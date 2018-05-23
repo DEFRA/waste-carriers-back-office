@@ -16,3 +16,7 @@ before_script:
   # Set up Mongo databases
   - mongo waste-carriers-test --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
   - mongo waste-carriers-users-test --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
+  # Run rubocop. Its installed as a dependency (hence no install step) as this
+  # allows projects to control the version they are using (rather than getting)
+  # surprise build failures.
+  - bundle exec rubocop
