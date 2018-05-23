@@ -1,0 +1,18 @@
+language: ruby
+rvm: 2.4.2
+cache: bundler
+
+# Travis CI clones repositories to a depth of 50 commits, which is only really
+# useful if you are performing git operations.
+# https://docs.travis-ci.com/user/customizing-the-build/#Git-Clone-Depth
+git:
+  depth: 3
+services:
+  - mongodb
+before_install:
+  - export TZ=UTC
+
+before_script:
+  # Set up Mongo databases
+  - mongo waste-carriers-test --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
+  - mongo waste-carriers-users-test --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
