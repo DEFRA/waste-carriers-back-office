@@ -22,6 +22,9 @@ AllCops:
     # bin contains standard files created when Rails is initialised and
     # therefore they should be left as is
     - "**/bin/*"
+    # locally when we run rubocop it ignores the vendor folder but when running
+    # in Travis-CI it seems to include. This will stop this from happening
+    - "**/vendor/**/*"
 
 # It is our opinion that code is easier to read if a white space is
 # permitted between the initial declaration and the first statement. Ditto the
