@@ -46,5 +46,13 @@ module EntityMatchingService
     config.generators do |g|
       g.orm :mongoid
     end
+
+    # Enable the asset pipeline
+    config.assets.enabled = true
+
+    config.assets.precompile += %w(
+      application.css
+      print.css
+    )
   end
 end
