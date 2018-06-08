@@ -40,7 +40,7 @@ gem "sdoc", "~> 0.4.0", group: :doc
 # gem "capistrano-rails", group: :development
 
 # Use GOV.UK Admin Template for styling
-gem "govuk_admin_template", "~> 3.3"
+gem "govuk_admin_template", "~> 6.6"
 
 group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console
