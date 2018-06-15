@@ -42,6 +42,9 @@ gem "sdoc", "~> 0.4.0", group: :doc
 # Use Devise for user authentication
 gem "devise", ">= 4.4.3"
 
+# Use GOV.UK Admin Template for styling
+gem "govuk_admin_template", "~> 6.6"
+
 group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console
   gem "byebug"
