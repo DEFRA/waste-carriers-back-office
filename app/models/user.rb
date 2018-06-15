@@ -4,17 +4,14 @@ class User
   include Mongoid::Document
 
   # Use the User database
-  store_in client: "users"
+  store_in client: "users", collection: "back_office_users"
 
   devise :database_authenticatable,
-         :lockable,
-         :recoverable,
          :trackable,
-         :validatable
-
-  ## Confirmable
-  # Any user confirmation happens in the frontend app - however we need this flag to seed confirmed users
-  field :confirmed_at, type: DateTime
+         :validatable,
+         :lockable,
+         :invitable,
+         :recoverable
 
   ## Database authenticatable
   field :email,              type: String, default: ""
@@ -35,6 +32,16 @@ class User
   field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   field :locked_at,       type: Time
+
+  # Invitable
+  field :invitation_token,       type: String
+  field :invitation_created_at,  type: Time
+  field :invitation_sent_at,     type: Time
+  field :invitation_accepted_at, type: Time
+  field :invitation_limit,       type: Integer
+
+  index({ invitation_token: 1 }, background: true)
+  index({ invitation_by_id: 1 }, background: true)
 
   validates :password, presence: true, length: { in: 8..128 }
   validate :password_must_have_lowercase_uppercase_and_numeric

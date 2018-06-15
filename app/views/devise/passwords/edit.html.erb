@@ -1,25 +1,33 @@
-<h2>Change your password</h2>
+<header>
+  <h1><%= t("devise.change_password") %></h1>
+</header>
+<br/>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+<%= simple_form_for(resource,
+                    as: resource_name,
+                    url: user_password_path,
+                    html: { method: :patch, autocomplete: 'off' }) do |f| %>
+  <%= full_devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
-  </div>
+  <%= f.input :reset_password_token, as: :hidden %>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+  <%-
+    password_length = User.try :password_length
+    hint = t("devise.minimum_password_length", count: password_length.min) if password_length && f.object.errors[:password].empty?
+  -%>
+  <%= f.input :password,
+              label: t("devise.new_password"),
+              required: true,
+              autofocus: true,
+              hint: hint,
+              input_html: { autocomplete: 'off' } %>
+  <%= f.input :password_confirmation,
+              label: t("devise.confirm_new_password"),
+              required: true,
+              input_html: { autocomplete: 'off' } %>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
+  <%= f.button :submit, t('devise.change_password'),
+                        data: { disable_with: t('please_wait_html') } %>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%= render "/shared/devise_links" %>

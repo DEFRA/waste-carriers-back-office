@@ -41,9 +41,13 @@ gem "sdoc", "~> 0.4.0", group: :doc
 
 # Use Devise for user authentication
 gem "devise", ">= 4.4.3"
+gem "devise_invitable", "~> 1.7.0"
 
 # Use GOV.UK Admin Template for styling
 gem "govuk_admin_template", "~> 6.6"
+
+# Sticking with version 3 for now as 4 doesn't support Rails 4
+gem "simple_form", "~> 3.5.1"
 
 group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console
