@@ -5,7 +5,7 @@ ruby "2.4.2"
 
 # Use Airbrake for error reporting to Errbit
 # Version 6 and above cause errors with Errbit, so use 5.8.1 for now
-gem "airbrake", "5.8.1"
+gem "airbrake", "7.3.4"
 # Use CoffeeScript for .coffee assets and views
 gem "coffee-rails", "~> 4.1.0"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
