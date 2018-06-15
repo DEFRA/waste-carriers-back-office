@@ -34,7 +34,7 @@ gem "uglifier", ">= 1.3.0"
 # gem "therubyracer", platforms: :ruby
 
 # bundle exec rake doc:rails generates the API under doc/api.
-gem "sdoc", "~> 0.4.0", group: :doc
+gem "sdoc", "~> 1.0.0", group: :doc
 
 # Use Capistrano for deployment
 # gem "capistrano-rails", group: :development
