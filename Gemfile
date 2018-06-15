@@ -14,7 +14,7 @@ gem "jbuilder", "~> 2.0"
 gem "jquery-rails"
 # Use MongoDB as the database, and mongoid as our ORM for it. This version of
 # mongoid supports MongoDb 3.6
-gem "mongoid", "~> 5.2.0"
+gem "mongoid", "~> 5.4.0"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
 gem "rails", "4.2.10"
 # Use SCSS for stylesheets
