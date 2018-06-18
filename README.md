@@ -41,7 +41,7 @@ Check out [.env.example](/.env.example) for details of what you need in your `.e
 
 Simply start the app using `bundle exec rails s`. If you are in an environment with other Rails apps running you might find the default port of 3000 is in use and so get an error.
 
-If that's the case use `bundle exec rails s -p 3010` swapping `3010` for whatever port you want to use.
+If that's the case use `bundle exec rails s -p 8001` swapping `8001` for whatever port you want to use.
 
 ## Testing the app
 
