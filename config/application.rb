@@ -34,13 +34,14 @@ module EntityMatchingService
     # API specification and provide the gem, but we choose instead to send
     # notifications to an instance of Errbit we manage ourselves
     # (cause its free!)
-    config.airbrake_on = ENV["WCRS_BACKOFFICE_USE_AIRBRAKE"] == "true" ? true : false
+    config.airbrake_on = ENV["WCRS_USE_AIRBRAKE"] == "true" ? true : false
     config.airbrake_host = ENV["WCRS_BACKOFFICE_AIRBRAKE_HOST"]
     # Even though we may not want to enable airbrake, its initializer requires
-    # a value for project ID and key else it errors. So to simplify local
-    # development we default these values to save having to set anything in the
-    # .env file.
-    config.airbrake_id = ENV["WCRS_BACKOFFICE_AIRBRAKE_PROJECT_ID"] || 1
+    # a value for project ID and key else it errors.
+    # Furthermore Errbit (which we send the exceptions to) doesn't make use of
+    # the project ID, but it still has to be set to a positive integer or
+    # Airbrake errors. Hence we just set it to 1.
+    config.airbrake_id = 1
     config.airbrake_key = ENV["WCRS_BACKOFFICE_AIRBRAKE_PROJECT_KEY"] || "dummy"
 
     config.generators do |g|

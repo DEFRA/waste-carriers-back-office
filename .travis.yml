@@ -2,7 +2,7 @@ env:
   global:
     - CC_TEST_REPORTER_ID=9db6462028452d95a747379abb11cd1f15f52499e7327904c50896883fffc2e8
 
-anguage: ruby
+language: ruby
 rvm: 2.4.2
 cache: bundler
 
