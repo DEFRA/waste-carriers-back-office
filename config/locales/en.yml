@@ -21,3 +21,6 @@
 
 en:
   please_wait_html: "Please wait&hellip;"
+  layouts:
+    application:
+      feedback_url: https://www.gov.uk/done/waste-carrier-or-broker-registration
