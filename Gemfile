@@ -24,23 +24,11 @@ gem "turbolinks"
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", ">= 1.3.0"
 
-# Use ActiveModel has_secure_password
-# gem "bcrypt", "~> 3.1.7"
-
-# Use Unicorn as the app server
-# gem "unicorn"
-
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem "therubyracer", platforms: :ruby
-
 # bundle exec rake doc:rails generates the API under doc/api.
 gem "sdoc", "~> 0.4.0", group: :doc
 
-# Use Capistrano for deployment
-# gem "capistrano-rails", group: :development
-
 # Use Devise for user authentication
-gem "devise", ">= 4.4.3"
+# gem "devise", ">= 4.4.3"
 gem "devise_invitable", "~> 1.7.0"
 
 # Use GOV.UK Admin Template for styling
@@ -48,6 +36,11 @@ gem "govuk_admin_template", "~> 6.6"
 
 # Sticking with version 3 for now as 4 doesn't support Rails 4
 gem "simple_form", "~> 3.5.1"
+
+# Use the waste carriers engine for the user journey
+gem "waste_carriers_engine",
+    git: "https://github.com/DEFRA/waste-carriers-renewals",
+    branch: "feature/convert-to-engine"
 
 group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console

@@ -3,4 +3,8 @@
   <%= javascript_include_tag 'application' %>
 <% end %>
 
+<% content_for :app_home_path do %>
+  registrations
+<% end %>
+
 <%= render template: 'layouts/govuk_admin_template' %>
