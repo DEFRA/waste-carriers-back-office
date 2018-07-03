@@ -143,6 +143,9 @@ GEM
     parallel (1.12.1)
     parser (2.5.1.0)
       ast (~> 2.4.0)
+    passenger (5.3.3)
+      rack
+      rake (>= 0.8.1)
     plek (2.1.1)
     powerpack (0.1.2)
     public_suffix (3.0.2)
@@ -279,6 +282,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mongoid (~> 5.2.0)
+  passenger (~> 5.0, >= 5.0.30)
   rails (= 4.2.10)
   rspec-rails (~> 3.6)
   rubocop
@@ -295,4 +299,4 @@ RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
