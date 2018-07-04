@@ -1,9 +1,8 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
-  revision: 11cedb8c0919d09ccf38e006cb05f651faf3f510
-  branch: feature/convert-to-engine
+  revision: a1c40670919b29f467672d1e6ad5dd08c9298d15
   specs:
-    waste_carriers_engine (1.0.0)
+    waste_carriers_engine (0.0.1)
       aasm (~> 4.12)
       cancancan (~> 1.10)
       countries
@@ -66,7 +65,7 @@ GEM
     airbrake-ruby (1.8.0)
     arel (6.0.4)
     ast (2.4.0)
-    autoprefixer-rails (8.6.1)
+    autoprefixer-rails (8.6.4)
       execjs
     bcrypt (3.1.12)
     binding_of_caller (0.8.0)
@@ -166,7 +165,7 @@ GEM
     minitest (5.11.3)
     money (6.11.3)
       i18n (>= 0.6.4, < 1.1)
-    mongo (2.5.3)
+    mongo (2.6.0)
       bson (>= 4.3.0, < 5.0.0)
     mongoid (5.2.1)
       activemodel (~> 4.0)
@@ -176,7 +175,7 @@ GEM
     multi_json (1.13.1)
     multipart-post (2.0.0)
     netrc (0.11.0)
-    nokogiri (1.8.3)
+    nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     octokit (4.9.0)
       sawyer (~> 0.8.0, >= 0.5.3)
@@ -350,4 +349,4 @@ RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   1.16.1
+   1.16.2

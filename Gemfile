@@ -39,8 +39,7 @@ gem "simple_form", "~> 3.5.1"
 
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
-    git: "https://github.com/DEFRA/waste-carriers-renewals",
-    branch: "feature/convert-to-engine"
+    git: "https://github.com/DEFRA/waste-carriers-renewals"
 
 group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console
