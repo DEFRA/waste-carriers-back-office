@@ -37,6 +37,13 @@ gem "govuk_admin_template", "~> 6.6"
 # Sticking with version 3 for now as 4 doesn't support Rails 4
 gem "simple_form", "~> 3.5.1"
 
+# Web application server that replaces webrick. It handles HTTP requests,
+# manages processes and resources, and enables administration, monitoring
+# and problem diagnosis. It is used in production because it gives us an ability
+# to scale by creating additional processes, and will automatically restart any
+# that fail.
+gem "passenger", "~> 5.0", ">= 5.0.30", require: "phusion_passenger/rack_handler"
+
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-renewals"
