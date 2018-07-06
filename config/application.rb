@@ -51,7 +51,7 @@ module EntityMatchingService
     # the project ID, but it still has to be set to a positive integer or
     # Airbrake errors. Hence we just set it to 1.
     config.airbrake_id = 1
-    config.airbrake_key = ENV["WCRS_RENEWALS_AIRBRAKE_PROJECT_KEY"] || "dummy"
+    config.airbrake_key = ENV["WCRS_BACKOFFICE_AIRBRAKE_PROJECT_KEY"] || "dummy"
 
     # Companies House config
     config.companies_house_host = ENV["WCRS_COMPANIES_HOUSE_URL"] || "https://api.companieshouse.gov.uk/company/"
