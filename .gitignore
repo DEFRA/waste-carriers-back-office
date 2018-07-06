@@ -43,3 +43,9 @@ coverage
 # variables will need to be set up
 .env
 .env.local
+
+# Passengerfile
+# This is used to configure how the web application server we use will
+# run in any given environment. Because it is environment dependent we don't
+# add it to source code.
+Passengerfile.json
