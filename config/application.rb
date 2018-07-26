@@ -33,8 +33,12 @@ module EntityMatchingService
     # assets:precompile is being run and therefore programmtically set the
     # secret key, stopping devise from erroring.
     # https://stackoverflow.com/a/15767148/6117745
-    if Rails.env.production? && File.basename($0) == "rake"
-      config.secret_key_base = "iamonlyherefordeviseduringassetcompilation"
+    def apply_dummy_secret_key?
+      return false unless Rails.env.production?
+      return false unless File.basename($0) == "rake"
+      return false unless config.secret_key_base.blank?
+
+      true
     end
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
@@ -103,5 +107,7 @@ module EntityMatchingService
     config.generators do |g|
       g.orm :mongoid
     end
+
+    config.secret_key_base = "iamonlyherefordevisewhenraketasksarecalled" if apply_dummy_secret_key?
   end
 end
