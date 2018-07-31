@@ -1,13 +1,11 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
-  revision: cf3d8ceb2dd2e65247ba49784219b40eb515728a
-  branch: master
+  revision: 9272db62176be8c4dbca7bcc10b519383e5e65a0
+  branch: feature/move-users-out-of-engine
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)
-      cancancan (~> 1.10)
       countries
-      devise (>= 4.4.3)
       high_voltage (~> 3.0)
       jbuilder (~> 2.0)
       jquery-rails
@@ -326,8 +324,10 @@ PLATFORMS
 DEPENDENCIES
   airbrake (= 5.8.1)
   byebug
+  cancancan (~> 1.10)
   coffee-rails (~> 4.1.0)
   database_cleaner
+  devise (>= 4.4.3)
   devise_invitable (~> 1.7.0)
   dotenv-rails
   factory_bot_rails
