@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
-  revision: 9272db62176be8c4dbca7bcc10b519383e5e65a0
-  branch: feature/move-users-out-of-engine
+  revision: d8b657683f37cbfcf23e216b6fe3c3f5d863c920
+  branch: master
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)

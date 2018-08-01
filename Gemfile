@@ -51,7 +51,7 @@ gem "passenger", "~> 5.0", ">= 5.0.30", require: "phusion_passenger/rack_handler
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-renewals",
-    branch: "feature/move-users-out-of-engine"
+    branch: "master"
 
 # Allows us to automatically generate the change log from the tags, issues,
 # labels and pull requests on GitHub. Added as a dependency so all dev's have
