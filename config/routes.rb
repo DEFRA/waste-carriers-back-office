@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
-  mount WasteCarriersEngine::Engine => "/"
+  mount WasteCarriersEngine::Engine => "/bo"
 
   resource :dashboards, only: :index
 
   root "dashboards#index"
 
-  devise_for :users
-  devise_scope :user do
-    get "/users/sign_out" => "devise/sessions#destroy"
-  end
+  devise_for :users, path: "/bo/users", path_names: { sign_in: "sign_in", sign_out: "sign_out" }
 end
