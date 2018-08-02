@@ -183,7 +183,7 @@ GEM
     parallel (1.12.1)
     parser (2.5.1.2)
       ast (~> 2.4.0)
-    passenger (5.3.3)
+    passenger (5.3.4)
       rack
       rake (>= 0.8.1)
     phonelib (0.6.24)
