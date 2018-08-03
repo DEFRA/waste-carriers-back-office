@@ -3,8 +3,8 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
-    can :read, WasteCarriersEngine::Registration, account_email: user.email
-    can :manage, WasteCarriersEngine::TransientRegistration, account_email: user.email
+  def initialize(_user)
+    can :read, WasteCarriersEngine::Registration
+    can :manage, WasteCarriersEngine::TransientRegistration
   end
 end
