@@ -4,7 +4,7 @@ class User
   include Mongoid::Document
 
   # Use the User database
-  store_in client: "users", collection: "users"
+  store_in client: "users", collection: "back_office_users"
 
   devise :database_authenticatable,
          :lockable,

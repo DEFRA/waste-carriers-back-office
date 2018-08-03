@@ -1,14 +1,7 @@
 # frozen_string_literal: true
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
-# User.find_or_create_by(
-#   email: "test@example.com",
-#   password: ENV["WCR_TEST_USER_PASSWORD"] || "Secret123"
-# )
+User.find_or_create_by(
+  email: "bo-user@waste-exemplar.gov.uk",
+  password: ENV["WCRS_DEFAULT_PASSWORD"] || "Secret123",
+  confirmed_at: Time.new(2015, 1, 1)
+)
