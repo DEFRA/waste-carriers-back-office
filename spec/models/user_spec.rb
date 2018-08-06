@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "cancan/matchers"
 require "rails_helper"
 
 RSpec.describe User, type: :model do
@@ -49,6 +50,51 @@ RSpec.describe User, type: :model do
 
       it "should not be valid" do
         expect(user).to_not be_valid
+      end
+    end
+  end
+
+  describe "abilities" do
+    subject(:ability) { Ability.new(user) }
+    let(:user) { build(:user) }
+
+    context "when the user owns a registration" do
+      let(:registration) { build(:registration, account_email: user.email) }
+
+      it "should be able to read it" do
+        should be_able_to(:read, registration)
+      end
+
+      it "should not able to manage it" do
+        should_not be_able_to(:manage, registration)
+      end
+    end
+
+    context "when the user does not own a registration" do
+      let(:registration) { build(:registration, account_email: "foo@test.com") }
+
+      it "should be able to read it" do
+        should be_able_to(:read, registration)
+      end
+
+      it "should not able to manage it" do
+        should_not be_able_to(:manage, registration)
+      end
+    end
+
+    context "when the user owns a transient_registration" do
+      let(:transient_registration) { build(:transient_registration, account_email: user.email) }
+
+      it "should be able to manage it" do
+        should be_able_to(:manage, transient_registration)
+      end
+    end
+
+    context "when the user does not own a transient_registration" do
+      let(:transient_registration) { build(:transient_registration, account_email: "foo@test.com") }
+
+      it "should be able to manage it" do
+        should be_able_to(:manage, transient_registration)
       end
     end
   end
