@@ -7,6 +7,7 @@ class User
   store_in client: "users", collection: "back_office_users"
 
   devise :database_authenticatable,
+         :invitable,
          :lockable,
          :recoverable,
          :trackable,
@@ -19,6 +20,16 @@ class User
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
+
+  # Invitable
+  field :invitation_token,       type: String
+  field :invitation_created_at,  type: Time
+  field :invitation_sent_at,     type: Time
+  field :invitation_accepted_at, type: Time
+  field :invitation_limit,       type: Integer
+
+  index({ invitation_token: 1 }, background: true)
+  index({ invitation_by_id: 1 }, background: true)
 
   ## Recoverable
   field :reset_password_token,   type: String
