@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  global_proposition_header: Waste carriers back office
   please_wait_html: "Please wait&hellip;"
   layouts:
     application:
