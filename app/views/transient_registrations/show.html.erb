@@ -1,3 +1,5 @@
 <h1>Renewal in progress: <%= @transient_registration.reg_identifier %></h1>
 
 Current state: <%= @current_workflow_state %>
+
+<%= link_to "Continue as an assisted digital renewal", WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier) %>

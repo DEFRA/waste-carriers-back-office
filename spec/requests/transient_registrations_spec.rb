@@ -26,6 +26,11 @@ RSpec.describe "TransientRegistrations", type: :request do
         get "/bo/transient-registrations/#{transient_registration.reg_identifier}"
         expect(response.body).to include("Check your tier")
       end
+
+      it "includes a link to continue the renewal" do
+        get "/bo/transient-registrations/#{transient_registration.reg_identifier}"
+        expect(response.body).to include("/bo/renew/#{transient_registration.reg_identifier}")
+      end
     end
   end
 end
