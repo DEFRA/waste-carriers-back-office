@@ -64,14 +64,9 @@ GEM
     airbrake-ruby (1.8.0)
     arel (6.0.4)
     ast (2.4.0)
-    autoprefixer-rails (8.6.4)
-      execjs
     bcrypt (3.1.12)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.5.1)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.3.0)
     bson (4.3.0)
     builder (3.2.3)
     byebug (10.0.2)
@@ -131,11 +126,6 @@ GEM
       retriable (~> 2.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    govuk_admin_template (6.6.0)
-      bootstrap-sass (= 3.3.5.1)
-      jquery-rails (~> 4.3.1)
-      plek (>= 2.1.0)
-      rails (>= 3.2.0)
     high_voltage (3.1.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -187,7 +177,6 @@ GEM
       rack
       rake (>= 0.8.1)
     phonelib (0.6.24)
-    plek (2.1.1)
     powerpack (0.1.2)
     public_suffix (3.0.2)
     rack (1.6.10)
@@ -332,7 +321,6 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   github_changelog_generator
-  govuk_admin_template (~> 6.6)
   jbuilder (~> 2.0)
   jquery-rails
   mongoid (~> 5.2.0)
