@@ -38,9 +38,6 @@ gem "devise_invitable", "~> 1.7.0"
 # Use GOV.UK Admin Template for styling
 gem "govuk_admin_template", "~> 6.6"
 
-# Sticking with version 3 for now as 4 doesn't support Rails 4
-gem "simple_form", "~> 3.5.1"
-
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-renewals",
