@@ -2,8 +2,7 @@
 
 FactoryBot.define do
   factory :transient_registration, class: WasteCarriersEngine::TransientRegistration do
-    sequence :reg_identifier do |n|
-      "CBDU#{n}"
-    end
+    # Create a new registration when initializing
+    initialize_with { new(reg_identifier: create(:registration).reg_identifier) }
   end
 end

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "TransientRegistrations", type: :request do
-  let(:transient_registration) { build(:transient_registration) }
+  let(:transient_registration) { create(:transient_registration, workflow_state: "tier_check_form") }
 
   describe "/bo/transient-registrations/:reg_identifier" do
     context "when a valid user is signed in" do
@@ -20,6 +20,11 @@ RSpec.describe "TransientRegistrations", type: :request do
       it "returns a 200 response" do
         get "/bo/transient-registrations/#{transient_registration.reg_identifier}"
         expect(response).to have_http_status(200)
+      end
+
+      it "includes a properly-displayed workflow_state" do
+        get "/bo/transient-registrations/#{transient_registration.reg_identifier}"
+        expect(response.body).to include("Check your tier")
       end
     end
   end
