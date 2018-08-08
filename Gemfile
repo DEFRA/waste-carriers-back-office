@@ -35,8 +35,7 @@ gem "cancancan", "~> 1.10"
 gem "devise", ">= 4.4.3"
 gem "devise_invitable", "~> 1.7.0"
 
-# Sticking with version 3 for now as 4 doesn't support Rails 4
-gem "simple_form", "~> 3.5.1"
+gem "secure_headers", "~> 5.0"
 
 # GOV.UK styling
 gem "govuk_elements_rails", "~> 3.1"
