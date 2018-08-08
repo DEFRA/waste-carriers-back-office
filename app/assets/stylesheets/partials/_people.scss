@@ -1,0 +1,12 @@
+// Key people list formatting
+.key-person-list form {
+  display: inline-block;
+}
+
+// A button which looks like a link
+input.button-link {
+  border: none;
+  color: $link-colour;
+  padding: 0;
+  text-decoration: underline;
+}

@@ -35,11 +35,11 @@ gem "cancancan", "~> 1.10"
 gem "devise", ">= 4.4.3"
 gem "devise_invitable", "~> 1.7.0"
 
-# Use GOV.UK Admin Template for styling
-gem "govuk_admin_template", "~> 6.6"
+gem "secure_headers", "~> 5.0"
 
-# Sticking with version 3 for now as 4 doesn't support Rails 4
-gem "simple_form", "~> 3.5.1"
+# GOV.UK styling
+gem "govuk_elements_rails", "~> 3.1"
+gem "govuk_template", "~> 0.23"
 
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",

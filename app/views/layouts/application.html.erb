@@ -1,12 +1,26 @@
-<% content_for :head do %>
+<% content_for(:head) do %>
   <%= stylesheet_link_tag "application", media: "all" %>
-  <%= javascript_include_tag 'application' %>
-<% end %>
-
-<% content_for :app_home_path do %>
-  /bo
+  <!--[if IE 8]><%= stylesheet_link_tag "ie8" %><![endif]-->
+  <%= csrf_meta_tags %>
 <% end %>
 
 <% content_for :page_title, title %>
 
-<%= render template: 'layouts/govuk_admin_template' %>
+<% content_for :header_class, "with-proposition" %>
+<% content_for :proposition_header do %>
+  <div class="header-proposition">
+    <div class="content">
+      <nav id="proposition-menu">
+        <%= link_to t(:global_proposition_header), "/", id: "proposition-name" %>
+      </nav>
+    </div>
+  </div>
+<% end %>
+
+<% content_for(:content) do %>
+  <main id="content" role="main">
+    <%= yield %>
+  </main>
+<% end %>
+
+<%= render file: "layouts/govuk_template" %>
