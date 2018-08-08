@@ -5,6 +5,14 @@ module TransientRegistrationsHelper
     @transient_registration[attribute] || I18n.t(".transient_registrations.show.filler")
   end
 
+  def show_translation_or_filler(attribute)
+    if @transient_registration[attribute].present?
+      I18n.t(".transient_registrations.show.attributes.#{attribute}.#{@transient_registration[attribute]}")
+    else
+      I18n.t(".transient_registrations.show.filler")
+    end
+  end
+
   def display_current_workflow_state
     I18n.t("waste_carriers_engine.#{@transient_registration.workflow_state}s.new.title", default: nil) ||
       I18n.t("waste_carriers_engine.#{@transient_registration.workflow_state}s.new.heading", default: nil) ||

@@ -46,3 +46,29 @@ en:
       sidebar:
         heading: "Actions"
         continue_button: "Continue renewal"
+      attributes:
+        business_type:
+          individual: "individual or sole trader"
+          limitedCompany: "limited company"
+          partnership: "partnership"
+          limitedLiabilityPartnership: "limited liability partnership"
+          localAuthority: "local authority or public body"
+          charity: "charity or trust"
+          authority: "local authority"
+          publicBody: "public body"
+          other: "other"
+        declaration:
+          "1": "yes"
+        location:
+          england: "England"
+          wales: "Wales"
+          scotland: "Scotland"
+          northern_ireland: "Northern Ireland"
+          overseas: "Not in the United Kingdom"
+        registration_type:
+          carrier_dealer: "carrier and dealer"
+          broker_dealer: "broker and dealer"
+          carrier_broker_dealer: "carrier, broker and dealer"
+        tier:
+          UPPER: "upper"
+          LOWER: "lower"
