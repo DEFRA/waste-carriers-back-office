@@ -80,7 +80,11 @@
             Registered address
           </td>
           <td>
-            TODO
+            <ul>
+            <% display_registered_address.each do |line| %>
+              <li><%= line %></li>
+            <% end %>
+            </ul>
           </td>
         </tr>
         <tr>
@@ -88,7 +92,16 @@
             Main people
           </td>
           <td>
-            TODO
+            <% if @transient_registration.main_people.present? %>
+              <% @transient_registration.main_people.each do |person| %>
+                <ul>
+                  <li><%= person.first_name %> <%= person.last_name %></li>
+                  <li><%= person.dob.to_date %></li>
+                </ul>
+              <% end %>
+            <% else %>
+              TODO: filler
+            <% end %>
           </td>
         </tr>
       </tbody>
@@ -126,7 +139,11 @@
             Contact address
           </td>
           <td>
-            TODO
+            <ul>
+            <% display_registered_address.each do |line| %>
+              <li><%= line %></li>
+            <% end %>
+            </ul>
           </td>
         </tr>
       </tbody>
@@ -145,10 +162,20 @@
         </tr>
         <tr>
           <td>
-            Declared people
+            Relevant people
           </td>
           <td>
-            TODO
+            <% if @transient_registration.relevant_people.present? %>
+              <% @transient_registration.relevant_people.each do |person| %>
+                <ul>
+                  <li><%= person.first_name %> <%= person.last_name %></li>
+                  <li><%= person.position %></li>
+                  <li><%= person.dob.to_date %></li>
+                </ul>
+              <% end %>
+            <% else %>
+              TODO: filler
+            <% end %>
           </td>
         </tr>
         <tr>
