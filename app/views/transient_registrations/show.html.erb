@@ -1,9 +1,25 @@
 <h1>Renewal in progress: <%= @transient_registration.reg_identifier %></h1>
 
-Current state: <%= display_current_workflow_state %>
-
-Reg_identifier: <%= show_value_or_filler(:reg_identifier) %>
-
-Location: <%= show_value_or_filler(:location) %>
+<ul>
+  <li>Current state: <%= display_current_workflow_state %></li>
+  <li>Reg_identifier: <%= show_value_or_filler(:reg_identifier) %></li>
+  <li>Location: <%= show_value_or_filler(:location) %></li>
+  <li>Business type: <%= show_value_or_filler(:business_type) %></li>
+  <li>Double-checked tier?: <%= show_value_or_filler(:temp_tier_check) %></li>
+  <li>Registration type: <%= show_value_or_filler(:registration_type) %></li>
+  <li>Company name: <%= show_value_or_filler(:company_name) %></li>
+  <li>Companies House number: <%= show_value_or_filler(:company_no) %></li>
+  <li>Registered address goes here</li>
+  <li>Main people go here</li>
+  <li>Declared convictions?: <%= show_value_or_filler(:declared_convictions) %></li>
+  <li>Relevant conviction people go here</li>
+  <li>Contact name: <%= show_value_or_filler(:contact_name) %></li>
+  <li>Contact phone: <%= show_value_or_filler(:phone_number) %></li>
+  <li>Contact email: <%= show_value_or_filler(:contact_email) %></li>
+  <li>Contact address goes here</li>
+  <li>Declaration: <%= show_value_or_filler(:declaration) %></li>
+  <li>Order stuff goes here</li>
+  <li>Pending conviction check?: <%= @transient_registration.conviction_check_required? %></li>
+</ul>
 
 <%= link_to "Continue as an assisted digital renewal", WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier) %>
