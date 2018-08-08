@@ -20,19 +20,17 @@ module TransientRegistrationsHelper
   end
 
   def address_lines(address)
-    lines = []
-
-    if address.present?
-      lines = [address.address_line_1,
-       address.address_line_2,
-       address.address_line_3,
-       address.address_line_4,
-       address.town_city,
-       address.postcode,
-       address.country].reject
-    else
-      lines = ["-"]
-    end
+    lines = if address.present?
+              [address.address_line_1,
+               address.address_line_2,
+               address.address_line_3,
+               address.address_line_4,
+               address.town_city,
+               address.postcode,
+               address.country].reject
+            else
+              ["-"]
+            end
 
     lines
   end
