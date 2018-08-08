@@ -27,15 +27,6 @@ RSpec.describe "TransientRegistrations", type: :request do
         expect(response.body).to include("Check your tier")
       end
 
-      context "when a value is not set" do
-        before { transient_registration.location = nil }
-
-        it "displays filler text" do
-          get "/bo/transient-registrations/#{transient_registration.reg_identifier}"
-          expect(response.body).to include("Location: not set")
-        end
-      end
-
       it "includes a link to continue the renewal" do
         get "/bo/transient-registrations/#{transient_registration.reg_identifier}"
         expect(response.body).to include("/bo/renew/#{transient_registration.reg_identifier}")
