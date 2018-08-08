@@ -274,6 +274,8 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    secure_headers (5.0.5)
+      useragent (>= 0.15.0)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -305,6 +307,7 @@ GEM
     unf_ext (0.0.7.5)
     unicode-display_width (1.4.0)
     unicode_utils (1.4.0)
+    useragent (0.16.10)
     validates_email_format_of (1.6.3)
       i18n
     warden (1.2.7)
@@ -339,6 +342,7 @@ DEPENDENCIES
   rubocop
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  secure_headers (~> 5.0)
   simplecov
   spring
   turbolinks

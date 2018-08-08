@@ -38,6 +38,8 @@ gem "devise_invitable", "~> 1.7.0"
 # Use GOV.UK Admin Template for styling
 gem "govuk_admin_template", "~> 6.6"
 
+gem "secure_headers", "~> 5.0"
+
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-renewals",
