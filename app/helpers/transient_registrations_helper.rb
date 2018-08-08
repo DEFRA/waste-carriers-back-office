@@ -2,7 +2,7 @@
 
 module TransientRegistrationsHelper
   def show_value_or_filler(attribute)
-    @transient_registration[attribute] || "not set"
+    @transient_registration[attribute] || "-"
   end
 
   def display_current_workflow_state

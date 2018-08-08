@@ -1,25 +1,223 @@
-<h1>Renewal in progress: <%= @transient_registration.reg_identifier %></h1>
+<h1 class="heading-large">Renewal in progress: <%= @transient_registration.reg_identifier %></h1>
 
-<ul>
-  <li>Current state: <%= display_current_workflow_state %></li>
-  <li>Reg_identifier: <%= show_value_or_filler(:reg_identifier) %></li>
-  <li>Location: <%= show_value_or_filler(:location) %></li>
-  <li>Business type: <%= show_value_or_filler(:business_type) %></li>
-  <li>Double-checked tier?: <%= show_value_or_filler(:temp_tier_check) %></li>
-  <li>Registration type: <%= show_value_or_filler(:registration_type) %></li>
-  <li>Company name: <%= show_value_or_filler(:company_name) %></li>
-  <li>Companies House number: <%= show_value_or_filler(:company_no) %></li>
-  <li>Registered address goes here</li>
-  <li>Main people go here</li>
-  <li>Declared convictions?: <%= show_value_or_filler(:declared_convictions) %></li>
-  <li>Relevant conviction people go here</li>
-  <li>Contact name: <%= show_value_or_filler(:contact_name) %></li>
-  <li>Contact phone: <%= show_value_or_filler(:phone_number) %></li>
-  <li>Contact email: <%= show_value_or_filler(:contact_email) %></li>
-  <li>Contact address goes here</li>
-  <li>Declaration: <%= show_value_or_filler(:declaration) %></li>
-  <li>Order stuff goes here</li>
-  <li>Pending conviction check?: <%= @transient_registration.conviction_check_required? %></li>
-</ul>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <table>
+      <caption class="heading-small">Registration information</caption>
+      <tbody>
+        <tr>
+          <td>
+            User
+          </td>
+          <td>
+            <%= show_value_or_filler(:account_email) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Registration number
+          </td>
+          <td>
+            <%= show_value_or_filler(:reg_identifier) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Tier
+          </td>
+          <td>
+            <%= show_value_or_filler(:tier) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Registration type
+          </td>
+          <td>
+            <%= show_value_or_filler(:registration_type) %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-<%= link_to "Continue as an assisted digital renewal", WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier) %>
+    <table>
+      <caption class="heading-small">Business information</caption>
+      <tbody>
+        <tr>
+          <td>
+            Company name
+          </td>
+          <td>
+            <%= show_value_or_filler(:company_name) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Business type
+          </td>
+          <td>
+            <%= show_value_or_filler(:business_type) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Companies House number
+          </td>
+          <td>
+            <%= show_value_or_filler(:company_no) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Location
+          </td>
+          <td>
+            <%= show_value_or_filler(:location) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Registered address
+          </td>
+          <td>
+            TODO
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Main people
+          </td>
+          <td>
+            TODO
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <caption class="heading-small">Contact details</caption>
+      <tbody>
+        <tr>
+          <td>
+            Contact name
+          </td>
+          <td>
+            <%= show_value_or_filler(:first_name) %> <%= show_value_or_filler(:last_name) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Contact phone
+          </td>
+          <td>
+            <%= show_value_or_filler(:phone_number) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Contact email
+          </td>
+          <td>
+            <%= show_value_or_filler(:contact_email) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Contact address
+          </td>
+          <td>
+            TODO
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <caption class="heading-small">Conviction information</caption>
+      <tbody>
+        <tr>
+          <td>
+            Declared convictions?
+          </td>
+          <td>
+            <%= show_value_or_filler(:declared_convictions) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Declared people
+          </td>
+          <td>
+            TODO
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Conviction check required?
+          </td>
+          <td>
+            <%= @transient_registration.conviction_check_required? %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <caption class="heading-small">Payment information</caption>
+      <tbody>
+        <tr>
+          <td>
+            Method of payment
+          </td>
+          <td>
+            TODO
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Copy cards ordered
+          </td>
+          <td>
+            TODO
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <caption class="heading-small">About this renewal</caption>
+      <tbody>
+        <tr>
+          <td>
+            Current form
+          </td>
+          <td>
+            <%= display_current_workflow_state %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Double-checked tier?
+          </td>
+          <td>
+            <%= show_value_or_filler(:temp_tier_check) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Signed declaration?
+          </td>
+          <td>
+            <%= show_value_or_filler(:declaration) %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="column-one-third">
+    <h2 class="heading-medium">Actions</h2>
+
+    <%= link_to "Continue renewal", WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier), class: 'button' %>
+  </div>
+</div>
