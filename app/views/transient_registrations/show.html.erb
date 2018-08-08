@@ -1,13 +1,17 @@
-<h1 class="heading-large">Renewal in progress: <%= @transient_registration.reg_identifier %></h1>
+<h1 class="heading-large">
+  <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
+</h1>
 
 <div class="grid-row">
   <div class="column-two-thirds">
     <table>
-      <caption class="heading-small">Registration information</caption>
+      <caption class="heading-small">
+        <%= t(".reg_information.heading") %>
+      </caption>
       <tbody>
         <tr>
           <td>
-            User
+            <%= t(".reg_information.labels.account_email") %>
           </td>
           <td>
             <%= show_value_or_filler(:account_email) %>
@@ -15,7 +19,7 @@
         </tr>
         <tr>
           <td>
-            Registration number
+            <%= t(".reg_information.labels.reg_identifier") %>
           </td>
           <td>
             <%= show_value_or_filler(:reg_identifier) %>
@@ -23,7 +27,7 @@
         </tr>
         <tr>
           <td>
-            Tier
+            <%= t(".reg_information.labels.tier") %>
           </td>
           <td>
             <%= show_value_or_filler(:tier) %>
@@ -31,7 +35,7 @@
         </tr>
         <tr>
           <td>
-            Registration type
+            <%= t(".reg_information.labels.registration_type") %>
           </td>
           <td>
             <%= show_value_or_filler(:registration_type) %>
@@ -41,11 +45,13 @@
     </table>
 
     <table>
-      <caption class="heading-small">Business information</caption>
+      <caption class="heading-small">
+        <%= t(".business_information.heading") %>
+      </caption>
       <tbody>
         <tr>
           <td>
-            Company name
+            <%= t(".business_information.labels.company_name") %>
           </td>
           <td>
             <%= show_value_or_filler(:company_name) %>
@@ -53,7 +59,7 @@
         </tr>
         <tr>
           <td>
-            Business type
+            <%= t(".business_information.labels.business_type") %>
           </td>
           <td>
             <%= show_value_or_filler(:business_type) %>
@@ -61,7 +67,7 @@
         </tr>
         <tr>
           <td>
-            Companies House number
+            <%= t(".business_information.labels.company_no") %>
           </td>
           <td>
             <%= show_value_or_filler(:company_no) %>
@@ -69,7 +75,7 @@
         </tr>
         <tr>
           <td>
-            Location
+            <%= t(".business_information.labels.location") %>
           </td>
           <td>
             <%= show_value_or_filler(:location) %>
@@ -77,7 +83,7 @@
         </tr>
         <tr>
           <td>
-            Registered address
+            <%= t(".business_information.labels.registered_address") %>
           </td>
           <td>
             <ul>
@@ -89,7 +95,7 @@
         </tr>
         <tr>
           <td>
-            Main people
+            <%= t(".business_information.labels.main_people") %>
           </td>
           <td>
             <% if @transient_registration.main_people.present? %>
@@ -100,7 +106,7 @@
                 </ul>
               <% end %>
             <% else %>
-              TODO: filler
+              <%= t(".filler") %>
             <% end %>
           </td>
         </tr>
@@ -108,11 +114,13 @@
     </table>
 
     <table>
-      <caption class="heading-small">Contact details</caption>
+      <caption class="heading-small">
+        <%= t(".contact_information.heading") %>
+      </caption>
       <tbody>
         <tr>
           <td>
-            Contact name
+            <%= t(".contact_information.labels.contact_name") %>
           </td>
           <td>
             <%= show_value_or_filler(:first_name) %> <%= show_value_or_filler(:last_name) %>
@@ -120,7 +128,7 @@
         </tr>
         <tr>
           <td>
-            Contact phone
+            <%= t(".contact_information.labels.phone_number") %>
           </td>
           <td>
             <%= show_value_or_filler(:phone_number) %>
@@ -128,7 +136,7 @@
         </tr>
         <tr>
           <td>
-            Contact email
+            <%= t(".contact_information.labels.contact_email") %>
           </td>
           <td>
             <%= show_value_or_filler(:contact_email) %>
@@ -136,11 +144,11 @@
         </tr>
         <tr>
           <td>
-            Contact address
+            <%= t(".contact_information.labels.contact_address") %>
           </td>
           <td>
             <ul>
-            <% display_registered_address.each do |line| %>
+            <% display_contact_address.each do |line| %>
               <li><%= line %></li>
             <% end %>
             </ul>
@@ -150,11 +158,13 @@
     </table>
 
     <table>
-      <caption class="heading-small">Conviction information</caption>
+      <caption class="heading-small">
+        <%= t(".conviction_information.heading") %>
+      </caption>
       <tbody>
         <tr>
           <td>
-            Declared convictions?
+            <%= t(".conviction_information.labels.declared_convictions") %>
           </td>
           <td>
             <%= show_value_or_filler(:declared_convictions) %>
@@ -162,7 +172,7 @@
         </tr>
         <tr>
           <td>
-            Relevant people
+            <%= t(".conviction_information.labels.relevant_people") %>
           </td>
           <td>
             <% if @transient_registration.relevant_people.present? %>
@@ -174,13 +184,13 @@
                 </ul>
               <% end %>
             <% else %>
-              TODO: filler
+              <%= t(".filler") %>
             <% end %>
           </td>
         </tr>
         <tr>
           <td>
-            Conviction check required?
+            <%= t(".conviction_information.labels.conviction_check_required") %>
           </td>
           <td>
             <%= @transient_registration.conviction_check_required? %>
@@ -190,11 +200,13 @@
     </table>
 
     <table>
-      <caption class="heading-small">Payment information</caption>
+      <caption class="heading-small">
+        <%= t(".financial_information.heading") %>
+      </caption>
       <tbody>
         <tr>
           <td>
-            Method of payment
+            <%= t(".financial_information.labels.payment_method") %>
           </td>
           <td>
             TODO
@@ -202,7 +214,7 @@
         </tr>
         <tr>
           <td>
-            Copy cards ordered
+            <%= t(".financial_information.labels.copy_cards") %>
           </td>
           <td>
             TODO
@@ -212,11 +224,13 @@
     </table>
 
     <table>
-      <caption class="heading-small">About this renewal</caption>
+      <caption class="heading-small">
+        <%= t(".renewal_information.heading") %>
+      </caption>
       <tbody>
         <tr>
           <td>
-            Current form
+            <%= t(".renewal_information.labels.workflow_state") %>
           </td>
           <td>
             <%= display_current_workflow_state %>
@@ -224,15 +238,7 @@
         </tr>
         <tr>
           <td>
-            Double-checked tier?
-          </td>
-          <td>
-            <%= show_value_or_filler(:temp_tier_check) %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Signed declaration?
+            <%= t(".renewal_information.labels.declaration") %>
           </td>
           <td>
             <%= show_value_or_filler(:declaration) %>
@@ -243,8 +249,10 @@
   </div>
 
   <div class="column-one-third">
-    <h2 class="heading-medium">Actions</h2>
+    <h2 class="heading-medium">
+      <%= t(".sidebar.heading") %>
+    </h2>
 
-    <%= link_to "Continue renewal", WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier), class: 'button' %>
+    <%= link_to t(".sidebar.continue_button"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier), class: 'button' %>
   </div>
 </div>

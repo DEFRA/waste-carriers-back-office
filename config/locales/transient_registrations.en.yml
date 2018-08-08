@@ -1,0 +1,48 @@
+en:
+  transient_registrations:
+    show:
+      title: "Renewal details"
+      heading: "Renewal in progress: %{reg_identifier}"
+      filler: "–"
+      reg_information:
+        heading: "Registration information"
+        labels:
+          account_email: "User"
+          reg_identifier: "Registration number"
+          tier: "Tier"
+          registration_type: "Registration type"
+      business_information:
+        heading: "Business information"
+        labels:
+          company_name: "Company name"
+          business_type: "Business type"
+          company_no: "Companies House number"
+          location: "Location"
+          registered_address: "Registered address"
+          main_people: "Main people"
+      contact_information:
+        heading: "Contact details"
+        labels:
+          contact_name: "Contact name"
+          phone_number: "Contact phone"
+          contact_email: "Contact email"
+          contact_address: "Contact address"
+      conviction_information:
+        heading: "Conviction information"
+        labels:
+          declared_convictions: "Declared convictions?"
+          relevant_people: "Relevant people"
+          conviction_check_required: "Conviction check required?"
+      financial_information:
+        heading: "Payment information"
+        labels:
+          payment_method: "Payment method"
+          copy_cards: "Copy cards ordered"
+      renewal_information:
+        heading: "About this renewal"
+        labels:
+          workflow_state: "Current form"
+          declaration: "Signed declaration?"
+      sidebar:
+        heading: "Actions"
+        continue_button: "Continue renewal"
