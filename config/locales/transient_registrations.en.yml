@@ -36,8 +36,17 @@ en:
       financial_information:
         heading: "Payment information"
         labels:
-          payment_method: "Payment method"
+          balance: "Total balance"
           copy_cards: "Copy cards ordered"
+      order_information:
+        heading: "Order"
+        labels:
+          items: "Charges"
+          total_amount: "Total amount"
+          payment_method: "Payment method"
+          world_pay_status: "WorldPay status"
+          date_last_updated: "Order last updated at"
+          updated_by_user: "Updated by"
       renewal_information:
         heading: "About this renewal"
         labels:
@@ -48,7 +57,7 @@ en:
         continue_button: "Continue renewal"
       attributes:
         business_type:
-          individual: "individual or sole trader"
+          soleTrader: "individual or sole trader"
           limitedCompany: "limited company"
           partnership: "partnership"
           limitedLiabilityPartnership: "limited liability partnership"

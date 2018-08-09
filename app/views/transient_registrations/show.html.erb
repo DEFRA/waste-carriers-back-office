@@ -206,22 +206,88 @@
       <tbody>
         <tr>
           <td>
-            <%= t(".financial_information.labels.payment_method") %>
+            <%= t(".financial_information.labels.copy_cards") %>
           </td>
           <td>
-            TODO
+            <%= show_value_or_filler(:temp_cards) %>
+          </td>
+        </tr>
+        <% if @transient_registration.finance_details.present? %>
+        <tr>
+          <td>
+            <%= t(".financial_information.labels.balance") %>
+          </td>
+          <td>
+            £<%= display_pence_as_pounds(@transient_registration.finance_details.balance) %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <% @transient_registration.finance_details.orders.each do |order| %>
+    <table>
+      <caption class="heading-small">
+        <%= t(".order_information.heading") %>
+      </caption>
+      <tbody>
+        <tr>
+          <td>
+            <%= t(".order_information.labels.items") %>
+          </td>
+          <td>
+            <ul>
+            <% order.order_items.each do |item| %>
+              <li><%= item.description %> (£<%= display_pence_as_pounds(item.amount) %>)</li>
+            <% end %>
+            </ul>
           </td>
         </tr>
         <tr>
           <td>
-            <%= t(".financial_information.labels.copy_cards") %>
+            <%= t(".order_information.labels.total_amount") %>
           </td>
           <td>
-            TODO
+            £<%= display_pence_as_pounds(order.total_amount) %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= t(".order_information.labels.payment_method") %>
+          </td>
+          <td>
+            <%= order.payment_method %>
+          </td>
+        </tr>
+        <% if order.world_pay_status.present? %>
+        <tr>
+          <td>
+            <%= t(".order_information.labels.world_pay_status") %>
+          </td>
+          <td>
+            <%= order.world_pay_status %>
+          </td>
+        </tr>
+        <% end %>
+        <tr>
+          <td>
+            <%= t(".order_information.labels.date_last_updated") %>
+          </td>
+          <td>
+            <%= order.date_last_updated.strftime("%A %e %B %Y at %l:%M%P") %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= t(".order_information.labels.updated_by_user") %>
+          </td>
+          <td>
+            <%= order.updated_by_user %>
           </td>
         </tr>
       </tbody>
     </table>
+    <% end %>
 
     <table>
       <caption class="heading-small">
