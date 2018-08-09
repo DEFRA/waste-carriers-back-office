@@ -57,6 +57,13 @@ gem "waste_carriers_engine",
 # to Heroku. Hence moved outside group till we can understand why.
 gem "github_changelog_generator", require: false
 
+# Defines a route for ELB healthchecks. The healthcheck is a piece of Rack
+# middleware that does absolutely nothing, so it is faster than just using the
+# default `/` route, or `/version` as was previously used.
+# The app now returns a 200 from `/healthcheck`
+# Test with `curl -I http://localhost:8001/healthcheck`
+gem "aws-healthcheck"
+
 group :development, :production do
   # Web application server that replaces webrick. It handles HTTP requests,
   # manages processes and resources, and enables administration, monitoring
