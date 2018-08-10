@@ -32,4 +32,25 @@ module TransientRegistrationsHelper
      address.postcode,
      address.country].reject
   end
+
+  def key_people_with_conviction_search_results?
+    return false unless @transient_registration.key_people.present?
+
+    results = @transient_registration.key_people.select(&:conviction_search_result)
+
+    results.count.positive?
+  end
+
+  def number_of_people_with_matching_convictions
+    return 0 unless @transient_registration.key_people.present?
+
+    count = 0
+    @transient_registration.key_people.each do |person|
+      next unless person.conviction_search_result.present?
+      next if person.conviction_search_result.match_result == "NO"
+      count += 1
+    end
+
+    count
+  end
 end

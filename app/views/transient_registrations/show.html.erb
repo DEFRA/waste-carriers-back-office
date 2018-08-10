@@ -102,34 +102,6 @@
       </tbody>
     </table>
 
-    <% if @transient_registration.main_people.present? %>
-      <% @transient_registration.main_people.each do |person| %>
-      <table>
-        <caption class="heading-small">
-          <%= t(".main_person_information.heading.#{@transient_registration.business_type}") %>
-        </caption>
-        <tbody>
-          <tr>
-            <td>
-              <%= t(".main_person_information.labels.name") %>
-            </td>
-            <td>
-              <%= person.first_name %> <%= person.last_name %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= t(".main_person_information.labels.dob") %>
-            </td>
-            <td>
-              <%= person.dob.to_date %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <% end %>
-    <% end %>
-
     <table>
       <caption class="heading-small">
         <%= t(".contact_information.heading") %>
@@ -176,6 +148,98 @@
       </tbody>
     </table>
 
+    <% if @transient_registration.main_people.present? || @transient_registration.relevant_people.present? %>
+      <h2 class="heading-medium"><%= t(".people_heading") %></h2>
+    <% end %>
+
+    <% if @transient_registration.main_people.present? %>
+      <% @transient_registration.main_people.each do |person| %>
+      <table>
+        <caption class="heading-small">
+          <%= t(".person_information.heading.#{@transient_registration.business_type}") %>
+        </caption>
+        <tbody>
+          <tr>
+            <td>
+              <%= t(".person_information.labels.name") %>
+            </td>
+            <td>
+              <%= person.first_name %> <%= person.last_name %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".person_information.labels.dob") %>
+            </td>
+            <td>
+              <%= person.dob.to_date %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".person_information.labels.conviction_search_result") %>
+            </td>
+            <td>
+              <% if person.conviction_search_result.present? %>
+                <%= person.conviction_search_result.match_result.titleize %>
+              <% else %>
+                <%= t(".attributes.key_person.conviction_search_result.pending") %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <% end %>
+    <% end %>
+
+    <% if @transient_registration.relevant_people.present? %>
+      <% @transient_registration.relevant_people.each do |person| %>
+      <table>
+        <caption class="heading-small">
+          <%= t(".person_information.heading.relevant") %>
+        </caption>
+        <tbody>
+          <tr>
+            <td>
+              <%= t(".person_information.labels.name") %>
+            </td>
+            <td>
+              <%= person.first_name %> <%= person.last_name %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".person_information.labels.position") %>
+            </td>
+            <td>
+              <%= person.position %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".person_information.labels.dob") %>
+            </td>
+            <td>
+              <%= person.dob.to_date %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".person_information.labels.conviction_search_result") %>
+            </td>
+            <td>
+              <% if person.conviction_search_result.present? %>
+                <%= person.conviction_search_result.match_result.titleize %>
+              <% else %>
+                <%= t(".attributes.key_person.conviction_search_result.pending") %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <% end %>
+    <% end %>
+
     <h2 class="heading-medium"><%= t(".conviction_heading") %></h2>
     <div class="panel">
     <% if @transient_registration.conviction_search_result.present? %>
@@ -204,63 +268,25 @@
         <% if @transient_registration.conviction_search_result.present? %>
         <tr>
           <td>
-            <%= t(".conviction_information.labels.conviction_search_result") %>
+            <%= t(".conviction_information.labels.business_conviction_search_result") %>
           </td>
           <td>
             <%= @transient_registration.conviction_search_result.match_result.titleize %>
           </td>
         </tr>
         <% end %>
+        <% if key_people_with_conviction_search_results? %>
+        <tr>
+          <td>
+            <%= t(".conviction_information.labels.people_conviction_search_result") %>
+          </td>
+          <td>
+            <%= t(".attributes.key_people.number_of_people_with_matching_convictions", count: number_of_people_with_matching_convictions) %>
+          </td>
+        </tr>
+        <% end %>
       </tbody>
     </table>
-    <% end %>
-
-    <% if @transient_registration.relevant_people.present? %>
-      <% @transient_registration.relevant_people.each do |person| %>
-      <table>
-        <caption class="heading-small">
-          <%= t(".relevant_person_information.heading") %>
-        </caption>
-        <tbody>
-          <tr>
-            <td>
-              <%= t(".relevant_person_information.labels.name") %>
-            </td>
-            <td>
-              <%= person.first_name %> <%= person.last_name %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= t(".relevant_person_information.labels.position") %>
-            </td>
-            <td>
-              <%= person.position %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= t(".relevant_person_information.labels.dob") %>
-            </td>
-            <td>
-              <%= person.dob.to_date %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= t(".relevant_person_information.labels.conviction_search_result") %>
-            </td>
-            <td>
-              <% if person.conviction_search_result.present? %>
-                <%= person.conviction_search_result.match_result.titleize %>
-              <% else %>
-                <%= t(".filler") %>
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <% end %>
     <% end %>
 
     <h2 class="heading-medium"><%= t(".finance_information.heading") %></h2>

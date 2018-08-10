@@ -19,18 +19,6 @@ en:
           company_no: "Companies House number"
           location: "Location"
           registered_address: "Registered address"
-      main_person_information:
-        heading:
-          localAuthority: "Chief executive details"
-          limitedCompany: "Company director details"
-          limitedLiabilityPartnership: "Member details"
-          overseas: "Business owner details"
-          partnership: "Partner details"
-          soleTrader: "Business owner details"
-        labels:
-          name: "Name"
-          position: "Position"
-          dob: "Date of birth"
       contact_information:
         heading: "Contact details"
         labels:
@@ -38,6 +26,21 @@ en:
           phone_number: "Contact phone"
           contact_email: "Contact email"
           contact_address: "Contact address"
+      people_heading: "People"
+      person_information:
+        heading:
+          localAuthority: "Chief executive details"
+          limitedCompany: "Company director details"
+          limitedLiabilityPartnership: "Member details"
+          overseas: "Business owner details"
+          partnership: "Partner details"
+          soleTrader: "Business owner details"
+          relevant: "Person with a relevant conviction"
+        labels:
+          name: "Name"
+          position: "Position"
+          dob: "Date of birth"
+          conviction_search_result: "Matching convictions found?"
       conviction_heading: "Convictions"
       conviction_information:
         heading: "Conviction overview"
@@ -47,14 +50,8 @@ en:
           unknown: "This renewal application is still in progress, so there is no conviction match data yet."
         labels:
           declared_convictions: "Declared convictions?"
-          conviction_search_result: "Matching convictions found for company?"
-      relevant_person_information:
-        heading: "Relevant person"
-        labels:
-          name: "Name"
-          position: "Position"
-          dob: "Date of birth"
-          conviction_search_result: "Matching convictions found?"
+          business_conviction_search_result: "Matching convictions found for company?"
+          people_conviction_search_result: "Matching convictions found for people?"
       finance_information:
         heading: Finance information
         balance:
@@ -107,6 +104,14 @@ en:
           other: "Other"
         declaration:
           "1": "Yes"
+        key_people:
+          number_of_people_with_matching_convictions:
+            zero: "No"
+            one: "1 match found"
+            other: "%{count} matches found"
+        key_person:
+          conviction_search_result:
+            pending: "No data yet"
         location:
           england: "England"
           wales: "Wales"
