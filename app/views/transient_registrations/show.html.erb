@@ -14,7 +14,7 @@
             <%= t(".reg_information.labels.account_email") %>
           </td>
           <td>
-            <%= show_value_or_filler(:account_email) %>
+            <%= @transient_registration.account_email %>
           </td>
         </tr>
         <tr>
@@ -22,7 +22,7 @@
             <%= t(".reg_information.labels.reg_identifier") %>
           </td>
           <td>
-            <%= show_value_or_filler(:reg_identifier) %>
+            <%= @transient_registration.reg_identifier %>
           </td>
         </tr>
         <tr>
@@ -54,7 +54,7 @@
             <%= t(".business_information.labels.company_name") %>
           </td>
           <td>
-            <%= show_value_or_filler(:company_name) %>
+            <%= @transient_registration.company_name %>
           </td>
         </tr>
         <tr>
@@ -65,14 +65,17 @@
             <%= show_translation_or_filler(:business_type) %>
           </td>
         </tr>
+        <% if @transient_registration.company_no.present? %>
         <tr>
           <td>
             <%= t(".business_information.labels.company_no") %>
           </td>
           <td>
-            <%= show_value_or_filler(:company_no) %>
+            <%= @transient_registration.company_no %>
           </td>
         </tr>
+        <% end %>
+        <% if @transient_registration.location.present? %>
         <tr>
           <td>
             <%= t(".business_information.labels.location") %>
@@ -81,6 +84,8 @@
             <%= show_translation_or_filler(:location) %>
           </td>
         </tr>
+        <% end %>
+        <% if @transient_registration.registered_address.present? %>
         <tr>
           <td>
             <%= t(".business_information.labels.registered_address") %>
@@ -93,25 +98,37 @@
             </ul>
           </td>
         </tr>
-        <tr>
-          <td>
-            <%= t(".business_information.labels.main_people") %>
-          </td>
-          <td>
-            <% if @transient_registration.main_people.present? %>
-              <% @transient_registration.main_people.each do |person| %>
-                <ul>
-                  <li><%= person.first_name %> <%= person.last_name %></li>
-                  <li><%= person.dob.to_date %></li>
-                </ul>
-              <% end %>
-            <% else %>
-              <%= t(".filler") %>
-            <% end %>
-          </td>
-        </tr>
+        <% end %>
       </tbody>
     </table>
+
+    <% if @transient_registration.main_people.present? %>
+      <% @transient_registration.main_people.each do |person| %>
+      <table>
+        <caption class="heading-small">
+          <%= t(".main_person_information.heading.#{@transient_registration.business_type}") %>
+        </caption>
+        <tbody>
+          <tr>
+            <td>
+              <%= t(".main_person_information.labels.name") %>
+            </td>
+            <td>
+              <%= person.first_name %> <%= person.last_name %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".main_person_information.labels.dob") %>
+            </td>
+            <td>
+              <%= person.dob.to_date %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <% end %>
+    <% end %>
 
     <table>
       <caption class="heading-small">
@@ -123,7 +140,7 @@
             <%= t(".contact_information.labels.contact_name") %>
           </td>
           <td>
-            <%= show_value_or_filler(:first_name) %> <%= show_value_or_filler(:last_name) %>
+            <%= @transient_registration.first_name %> <%= @transient_registration.last_name %>
           </td>
         </tr>
         <tr>
@@ -131,7 +148,7 @@
             <%= t(".contact_information.labels.phone_number") %>
           </td>
           <td>
-            <%= show_value_or_filler(:phone_number) %>
+            <%= @transient_registration.phone_number %>
           </td>
         </tr>
         <tr>
@@ -139,9 +156,10 @@
             <%= t(".contact_information.labels.contact_email") %>
           </td>
           <td>
-            <%= show_value_or_filler(:contact_email) %>
+            <%= @transient_registration.contact_email %>
           </td>
         </tr>
+        <% if @transient_registration.contact_address.present? %>
         <tr>
           <td>
             <%= t(".contact_information.labels.contact_address") %>
@@ -154,135 +172,267 @@
             </ul>
           </td>
         </tr>
+        <% end %>
       </tbody>
     </table>
 
+    <h2 class="heading-medium"><%= t(".conviction_heading") %></h2>
+    <div class="panel">
+    <% if @transient_registration.conviction_search_result.present? %>
+      <%= t(".conviction_information.conviction_search_text.#{@transient_registration.conviction_check_required?}") %>
+    <% else %>
+      <%= t(".conviction_information.conviction_search_text.unknown") %>
+    <% end %>
+    </div>
+
+    <% if @transient_registration.declared_convictions.present? || @transient_registration.conviction_search_result.present? %>
     <table>
       <caption class="heading-small">
         <%= t(".conviction_information.heading") %>
       </caption>
       <tbody>
+        <% if @transient_registration.declared_convictions.present? %>
         <tr>
           <td>
             <%= t(".conviction_information.labels.declared_convictions") %>
           </td>
           <td>
-            <%= show_value_or_filler(:declared_convictions) %>
+            <%= @transient_registration.declared_convictions.titleize %>
           </td>
         </tr>
+        <% end %>
+        <% if @transient_registration.conviction_search_result.present? %>
         <tr>
           <td>
-            <%= t(".conviction_information.labels.relevant_people") %>
+            <%= t(".conviction_information.labels.conviction_search_result") %>
           </td>
           <td>
-            <% if @transient_registration.relevant_people.present? %>
-              <% @transient_registration.relevant_people.each do |person| %>
-                <ul>
-                  <li><%= person.first_name %> <%= person.last_name %></li>
-                  <li><%= person.position %></li>
-                  <li><%= person.dob.to_date %></li>
-                </ul>
+            <%= @transient_registration.conviction_search_result.match_result.titleize %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
+
+    <% if @transient_registration.relevant_people.present? %>
+      <% @transient_registration.relevant_people.each do |person| %>
+      <table>
+        <caption class="heading-small">
+          <%= t(".relevant_person_information.heading") %>
+        </caption>
+        <tbody>
+          <tr>
+            <td>
+              <%= t(".relevant_person_information.labels.name") %>
+            </td>
+            <td>
+              <%= person.first_name %> <%= person.last_name %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".relevant_person_information.labels.position") %>
+            </td>
+            <td>
+              <%= person.position %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".relevant_person_information.labels.dob") %>
+            </td>
+            <td>
+              <%= person.dob.to_date %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".relevant_person_information.labels.conviction_search_result") %>
+            </td>
+            <td>
+              <% if person.conviction_search_result.present? %>
+                <%= person.conviction_search_result.match_result.titleize %>
+              <% else %>
+                <%= t(".filler") %>
               <% end %>
-            <% else %>
-              <%= t(".filler") %>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= t(".conviction_information.labels.conviction_check_required") %>
-          </td>
-          <td>
-            <%= @transient_registration.conviction_check_required? %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <% end %>
+    <% end %>
 
+    <h2 class="heading-medium"><%= t(".finance_information.heading") %></h2>
+
+    <div class="panel">
+    <% if @transient_registration.finance_details.present? && @transient_registration.finance_details.balance.present? %>
+      <% if @transient_registration.finance_details.balance.zero? %>
+        <%= t(".finance_information.balance.zero") %>
+      <% elsif @transient_registration.finance_details.balance.positive? %>
+        <%= t(".finance_information.balance.positive", balance: display_pence_as_pounds(@transient_registration.finance_details.balance)) %>
+      <% elsif @transient_registration.finance_details.balance.negative? %>
+        <%= t(".finance_information.balance.negative", balance: display_pence_as_pounds(@transient_registration.finance_details.balance)) %>
+      <% end %>
+    <% else %>
+      <%= t(".finance_information.balance.unknown") %>
+    <% end %>
+    </div>
+
+    <% if @transient_registration.finance_details.present? && @transient_registration.finance_details.orders.present? %>
+      <% @transient_registration.finance_details.orders.each do |order| %>
+      <table>
+        <caption class="heading-small">
+          <%= t(".order_information.heading") %>
+        </caption>
+        <tbody>
+          <tr>
+            <td>
+              <%= t(".order_information.labels.items") %>
+            </td>
+            <td>
+              <ul>
+              <% order.order_items.each do |item| %>
+                <li><%= item.description %> (£<%= display_pence_as_pounds(item.amount) %>)</li>
+              <% end %>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".order_information.labels.total_amount") %>
+            </td>
+            <td>
+              £<%= display_pence_as_pounds(order.total_amount) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".order_information.labels.order_code") %>
+            </td>
+            <td>
+              <%= order.order_code %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".order_information.labels.payment_method") %>
+            </td>
+            <td>
+              <%= order.payment_method %>
+            </td>
+          </tr>
+          <% if order.world_pay_status.present? %>
+          <tr>
+            <td>
+              <%= t(".order_information.labels.world_pay_status") %>
+            </td>
+            <td>
+              <%= order.world_pay_status %>
+            </td>
+          </tr>
+          <% end %>
+          <tr>
+            <td>
+              <%= t(".order_information.labels.date_last_updated") %>
+            </td>
+            <td>
+              <%= order.date_last_updated.strftime("%A %e %B %Y at %l:%M%P") %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".order_information.labels.updated_by_user") %>
+            </td>
+            <td>
+              <%= order.updated_by_user %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <% end %>
+    <% end %>
+
+    <% if @transient_registration.finance_details.present? && @transient_registration.finance_details.payments.present? %>
+      <% @transient_registration.finance_details.payments.each do |payment| %>
+      <table>
+        <caption class="heading-small">
+          <%= t(".payment_information.heading") %>
+        </caption>
+        <tbody>
+          <tr>
+            <td>
+              <%= t(".payment_information.labels.amount") %>
+            </td>
+            <td>
+              £<%= display_pence_as_pounds(payment.amount) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".payment_information.labels.payment_type") %>
+            </td>
+            <td>
+              <%= payment.payment_type %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".payment_information.labels.registration_reference") %>
+            </td>
+            <td>
+              <%= payment.registration_reference %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".payment_information.labels.comment") %>
+            </td>
+            <td>
+              <%= payment.comment %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".payment_information.labels.date_received") %>
+            </td>
+            <td>
+              <%= payment.date_received %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".payment_information.labels.date_entered") %>
+            </td>
+            <td>
+              <%= payment.date_entered %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".payment_information.labels.updated_by_user") %>
+            </td>
+            <td>
+              <%= payment.updated_by_user %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <% end %>
+    <% end %>
+
+    <% if @transient_registration.temp_cards.present? %>
     <table>
       <caption class="heading-small">
-        <%= t(".financial_information.heading") %>
+        <%= t(".card_information.heading") %>
       </caption>
       <tbody>
         <tr>
           <td>
-            <%= t(".financial_information.labels.copy_cards") %>
+            <%= t(".card_information.labels.temp_cards") %>
           </td>
           <td>
-            <%= show_value_or_filler(:temp_cards) %>
-          </td>
-        </tr>
-        <% if @transient_registration.finance_details.present? %>
-        <tr>
-          <td>
-            <%= t(".financial_information.labels.balance") %>
-          </td>
-          <td>
-            £<%= display_pence_as_pounds(@transient_registration.finance_details.balance) %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-    <% @transient_registration.finance_details.orders.each do |order| %>
-    <table>
-      <caption class="heading-small">
-        <%= t(".order_information.heading") %>
-      </caption>
-      <tbody>
-        <tr>
-          <td>
-            <%= t(".order_information.labels.items") %>
-          </td>
-          <td>
-            <ul>
-            <% order.order_items.each do |item| %>
-              <li><%= item.description %> (£<%= display_pence_as_pounds(item.amount) %>)</li>
-            <% end %>
-            </ul>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= t(".order_information.labels.total_amount") %>
-          </td>
-          <td>
-            £<%= display_pence_as_pounds(order.total_amount) %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= t(".order_information.labels.payment_method") %>
-          </td>
-          <td>
-            <%= order.payment_method %>
-          </td>
-        </tr>
-        <% if order.world_pay_status.present? %>
-        <tr>
-          <td>
-            <%= t(".order_information.labels.world_pay_status") %>
-          </td>
-          <td>
-            <%= order.world_pay_status %>
-          </td>
-        </tr>
-        <% end %>
-        <tr>
-          <td>
-            <%= t(".order_information.labels.date_last_updated") %>
-          </td>
-          <td>
-            <%= order.date_last_updated.strftime("%A %e %B %Y at %l:%M%P") %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= t(".order_information.labels.updated_by_user") %>
-          </td>
-          <td>
-            <%= order.updated_by_user %>
+            <%= @transient_registration.temp_cards %>
           </td>
         </tr>
       </tbody>
@@ -290,7 +440,7 @@
     <% end %>
 
     <table>
-      <caption class="heading-small">
+      <caption class="heading-medium">
         <%= t(".renewal_information.heading") %>
       </caption>
       <tbody>

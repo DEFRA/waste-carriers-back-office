@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 module TransientRegistrationsHelper
-  def show_value_or_filler(attribute)
-    @transient_registration[attribute] || I18n.t(".transient_registrations.show.filler")
-  end
-
   def show_translation_or_filler(attribute)
     if @transient_registration[attribute].present?
       I18n.t(".transient_registrations.show.attributes.#{attribute}.#{@transient_registration[attribute]}")
@@ -28,18 +24,12 @@ module TransientRegistrationsHelper
   end
 
   def address_lines(address)
-    lines = if address.present?
-              [address.address_line_1,
-               address.address_line_2,
-               address.address_line_3,
-               address.address_line_4,
-               address.town_city,
-               address.postcode,
-               address.country].reject
-            else
-              ["-"]
-            end
-
-    lines
+    [address.address_line_1,
+     address.address_line_2,
+     address.address_line_3,
+     address.address_line_4,
+     address.town_city,
+     address.postcode,
+     address.country].reject
   end
 end

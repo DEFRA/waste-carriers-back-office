@@ -19,7 +19,18 @@ en:
           company_no: "Companies House number"
           location: "Location"
           registered_address: "Registered address"
-          main_people: "Main people"
+      main_person_information:
+        heading:
+          localAuthority: "Chief executive details"
+          limitedCompany: "Company director details"
+          limitedLiabilityPartnership: "Member details"
+          overseas: "Business owner details"
+          partnership: "Partner details"
+          soleTrader: "Business owner details"
+        labels:
+          name: "Name"
+          position: "Position"
+          dob: "Date of birth"
       contact_information:
         heading: "Contact details"
         labels:
@@ -27,26 +38,54 @@ en:
           phone_number: "Contact phone"
           contact_email: "Contact email"
           contact_address: "Contact address"
+      conviction_heading: "Convictions"
       conviction_information:
-        heading: "Conviction information"
+        heading: "Conviction overview"
+        conviction_search_text:
+          "true": "This registration has matching or declared convictions."
+          "false": "There are no matching or declared convictions for this registration."
+          unknown: "This renewal application is still in progress, so there is no conviction match data yet."
         labels:
           declared_convictions: "Declared convictions?"
-          relevant_people: "Relevant people"
-          conviction_check_required: "Conviction check required?"
-      financial_information:
-        heading: "Payment information"
+          conviction_search_result: "Matching convictions found for company?"
+      relevant_person_information:
+        heading: "Relevant person"
         labels:
-          balance: "Total balance"
-          copy_cards: "Copy cards ordered"
+          name: "Name"
+          position: "Position"
+          dob: "Date of birth"
+          conviction_search_result: "Matching convictions found?"
+      finance_information:
+        heading: Finance information
+        balance:
+          zero: "All charges for this renewal have been fully paid."
+          positive: "There is an outstanding balance of £%{balance} on this renewal."
+          negative: "This renewal has been overpaid by £%{balance}."
+          unknown: "This renewal application is still in progress, so there is no finance data yet."
       order_information:
-        heading: "Order"
+        heading: "Order details"
         labels:
           items: "Charges"
           total_amount: "Total amount"
           payment_method: "Payment method"
+          order_code: "Order code"
           world_pay_status: "WorldPay status"
           date_last_updated: "Order last updated at"
           updated_by_user: "Updated by"
+      payment_information:
+        heading: "Payment details"
+        labels:
+          amount: "Amount"
+          payment_type: "Payment type"
+          registration_reference: "Registration reference"
+          comment: "Comment"
+          date_received: "Date received"
+          date_entered: "Date entered"
+          updated_by_user: "Updated by"
+      card_information:
+        heading: "Registration cards (copy cards)"
+        labels:
+          temp_cards: "Number of cards ordered"
       renewal_information:
         heading: "About this renewal"
         labels:
@@ -57,17 +96,17 @@ en:
         continue_button: "Continue renewal"
       attributes:
         business_type:
-          soleTrader: "individual or sole trader"
-          limitedCompany: "limited company"
-          partnership: "partnership"
-          limitedLiabilityPartnership: "limited liability partnership"
-          localAuthority: "local authority or public body"
-          charity: "charity or trust"
-          authority: "local authority"
-          publicBody: "public body"
-          other: "other"
+          soleTrader: "Individual or sole trader"
+          limitedCompany: "Limited company"
+          partnership: "Partnership"
+          limitedLiabilityPartnership: "Limited liability partnership"
+          localAuthority: "Local authority or public body"
+          charity: "Charity or trust"
+          authority: "Local authority"
+          publicBody: "Public body"
+          other: "Other"
         declaration:
-          "1": "yes"
+          "1": "Yes"
         location:
           england: "England"
           wales: "Wales"
@@ -75,9 +114,9 @@ en:
           northern_ireland: "Northern Ireland"
           overseas: "Not in the United Kingdom"
         registration_type:
-          carrier_dealer: "carrier and dealer"
-          broker_dealer: "broker and dealer"
-          carrier_broker_dealer: "carrier, broker and dealer"
+          carrier_dealer: "Carrier and dealer"
+          broker_dealer: "Broker and dealer"
+          carrier_broker_dealer: "Carrier, broker and dealer"
         tier:
-          UPPER: "upper"
-          LOWER: "lower"
+          UPPER: "Upper"
+          LOWER: "Lower"
