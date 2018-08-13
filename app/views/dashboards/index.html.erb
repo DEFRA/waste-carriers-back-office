@@ -1,5 +1,5 @@
 <h1 class="heading-large">
-  Renewals dashboard
+  <%= t(".heading") %>
 </h1>
 
 <div class="grid-row">
@@ -12,9 +12,9 @@
       <table>
         <thead>
           <tr>
-            <th>Registration number</th>
-            <th>Company name</th>
-            <th>Actions</th>
+            <th><%= t(".results.th.reg_identifier") %></th>
+            <th><%= t(".results.th.company_name") %></th>
+            <th><%= t(".results.th.actions") %></th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
                 <%= transient_registration.company_name %>
               </td>
               <td>
-                <%= link_to "See details", transient_registration_path(transient_registration.reg_identifier), class: 'button' %>
+                <%= link_to t(".results.details_button"), transient_registration_path(transient_registration.reg_identifier), class: 'button' %>
               </td>
             </tr>
           <% end %>

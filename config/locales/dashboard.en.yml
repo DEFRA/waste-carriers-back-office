@@ -1,0 +1,11 @@
+en:
+  dashboards:
+    index:
+      title: "Renewals dashboard"
+      heading: "Renewals dashboard"
+      results:
+        th:
+          reg_identifier: "Registration number"
+          company_name: "Company name"
+          actions: "Actions"
+        details_button: "See details"
