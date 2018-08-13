@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
 
-  get "/bo" => "dashboards#index"
+  root to: "application#redirect_root_to_dashboard"
 
   get "/bo/registrations" => "waste_carriers_engine/registrations#index"
-
-  root to: "application#redirect_root_to_dashboard"
 
   devise_for :users, path: "/bo/users", path_names: { sign_in: "sign_in", sign_out: "sign_out" }
 
