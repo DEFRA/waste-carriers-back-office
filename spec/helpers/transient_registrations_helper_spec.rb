@@ -9,8 +9,36 @@ RSpec.describe WasteCarriersEngine::ApplicationHelper, type: :helper do
     assign(:transient_registration, transient_registration)
   end
 
+  describe "#renewal_application_submitted?" do
+    context "when the workflow_state is not a completed one" do
+      it "returns false" do
+        expect(helper.renewal_application_submitted?).to eq(false)
+      end
+    end
+
+    context "when the workflow_state is renewal_received" do
+      before do
+        transient_registration.workflow_state = "renewal_received_form"
+      end
+
+      it "returns true" do
+        expect(helper.renewal_application_submitted?).to eq(true)
+      end
+    end
+
+    context "when the workflow_state is renewal_complete" do
+      before do
+        transient_registration.workflow_state = "renewal_complete_form"
+      end
+
+      it "returns true" do
+        expect(helper.renewal_application_submitted?).to eq(true)
+      end
+    end
+  end
+
   describe "#show_translation_or_filler" do
-    context "when the attribut evalue is present" do
+    context "when the attribute value is present" do
       before do
         transient_registration.tier = "UPPER"
       end

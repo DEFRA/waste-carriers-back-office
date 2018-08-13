@@ -2,8 +2,21 @@ en:
   transient_registrations:
     show:
       title: "Renewal details"
-      heading: "Renewal in progress: %{reg_identifier}"
+      heading: "Renewal application for %{reg_identifier}"
       filler: "–"
+      status:
+        headings:
+          in_progress: "Application in progress"
+          submitted: "Application submitted"
+        messages:
+          in_progress: "The current form is"
+          pending_payment: "Payment is required before this registration can be renewed."
+          pending_convictions_check: "A convictions check is required before this registration can be renewed."
+          pending_payment_and_convictions_check: "Payment and a convictions check are required before this registration can be renewed."
+        actions:
+          continue_button: "Continue as assisted digital renewal"
+          payment_button: "Process payment"
+          convictions_check_button: "Check conviction matches"
       reg_information:
         heading: "Registration information"
         labels:
@@ -88,9 +101,6 @@ en:
         labels:
           workflow_state: "Current form"
           declaration: "Signed declaration?"
-      sidebar:
-        heading: "Actions"
-        continue_button: "Continue renewal"
       attributes:
         business_type:
           soleTrader: "Individual or sole trader"

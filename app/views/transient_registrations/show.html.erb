@@ -4,8 +4,43 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
+    <% if renewal_application_submitted? %>
+      <div class="panel">
+        <h2 class="heading-medium">
+          <%= t(".status.headings.submitted") %>
+        </h2>
+        <% if @transient_registration.finance_details.balance.positive? && @transient_registration.conviction_check_required? %>
+          <p>
+            <%= t(".status.messages.pending_payment_and_convictions_check") %>
+          </p>
+          <%= link_to t(".status.actions.payment_button"), "#", class: 'button' %>
+          <%= link_to t(".status.actions.convictions_check_button"), "#", class: 'button' %>
+        <% elsif @transient_registration.finance_details.balance.positive? %>
+          <p>
+            <%= t(".status.messages.pending_payment") %>
+          </p>
+          <%= link_to t(".status.actions.payment_button"), "#", class: 'button' %>
+        <% elsif @transient_registration.conviction_check_required? %>
+          <p>
+            <%= t(".status.messages.pending_convictions_check") %>
+          </p>
+          <%= link_to t(".status.actions.convictions_check_button"), "#", class: 'button' %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="panel">
+        <h2 class="heading-medium">
+          <%= t(".status.headings.in_progress") %>
+        </h2>
+        <p>
+          <%= t(".status.messages.in_progress") %> "<%= display_current_workflow_state %>".
+        </p>
+
+        <%= link_to t(".status.actions.continue_button"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier), class: 'button' %>
+      </div>
+    <% end %>
     <table>
-      <caption class="heading-small">
+      <caption class="heading-medium">
         <%= t(".reg_information.heading") %>
       </caption>
       <tbody>
@@ -45,7 +80,7 @@
     </table>
 
     <table>
-      <caption class="heading-small">
+      <caption class="heading-medium">
         <%= t(".business_information.heading") %>
       </caption>
       <tbody>
@@ -103,7 +138,7 @@
     </table>
 
     <table>
-      <caption class="heading-small">
+      <caption class="heading-medium">
         <%= t(".contact_information.heading") %>
       </caption>
       <tbody>
@@ -488,13 +523,5 @@
         </tr>
       </tbody>
     </table>
-  </div>
-
-  <div class="column-one-third">
-    <h2 class="heading-medium">
-      <%= t(".sidebar.heading") %>
-    </h2>
-
-    <%= link_to t(".sidebar.continue_button"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier), class: 'button' %>
   </div>
 </div>
