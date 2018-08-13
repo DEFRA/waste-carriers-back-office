@@ -7,5 +7,13 @@ FactoryBot.define do
     town_city "Baz City"
     postcode "FA1 1KE"
     uprn "340116"
+
+    trait :contact do
+      address_type "POSTAL"
+    end
+
+    trait :registered do
+      address_type "REGISTERED"
+    end
   end
 end

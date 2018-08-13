@@ -30,7 +30,7 @@ module TransientRegistrationsHelper
      address.address_line_4,
      address.town_city,
      address.postcode,
-     address.country].reject
+     address.country].compact
   end
 
   def key_people_with_conviction_search_results?
