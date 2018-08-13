@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
-  revision: fcb4475c60d2e79a00305cdda8794904b36560fd
+  revision: 09d21f7e5cf28c757be5dcea4d84747ac35cf8d0
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -157,9 +157,9 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
-    mime-types (3.1)
+    mime-types (3.2.2)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2016.0521)
+    mime-types-data (3.2018.0812)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
