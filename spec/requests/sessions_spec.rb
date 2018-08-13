@@ -27,9 +27,9 @@ RSpec.describe "Sessions", type: :request do
           expect(response).to have_http_status(302)
         end
 
-        it "redirects to the root path" do
+        it "redirects to /bo" do
           post user_session_path, user: { email: user.email, password: user.password }
-          expect(response).to redirect_to(root_path)
+          expect(response).to redirect_to(bo_path)
         end
       end
     end
@@ -52,9 +52,9 @@ RSpec.describe "Sessions", type: :request do
         expect(response).to have_http_status(302)
       end
 
-      it "redirects to the root path" do
+      it "redirects to the /bo path" do
         get destroy_user_session_path
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end

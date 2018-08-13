@@ -14,4 +14,12 @@ class ApplicationController < ActionController::Base
   def redirect_root_to_dashboard
     redirect_to bo_path
   end
+
+  def after_sign_in_path_for(*)
+    bo_path
+  end
+
+  def after_sign_out_path_for(*)
+    new_user_session_path
+  end
 end
