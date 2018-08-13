@@ -51,13 +51,7 @@ module TransientRegistrationsHelper
   def number_of_people_with_matching_convictions
     return 0 unless @transient_registration.key_people.present?
 
-    count = 0
-    @transient_registration.key_people.each do |person|
-      next unless person.conviction_search_result.present?
-      next if person.conviction_search_result.match_result == "NO"
-      count += 1
-    end
-
-    count
+    all_requirements = @transient_registration.key_people.map(&:conviction_check_required?)
+    all_requirements.count(true)
   end
 end
