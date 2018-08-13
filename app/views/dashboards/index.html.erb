@@ -1,1 +1,38 @@
-Hello waste carrier world!
+<h1 class="heading-large">
+  Renewals dashboard
+</h1>
+
+<div class="grid-row">
+  <div class="column-full">
+    <div class="panel">
+      <p>TODO: Search</p>
+    </div>
+
+    <% if @transient_registrations.present? %>
+      <table>
+        <thead>
+          <tr>
+            <th>Registration number</th>
+            <th>Company name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @transient_registrations.each do |transient_registration| %>
+            <tr>
+              <td>
+                <%= transient_registration.reg_identifier %>
+              </td>
+              <td>
+                <%= transient_registration.company_name %>
+              </td>
+              <td>
+                <%= link_to "See details", transient_registration_path(transient_registration.reg_identifier), class: 'button' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

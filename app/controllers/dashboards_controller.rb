@@ -3,5 +3,7 @@
 class DashboardsController < ApplicationController
   before_action :authenticate_user!
 
-  def index; end
+  def index
+    @transient_registrations = WasteCarriersEngine::TransientRegistration.all
+  end
 end
