@@ -6,4 +6,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper WasteCarriersEngine::ApplicationHelper
+
+  # Within our production 'like' environments access to the app can only be
+  # obtained through `/bo`. Therefore to make this clear and ensure there is
+  # no confusion we redirect all requests to `/` to `/bo`
+  # https://stackoverflow.com/a/28822626/6117745
+  def redirect_root_to_dashboard
+    redirect_to bo_path
+  end
 end
