@@ -14,6 +14,8 @@
           <tr>
             <th><%= t(".results.th.reg_identifier") %></th>
             <th><%= t(".results.th.company_name") %></th>
+            <th><%= t(".results.th.status") %></th>
+            <th><%= t(".results.th.last_modified") %></th>
             <th><%= t(".results.th.actions") %></th>
           </tr>
         </thead>
@@ -25,6 +27,27 @@
               </td>
               <td>
                 <%= transient_registration.company_name %>
+              </td>
+              <td>
+                <% if renewal_application_submitted?(transient_registration) %>
+                    <% if transient_registration.finance_details.balance.positive? %>
+                      <strong class="app-c-tag app-c-tag--success">
+                        <%= t(".results.statuses.pending_payment") %>
+                      </strong>
+                    <% end %>
+                    <% if transient_registration.conviction_check_required? %>
+                      <strong class="app-c-tag app-c-tag--warning">
+                        <%= t(".results.statuses.pending_convictions_check") %>
+                      </strong>
+                    <% end %>
+                <% else %>
+                  <strong class="app-c-tag">
+                    <%= t(".results.statuses.in_progress") %>
+                  </strong>
+                <% end %>
+              </td>
+              <td>
+                <%= transient_registration.metaData.last_modified.strftime("%H:%M %d/%m/%Y") %>
               </td>
               <td>
                 <%= link_to t(".results.details_button"), transient_registration_path(transient_registration.reg_identifier), class: 'button' %>

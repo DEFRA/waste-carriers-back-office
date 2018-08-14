@@ -3,9 +3,9 @@
 module TransientRegistrationsHelper
   # Note that this is the application to renew, not a completed renewal. It just means that the user has submitted
   # all the required information through the forms, either through digital or assisted digital.
-  def renewal_application_submitted?
+  def renewal_application_submitted?(transient_registration)
     not_in_progress_states = %w[renewal_received_form renewal_complete_form]
-    not_in_progress_states.include?(@transient_registration.workflow_state)
+    not_in_progress_states.include?(transient_registration.workflow_state)
   end
 
   def show_translation_or_filler(attribute)
