@@ -4,6 +4,7 @@ class DashboardsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @transient_registrations = WasteCarriersEngine::TransientRegistration.all.page params[:page]
+    @transient_registrations = WasteCarriersEngine::TransientRegistration.order_by(:"metaData.last_modified".desc)
+                                                                         .page params[:page]
   end
 end
