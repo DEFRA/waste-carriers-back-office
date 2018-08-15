@@ -4,6 +4,17 @@ class DashboardsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @transient_registrations = WasteCarriersEngine::TransientRegistration.all
+    term = params[:term]
+    @transient_registrations = if term.present?
+                                 search_results(term)
+                               else
+                                 WasteCarriersEngine::TransientRegistration.all
+                               end
+  end
+
+  private
+
+  def search_results(term)
+    WasteCarriersEngine::TransientRegistration.where(reg_identifier: term)
   end
 end

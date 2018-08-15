@@ -19,6 +19,43 @@ RSpec.describe "Dashboards", type: :request do
         get "/bo"
         expect(response).to have_http_status(200)
       end
+
+      context "when there is no search term" do
+        let(:last_modified_renewal) { create(:transient_registration) }
+
+        before do
+          last_modified_renewal.save
+        end
+
+        it "displays the most recently modified renewal, regardless of content" do
+          get "/bo"
+          expect(response.body).to include(last_modified_renewal.reg_identifier)
+        end
+      end
+
+      context "when there is a search term" do
+        let(:last_modified_renewal) { create(:transient_registration) }
+        let(:matching_renewal) { create(:transient_registration) }
+
+        let(:term) do
+          matching_renewal.reg_identifier
+        end
+
+        before do
+          last_modified_renewal.save
+          matching_renewal.save
+        end
+
+        it "displays the matching renewal" do
+          get "/bo", term: term
+          expect(response.body).to include(matching_renewal.reg_identifier)
+        end
+
+        it "does not display the most recently modified, but non-matching, renewal" do
+          get "/bo", term: term
+          expect(response.body).to_not include(last_modified_renewal.reg_identifier)
+        end
+      end
     end
 
     context "when a user is not signed in" do
