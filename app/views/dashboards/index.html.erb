@@ -60,4 +60,13 @@
   </div>
 </div>
 
-<%= paginate @transient_registrations %>
+<div class="grid-row">
+  <div class="column-full">
+    <nav role="navigation" class="pagination" aria-label="Pagination">
+      <div class="pagination__summary">
+        <%= page_entries_info @transient_registrations, entry_name: "item" %>
+      </div>
+      <%= paginate @transient_registrations %>
+    </nav>
+  </div>
+</div>
