@@ -8,7 +8,7 @@ en:
         searchable_attributes:
           - "registration number"
           - "company name"
-          - "contact name"
+          - "last name of contact person"
           - "postcode"
         label: "Search for renewals"
         placeholder: "Enter your search term here"

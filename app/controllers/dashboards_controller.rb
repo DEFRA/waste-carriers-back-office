@@ -19,6 +19,7 @@ class DashboardsController < ApplicationController
   def search_results(term)
     WasteCarriersEngine::TransientRegistration.any_of({ reg_identifier: term },
                                                       { company_name: term },
+                                                      { last_name: term },
                                                       "addresses.postcode": term)
   end
 end
