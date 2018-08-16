@@ -1,13 +1,6 @@
 # frozen_string_literal: true
 
 module TransientRegistrationsHelper
-  # Note that this is the application to renew, not a completed renewal. It just means that the user has submitted
-  # all the required information through the forms, either through digital or assisted digital.
-  def renewal_application_submitted?(transient_registration)
-    not_in_progress_states = %w[renewal_received_form renewal_complete_form]
-    not_in_progress_states.include?(transient_registration.workflow_state)
-  end
-
   def show_translation_or_filler(attribute)
     if @transient_registration[attribute].present?
       I18n.t(".transient_registrations.show.attributes.#{attribute}.#{@transient_registration[attribute]}")

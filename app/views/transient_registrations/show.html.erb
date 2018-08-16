@@ -4,23 +4,23 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <% if renewal_application_submitted?(@transient_registration) %>
+    <% if @transient_registration.renewal_application_submitted? %>
       <div class="panel">
         <h2 class="heading-medium">
           <%= t(".status.headings.submitted") %>
         </h2>
-        <% if @transient_registration.finance_details.balance.positive? && @transient_registration.conviction_check_required? %>
+        <% if @transient_registration.pending_payment? && @transient_registration.pending_manual_conviction_check? %>
           <p>
             <%= t(".status.messages.pending_payment_and_convictions_check") %>
           </p>
           <%= link_to t(".status.actions.payment_button"), "#", class: 'button' %>
           <%= link_to t(".status.actions.convictions_check_button"), "#", class: 'button' %>
-        <% elsif @transient_registration.finance_details.balance.positive? %>
+        <% elsif @transient_registration.pending_payment? %>
           <p>
             <%= t(".status.messages.pending_payment") %>
           </p>
           <%= link_to t(".status.actions.payment_button"), "#", class: 'button' %>
-        <% elsif @transient_registration.conviction_check_required? %>
+        <% elsif @transient_registration.pending_manual_conviction_check? %>
           <p>
             <%= t(".status.messages.pending_convictions_check") %>
           </p>

@@ -43,13 +43,13 @@
                 <%= transient_registration.company_name %>
               </td>
               <td>
-                <% if renewal_application_submitted?(transient_registration) %>
-                    <% if transient_registration.finance_details.balance.positive? %>
+                <% if transient_registration.renewal_application_submitted? %>
+                    <% if transient_registration.pending_payment? %>
                       <strong class="app-c-tag app-c-tag--success">
                         <%= t(".results.statuses.pending_payment") %>
                       </strong>
                     <% end %>
-                    <% if transient_registration.conviction_check_required? %>
+                    <% if transient_registration.pending_manual_conviction_check? %>
                       <strong class="app-c-tag app-c-tag--warning">
                         <%= t(".results.statuses.pending_convictions_check") %>
                       </strong>
