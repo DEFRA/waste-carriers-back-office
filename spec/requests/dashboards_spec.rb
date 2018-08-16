@@ -71,6 +71,19 @@ RSpec.describe "Dashboards", type: :request do
             expect(response.body).to include(link_to_renewal)
           end
         end
+
+        context "when there is a match on a postcode" do
+          let(:address) { build(:address, postcode: "AB1 2CD") }
+          let(:matching_postcode_renewal) { create(:transient_registration, addresses: [address]) }
+          let(:term) { address.postcode }
+
+          it "displays the matching renewal" do
+            link_to_renewal = transient_registration_path(matching_postcode_renewal.reg_identifier)
+
+            get "/bo", term: term
+            expect(response.body).to include(link_to_renewal)
+          end
+        end
       end
     end
 
