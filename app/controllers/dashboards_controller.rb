@@ -17,12 +17,14 @@ class DashboardsController < ApplicationController
   private
 
   def search_results(term)
+    # Regex to find strings which match the term, with no surrounding characters. The search is case-insensitive.
+    exact_match_regex = /\A#{term}\z/i
     # Regex to find strings which include the term. The search is case-insensitive.
-    matching_regex = /#{term}/i
+    partial_match_regex = /#{term}/i
 
-    WasteCarriersEngine::TransientRegistration.any_of({ reg_identifier: matching_regex },
-                                                      { company_name: matching_regex },
-                                                      { last_name: matching_regex },
-                                                      "addresses.postcode": matching_regex)
+    WasteCarriersEngine::TransientRegistration.any_of({ reg_identifier: exact_match_regex },
+                                                      { company_name: partial_match_regex },
+                                                      { last_name: partial_match_regex },
+                                                      "addresses.postcode": partial_match_regex)
   end
 end

@@ -104,11 +104,23 @@ RSpec.describe "Dashboards", type: :request do
           expect(response.body).to include(link_to_renewal)
         end
 
-        context "when the matching renewal value includes the search term" do
-          let(:partially_matching_renewal) { create(:transient_registration, last_name: "Aardvark") }
-          let(:term) { "Aardva" }
+        context "when there is a partial match on the reg_identifier" do
+          let(:partially_matching_renewal) { create(:transient_registration) }
+          let(:term) { partially_matching_renewal.reg_identifier.chop }
 
-          it "includes partial matches" do
+          it "does not include the partial match" do
+            link_to_renewal = transient_registration_path(partially_matching_renewal.reg_identifier)
+
+            get "/bo", term: term
+            expect(response.body).to_not include(link_to_renewal)
+          end
+        end
+
+        context "when there is a partial match on the last_name" do
+          let(:partially_matching_renewal) { create(:transient_registration, last_name: "Aardvark") }
+          let(:term) { partially_matching_renewal.last_name.chop }
+
+          it "includes the partial match" do
             link_to_renewal = transient_registration_path(partially_matching_renewal.reg_identifier)
 
             get "/bo", term: term
