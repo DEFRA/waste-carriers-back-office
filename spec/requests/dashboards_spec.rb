@@ -96,6 +96,25 @@ RSpec.describe "Dashboards", type: :request do
             expect(response.body).to include(link_to_renewal)
           end
         end
+
+        it "is case-insensitive" do
+          link_to_renewal = transient_registration_path(matching_renewal.reg_identifier)
+
+          get "/bo", term: term.downcase
+          expect(response.body).to include(link_to_renewal)
+        end
+
+        context "when the matching renewal value includes the search term" do
+          let(:partially_matching_renewal) { create(:transient_registration, last_name: "Aardvark") }
+          let(:term) { "Aardva" }
+
+          it "includes partial matches" do
+            link_to_renewal = transient_registration_path(partially_matching_renewal.reg_identifier)
+
+            get "/bo", term: term
+            expect(response.body).to include(link_to_renewal)
+          end
+        end
       end
     end
 

@@ -17,9 +17,12 @@ class DashboardsController < ApplicationController
   private
 
   def search_results(term)
-    WasteCarriersEngine::TransientRegistration.any_of({ reg_identifier: term },
-                                                      { company_name: term },
-                                                      { last_name: term },
-                                                      "addresses.postcode": term)
+    # Regex to find strings which include the term. The search is case-insensitive.
+    matching_regex = /#{term}/i
+
+    WasteCarriersEngine::TransientRegistration.any_of({ reg_identifier: matching_regex },
+                                                      { company_name: matching_regex },
+                                                      { last_name: matching_regex },
+                                                      "addresses.postcode": matching_regex)
   end
 end
