@@ -4,7 +4,7 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <% if renewal_application_submitted? %>
+    <% if renewal_application_submitted?(@transient_registration) %>
       <div class="panel">
         <h2 class="heading-medium">
           <%= t(".status.headings.submitted") %>

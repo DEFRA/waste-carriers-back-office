@@ -41,6 +41,9 @@ gem "secure_headers", "~> 5.0"
 gem "govuk_elements_rails", "~> 3.1"
 gem "govuk_template", "~> 0.23"
 
+gem "kaminari", "~> 1.1"
+gem "kaminari-mongoid", "~> 1.0"
+
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-renewals",
