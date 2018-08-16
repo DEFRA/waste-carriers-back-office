@@ -4,10 +4,24 @@
 
 <div class="grid-row">
   <div class="column-full">
-    <div class="panel">
-      <p>TODO: Search</p>
+    <p><%= t(".search.paragraph_1") %></p>
+    <ul class="list list-bullet">
+      <% t(".search.searchable_attributes").each do |attribute| %>
+        <li><%= attribute %></li>
+      <% end %>
+    </ul>
+    <div class="form-group">
+      <%= form_tag("/bo", method: :get) do %>
+        <%= label_tag :term, t(".search.label"), class: "form-label" %>
+        <%= text_field_tag :term, params[:term], placeholder: t(".search.placeholder"), class: "form-control" %>
+        <%= submit_tag t(".search.submit"), class: "button" %>
+      <% end %>
     </div>
+  </div>
+</div>
 
+<div class="grid-row">
+  <div class="column-full">
     <% if @transient_registrations.present? %>
       <table>
         <thead>
@@ -50,7 +64,7 @@
                 <%= transient_registration.metaData.last_modified.strftime("%H:%M %d/%m/%Y") %>
               </td>
               <td>
-                <%= link_to t(".results.details_button"), transient_registration_path(transient_registration.reg_identifier), class: 'button' %>
+                <%= link_to t(".results.details_button"), transient_registration_path(transient_registration.reg_identifier) %>
               </td>
             </tr>
           <% end %>

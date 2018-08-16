@@ -3,6 +3,16 @@ en:
     index:
       title: "Renewals dashboard"
       heading: "Renewals dashboard"
+      search:
+        paragraph_1: "You can search for a renewal by:"
+        searchable_attributes:
+          - "registration number"
+          - "company name"
+          - "contact name"
+          - "postcode"
+        label: "Search for renewals"
+        placeholder: "Enter your search term here"
+        submit: "Search"
       results:
         th:
           reg_identifier: "Registration"
