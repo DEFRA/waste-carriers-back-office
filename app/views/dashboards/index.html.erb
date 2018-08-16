@@ -15,6 +15,30 @@
         <%= label_tag :term, t(".search.label"), class: "form-label" %>
         <%= text_field_tag :term, params[:term], placeholder: t(".search.placeholder"), class: "form-control" %>
         <%= submit_tag t(".search.submit"), class: "button" %>
+
+        <div class="filters font-xsmall">
+          <div class="multiple-choice">
+            <%= check_box_tag :in_progress,
+                              "true",
+                              @filters[:in_progress] %>
+            <%= label_tag :in_progress,
+                          t(".search.filters.in_progress") %>
+          </div>
+          <div class="multiple-choice">
+            <%= check_box_tag :pending_payment,
+                              "true",
+                              @filters[:pending_payment] %>
+            <%= label_tag :pending_payment,
+                          t(".search.filters.pending_payment") %>
+          </div>
+          <div class="multiple-choice">
+            <%= check_box_tag :pending_convictions_check,
+                              "true",
+                              @filters[:pending_convictions_check] %>
+            <%= label_tag :pending_convictions_check,
+                          t(".search.filters.pending_convictions_check") %>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>

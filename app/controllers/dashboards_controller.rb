@@ -5,6 +5,9 @@ class DashboardsController < ApplicationController
 
   def index
     term = params[:term]
+
+    @filters = get_filters(params)
+
     relevant_transient_registrations = if term.present?
                                          search_results(term)
                                        else
@@ -26,5 +29,17 @@ class DashboardsController < ApplicationController
                                                       { company_name: partial_match_regex },
                                                       { last_name: partial_match_regex },
                                                       "addresses.postcode": partial_match_regex)
+  end
+
+  def get_filters(params)
+    {
+      in_progress: get_filter_value(params[:in_progress]),
+      pending_payment: get_filter_value(params[:pending_payment]),
+      pending_convictions_check: get_filter_value(params[:pending_convictions_check])
+    }
+  end
+
+  def get_filter_value(filter_param)
+    filter_param.present? && filter_param == "true"
   end
 end

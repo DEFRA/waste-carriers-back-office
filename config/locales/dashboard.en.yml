@@ -13,6 +13,10 @@ en:
         label: "Search for renewals"
         placeholder: "Enter your search term here"
         submit: "Search"
+        filters:
+          in_progress: "Application in progress"
+          pending_payment: "Pending payment"
+          pending_convictions_check: "Pending manual convictions check"
       results:
         th:
           reg_identifier: "Registration"
