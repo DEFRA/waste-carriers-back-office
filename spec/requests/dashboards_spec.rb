@@ -37,23 +37,33 @@ RSpec.describe "Dashboards", type: :request do
         let(:last_modified_renewal) { create(:transient_registration) }
         let(:matching_renewal) { create(:transient_registration) }
 
-        let(:term) do
-          matching_renewal.reg_identifier
-        end
+        let(:term) { matching_renewal.reg_identifier }
 
         before do
           last_modified_renewal.save
           matching_renewal.save
         end
 
-        it "displays the matching renewal" do
-          get "/bo", term: term
-          expect(response.body).to include(matching_renewal.reg_identifier)
-        end
-
         it "does not display the most recently modified, but non-matching, renewal" do
           get "/bo", term: term
           expect(response.body).to_not include(last_modified_renewal.reg_identifier)
+        end
+
+        context "when there is a match on a reg_identifier" do
+          it "displays the matching renewal" do
+            get "/bo", term: term
+            expect(response.body).to include(matching_renewal.reg_identifier)
+          end
+        end
+
+        context "when there is a match on a company_name" do
+          let(:matching_company_name_renewal) { create(:transient_registration, company_name: "Acme") }
+          let(:term) { matching_company_name_renewal.company_name }
+
+          it "displays the matching renewal" do
+            get "/bo", term: term
+            expect(response.body).to include(matching_company_name_renewal.company_name)
+          end
         end
       end
     end

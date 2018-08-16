@@ -17,6 +17,7 @@ class DashboardsController < ApplicationController
   private
 
   def search_results(term)
-    WasteCarriersEngine::TransientRegistration.where(reg_identifier: term)
+    WasteCarriersEngine::TransientRegistration.any_of(reg_identifier: term,
+                                                      company_name: term)
   end
 end
