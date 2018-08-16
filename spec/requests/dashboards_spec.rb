@@ -45,14 +45,18 @@ RSpec.describe "Dashboards", type: :request do
         end
 
         it "does not display the most recently modified, but non-matching, renewal" do
+          link_to_renewal = transient_registration_path(last_modified_renewal.reg_identifier)
+
           get "/bo", term: term
-          expect(response.body).to_not include(last_modified_renewal.reg_identifier)
+          expect(response.body).to_not include(link_to_renewal)
         end
 
         context "when there is a match on a reg_identifier" do
           it "displays the matching renewal" do
+            link_to_renewal = transient_registration_path(matching_renewal.reg_identifier)
+
             get "/bo", term: term
-            expect(response.body).to include(matching_renewal.reg_identifier)
+            expect(response.body).to include(link_to_renewal)
           end
         end
 
@@ -61,8 +65,10 @@ RSpec.describe "Dashboards", type: :request do
           let(:term) { matching_company_name_renewal.company_name }
 
           it "displays the matching renewal" do
+            link_to_renewal = transient_registration_path(matching_company_name_renewal.reg_identifier)
+
             get "/bo", term: term
-            expect(response.body).to include(matching_company_name_renewal.company_name)
+            expect(response.body).to include(link_to_renewal)
           end
         end
       end
