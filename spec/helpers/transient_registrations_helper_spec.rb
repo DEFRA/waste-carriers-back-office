@@ -12,7 +12,7 @@ RSpec.describe WasteCarriersEngine::ApplicationHelper, type: :helper do
   describe "#renewal_application_submitted?" do
     context "when the workflow_state is not a completed one" do
       it "returns false" do
-        expect(helper.renewal_application_submitted?).to eq(false)
+        expect(helper.renewal_application_submitted?(transient_registration)).to eq(false)
       end
     end
 
@@ -22,7 +22,7 @@ RSpec.describe WasteCarriersEngine::ApplicationHelper, type: :helper do
       end
 
       it "returns true" do
-        expect(helper.renewal_application_submitted?).to eq(true)
+        expect(helper.renewal_application_submitted?(transient_registration)).to eq(true)
       end
     end
 
@@ -32,7 +32,7 @@ RSpec.describe WasteCarriersEngine::ApplicationHelper, type: :helper do
       end
 
       it "returns true" do
-        expect(helper.renewal_application_submitted?).to eq(true)
+        expect(helper.renewal_application_submitted?(transient_registration)).to eq(true)
       end
     end
   end

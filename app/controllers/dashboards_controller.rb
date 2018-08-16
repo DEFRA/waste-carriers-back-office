@@ -5,11 +5,13 @@ class DashboardsController < ApplicationController
 
   def index
     term = params[:term]
-    @transient_registrations = if term.present?
-                                 search_results(term)
-                               else
-                                 WasteCarriersEngine::TransientRegistration.all
-                               end
+    relevant_transient_registrations = if term.present?
+                                         search_results(term)
+                                       else
+                                         WasteCarriersEngine::TransientRegistration.all
+                                       end
+    @transient_registrations = relevant_transient_registrations.order_by("metaData.lastModified": :desc)
+                                                               .page params[:page]
   end
 
   private

@@ -5,7 +5,13 @@ en:
       heading: "Renewals dashboard"
       results:
         th:
-          reg_identifier: "Registration number"
+          reg_identifier: "Registration"
           company_name: "Company name"
+          last_modified: "Last modified"
+          status: "Status"
           actions: "Actions"
-        details_button: "See details"
+        statuses:
+          in_progress: "application in progress"
+          pending_payment: "pending payment"
+          pending_convictions_check: "pending convictions"
+        details_button: "Details"
