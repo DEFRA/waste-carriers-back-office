@@ -134,8 +134,6 @@ RSpec.describe "Dashboards", type: :request do
       end
 
       context "when the in_progress filter is on" do
-        let(:in_progress) { "true" }
-
         let(:in_progress_renewal) { create(:transient_registration) }
         let(:submitted_renewal) { create(:transient_registration, workflow_state: "renewal_received_form") }
 
@@ -143,26 +141,22 @@ RSpec.describe "Dashboards", type: :request do
           # Save first to get them to the top of the list and avoid pagination issues
           in_progress_renewal.save
           submitted_renewal.save
+
+          get "/bo", in_progress: true
         end
 
         it "displays matching renewals" do
           link_to_renewal = transient_registration_path(in_progress_renewal.reg_identifier)
-
-          get "/bo", in_progress: in_progress
           expect(response.body).to include(link_to_renewal)
         end
 
         it "does not display non-matching renewals" do
           link_to_renewal = transient_registration_path(submitted_renewal.reg_identifier)
-
-          get "/bo", in_progress: in_progress
           expect(response.body).to_not include(link_to_renewal)
         end
       end
 
       context "when the pending_payment filter is on" do
-        let(:pending_payment) { "true" }
-
         let(:pending_payment_renewal) { create(:transient_registration, :pending_payment) }
         let(:paid_renewal) { create(:transient_registration, :no_pending_payment) }
 
@@ -170,26 +164,22 @@ RSpec.describe "Dashboards", type: :request do
           # Save first to get them to the top of the list and avoid pagination issues
           pending_payment_renewal.save
           paid_renewal.save
+
+          get "/bo", pending_payment: true
         end
 
         it "displays matching renewals" do
           link_to_renewal = transient_registration_path(pending_payment_renewal.reg_identifier)
-
-          get "/bo", pending_payment: pending_payment
           expect(response.body).to include(link_to_renewal)
         end
 
         it "does not display non-matching renewals" do
           link_to_renewal = transient_registration_path(paid_renewal.reg_identifier)
-
-          get "/bo", pending_payment: pending_payment
           expect(response.body).to_not include(link_to_renewal)
         end
       end
 
       context "when the pending_conviction_check filter is on" do
-        let(:pending_conviction_check) { "true" }
-
         let(:pending_conviction_check_renewal) { create(:transient_registration, :requires_conviction_check) }
         let(:no_conviction_check_renewal) { create(:transient_registration, :does_not_require_conviction_check) }
 
@@ -197,27 +187,22 @@ RSpec.describe "Dashboards", type: :request do
           # Save first to get them to the top of the list and avoid pagination issues
           pending_conviction_check_renewal.save
           no_conviction_check_renewal.save
+
+          get "/bo", pending_conviction_check: true
         end
 
         it "displays matching renewals" do
           link_to_renewal = transient_registration_path(pending_conviction_check_renewal.reg_identifier)
-
-          get "/bo", pending_conviction_check: pending_conviction_check
           expect(response.body).to include(link_to_renewal)
         end
 
         it "does not display non-matching renewals" do
           link_to_renewal = transient_registration_path(no_conviction_check_renewal.reg_identifier)
-
-          get "/bo", pending_conviction_check: pending_conviction_check
           expect(response.body).to_not include(link_to_renewal)
         end
       end
 
       context "when multiple filters are on" do
-        pending_payment = "true"
-        pending_conviction_check = "true"
-
         let(:matches_both_filters) { create(:transient_registration, :pending_payment, :requires_conviction_check) }
         let(:matches_one_filter) { create(:transient_registration, :no_pending_payment, :requires_conviction_check) }
 
@@ -225,26 +210,23 @@ RSpec.describe "Dashboards", type: :request do
           # Save first to get them to the top of the list and avoid pagination issues
           matches_both_filters.save
           matches_one_filter.save
+
+          get "/bo", pending_conviction_check: true, pending_payment: true
         end
 
         it "displays renewals which match all the filters" do
           link_to_renewal = transient_registration_path(matches_both_filters.reg_identifier)
-
-          get "/bo", pending_conviction_check: pending_conviction_check, pending_payment: pending_payment
           expect(response.body).to include(link_to_renewal)
         end
 
         it "does not display renewals which only match one filter" do
           link_to_renewal = transient_registration_path(matches_one_filter.reg_identifier)
-
-          get "/bo", pending_conviction_check: pending_conviction_check, pending_payment: pending_payment
           expect(response.body).to_not include(link_to_renewal)
         end
       end
 
       context "when a search term and a filter are both present" do
         let(:term) { "Acme" }
-        let(:pending_payment) { "true" }
 
         let(:matching_search_term_and_filter) { create(:transient_registration, :pending_payment, company_name: term) }
         let(:matching_search_term) { create(:transient_registration, :no_pending_payment, company_name: term) }
@@ -255,26 +237,22 @@ RSpec.describe "Dashboards", type: :request do
           matching_search_term_and_filter.save
           matching_search_term.save
           matching_filter.save
+
+          get "/bo", term: term, pending_payment: true
         end
 
         it "displays renewals which match the search term and filter" do
           link_to_renewal = transient_registration_path(matching_search_term_and_filter.reg_identifier)
-
-          get "/bo", term: term, pending_payment: pending_payment
           expect(response.body).to include(link_to_renewal)
         end
 
         it "does not display renewals which only match the search term" do
           link_to_renewal = transient_registration_path(matching_search_term.reg_identifier)
-
-          get "/bo", term: term, pending_payment: pending_payment
           expect(response.body).to_not include(link_to_renewal)
         end
 
         it "does not display renewals which only match the filter" do
           link_to_renewal = transient_registration_path(matching_filter.reg_identifier)
-
-          get "/bo", term: term, pending_payment: pending_payment
           expect(response.body).to_not include(link_to_renewal)
         end
       end
