@@ -14,6 +14,7 @@ en:
         placeholder: "Enter your search term here"
         submit: "Search"
         filters:
+          paragraph_1: "Filter the results:"
           in_progress: "Application in progress"
           pending_payment: "Pending payment"
           pending_conviction_check: "Pending manual convictions check"

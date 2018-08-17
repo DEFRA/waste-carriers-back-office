@@ -10,13 +10,14 @@
         <li><%= attribute %></li>
       <% end %>
     </ul>
-    <div class="form-group">
+    <div class="form-group panel panel-border-wide">
       <%= form_tag("/bo", method: :get) do %>
-        <%= label_tag :term, t(".search.label"), class: "form-label" %>
+        <%= label_tag :term, t(".search.label"), class: "form-label visually-hidden" %>
         <%= text_field_tag :term, @term, placeholder: t(".search.placeholder"), class: "form-control" %>
         <%= submit_tag t(".search.submit"), class: "button" %>
 
-        <div class="filters font-xsmall">
+        <div class="filters">
+          <p><%= t(".search.filters.paragraph_1") %></p>
           <div class="multiple-choice">
             <%= check_box_tag :in_progress,
                               "true",
