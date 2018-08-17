@@ -10,6 +10,7 @@
         <li><%= attribute %></li>
       <% end %>
     </ul>
+    <p><%= t(".search.paragraph_2") %></p>
     <div class="form-group panel panel-border-wide">
       <%= form_tag("/bo", method: :get) do %>
         <%= label_tag :term, t(".search.label"), class: "form-label visually-hidden" %>

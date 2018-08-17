@@ -10,6 +10,7 @@ en:
           - "company name"
           - "last name of contact person"
           - "postcode"
+        paragraph_2: "You can filter the search results, or search without a term to use the filters on their own."
         label: "Search for renewals"
         placeholder: "Enter your search term here"
         submit: "Search"
