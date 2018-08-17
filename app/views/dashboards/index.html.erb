@@ -13,7 +13,7 @@
     <div class="form-group">
       <%= form_tag("/bo", method: :get) do %>
         <%= label_tag :term, t(".search.label"), class: "form-label" %>
-        <%= text_field_tag :term, params[:term], placeholder: t(".search.placeholder"), class: "form-control" %>
+        <%= text_field_tag :term, @term, placeholder: t(".search.placeholder"), class: "form-control" %>
         <%= submit_tag t(".search.submit"), class: "button" %>
 
         <div class="filters font-xsmall">
@@ -32,11 +32,11 @@
                           t(".search.filters.pending_payment") %>
           </div>
           <div class="multiple-choice">
-            <%= check_box_tag :pending_convictions_check,
+            <%= check_box_tag :pending_conviction_check,
                               "true",
-                              @filters[:pending_convictions_check] %>
-            <%= label_tag :pending_convictions_check,
-                          t(".search.filters.pending_convictions_check") %>
+                              @filters[:pending_conviction_check] %>
+            <%= label_tag :pending_conviction_check,
+                          t(".search.filters.pending_conviction_check") %>
           </div>
         </div>
       <% end %>
@@ -75,7 +75,7 @@
                     <% end %>
                     <% if transient_registration.pending_manual_conviction_check? %>
                       <strong class="app-c-tag app-c-tag--warning">
-                        <%= t(".results.statuses.pending_convictions_check") %>
+                        <%= t(".results.statuses.pending_conviction_check") %>
                       </strong>
                     <% end %>
                 <% else %>

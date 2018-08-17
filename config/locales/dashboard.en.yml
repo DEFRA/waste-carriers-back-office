@@ -16,7 +16,7 @@ en:
         filters:
           in_progress: "Application in progress"
           pending_payment: "Pending payment"
-          pending_convictions_check: "Pending manual convictions check"
+          pending_conviction_check: "Pending manual convictions check"
       results:
         th:
           reg_identifier: "Registration"
@@ -27,5 +27,5 @@ en:
         statuses:
           in_progress: "application in progress"
           pending_payment: "pending payment"
-          pending_convictions_check: "pending convictions"
+          pending_conviction_check: "pending convictions"
         details_button: "Details"

@@ -4,38 +4,50 @@ class DashboardsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    term = params[:term]
-
+    @term = params[:term]
     @filters = get_filters(params)
 
-    relevant_transient_registrations = if term.present?
-                                         search_results(term)
-                                       else
-                                         WasteCarriersEngine::TransientRegistration.all
-                                       end
-    @transient_registrations = relevant_transient_registrations.order_by("metaData.lastModified": :desc)
-                                                               .page params[:page]
+    @transient_registrations = Kaminari.paginate_array(find_and_prepare_transient_registrations).page params[:page]
   end
 
   private
 
-  def search_results(term)
-    # Regex to find strings which match the term, with no surrounding characters. The search is case-insensitive.
-    exact_match_regex = /\A#{term}\z/i
-    # Regex to find strings which include the term. The search is case-insensitive.
-    partial_match_regex = /#{term}/i
+  def find_and_prepare_transient_registrations
+    transient_registrations = WasteCarriersEngine::TransientRegistration.all.order_by("metaData.lastModified": :desc)
 
-    WasteCarriersEngine::TransientRegistration.any_of({ reg_identifier: exact_match_regex },
-                                                      { company_name: partial_match_regex },
-                                                      { last_name: partial_match_regex },
-                                                      "addresses.postcode": partial_match_regex)
+    transient_registrations = search_results(transient_registrations)
+    transient_registrations = filtered_results(transient_registrations)
+
+    transient_registrations
+  end
+
+  def search_results(transient_registrations)
+    return transient_registrations unless @term.present?
+
+    # Regex to find strings which match the term, with no surrounding characters. The search is case-insensitive.
+    exact_match_regex = /\A#{@term}\z/i
+    # Regex to find strings which include the term. The search is case-insensitive.
+    partial_match_regex = /#{@term}/i
+
+    transient_registrations.any_of({ reg_identifier: exact_match_regex },
+                                   { company_name: partial_match_regex },
+                                   { last_name: partial_match_regex },
+                                   "addresses.postcode": partial_match_regex)
+  end
+
+  def filtered_results(results)
+    results = results.select { |tr| tr.renewal_application_submitted? == false } if @filters[:in_progress]
+    results = results.select { |tr| tr.pending_payment? == true } if @filters[:pending_payment]
+    results = results.select { |tr| tr.pending_manual_conviction_check? == true } if @filters[:pending_conviction_check]
+
+    results
   end
 
   def get_filters(params)
     {
       in_progress: get_filter_value(params[:in_progress]),
       pending_payment: get_filter_value(params[:pending_payment]),
-      pending_convictions_check: get_filter_value(params[:pending_convictions_check])
+      pending_conviction_check: get_filter_value(params[:pending_conviction_check])
     }
   end
 
