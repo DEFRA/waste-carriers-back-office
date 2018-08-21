@@ -3,11 +3,11 @@
 FactoryBot.define do
   factory :finance_details, class: WasteCarriersEngine::FinanceDetails do
     trait :positive_balance do
-      balance 100
+      balance { 100 }
     end
 
     trait :zero_balance do
-      balance 0
+      balance { 0 }
     end
   end
 end
