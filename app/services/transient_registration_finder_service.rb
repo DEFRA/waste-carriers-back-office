@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class TransientRegistrationFinderService
-  def initialize(term, filters)
+  def initialize(term, in_progress, pending_payment, pending_conviction_check)
     @term = term
-    @filters = filters
+
+    @in_progress = in_progress
+    @pending_payment = pending_payment
+    @pending_conviction_check = pending_conviction_check
   end
 
   def transient_registrations
@@ -32,9 +35,9 @@ class TransientRegistrationFinderService
   end
 
   def filter_results(results)
-    results = results.select { |tr| tr.renewal_application_submitted? == false } if @filters[:in_progress]
-    results = results.select { |tr| tr.pending_payment? == true } if @filters[:pending_payment]
-    results = results.select { |tr| tr.pending_manual_conviction_check? == true } if @filters[:pending_conviction_check]
+    results = results.select { |tr| tr.renewal_application_submitted? == false } if @in_progress
+    results = results.select { |tr| tr.pending_payment? == true } if @pending_payment
+    results = results.select { |tr| tr.pending_manual_conviction_check? == true } if @pending_conviction_check
 
     results
   end

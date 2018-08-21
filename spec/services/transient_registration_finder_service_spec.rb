@@ -6,19 +6,14 @@ RSpec.describe TransientRegistrationFinderService do
   let(:term) { nil }
 
   let(:in_progress) { false }
-  let(:pending_conviction_check) { false }
   let(:pending_payment) { false }
-
-  let(:filters) do
-    {
-      in_progress: in_progress,
-      pending_conviction_check: pending_conviction_check,
-      pending_payment: pending_payment
-    }
-  end
+  let(:pending_conviction_check) { false }
 
   let(:transient_registrations) do
-    service = TransientRegistrationFinderService.new(term, filters)
+    service = TransientRegistrationFinderService.new(term,
+                                                     in_progress,
+                                                     pending_payment,
+                                                     pending_conviction_check)
     service.transient_registrations
   end
 
@@ -145,8 +140,8 @@ RSpec.describe TransientRegistrationFinderService do
   end
 
   context "when multiple filters are on" do
-    let(:pending_conviction_check) { true }
     let(:pending_payment) { true }
+    let(:pending_conviction_check) { true }
 
     it "displays renewals which match all the filters" do
       matches_both_filters = create(:transient_registration, :pending_payment, :requires_conviction_check)

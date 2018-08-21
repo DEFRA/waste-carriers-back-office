@@ -5,21 +5,19 @@ class DashboardsController < ApplicationController
 
   def index
     @term = params[:term]
-    @filters = get_filters(params)
+    @in_progress = get_filter_value(params[:in_progress])
+    @pending_payment = get_filter_value(params[:pending_payment])
+    @pending_conviction_check = get_filter_value(params[:pending_conviction_check])
 
-    service = TransientRegistrationFinderService.new(@term, @filters)
+    service = TransientRegistrationFinderService.new(@term,
+                                                     @in_progress,
+                                                     @pending_payment,
+                                                     @pending_conviction_check)
+
     @transient_registrations = Kaminari.paginate_array(service.transient_registrations).page params[:page]
   end
 
   private
-
-  def get_filters(params)
-    {
-      in_progress: get_filter_value(params[:in_progress]),
-      pending_payment: get_filter_value(params[:pending_payment]),
-      pending_conviction_check: get_filter_value(params[:pending_conviction_check])
-    }
-  end
 
   def get_filter_value(filter_param)
     filter_param.present? && filter_param == "true"
