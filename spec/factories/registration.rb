@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :registration, class: WasteCarriersEngine::Registration do
-    tier "UPPER"
+    tier { "UPPER" }
 
     addresses { [build(:address), build(:address)] }
 
