@@ -16,7 +16,7 @@ class DashboardsController < ApplicationController
     transient_registrations = WasteCarriersEngine::TransientRegistration.all.order_by("metaData.lastModified": :desc)
 
     transient_registrations = search_results(transient_registrations)
-    transient_registrations = filtered_results(transient_registrations)
+    transient_registrations = filter_results(transient_registrations)
 
     transient_registrations
   end
@@ -35,7 +35,7 @@ class DashboardsController < ApplicationController
                                    "addresses.postcode": partial_match_regex)
   end
 
-  def filtered_results(results)
+  def filter_results(results)
     results = results.select { |tr| tr.renewal_application_submitted? == false } if @filters[:in_progress]
     results = results.select { |tr| tr.pending_payment? == true } if @filters[:pending_payment]
     results = results.select { |tr| tr.pending_manual_conviction_check? == true } if @filters[:pending_conviction_check]
