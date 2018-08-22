@@ -49,9 +49,9 @@
   </div>
 </div>
 
-<div class="grid-row">
-  <div class="column-full">
-    <% if @transient_registrations.present? %>
+<% if @transient_registrations.present? %>
+  <div class="grid-row">
+    <div class="column-full">
       <table>
         <thead>
           <tr>
@@ -90,7 +90,7 @@
                 <% end %>
               </td>
               <td>
-                <%= transient_registration.metaData.last_modified.strftime("%H:%M %d/%m/%Y") %>
+                <%= transient_registration.metaData.last_modified.in_time_zone("London").strftime("%H:%M %d/%m/%Y") %>
               </td>
               <td>
                 <%= link_to t(".results.details_button"), transient_registration_path(transient_registration.reg_identifier) %>
@@ -99,17 +99,28 @@
           <% end %>
         </tbody>
       </table>
-    <% end %>
+    </div>
   </div>
-</div>
+
+  <div class="grid-row">
+    <div class="column-full">
+      <nav role="navigation" class="pagination" aria-label="Pagination">
+        <div class="pagination__summary">
+          <%= page_entries_info @transient_registrations, entry_name: "item" %>
+        </div>
+        <%= paginate @transient_registrations %>
+      </nav>
+    </div>
+  </div>
+
+<% else %>
+
+<hr>
 
 <div class="grid-row">
   <div class="column-full">
-    <nav role="navigation" class="pagination" aria-label="Pagination">
-      <div class="pagination__summary">
-        <%= page_entries_info @transient_registrations, entry_name: "item" %>
-      </div>
-      <%= paginate @transient_registrations %>
-    </nav>
+    <p><%= t(".results.no_results") %></p>
   </div>
 </div>
+
+<% end %>

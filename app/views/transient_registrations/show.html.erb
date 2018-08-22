@@ -398,7 +398,7 @@
               <%= t(".order_information.labels.date_last_updated") %>
             </td>
             <td>
-              <%= order.date_last_updated.strftime("%A %e %B %Y at %l:%M%P") %>
+              <%= order.date_last_updated.in_time_zone("London").strftime("%A %e %B %Y at %l:%M%P") %>
             </td>
           </tr>
           <tr>
