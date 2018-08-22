@@ -32,3 +32,4 @@ en:
           pending_payment: "pending payment"
           pending_conviction_check: "pending convictions"
         details_button: "Details"
+        no_results: "No results found."
