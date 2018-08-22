@@ -9,7 +9,7 @@ en:
           - "registration number"
           - "company name"
           - "last name of contact person"
-          - "postcode"
+          - "postcode (if confirmed during renewal process)"
         paragraph_2: "You can filter the search results, or search without a term to use the filters on their own."
         label: "Search for renewals"
         placeholder: "Enter your search term here"
