@@ -3,3 +3,21 @@ en:
     index:
       title: "Conviction details"
       heading: "Conviction information for %{reg_identifier}"
+      required:
+        "true": "This renewal requires a conviction check before it can be approved."
+        "false": "This renewal does not require a conviction check before it can be approved."
+      declared_convictions:
+        heading: "Declared convictions"
+        "true": "Yes – the user declared there were relevant convictions."
+        "false": "No – the user said there were no relevant convictions to declare."
+        unknown: "Unknown – the user has not answered this question yet."
+      business_convictions:
+        heading: Business conviction matches
+        "true": "Yes – there is a conviction match for the business."
+        "false": "No – there is no conviction match for the business."
+        unknown: "Unknown – the automated conviction checks have not run yet. This may be because the renewal application is still in progress."
+      people_convictions:
+        heading: People conviction matches
+        "true": "Yes – there is a conviction match for at least one person."
+        "false": "No – there are no conviction matches for people."
+        unknown: "Unknown – the automated conviction checks have not run yet. This may be because the renewal application is still in progress."

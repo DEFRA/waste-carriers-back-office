@@ -1,9 +1,11 @@
-<h1 class="heading-large">
-  <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
-</h1>
-
 <div class="grid-row">
   <div class="column-two-thirds">
+    <%= render("waste_carriers_engine/shared/back", back_path: bo_path) %>
+
+    <h1 class="heading-large">
+      <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
+    </h1>
+
     <% if @transient_registration.renewal_application_submitted? %>
       <div class="panel">
         <h2 class="heading-medium">
@@ -14,7 +16,7 @@
             <%= t(".status.messages.pending_payment_and_convictions_check") %>
           </p>
           <%= link_to t(".status.actions.payment_button"), "#", class: 'button' %>
-          <%= link_to t(".status.actions.convictions_check_button"), "#", class: 'button' %>
+          <%= link_to t(".status.actions.convictions_check_button"), transient_registration_convictions_path(@transient_registration.reg_identifier), class: 'button' %>
         <% elsif @transient_registration.pending_payment? %>
           <p>
             <%= t(".status.messages.pending_payment") %>
@@ -24,7 +26,7 @@
           <p>
             <%= t(".status.messages.pending_convictions_check") %>
           </p>
-          <%= link_to t(".status.actions.convictions_check_button"), "#", class: 'button' %>
+          <%= link_to t(".status.actions.convictions_check_button"), transient_registration_convictions_path(@transient_registration.reg_identifier), class: 'button' %>
         <% end %>
       </div>
     <% else %>

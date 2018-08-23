@@ -1,3 +1,34 @@
-<h1 class="heading-large">
-  <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
-</h1>
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <%= render("waste_carriers_engine/shared/back", back_path: transient_registration_path(@transient_registration.reg_identifier)) %>
+
+    <h1 class="heading-large">
+      <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
+    </h1>
+
+    <div class="panel">
+      <%= t(".required.#{@transient_registration.conviction_check_required?}") %>
+    </div>
+
+    <h2 class="heading-medium">
+      <%= t(".declared_convictions.heading") %>
+    </h2>
+    <p>
+      <%= t(".declared_convictions.#{declared_convictions}") %>
+    </p>
+
+    <h2 class="heading-medium">
+      <%= t(".business_convictions.heading") %>
+    </h2>
+    <p>
+      <%= t(".business_convictions.#{business_convictions}") %>
+    </p>
+
+    <h2 class="heading-medium">
+      <%= t(".people_convictions.heading") %>
+    </h2>
+    <p>
+      <%= t(".people_convictions.#{people_convictions}") %>
+    </p>
+  </div>
+</div>
