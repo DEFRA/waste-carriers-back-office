@@ -1,0 +1,5 @@
+en:
+  convictions:
+    index:
+      title: "Conviction details"
+      heading: "Conviction information for %{reg_identifier}"

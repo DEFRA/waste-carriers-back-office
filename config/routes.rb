@@ -10,7 +10,10 @@ Rails.application.routes.draw do
             only: :show,
             param: :reg_identifier,
             path: "/bo/transient-registrations",
-            path_names: { show: "/:reg_identifier" }
+            path_names: { show: "/:reg_identifier" } do
+              resources :convictions,
+                        only: :index
+            end
 
   mount WasteCarriersEngine::Engine => "/bo"
 end
