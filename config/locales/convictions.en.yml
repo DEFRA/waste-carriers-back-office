@@ -32,3 +32,10 @@ en:
       unmatched_people:
         heading: Relevant people without matching convictions
         paragraph: "The following people were declared to have relevant convictions, but no matches were found:"
+      approve_or_reject:
+        heading: "Approve or reject this renewal"
+        paragraph_1: "You can approve or reject this renewal based on this conviction information."
+        paragraph_2: "If the renewal hasn't been paid for yet, it won't be renewed until payment is received and processed."
+        buttons:
+          approve: "Approve"
+          reject: "Reject"

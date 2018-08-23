@@ -33,6 +33,7 @@
     <p>
       <%= t(".people_convictions.#{people_convictions}") %>
     </p>
+
     <% if people_convictions == true %>
       <% people_with_matches.each do |person| %>
         <h3 class="heading-small">
@@ -46,7 +47,7 @@
       <% end %>
     <% end %>
 
-      <% if relevant_people_without_matches.present? %>
+    <% if relevant_people_without_matches.present? %>
       <h2 class="heading-medium">
         <%= t(".unmatched_people.heading") %>
       </h2>
@@ -60,6 +61,20 @@
           </tbody>
         </table>
       <% end %>
+    <% end %>
+
+    <% if @transient_registration.conviction_check_required? %>
+      <h2 class="heading-medium">
+        <%= t(".approve_or_reject.heading") %>
+      </h2>
+      <p>
+        <%= t(".approve_or_reject.paragraph_1") %>
+      </p>
+      <p>
+        <%= t(".approve_or_reject.paragraph_2") %>
+      </p>
+      <%= link_to t(".approve_or_reject.buttons.approve"), "#", class: "button" %>
+      <%= link_to t(".approve_or_reject.buttons.reject"), "#", class: "button-warning" %>
     <% end %>
   </div>
 </div>
