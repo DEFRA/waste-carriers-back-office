@@ -2,6 +2,14 @@
 
 FactoryBot.define do
   factory :key_person, class: WasteCarriersEngine::KeyPerson do
+    trait :main do
+      person_type { "KEY" }
+    end
+
+    trait :relevant do
+      person_type { "RELEVANT" }
+    end
+
     trait :requires_conviction_check do
       conviction_search_result { build(:conviction_search_result, :match_result_yes) }
     end

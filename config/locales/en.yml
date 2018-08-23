@@ -4,6 +4,18 @@ en:
   layouts:
     application:
       feedback_url: https://www.gov.uk/done/waste-carrier-or-broker-registration
+  shared:
+    conviction_search_result:
+      match_result: "Match result"
+      matching_system: "Matching system"
+      reference: "Reference"
+      matched_name: "Matched name"
+      searched_at: "Searched at"
+      confirmed: "Confirmed"
+    person_table_rows:
+      name: "Name"
+      position: "Position"
+      dob: "Date of birth"
 
   # Kaminari overrides
   helpers:

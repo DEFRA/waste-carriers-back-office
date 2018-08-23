@@ -142,14 +142,14 @@ RSpec.describe ConvictionsHelper, type: :helper do
     end
   end
 
-  describe "#people_to_show" do
+  describe "#people_with_matches" do
     context "when there are no key people" do
       before do
         transient_registration.key_people = []
       end
 
       it "returns an empty array" do
-        expect(helper.people_to_show).to eq([])
+        expect(helper.people_with_matches).to eq([])
       end
     end
 
@@ -166,7 +166,7 @@ RSpec.describe ConvictionsHelper, type: :helper do
         end
 
         it "returns an empty array" do
-          expect(helper.people_to_show).to eq([])
+          expect(helper.people_with_matches).to eq([])
         end
       end
 
@@ -176,7 +176,7 @@ RSpec.describe ConvictionsHelper, type: :helper do
         end
 
         it "returns an empty array" do
-          expect(helper.people_to_show).to eq([])
+          expect(helper.people_with_matches).to eq([])
         end
       end
 
@@ -186,7 +186,7 @@ RSpec.describe ConvictionsHelper, type: :helper do
         end
 
         it "includes the person in the array" do
-          expect(helper.people_to_show).to eq([person])
+          expect(helper.people_with_matches).to eq([person])
         end
       end
 
@@ -196,7 +196,67 @@ RSpec.describe ConvictionsHelper, type: :helper do
         end
 
         it "includes the person in the array" do
-          expect(helper.people_to_show).to eq([person])
+          expect(helper.people_with_matches).to eq([person])
+        end
+      end
+    end
+  end
+
+  describe "#relevant_people_without_matches" do
+    context "when there are no relevant people" do
+      before do
+        transient_registration.key_people = []
+      end
+
+      it "returns an empty array" do
+        expect(helper.relevant_people_without_matches).to eq([])
+      end
+    end
+
+    context "when there is a relevant person" do
+      let(:person) { build(:key_person, :relevant) }
+
+      before do
+        transient_registration.key_people = [person]
+      end
+
+      context "when a person has no conviction search result" do
+        before do
+          person.conviction_search_result = nil
+        end
+
+        it "includes the person in the array" do
+          expect(helper.relevant_people_without_matches).to eq([person])
+        end
+      end
+
+      context "when a conviction search result is NO" do
+        before do
+          person.conviction_search_result = build(:conviction_search_result, :match_result_no)
+        end
+
+        it "includes the person in the array" do
+          expect(helper.relevant_people_without_matches).to eq([person])
+        end
+      end
+
+      context "when a conviction search result is YES" do
+        before do
+          person.conviction_search_result = build(:conviction_search_result, :match_result_yes)
+        end
+
+        it "returns an empty array" do
+          expect(helper.relevant_people_without_matches).to eq([])
+        end
+      end
+
+      context "when a conviction search result is UNKNOWN" do
+        before do
+          person.conviction_search_result = build(:conviction_search_result, :match_result_unknown)
+        end
+
+        it "returns an empty array" do
+          expect(helper.relevant_people_without_matches).to eq([])
         end
       end
     end

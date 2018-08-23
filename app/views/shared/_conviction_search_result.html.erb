@@ -1,11 +1,14 @@
 <table>
   <tbody>
+    <% if person.present? %>
+      <%= render("shared/person_table_rows", person: person) %>
+    <% end %>
     <tr>
       <td>
         <%= t(".match_result") %>
       </td>
       <td>
-        <%= conviction_search_result.match_result.downcase %>
+        <%= conviction_search_result.match_result.titleize %>
       </td>
     </tr>
     <tr>
@@ -45,7 +48,7 @@
         <%= t(".confirmed") %>
       </td>
       <td>
-        <%= conviction_search_result.confirmed %>
+        <%= conviction_search_result.confirmed.titleize %>
       </td>
     </tr>
   </tbody>

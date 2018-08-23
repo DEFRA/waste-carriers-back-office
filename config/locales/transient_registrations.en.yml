@@ -50,9 +50,6 @@ en:
           soleTrader: "Business owner details"
           relevant: "Person with a relevant conviction"
         labels:
-          name: "Name"
-          position: "Position"
-          dob: "Date of birth"
           conviction_search_result: "Matching convictions found?"
       conviction_heading: "Convictions"
       conviction_information:

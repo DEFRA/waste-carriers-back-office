@@ -1,0 +1,26 @@
+<tr>
+  <td>
+    <%= t(".name") %>
+  </td>
+  <td>
+    <%= person.first_name %> <%= person.last_name %>
+  </td>
+</tr>
+<% if person.position.present? %>
+<tr>
+  <td>
+    <%= t(".position") %>
+  </td>
+  <td>
+      <%= person.position %>
+  </td>
+</tr>
+<% end %>
+<tr>
+  <td>
+    <%= t(".dob") %>
+  </td>
+  <td>
+    <%= person.dob.to_date %>
+  </td>
+</tr>

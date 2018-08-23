@@ -196,22 +196,7 @@
           <%= t(".person_information.heading.#{@transient_registration.business_type}") %>
         </caption>
         <tbody>
-          <tr>
-            <td>
-              <%= t(".person_information.labels.name") %>
-            </td>
-            <td>
-              <%= person.first_name %> <%= person.last_name %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= t(".person_information.labels.dob") %>
-            </td>
-            <td>
-              <%= person.dob.to_date %>
-            </td>
-          </tr>
+          <%= render("shared/person_table_rows", person: person) %>
           <tr>
             <td>
               <%= t(".person_information.labels.conviction_search_result") %>
@@ -236,30 +221,7 @@
           <%= t(".person_information.heading.relevant") %>
         </caption>
         <tbody>
-          <tr>
-            <td>
-              <%= t(".person_information.labels.name") %>
-            </td>
-            <td>
-              <%= person.first_name %> <%= person.last_name %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= t(".person_information.labels.position") %>
-            </td>
-            <td>
-              <%= person.position %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= t(".person_information.labels.dob") %>
-            </td>
-            <td>
-              <%= person.dob.to_date %>
-            </td>
-          </tr>
+          <%= render("shared/person_table_rows", person: person) %>
           <tr>
             <td>
               <%= t(".person_information.labels.conviction_search_result") %>

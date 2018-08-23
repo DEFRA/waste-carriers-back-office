@@ -24,7 +24,7 @@
       <%= t(".business_convictions.#{business_convictions}") %>
     </p>
     <% if business_convictions == true %>
-      <%= render("shared/conviction_search_result", conviction_search_result: @transient_registration.conviction_search_result) %>
+      <%= render("shared/conviction_search_result", conviction_search_result: @transient_registration.conviction_search_result, person: nil) %>
     <% end %>
 
     <h2 class="heading-medium">
@@ -34,9 +34,31 @@
       <%= t(".people_convictions.#{people_convictions}") %>
     </p>
     <% if people_convictions == true %>
-      <% people_to_show.each do |person| %>
-        <h3 class="heading-small"><%= person.first_name %> <%= person.last_name %></h3>
-        <%= render("shared/conviction_search_result", conviction_search_result: person.conviction_search_result) %>
+      <% people_with_matches.each do |person| %>
+        <h3 class="heading-small">
+          <% if person.person_type == "KEY" %>
+            <%= t(".people_convictions.person_heading.#{@transient_registration.business_type}") %>
+          <% else %>
+            <%= t(".people_convictions.person_heading.relevant") %>
+          <% end %>
+        </h3>
+        <%= render("shared/conviction_search_result", conviction_search_result: person.conviction_search_result, person: person) %>
+      <% end %>
+    <% end %>
+
+      <% if relevant_people_without_matches.present? %>
+      <h2 class="heading-medium">
+        <%= t(".unmatched_people.heading") %>
+      </h2>
+      <p>
+        <%= t(".unmatched_people.paragraph") %>
+      </p>
+      <% relevant_people_without_matches.each do |person| %>
+        <table>
+          <tbody>
+            <%= render("shared/person_table_rows", person: person) %>
+          </tbody>
+        </table>
       <% end %>
     <% end %>
   </div>
