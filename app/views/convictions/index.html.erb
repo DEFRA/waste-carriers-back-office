@@ -23,6 +23,9 @@
     <p>
       <%= t(".business_convictions.#{business_convictions}") %>
     </p>
+    <% if business_convictions == true %>
+      <%= render("shared/conviction_search_result", conviction_search_result: @transient_registration.conviction_search_result) %>
+    <% end %>
 
     <h2 class="heading-medium">
       <%= t(".people_convictions.heading") %>
@@ -30,5 +33,11 @@
     <p>
       <%= t(".people_convictions.#{people_convictions}") %>
     </p>
+    <% if people_convictions == true %>
+      <% people_to_show.each do |person| %>
+        <h3 class="heading-small"><%= person.first_name %> <%= person.last_name %></h3>
+        <%= render("shared/conviction_search_result", conviction_search_result: person.conviction_search_result) %>
+      <% end %>
+    <% end %>
   </div>
 </div>

@@ -16,6 +16,11 @@ module ConvictionsHelper
     @transient_registration.key_person_has_matching_or_unknown_conviction?
   end
 
+  def people_to_show
+    people = @transient_registration.key_people.select(&:conviction_check_required?)
+    people
+  end
+
   private
 
   def unknown_people_convictions?

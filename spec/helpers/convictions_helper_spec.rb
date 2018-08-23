@@ -141,4 +141,64 @@ RSpec.describe ConvictionsHelper, type: :helper do
       end
     end
   end
+
+  describe "#people_to_show" do
+    context "when there are no key people" do
+      before do
+        transient_registration.key_people = []
+      end
+
+      it "returns an empty array" do
+        expect(helper.people_to_show).to eq([])
+      end
+    end
+
+    context "when there is a key person" do
+      let(:person) { build(:key_person) }
+
+      before do
+        transient_registration.key_people = [person]
+      end
+
+      context "when a person has no conviction search result" do
+        before do
+          person.conviction_search_result = nil
+        end
+
+        it "returns an empty array" do
+          expect(helper.people_to_show).to eq([])
+        end
+      end
+
+      context "when a conviction search result is NO" do
+        before do
+          person.conviction_search_result = build(:conviction_search_result, :match_result_no)
+        end
+
+        it "returns an empty array" do
+          expect(helper.people_to_show).to eq([])
+        end
+      end
+
+      context "when a conviction search result is YES" do
+        before do
+          person.conviction_search_result = build(:conviction_search_result, :match_result_yes)
+        end
+
+        it "includes the person in the array" do
+          expect(helper.people_to_show).to eq([person])
+        end
+      end
+
+      context "when a conviction search result is UNKNOWN" do
+        before do
+          person.conviction_search_result = build(:conviction_search_result, :match_result_unknown)
+        end
+
+        it "includes the person in the array" do
+          expect(helper.people_to_show).to eq([person])
+        end
+      end
+    end
+  end
 end

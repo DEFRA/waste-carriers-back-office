@@ -13,11 +13,20 @@ en:
         unknown: "Unknown – the user has not answered this question yet."
       business_convictions:
         heading: Business conviction matches
-        "true": "Yes – there is a conviction match for the business."
-        "false": "No – there is no conviction match for the business."
+        "true": "There is a possible conviction match for the business:"
+        "false": "There is no conviction match for the business."
         unknown: "Unknown – the automated conviction checks have not run yet. This may be because the renewal application is still in progress."
       people_convictions:
         heading: People conviction matches
-        "true": "Yes – there is a conviction match for at least one person."
-        "false": "No – there are no conviction matches for people."
+        "true": "There are possible conviction matches for the following people:"
+        "false": "There are no conviction matches for people."
         unknown: "Unknown – the automated conviction checks have not run yet. This may be because the renewal application is still in progress."
+
+  shared:
+    conviction_search_result:
+      match_result: "Match result"
+      matching_system: "Matching system"
+      reference: "Reference"
+      matched_name: "Matched name"
+      searched_at: "Searched at"
+      confirmed: "Confirmed"
