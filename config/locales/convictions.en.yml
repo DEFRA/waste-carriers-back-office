@@ -12,14 +12,14 @@ en:
         "false": "No – the user said there were no relevant convictions to declare."
         unknown: "Unknown – the user has not answered this question yet."
       business_convictions:
-        heading: Business conviction matches
-        "true": "There is a possible conviction match for the business:"
-        "false": "There is no conviction match for the business."
+        heading: Matching convictions for the business
+        "true": "There is a possible matching conviction for the business:"
+        "false": "No matching convictions were found for the business."
         unknown: "Unknown – the automated conviction checks have not run yet. This may be because the renewal application is still in progress."
       people_convictions:
-        heading: People with conviction matches
-        "true": "There are possible conviction matches for the following people:"
-        "false": "There are no conviction matches for people."
+        heading: People with matching convictions
+        "true": "There are possible matching convictions for the following people:"
+        "false": "No matching convictions were found for people."
         unknown: "Unknown – the automated conviction checks have not run yet. This may be because the renewal application is still in progress."
         person_heading:
           localAuthority: "Chief executive"
@@ -30,5 +30,5 @@ en:
           soleTrader: "Business owner"
           relevant: "Employee"
       unmatched_people:
-        heading: People without conviction matches
+        heading: Relevant people without matching convictions
         paragraph: "The following people were declared to have relevant convictions, but no matches were found:"
