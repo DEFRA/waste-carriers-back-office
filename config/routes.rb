@@ -13,6 +13,16 @@ Rails.application.routes.draw do
             path_names: { show: "/:reg_identifier" } do
               resources :convictions,
                         only: :index
+
+              resources :conviction_approvals,
+                        only: :new,
+                        path: "convictions/approve",
+                        path_names: { new: "" }
+
+              resources :conviction_rejections,
+                        only: :new,
+                        path: "convictions/reject",
+                        path_names: { new: "" }
             end
 
   mount WasteCarriersEngine::Engine => "/bo"
