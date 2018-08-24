@@ -1,0 +1,6 @@
+en:
+  conviction_approvals:
+    new:
+      title: "Approve a renewal with possible convictions"
+      heading: "Approve a renewal with possible convictions: %{reg_identifier}"
+      approve_button: "Approve this renewal"

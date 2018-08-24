@@ -1,0 +1,6 @@
+en:
+  conviction_rejections:
+    new:
+      title: "Reject a renewal with possible convictions"
+      heading: "Reject a renewal with possible convictions: %{reg_identifier}"
+      reject_button: "Reject this renewal"

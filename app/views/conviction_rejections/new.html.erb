@@ -3,7 +3,9 @@
     <%= render("waste_carriers_engine/shared/back", back_path: transient_registration_convictions_path(@transient_registration.reg_identifier)) %>
 
     <h1 class="heading-large">
-      Approve <%= @transient_registration.reg_identifier %>
+      <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
     </h1>
+
+    <%= link_to t(".reject_button"), "#", class: "button" %>
   </div>
 </div>
