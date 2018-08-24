@@ -19,6 +19,7 @@ FactoryBot.define do
       workflow_state { "renewal_received_form" }
       key_people { [build(:key_person, :requires_conviction_check)] }
       conviction_search_result { build(:conviction_search_result, :match_result_yes) }
+      conviction_sign_offs { [build(:conviction_sign_off)] }
     end
 
     trait :does_not_require_conviction_check do
