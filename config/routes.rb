@@ -14,13 +14,13 @@ Rails.application.routes.draw do
               resources :convictions,
                         only: :index
 
-              resources :conviction_approvals,
-                        only: :new,
+              resources :conviction_approval_forms,
+                        only: [:new, :create],
                         path: "convictions/approve",
                         path_names: { new: "" }
 
-              resources :conviction_rejections,
-                        only: :new,
+              resources :conviction_rejection_forms,
+                        only: [:new, :create],
                         path: "convictions/reject",
                         path_names: { new: "" }
             end

@@ -73,8 +73,8 @@
       <p>
         <%= t(".approve_or_reject.paragraph_2") %>
       </p>
-      <%= link_to t(".approve_or_reject.buttons.approve"), new_transient_registration_conviction_approval_path(@transient_registration.reg_identifier), class: "button" %>
-      <%= link_to t(".approve_or_reject.buttons.reject"), new_transient_registration_conviction_rejection_path(@transient_registration.reg_identifier), class: "button-warning" %>
+      <%= link_to t(".approve_or_reject.buttons.approve"), new_transient_registration_conviction_approval_form_path(@transient_registration.reg_identifier), class: "button" %>
+      <%= link_to t(".approve_or_reject.buttons.reject"), new_transient_registration_conviction_rejection_form_path(@transient_registration.reg_identifier), class: "button-warning" %>
     <% end %>
   </div>
 </div>

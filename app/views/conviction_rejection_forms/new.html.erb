@@ -1,0 +1,37 @@
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <%= render("waste_carriers_engine/shared/back", back_path: transient_registration_convictions_path(@transient_registration.reg_identifier)) %>
+
+    <%= form_for(@conviction_rejection_form, url: transient_registration_conviction_rejection_forms_path) do |f| %>
+      <%= render("waste_carriers_engine/shared/errors", object: @conviction_rejection_form) %>
+
+      <h1 class="heading-large">
+        <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
+      </h1>
+
+      <% if @conviction_rejection_form.errors[:revoked_reason].any? %>
+      <div class="form-group form-group-error">
+      <% else %>
+      <div class="form-group">
+      <% end %>
+        <fieldset id="company_name">
+          <legend class="visuallyhidden">
+            <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
+          </legend>
+
+          <% if @conviction_rejection_form.errors[:revoked_reason].any? %>
+          <span class="error-message"><%= @conviction_rejection_form.errors[:revoked_reason].join(", ") %></span>
+          <% end %>
+
+          <%= f.label :revoked_reason, t(".revoked_reason_label"), class: "form-label" %>
+          <%= f.text_area :revoked_reason, class: "form-control" %>
+        </fieldset>
+      </div>
+
+      <%= f.hidden_field :reg_identifier, value: @conviction_rejection_form.reg_identifier %>
+      <div class="form-group">
+        <%= f.submit t(".reject_button"), class: "button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

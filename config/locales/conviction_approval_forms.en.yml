@@ -1,6 +1,7 @@
 en:
-  conviction_approvals:
+  conviction_approval_forms:
     new:
       title: "Approve a renewal with possible convictions"
       heading: "Approve a renewal with possible convictions: %{reg_identifier}"
+      revoked_reason_label: "Reason for approval"
       approve_button: "Approve this renewal"

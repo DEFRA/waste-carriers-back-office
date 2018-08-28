@@ -1,6 +1,7 @@
 en:
-  conviction_rejections:
+  conviction_rejection_forms:
     new:
       title: "Reject a renewal with possible convictions"
       heading: "Reject a renewal with possible convictions: %{reg_identifier}"
+      revoked_reason_label: "Reason for rejection"
       reject_button: "Reject this renewal"
