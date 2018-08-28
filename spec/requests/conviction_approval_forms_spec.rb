@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "ConvictionApprovalForms", type: :request do
-  let(:transient_registration) { create(:transient_registration, workflow_state: "renewal_received_form") }
+  let(:transient_registration) { create(:transient_registration, :requires_conviction_check) }
 
   describe "GET /bo/transient-registrations/:reg_identifier/convictions/approve" do
     context "when a valid user is signed in" do
@@ -51,6 +51,21 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
       it "updates the revoked_reason" do
         post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
         expect(transient_registration.reload.metaData.revoked_reason).to eq(params[:revoked_reason])
+      end
+
+      it "updates the conviction_sign_off's confirmed" do
+        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+        expect(transient_registration.reload.conviction_sign_offs.first.confirmed).to eq("yes")
+      end
+
+      it "updates the conviction_sign_off's confirmed_at" do
+        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+        expect(transient_registration.reload.conviction_sign_offs.first.confirmed_at).to be_a(DateTime)
+      end
+
+      it "updates the conviction_sign_off's confirmed_by" do
+        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+        expect(transient_registration.reload.conviction_sign_offs.first.confirmed_by).to eq(user.email)
       end
 
       context "when the params are invalid" do

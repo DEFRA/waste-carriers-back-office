@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "ConvictionRejectionForms", type: :request do
-  let(:transient_registration) { create(:transient_registration, workflow_state: "renewal_received_form") }
+  let(:transient_registration) { create(:transient_registration, :requires_conviction_check) }
 
   describe "GET /bo/transient-registrations/:reg_identifier/convictions/reject" do
     context "when a valid user is signed in" do
