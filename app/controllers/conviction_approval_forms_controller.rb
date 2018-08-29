@@ -16,12 +16,6 @@ class ConvictionApprovalFormsController < AdminFormsController
   private
 
   def update_conviction_sign_off
-    cso = @transient_registration.conviction_sign_offs.first
-
-    cso.confirmed = "yes"
-    cso.confirmed_at = Time.current
-    cso.confirmed_by = current_user.email
-
-    cso.save!
+    @transient_registration.conviction_sign_offs.first.approve(current_user)
   end
 end
