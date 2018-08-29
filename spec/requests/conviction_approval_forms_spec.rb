@@ -85,6 +85,11 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
           post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
           expect(transient_registration.reload.metaData.revoked_reason).to_not eq(params[:revoked_reason])
         end
+
+        it "does not update the conviction_sign_off" do
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+          expect(transient_registration.reload.conviction_sign_offs.first.confirmed).to eq("no")
+        end
       end
     end
   end

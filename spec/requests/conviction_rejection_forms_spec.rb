@@ -53,6 +53,11 @@ RSpec.describe "ConvictionRejectionForms", type: :request do
         expect(transient_registration.reload.metaData.revoked_reason).to eq(params[:revoked_reason])
       end
 
+      it "revokes the renewal" do
+        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
+        expect(transient_registration.reload.metaData.status).to eq("REVOKED")
+      end
+
       context "when the params are invalid" do
         let(:params) do
           {
@@ -69,6 +74,11 @@ RSpec.describe "ConvictionRejectionForms", type: :request do
         it "does not update the revoked_reason" do
           post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
           expect(transient_registration.reload.metaData.revoked_reason).to_not eq(params[:revoked_reason])
+        end
+
+        it "does not revoke the renewal" do
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
+          expect(transient_registration.reload.metaData.status).to eq("ACTIVE")
         end
       end
     end

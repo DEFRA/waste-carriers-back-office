@@ -28,14 +28,12 @@ class AdminFormsController < ApplicationController
   end
 
   def submit_form(form, params)
-    respond_to do |format|
-      if form.submit(params)
-        format.html { redirect_to transient_registration_path(@transient_registration.reg_identifier) }
-        true
-      else
-        format.html { render :new }
-        false
-      end
+    if form.submit(params)
+      redirect_to transient_registration_path(@transient_registration.reg_identifier)
+      true
+    else
+      render :new
+      false
     end
   end
 

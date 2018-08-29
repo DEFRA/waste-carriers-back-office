@@ -6,9 +6,11 @@ class ConvictionApprovalFormsController < AdminFormsController
   end
 
   def create
-    update_conviction_sign_off if super(ConvictionApprovalForm,
-                                        "conviction_approval_form",
-                                        params[:conviction_approval_form][:reg_identifier])
+    return unless super(ConvictionApprovalForm,
+                        "conviction_approval_form",
+                        params[:conviction_approval_form][:reg_identifier])
+
+    update_conviction_sign_off
   end
 
   private
