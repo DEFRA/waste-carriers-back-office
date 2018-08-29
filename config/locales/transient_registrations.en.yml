@@ -52,12 +52,24 @@ en:
         labels:
           conviction_search_result: "Matching convictions found?"
       conviction_heading: "Convictions"
+      conviction_search_text:
+        "true": "This registration has matching or declared convictions."
+        "false": "There are no matching or declared convictions for this registration."
+        approved: "This renewal was approved after a review of the matching or declared convictions."
+        rejected: "This renewal was rejected after a review of the matching or declared convictions."
+        unknown: "This renewal application is still in progress, so there is no conviction match data yet."
+      conviction_sign_off:
+        heading: "Conviction check result"
+        labels:
+          status: "Status"
+          status_values:
+            approved: "Approved"
+            rejected: "Rejected"
+          confirmed_by: "Confirmed by"
+          confirmed_at: "Confirmed at"
+          revoked_reason: "Comment"
       conviction_information:
         heading: "Conviction overview"
-        conviction_search_text:
-          "true": "This registration has matching or declared convictions."
-          "false": "There are no matching or declared convictions for this registration."
-          unknown: "This renewal application is still in progress, so there is no conviction match data yet."
         labels:
           declared_convictions: "Declared convictions?"
           business_conviction_search_result: "Matching convictions found for company?"
