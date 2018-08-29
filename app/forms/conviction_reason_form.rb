@@ -16,4 +16,16 @@ class ConvictionReasonForm < WasteCarriersEngine::BaseForm
   end
 
   validates :revoked_reason, presence: true
+  validate :convictions_not_already_signed_off?
+
+  private
+
+  def convictions_not_already_signed_off?
+    if @transient_registration.conviction_check_approved? || @transient_registration.metaData.REVOKED?
+      errors.add(:base, :already_signed_off)
+      false
+    else
+      true
+    end
+  end
 end
