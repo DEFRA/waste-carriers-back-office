@@ -3,9 +3,11 @@ en:
     index:
       title: "Conviction details"
       heading: "Conviction information for %{reg_identifier}"
-      required:
+      status:
         "true": "This renewal requires a conviction check before it can be approved."
         "false": "This renewal does not require a conviction check before it can be approved."
+        approved: "This renewal was approved after a review of the matching or declared convictions."
+        rejected: "This renewal was rejected after a review of the matching or declared convictions."
       declared_convictions:
         heading: "Declared convictions"
         "true": "Yes – the user declared there were relevant convictions."
@@ -32,6 +34,16 @@ en:
       unmatched_people:
         heading: Relevant people without matching convictions
         paragraph: "The following people were declared to have relevant convictions, but no matches were found:"
+      conviction_sign_off:
+        heading: "Conviction check result"
+        labels:
+          status: "Status"
+          status_values:
+            approved: "Approved"
+            rejected: "Rejected"
+          confirmed_by: "Confirmed by"
+          confirmed_at: "Confirmed at"
+          revoked_reason: "Comment"
       approve_or_reject:
         heading: "Approve or reject this renewal"
         paragraph_1: "You can approve or reject this renewal based on this conviction information."

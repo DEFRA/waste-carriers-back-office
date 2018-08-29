@@ -58,16 +58,7 @@ en:
         approved: "This renewal was approved after a review of the matching or declared convictions."
         rejected: "This renewal was rejected after a review of the matching or declared convictions."
         unknown: "This renewal application is still in progress, so there is no conviction match data yet."
-      conviction_sign_off:
-        heading: "Conviction check result"
-        labels:
-          status: "Status"
-          status_values:
-            approved: "Approved"
-            rejected: "Rejected"
-          confirmed_by: "Confirmed by"
-          confirmed_at: "Confirmed at"
-          revoked_reason: "Comment"
+      conviction_link: "See details about convictions for this renewal"
       conviction_information:
         heading: "Conviction overview"
         labels:

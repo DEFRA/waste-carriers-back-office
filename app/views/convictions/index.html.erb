@@ -7,7 +7,13 @@
     </h1>
 
     <div class="panel">
-      <%= t(".required.#{@transient_registration.conviction_check_required?}") %>
+      <% if @transient_registration.conviction_check_approved? %>
+        <%= t(".status.approved") %>
+      <% elsif @transient_registration.metaData.REVOKED? %>
+        <%= t(".status.rejected") %>
+      <% else %>
+        <%= t(".status.#{@transient_registration.conviction_check_required?}") %>
+      <% end %>
     </div>
 
     <h2 class="heading-medium">
@@ -61,6 +67,56 @@
           </tbody>
         </table>
       <% end %>
+    <% end %>
+
+    <% if @transient_registration.conviction_check_approved? || @transient_registration.metaData.REVOKED? %>
+    <table>
+      <caption class="heading-medium">
+        <%= t(".conviction_sign_off.heading") %>
+      </caption>
+      <tbody>
+        <tr>
+          <td>
+            <%= t(".conviction_sign_off.labels.status") %>
+          </td>
+          <td>
+            <% if @transient_registration.conviction_check_approved? %>
+              <%= t(".conviction_sign_off.labels.status_values.approved") %>
+            <% elsif @transient_registration.metaData.REVOKED? %>
+              <%= t(".conviction_sign_off.labels.status_values.rejected") %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= t(".conviction_sign_off.labels.revoked_reason") %>
+          </td>
+          <td>
+            <%= @transient_registration.metaData.revoked_reason %>
+          </td>
+        </tr>
+        <% if @transient_registration.conviction_sign_offs.first.confirmed_by.present? %>
+        <tr>
+          <td>
+            <%= t(".conviction_sign_off.labels.confirmed_by") %>
+          </td>
+          <td>
+            <%= @transient_registration.conviction_sign_offs.first.confirmed_by %>
+          </td>
+        </tr>
+        <% end %>
+        <% if @transient_registration.conviction_sign_offs.first.confirmed_at.present? %>
+        <tr>
+          <td>
+            <%= t(".conviction_sign_off.labels.confirmed_at") %>
+          </td>
+          <td>
+            <%= @transient_registration.conviction_sign_offs.first.confirmed_at.in_time_zone("London").strftime("%A %e %B %Y at %l:%M%P") %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
     <% end %>
 
     <% if @transient_registration.conviction_check_required? %>
