@@ -42,13 +42,27 @@ class User
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
 
-  # Lockable
+  ## Lockable
   field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   field :locked_at,       type: Time
 
+  ## Roles
+
+  ROLES = %w[agency
+             agency_with_refund
+             finance
+             finance_admin
+             agency_super
+             finance_super].freeze
+
+  field :role, type: String
+
+  ## Validations
+
   validates :password, presence: true, length: { in: 8..128 }
   validate :password_must_have_lowercase_uppercase_and_numeric
+  validates :role, inclusion: { in: ROLES }
 
   private
 

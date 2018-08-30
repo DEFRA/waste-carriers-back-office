@@ -98,4 +98,70 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "role" do
+    context "when the role is agency" do
+      let(:user) { build(:user, :agency) }
+
+      it "is valid" do
+        expect(user).to be_valid
+      end
+    end
+
+    context "when the role is agency_with_refund" do
+      let(:user) { build(:user, :agency_with_refund) }
+
+      it "is valid" do
+        expect(user).to be_valid
+      end
+    end
+
+    context "when the role is finance" do
+      let(:user) { build(:user, :finance) }
+
+      it "is valid" do
+        expect(user).to be_valid
+      end
+    end
+
+    context "when the role is finance_admin" do
+      let(:user) { build(:user, :finance_admin) }
+
+      it "is valid" do
+        expect(user).to be_valid
+      end
+    end
+
+    context "when the role is agency_super" do
+      let(:user) { build(:user, :agency_super) }
+
+      it "is valid" do
+        expect(user).to be_valid
+      end
+    end
+
+    context "when the role is finance_super" do
+      let(:user) { build(:user, :finance_super) }
+
+      it "is valid" do
+        expect(user).to be_valid
+      end
+    end
+
+    context "when the role is nil" do
+      let(:user) { build(:user, role: nil) }
+
+      it "is not valid" do
+        expect(user).to_not be_valid
+      end
+    end
+
+    context "when the role is not allowed" do
+      let(:user) { build(:user, role: "foo") }
+
+      it "is not valid" do
+        expect(user).to_not be_valid
+      end
+    end
+  end
 end
