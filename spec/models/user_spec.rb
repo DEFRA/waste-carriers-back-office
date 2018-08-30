@@ -57,6 +57,8 @@ RSpec.describe User, type: :model do
   describe "abilities" do
     subject(:ability) { Ability.new(user) }
     let(:user) { build(:user) }
+    let(:transient_registration) { build(:transient_registration) }
+    let(:other_user) { build(:user) }
 
     context "when the user owns a registration" do
       let(:registration) { build(:registration, account_email: user.email) }
@@ -85,16 +87,304 @@ RSpec.describe User, type: :model do
     context "when the user owns a transient_registration" do
       let(:transient_registration) { build(:transient_registration, account_email: user.email) }
 
-      it "should be able to manage it" do
-        should be_able_to(:manage, transient_registration)
+      it "should be able to update it" do
+        should be_able_to(:update, transient_registration)
       end
     end
 
     context "when the user does not own a transient_registration" do
       let(:transient_registration) { build(:transient_registration, account_email: "foo@test.com") }
 
-      it "should be able to manage it" do
-        should be_able_to(:manage, transient_registration)
+      it "should be able to update it" do
+        should be_able_to(:update, transient_registration)
+      end
+    end
+
+    context "when the user is an agency user" do
+      let(:user) { build(:user, :agency) }
+
+      it "should be able to renew a registration" do
+        should be_able_to(:renew_registration, transient_registration)
+      end
+
+      it "should be able to take a worldpay payment" do
+        should be_able_to(:take_worldpay_payment, transient_registration)
+      end
+
+      it "should be able to record a cash payment" do
+        should be_able_to(:record_cash_payment, transient_registration)
+      end
+
+      it "should be able to record a cheque payment" do
+        should be_able_to(:record_cheque_payment, transient_registration)
+      end
+
+      it "should be able to record a postal order payment" do
+        should be_able_to(:record_postal_order_payment, transient_registration)
+      end
+
+      it "should not be able to record an electronic transfer payment" do
+        should_not be_able_to(:record_electronic_transfer_payment, transient_registration)
+      end
+
+      it "should not be able to record a worldpay payment" do
+        should_not be_able_to(:record_worldpay_payment, transient_registration)
+      end
+
+      it "should not be able to create an agency user" do
+        should_not be_able_to(:create_agency_user, user)
+      end
+
+      it "should not be able to create an agency_with_refund user" do
+        should_not be_able_to(:create_agency_with_refund_user, user)
+      end
+
+      it "should not be able to create a finance user" do
+        should_not be_able_to(:create_finance_user, user)
+      end
+
+      it "should not be able to create a finance admin user" do
+        should_not be_able_to(:create_finance_admin_user, user)
+      end
+    end
+
+    context "when the user is an agency with refund user" do
+      let(:user) { build(:user, :agency_with_refund) }
+
+      it "should be able to renew a registration" do
+        should be_able_to(:renew_registration, transient_registration)
+      end
+
+      it "should be able to take a worldpay payment" do
+        should be_able_to(:take_worldpay_payment, transient_registration)
+      end
+
+      it "should be able to record a cash payment" do
+        should be_able_to(:record_cash_payment, transient_registration)
+      end
+
+      it "should be able to record a cheque payment" do
+        should be_able_to(:record_cheque_payment, transient_registration)
+      end
+
+      it "should be able to record a postal order payment" do
+        should be_able_to(:record_postal_order_payment, transient_registration)
+      end
+
+      it "should not be able to record an electronic transfer payment" do
+        should_not be_able_to(:record_electronic_transfer_payment, transient_registration)
+      end
+
+      it "should not be able to record a worldpay payment" do
+        should_not be_able_to(:record_worldpay_payment, transient_registration)
+      end
+
+      it "should not be able to create an agency user" do
+        should_not be_able_to(:create_agency_user, user)
+      end
+
+      it "should not be able to create an agency_with_refund user" do
+        should_not be_able_to(:create_agency_with_refund_user, user)
+      end
+
+      it "should not be able to create a finance user" do
+        should_not be_able_to(:create_finance_user, user)
+      end
+
+      it "should not be able to create a finance admin user" do
+        should_not be_able_to(:create_finance_admin_user, user)
+      end
+    end
+
+    context "when the user is a finance user" do
+      let(:user) { build(:user, :finance) }
+
+      it "should not be able to renew a registration" do
+        should_not be_able_to(:renew_registration, transient_registration)
+      end
+
+      it "should not be able to take a worldpay payment" do
+        should_not be_able_to(:take_worldpay_payment, transient_registration)
+      end
+
+      it "should not be able to record a cash payment" do
+        should_not be_able_to(:record_cash_payment, transient_registration)
+      end
+
+      it "should not be able to record a cheque payment" do
+        should_not be_able_to(:record_cheque_payment, transient_registration)
+      end
+
+      it "should not be able to record a postal order payment" do
+        should_not be_able_to(:record_postal_order_payment, transient_registration)
+      end
+
+      it "should be able to record an electronic transfer payment" do
+        should be_able_to(:record_electronic_transfer_payment, transient_registration)
+      end
+
+      it "should not be able to record a worldpay payment" do
+        should_not be_able_to(:record_worldpay_payment, transient_registration)
+      end
+
+      it "should not be able to create an agency user" do
+        should_not be_able_to(:create_agency_user, user)
+      end
+
+      it "should not be able to create an agency_with_refund user" do
+        should_not be_able_to(:create_agency_with_refund_user, user)
+      end
+
+      it "should not be able to create a finance user" do
+        should_not be_able_to(:create_finance_user, user)
+      end
+
+      it "should not be able to create a finance admin user" do
+        should_not be_able_to(:create_finance_admin_user, user)
+      end
+    end
+
+    context "when the user is a finance admin user" do
+      let(:user) { build(:user, :finance_admin) }
+
+      it "should not be able to renew a registration" do
+        should_not be_able_to(:renew_registration, transient_registration)
+      end
+
+      it "should not be able to take a worldpay payment" do
+        should_not be_able_to(:take_worldpay_payment, transient_registration)
+      end
+
+      it "should not be able to record a cash payment" do
+        should_not be_able_to(:record_cash_payment, transient_registration)
+      end
+
+      it "should not be able to record a cheque payment" do
+        should_not be_able_to(:record_cheque_payment, transient_registration)
+      end
+
+      it "should not be able to record a postal order payment" do
+        should_not be_able_to(:record_postal_order_payment, transient_registration)
+      end
+
+      it "should not be able to record an electronic transfer payment" do
+        should_not be_able_to(:record_electronic_transfer_payment, transient_registration)
+      end
+
+      it "should be able to record a worldpay payment" do
+        should be_able_to(:record_worldpay_payment, transient_registration)
+      end
+
+      it "should not be able to create an agency user" do
+        should_not be_able_to(:create_agency_user, user)
+      end
+
+      it "should not be able to create an agency_with_refund user" do
+        should_not be_able_to(:create_agency_with_refund_user, user)
+      end
+
+      it "should not be able to create a finance user" do
+        should_not be_able_to(:create_finance_user, user)
+      end
+
+      it "should not be able to create a finance admin user" do
+        should_not be_able_to(:create_finance_admin_user, user)
+      end
+    end
+
+    context "when the user is an agency super user" do
+      let(:user) { build(:user, :agency_super) }
+
+      it "should not be able to renew a registration" do
+        should_not be_able_to(:renew_registration, transient_registration)
+      end
+
+      it "should not be able to take a worldpay payment" do
+        should_not be_able_to(:take_worldpay_payment, transient_registration)
+      end
+
+      it "should not be able to record a cash payment" do
+        should_not be_able_to(:record_cash_payment, transient_registration)
+      end
+
+      it "should not be able to record a cheque payment" do
+        should_not be_able_to(:record_cheque_payment, transient_registration)
+      end
+
+      it "should not be able to record a postal order payment" do
+        should_not be_able_to(:record_postal_order_payment, transient_registration)
+      end
+
+      it "should not be able to record an electronic transfer payment" do
+        should_not be_able_to(:record_electronic_transfer_payment, transient_registration)
+      end
+
+      it "should_not be able to record a worldpay payment" do
+        should_not be_able_to(:record_worldpay_payment, transient_registration)
+      end
+
+      it "should be able to create an agency user" do
+        should be_able_to(:create_agency_user, user)
+      end
+
+      it "should not be able to create an agency_with_refund user" do
+        should_not be_able_to(:create_agency_with_refund_user, user)
+      end
+
+      it "should not be able to create a finance user" do
+        should_not be_able_to(:create_finance_user, user)
+      end
+
+      it "should not be able to create a finance admin user" do
+        should_not be_able_to(:create_finance_admin_user, user)
+      end
+    end
+
+    context "when the user is a finance super user" do
+      let(:user) { build(:user, :finance_super) }
+
+      it "should not be able to renew a registration" do
+        should_not be_able_to(:renew_registration, transient_registration)
+      end
+
+      it "should not be able to take a worldpay payment" do
+        should_not be_able_to(:take_worldpay_payment, transient_registration)
+      end
+
+      it "should not be able to record a cash payment" do
+        should_not be_able_to(:record_cash_payment, transient_registration)
+      end
+
+      it "should not be able to record a cheque payment" do
+        should_not be_able_to(:record_cheque_payment, transient_registration)
+      end
+
+      it "should not be able to record a postal order payment" do
+        should_not be_able_to(:record_postal_order_payment, transient_registration)
+      end
+
+      it "should not be able to record an electronic transfer payment" do
+        should_not be_able_to(:record_electronic_transfer_payment, transient_registration)
+      end
+
+      it "should not be able to record a worldpay payment" do
+        should_not be_able_to(:record_worldpay_payment, transient_registration)
+      end
+
+      it "should be able to create an agency user" do
+        should be_able_to(:create_agency_user, user)
+      end
+
+      it "should be able to create an agency_with_refund user" do
+        should be_able_to(:create_agency_with_refund_user, user)
+      end
+
+      it "should be able to create a finance user" do
+        should be_able_to(:create_finance_user, user)
+      end
+
+      it "should be able to create a finance admin user" do
+        should be_able_to(:create_finance_admin_user, user)
       end
     end
   end
