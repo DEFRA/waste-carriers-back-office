@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Assisted Digital Forms", type: :request do
-  let(:registration) { create(:registration) }
+  let(:registration) { create(:registration, :expires_soon) }
 
   describe "GET /bo/renew/:reg_identifier" do
     context "when a valid user is signed in" do

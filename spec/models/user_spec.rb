@@ -60,55 +60,11 @@ RSpec.describe User, type: :model do
     let(:transient_registration) { build(:transient_registration) }
     let(:other_user) { build(:user) }
 
-    context "when the user owns a registration" do
-      let(:registration) { build(:registration, account_email: user.email) }
-
-      it "should be able to read it" do
-        should be_able_to(:read, registration)
-      end
-
-      it "should not able to manage it" do
-        should_not be_able_to(:manage, registration)
-      end
-    end
-
-    context "when the user does not own a registration" do
-      let(:registration) { build(:registration, account_email: "foo@test.com") }
-
-      it "should be able to read it" do
-        should be_able_to(:read, registration)
-      end
-
-      it "should not able to manage it" do
-        should_not be_able_to(:manage, registration)
-      end
-    end
-
-    context "when the user owns a transient_registration" do
-      let(:transient_registration) { build(:transient_registration, account_email: user.email) }
-
-      it "should be able to update it" do
-        should be_able_to(:update, transient_registration)
-      end
-    end
-
-    context "when the user does not own a transient_registration" do
-      let(:transient_registration) { build(:transient_registration, account_email: "foo@test.com") }
-
-      it "should be able to update it" do
-        should be_able_to(:update, transient_registration)
-      end
-    end
-
     context "when the user is an agency user" do
       let(:user) { build(:user, :agency) }
 
-      it "should be able to renew a registration" do
-        should be_able_to(:renew_registration, transient_registration)
-      end
-
-      it "should be able to take a worldpay payment" do
-        should be_able_to(:take_worldpay_payment, transient_registration)
+      it "should be able to update a transient registration" do
+        should be_able_to(:update, transient_registration)
       end
 
       it "should be able to record a cash payment" do
@@ -155,12 +111,8 @@ RSpec.describe User, type: :model do
     context "when the user is an agency with refund user" do
       let(:user) { build(:user, :agency_with_refund) }
 
-      it "should be able to renew a registration" do
-        should be_able_to(:renew_registration, transient_registration)
-      end
-
-      it "should be able to take a worldpay payment" do
-        should be_able_to(:take_worldpay_payment, transient_registration)
+      it "should be able to update a transient registration" do
+        should be_able_to(:update, transient_registration)
       end
 
       it "should be able to record a cash payment" do
@@ -207,12 +159,8 @@ RSpec.describe User, type: :model do
     context "when the user is a finance user" do
       let(:user) { build(:user, :finance) }
 
-      it "should not be able to renew a registration" do
-        should_not be_able_to(:renew_registration, transient_registration)
-      end
-
-      it "should not be able to take a worldpay payment" do
-        should_not be_able_to(:take_worldpay_payment, transient_registration)
+      it "should not be able to update a transient registration" do
+        should_not be_able_to(:update, transient_registration)
       end
 
       it "should not be able to record a cash payment" do
@@ -259,12 +207,8 @@ RSpec.describe User, type: :model do
     context "when the user is a finance admin user" do
       let(:user) { build(:user, :finance_admin) }
 
-      it "should not be able to renew a registration" do
-        should_not be_able_to(:renew_registration, transient_registration)
-      end
-
-      it "should not be able to take a worldpay payment" do
-        should_not be_able_to(:take_worldpay_payment, transient_registration)
+      it "should not be able to update a transient registration" do
+        should_not be_able_to(:update, transient_registration)
       end
 
       it "should not be able to record a cash payment" do
@@ -311,12 +255,8 @@ RSpec.describe User, type: :model do
     context "when the user is an agency super user" do
       let(:user) { build(:user, :agency_super) }
 
-      it "should not be able to renew a registration" do
-        should_not be_able_to(:renew_registration, transient_registration)
-      end
-
-      it "should not be able to take a worldpay payment" do
-        should_not be_able_to(:take_worldpay_payment, transient_registration)
+      it "should not be able to update a transient registration" do
+        should_not be_able_to(:update, transient_registration)
       end
 
       it "should not be able to record a cash payment" do
@@ -363,12 +303,8 @@ RSpec.describe User, type: :model do
     context "when the user is a finance super user" do
       let(:user) { build(:user, :finance_super) }
 
-      it "should not be able to renew a registration" do
-        should_not be_able_to(:renew_registration, transient_registration)
-      end
-
-      it "should not be able to take a worldpay payment" do
-        should_not be_able_to(:take_worldpay_payment, transient_registration)
+      it "should not be able to update a transient registration" do
+        should_not be_able_to(:update, transient_registration)
       end
 
       it "should not be able to record a cash payment" do

@@ -16,11 +16,7 @@ class Ability
   # Permissions for specific roles
 
   def permissions_for_agency_user_group
-    can :read, WasteCarriersEngine::Registration
     can :update, WasteCarriersEngine::TransientRegistration
-
-    can :renew_registration, WasteCarriersEngine::TransientRegistration
-    can :take_worldpay_payment, WasteCarriersEngine::TransientRegistration
 
     can :record_cash_payment, WasteCarriersEngine::TransientRegistration
     can :record_cheque_payment, WasteCarriersEngine::TransientRegistration
