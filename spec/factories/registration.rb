@@ -9,5 +9,10 @@ FactoryBot.define do
     metaData { build(:metaData) }
 
     expires_on { 2.months.from_now }
+
+    trait :expires_soon do
+      metaData { build(:metaData, status: :ACTIVE) }
+      expires_on { 2.months.from_now }
+    end
   end
 end

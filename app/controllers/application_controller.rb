@@ -15,8 +15,14 @@ class ApplicationController < ActionController::Base
     redirect_to bo_path
   end
 
-  def after_sign_in_path_for(*)
-    bo_path
+  # We need to handle users coming to the app via /bo/renew/CBDU12345 that are
+  # first required to sign in, and those that just come straight to the sign in
+  # page. In the first case we need to redirect them back to /bo/renew/CBDU12345
+  # after sign in, which we're able to do thanks to a handy helper method in
+  # Devise which stores the previous url. In the second case we redirect them to
+  # our dashboard.
+  def after_sign_in_path_for(resource)
+    stored_location_for(resource) || bo_path
   end
 
   def after_sign_out_path_for(*)
