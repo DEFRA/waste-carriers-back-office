@@ -38,7 +38,9 @@
           <%= t(".status.messages.in_progress") %> "<%= display_current_workflow_state %>".
         </p>
 
-        <%= link_to t(".status.actions.continue_button"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier), class: 'button' %>
+        <% if can? :update, @transient_registration %>
+          <%= link_to t(".status.actions.continue_button"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier), class: 'button' %>
+        <% end %>
       </div>
     <% end %>
     <table>
