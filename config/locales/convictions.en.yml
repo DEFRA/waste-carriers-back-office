@@ -51,3 +51,4 @@ en:
         buttons:
           approve: "Approve"
           reject: "Reject"
+        no_permission: "You don't have permission to approve or reject this renewal based on conviction information."

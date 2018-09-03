@@ -123,14 +123,18 @@
       <h2 class="heading-medium">
         <%= t(".approve_or_reject.heading") %>
       </h2>
-      <p>
-        <%= t(".approve_or_reject.paragraph_1") %>
-      </p>
-      <p>
-        <%= t(".approve_or_reject.paragraph_2") %>
-      </p>
-      <%= link_to t(".approve_or_reject.buttons.approve"), new_transient_registration_conviction_approval_form_path(@transient_registration.reg_identifier), class: "button" %>
-      <%= link_to t(".approve_or_reject.buttons.reject"), new_transient_registration_conviction_rejection_form_path(@transient_registration.reg_identifier), class: "button-warning" %>
+      <% if can? :review_convictions, @transient_registration %>
+        <p>
+          <%= t(".approve_or_reject.paragraph_1") %>
+        </p>
+        <p>
+          <%= t(".approve_or_reject.paragraph_2") %>
+        </p>
+        <%= link_to t(".approve_or_reject.buttons.approve"), new_transient_registration_conviction_approval_form_path(@transient_registration.reg_identifier), class: "button" %>
+        <%= link_to t(".approve_or_reject.buttons.reject"), new_transient_registration_conviction_rejection_form_path(@transient_registration.reg_identifier), class: "button-warning" %>
+      <% else %>
+        <%= t(".approve_or_reject.no_permission") %>
+      <% end %>
     <% end %>
   </div>
 </div>

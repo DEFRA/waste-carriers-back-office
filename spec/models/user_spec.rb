@@ -131,6 +131,10 @@ RSpec.describe User, type: :model do
         should_not be_able_to(:record_worldpay_payment, transient_registration)
       end
 
+      it "should be able to review convictions" do
+        should be_able_to(:review_convictions, transient_registration)
+      end
+
       it "should not be able to create an agency user" do
         should_not be_able_to(:create_agency_user, user)
       end
@@ -177,6 +181,10 @@ RSpec.describe User, type: :model do
 
       it "should not be able to record a worldpay payment" do
         should_not be_able_to(:record_worldpay_payment, transient_registration)
+      end
+
+      it "should be able to review convictions" do
+        should be_able_to(:review_convictions, transient_registration)
       end
 
       it "should not be able to create an agency user" do
@@ -227,6 +235,10 @@ RSpec.describe User, type: :model do
         should_not be_able_to(:record_worldpay_payment, transient_registration)
       end
 
+      it "should not be able to review convictions" do
+        should_not be_able_to(:review_convictions, transient_registration)
+      end
+
       it "should not be able to create an agency user" do
         should_not be_able_to(:create_agency_user, user)
       end
@@ -275,6 +287,10 @@ RSpec.describe User, type: :model do
         should be_able_to(:record_worldpay_payment, transient_registration)
       end
 
+      it "should not be able to review convictions" do
+        should_not be_able_to(:review_convictions, transient_registration)
+      end
+
       it "should not be able to create an agency user" do
         should_not be_able_to(:create_agency_user, user)
       end
@@ -319,8 +335,12 @@ RSpec.describe User, type: :model do
         should_not be_able_to(:record_electronic_transfer_payment, transient_registration)
       end
 
-      it "should_not be able to record a worldpay payment" do
+      it "should not be able to record a worldpay payment" do
         should_not be_able_to(:record_worldpay_payment, transient_registration)
+      end
+
+      it "should not be able to review convictions" do
+        should_not be_able_to(:review_convictions, transient_registration)
       end
 
       it "should be able to create an agency user" do
@@ -369,6 +389,10 @@ RSpec.describe User, type: :model do
 
       it "should not be able to record a worldpay payment" do
         should_not be_able_to(:record_worldpay_payment, transient_registration)
+      end
+
+      it "should not be able to review convictions" do
+        should_not be_able_to(:review_convictions, transient_registration)
       end
 
       it "should be able to create an agency user" do

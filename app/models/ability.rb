@@ -25,6 +25,8 @@ class Ability
     can :record_cash_payment, WasteCarriersEngine::TransientRegistration
     can :record_cheque_payment, WasteCarriersEngine::TransientRegistration
     can :record_postal_order_payment, WasteCarriersEngine::TransientRegistration
+
+    can :review_convictions, WasteCarriersEngine::TransientRegistration
   end
 
   def permissions_for_finance_user
