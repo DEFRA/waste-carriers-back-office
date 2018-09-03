@@ -24,6 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do
-    redirect_to page_path("permission")
+    redirect_to "/bo/permission"
   end
 end

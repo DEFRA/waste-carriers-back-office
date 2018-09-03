@@ -4,9 +4,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :read, WasteCarriersEngine::Registration
-    can :update, WasteCarriersEngine::TransientRegistration
-
     permissions_for_agency_user_group if in_agency_user_group?(user)
     permissions_for_finance_user if finance_user?(user)
     permissions_for_finance_admin_user if finance_admin_user?(user)
@@ -19,6 +16,9 @@ class Ability
   # Permissions for specific roles
 
   def permissions_for_agency_user_group
+    can :read, WasteCarriersEngine::Registration
+    can :update, WasteCarriersEngine::TransientRegistration
+
     can :renew_registration, WasteCarriersEngine::TransientRegistration
     can :take_worldpay_payment, WasteCarriersEngine::TransientRegistration
 
