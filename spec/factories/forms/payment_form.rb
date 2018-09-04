@@ -11,6 +11,8 @@ FactoryBot.define do
     date_received_month { 1 }
     date_received_year { 2018 }
 
+    date_received { Date.new(2018, 1, 1) }
+
     initialize_with do
       new(create(:transient_registration,
                  :has_finance_details,

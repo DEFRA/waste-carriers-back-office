@@ -86,14 +86,7 @@ RSpec.describe PaymentForm, type: :model do
     context "when the form is not valid" do
       let(:invalid_params) do
         {
-          reg_identifier: payment_form.reg_identifier,
-          amount: payment_form.amount,
-          comment: payment_form.comment,
-          updated_by_user: payment_form.updated_by_user,
-          registration_reference: payment_form.registration_reference,
-          date_received_day: 32,
-          date_received_month: 13,
-          date_received_year: "foo"
+          reg_identifier: payment_form.reg_identifier
         }
       end
       let(:payment_type) { "FOO" }
@@ -108,6 +101,64 @@ RSpec.describe PaymentForm, type: :model do
         new_payment_count = transient_registration.reload.finance_details.payments.count
 
         expect(new_payment_count).to eq(payment_count)
+      end
+    end
+  end
+
+  describe "#amount" do
+    context "when it is zero" do
+      before do
+        payment_form.amount = 0
+      end
+
+      it "is not valid" do
+        expect(payment_form).to_not be_valid
+      end
+    end
+
+    context "when it is not a number" do
+      before do
+        payment_form.amount = "foo"
+      end
+
+      it "is not valid" do
+        expect(payment_form).to_not be_valid
+      end
+    end
+  end
+
+  describe "#comment" do
+    context "when it is more than 250 characters" do
+      before do
+        payment_form.comment = "Q2HK0PM50AZ8QWEQL6ZVR7A2SLL5QBQ9T6ZQQ7SU793YOSLABX4SAWMM3OE1LGH8Z6MJK92GEP3F9WR89IY7OUQN1PTU9NHFHSUHA1L6ELJI749QH9UXAKVD9CCGX344692OISGGLMAT4VLDAHOEST6N3KD5093AE9C2RHZD12TUPW0FHRR7JJSQRZM3XJ1FCQQJX9UXG7HW258Y71RDUQQ2UNOX4G1IO5J0JE3GQHH46ENQDT4JX89TSJGT"
+      end
+
+      it "is not valid" do
+        expect(payment_form).to_not be_valid
+      end
+    end
+  end
+
+  describe "#date_received" do
+    context "when it is nil" do
+      before do
+        payment_form.date_received = nil
+      end
+
+      it "is not valid" do
+        expect(payment_form).to_not be_valid
+      end
+    end
+  end
+
+  describe "#registration_reference" do
+    context "when it is nil" do
+      before do
+        payment_form.registration_reference = nil
+      end
+
+      it "is not valid" do
+        expect(payment_form).to_not be_valid
       end
     end
   end

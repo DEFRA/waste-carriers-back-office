@@ -12,7 +12,7 @@ en:
         date_received_day: "Day"
         date_received_month: "Month"
         date_received_year: "Year"
-        registration_reference: "Registration reference"
+        registration_reference: "Reference"
         comment: "Comment"
       submit_button: "Add this payment"
   activemodel:
@@ -20,5 +20,13 @@ en:
       models:
         transfer_payment_form:
           attributes:
+            amount:
+              blank: "You must enter an amount"
+              not_a_number: "You must enter a valid number"
+              greater_than: "You must enter a positive number"
+            comment:
+              too_long: "Your comment must not be longer than 250 characters"
             date_received:
               blank: "You must enter a valid date"
+            registration_reference:
+              blank: "You must enter a reference"

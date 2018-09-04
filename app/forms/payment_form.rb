@@ -30,7 +30,10 @@ class PaymentForm < WasteCarriersEngine::BaseForm
     super(attributes, params[:reg_identifier])
   end
 
+  validates :amount, presence: true, numericality: { greater_than: 0 }
+  validates :comment, length: { maximum: 250 }
   validates :date_received, presence: true
+  validates :registration_reference, presence: true
 
   private
 
