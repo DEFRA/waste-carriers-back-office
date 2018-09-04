@@ -20,10 +20,11 @@ class PaymentForm < WasteCarriersEngine::BaseForm
     self.updated_by_user = params[:updated_by_user]
 
     process_date_fields(params)
-    set_date_received
+    params[:date_received] = set_date_received
+    params[:payment_type] = payment_type_value
 
-    self.payment = build_payment
-    self.finance_details = update_finance_details
+    build_payment(params)
+    update_finance_details
 
     attributes = { finance_details: finance_details }
 
@@ -61,24 +62,8 @@ class PaymentForm < WasteCarriersEngine::BaseForm
     errors.add(:date_received, :invalid_date)
   end
 
-  def build_payment
-    payment = WasteCarriersEngine::Payment.new
-
-    payment.amount = amount
-    payment.comment = comment
-    payment.registration_reference = registration_reference
-    payment.payment_type = payment_type
-    payment.order_key = order_key
-    payment.currency = "GBP"
-
-    payment.date_received_day = date_received_day
-    payment.date_received_month = date_received_month
-    payment.date_received_year = date_received_year
-    payment.date_received = date_received
-
-    payment.updated_by_user = updated_by_user
-
-    payment
+  def build_payment(params)
+    self.payment = WasteCarriersEngine::Payment.new_from_non_worldpay(params, order)
   end
 
   def update_finance_details
@@ -89,8 +74,6 @@ class PaymentForm < WasteCarriersEngine::BaseForm
     else
       finance_details.payments = [payment]
     end
-
-    finance_details
   end
 
   # Need to copy the finance details, update our copy and then overwrite what's already there when submitting.
