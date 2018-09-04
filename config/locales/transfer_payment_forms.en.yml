@@ -3,18 +3,6 @@ en:
     new:
       title: "Add a bank transfer payment"
       heading: "Add a bank transfer payment for %{reg_identifier}"
-      current_balance: "The current balance for this renewal is £%{balance}."
-      labels:
-        amount: "Amount received (£)"
-        amount_hint: "For example, 120.50"
-        date_received: "Date received"
-        date_received_hint: "For example, 26 5 2018"
-        date_received_day: "Day"
-        date_received_month: "Month"
-        date_received_year: "Year"
-        registration_reference: "Reference"
-        comment: "Comment"
-      submit_button: "Add this payment"
   activemodel:
     errors:
       models:
