@@ -7,7 +7,7 @@ RSpec.describe "ConvictionRejectionForms", type: :request do
 
   describe "GET /bo/transient-registrations/:reg_identifier/convictions/reject" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency) }
       before(:each) do
         sign_in(user)
       end
@@ -27,11 +27,23 @@ RSpec.describe "ConvictionRejectionForms", type: :request do
         expect(response.body).to include(transient_registration.reg_identifier)
       end
     end
+
+    context "when a non-agency user is signed in" do
+      let(:user) { create(:user, :finance) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "redirects to the permissions error page" do
+        get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/reject"
+        expect(response).to redirect_to("/bo/permission")
+      end
+    end
   end
 
   describe "POST /bo/transient-registrations/:reg_identifier/convictions/reject" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency) }
       before(:each) do
         sign_in(user)
       end
@@ -80,6 +92,35 @@ RSpec.describe "ConvictionRejectionForms", type: :request do
           post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
           expect(transient_registration.reload.metaData.status).to eq("ACTIVE")
         end
+      end
+    end
+
+    context "when a non-agency user is signed in" do
+      let(:user) { create(:user, :finance) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      let(:params) do
+        {
+          reg_identifier: transient_registration.reg_identifier,
+          revoked_reason: "foo"
+        }
+      end
+
+      it "redirects to the permissions error page" do
+        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
+        expect(response).to redirect_to("/bo/permission")
+      end
+
+      it "does not update the revoked_reason" do
+        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
+        expect(transient_registration.reload.metaData.revoked_reason).to_not eq(params[:revoked_reason])
+      end
+
+      it "does not update the conviction_sign_off" do
+        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
+        expect(transient_registration.reload.conviction_sign_offs.first.confirmed).to eq("no")
       end
     end
   end

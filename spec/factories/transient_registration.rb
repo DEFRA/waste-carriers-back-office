@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :transient_registration, class: WasteCarriersEngine::TransientRegistration do
     # Create a new registration when initializing
-    initialize_with { new(reg_identifier: create(:registration).reg_identifier) }
+    initialize_with { new(reg_identifier: create(:registration, :expires_soon).reg_identifier) }
 
     trait :pending_payment do
       workflow_state { "renewal_received_form" }

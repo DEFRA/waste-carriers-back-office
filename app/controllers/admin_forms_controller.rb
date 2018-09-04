@@ -5,12 +5,16 @@
 class AdminFormsController < ApplicationController
   before_action :authenticate_user!
 
-  def new(form_class, form, reg_identifier)
+  def new(form_class, form, reg_identifier, authorize_action = nil)
     set_up_form(form_class, form, reg_identifier)
+
+    public_send(authorize_action, @transient_registration)
   end
 
-  def create(form_class, form, reg_identifier)
+  def create(form_class, form, reg_identifier, authorize_action = nil)
     return false unless set_up_form(form_class, form, reg_identifier)
+
+    public_send(authorize_action, @transient_registration)
 
     # Submit the form by getting the instance variable we just set
     submit_form(instance_variable_get("@#{form}"), params[form])
