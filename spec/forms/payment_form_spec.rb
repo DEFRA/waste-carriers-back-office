@@ -57,6 +57,20 @@ RSpec.describe PaymentForm, type: :model do
         payment = transient_registration.finance_details.payments.last
         expect(payment.date_received).to eq(Date.new(1991, 1, 1))
       end
+
+      context "when a payment already exists" do
+        before do
+          transient_registration.finance_details.update_attributes(payments: [build(:payment)])
+        end
+
+        it "should create an additional payment" do
+          payment_count = transient_registration.finance_details.payments.count
+          payment_form.submit(valid_params, payment_type)
+          new_payment_count = transient_registration.reload.finance_details.payments.count
+
+          expect(new_payment_count).to eq(payment_count + 1)
+        end
+      end
     end
 
     context "when the form is not valid" do

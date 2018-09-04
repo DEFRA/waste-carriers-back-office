@@ -88,8 +88,10 @@ class PaymentForm < WasteCarriersEngine::BaseForm
   # This is awkward, but Mongo throws a push error otherwise. We do a similar thing for key people.
   def copy_finance_details
     self.finance_details = WasteCarriersEngine::FinanceDetails.new
-    finance_details.orders = @transient_registration.finance_details.orders
-    finance_details.payments = @transient_registration.finance_details.payments
-    finance_details.balance = @transient_registration.finance_details.balance
+    existing_finance_details = @transient_registration.reload.finance_details
+
+    finance_details.orders = existing_finance_details.orders
+    finance_details.payments = existing_finance_details.payments
+    finance_details.balance = existing_finance_details.balance
   end
 end
