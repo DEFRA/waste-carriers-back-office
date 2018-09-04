@@ -9,6 +9,84 @@
         <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
       </h1>
 
+      <p>
+        <%= t(".current_balance", balance: display_pence_as_pounds(@transient_registration.finance_details.balance)) %>
+      </p>
+
+      <% if @transfer_payment_form.errors[:amount].any? %>
+      <div class="form-group form-group-error">
+      <% else %>
+      <div class="form-group">
+      <% end %>
+        <fieldset id="company_name">
+          <legend class="visuallyhidden">
+            <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
+          </legend>
+
+          <% if @transfer_payment_form.errors[:amount].any? %>
+          <span class="error-message"><%= @transfer_payment_form.errors[:amount].join(", ") %></span>
+          <% end %>
+
+          <%= f.label :amount, class: "form-label" do %>
+            <%= t(".labels.amount") %>
+            <span class="form-hint"><%= t(".labels.amount_hint") %></span>
+          <% end %>
+          <%= f.text_field :amount, class: "form-control" %>
+        </fieldset>
+      </div>
+
+      <% if @transfer_payment_form.errors[:date_received].any? %>
+      <div class="form-group form-group-error">
+      <% else %>
+      <div class="form-group">
+      <% end %>
+        <fieldset id="date_received">
+          <% if @transfer_payment_form.errors[:date_received].any? %>
+            <span class="error-message"><%= @transfer_payment_form.errors[:date_received].join(". ") %></span>
+          <% end %>
+
+          <legend>
+            <%= t(".labels.date_received") %>
+            <span class="form-hint"><%= t(".labels.date_received_hint") %></span>
+          </legend>
+
+          <fieldset id="date_received_day" class="inline-date">
+            <%= f.label :date_received_day, t(".labels.date_received_day"), class: "form-label" %>
+            <%= f.text_field :date_received_day, value: @transfer_payment_form.date_received_day, class: "form-control" %>
+          </fieldset>
+
+          <fieldset id="date_received_month" class="inline-date">
+            <%= f.label :date_received_month, t(".labels.date_received_month"), class: "form-label" %>
+            <%= f.text_field :date_received_month, value: @transfer_payment_form.date_received_month, class: "form-control" %>
+          </fieldset>
+
+          <fieldset id="date_received_year" class="inline-date">
+            <%= f.label :date_received_year, t(".labels.date_received_year"), class: "form-label" %>
+            <%= f.text_field :date_received_year, value: @transfer_payment_form.date_received_year, class: "form-control" %>
+          </fieldset>
+
+        </fieldset>
+      </div>
+
+      <% if @transfer_payment_form.errors[:registration_reference].any? %>
+      <div class="form-group form-group-error">
+      <% else %>
+      <div class="form-group">
+      <% end %>
+        <fieldset id="company_name">
+          <legend class="visuallyhidden">
+            <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
+          </legend>
+
+          <% if @transfer_payment_form.errors[:registration_reference].any? %>
+          <span class="error-message"><%= @transfer_payment_form.errors[:registration_reference].join(", ") %></span>
+          <% end %>
+
+          <%= f.label :registration_reference, t(".labels.registration_reference"), class: "form-label" %>
+          <%= f.text_field :registration_reference, class: "form-control" %>
+        </fieldset>
+      </div>
+
       <% if @transfer_payment_form.errors[:comment].any? %>
       <div class="form-group form-group-error">
       <% else %>
@@ -23,7 +101,7 @@
           <span class="error-message"><%= @transfer_payment_form.errors[:comment].join(", ") %></span>
           <% end %>
 
-          <%= f.label :comment, t(".comment_label"), class: "form-label" %>
+          <%= f.label :comment, t(".labels.comment"), class: "form-label" %>
           <%= f.text_area :comment, class: "form-control" %>
         </fieldset>
       </div>
