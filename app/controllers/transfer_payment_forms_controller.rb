@@ -6,7 +6,7 @@ class TransferPaymentFormsController < AdminFormsController
   end
 
   def create
-    params[:transfer_payment_form][:current_user_email] = current_user.email
+    params[:transfer_payment_form][:last_updated_by] = current_user.email
 
     return unless super(TransferPaymentForm,
                         "transfer_payment_form",

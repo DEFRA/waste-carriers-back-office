@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class PaymentForm < WasteCarriersEngine::BaseForm
-  attr_accessor :amount, :comment, :current_user_email, :date_received, :date_received_day, :date_received_month,
-                :date_received_year, :order_key, :payment_type, :registration_reference, :payment, :finance_details
+  attr_accessor :amount, :comment, :date_received, :date_received_day, :date_received_month, :date_received_year,
+                :order_key, :payment_type, :registration_reference, :updated_by_user, :payment, :finance_details
 
   def submit(params, payment_type_value)
     # Assign the params for validation and pass them to the BaseForm method for updating
     self.amount = params[:amount]
     self.comment = params[:comment]
-    self.current_user_email = params[:current_user_email]
+    self.updated_by_user = params[:updated_by_user]
     self.order_key = params[:order_key]
     self.payment_type = payment_type_value
     self.registration_reference = params[:registration_reference]
@@ -66,7 +66,7 @@ class PaymentForm < WasteCarriersEngine::BaseForm
     payment.date_received_year = date_received_year
     payment.date_received = date_received
 
-    payment.updated_by_user = current_user_email
+    payment.updated_by_user = updated_by_user
 
     payment
   end

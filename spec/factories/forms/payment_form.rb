@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :payment_form do
     amount { 100 }
     comment { "foo" }
-    current_user_email { build(:user).email }
+    updated_by_user { build(:user).email }
     order_key { "foo" }
     registration_reference { "foo" }
 
