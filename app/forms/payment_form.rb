@@ -12,6 +12,7 @@ class PaymentForm < WasteCarriersEngine::BaseForm
 
   def submit(params, payment_type_value)
     # Assign the params for validation and pass them to the BaseForm method for updating
+    params[:amount] = convert_amount_to_pence(params[:amount])
     self.amount = params[:amount]
     self.comment = params[:comment]
     self.order_key = order.order_code
@@ -37,6 +38,11 @@ class PaymentForm < WasteCarriersEngine::BaseForm
   validates :registration_reference, presence: true
 
   private
+
+  def convert_amount_to_pence(amount_in_pounds)
+    return amount_in_pounds unless amount_in_pounds.present?
+    amount_in_pounds.to_d * 100
+  end
 
   def process_date_fields(params)
     self.date_received_day = format_date_field_value(params[:date_received_day])

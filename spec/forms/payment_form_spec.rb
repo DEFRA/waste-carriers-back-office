@@ -36,6 +36,14 @@ RSpec.describe PaymentForm, type: :model do
         expect(new_payment_count).to eq(payment_count + 1)
       end
 
+      it "should add the correct amount to the payment" do
+        expected_amount = valid_params[:amount] * 100
+        payment_form.submit(valid_params, payment_type)
+
+        payment = transient_registration.finance_details.payments.last
+        expect(payment.amount).to eq(expected_amount)
+      end
+
       it "should add the correct payment_type to the payment" do
         payment_form.submit(valid_params, payment_type)
 
