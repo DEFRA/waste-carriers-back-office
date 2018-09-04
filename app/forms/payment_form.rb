@@ -80,6 +80,8 @@ class PaymentForm < WasteCarriersEngine::BaseForm
     else
       finance_details.payments = [payment]
     end
+
+    finance_details.update_balance
   end
 
   # Need to copy the finance details, update our copy and then overwrite what's already there when submitting.

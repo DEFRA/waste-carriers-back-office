@@ -66,6 +66,13 @@ RSpec.describe PaymentForm, type: :model do
         expect(payment.comment).to eq(valid_params[:comment])
       end
 
+      it "should update the finance_details balance" do
+        expected_balance = transient_registration.finance_details.balance - valid_params[:amount] * 100
+        payment_form.submit(valid_params, payment_type)
+
+        expect(transient_registration.reload.finance_details.balance).to eq(expected_balance)
+      end
+
       it "should correctly format the date" do
         expected_date = Date.new(payment_form.date_received_year,
                                  payment_form.date_received_month,
