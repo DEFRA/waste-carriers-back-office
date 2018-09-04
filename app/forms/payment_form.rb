@@ -8,7 +8,6 @@ class PaymentForm < WasteCarriersEngine::BaseForm
     # Assign the params for validation and pass them to the BaseForm method for updating
     self.amount = params[:amount]
     self.comment = params[:comment]
-    # TODO: Add this value to params before calling submit
     self.current_user_email = params[:current_user_email]
     self.order_key = params[:order_key]
     self.payment_type = payment_type_value

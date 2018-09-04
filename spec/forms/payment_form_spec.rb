@@ -52,10 +52,13 @@ RSpec.describe PaymentForm, type: :model do
       end
 
       it "should correctly format the date" do
+        expected_date = Date.new(payment_form.date_received_year,
+                                 payment_form.date_received_month,
+                                 payment_form.date_received_day)
         payment_form.submit(valid_params, payment_type)
 
         payment = transient_registration.finance_details.payments.last
-        expect(payment.date_received).to eq(Date.new(1991, 1, 1))
+        expect(payment.date_received).to eq(expected_date)
       end
 
       context "when a payment already exists" do

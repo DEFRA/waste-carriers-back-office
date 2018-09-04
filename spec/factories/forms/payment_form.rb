@@ -10,7 +10,7 @@ FactoryBot.define do
 
     date_received_day { 1 }
     date_received_month { 1 }
-    date_received_year { 1991 }
+    date_received_year { 2018 }
 
     initialize_with do
       new(create(:transient_registration,

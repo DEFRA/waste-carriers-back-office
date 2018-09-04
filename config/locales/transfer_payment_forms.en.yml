@@ -1,0 +1,14 @@
+en:
+  transfer_payment_forms:
+    new:
+      title: "Record a payment by bank transfer"
+      heading: "Record a payment by bank transfer: %{reg_identifier}"
+      comment_label: "Comment"
+      submit_button: "Submit"
+  activemodel:
+    errors:
+      models:
+        transfer_payment_form:
+          attributes:
+            comment:
+              blank: "You must enter a comment"
