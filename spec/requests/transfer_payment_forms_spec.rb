@@ -71,6 +71,11 @@ RSpec.describe "TransferPaymentForms", type: :request do
         expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count + 1)
       end
 
+      it "assigns the correct updated_by_user to the payment" do
+        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/transfer", transfer_payment_form: params
+        expect(transient_registration.reload.finance_details.payments.first.updated_by_user).to eq(user.email)
+      end
+
       context "when the params are invalid" do
         let(:params) do
           {
