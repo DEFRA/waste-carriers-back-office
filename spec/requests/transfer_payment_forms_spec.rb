@@ -41,7 +41,6 @@ RSpec.describe "TransferPaymentForms", type: :request do
           reg_identifier: transient_registration.reg_identifier,
           amount: "100",
           comment: "foo",
-          order_key: "foo",
           registration_reference: "foo",
           date_received_day: "1",
           date_received_month: "1",

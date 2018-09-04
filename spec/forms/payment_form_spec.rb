@@ -16,7 +16,6 @@ RSpec.describe PaymentForm, type: :model do
           amount: payment_form.amount,
           comment: payment_form.comment,
           updated_by_user: payment_form.updated_by_user,
-          order_key: payment_form.order_key,
           registration_reference: payment_form.registration_reference,
           date_received_day: payment_form.date_received_day,
           date_received_month: payment_form.date_received_month,
@@ -42,6 +41,14 @@ RSpec.describe PaymentForm, type: :model do
 
         payment = transient_registration.finance_details.payments.last
         expect(payment.payment_type).to eq(payment_type)
+      end
+
+      it "should add the correct order_key to the payment" do
+        payment_form.submit(valid_params, payment_type)
+
+        payment = transient_registration.reload.finance_details.payments.last
+        order = transient_registration.reload.finance_details.orders.last
+        expect(payment.order_key).to eq(order.order_code)
       end
 
       it "should add the correct values from params to the payment" do
@@ -83,7 +90,6 @@ RSpec.describe PaymentForm, type: :model do
           amount: payment_form.amount,
           comment: payment_form.comment,
           updated_by_user: payment_form.updated_by_user,
-          order_key: payment_form.order_key,
           registration_reference: payment_form.registration_reference,
           date_received_day: 32,
           date_received_month: 13,

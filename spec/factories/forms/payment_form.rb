@@ -5,7 +5,6 @@ FactoryBot.define do
     amount { 100 }
     comment { "foo" }
     updated_by_user { build(:user).email }
-    order_key { "foo" }
     registration_reference { "foo" }
 
     date_received_day { 1 }

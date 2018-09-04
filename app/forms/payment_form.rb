@@ -2,16 +2,22 @@
 
 class PaymentForm < WasteCarriersEngine::BaseForm
   attr_accessor :amount, :comment, :date_received, :date_received_day, :date_received_month, :date_received_year,
-                :order_key, :payment_type, :registration_reference, :updated_by_user, :payment, :finance_details
+                :order_key, :payment_type, :registration_reference, :updated_by_user,
+                :finance_details, :order, :payment
+
+  def initialize(transient_registration)
+    super
+    self.order = transient_registration.finance_details.orders.first
+  end
 
   def submit(params, payment_type_value)
     # Assign the params for validation and pass them to the BaseForm method for updating
     self.amount = params[:amount]
     self.comment = params[:comment]
-    self.updated_by_user = params[:updated_by_user]
-    self.order_key = params[:order_key]
+    self.order_key = order.order_code
     self.payment_type = payment_type_value
     self.registration_reference = params[:registration_reference]
+    self.updated_by_user = params[:updated_by_user]
 
     process_date_fields(params)
     set_date_received
@@ -59,6 +65,7 @@ class PaymentForm < WasteCarriersEngine::BaseForm
     payment.comment = comment
     payment.registration_reference = registration_reference
     payment.payment_type = payment_type
+    payment.order_key = order_key
     payment.currency = "GBP"
 
     payment.date_received_day = date_received_day
