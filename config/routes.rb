@@ -23,6 +23,10 @@ Rails.application.routes.draw do
                         only: [:new, :create],
                         path: "convictions/reject",
                         path_names: { new: "" }
+
+              resources :payments,
+                        only: [:new, :create],
+                        path_names: { new: "" }
             end
 
   mount WasteCarriersEngine::Engine => "/bo"
