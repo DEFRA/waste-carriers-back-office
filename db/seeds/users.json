@@ -1,0 +1,52 @@
+{
+	"users" : [
+    {
+			"email" : "bo-agency-super@wcr.gov.uk",
+			"role" : "agency_super"
+		},
+		{
+			"email" : "bo-finance-super@wcr.gov.uk",
+			"role" : "finance_super"
+		},
+		{
+			"email" : "agency-super@wcr.gov.uk",
+			"role" : "agency_super"
+		},
+		{
+			"email" : "finance-super@wcr.gov.uk",
+			"role" : "finance_super"
+		},
+		{
+			"email" : "bo-user@wcr.gov.uk",
+			"role" : "agency"
+		},
+		{
+			"email" : "bo-user-with-refund@wcr.gov.uk",
+			"role" : "agency_with_refund"
+		},
+		{
+			"email" : "bo-finance-user@wcr.gov.uk",
+			"role" : "finance"
+		},
+		{
+			"email" : "bo-finance-admin@wcr.gov.uk",
+			"role" : "finance_admin"
+		},
+		{
+			"email" : "agency-user@wcr.gov.uk",
+			"role" : "agency"
+		},
+		{
+			"email" : "agency-refund-payment-user@wcr.gov.uk",
+			"role" : "agency_with_refund"
+		},
+		{
+			"email" : "finance-user@wcr.gov.uk",
+			"role" : "finance"
+		},
+		{
+			"email" : "finance-admin-user@wcr.gov.uk",
+			"role" : "finance_admin"
+		}
+	]
+}
