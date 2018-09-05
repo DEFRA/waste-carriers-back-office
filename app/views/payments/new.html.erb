@@ -15,8 +15,15 @@
 
           <% @payment_types.each do |type| %>
             <div class="multiple-choice">
-              <%= f.radio_button :payment_type, type %>
-              <%= f.label :payment_type, t(".options.#{type}"), value: type %>
+              <%= f.radio_button :payment_type,
+                                 type,
+                                 disabled: !(can? record_payment_of_type(type), @transient_registration) %>
+              <%= f.label :payment_type, value: type do %>
+                <%= t(".options.#{type}") %>
+                <% if !(can? record_payment_of_type(type), @transient_registration)%>
+                  <%= t(".no_permission") %>
+                <% end %>
+              <% end %>
             </div>
           <% end %>
         </fieldset>

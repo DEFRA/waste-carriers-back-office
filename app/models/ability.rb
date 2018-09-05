@@ -27,11 +27,11 @@ class Ability
   end
 
   def permissions_for_finance_user
-    can :record_electronic_transfer_payment, WasteCarriersEngine::TransientRegistration
+    can :record_transfer_payment, WasteCarriersEngine::TransientRegistration
   end
 
   def permissions_for_finance_admin_user
-    can :record_worldpay_payment, WasteCarriersEngine::TransientRegistration
+    can :record_worldpay_missed_payment, WasteCarriersEngine::TransientRegistration
   end
 
   def permissions_for_agency_super_user

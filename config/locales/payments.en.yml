@@ -2,11 +2,12 @@ en:
   payments:
     new:
       title: "Add a payment"
-      heading: "Add a payment"
+      heading: "How was this payment made?"
       options:
         transfer: "Bank transfer"
         cash: "Cash"
         cheque: "Cheque"
         postal_order: "Postal order"
         worldpay_missed: "Missed WorldPay payment"
+      no_permission: " – your account can't add this type of payment"
       submit_button: "Add payment details"
