@@ -13,30 +13,12 @@
             <%= t(".heading") %>
           </legend>
 
-          <div class="multiple-choice">
-            <%= f.radio_button :payment_type, 'transfer' %>
-            <%= f.label :payment_type, t(".options.transfer"), value: 'transfer' %>
-          </div>
-
-          <div class="multiple-choice">
-            <%= f.radio_button :payment_type, 'cash' %>
-            <%= f.label :payment_type, t(".options.cash"), value: 'cash' %>
-          </div>
-
-          <div class="multiple-choice">
-            <%= f.radio_button :payment_type, 'cheque' %>
-            <%= f.label :payment_type, t(".options.cheque"), value: 'cheque' %>
-          </div>
-
-          <div class="multiple-choice">
-            <%= f.radio_button :payment_type, 'postal_order' %>
-            <%= f.label :payment_type, t(".options.postal_order"), value: 'postal_order' %>
-          </div>
-
-          <div class="multiple-choice">
-            <%= f.radio_button :payment_type, 'worldpay_missed' %>
-            <%= f.label :payment_type, t(".options.worldpay_missed"), value: 'worldpay_missed' %>
-          </div>
+          <% @payment_types.each do |type| %>
+            <div class="multiple-choice">
+              <%= f.radio_button :payment_type, type %>
+              <%= f.label :payment_type, t(".options.#{type}"), value: type %>
+            </div>
+          <% end %>
         </fieldset>
       </div>
 

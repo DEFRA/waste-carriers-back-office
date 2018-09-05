@@ -34,8 +34,24 @@ RSpec.describe "Payments", type: :request do
       let(:params) do
         {
           reg_identifier: transient_registration.reg_identifier,
-          payment_type: "foo"
+          payment_type: "transfer"
         }
+      end
+
+      # it "redirects to the requested payment type" do
+      #   post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments", payment_form: params
+      #   expect(response).to redirect_to(transient_registration_transfer_payment_form_path(transient_registration.reg_identifier))
+      # end
+
+      context "when the payment_type is not recognised" do
+        before do
+          params[:payment_type] = "foo"
+        end
+
+        it "renders the new template" do
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments", payment_form: params
+          expect(response).to render_template(:new)
+        end
       end
     end
   end
