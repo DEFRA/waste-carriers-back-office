@@ -38,10 +38,10 @@ RSpec.describe "Payments", type: :request do
         }
       end
 
-      # it "redirects to the requested payment type" do
-      #   post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments", payment_form: params
-      #   expect(response).to redirect_to(transient_registration_transfer_payment_form_path(transient_registration.reg_identifier))
-      # end
+      it "redirects to the requested payment type" do
+        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments", payment_form: params
+        expect(response).to redirect_to(new_transient_registration_transfer_payment_form_path)
+      end
 
       context "when the payment_type is not recognised" do
         before do
