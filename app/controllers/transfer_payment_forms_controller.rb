@@ -18,6 +18,6 @@ class TransferPaymentFormsController < AdminFormsController
   end
 
   def authorize_action(transient_registration)
-    authorize! :record_electronic_transfer_payment, transient_registration
+    authorize! :record_transfer_payment, transient_registration
   end
 end
