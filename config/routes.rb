@@ -28,6 +28,11 @@ Rails.application.routes.draw do
                         only: [:new, :create],
                         path_names: { new: "" }
 
+              resources :cheque_payment_forms,
+                        only: [:new, :create],
+                        path: "payments/cheque",
+                        path_names: { new: "" }
+
               resources :transfer_payment_forms,
                         only: [:new, :create],
                         path: "payments/transfer",
