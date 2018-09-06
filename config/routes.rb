@@ -37,6 +37,11 @@ Rails.application.routes.draw do
                         only: [:new, :create],
                         path: "payments/transfer",
                         path_names: { new: "" }
+
+              resources :worldpay_missed_payment_forms,
+                        only: [:new, :create],
+                        path: "payments/worldpay-missed",
+                        path_names: { new: "" }
             end
 
   mount WasteCarriersEngine::Engine => "/bo"
