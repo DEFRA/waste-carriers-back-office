@@ -24,6 +24,11 @@ Rails.application.routes.draw do
                         path: "convictions/reject",
                         path_names: { new: "" }
 
+              resources :cash_payment_forms,
+                        only: [:new, :create],
+                        path: "payments/cash",
+                        path_names: { new: "" }
+
               resources :transfer_payment_forms,
                         only: [:new, :create],
                         path: "payments/transfer",
