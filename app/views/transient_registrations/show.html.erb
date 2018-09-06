@@ -15,13 +15,13 @@
           <p>
             <%= t(".status.messages.pending_payment_and_convictions_check") %>
           </p>
-          <%= link_to t(".status.actions.payment_button"), transient_registration_transfer_payment_forms_path(@transient_registration.reg_identifier), class: 'button' %>
+          <%= link_to t(".status.actions.payment_button"), transient_registration_payments_path(@transient_registration.reg_identifier), class: 'button' %>
           <%= link_to t(".status.actions.convictions_check_button"), transient_registration_convictions_path(@transient_registration.reg_identifier), class: 'button' %>
         <% elsif @transient_registration.pending_payment? %>
           <p>
             <%= t(".status.messages.pending_payment") %>
           </p>
-          <%= link_to t(".status.actions.payment_button"), transient_registration_transfer_payment_forms_path(@transient_registration.reg_identifier), class: 'button' %>
+          <%= link_to t(".status.actions.payment_button"), transient_registration_payments_path(@transient_registration.reg_identifier), class: 'button' %>
         <% elsif @transient_registration.pending_manual_conviction_check? %>
           <p>
             <%= t(".status.messages.pending_convictions_check") %>
@@ -372,7 +372,7 @@
               <%= t(".order_information.labels.payment_method") %>
             </td>
             <td>
-              <%= order.payment_method %>
+              <%= order.payment_method.titleize %>
             </td>
           </tr>
           <% if order.world_pay_status.present? %>
@@ -426,7 +426,7 @@
               <%= t(".payment_information.labels.payment_type") %>
             </td>
             <td>
-              <%= payment.payment_type %>
+              <%= t(".attributes.finance_details.payment.payment_type.#{payment.payment_type}") %>
             </td>
           </tr>
           <tr>

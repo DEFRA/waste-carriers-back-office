@@ -79,12 +79,12 @@ RSpec.describe User, type: :model do
         should be_able_to(:record_postal_order_payment, transient_registration)
       end
 
-      it "should not be able to record an electronic transfer payment" do
-        should_not be_able_to(:record_electronic_transfer_payment, transient_registration)
+      it "should not be able to record a transfer payment" do
+        should_not be_able_to(:record_transfer_payment, transient_registration)
       end
 
       it "should not be able to record a worldpay payment" do
-        should_not be_able_to(:record_worldpay_payment, transient_registration)
+        should_not be_able_to(:record_worldpay_missed_payment, transient_registration)
       end
 
       it "should be able to review convictions" do
@@ -127,12 +127,12 @@ RSpec.describe User, type: :model do
         should be_able_to(:record_postal_order_payment, transient_registration)
       end
 
-      it "should not be able to record an electronic transfer payment" do
-        should_not be_able_to(:record_electronic_transfer_payment, transient_registration)
+      it "should not be able to record a transfer payment" do
+        should_not be_able_to(:record_transfer_payment, transient_registration)
       end
 
       it "should not be able to record a worldpay payment" do
-        should_not be_able_to(:record_worldpay_payment, transient_registration)
+        should_not be_able_to(:record_worldpay_missed_payment, transient_registration)
       end
 
       it "should be able to review convictions" do
@@ -175,12 +175,12 @@ RSpec.describe User, type: :model do
         should_not be_able_to(:record_postal_order_payment, transient_registration)
       end
 
-      it "should be able to record an electronic transfer payment" do
-        should be_able_to(:record_electronic_transfer_payment, transient_registration)
+      it "should be able to record a transfer payment" do
+        should be_able_to(:record_transfer_payment, transient_registration)
       end
 
       it "should not be able to record a worldpay payment" do
-        should_not be_able_to(:record_worldpay_payment, transient_registration)
+        should_not be_able_to(:record_worldpay_missed_payment, transient_registration)
       end
 
       it "should not be able to review convictions" do
@@ -223,12 +223,12 @@ RSpec.describe User, type: :model do
         should_not be_able_to(:record_postal_order_payment, transient_registration)
       end
 
-      it "should not be able to record an electronic transfer payment" do
-        should_not be_able_to(:record_electronic_transfer_payment, transient_registration)
+      it "should not be able to record a transfer payment" do
+        should_not be_able_to(:record_transfer_payment, transient_registration)
       end
 
       it "should be able to record a worldpay payment" do
-        should be_able_to(:record_worldpay_payment, transient_registration)
+        should be_able_to(:record_worldpay_missed_payment, transient_registration)
       end
 
       it "should not be able to review convictions" do
@@ -271,12 +271,12 @@ RSpec.describe User, type: :model do
         should_not be_able_to(:record_postal_order_payment, transient_registration)
       end
 
-      it "should not be able to record an electronic transfer payment" do
-        should_not be_able_to(:record_electronic_transfer_payment, transient_registration)
+      it "should not be able to record a transfer payment" do
+        should_not be_able_to(:record_transfer_payment, transient_registration)
       end
 
       it "should not be able to record a worldpay payment" do
-        should_not be_able_to(:record_worldpay_payment, transient_registration)
+        should_not be_able_to(:record_worldpay_missed_payment, transient_registration)
       end
 
       it "should not be able to review convictions" do
@@ -319,12 +319,12 @@ RSpec.describe User, type: :model do
         should_not be_able_to(:record_postal_order_payment, transient_registration)
       end
 
-      it "should not be able to record an electronic transfer payment" do
-        should_not be_able_to(:record_electronic_transfer_payment, transient_registration)
+      it "should not be able to record a transfer payment" do
+        should_not be_able_to(:record_transfer_payment, transient_registration)
       end
 
       it "should not be able to record a worldpay payment" do
-        should_not be_able_to(:record_worldpay_payment, transient_registration)
+        should_not be_able_to(:record_worldpay_missed_payment, transient_registration)
       end
 
       it "should not be able to review convictions" do

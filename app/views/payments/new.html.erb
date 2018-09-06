@@ -1,0 +1,38 @@
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <%= render("waste_carriers_engine/shared/back", back_path: transient_registration_path(@transient_registration.reg_identifier)) %>
+
+    <%= form_for(:payment_form, url: transient_registration_payments_path) do |f| %>
+      <h1 class="heading-large">
+        <%= t(".heading") %>
+      </h1>
+
+      <div class="form-group">
+        <fieldset id="payment_type">
+          <legend class="visuallyhidden">
+            <%= t(".heading") %>
+          </legend>
+
+          <% @payment_types.each do |type| %>
+            <div class="multiple-choice">
+              <%= f.radio_button :payment_type,
+                                 type,
+                                 disabled: !(can? record_payment_of_type(type), @transient_registration) %>
+              <%= f.label :payment_type, value: type do %>
+                <%= t(".options.#{type}") %>
+                <% if !(can? record_payment_of_type(type), @transient_registration)%>
+                  <%= t(".no_permission") %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </fieldset>
+      </div>
+
+      <%= f.hidden_field :reg_identifier, value: @transient_registration.reg_identifier %>
+      <div class="form-group">
+        <%= f.submit t(".submit_button"), class: "button" %>
+      </div>
+    <% end %>
+  </div>
+</div>
