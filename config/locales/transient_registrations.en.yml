@@ -114,6 +114,15 @@ en:
           other: "Other"
         declaration:
           "1": "Yes"
+        finance_details:
+          payment:
+            payment_type:
+              CASH: "Cash"
+              CHEQUE: "Cheque"
+              POSTALORDER: "Postal order"
+              BANKTRANSFER: "Bank transfer"
+              WORLDPAY: "WorldPay"
+              WORLDPAY_MISSED: "WorldPay (manually added)"
         key_people:
           number_of_people_with_matching_convictions:
             zero: "No"

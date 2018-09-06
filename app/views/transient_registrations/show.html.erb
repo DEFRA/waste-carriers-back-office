@@ -372,7 +372,7 @@
               <%= t(".order_information.labels.payment_method") %>
             </td>
             <td>
-              <%= order.payment_method %>
+              <%= order.payment_method.titleize %>
             </td>
           </tr>
           <% if order.world_pay_status.present? %>
@@ -426,7 +426,7 @@
               <%= t(".payment_information.labels.payment_type") %>
             </td>
             <td>
-              <%= payment.payment_type %>
+              <%= t(".attributes.finance_details.payment.payment_type.#{payment.payment_type}") %>
             </td>
           </tr>
           <tr>
