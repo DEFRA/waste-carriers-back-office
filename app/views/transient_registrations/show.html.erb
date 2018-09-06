@@ -15,13 +15,13 @@
           <p>
             <%= t(".status.messages.pending_payment_and_convictions_check") %>
           </p>
-          <%= link_to t(".status.actions.payment_button"), "#", class: 'button' %>
+          <%= link_to t(".status.actions.payment_button"), transient_registration_transfer_payment_forms_path(@transient_registration.reg_identifier), class: 'button' %>
           <%= link_to t(".status.actions.convictions_check_button"), transient_registration_convictions_path(@transient_registration.reg_identifier), class: 'button' %>
         <% elsif @transient_registration.pending_payment? %>
           <p>
             <%= t(".status.messages.pending_payment") %>
           </p>
-          <%= link_to t(".status.actions.payment_button"), "#", class: 'button' %>
+          <%= link_to t(".status.actions.payment_button"), transient_registration_transfer_payment_forms_path(@transient_registration.reg_identifier), class: 'button' %>
         <% elsif @transient_registration.pending_manual_conviction_check? %>
           <p>
             <%= t(".status.messages.pending_convictions_check") %>

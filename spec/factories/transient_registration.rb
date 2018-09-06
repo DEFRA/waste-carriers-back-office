@@ -27,5 +27,12 @@ FactoryBot.define do
       key_people { [build(:key_person, :does_not_require_conviction_check)] }
       conviction_search_result { build(:conviction_search_result, :match_result_no) }
     end
+
+    trait :has_finance_details do
+      temp_cards { 0 }
+      after(:build, :create) do |transient_registration|
+        WasteCarriersEngine::FinanceDetails.new_finance_details(transient_registration, :bank_transfer, build(:user))
+      end
+    end
   end
 end
