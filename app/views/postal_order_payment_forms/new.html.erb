@@ -1,0 +1,11 @@
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <%= render("waste_carriers_engine/shared/back", back_path: transient_registration_path(@transient_registration.reg_identifier)) %>
+
+    <h1 class="heading-large">
+      <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
+    </h1>
+
+    <%= render("shared/payment_form", form: @postal_order_payment_form, path: transient_registration_postal_order_payment_forms_path) %>
+  </div>
+</div>

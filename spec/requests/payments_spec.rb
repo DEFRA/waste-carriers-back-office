@@ -60,6 +60,28 @@ RSpec.describe "Payments", type: :request do
         end
       end
 
+      context "when the payment_type is cheque" do
+        before do
+          params[:payment_type] = "cheque"
+        end
+
+        it "redirects to the cheque payment form" do
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments", payment_form: params
+          expect(response).to redirect_to(new_transient_registration_cheque_payment_form_path)
+        end
+      end
+
+      context "when the payment_type is postal_order" do
+        before do
+          params[:payment_type] = "postal_order"
+        end
+
+        it "redirects to the postal order payment form" do
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments", payment_form: params
+          expect(response).to redirect_to(new_transient_registration_postal_order_payment_form_path)
+        end
+      end
+
       context "when the payment_type is not recognised" do
         before do
           params[:payment_type] = "foo"
