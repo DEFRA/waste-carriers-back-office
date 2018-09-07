@@ -15,6 +15,8 @@ class TransferPaymentFormsController < AdminFormsController
                         "transfer_payment_form",
                         params[:transfer_payment_form][:reg_identifier],
                         :authorize_action)
+
+    renew_if_possible
   end
 
   def authorize_action(transient_registration)
