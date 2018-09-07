@@ -31,6 +31,13 @@ RSpec.describe "TransientRegistrations", type: :request do
         get "/bo/transient-registrations/#{transient_registration.reg_identifier}"
         expect(response.body).to include("/bo/renew/#{transient_registration.reg_identifier}")
       end
+
+      context "when no matching transient_registration exists" do
+        it "redirects to the dashboard" do
+          get "/bo/transient-registrations/foo"
+          expect(response).to redirect_to(bo_path)
+        end
+      end
     end
   end
 end
