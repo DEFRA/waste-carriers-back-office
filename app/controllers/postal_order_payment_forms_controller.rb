@@ -15,6 +15,8 @@ class PostalOrderPaymentFormsController < AdminFormsController
                         "postal_order_payment_form",
                         params[:postal_order_payment_form][:reg_identifier],
                         :authorize_action)
+
+    renew_if_possible
   end
 
   def authorize_action(transient_registration)
