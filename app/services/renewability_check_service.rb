@@ -6,13 +6,8 @@ class RenewabilityCheckService
   end
 
   def renewal_ready_to_complete?
-    # Renewal must have been submitted
     return false unless @transient_registration.renewal_application_submitted?
-    # Renewal must not have a pending payment
-    return false if @transient_registration.pending_payment?
-    # Renewal must not have a pending conviction check
-    return false if @transient_registration.conviction_check_required?
-    # Renewal status must be active
+    return false if transient_registration_has_pending_checks?
     return false unless @transient_registration.metaData.ACTIVE?
     true
   end
@@ -22,5 +17,13 @@ class RenewabilityCheckService
 
     renewal_completion_service = WasteCarriersEngine::RenewalCompletionService.new(@transient_registration)
     renewal_completion_service.complete_renewal
+  end
+
+  private
+
+  def transient_registration_has_pending_checks?
+    return true if @transient_registration.pending_payment?
+    return true if @transient_registration.conviction_check_required?
+    false
   end
 end
