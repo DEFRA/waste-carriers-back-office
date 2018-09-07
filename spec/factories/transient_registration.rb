@@ -2,16 +2,18 @@
 
 FactoryBot.define do
   factory :transient_registration, class: WasteCarriersEngine::TransientRegistration do
+    location { "england" }
+    temp_cards { 1 }
+
+    addresses { [build(:address, :registered), build(:address, :contact)] }
+
     # Create a new registration when initializing
     initialize_with { new(reg_identifier: create(:registration, :expires_soon).reg_identifier) }
 
     trait :ready_to_renew do
       declared_convictions { "no" }
-      location { "england" }
-      temp_cards { 1 }
       workflow_state { "renewal_received_form" }
 
-      addresses { [build(:address, :registered), build(:address, :contact)] }
       conviction_search_result { build(:conviction_search_result, :match_result_no) }
       finance_details { build(:finance_details, :zero_balance) }
       key_people { [build(:key_person, :does_not_require_conviction_check)] }

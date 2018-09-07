@@ -15,6 +15,7 @@ class ConvictionApprovalFormsController < AdminFormsController
                         :authorize_action)
 
     update_conviction_sign_off
+    renew_if_possible
   end
 
   def authorize_action(transient_registration)
@@ -25,5 +26,10 @@ class ConvictionApprovalFormsController < AdminFormsController
 
   def update_conviction_sign_off
     @transient_registration.conviction_sign_offs.first.approve(current_user)
+  end
+
+  def renew_if_possible
+    renewability_check_service = RenewabilityCheckService.new(@transient_registration)
+    renewability_check_service.complete_renewal
   end
 end
