@@ -44,4 +44,9 @@ class AdminFormsController < ApplicationController
   def find_transient_registration(reg_identifier)
     @transient_registration = WasteCarriersEngine::TransientRegistration.where(reg_identifier: reg_identifier).first
   end
+
+  def renew_if_possible
+    renewability_check_service = RenewabilityCheckService.new(@transient_registration)
+    renewability_check_service.complete_renewal
+  end
 end

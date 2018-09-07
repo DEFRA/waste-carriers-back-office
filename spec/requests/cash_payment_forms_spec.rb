@@ -3,7 +3,12 @@
 require "rails_helper"
 
 RSpec.describe "CashPaymentForms", type: :request do
-  let(:transient_registration) { create(:transient_registration, :has_finance_details) }
+  let(:transient_registration) do
+    create(:transient_registration, :has_finance_details, :does_not_require_conviction_check)
+  end
+  let(:registration) do
+    WasteCarriersEngine::Registration.where(reg_identifier: transient_registration.reg_identifier).first
+  end
 
   describe "GET /bo/transient-registrations/:reg_identifier/payments/cash" do
     context "when a valid user is signed in" do
@@ -45,13 +50,18 @@ RSpec.describe "CashPaymentForms", type: :request do
     let(:params) do
       {
         reg_identifier: transient_registration.reg_identifier,
-        amount: "100",
+        amount: transient_registration.finance_details.balance,
         comment: "foo",
         registration_reference: "foo",
         date_received_day: "1",
         date_received_month: "1",
         date_received_year: "2018"
       }
+    end
+
+    before do
+      # Block renewal completion so we can check the values of the transient_registration after submission
+      allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_return(nil)
     end
 
     context "when a valid user is signed in" do
@@ -74,6 +84,34 @@ RSpec.describe "CashPaymentForms", type: :request do
       it "assigns the correct updated_by_user to the payment" do
         post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/cash", cash_payment_form: params
         expect(transient_registration.reload.finance_details.payments.first.updated_by_user).to eq(user.email)
+      end
+
+      context "when there is no pending conviction check" do
+        before do
+          transient_registration.conviction_sign_offs = [build(:conviction_sign_off, :confirmed)]
+          # Disable the stubbing as we want to test the full behaviour this time
+          allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
+        end
+
+        it "renews the registration" do
+          updated_renewal_date = registration.expires_on + 3.years
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/cash", cash_payment_form: params
+          expect(registration.reload.expires_on).to eq(updated_renewal_date)
+        end
+      end
+
+      context "when there is a pending conviction check" do
+        before do
+          transient_registration.conviction_sign_offs = [build(:conviction_sign_off)]
+          # Disable the stubbing as we want to test the full behaviour this time
+          allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
+        end
+
+        it "does not renews the registration" do
+          old_renewal_date = registration.expires_on
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/cash", cash_payment_form: params
+          expect(registration.reload.expires_on).to eq(old_renewal_date)
+        end
       end
 
       context "when the params are invalid" do

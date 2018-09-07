@@ -15,6 +15,8 @@ class CashPaymentFormsController < AdminFormsController
                         "cash_payment_form",
                         params[:cash_payment_form][:reg_identifier],
                         :authorize_action)
+
+    renew_if_possible
   end
 
   def authorize_action(transient_registration)
