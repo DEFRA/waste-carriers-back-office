@@ -6,7 +6,16 @@
       <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
     </h1>
 
-    <% if @transient_registration.renewal_application_submitted? %>
+    <% if @transient_registration.metaData.REVOKED? %>
+      <div class="panel">
+        <h2 class="heading-medium">
+          <%= t(".status.headings.rejected") %>
+        </h2>
+        <p>
+          <%= t(".status.messages.rejected") %>
+        </p>
+      </div>
+    <% elsif @transient_registration.renewal_application_submitted? %>
       <div class="panel">
         <h2 class="heading-medium">
           <%= t(".status.headings.submitted") %>
