@@ -12,7 +12,6 @@ class PaymentForm < WasteCarriersEngine::BaseForm
 
   def submit(params, payment_type_value)
     # Assign the params for validation and pass them to the BaseForm method for updating
-    params[:amount] = convert_amount_to_pence(params[:amount])
     self.amount = params[:amount]
     self.comment = params[:comment]
     self.order_key = order.order_code
@@ -69,6 +68,7 @@ class PaymentForm < WasteCarriersEngine::BaseForm
   end
 
   def build_payment(params)
+    params[:amount] = convert_amount_to_pence(params[:amount])
     self.payment = WasteCarriersEngine::Payment.new_from_non_worldpay(params, order)
   end
 
