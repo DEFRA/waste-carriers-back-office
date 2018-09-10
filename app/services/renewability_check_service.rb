@@ -9,6 +9,7 @@ class RenewabilityCheckService
     return false unless @transient_registration.renewal_application_submitted?
     return false if transient_registration_has_pending_checks?
     return false unless @transient_registration.metaData.ACTIVE?
+
     true
   end
 
@@ -24,6 +25,7 @@ class RenewabilityCheckService
   def transient_registration_has_pending_checks?
     return true if @transient_registration.pending_payment?
     return true if @transient_registration.conviction_check_required?
+
     false
   end
 end
