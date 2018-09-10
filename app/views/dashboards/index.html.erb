@@ -72,7 +72,11 @@
                 <%= transient_registration.company_name %>
               </td>
               <td>
-                <% if transient_registration.renewal_application_submitted? %>
+                <% if transient_registration.metaData.REVOKED? %>
+                  <strong class="app-c-tag app-c-tag--danger">
+                    <%= t(".results.statuses.rejected") %>
+                  </strong>
+                <% elsif transient_registration.renewal_application_submitted? %>
                     <% if transient_registration.pending_payment? %>
                       <strong class="app-c-tag app-c-tag--success">
                         <%= t(".results.statuses.pending_payment") %>

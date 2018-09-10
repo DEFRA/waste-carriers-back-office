@@ -31,5 +31,6 @@ en:
           in_progress: "application in progress"
           pending_payment: "pending payment"
           pending_conviction_check: "pending convictions"
+          rejected: "rejected"
         details_button: "Details"
         no_results: "No results found."
