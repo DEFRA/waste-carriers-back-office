@@ -2,6 +2,9 @@ en:
   dashboards:
     index:
       title: "Renewals dashboard"
+      user_info:
+        signed_in_user: "Signed in as %{email}."
+        sign_out_link: "Sign out"
       heading: "Renewals dashboard"
       search:
         paragraph_1: "You can search for a renewal by:"

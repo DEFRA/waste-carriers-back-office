@@ -1,6 +1,21 @@
-<h1 class="heading-large">
-  <%= t(".heading") %>
-</h1>
+<div class="grid-row">
+  <div class="column-full">
+    <div id="user-status">
+      <p>
+        <%= t(".user_info.signed_in_user", email: current_user.email) %>
+        <%= link_to t(".user_info.sign_out_link"), destroy_user_session_path %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="column-full">
+    <h1 class="heading-large">
+      <%= t(".heading") %>
+    </h1>
+  </div>
+</div>
 
 <div class="grid-row">
   <div class="column-full">
