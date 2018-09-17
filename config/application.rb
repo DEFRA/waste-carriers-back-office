@@ -97,6 +97,11 @@ module WasteCarriersBackOffice
     config.worldpay_password = ENV["WCRS_WORLDPAY_MOTO_PASSWORD"]
     config.worldpay_macsecret =  ENV["WCRS_WORLDPAY_MOTO_MACSECRET"]
 
+    # Emails
+    config.email_service_name = "Waste Carriers Registration Service"
+    config.email_service_email = ENV["WCRS_EMAIL_SERVICE_EMAIL"]
+    config.email_test_address = ENV["WCRS_EMAIL_TEST_ADDRESS"]
+
     # Digital or assisted digital metaData.route value
     config.metadata_route = "ASSISTED_DIGITAL"
 

@@ -70,10 +70,6 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
 
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
-
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
@@ -83,4 +79,21 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # Sending e-mails is required for user management and registration e-mails
+  config.action_mailer.default_url_options = { host: config.wcrs_back_office_url, protocol: "http" }
+
+  # Don't care if the mailer can't send (if set to false)
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+    user_name: ENV["WCRS_EMAIL_USERNAME"],
+    password: ENV["WCRS_EMAIL_PASSWORD"],
+    domain: config.wcrs_back_office_url,
+    address: ENV["WCRS_EMAIL_HOST"],
+    port: ENV["WCRS_EMAIL_PORT"],
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 end
