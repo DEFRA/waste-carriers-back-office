@@ -22,7 +22,7 @@ en:
       reg_information:
         heading: "Registration information"
         labels:
-          account_email: "User"
+          account_email: "User account email"
           reg_identifier: "Registration number"
           tier: "Tier"
           registration_type: "Registration type"
