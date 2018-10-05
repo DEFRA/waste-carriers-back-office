@@ -31,7 +31,7 @@ class WorldpayEscapesController < ApplicationController
   end
 
   def change_state_to_payment_summary
-    @transient_registration.workflow_state = "payment_summary_form"
+    @transient_registration.update_attributes(workflow_state: "payment_summary_form")
   end
 
   def continue_renewal_path
