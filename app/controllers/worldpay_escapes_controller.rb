@@ -4,7 +4,12 @@ class WorldpayEscapesController < ApplicationController
   def new
     return unless set_up_valid_transient_registration?
 
-    redirect_to continue_renewal_path
+    if correct_workflow_state?
+      change_state_to_payment_summary
+      redirect_to continue_renewal_path
+    else
+      redirect_to transient_registration_path(@transient_registration.reg_identifier)
+    end
   end
 
   private
@@ -15,7 +20,15 @@ class WorldpayEscapesController < ApplicationController
                                                                         .first
   end
 
+  def correct_workflow_state?
+    @transient_registration.workflow_state == "worldpay_form"
+  end
+
+  def change_state_to_payment_summary
+    @transient_registration.workflow_state = "payment_summary_form"
+  end
+
   def continue_renewal_path
-    WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier)
+    WasteCarriersEngine::Engine.routes.url_helpers.new_payment_summary_form_path(@transient_registration.reg_identifier)
   end
 end
