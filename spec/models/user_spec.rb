@@ -255,20 +255,20 @@ RSpec.describe User, type: :model do
     context "when the user is an agency super user" do
       let(:user) { build(:user, :agency_super) }
 
-      it "should not be able to update a transient registration" do
-        should_not be_able_to(:update, transient_registration)
+      it "should be able to update a transient registration" do
+        should be_able_to(:update, transient_registration)
       end
 
-      it "should not be able to record a cash payment" do
-        should_not be_able_to(:record_cash_payment, transient_registration)
+      it "should be able to record a cash payment" do
+        should be_able_to(:record_cash_payment, transient_registration)
       end
 
-      it "should not be able to record a cheque payment" do
-        should_not be_able_to(:record_cheque_payment, transient_registration)
+      it "should be able to record a cheque payment" do
+        should be_able_to(:record_cheque_payment, transient_registration)
       end
 
-      it "should not be able to record a postal order payment" do
-        should_not be_able_to(:record_postal_order_payment, transient_registration)
+      it "should be able to record a postal order payment" do
+        should be_able_to(:record_postal_order_payment, transient_registration)
       end
 
       it "should not be able to record a transfer payment" do
@@ -279,8 +279,8 @@ RSpec.describe User, type: :model do
         should_not be_able_to(:record_worldpay_missed_payment, transient_registration)
       end
 
-      it "should not be able to review convictions" do
-        should_not be_able_to(:review_convictions, transient_registration)
+      it "should be able to review convictions" do
+        should be_able_to(:review_convictions, transient_registration)
       end
 
       it "should be able to create an agency user" do

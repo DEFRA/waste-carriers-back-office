@@ -35,6 +35,8 @@ class Ability
   end
 
   def permissions_for_agency_super_user
+    permissions_for_agency_user_group
+
     can :create_agency_user, User
   end
 
