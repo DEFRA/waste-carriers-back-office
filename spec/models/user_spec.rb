@@ -91,6 +91,10 @@ RSpec.describe User, type: :model do
         should be_able_to(:review_convictions, transient_registration)
       end
 
+      it "should be able to revert to payment summary" do
+        should be_able_to(:revert_to_payment_summary, transient_registration)
+      end
+
       it "should not be able to create an agency user" do
         should_not be_able_to(:create_agency_user, user)
       end
@@ -137,6 +141,10 @@ RSpec.describe User, type: :model do
 
       it "should be able to review convictions" do
         should be_able_to(:review_convictions, transient_registration)
+      end
+
+      it "should be able to revert to payment summary" do
+        should be_able_to(:revert_to_payment_summary, transient_registration)
       end
 
       it "should not be able to create an agency user" do
@@ -187,6 +195,10 @@ RSpec.describe User, type: :model do
         should_not be_able_to(:review_convictions, transient_registration)
       end
 
+      it "should not be able to revert to payment summary" do
+        should_not be_able_to(:revert_to_payment_summary, transient_registration)
+      end
+
       it "should not be able to create an agency user" do
         should_not be_able_to(:create_agency_user, user)
       end
@@ -233,6 +245,10 @@ RSpec.describe User, type: :model do
 
       it "should not be able to review convictions" do
         should_not be_able_to(:review_convictions, transient_registration)
+      end
+
+      it "should not be able to revert to payment summary" do
+        should_not be_able_to(:revert_to_payment_summary, transient_registration)
       end
 
       it "should not be able to create an agency user" do
@@ -283,6 +299,10 @@ RSpec.describe User, type: :model do
         should_not be_able_to(:review_convictions, transient_registration)
       end
 
+      it "should not be able to revert to payment summary" do
+        should_not be_able_to(:revert_to_payment_summary, transient_registration)
+      end
+
       it "should be able to create an agency user" do
         should be_able_to(:create_agency_user, user)
       end
@@ -329,6 +349,10 @@ RSpec.describe User, type: :model do
 
       it "should not be able to review convictions" do
         should_not be_able_to(:review_convictions, transient_registration)
+      end
+
+      it "should not be able to revert to payment summary" do
+        should_not be_able_to(:revert_to_payment_summary, transient_registration)
       end
 
       it "should be able to create an agency user" do
