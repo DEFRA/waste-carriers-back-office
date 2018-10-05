@@ -17,20 +17,33 @@ RSpec.describe "WorldpayEscapes", type: :request do
         transient_registration.update_attributes(workflow_state: "worldpay_form")
       end
 
-      it "redirects to the payment_summary_form" do
-        get "/bo/transient-registrations/#{reg_identifier}/revert-to-payment-summary"
-        expect(response).to redirect_to WasteCarriersEngine::Engine.routes.url_helpers.new_payment_summary_form_path(reg_identifier)
+      context "when the user has the correct role" do
+        let(:user) { create(:user, :agency) }
+
+        it "redirects to the payment_summary_form" do
+          get "/bo/transient-registrations/#{reg_identifier}/revert-to-payment-summary"
+          expect(response).to redirect_to WasteCarriersEngine::Engine.routes.url_helpers.new_payment_summary_form_path(reg_identifier)
+        end
+      end
+
+      context "when the workflow_state is not worldpay_form" do
+        before do
+          transient_registration.update_attributes(workflow_state: "renewal_start_form")
+        end
+
+        it "renders the transient_registration page" do
+          get "/bo/transient-registrations/#{reg_identifier}/revert-to-payment-summary"
+          expect(response).to redirect_to transient_registration_path(reg_identifier)
+        end
       end
     end
 
-    context "when the workflow_state is not worldpay_form" do
-      before do
-        transient_registration.update_attributes(workflow_state: "renewal_start_form")
-      end
+    context "when the user does not have the correct role" do
+      let(:user) { create(:user, :finance) }
 
-      it "renders the transient_registration page" do
+      it "renders the permissions error page" do
         get "/bo/transient-registrations/#{reg_identifier}/revert-to-payment-summary"
-        expect(response).to redirect_to transient_registration_path(reg_identifier)
+        expect(response).to redirect_to "/bo/permission"
       end
     end
   end

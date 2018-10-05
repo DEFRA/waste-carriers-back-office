@@ -4,6 +4,8 @@ class WorldpayEscapesController < ApplicationController
   def new
     return unless set_up_valid_transient_registration?
 
+    authorize
+
     if correct_workflow_state?
       change_state_to_payment_summary
       redirect_to continue_renewal_path
@@ -18,6 +20,10 @@ class WorldpayEscapesController < ApplicationController
     reg_identifier = params[:transient_registration_reg_identifier]
     @transient_registration = WasteCarriersEngine::TransientRegistration.where(reg_identifier: reg_identifier)
                                                                         .first
+  end
+
+  def authorize
+    authorize! :revert_to_payment_summary, @transient_registration
   end
 
   def correct_workflow_state?
