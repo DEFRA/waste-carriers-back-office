@@ -43,12 +43,25 @@
         <h2 class="heading-medium">
           <%= t(".status.headings.in_progress") %>
         </h2>
-        <p>
-          <%= t(".status.messages.in_progress") %> "<%= display_current_workflow_state %>".
-        </p>
 
-        <% if can? :update, @transient_registration %>
-          <%= link_to t(".status.actions.continue_button"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier), class: 'button' %>
+        <% if @transient_registration.workflow_state == "worldpay_form" %>
+          <p>
+            <%= t(".status.messages.worldpay.paragraph_1") %>
+          </p>
+
+          <% if can? :revert_to_payment_summary, @transient_registration %>
+            <p>
+              <%= t(".status.messages.worldpay.paragraph_2") %>
+            </p>
+            <%= link_to t(".status.actions.revert_to_payment_summary_button"), new_transient_registration_worldpay_escape_path(@transient_registration.reg_identifier), class: 'button' %>
+          <% end %>
+        <% else %>
+          <p>
+            <%= t(".status.messages.in_progress") %> "<%= display_current_workflow_state %>".
+          </p>
+          <% if can? :update, @transient_registration %>
+            <%= link_to t(".status.actions.continue_button"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier), class: 'button' %>
+          <% end %>
         <% end %>
       </div>
     <% end %>
