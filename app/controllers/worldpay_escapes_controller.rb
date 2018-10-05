@@ -8,6 +8,7 @@ class WorldpayEscapesController < ApplicationController
 
     if correct_workflow_state?
       change_state_to_payment_summary
+      log_worldpay_escape
       redirect_to continue_renewal_path
     else
       redirect_to transient_registration_path(@transient_registration.reg_identifier)
@@ -32,6 +33,12 @@ class WorldpayEscapesController < ApplicationController
 
   def change_state_to_payment_summary
     @transient_registration.update_attributes(workflow_state: "payment_summary_form")
+  end
+
+  def log_worldpay_escape
+    message = "#{current_user.email} sent #{@transient_registration.reg_identifier} back to payment summary"
+    Rails.logger.debug message
+    Airbrake.notify message
   end
 
   def continue_renewal_path
