@@ -56,7 +56,8 @@ RSpec.describe WasteCarriersEngine::ApplicationHelper, type: :helper do
       end
 
       it "returns the required values in an array" do
-        array = ["Foo Gardens",
+        array = ["42",
+                 "Foo Gardens",
                  "Baz City",
                  "FA1 1KE"]
         expect(helper.display_registered_address).to eq(array)
@@ -71,7 +72,8 @@ RSpec.describe WasteCarriersEngine::ApplicationHelper, type: :helper do
       end
 
       it "returns the required values in an array" do
-        array = ["Foo Gardens",
+        array = ["42",
+                 "Foo Gardens",
                  "Baz City",
                  "FA1 1KE"]
         expect(helper.display_contact_address).to eq(array)

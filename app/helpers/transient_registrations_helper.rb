@@ -16,21 +16,11 @@ module TransientRegistrationsHelper
   end
 
   def display_registered_address
-    address_lines(@transient_registration.registered_address)
+    displayable_address(@transient_registration.registered_address)
   end
 
   def display_contact_address
-    address_lines(@transient_registration.contact_address)
-  end
-
-  def address_lines(address)
-    [address.address_line_1,
-     address.address_line_2,
-     address.address_line_3,
-     address.address_line_4,
-     address.town_city,
-     address.postcode,
-     address.country].compact
+    displayable_address(@transient_registration.contact_address)
   end
 
   def key_people_with_conviction_search_results?
