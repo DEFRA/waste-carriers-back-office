@@ -10,6 +10,8 @@ class TransientRegistrationFinderService
   end
 
   def transient_registrations
+    return [] if no_search_terms_or_filters?
+
     transient_registrations = WasteCarriersEngine::TransientRegistration.all.order_by("metaData.lastModified": :desc)
 
     transient_registrations = search_results(transient_registrations)
@@ -19,6 +21,14 @@ class TransientRegistrationFinderService
   end
 
   private
+
+  def no_search_terms_or_filters?
+    return false if @term.present?
+
+    return false if @in_progress || @pending_payment || @pending_conviction_check
+
+    true
+  end
 
   def search_results(transient_registrations)
     return transient_registrations unless @term.present?

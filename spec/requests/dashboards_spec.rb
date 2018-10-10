@@ -20,12 +20,23 @@ RSpec.describe "Dashboards", type: :request do
         expect(response).to have_http_status(200)
       end
 
-      it "links to renewal details pages" do
-        last_modified_renewal = create(:transient_registration)
-        link_to_renewal = transient_registration_path(last_modified_renewal.reg_identifier)
+      context "when a search term is included" do
+        context "when there are matches" do
+          it "links to renewal details pages" do
+            last_modified_renewal = create(:transient_registration)
+            link_to_renewal = transient_registration_path(last_modified_renewal.reg_identifier)
 
-        get "/bo"
-        expect(response.body).to include(link_to_renewal)
+            get "/bo", term: last_modified_renewal.reg_identifier
+            expect(response.body).to include(link_to_renewal)
+          end
+        end
+
+        context "when there are no matches" do
+          it "says there are no results" do
+            get "/bo", term: "foobarbaz"
+            expect(response.body).to include("No results")
+          end
+        end
       end
     end
 
