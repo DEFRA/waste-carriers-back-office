@@ -21,8 +21,8 @@ RSpec.describe TransientRegistrationFinderService do
 
   context "when there are no filters" do
     context "when there is no search term" do
-      it "returns all renewals" do
-        expect(transient_registrations).to include(non_matching_renewal)
+      it "returns no renewals" do
+        expect(transient_registrations).to eq([])
       end
     end
 
