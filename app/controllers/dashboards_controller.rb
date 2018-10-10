@@ -6,6 +6,7 @@ class DashboardsController < ApplicationController
   def index
     set_term_and_filters
     @transient_registrations = Kaminari.paginate_array(matching_renewals).page params[:page]
+    @search_terms_or_filters_present = search_terms_or_filters_present?
   end
 
   private
@@ -28,5 +29,11 @@ class DashboardsController < ApplicationController
                                                      @pending_conviction_check)
 
     service.transient_registrations
+  end
+
+  def search_terms_or_filters_present?
+    return true if @term.present?
+
+    @in_progress || @pending_payment || @pending_conviction_check
   end
 end
