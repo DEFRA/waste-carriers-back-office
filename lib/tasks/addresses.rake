@@ -28,8 +28,8 @@ end
 
 def update_address(old_address)
   new_address = build_updated_address(old_address)
-
   return unless new_address
+
   replace_old_address(old_address, new_address)
 end
 
@@ -41,7 +41,9 @@ def build_updated_address(old_address)
   matching_address = address_results.find { |result| result["uprn"] == old_address.uprn.to_s }
 
   if matching_address.blank?
-    puts "Could not update #{old_address.address_type} address for #{old_address._parent.class} #{old_address._parent.reg_identifier} - no matching address found for UPRN #{old_address.uprn}"
+    parent = old_address._parent
+    puts "Could not update #{old_address.address_type} address for #{parent.class} #{parent.reg_identifier}"\
+         " - no matching address found for UPRN #{old_address.uprn}"
     return nil
   end
 
