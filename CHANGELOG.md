@@ -1,5 +1,18 @@
 # Change Log
 
+## [v1.2.1](https://github.com/DEFRA/waste-carriers-back-office/tree/v1.2.1) (2018-10-11)
+[Full Changelog](https://github.com/DEFRA/waste-carriers-back-office/compare/v1.2...v1.2.1)
+
+**Fixed bugs:**
+
+- Use shared displayable\_address method for displaying addresses [\#141](https://github.com/DEFRA/waste-carriers-back-office/pull/141) ([irisfaraway](https://github.com/irisfaraway))
+-  Don't automatically list all renewals in back office dashboard [\#140](https://github.com/DEFRA/waste-carriers-back-office/pull/140) ([irisfaraway](https://github.com/irisfaraway))
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `4297b34` to `3565d4e` [\#142](https://github.com/DEFRA/waste-carriers-back-office/pull/142) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `0f1f11b` to `4297b34` [\#139](https://github.com/DEFRA/waste-carriers-back-office/pull/139) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v1.2](https://github.com/DEFRA/waste-carriers-back-office/tree/v1.2) (2018-10-05)
 [Full Changelog](https://github.com/DEFRA/waste-carriers-back-office/compare/v1.1...v1.2)
 
