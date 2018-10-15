@@ -13,13 +13,9 @@ end
 
 def update_addresses_for(registrations)
   registrations.each do |registration|
-    update_address_if_necessary(registration.registered_address)
-    update_address_if_necessary(registration.contact_address)
+    update_address (registration.registered_address) if address_is_from_os_places?(registration.registered_address)
+    update_address (registration.contact_address) if address_is_from_os_places?(registration.contact_address)
   end
-end
-
-def update_address_if_necessary(address)
-  update_address(address) if address_is_from_os_places?(address)
 end
 
 def address_is_from_os_places?(address)
