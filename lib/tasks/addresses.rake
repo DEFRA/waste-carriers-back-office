@@ -22,8 +22,8 @@ end
 
 def update_addresses_for(registrations)
   registrations.each do |registration|
-    update_address (registration.registered_address) if address_is_from_os_places?(registration.registered_address)
-    update_address (registration.contact_address) if address_is_from_os_places?(registration.contact_address)
+    update_address(registration.registered_address) if address_is_from_os_places?(registration.registered_address)
+    update_address(registration.contact_address) if address_is_from_os_places?(registration.contact_address)
   end
 end
 
@@ -59,15 +59,11 @@ def search_by_uprn(uprn)
   url = "#{Rails.configuration.os_places_service_url}/addresses/#{uprn}"
 
   begin
-    response = RestClient::Request.execute(
-      method: :get,
-      url: url
-    )
+    response = RestClient::Request.execute(method: :get, url: url)
 
     begin
       JSON.parse(response)
     rescue JSON::ParserError => e
-      Airbrake.notify(e) if defined?(Airbrake)
       Rails.logger.error "OS Places JSON error: " + e.to_s
       nil
     end
@@ -75,11 +71,9 @@ def search_by_uprn(uprn)
     Rails.logger.debug "OS Places: resource not found"
     nil
   rescue RestClient::ExceptionWithResponse => e
-    Airbrake.notify(e) if defined?(Airbrake)
     Rails.logger.error "OS Places response error: " + e.to_s
     nil
   rescue SocketError => e
-    Airbrake.notify(e) if defined?(Airbrake)
     Rails.logger.error "OS Places socket error: " + e.to_s
     nil
   end
