@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rest-client"
+
 namespace :address do
   desc "Fix addresses set in the renewals process to match old data format"
   task update_from_os_places: :environment do
@@ -37,11 +39,7 @@ def update_address(old_address)
 end
 
 def build_updated_address(old_address)
-  # Send request to OS Places
-  address_results = WasteCarriersEngine::AddressFinderService.new(old_address.postcode).search_by_postcode
-
-  # Find the correct match - use UPRN :)
-  matching_address = address_results.find { |result| result["uprn"] == old_address.uprn.to_s }
+  matching_address = search_by_uprn(old_address.uprn)
 
   if matching_address.blank?
     parent = old_address._parent
@@ -55,6 +53,36 @@ def build_updated_address(old_address)
   new_address.address_type = old_address.address_type
 
   new_address
+end
+
+def search_by_uprn(uprn)
+  url = "#{Rails.configuration.os_places_service_url}/addresses/#{uprn}"
+
+  begin
+    response = RestClient::Request.execute(
+      method: :get,
+      url: url
+    )
+
+    begin
+      JSON.parse(response)
+    rescue JSON::ParserError => e
+      Airbrake.notify(e) if defined?(Airbrake)
+      Rails.logger.error "OS Places JSON error: " + e.to_s
+      nil
+    end
+  rescue RestClient::BadRequest
+    Rails.logger.debug "OS Places: resource not found"
+    nil
+  rescue RestClient::ExceptionWithResponse => e
+    Airbrake.notify(e) if defined?(Airbrake)
+    Rails.logger.error "OS Places response error: " + e.to_s
+    nil
+  rescue SocketError => e
+    Airbrake.notify(e) if defined?(Airbrake)
+    Rails.logger.error "OS Places socket error: " + e.to_s
+    nil
+  end
 end
 
 def replace_old_address(old_address, new_address)
