@@ -3,12 +3,19 @@
 namespace :address do
   desc "Fix addresses set in the renewals process to match old data format"
   task update_from_os_places: :environment do
-    registrations = WasteCarriersEngine::Registration.where(:past_registration.exists => true)
-    transient_registrations = WasteCarriersEngine::TransientRegistration.where(:addresses.exists => true)
-
-    update_addresses_for(registrations)
-    update_addresses_for(transient_registrations)
+    update_addresses_for_registrations
+    update_addresses_for_transient_registrations
   end
+end
+
+def update_addresses_for_registrations
+  registrations = WasteCarriersEngine::Registration.where(:past_registration.exists => true)
+  update_addresses_for(registrations)
+end
+
+def update_addresses_for_transient_registrations
+  transient_registrations = WasteCarriersEngine::TransientRegistration.where(:addresses.exists => true)
+  update_addresses_for(transient_registrations)
 end
 
 def update_addresses_for(registrations)
