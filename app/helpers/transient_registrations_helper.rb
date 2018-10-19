@@ -16,7 +16,7 @@ module TransientRegistrationsHelper
   end
 
   def display_expiry_date
-    original_registration.expires_on
+    original_registration.expires_on.to_date
   end
 
   def display_registration_status
