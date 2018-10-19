@@ -11,7 +11,7 @@ namespace :address do
 end
 
 def update_addresses_for_registrations
-  registrations = WasteCarriersEngine::Registration.where(:past_registration.exists => true)
+  registrations = WasteCarriersEngine::Registration.where(:past_registrations.exists => true)
   update_addresses_for(registrations)
 end
 
