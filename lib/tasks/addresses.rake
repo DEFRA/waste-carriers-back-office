@@ -33,7 +33,7 @@ end
 
 def update_address(old_address)
   new_address = build_updated_address(old_address)
-  return unless new_address
+  return if new_address.blank? || address_is_the_same?(old_address, new_address)
 
   replace_old_address(old_address, new_address)
 end
@@ -96,17 +96,16 @@ def replace_old_address(old_address, new_address)
 end
 
 def log_address_change(old_address, new_address, parent)
+  puts "Updated #{old_address.address_type} address for #{parent.class} #{parent.reg_identifier}"
+
+  puts "OLD: #{old_address.attributes.to_json}"
+  puts "NEW: #{new_address.attributes.to_json}"
+  puts "\n"
+end
+
+def address_is_the_same?(old_address, new_address)
   old_address_data = old_address.attributes.except("_id")
   new_address_data = new_address.attributes.except("_id")
 
-  print "Checked #{old_address.address_type} address for #{parent.class} #{parent.reg_identifier}..."
-
-  if old_address_data == new_address_data
-    puts " No change"
-  else
-    puts " Address modified"
-    puts "OLD: #{old_address_data.to_json}"
-    puts "NEW: #{new_address_data.to_json}"
-    puts "\n"
-  end
+  old_address_data == new_address_data
 end
