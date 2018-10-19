@@ -28,6 +28,8 @@ en:
         labels:
           account_email: "User account email"
           reg_identifier: "Registration number"
+          expires_on: "Expires on"
+          status: "Registration status"
           tier: "Tier"
           registration_type: "Registration type"
       business_information:
