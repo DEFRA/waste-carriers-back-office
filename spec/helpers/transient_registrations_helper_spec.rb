@@ -61,7 +61,7 @@ RSpec.describe WasteCarriersEngine::ApplicationHelper, type: :helper do
 
   describe "#display_registration_status" do
     it "displays the correct value" do
-      expect(helper.display_registration_status).to eq("ACTIVE")
+      expect(helper.display_registration_status).to eq("Active")
     end
   end
 

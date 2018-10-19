@@ -20,7 +20,7 @@ module TransientRegistrationsHelper
   end
 
   def display_registration_status
-    original_registration.metaData.status
+    original_registration.metaData.status.titleize
   end
 
   def display_registered_address
