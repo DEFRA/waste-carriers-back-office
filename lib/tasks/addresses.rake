@@ -51,6 +51,8 @@ def build_updated_address(old_address)
   # Create new address
   new_address = WasteCarriersEngine::Address.create_from_os_places_data(matching_address)
   new_address.address_type = old_address.address_type
+  new_address.first_name = old_address.first_name if old_address.first_name.present?
+  new_address.last_name = old_address.last_name if old_address.last_name.present?
 
   new_address
 end
