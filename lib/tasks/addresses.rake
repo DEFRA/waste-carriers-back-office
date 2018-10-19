@@ -11,7 +11,7 @@ namespace :address do
 end
 
 def update_addresses_for_registrations
-  registrations = WasteCarriersEngine::Registration.where(:past_registration.exists => true)
+  registrations = WasteCarriersEngine::Registration.where(:past_registrations.exists => true)
   update_addresses_for(registrations)
 end
 
@@ -33,7 +33,7 @@ end
 
 def update_address(old_address)
   new_address = build_updated_address(old_address)
-  return unless new_address
+  return if new_address.blank? || address_is_the_same?(old_address, new_address)
 
   replace_old_address(old_address, new_address)
 end
@@ -51,6 +51,8 @@ def build_updated_address(old_address)
   # Create new address
   new_address = WasteCarriersEngine::Address.create_from_os_places_data(matching_address)
   new_address.address_type = old_address.address_type
+  new_address.first_name = old_address.first_name if old_address.first_name.present?
+  new_address.last_name = old_address.last_name if old_address.last_name.present?
 
   new_address
 end
@@ -88,6 +90,22 @@ def replace_old_address(old_address, new_address)
   updated_addresses << new_address
   parent.addresses = updated_addresses
 
-  puts "Updating #{old_address.address_type} address for #{parent.class} #{parent.reg_identifier}"
+  log_address_change(old_address, new_address, parent)
+
   parent.save!
+end
+
+def log_address_change(old_address, new_address, parent)
+  puts "Updated #{old_address.address_type} address for #{parent.class} #{parent.reg_identifier}"
+
+  puts "OLD: #{old_address.attributes.to_json}"
+  puts "NEW: #{new_address.attributes.to_json}"
+  puts "\n"
+end
+
+def address_is_the_same?(old_address, new_address)
+  old_address_data = old_address.attributes.except("_id")
+  new_address_data = new_address.attributes.except("_id")
+
+  old_address_data == new_address_data
 end
