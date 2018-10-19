@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe WasteCarriersEngine::ApplicationHelper, type: :helper do
   let(:transient_registration) { build(:transient_registration) }
+  let(:registration) { WasteCarriersEngine::Registration.where(reg_identifier: transient_registration.reg_identifier).first }
 
   before do
     assign(:transient_registration, transient_registration)
@@ -46,6 +47,21 @@ RSpec.describe WasteCarriersEngine::ApplicationHelper, type: :helper do
       it "returns the value" do
         expect(helper.display_current_workflow_state).to eq("foo")
       end
+    end
+  end
+
+  describe "#display_expiry_date" do
+    it "displays the correct date" do
+      correct_expiry_date = DateTime.new(2000).in_time_zone("UTC")
+      registration.update_attributes(expires_on: correct_expiry_date)
+
+      expect(helper.display_expiry_date).to eq(correct_expiry_date)
+    end
+  end
+
+  describe "#display_registration_status" do
+    it "displays the correct value" do
+      expect(helper.display_registration_status).to eq("ACTIVE")
     end
   end
 

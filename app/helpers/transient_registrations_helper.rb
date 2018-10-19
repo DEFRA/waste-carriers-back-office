@@ -15,6 +15,14 @@ module TransientRegistrationsHelper
       @transient_registration.workflow_state
   end
 
+  def display_expiry_date
+    original_registration.expires_on
+  end
+
+  def display_registration_status
+    original_registration.metaData.status
+  end
+
   def display_registered_address
     displayable_address(@transient_registration.registered_address)
   end
@@ -36,5 +44,11 @@ module TransientRegistrationsHelper
 
     all_requirements = @transient_registration.key_people.map(&:conviction_check_required?)
     all_requirements.count(true)
+  end
+
+  private
+
+  def original_registration
+    WasteCarriersEngine::Registration.where(reg_identifier: @transient_registration.reg_identifier).first
   end
 end
