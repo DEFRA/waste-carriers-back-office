@@ -8,8 +8,10 @@ class RegistrationTransferService
 
   def transfer_to_user(email)
     @recipient_user = find_user(email)
-
     return :no_matching_user if @recipient_user.blank?
+
+    update_account_email_for(@registration)
+    update_account_email_for(@transient_registration) if @transient_registration.present?
   end
 
   private
@@ -22,5 +24,10 @@ class RegistrationTransferService
     return nil unless email.present?
 
     ExternalUser.where(email: email).first
+  end
+
+  def update_account_email_for(registration)
+    registration.account_email = @recipient_user.email
+    registration.save!
   end
 end

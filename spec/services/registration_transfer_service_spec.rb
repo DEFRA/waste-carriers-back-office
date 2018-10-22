@@ -48,6 +48,16 @@ RSpec.describe RegistrationTransferService do
       it "sets @recipient_user" do
         expect(recipient_user_instance_variable).to eq(existing_user)
       end
+
+      it "updates the registration's account_email" do
+        registration_transfer_service.transfer_to_user(recipient_email)
+        expect(registration.reload.account_email).to eq(recipient_email)
+      end
+
+      it "updates the transient_registration's account_email" do
+        registration_transfer_service.transfer_to_user(recipient_email)
+        expect(transient_registration.reload.account_email).to eq(recipient_email)
+      end
     end
 
     context "when there is no external user with a matching email" do
