@@ -6,9 +6,19 @@ class RegistrationTransferService
     @transient_registration = find_transient_registration
   end
 
+  def transfer_to_user(email)
+    @recipient_user = find_user(email)
+  end
+
   private
 
   def find_transient_registration
     WasteCarriersEngine::TransientRegistration.where(reg_identifier: @registration.reg_identifier).first
+  end
+
+  def find_user(email)
+    return nil unless email.present?
+
+    ExternalUser.where(email: email).first
   end
 end

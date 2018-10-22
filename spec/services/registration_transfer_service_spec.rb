@@ -34,4 +34,36 @@ RSpec.describe RegistrationTransferService do
       end
     end
   end
+
+  describe "#transfer_to_user" do
+    let(:existing_user) { create(:external_user) }
+    let(:recipient_email) { existing_user.email }
+
+    let(:recipient_user_instance_variable) do
+      registration_transfer_service.transfer_to_user(recipient_email)
+      registration_transfer_service.instance_variable_get(:@recipient_user)
+    end
+
+    context "when there is an external user with a matching email" do
+      it "sets @recipient_user" do
+        expect(recipient_user_instance_variable).to eq(existing_user)
+      end
+    end
+
+    context "when there is no external user with a matching email" do
+      let(:recipient_email) { "unused-email@example.com" }
+
+      it "sets @recipient_user to nil" do
+        expect(recipient_user_instance_variable).to eq(nil)
+      end
+    end
+
+    context "when the email is nil" do
+      let(:recipient_email) { nil }
+
+      it "sets @recipient_user to nil" do
+        expect(recipient_user_instance_variable).to eq(nil)
+      end
+    end
+  end
 end
