@@ -59,6 +59,17 @@ RSpec.describe RegistrationTransferService do
       it "updates the transient_registration's account_email" do
         expect(transient_registration.reload.account_email).to eq(recipient_email)
       end
+
+      it "sends an email" do
+        old_emails_sent_count = ActionMailer::Base.deliveries.count
+        registration_transfer_service.transfer_to_user(recipient_email)
+        expect(ActionMailer::Base.deliveries.count).to eq(old_emails_sent_count + 1)
+      end
+
+      it "sends an email to the correct address" do
+        last_delivery = ActionMailer::Base.deliveries.last
+        expect(last_delivery.header["to"].value).to eq(recipient_email)
+      end
     end
 
     context "when there is no external user with a matching email" do

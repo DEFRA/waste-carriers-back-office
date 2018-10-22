@@ -12,6 +12,8 @@ class RegistrationTransferService
 
     update_account_email_for(@registration)
     update_account_email_for(@transient_registration) if @transient_registration.present?
+
+    send_confirmation_email
   end
 
   private
@@ -29,5 +31,9 @@ class RegistrationTransferService
   def update_account_email_for(registration)
     registration.account_email = @recipient_user.email
     registration.save!
+  end
+
+  def send_confirmation_email
+    RegistrationTransferMailer.transfer_to_existing_account_email(@registration).deliver_now
   end
 end
