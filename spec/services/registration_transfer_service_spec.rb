@@ -56,6 +56,10 @@ RSpec.describe RegistrationTransferService do
       it "sets @recipient_user to nil" do
         expect(recipient_user_instance_variable).to eq(nil)
       end
+
+      it "returns :no_matching_user" do
+        expect(registration_transfer_service.transfer_to_user(recipient_email)).to eq(:no_matching_user)
+      end
     end
 
     context "when the email is nil" do
@@ -63,6 +67,10 @@ RSpec.describe RegistrationTransferService do
 
       it "sets @recipient_user to nil" do
         expect(recipient_user_instance_variable).to eq(nil)
+      end
+
+      it "returns :no_matching_user" do
+        expect(registration_transfer_service.transfer_to_user(recipient_email)).to eq(:no_matching_user)
       end
     end
   end

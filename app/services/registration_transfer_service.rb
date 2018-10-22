@@ -8,6 +8,8 @@ class RegistrationTransferService
 
   def transfer_to_user(email)
     @recipient_user = find_user(email)
+
+    return :no_matching_user if @recipient_user.blank?
   end
 
   private
