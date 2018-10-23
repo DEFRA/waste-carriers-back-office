@@ -5,5 +5,50 @@
     <h1 class="heading-large">
       <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
     </h1>
+
+    <p><%= t(".paragraph_1", email: @registration.account_email) %></p>
+
+    <p><%= t(".paragraph_2", reg_identifier: @registration.reg_identifier) %></p>
+
+    <p><%= t(".paragraph_3", email: @registration.account_email) %></p>
+
+    <p><%= t(".paragraph_4", email: @registration.account_email) %></p>
+
+    <table>
+      <caption class="heading-medium">
+        <%= t(".registration_info.heading") %>
+      </caption>
+      <tbody>
+        <tr>
+          <td>
+            <%= t(".registration_info.labels.account_email") %>
+          </td>
+          <td>
+            <%= @registration.account_email %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= t(".registration_info.labels.reg_identifier") %>
+          </td>
+          <td>
+            <%= @registration.reg_identifier %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= t(".registration_info.labels.company_name") %>
+          </td>
+          <td>
+            <%= @registration.company_name %>
+          </td>
+        </tr>
+    </table>
+
+    <h2 class="heading-medium">
+      <%= t(".subheading_1") %>
+    </h2>
+
+    <p>Form and button go here</p>
   </end>
 </end>
