@@ -26,7 +26,7 @@ RSpec.describe "Assisted Digital Forms", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/renew/#{registration.reg_identifier}"
-        expect(response).to redirect_to("/bo/permission")
+        expect(response).to redirect_to("/bo/pages/permission")
       end
     end
   end
@@ -67,7 +67,7 @@ RSpec.describe "Assisted Digital Forms", type: :request do
 
       it "redirects to the permissions error page" do
         post "/bo/renew/", renewal_start_form: params
-        expect(response).to redirect_to("/bo/permission")
+        expect(response).to redirect_to("/bo/pages/permission")
       end
     end
   end
