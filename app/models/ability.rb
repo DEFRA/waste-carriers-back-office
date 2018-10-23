@@ -26,6 +26,8 @@ class Ability
     can :review_convictions, WasteCarriersEngine::TransientRegistration
 
     can :revert_to_payment_summary, WasteCarriersEngine::TransientRegistration
+
+    can :transfer_registration, WasteCarriersEngine::Registration
   end
 
   def permissions_for_finance_user

@@ -57,6 +57,7 @@ RSpec.describe User, type: :model do
   describe "abilities" do
     subject(:ability) { Ability.new(user) }
     let(:user) { build(:user) }
+    let(:registration) { build(:registration) }
     let(:transient_registration) { build(:transient_registration) }
     let(:other_user) { build(:user) }
 
@@ -110,6 +111,10 @@ RSpec.describe User, type: :model do
       it "should not be able to create a finance admin user" do
         should_not be_able_to(:create_finance_admin_user, user)
       end
+
+      it "should be able to transfer a registration" do
+        should be_able_to(:transfer_registration, registration)
+      end
     end
 
     context "when the user is an agency with refund user" do
@@ -161,6 +166,10 @@ RSpec.describe User, type: :model do
 
       it "should not be able to create a finance admin user" do
         should_not be_able_to(:create_finance_admin_user, user)
+      end
+
+      it "should be able to transfer a registration" do
+        should be_able_to(:transfer_registration, registration)
       end
     end
 
@@ -214,6 +223,10 @@ RSpec.describe User, type: :model do
       it "should not be able to create a finance admin user" do
         should_not be_able_to(:create_finance_admin_user, user)
       end
+
+      it "should not be able to transfer a registration" do
+        should_not be_able_to(:transfer_registration, registration)
+      end
     end
 
     context "when the user is a finance admin user" do
@@ -265,6 +278,10 @@ RSpec.describe User, type: :model do
 
       it "should not be able to create a finance admin user" do
         should_not be_able_to(:create_finance_admin_user, user)
+      end
+
+      it "should not be able to transfer a registration" do
+        should_not be_able_to(:transfer_registration, registration)
       end
     end
 
@@ -318,6 +335,10 @@ RSpec.describe User, type: :model do
       it "should not be able to create a finance admin user" do
         should_not be_able_to(:create_finance_admin_user, user)
       end
+
+      it "should be able to transfer a registration" do
+        should be_able_to(:transfer_registration, registration)
+      end
     end
 
     context "when the user is a finance super user" do
@@ -369,6 +390,10 @@ RSpec.describe User, type: :model do
 
       it "should be able to create a finance admin user" do
         should be_able_to(:create_finance_admin_user, user)
+      end
+
+      it "should not be able to transfer a registration" do
+        should_not be_able_to(:transfer_registration, registration)
       end
     end
   end
