@@ -14,6 +14,8 @@ class RegistrationTransferService
     update_account_email_for(@transient_registration) if @transient_registration.present?
 
     send_confirmation_email
+
+    :success_existing_user
   end
 
   private

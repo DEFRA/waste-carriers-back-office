@@ -70,6 +70,10 @@ RSpec.describe RegistrationTransferService do
         last_delivery = ActionMailer::Base.deliveries.last
         expect(last_delivery.header["to"].value).to eq(recipient_email)
       end
+
+      it "returns :success_existing_user" do
+        expect(registration_transfer_service.transfer_to_user(recipient_email)).to eq(:success_existing_user)
+      end
     end
 
     context "when there is no external user with a matching email" do
