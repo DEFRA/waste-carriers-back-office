@@ -7,7 +7,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
 
   describe "GET /bo/transfer-registration" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency) }
       before(:each) do
         sign_in(user)
       end
@@ -28,6 +28,18 @@ RSpec.describe "RegistrationTransfers", type: :request do
       end
     end
 
+    context "when a non-agency user is signed in" do
+      let(:user) { create(:user, :finance) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "redirects to the permissions error page" do
+        get "/bo/transfer-registration/#{registration.reg_identifier}"
+        expect(response).to redirect_to("/bo/permission")
+      end
+    end
+
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
         get "/bo/transfer-registration/#{registration.reg_identifier}"
@@ -37,21 +49,39 @@ RSpec.describe "RegistrationTransfers", type: :request do
   end
 
   describe "POST /bo/transfer-registration" do
+    let(:valid_params) do
+      {
+        reg_identifier: registration.reg_identifier
+      }
+    end
+
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency) }
       before(:each) do
         sign_in(user)
       end
 
       it "redirects to bo_path" do
-        post "/bo/transfer-registration"
+        post "/bo/transfer-registration", registration_transfer_form: valid_params
         expect(response).to redirect_to(bo_path)
+      end
+    end
+
+    context "when a non-agency user is signed in" do
+      let(:user) { create(:user, :finance) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "redirects to the permissions error page" do
+        post "/bo/transfer-registration", registration_transfer_form: valid_params
+        expect(response).to redirect_to("/bo/permission")
       end
     end
 
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
-        post "/bo/transfer-registration"
+        post "/bo/transfer-registration", registration_transfer_form: valid_params
         expect(response).to redirect_to(new_user_session_path)
       end
     end
