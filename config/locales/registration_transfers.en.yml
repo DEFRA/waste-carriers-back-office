@@ -1,4 +1,4 @@
 en:
   registration_transfers:
     new:
-      heading: "Transfer a registration to a different user account"
+      heading: "Transfer registration %{reg_identifier} to a different user account"
