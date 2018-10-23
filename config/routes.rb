@@ -62,5 +62,10 @@ Rails.application.routes.draw do
                         path_names: { new: "" }
             end
 
+  resources :registration_transfers,
+            only: [:new, :create],
+            path: "/bo/transfer-registration",
+            path_names: { new: "" }
+
   mount WasteCarriersEngine::Engine => "/bo"
 end
