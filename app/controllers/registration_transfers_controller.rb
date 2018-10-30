@@ -4,13 +4,13 @@ class RegistrationTransfersController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    set_up_form(params[:reg_identifier])
+    build_form(params[:reg_identifier])
 
     authorize_action
   end
 
   def create
-    return false unless set_up_form(params[:registration_transfer_form][:reg_identifier])
+    return false unless build_form(params[:registration_transfer_form][:reg_identifier])
 
     authorize_action
 
@@ -19,7 +19,7 @@ class RegistrationTransfersController < ApplicationController
 
   private
 
-  def set_up_form(reg_identifier)
+  def build_form(reg_identifier)
     find_registration(reg_identifier)
     @registration_transfer_form = RegistrationTransferForm.new(@registration)
   end
