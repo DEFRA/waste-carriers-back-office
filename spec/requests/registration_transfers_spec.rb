@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe "RegistrationTransfers", type: :request do
   let(:registration) { create(:registration) }
+  let(:other_external_user) { create(:external_user) }
 
   describe "GET /bo/transfer-registration" do
     context "when a valid user is signed in" do
@@ -52,8 +53,8 @@ RSpec.describe "RegistrationTransfers", type: :request do
     let(:params) do
       {
         reg_identifier: registration.reg_identifier,
-        email: "foo@example.com",
-        confirm_email: "foo@example.com"
+        email: other_external_user.email,
+        confirm_email: other_external_user.email
       }
     end
 
@@ -67,6 +68,11 @@ RSpec.describe "RegistrationTransfers", type: :request do
         it "redirects to bo_path" do
           post "/bo/transfer-registration", registration_transfer_form: params
           expect(response).to redirect_to(bo_path)
+        end
+
+        it "changes the account_email" do
+          post "/bo/transfer-registration", registration_transfer_form: params
+          expect(registration.reload.account_email).to eq(params[:email])
         end
       end
 
@@ -82,6 +88,12 @@ RSpec.describe "RegistrationTransfers", type: :request do
         it "redirects to bo_path" do
           post "/bo/transfer-registration", registration_transfer_form: params
           expect(response).to render_template(:new)
+        end
+
+        it "does not change the account_email" do
+          old_email = registration.account_email
+          post "/bo/transfer-registration", registration_transfer_form: params
+          expect(registration.reload.account_email).to eq(old_email)
         end
       end
     end

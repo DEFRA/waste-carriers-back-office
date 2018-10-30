@@ -26,6 +26,7 @@ class RegistrationTransfersController < ApplicationController
 
   def submit_form
     if @registration_transfer_form.submit(params[:registration_transfer_form])
+      transfer_registration
       redirect_to bo_path
       true
     else
@@ -40,5 +41,10 @@ class RegistrationTransfersController < ApplicationController
 
   def authorize_action
     authorize! :transfer_registration, @registration
+  end
+
+  def transfer_registration
+    registration_transfer_service = RegistrationTransferService.new(@registration)
+    registration_transfer_service.transfer_to_user(@registration_transfer_form.email)
   end
 end
