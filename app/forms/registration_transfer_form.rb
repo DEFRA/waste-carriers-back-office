@@ -16,5 +16,6 @@ class RegistrationTransferForm < WasteCarriersEngine::BaseForm
     super(attributes, params[:reg_identifier])
   end
 
-  validates :email, :confirm_email, presence: true
+  validates :email, :confirm_email, "waste_carriers_engine/email": true
+  validates :confirm_email, "waste_carriers_engine/matching_email": { compare_to: :email }
 end

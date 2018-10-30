@@ -23,6 +23,9 @@ en:
         registration_transfer_form:
           attributes:
             email:
-              blank: "You must enter an email"
+              blank: "Enter an email address"
+              invalid_format: "Enter a valid email address - there’s a mistake in that one"
             confirm_email:
-              blank: "You must re-enter the email to confirm it"
+              blank: "Enter the email address again to confirm it"
+              invalid_format: "Enter a valid confirmed email address - there’s a mistake in that one"
+              does_not_match: "The email addresses you’ve entered don’t match"
