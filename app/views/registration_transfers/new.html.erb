@@ -2,53 +2,97 @@
   <div class="column-two-thirds">
     <%= render("waste_carriers_engine/shared/back", back_path: bo_path) %>
 
-    <h1 class="heading-large">
-      <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
-    </h1>
+    <%= form_for(@registration_transfer_form, url: registration_transfers_path) do |f| %>
+      <%= render("waste_carriers_engine/shared/errors", object: @registration_transfer_form) %>
 
-    <p><%= t(".paragraph_1", email: @registration.account_email) %></p>
+      <h1 class="heading-large">
+        <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
+      </h1>
 
-    <p><%= t(".paragraph_2", reg_identifier: @registration.reg_identifier) %></p>
+      <div class="form-group">
+        <p><%= t(".paragraph_1", email: @registration.account_email) %></p>
+        <p><%= t(".paragraph_2", reg_identifier: @registration.reg_identifier) %></p>
+        <p><%= t(".paragraph_3", email: @registration.account_email) %></p>
+        <p><%= t(".paragraph_4", email: @registration.account_email) %></p>
 
-    <p><%= t(".paragraph_3", email: @registration.account_email) %></p>
+        <table>
+          <caption class="heading-medium">
+            <%= t(".registration_info.heading") %>
+          </caption>
+          <tbody>
+            <tr>
+              <td>
+                <%= t(".registration_info.labels.account_email") %>
+              </td>
+              <td>
+                <%= @registration.account_email %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <%= t(".registration_info.labels.reg_identifier") %>
+              </td>
+              <td>
+                <%= @registration.reg_identifier %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <%= t(".registration_info.labels.company_name") %>
+              </td>
+              <td>
+                <%= @registration.company_name %>
+              </td>
+            </tr>
+        </table>
 
-    <p><%= t(".paragraph_4", email: @registration.account_email) %></p>
+        <h2 class="heading-medium">
+          <%= t(".subheading_1") %>
+        </h2>
+      </div>
 
-    <table>
-      <caption class="heading-medium">
-        <%= t(".registration_info.heading") %>
-      </caption>
-      <tbody>
-        <tr>
-          <td>
-            <%= t(".registration_info.labels.account_email") %>
-          </td>
-          <td>
-            <%= @registration.account_email %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= t(".registration_info.labels.reg_identifier") %>
-          </td>
-          <td>
-            <%= @registration.reg_identifier %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= t(".registration_info.labels.company_name") %>
-          </td>
-          <td>
-            <%= @registration.company_name %>
-          </td>
-        </tr>
-    </table>
+      <% if @registration_transfer_form.errors[:email].any? %>
+      <div class="form-group form-group-error">
+      <% else %>
+      <div class="form-group">
+      <% end %>
+        <fieldset id="company_name">
+          <legend class="visuallyhidden">
+            <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
+          </legend>
 
-    <h2 class="heading-medium">
-      <%= t(".subheading_1") %>
-    </h2>
+          <% if @registration_transfer_form.errors[:email].any? %>
+          <span class="error-message"><%= @registration_transfer_form.errors[:email].join(", ") %></span>
+          <% end %>
 
-    <p>Form and button go here</p>
+          <%= f.label :email, t(".email_label"), class: "form-label" %>
+          <%= f.text_field :email, class: "form-control" %>
+        </fieldset>
+      </div>
+
+      <% if @registration_transfer_form.errors[:confirm_email].any? %>
+      <div class="form-group form-group-error">
+      <% else %>
+      <div class="form-group">
+      <% end %>
+        <fieldset id="company_name">
+          <legend class="visuallyhidden">
+            <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
+          </legend>
+
+          <% if @registration_transfer_form.errors[:confirm_email].any? %>
+          <span class="error-message"><%= @registration_transfer_form.errors[:confirm_email].join(", ") %></span>
+          <% end %>
+
+          <%= f.label :confirm_email, t(".confirm_email_label"), class: "form-label" %>
+          <%= f.text_field :confirm_email, class: "form-control" %>
+        </fieldset>
+      </div>
+
+      <%= f.hidden_field :reg_identifier, value: @registration_transfer_form.reg_identifier %>
+      <div class="form-group">
+        <%= f.submit t(".button"), class: "button" %>
+      </div>
+    <% end %>
   </end>
 </end>

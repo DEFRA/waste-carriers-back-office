@@ -14,3 +14,6 @@ en:
           reg_identifier: "Registration number"
           company_name: "Company name"
       subheading_1: "Transfer the registration"
+      email_label: "Email address"
+      confirm_email_label: "Confirm email address"
+      button: "Transfer account"
