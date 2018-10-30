@@ -52,7 +52,7 @@ RSpec.describe WasteCarriersEngine::ApplicationHelper, type: :helper do
 
   describe "#display_expiry_date" do
     it "displays the correct date" do
-      correct_expiry_date = DateTime.new(2000, 1, 2, 3, 4, 5).in_time_zone("UTC")
+      correct_expiry_date = Time.new(2000, 1, 2, 3, 4, 5).in_time_zone("UTC")
       registration.update_attributes(expires_on: correct_expiry_date)
 
       expect(helper.display_expiry_date).to eq(Date.new(2000, 1, 2))
