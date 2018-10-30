@@ -17,3 +17,12 @@ en:
       email_label: "Email address"
       confirm_email_label: "Confirm email address"
       button: "Transfer account"
+  activemodel:
+    errors:
+      models:
+        registration_transfer_form:
+          attributes:
+            email:
+              blank: "You must enter an email"
+            confirm_email:
+              blank: "You must re-enter the email to confirm it"
