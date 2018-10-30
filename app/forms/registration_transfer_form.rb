@@ -8,6 +8,9 @@ class RegistrationTransferForm < WasteCarriersEngine::BaseForm
   end
 
   def submit(params)
+    self.email = params[:email]
+    self.confirm_email = params[:confirm_email]
+
     attributes = {}
 
     super(attributes, params[:reg_identifier])

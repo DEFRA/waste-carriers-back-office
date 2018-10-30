@@ -49,9 +49,11 @@ RSpec.describe "RegistrationTransfers", type: :request do
   end
 
   describe "POST /bo/transfer-registration" do
-    let(:valid_params) do
+    let(:params) do
       {
-        reg_identifier: registration.reg_identifier
+        reg_identifier: registration.reg_identifier,
+        email: "foo@example.com",
+        confirm_email: "foo@example.com"
       }
     end
 
@@ -61,9 +63,26 @@ RSpec.describe "RegistrationTransfers", type: :request do
         sign_in(user)
       end
 
-      it "redirects to bo_path" do
-        post "/bo/transfer-registration", registration_transfer_form: valid_params
-        expect(response).to redirect_to(bo_path)
+      context "when the params are valid" do
+        it "redirects to bo_path" do
+          post "/bo/transfer-registration", registration_transfer_form: params
+          expect(response).to redirect_to(bo_path)
+        end
+      end
+
+      context "when the params are invalid" do
+        let(:params) do
+          {
+            reg_identifier: registration.reg_identifier,
+            email: nil,
+            confirm_email: nil
+          }
+        end
+
+        it "redirects to bo_path" do
+          post "/bo/transfer-registration", registration_transfer_form: params
+          expect(response).to render_template(:new)
+        end
       end
     end
 
@@ -74,14 +93,14 @@ RSpec.describe "RegistrationTransfers", type: :request do
       end
 
       it "redirects to the permissions error page" do
-        post "/bo/transfer-registration", registration_transfer_form: valid_params
+        post "/bo/transfer-registration", registration_transfer_form: params
         expect(response).to redirect_to("/bo/permission")
       end
     end
 
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
-        post "/bo/transfer-registration", registration_transfer_form: valid_params
+        post "/bo/transfer-registration", registration_transfer_form: params
         expect(response).to redirect_to(new_user_session_path)
       end
     end

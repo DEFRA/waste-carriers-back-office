@@ -4,17 +4,35 @@ class RegistrationTransfersController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    find_registration(params[:reg_identifier])
+    set_up_form(params[:reg_identifier])
+
     authorize_action
   end
 
   def create
-    find_registration(params[:registration_transfer_form][:reg_identifier])
+    return false unless set_up_form(params[:registration_transfer_form][:reg_identifier])
+
     authorize_action
-    redirect_to bo_path
+
+    submit_form
   end
 
   private
+
+  def set_up_form(reg_identifier)
+    find_registration(reg_identifier)
+    @registration_transfer_form = RegistrationTransferForm.new(@registration)
+  end
+
+  def submit_form
+    if @registration_transfer_form.submit(params[:registration_transfer_form])
+      redirect_to bo_path
+      true
+    else
+      render :new
+      false
+    end
+  end
 
   def find_registration(reg_identifier)
     @registration = WasteCarriersEngine::Registration.where(reg_identifier: reg_identifier).first
