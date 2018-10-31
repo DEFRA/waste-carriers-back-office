@@ -30,6 +30,7 @@ en:
             email:
               blank: "Enter an email address"
               invalid_format: "Enter a valid email address - there’s a mistake in that one"
+              no_matching_user: "Enter an email address which belongs to an existing user account"
             confirm_email:
               blank: "Enter the email address again to confirm it"
               invalid_format: "Enter a valid confirmed email address - there’s a mistake in that one"
