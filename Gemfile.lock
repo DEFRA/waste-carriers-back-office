@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
-  revision: 74171af73a3e2af277133a13bb5e93f559d680b7
+  revision: 307ebcff555a99585c7153f6fe2d2ff41b388c76
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -179,7 +179,7 @@ GEM
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
-    money (6.13.0)
+    money (6.13.1)
       i18n (>= 0.6.4, <= 2)
     mongo (2.6.2)
       bson (>= 4.3.0, < 5.0.0)
