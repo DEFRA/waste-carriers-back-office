@@ -20,7 +20,7 @@ en:
     success:
       title: "Registration transferred successfully"
       heading: "Registration %{reg_identifier} has been transferred"
-      paragraph: "This registration is now owned by %{email}."
+      paragraph_1: "This registration is now owned by %{email}."
       button: "Continue"
   activemodel:
     errors:
