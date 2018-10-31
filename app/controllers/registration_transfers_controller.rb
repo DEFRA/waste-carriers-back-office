@@ -17,6 +17,10 @@ class RegistrationTransfersController < ApplicationController
     submit_form
   end
 
+  def success
+    find_registration(params[:reg_identifier])
+  end
+
   private
 
   def build_form(reg_identifier)
@@ -27,7 +31,7 @@ class RegistrationTransfersController < ApplicationController
   def submit_form
     if @registration_transfer_form.submit(params[:registration_transfer_form])
       transfer_registration
-      redirect_to bo_path
+      redirect_to registration_transfer_success_path(params[:registration_transfer_form][:reg_identifier])
       true
     else
       render :new

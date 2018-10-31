@@ -67,6 +67,9 @@ Rails.application.routes.draw do
             param: :reg_identifier,
             path: "/bo/transfer-registration",
             path_names: { new: "/:reg_identifier" }
+  get "/bo/transfer-registration/:reg_identifier/success",
+      to: "registration_transfers#success",
+      as: :registration_transfer_success
 
   mount WasteCarriersEngine::Engine => "/bo"
 end

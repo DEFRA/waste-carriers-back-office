@@ -65,9 +65,9 @@ RSpec.describe "RegistrationTransfers", type: :request do
       end
 
       context "when the params are valid" do
-        it "redirects to bo_path" do
+        it "redirects to the success page" do
           post "/bo/transfer-registration", registration_transfer_form: params
-          expect(response).to redirect_to(bo_path)
+          expect(response).to redirect_to("/bo/transfer-registration/#{params[:reg_identifier]}/success")
         end
 
         it "changes the account_email" do
@@ -85,7 +85,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
           }
         end
 
-        it "redirects to bo_path" do
+        it "renders the new template" do
           post "/bo/transfer-registration", registration_transfer_form: params
           expect(response).to render_template(:new)
         end
