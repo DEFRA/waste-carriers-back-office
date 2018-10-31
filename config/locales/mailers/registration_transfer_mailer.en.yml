@@ -3,7 +3,9 @@ en:
     transfer_to_existing_account_email:
       subject: "The waste carriers registration %{reg_identifier} has been transferred to you"
       heading: "A waste carriers registration has been transferred to your account"
-      paragraph_1: "You can now use this email address to log in and manage this registration."
+      paragraph_1: "You can now manage the registration for %{company_name}."
+      paragraph_2: "Use this email address (%{email}) to sign in."
+      log_in_link: "Sign in to access this registration"
       footer_list:
         item_1: "If you have enquiries please contact the Environment Agency helpline: 03708 506506"
         item_2: "This is an automated email, please do not reply"
