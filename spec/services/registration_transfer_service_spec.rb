@@ -74,6 +74,16 @@ RSpec.describe RegistrationTransferService do
       it "returns :success_existing_user" do
         expect(registration_transfer_service.transfer_to_user(recipient_email)).to eq(:success_existing_user)
       end
+
+      context "when the mailer encounters an error" do
+        before do
+          allow(RegistrationTransferMailer).to receive(:transfer_to_existing_account_email).and_raise(StandardError)
+        end
+
+        it "returns :success_existing_user" do
+          expect(registration_transfer_service.transfer_to_user(recipient_email)).to eq(:success_existing_user)
+        end
+      end
     end
 
     context "when there is no external user with a matching email" do

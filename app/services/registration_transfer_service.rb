@@ -37,5 +37,8 @@ class RegistrationTransferService
 
   def send_confirmation_email
     RegistrationTransferMailer.transfer_to_existing_account_email(@registration).deliver_now
+  rescue StandardError => e
+    Airbrake.notify(e) if defined?(Airbrake)
+    Rails.logger.error "Registration transfer confirmation email error: " + e.to_s
   end
 end
