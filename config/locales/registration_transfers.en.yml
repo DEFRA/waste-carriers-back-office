@@ -16,7 +16,7 @@ en:
       subheading_1: "Transfer the registration"
       email_label: "Email address"
       confirm_email_label: "Confirm email address"
-      button: "Transfer account"
+      button: "Transfer"
     success:
       title: "Registration transferred successfully"
       heading: "Registration %{reg_identifier} has been transferred"
