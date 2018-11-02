@@ -89,12 +89,16 @@ RSpec.describe RegistrationTransferService do
     context "when there is no external user with a matching email" do
       let(:recipient_email) { "unused-email@example.com" }
 
-      it "sets @recipient_user to nil" do
-        expect(recipient_user_instance_variable).to eq(nil)
+      it "creates a new user" do
+        expect(ExternalUser.where(email: recipient_email).length).to eq(1)
       end
 
-      it "returns :no_matching_user" do
-        expect(registration_transfer_service.transfer_to_user(recipient_email)).to eq(:no_matching_user)
+      it "sets @recipient_user to the new user" do
+        expect(recipient_user_instance_variable).to eq(ExternalUser.where(email: recipient_email).first)
+      end
+
+      it "returns :success_existing_user" do
+        expect(registration_transfer_service.transfer_to_user(recipient_email)).to eq(:success_existing_user)
       end
     end
 

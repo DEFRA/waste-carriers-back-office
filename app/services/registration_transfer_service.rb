@@ -7,7 +7,7 @@ class RegistrationTransferService
   end
 
   def transfer_to_user(email)
-    @recipient_user = find_user(email)
+    @recipient_user = find_user(email) || create_new_user(email)
     return :no_matching_user if @recipient_user.blank?
 
     update_account_email_for(@registration)
@@ -28,6 +28,12 @@ class RegistrationTransferService
     return nil unless email.present?
 
     ExternalUser.where(email: email).first
+  end
+
+  def create_new_user(email)
+    return nil unless email.present?
+
+    ExternalUser.invite!(email: email, skip_invitation: true)
   end
 
   def update_account_email_for(registration)
