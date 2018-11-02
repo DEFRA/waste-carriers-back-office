@@ -48,10 +48,6 @@ RSpec.describe RegistrationTransferService do
         @existing_user_status = registration_transfer_service.transfer_to_user(recipient_email)
       end
 
-      it "sets @recipient_user" do
-        expect(recipient_user_instance_variable).to eq(existing_user)
-      end
-
       it "updates the registration's account_email" do
         expect(registration.reload.account_email).to eq(recipient_email)
       end
@@ -96,8 +92,23 @@ RSpec.describe RegistrationTransferService do
         expect(ExternalUser.where(email: recipient_email).length).to eq(1)
       end
 
-      it "sets @recipient_user to the new user" do
-        expect(recipient_user_instance_variable).to eq(ExternalUser.where(email: recipient_email).first)
+      it "updates the registration's account_email" do
+        expect(registration.reload.account_email).to eq(recipient_email)
+      end
+
+      it "updates the transient_registration's account_email" do
+        expect(transient_registration.reload.account_email).to eq(recipient_email)
+      end
+
+      it "sends an email" do
+        old_emails_sent_count = ActionMailer::Base.deliveries.count
+        registration_transfer_service.transfer_to_user(recipient_email)
+        expect(ActionMailer::Base.deliveries.count).to eq(old_emails_sent_count + 1)
+      end
+
+      it "sends an email to the correct address" do
+        last_delivery = ActionMailer::Base.deliveries.last
+        expect(last_delivery.header["to"].value).to eq(recipient_email)
       end
 
       it "returns :success_existing_user" do
