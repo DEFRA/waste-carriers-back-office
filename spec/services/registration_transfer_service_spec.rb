@@ -43,11 +43,11 @@ RSpec.describe RegistrationTransferService do
       registration_transfer_service.instance_variable_get(:@recipient_user)
     end
 
-    before do
-      registration_transfer_service.transfer_to_user(recipient_email)
-    end
-
     context "when there is an external user with a matching email" do
+      before do
+        @existing_user_status = registration_transfer_service.transfer_to_user(recipient_email)
+      end
+
       it "sets @recipient_user" do
         expect(recipient_user_instance_variable).to eq(existing_user)
       end
@@ -72,7 +72,7 @@ RSpec.describe RegistrationTransferService do
       end
 
       it "returns :success_existing_user" do
-        expect(registration_transfer_service.transfer_to_user(recipient_email)).to eq(:success_existing_user)
+        expect(@existing_user_status).to eq(:success_existing_user)
       end
 
       context "when the mailer encounters an error" do
@@ -88,6 +88,9 @@ RSpec.describe RegistrationTransferService do
 
     context "when there is no external user with a matching email" do
       let(:recipient_email) { "unused-email@example.com" }
+      before do
+        @new_user_status = registration_transfer_service.transfer_to_user(recipient_email)
+      end
 
       it "creates a new user" do
         expect(ExternalUser.where(email: recipient_email).length).to eq(1)
@@ -98,7 +101,7 @@ RSpec.describe RegistrationTransferService do
       end
 
       it "returns :success_existing_user" do
-        expect(registration_transfer_service.transfer_to_user(recipient_email)).to eq(:success_existing_user)
+        expect(@new_user_status).to eq(:success_existing_user)
       end
     end
 
