@@ -84,6 +84,16 @@ RSpec.describe RegistrationTransferForm, type: :model do
       end
     end
 
+    context "when the RegistrationTransferService returns :success_new_user" do
+      before do
+        allow_any_instance_of(RegistrationTransferService).to receive(:transfer_to_user).and_return(:success_new_user)
+      end
+
+      it "is valid" do
+        expect(registration_transfer_form).to be_valid
+      end
+    end
+
     context "when the RegistrationTransferService returns :no_matching_user" do
       before do
         allow_any_instance_of(RegistrationTransferService).to receive(:transfer_to_user).and_return(:no_matching_user)
