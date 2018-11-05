@@ -8,7 +8,13 @@ module Db
     attr_reader :counts
 
     def initialize
-      @counts = Db.counts(Db.users_collection)
+      @collections = {
+        registrations: Db.registrations_collection,
+        renewals: Db.transient_registrations_collection,
+        users: Db.users_collection
+      }
+
+      @counts = Db.counts(@collections[:users])
       @counts[:id_increment] = 1
 
       @paging = Db.paging(@counts[:total], 100)
@@ -51,26 +57,25 @@ module Db
     end
 
     def update_registrations(old_email, new_email)
-      result = Db.registrations_collection
-                 .find(accountEmail: old_email)
-                 .update_many("$set": { accountEmail: new_email, contactEmail: new_email })
+      result = @collections[:registrations]
+               .find(accountEmail: old_email)
+               .update_many("$set": { accountEmail: new_email, contactEmail: new_email })
       result.modified_count
     end
 
     def update_transient_registrations(old_email, new_email)
-      collection = Db.transient_registrations_collection
-      return 0 unless collection
+      return 0 unless @collections[:renewals]
 
-      result = collection
+      result = @collections[:renewals]
                .find(accountEmail: old_email)
                .update_many("$set": { accountEmail: new_email, contactEmail: new_email })
       result.modified_count
     end
 
     def update_user(old_email, new_email)
-      result = Db.users_collection
-                 .find(email: old_email)
-                 .update_one("$set": { email: new_email })
+      result = @collections[:users]
+               .find(email: old_email)
+               .update_one("$set": { email: new_email })
       result.n
     end
   end
