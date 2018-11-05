@@ -58,9 +58,12 @@ module Db
     end
 
     def update_transient_registrations(old_email, new_email)
-      result = Db.transient_registrations_collection
-                 .find(accountEmail: old_email)
-                 .update_many("$set": { accountEmail: new_email, contactEmail: new_email })
+      collection = Db.transient_registrations_collection
+      return 0 unless collection
+
+      result = collection
+               .find(accountEmail: old_email)
+               .update_many("$set": { accountEmail: new_email, contactEmail: new_email })
       result.modified_count
     end
 
