@@ -36,39 +36,35 @@ RSpec.describe RegistrationTransferService do
   end
 
   describe "#transfer_to_user" do
-    let(:existing_user) { create(:external_user) }
-    let(:recipient_email) { existing_user.email }
-
-    let(:recipient_user_instance_variable) do
-      registration_transfer_service.instance_variable_get(:@recipient_user)
-    end
+    let(:external_user) { create(:external_user) }
+    let(:recipient_email) { external_user.email }
+    let(:transfer_to_user) { registration_transfer_service.transfer_to_user(recipient_email) }
 
     context "when there is an external user with a matching email" do
-      before do
-        @existing_user_status = registration_transfer_service.transfer_to_user(recipient_email)
-      end
-
       it "updates the registration's account_email" do
+        transfer_to_user
         expect(registration.reload.account_email).to eq(recipient_email)
       end
 
       it "updates the transient_registration's account_email" do
+        transfer_to_user
         expect(transient_registration.reload.account_email).to eq(recipient_email)
       end
 
       it "sends an email" do
         old_emails_sent_count = ActionMailer::Base.deliveries.count
-        registration_transfer_service.transfer_to_user(recipient_email)
+        transfer_to_user
         expect(ActionMailer::Base.deliveries.count).to eq(old_emails_sent_count + 1)
       end
 
       it "sends an email to the correct address" do
+        transfer_to_user
         last_delivery = ActionMailer::Base.deliveries.last
         expect(last_delivery.header["to"].value).to eq(recipient_email)
       end
 
       it "returns :success_existing_user" do
-        expect(@existing_user_status).to eq(:success_existing_user)
+        expect(transfer_to_user).to eq(:success_existing_user)
       end
 
       context "when the mailer encounters an error" do
@@ -77,51 +73,49 @@ RSpec.describe RegistrationTransferService do
         end
 
         it "returns :success_existing_user" do
-          expect(registration_transfer_service.transfer_to_user(recipient_email)).to eq(:success_existing_user)
+          expect(transfer_to_user).to eq(:success_existing_user)
         end
       end
     end
 
     context "when there is no external user with a matching email" do
-      let(:recipient_email) { "unused-email@example.com" }
-      before do
-        @new_user_status = registration_transfer_service.transfer_to_user(recipient_email)
-      end
+      let(:recipient_email) { attributes_for(:external_user)[:email] }
 
       it "creates a new user" do
-        expect(ExternalUser.where(email: recipient_email).length).to eq(1)
+        old_matching_user_count = ExternalUser.where(email: recipient_email).length
+        transfer_to_user
+        expect(ExternalUser.where(email: recipient_email).length).to eq(old_matching_user_count + 1)
       end
 
       it "updates the registration's account_email" do
+        transfer_to_user
         expect(registration.reload.account_email).to eq(recipient_email)
       end
 
       it "updates the transient_registration's account_email" do
+        transfer_to_user
         expect(transient_registration.reload.account_email).to eq(recipient_email)
       end
 
       it "sends an email" do
         old_emails_sent_count = ActionMailer::Base.deliveries.count
-        registration_transfer_service.transfer_to_user(recipient_email)
+        transfer_to_user
         expect(ActionMailer::Base.deliveries.count).to eq(old_emails_sent_count + 1)
       end
 
       it "sends an email to the correct address" do
+        transfer_to_user
         last_delivery = ActionMailer::Base.deliveries.last
         expect(last_delivery.header["to"].value).to eq(recipient_email)
       end
 
       it "returns :success_existing_user" do
-        expect(@new_user_status).to eq(:success_existing_user)
+        expect(transfer_to_user).to eq(:success_existing_user)
       end
     end
 
     context "when the email is nil" do
       let(:recipient_email) { nil }
-
-      it "sets @recipient_user to nil" do
-        expect(recipient_user_instance_variable).to eq(nil)
-      end
 
       it "returns :no_matching_user" do
         expect(registration_transfer_service.transfer_to_user(recipient_email)).to eq(:no_matching_user)
