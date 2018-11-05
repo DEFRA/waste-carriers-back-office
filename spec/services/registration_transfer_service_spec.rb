@@ -109,8 +109,8 @@ RSpec.describe RegistrationTransferService do
         expect(last_delivery.header["to"].value).to eq(recipient_email)
       end
 
-      it "returns :success_existing_user" do
-        expect(transfer_to_user).to eq(:success_existing_user)
+      it "returns :success_new_user" do
+        expect(transfer_to_user).to eq(:success_new_user)
       end
     end
 

@@ -7,15 +7,7 @@ class RegistrationTransferService
   end
 
   def transfer_to_user(email)
-    @recipient_user = find_user(email) || create_new_user(email)
-    return :no_matching_user if @recipient_user.blank?
-
-    update_account_email_for(@registration)
-    update_account_email_for(@transient_registration) if @transient_registration.present?
-
-    send_confirmation_email
-
-    :success_existing_user
+    find_user(email) || create_new_user(email) || :no_matching_user
   end
 
   private
@@ -27,17 +19,32 @@ class RegistrationTransferService
   def find_user(email)
     return nil unless email.present?
 
-    ExternalUser.where(email: email).first
+    return unless ExternalUser.where(email: email).first
+
+    # If a matching user exists, transfer and return a success status
+    transfer_and_send_email(email)
+    :success_existing_user
   end
 
   def create_new_user(email)
     return nil unless email.present?
 
-    ExternalUser.invite!(email: email, skip_invitation: true)
+    return unless ExternalUser.invite!(email: email, skip_invitation: true)
+
+    # If a new user is created, transfer and return a success status
+    transfer_and_send_email(email)
+    :success_new_user
   end
 
-  def update_account_email_for(registration)
-    registration.account_email = @recipient_user.email
+  def transfer_and_send_email(email)
+    update_account_email_for(@registration, email)
+    update_account_email_for(@transient_registration, email) if @transient_registration.present?
+
+    send_confirmation_email
+  end
+
+  def update_account_email_for(registration, email)
+    registration.account_email = email
     registration.save!
   end
 
