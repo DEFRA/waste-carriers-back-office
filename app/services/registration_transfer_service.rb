@@ -22,7 +22,9 @@ class RegistrationTransferService
     return unless ExternalUser.where(email: email).first
 
     # If a matching user exists, transfer and return a success status
-    transfer_and_send_email(email)
+    update_account_emails(email)
+    send_existing_account_confirmation_email
+
     :success_existing_user
   end
 
@@ -32,15 +34,15 @@ class RegistrationTransferService
     return unless ExternalUser.invite!(email: email, skip_invitation: true)
 
     # If a new user is created, transfer and return a success status
-    transfer_and_send_email(email)
+    update_account_emails(email)
+    send_new_account_confirmation_email
+
     :success_new_user
   end
 
-  def transfer_and_send_email(email)
+  def update_account_emails(email)
     update_account_email_for(@registration, email)
     update_account_email_for(@transient_registration, email) if @transient_registration.present?
-
-    send_confirmation_email
   end
 
   def update_account_email_for(registration, email)
@@ -48,10 +50,17 @@ class RegistrationTransferService
     registration.save!
   end
 
-  def send_confirmation_email
+  def send_existing_account_confirmation_email
     RegistrationTransferMailer.transfer_to_existing_account_email(@registration).deliver_now
   rescue StandardError => e
     Airbrake.notify(e) if defined?(Airbrake)
-    Rails.logger.error "Registration transfer confirmation email error: " + e.to_s
+    Rails.logger.error "Registration transfer existing account confirmation email error: " + e.to_s
+  end
+
+  def send_new_account_confirmation_email
+    RegistrationTransferMailer.transfer_to_new_account_email(@registration).deliver_now
+  rescue StandardError => e
+    Airbrake.notify(e) if defined?(Airbrake)
+    Rails.logger.error "Registration transfer new account confirmation email error: " + e.to_s
   end
 end
