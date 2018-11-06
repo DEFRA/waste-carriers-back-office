@@ -20,17 +20,18 @@ module Db
       @paging = Db.paging(@counts[:total], 100)
     end
 
-    def anonymise(show_output = false)
+    def anonymise(debug = false)
       while @paging[:page_number] <= @paging[:num_of_pages]
         Db.paged_users(@paging).each do |user|
           result = anonymise_email(
-            show_output,
+            debug,
             user["email"],
             "user#{@counts[:id_increment]}@example.com"
           )
           update_counts(result)
         end
         @paging[:page_number] += 1
+        print "." unless debug
       end
     end
 
@@ -42,10 +43,10 @@ module Db
       @counts[:errored] += 1 unless result
     end
 
-    def anonymise_email(show_output, old_email, new_email)
+    def anonymise_email(debug, old_email, new_email)
       results = update_documents(old_email, new_email)
 
-      puts "#{old_email} => #{new_email}: #{results[:regs]}, #{results[:renewals]}" if show_output
+      puts "#{old_email} => #{new_email}: #{results[:regs]}, #{results[:renewals]}" if debug
 
       true
     rescue StandardError => e

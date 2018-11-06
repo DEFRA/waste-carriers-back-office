@@ -13,9 +13,9 @@ namespace :db do
       puts "Anonymising all emails for #{anonymiser.counts[:total]} users"
       puts "-------------------------"
 
-      anonymiser.anonymise(true)
+      anonymiser.anonymise(false)
 
-      puts "-------------------------"
+      puts "\n-------------------------"
       puts "Final results"
       puts "Errors: #{anonymiser.counts[:errored]}"
       puts "Updated: #{anonymiser.counts[:processed]}"
