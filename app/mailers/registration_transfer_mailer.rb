@@ -7,7 +7,8 @@ class RegistrationTransferMailer < ActionMailer::Base
     send_email(registration, ".registration_transfer_mailer.transfer_to_existing_account_email.subject")
   end
 
-  def transfer_to_new_account_email(registration)
+  def transfer_to_new_account_email(registration, token)
+    @accept_invite_url = accept_invite_url(token)
     send_email(registration, ".registration_transfer_mailer.transfer_to_new_account_email.subject")
   end
 
@@ -24,5 +25,11 @@ class RegistrationTransferMailer < ActionMailer::Base
     mail(to: to_address,
          from: from_address,
          subject: subject)
+  end
+
+  def accept_invite_url(token)
+    [Rails.configuration.wcrs_renewals_url,
+     "/fo/users/invitation/accept?invitation_token=",
+     token].join
   end
 end

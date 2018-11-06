@@ -31,13 +31,18 @@ class RegistrationTransferService
   def create_new_user(email)
     return nil unless email.present?
 
-    return unless ExternalUser.invite!(email: email, skip_invitation: true)
+    token = invite_user_and_return_token(email)
+    return unless token.present?
 
     # If a new user is created, transfer and return a success status
     update_account_emails(email)
-    send_new_account_confirmation_email
+    send_new_account_confirmation_email(token)
 
     :success_new_user
+  end
+
+  def invite_user_and_return_token(email)
+    ExternalUser.invite!(email: email, skip_invitation: true).raw_invitation_token
   end
 
   def update_account_emails(email)
@@ -56,8 +61,8 @@ class RegistrationTransferService
     log_email_error(e)
   end
 
-  def send_new_account_confirmation_email
-    RegistrationTransferMailer.transfer_to_new_account_email(@registration).deliver_now
+  def send_new_account_confirmation_email(token)
+    RegistrationTransferMailer.transfer_to_new_account_email(@registration, token).deliver_now
   rescue StandardError => e
     log_email_error(e)
   end
