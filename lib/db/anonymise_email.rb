@@ -43,18 +43,25 @@ module Db
     end
 
     def anonymise_email(show_output, old_email, new_email)
-      regs = update_registrations(old_email, new_email)
-      renewals = update_transient_registrations(old_email, new_email)
-      user = update_user(old_email, new_email)
+      results = update_documents(old_email, new_email)
 
-      raise "Failed to update" unless user.positive?
-
-      puts "#{old_email} => #{new_email}: #{regs}, #{renewals}" if show_output
+      puts "#{old_email} => #{new_email}: #{results[:regs]}, #{results[:renewals]}" if show_output
 
       true
     rescue StandardError => e
       puts "Error with #{old_email}: #{e.message}"
       false
+    end
+
+    def update_documents(old_email, new_email)
+      results = {
+        regs: update_registrations(old_email, new_email),
+        renewals: update_transient_registrations(old_email, new_email),
+        user: update_user(old_email, new_email)
+      }
+      raise "Failed to update" unless results[:user].positive?
+
+      results
     end
 
     def update_registrations(old_email, new_email)
