@@ -23,15 +23,17 @@ module Db
     def anonymise(debug = false)
       while @paging[:page_number] <= @paging[:num_of_pages]
         Db.paged_users(@paging).each do |user|
-          result = anonymise_email(
-            debug,
-            user["email"],
-            "user#{@counts[:id_increment]}@example.com"
-          )
+          unless user["email"].end_with?("@example.com")
+            result = anonymise_email(
+              debug,
+              user["email"],
+              "user#{@counts[:id_increment]}@example.com"
+            )
+          end
           update_counts(result)
         end
         @paging[:page_number] += 1
-        print "." unless debug
+        print_progress unless debug
       end
     end
 
@@ -39,13 +41,21 @@ module Db
 
     def update_counts(result)
       @counts[:id_increment] += 1
-      @counts[:processed] += 1 if result
-      @counts[:errored] += 1 unless result
+
+      case result
+      when true
+        @counts[:processed] += 1
+      when false
+        @counts[:errored] += 1
+      else
+        @counts[:skipped] += 1
+      end
     end
 
     def anonymise_email(debug, old_email, new_email)
       results = update_documents(old_email, new_email)
 
+      STDOUT.sync = true
       puts "#{old_email} => #{new_email}: #{results[:regs]}, #{results[:renewals]}" if debug
 
       true
@@ -86,6 +96,11 @@ module Db
                .find(email: old_email)
                .update_one("$set": { email: new_email })
       result.n
+    end
+
+    def print_progress
+      STDOUT.sync = true
+      print "."
     end
   end
 end
