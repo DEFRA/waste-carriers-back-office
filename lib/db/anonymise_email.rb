@@ -22,22 +22,26 @@ module Db
 
     def anonymise(debug = false)
       while @paging[:page_number] <= @paging[:num_of_pages]
-        Db.paged_users(@paging).each do |user|
-          unless user["email"].end_with?("@example.com")
-            result = anonymise_email(
-              debug,
-              user["email"],
-              "user#{@counts[:id_increment]}@example.com"
-            )
-          end
-          update_counts(result)
-        end
+        anonymise_users
         @paging[:page_number] += 1
         print_progress unless debug
       end
     end
 
     private
+
+    def anonymise_users
+      Db.paged_users(@paging).each do |user|
+        unless user["email"].end_with?("@example.com")
+          result = anonymise_email(
+            debug,
+            user["email"],
+            "user#{@counts[:id_increment]}@example.com"
+          )
+        end
+        update_counts(result)
+      end
+    end
 
     def update_counts(result)
       @counts[:id_increment] += 1
