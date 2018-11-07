@@ -88,6 +88,7 @@ module WasteCarriersBackOffice
     # Times
     config.renewal_window = ENV["WCRS_REGISTRATION_RENEWAL_WINDOW"].to_i
     config.expires_after = ENV["WCRS_REGISTRATION_EXPIRES_AFTER"].to_i
+    config.grace_window = ENV["WCRS_REGISTRATION_GRACE_WINDOW"].to_i
 
     # Worldpay
     config.worldpay_url = ENV["WCRS_WORLDPAY_URL"] || "https://secure-test.worldpay.com/jsp/merchant/xml/paymentService.jsp"
