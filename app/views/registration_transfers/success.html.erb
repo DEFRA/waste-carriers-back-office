@@ -8,6 +8,14 @@
 
     <div class="form-group">
       <p><%= t(".paragraph_1", email: @registration.account_email) %></p>
+      <% if newly_invited_account?(@registration.account_email) %>
+        <p><%= t(".new_user.paragraph_2") %></p>
+        <p><%= t(".new_user.paragraph_3") %></p>
+        <p><%= t(".new_user.paragraph_4") %></p>
+        <p><%= t(".new_user.paragraph_5") %></p>
+      <% else %>
+        <p><%= t(".existing_user.paragraph_2") %></p>
+      <% end %>
     </div>
 
     <div class="form-group">

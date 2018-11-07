@@ -21,6 +21,13 @@ en:
       title: "Registration transferred successfully"
       heading: "Registration %{reg_identifier} has been transferred"
       paragraph_1: "This registration is now owned by %{email}."
+      existing_user:
+        paragraph_2: "This user already had an account, so we've sent them an email letting them know how they can log in to manage the registration."
+      new_user:
+        paragraph_2: "This user didn't have an account, so a new one has been created."
+        paragraph_3: "We've sent the user an email confirming that we've created an account for them and transferred the registration to it."
+        paragraph_4: "The email also asks the user to set an account password. They must do this to finish setting up the account."
+        paragraph_5: "Once the account is set up, they should be able to log in and manage the registration."
       button: "Continue"
   activemodel:
     errors:
