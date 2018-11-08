@@ -68,7 +68,7 @@ class RegistrationTransferService
   end
 
   def log_email_error(error)
-    Airbrake.notify(error) if defined?(Airbrake)
+    Airbrake.notify(error, reg_identifier: @registration.reg_identifier) if defined?(Airbrake)
     Rails.logger.error "Registration transfer new account confirmation email error: " + error.to_s
   end
 end
