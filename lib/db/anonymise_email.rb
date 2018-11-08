@@ -17,6 +17,10 @@ module Db
       @counts = Db.counts(@collections[:users])
       @counts[:id_increment] = 1
 
+      @counts[:users_updated] = 0
+      @counts[:registrations_updated] = 0
+      @counts[:transient_registrations_updated] = 0
+
       @paging = Db.paging(@counts[:total], 100)
     end
 
