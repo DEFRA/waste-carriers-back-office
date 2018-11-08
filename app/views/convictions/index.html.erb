@@ -119,7 +119,7 @@
     </table>
     <% end %>
 
-    <% if @transient_registration.metaData.ACTIVE? && @transient_registration.conviction_check_required? %>
+    <% if @registration.metaData.may_renew? && @transient_registration.conviction_check_required? %>
       <h2 class="heading-medium">
         <%= t(".approve_or_reject.heading") %>
       </h2>
