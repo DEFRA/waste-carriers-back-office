@@ -7,7 +7,7 @@ class RegistrationTransferService
   end
 
   def transfer_to_user(email)
-    find_user(email) || create_new_user(email) || :no_matching_user
+    transfer_to_existing_user(email) || transfer_to_new_user(email) || :no_matching_user
   end
 
   private
@@ -16,7 +16,7 @@ class RegistrationTransferService
     WasteCarriersEngine::TransientRegistration.where(reg_identifier: @registration.reg_identifier).first
   end
 
-  def find_user(email)
+  def transfer_to_existing_user(email)
     return nil unless email.present?
 
     return unless ExternalUser.where(email: email).first
@@ -28,7 +28,7 @@ class RegistrationTransferService
     :success_existing_user
   end
 
-  def create_new_user(email)
+  def transfer_to_new_user(email)
     return nil unless email.present?
 
     token = invite_user_and_return_token(email)
