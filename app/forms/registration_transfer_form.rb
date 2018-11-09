@@ -25,7 +25,8 @@ class RegistrationTransferForm < WasteCarriersEngine::BaseForm
     registration_transfer_service = RegistrationTransferService.new(registration)
     result = registration_transfer_service.transfer_to_user(email)
 
-    return true if result == :success_existing_user
+    return true if %i[success_existing_user
+                      success_new_user].include?(result)
 
     errors[:email] << I18n.t("activemodel.errors.models.registration_transfer_form.attributes.email.#{result}")
     false

@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   devise_for :users,
              controllers: { sessions: "sessions" },
              path: "/bo/users",
-             path_names: { sign_in: "sign_in", sign_out: "sign_out" }
+             path_names: { sign_in: "sign_in", sign_out: "sign_out" },
+             skip: [:invitations]
 
   get "/bo" => "dashboards#index"
 
