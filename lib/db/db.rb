@@ -13,6 +13,18 @@ module Db
     Mongoid::Clients.with_name("users").database.collections.find { |c| c.name == "users" }
   end
 
+  def self.admin_users_collection
+    Mongoid::Clients.with_name("users").database.collections.find { |c| c.name == "admins" }
+  end
+
+  def self.agency_users_collection
+    Mongoid::Clients.with_name("users").database.collections.find { |c| c.name == "agency_users" }
+  end
+
+  def self.back_office_users_collection
+    Mongoid::Clients.with_name("users").database.collections.find { |c| c.name == "back_office_users" }
+  end
+
   def self.paged_users(paging)
     users_collection
       .find
