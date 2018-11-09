@@ -10,9 +10,23 @@
 <% content_for :proposition_header do %>
   <div class="header-proposition">
     <div class="content">
-      <nav id="proposition-menu">
+      <% if user_signed_in? %>
         <%= link_to t(:global_proposition_header), main_app.bo_path, id: "proposition-name" %>
-      </nav>
+        <a role="button" href="#proposition-links" class="js-header-toggle menu" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</a>
+          <nav id="proposition-menu">
+            <ul id="proposition-links" aria-label="Top Level Navigation">
+              <li>
+                <%= link_to t("layouts.application.menu.dashboard"),
+                            main_app.bo_path,
+                            class: (current_page?(main_app.bo_path) ? "active" : "") %>
+              </li>
+            </ul>
+          </nav>
+      <% else %>
+        <nav id="proposition-menu">
+          <%= link_to t(:global_proposition_header), main_app.bo_path, id: "proposition-name" %>
+        </nav>
+      <% end %>
     </div>
   </div>
 <% end %>

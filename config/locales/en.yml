@@ -4,6 +4,8 @@ en:
   layouts:
     application:
       feedback_url: https://www.gov.uk/done/waste-carrier-or-broker-registration
+      menu:
+        dashboard: "Renewals dashboard"
   shared:
     conviction_search_result:
       match_result: "Match result"
