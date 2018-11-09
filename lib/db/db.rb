@@ -25,6 +25,10 @@ module Db
     Mongoid::Clients.with_name("users").database.collections.find { |c| c.name == "back_office_users" }
   end
 
+  def self.roles_collection
+    Mongoid::Clients.with_name("users").database.collections.find { |c| c.name == "roles" }
+  end
+
   def self.paged_collection(paging, collection)
     collection
       .find
