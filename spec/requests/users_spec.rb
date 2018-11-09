@@ -25,5 +25,12 @@ RSpec.describe "Users", type: :request do
         expect(response.body).to include("Manage back office users")
       end
     end
+
+    context "when no user is signed in" do
+      it "redirects the user to the sign in page" do
+        get "/bo/users"
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
   end
 end
