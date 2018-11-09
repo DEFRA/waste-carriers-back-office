@@ -25,8 +25,8 @@ module Db
     Mongoid::Clients.with_name("users").database.collections.find { |c| c.name == "back_office_users" }
   end
 
-  def self.paged_users(paging)
-    users_collection
+  def self.paged_collection(paging, collection)
+    collection
       .find
       .skip(paging[:page_size] * (paging[:page_number] - 1))
       .limit(paging[:page_size])
