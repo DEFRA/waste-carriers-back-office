@@ -3,5 +3,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
-  def index; end
+  def index
+    authorize! :manage_back_office_users, current_user
+  end
 end
