@@ -5,5 +5,6 @@ class UsersController < ApplicationController
 
   def index
     authorize! :manage_back_office_users, current_user
+    @users = User.all.order_by(email: :asc)
   end
 end

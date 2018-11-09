@@ -24,6 +24,12 @@ RSpec.describe "Users", type: :request do
         get "/bo/users"
         expect(response.body).to include("Manage back office users")
       end
+
+      it "displays a list of users" do
+        listed_user = create(:user)
+        get "/bo/users"
+        expect(response.body).to include(listed_user.email)
+      end
     end
 
     context "when a non-super user is signed in" do

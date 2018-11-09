@@ -5,5 +5,32 @@
     <h1 class="heading-large">
       <%= t(".heading") %>
     </h1>
+
+    <% if @users.present? %>
+      <div class="grid-row">
+        <div class="column-full">
+          <table>
+            <thead>
+              <tr>
+                <th><%= t(".user_list.th.email") %></th>
+                <th><%= t(".user_list.th.role") %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |user| %>
+                <tr>
+                  <td>
+                    <%= user.email %>
+                  </td>
+                  <td>
+                    <%= t(".user_list.roles.#{user.role}") %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
