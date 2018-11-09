@@ -24,6 +24,7 @@ module Db
     counts = {
       total: 0,
       processed: 0,
+      skipped: 0,
       errored: 0
     }
     counts[:total] = collection.find.count

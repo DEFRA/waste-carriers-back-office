@@ -22,8 +22,9 @@ namespace :db do
 
       puts "\n-------------------------"
       puts "Final results"
-      puts "Errors: #{anonymiser.counts[:errored]}"
+      puts "Skipped: #{anonymiser.counts[:skipped]}"
       puts "Updated: #{anonymiser.counts[:processed]}"
+      puts "Errors: #{anonymiser.counts[:errored]}"
       puts "Took #{TimeHelpers.humanise(Time.now - started)} to complete"
     end
   end
