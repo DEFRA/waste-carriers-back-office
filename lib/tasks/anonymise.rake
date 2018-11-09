@@ -18,13 +18,9 @@ namespace :db do
       puts "Anonymising all emails for #{anonymiser.counts[:total]} users"
       puts "-------------------------"
 
-      anonymiser.anonymise(false)
+      anonymiser.anonymise
 
       puts "\n-------------------------"
-      puts "Final results"
-      puts "Skipped: #{anonymiser.counts[:skipped]}"
-      puts "Updated: #{anonymiser.counts[:processed]}"
-      puts "Errors: #{anonymiser.counts[:errored]}"
       puts "Took #{TimeHelpers.humanise(Time.now - started)} to complete"
     end
   end
