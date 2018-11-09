@@ -26,7 +26,7 @@ RSpec.describe "Users", type: :request do
       end
 
       it "displays a list of users" do
-        listed_user = create(:user)
+        listed_user = create(:user, email: "aaaaaaaaaaa@example.com")
         get "/bo/users"
         expect(response.body).to include(listed_user.email)
       end

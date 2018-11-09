@@ -1,36 +1,48 @@
 <div class="grid-row">
-  <div class="column-two-thirds">
+  <div class="column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: bo_path) %>
 
     <h1 class="heading-large">
       <%= t(".heading") %>
     </h1>
-
-    <% if @users.present? %>
-      <div class="grid-row">
-        <div class="column-full">
-          <table>
-            <thead>
-              <tr>
-                <th><%= t(".user_list.th.email") %></th>
-                <th><%= t(".user_list.th.role") %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @users.each do |user| %>
-                <tr>
-                  <td>
-                    <%= user.email %>
-                  </td>
-                  <td>
-                    <%= t(".user_list.roles.#{user.role}") %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    <% end %>
   </div>
+</div>
+
+  <% if @users.present? %>
+    <div class="grid-row">
+      <div class="column-full">
+        <table>
+          <thead>
+            <tr>
+              <th><%= t(".user_list.th.email") %></th>
+              <th><%= t(".user_list.th.role") %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td>
+                  <%= user.email %>
+                </td>
+                <td>
+                  <%= t(".user_list.roles.#{user.role}") %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-full">
+        <nav role="navigation" class="pagination" aria-label="Pagination">
+          <div class="pagination__summary">
+            <%= page_entries_info @users, entry_name: "item" %>
+          </div>
+          <%= paginate @users %>
+        </nav>
+      </div>
+    </div>
+  <% end %>
 </div>
