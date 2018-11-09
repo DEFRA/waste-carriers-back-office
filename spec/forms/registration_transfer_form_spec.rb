@@ -37,6 +37,26 @@ RSpec.describe RegistrationTransferForm, type: :model do
         expect(registration_transfer_form.submit(invalid_params)).to eq(false)
       end
     end
+
+    context "when the params contain uppercase letters" do
+      let(:uppercase_params) do
+        {
+          reg_identifier: registration_transfer_form.reg_identifier,
+          email: "UPPERCASElowercase@example.com",
+          confirm_email: "UPPERCASElowercase@example.com"
+        }
+      end
+
+      it "lowercases the email" do
+        registration_transfer_form.submit(uppercase_params)
+        expect(registration_transfer_form.email).to eq("uppercaselowercase@example.com")
+      end
+
+      it "lowercases the confirm_email" do
+        registration_transfer_form.submit(uppercase_params)
+        expect(registration_transfer_form.confirm_email).to eq("uppercaselowercase@example.com")
+      end
+    end
   end
 
   describe "#email" do

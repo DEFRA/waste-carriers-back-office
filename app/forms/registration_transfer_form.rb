@@ -9,8 +9,8 @@ class RegistrationTransferForm < WasteCarriersEngine::BaseForm
   end
 
   def submit(params)
-    self.email = params[:email]
-    self.confirm_email = params[:confirm_email]
+    self.email = params[:email]&.downcase
+    self.confirm_email = params[:confirm_email]&.downcase
 
     attributes = {}
 
