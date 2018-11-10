@@ -20,10 +20,26 @@ namespace :users do
       bo_user = back_office_user(user_collections[:back_office], user["email"])
       role = determine_admin_role(user_collections[:roles], user)
       if bo_user.nil?
-        result = create_back_office_user(user_collections[:back_office], user, role)
+        result = create_user(user_collections[:back_office], user, role)
         puts "Created new user: #{user[:email]}, #{role}" if result
         puts "Error creating new user: #{user[:email]}, #{role}" unless result
-      elsif role != bo_user[:role]
+      elsif role.to_s != bo_user[:role]
+        result = update_role(user_collections[:back_office], bo_user, role)
+        puts "Updated #{user[:email]} to new role #{role}" if result
+        puts "Error updating #{user[:email]} to new role #{role}" unless result
+      else
+        puts "No changes so skipping #{bo_user['email']}"
+      end
+    end
+
+    Db.paged_collection(paging, user_collections[:agency]).each do |user|
+      bo_user = back_office_user(user_collections[:back_office], user["email"])
+      role = determine_role(user_collections[:roles], user)
+      if bo_user.nil?
+        result = create_user(user_collections[:back_office], user, role)
+        puts "Created new user: #{user[:email]}, #{role}" if result
+        puts "Error creating new user: #{user[:email]}, #{role}" unless result
+      elsif role.to_s != bo_user[:role]
         result = update_role(user_collections[:back_office], bo_user, role)
         puts "Updated #{user[:email]} to new role #{role}" if result
         puts "Error updating #{user[:email]} to new role #{role}" unless result
@@ -37,7 +53,7 @@ namespace :users do
     collection.find(email: email).first
   end
 
-  def create_back_office_user(collection, user, role)
+  def create_user(collection, user, role)
     result = collection.insert_one(
       email: user["email"],
       encrypted_password: user["encrypted_password"],
@@ -60,6 +76,13 @@ namespace :users do
 
   def determine_admin_role(collection, user)
     return :agency_super unless user["role_ids"]
+
+    role = collection.find(_id: user["role_ids"][0]).first
+    convert_role(role["name"])
+  end
+
+  def determine_role(collection, user)
+    return :agency unless user["role_ids"]
 
     role = collection.find(_id: user["role_ids"][0]).first
     convert_role(role["name"])
