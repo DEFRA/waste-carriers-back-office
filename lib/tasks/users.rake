@@ -18,12 +18,17 @@ namespace :users do
 
     Db.paged_collection(paging, user_collections[:admin]).each do |user|
       bo_user = back_office_user(user_collections[:back_office], user["email"])
+      role = determine_admin_role(user_collections[:roles], user)
       if bo_user.nil?
-        role = determine_admin_role(user_collections[:roles], user)
-        create_back_office_user(user_collections[:back_office], user, role)
-        puts "Created new back office user: #{user[:email]}, #{role}"
+        result = create_back_office_user(user_collections[:back_office], user, role)
+        puts "Created new user: #{user[:email]}, #{role}" if result
+        puts "Error creating new user: #{user[:email]}, #{role}" unless result
+      elsif role != bo_user[:role]
+        result = update_role(user_collections[:back_office], bo_user, role)
+        puts "Updated #{user[:email]} to new role #{role}" if result
+        puts "Error updating #{user[:email]} to new role #{role}" unless result
       else
-        puts "Skipping admin #{bo_user['email']}"
+        puts "No changes so skipping #{bo_user['email']}"
       end
     end
   end
@@ -33,7 +38,7 @@ namespace :users do
   end
 
   def create_back_office_user(collection, user, role)
-    collection.insert_one(
+    result = collection.insert_one(
       email: user["email"],
       encrypted_password: user["encrypted_password"],
       sign_in_count: 0,
@@ -41,6 +46,16 @@ namespace :users do
       role: role,
       confirmed_at: Time.now
     )
+    return true if result.n.positive?
+
+    false
+  end
+
+  def update_role(collection, user, new_role)
+    result = collection.find(_id: user[:_id]).update_one("$set": { role: new_role })
+    return true if result.n.positive?
+
+    false
   end
 
   def determine_admin_role(collection, user)
