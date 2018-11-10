@@ -18,16 +18,12 @@ namespace :users do
 
     Db.paged_collection(paging, user_collections[:admin]).each do |user|
       bo_user = back_office_user(user_collections[:back_office], user["email"])
-      begin
-        if bo_user.nil?
-          role = determine_admin_role(user_collections[:roles], user)
-          create_back_office_user(user, role)
-          puts "Created new back office user: #{user.email}, #{role}"
-        else
-          puts "Skipping admin #{bo_user['email']}"
-        end
-      rescue StandardError => ex
-        puts ex
+      if bo_user.nil?
+        role = determine_admin_role(user_collections[:roles], user)
+        create_back_office_user(user_collections[:back_office], user, role)
+        puts "Created new back office user: #{user[:email]}, #{role}"
+      else
+        puts "Skipping admin #{bo_user['email']}"
       end
     end
   end
@@ -36,13 +32,15 @@ namespace :users do
     collection.find(email: email).first
   end
 
-  def create_back_office_user(user, role)
-    User.create(
+  def create_back_office_user(collection, user, role)
+    collection.insert_one(
       email: user["email"],
+      encrypted_password: user["encrypted_password"],
+      sign_in_count: 0,
+      failed_attempts: 0,
       role: role,
-      password: user["encrypted_password"],
       confirmed_at: Time.now
-    ).save!
+    )
   end
 
   def determine_admin_role(collection, user)
