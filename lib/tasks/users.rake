@@ -8,5 +8,7 @@ namespace :users do
   task sync_internal_users: :environment do
     sync_users = Users::SyncUsers.new
     sync_users.sync
+    puts "Action, Email, Determined role"
+    sync_users.results.each { |result| puts "#{result[:action]}, #{result[:email]}, #{result[:role]}" }
   end
 end

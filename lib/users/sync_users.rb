@@ -5,6 +5,8 @@ require "db"
 module Users
   class SyncUsers
 
+    attr_reader :results
+
     def initialize
       @collections = {
         roles: Db.roles_collection,
@@ -12,6 +14,7 @@ module Users
         agency: Db.agency_users_collection,
         back_office: Db.back_office_users_collection
       }
+      @results = []
     end
 
     def sync
@@ -43,7 +46,7 @@ module Users
       elsif determined_role.to_s != bo_user[:role]
         update_role(bo_user, determined_role)
       else
-        puts "No changes so skipping #{bo_user[:email]}"
+        add_result(user[:email], determined_role, :skip)
       end
     end
 
@@ -60,22 +63,17 @@ module Users
         role: role,
         confirmed_at: Time.now
       )
-      if result.n.positive?
-        puts "Created new user: #{user[:email]}, #{role}"
-      else
-        puts "Error creating new user: #{user[:email]}, #{role}"
-      end
+      action = result.n.positive? ? :create : :error
+      add_result(user[:email], role, action)
     end
 
     def update_role(user, new_role)
       result = @collections[:back_office]
                .find(_id: user[:_id])
                .update_one("$set": { role: new_role })
-      if result.n.positive?
-        puts "Updated #{user[:email]} to new role #{new_role}"
-      else
-        puts "Error updating #{user[:email]} to new role #{new_role}"
-      end
+
+      action = result.n.positive? ? :update : :error
+      add_result(user[:email], new_role, action)
     end
 
     def determine_admin_role(user)
@@ -120,6 +118,10 @@ module Users
 
     def admin_role?(role)
       %w[agency_super finance_super].include?(role)
+    end
+
+    def add_result(email, role, action)
+      @results << { email: email, role: role, action: action }
     end
   end
 end
