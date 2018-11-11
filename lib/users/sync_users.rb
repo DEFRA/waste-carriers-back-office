@@ -32,7 +32,7 @@ module Users
     def sync_agency
       @collections[:agency].find.each do |user|
         bo_user = back_office_user(user["email"])
-        role = determine_agency_role(user)
+        role = determine_agency_role(user, bo_user)
         sync_user(user, bo_user, role)
       end
     end
@@ -41,15 +41,7 @@ module Users
       if bo_user.nil?
         create_user(user, determined_role)
       elsif determined_role.to_s != bo_user[:role]
-        # Because we are syncing across from the backend, we have to deal with
-        # the fact that they have individuals who have both an admin and agency
-        # user (because in the backend system admins can only manage users, not
-        # actually do anything with registrations).
-        # So when syncing agency users, if the role found in the back office is
-        # an admin role, we leave it as is rather than overwriting it (in the
-        # back office admins can do pretty much anything hence only one user
-        # needed)
-        update_role(bo_user, determined_role) unless admin_role?(bo_user[:role])
+        update_role(bo_user, determined_role)
       else
         puts "No changes so skipping #{bo_user['email']}"
       end
@@ -87,13 +79,22 @@ module Users
     end
 
     def determine_admin_role(user)
-      return :agency_super unless user["role_ids"]
+      return "agency_super" unless user["role_ids"]
 
       determine_role(user)
     end
 
-    def determine_agency_role(user)
-      return :agency unless user["role_ids"]
+    def determine_agency_role(user, bo_user)
+      # Because we are syncing across from the backend, we have to deal with
+      # the fact that they have individuals who have both an admin and agency
+      # user (because in the backend system admins can only manage users, not
+      # actually do anything with registrations).
+      # So when syncing agency users, if the role found in the back office is
+      # an admin role, we leave it as is rather than overwriting it (in the
+      # back office admins can do pretty much anything hence only one user
+      # needed)
+      return bo_user["role"] if bo_user && admin_role?(bo_user[:role])
+      return "agency" unless user["role_ids"]
 
       determine_role(user)
     end
