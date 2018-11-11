@@ -41,7 +41,15 @@ module Users
       if bo_user.nil?
         create_user(user, determined_role)
       elsif determined_role.to_s != bo_user[:role]
-        update_role(bo_user, determined_role)
+        # Because we are syncing across from the backend, we have to deal with
+        # the fact that they have individuals who have both an admin and agency
+        # user (because in the backend system admins can only manage users, not
+        # actually do anything with registrations).
+        # So when syncing agency users, if the role found in the back office is
+        # an admin role, we leave it as is rather than overwriting it (in the
+        # back office admins can do pretty much anything hence only one user
+        # needed)
+        update_role(bo_user, determined_role) unless admin_role?(bo_user[:role])
       else
         puts "No changes so skipping #{bo_user['email']}"
       end
@@ -107,6 +115,10 @@ module Users
         new_role = "finance"
       end
       new_role
+    end
+
+    def admin_role?(role)
+      %w[agency_super finance_super].include?(role)
     end
   end
 end
