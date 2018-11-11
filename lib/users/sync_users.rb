@@ -23,7 +23,7 @@ module Users
 
     def sync_admin
       @collections[:admin].find.each do |user|
-        bo_user = back_office_user(user["email"])
+        bo_user = back_office_user(user[:email])
         role = determine_admin_role(user)
         sync_user(user, bo_user, role)
       end
@@ -31,7 +31,7 @@ module Users
 
     def sync_agency
       @collections[:agency].find.each do |user|
-        bo_user = back_office_user(user["email"])
+        bo_user = back_office_user(user[:email])
         role = determine_agency_role(user, bo_user)
         sync_user(user, bo_user, role)
       end
@@ -43,7 +43,7 @@ module Users
       elsif determined_role.to_s != bo_user[:role]
         update_role(bo_user, determined_role)
       else
-        puts "No changes so skipping #{bo_user['email']}"
+        puts "No changes so skipping #{bo_user[:email]}"
       end
     end
 
@@ -53,8 +53,8 @@ module Users
 
     def create_user(user, role)
       result = @collections[:back_office].insert_one(
-        email: user["email"],
-        encrypted_password: user["encrypted_password"],
+        email: user[:email],
+        encrypted_password: user[:encrypted_password],
         sign_in_count: 0,
         failed_attempts: 0,
         role: role,
@@ -93,15 +93,15 @@ module Users
       # an admin role, we leave it as is rather than overwriting it (in the
       # back office admins can do pretty much anything hence only one user
       # needed)
-      return bo_user["role"] if bo_user && admin_role?(bo_user[:role])
-      return "agency" unless user["role_ids"]
+      return bo_user[:role] if bo_user && admin_role?(bo_user[:role])
+      return "agency" unless user[:role_ids]
 
       determine_role(user)
     end
 
     def determine_role(user)
-      role = @collections[:roles].find(_id: user["role_ids"][0]).first
-      convert_role(role["name"])
+      role = @collections[:roles].find(_id: user[:role_ids][0]).first
+      convert_role(role[:name])
     end
 
     def convert_role(role)
