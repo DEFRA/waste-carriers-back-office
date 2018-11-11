@@ -32,7 +32,7 @@ module Users
     def sync_agency
       @collections[:agency].find.each do |user|
         bo_user = back_office_user(user["email"])
-        role = determine_role(user)
+        role = determine_agency_role(user)
         sync_user(user, bo_user, role)
       end
     end
@@ -61,9 +61,9 @@ module Users
         confirmed_at: Time.now
       )
       if result.n.positive?
-        puts "Created new user: #{user[:email]}, #{determined_role}"
+        puts "Created new user: #{user[:email]}, #{role}"
       else
-        puts "Error creating new user: #{user[:email]}, #{determined_role}"
+        puts "Error creating new user: #{user[:email]}, #{role}"
       end
     end
 
@@ -72,22 +72,25 @@ module Users
                .find(_id: user[:_id])
                .update_one("$set": { role: new_role })
       if result.n.positive?
-        puts "Updated #{user[:email]} to new role #{determined_role}"
+        puts "Updated #{user[:email]} to new role #{new_role}"
       else
-        puts "Error updating #{user[:email]} to new role #{determined_role}"
+        puts "Error updating #{user[:email]} to new role #{new_role}"
       end
     end
 
     def determine_admin_role(user)
       return :agency_super unless user["role_ids"]
 
-      role = @collections[:roles].find(_id: user["role_ids"][0]).first
-      convert_role(role["name"])
+      determine_role(user)
+    end
+
+    def determine_agency_role(user)
+      return :agency unless user["role_ids"]
+
+      determine_role(user)
     end
 
     def determine_role(user)
-      return :agency unless user["role_ids"]
-
       role = @collections[:roles].find(_id: user["role_ids"][0]).first
       convert_role(role["name"])
     end
