@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
-  revision: b535c6c5c2a3edaa0b7056534d148b76a3ca4bf9
+  revision: c9d8c00604cdf7dc0b2032b9b76fd85166260093
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -307,7 +307,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    thor (0.20.0)
+    thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.8)
     turbolinks (5.2.0)

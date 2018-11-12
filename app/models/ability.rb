@@ -41,10 +41,12 @@ class Ability
   def permissions_for_agency_super_user
     permissions_for_agency_user_group
 
+    can :manage_back_office_users, :all
     can :create_agency_user, User
   end
 
   def permissions_for_finance_super_user
+    can :manage_back_office_users, User
     can :create_agency_user, User
     can :create_agency_with_refund_user, User
     can :create_finance_user, User
