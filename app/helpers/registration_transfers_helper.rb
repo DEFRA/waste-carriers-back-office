@@ -8,7 +8,7 @@ module RegistrationTransfersHelper
   end
 
   def continue_after_transfer_link(registration)
-    [Rails.configuration.wcrs_frontend_url,
+    [Rails.configuration.wcrs_backend_url,
      "/registrations?utf8=%E2%9C%93&q=",
      registration.reg_identifier,
      "&commit=Search&searchWithin=any"].join

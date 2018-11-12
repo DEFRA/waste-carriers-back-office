@@ -72,5 +72,9 @@ Rails.application.routes.draw do
       to: "registration_transfers#success",
       as: :registration_transfer_success
 
+  get "/bo/users",
+      to: "users#index",
+      as: :users
+
   mount WasteCarriersEngine::Engine => "/bo"
 end
