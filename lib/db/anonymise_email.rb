@@ -31,7 +31,7 @@ module Db
     private
 
     def anonymise_users
-      Db.paged_users(@paging).each do |user|
+      Db.paged_collection(@paging, @collections[:users]).each do |user|
         unless user["email"].end_with?("@example.com")
           result = anonymise_email(
             debug,
