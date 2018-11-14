@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "db"
-require "users"
 
 namespace :users do
   desc "Sync backend users with back-office"
