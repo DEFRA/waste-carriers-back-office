@@ -4,11 +4,6 @@ class UserMigrationService
   attr_reader :results
 
   def initialize
-    @roles = BackendUsers::Role.all
-    @backend_admins = BackendUsers::Admin.all
-    @backend_agency_users = BackendUsers::AgencyUser.all
-    @back_office_users = User.all
-
     @results = []
   end
 
@@ -20,7 +15,7 @@ class UserMigrationService
   private
 
   def sync_admin
-    @backend_admins.each do |user|
+    BackendUsers::Admin.each do |user|
       bo_user = back_office_user(user[:email])
       role = determine_admin_role(user)
       sync_user(user, bo_user, role)
@@ -28,7 +23,7 @@ class UserMigrationService
   end
 
   def sync_agency
-    @backend_agency_users.each do |user|
+    BackendUsers::AgencyUser.each do |user|
       bo_user = back_office_user(user[:email])
       role = determine_agency_role(user, bo_user)
       sync_user(user, bo_user, role)
@@ -46,7 +41,7 @@ class UserMigrationService
   end
 
   def back_office_user(email)
-    @back_office_users.where(email: email).first
+    User.where(email: email).first
   end
 
   def create_user(user, role)
@@ -91,7 +86,7 @@ class UserMigrationService
   end
 
   def determine_role(user)
-    role = @roles.where(_id: user[:role_ids][0]).first
+    role = BackendUsers::Role.where(_id: user[:role_ids][0]).first
     convert_role(role[:name])
   end
 
