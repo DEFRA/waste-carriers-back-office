@@ -16,16 +16,18 @@ class UserMigrationService
 
   def sync_admin
     BackendUsers::Admin.each do |user|
-      bo_user = back_office_user(user.email)
+      bo_user = back_office_user(user)
       role = determine_admin_role(user)
+
       sync_user(user, bo_user, role)
     end
   end
 
   def sync_agency
     BackendUsers::AgencyUser.each do |user|
-      bo_user = back_office_user(user.email)
+      bo_user = back_office_user(user)
       role = determine_agency_role(user, bo_user)
+
       sync_user(user, bo_user, role)
     end
   end
@@ -40,7 +42,8 @@ class UserMigrationService
     end
   end
 
-  def back_office_user(email)
+  def back_office_user(backend_user)
+    email = backend_user.email
     User.where(email: email).first
   end
 
