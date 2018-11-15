@@ -10,6 +10,6 @@ module BackendUsers
     field :name,            type: String
     field :resource_type,   type: String
     field :resource_id,     type: String
-    field :agency_user_ids, type: Hash
+    field :agency_user_ids, type: Array
   end
 end

@@ -46,6 +46,42 @@ RSpec.describe UserMigrationService do
         expect(matching_back_office_user.role).to eq("agency")
       end
 
+      context "when the role is agency_with_refund" do
+        before do
+          role = create(:role, :agency_with_refund, agency_user_ids: [agency_user.id])
+          agency_user.update_attributes(role_ids: [role.id])
+        end
+
+        it "uses the correct role" do
+          user_migration_service.sync
+          expect(matching_back_office_user.role).to eq("agency_with_refund")
+        end
+      end
+
+      context "when the role is finance" do
+        before do
+          role = create(:role, :finance, agency_user_ids: [agency_user.id])
+          agency_user.update_attributes(role_ids: [role.id])
+        end
+
+        it "uses the correct role" do
+          user_migration_service.sync
+          expect(matching_back_office_user.role).to eq("finance")
+        end
+      end
+
+      context "when the role is finance_admin" do
+        before do
+          role = create(:role, :finance_admin, agency_user_ids: [agency_user.id])
+          agency_user.update_attributes(role_ids: [role.id])
+        end
+
+        it "uses the correct role" do
+          user_migration_service.sync
+          expect(matching_back_office_user.role).to eq("finance_admin")
+        end
+      end
+
       it "adds the correct value to @results" do
         result = {
           action: :create,
@@ -75,6 +111,18 @@ RSpec.describe UserMigrationService do
       it "uses the correct role" do
         user_migration_service.sync
         expect(matching_back_office_user.role).to eq("agency_super")
+      end
+
+      context "when the role is finance_super" do
+        before do
+          role = create(:role, :finance_super, agency_user_ids: [admin.id])
+          admin.update_attributes(role_ids: [role.id])
+        end
+
+        it "uses the correct role" do
+          user_migration_service.sync
+          expect(matching_back_office_user.role).to eq("finance_super")
+        end
       end
 
       it "adds the correct value to @results" do
