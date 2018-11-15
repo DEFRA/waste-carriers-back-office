@@ -4,12 +4,11 @@ class UserMigrationService
   attr_reader :results
 
   def initialize
-    @collections = {
-      roles: Mongoid::Clients.with_name("users").database.collections.find { |c| c.name == "roles" },
-      admin: Mongoid::Clients.with_name("users").database.collections.find { |c| c.name == "admins" },
-      agency: Mongoid::Clients.with_name("users").database.collections.find { |c| c.name == "agency_users" },
-      back_office: Mongoid::Clients.with_name("users").database.collections.find { |c| c.name == "back_office_users" }
-    }
+    @roles = BackendUsers::Role.all
+    @backend_admins = BackendUsers::Admin.all
+    @backend_agency_users = BackendUsers::AgencyUser.all
+    @back_office_users = User.all
+
     @results = []
   end
 
@@ -21,7 +20,7 @@ class UserMigrationService
   private
 
   def sync_admin
-    @collections[:admin].find.each do |user|
+    @backend_admins.each do |user|
       bo_user = back_office_user(user[:email])
       role = determine_admin_role(user)
       sync_user(user, bo_user, role)
@@ -29,7 +28,7 @@ class UserMigrationService
   end
 
   def sync_agency
-    @collections[:agency].find.each do |user|
+    @backend_agency_users.each do |user|
       bo_user = back_office_user(user[:email])
       role = determine_agency_role(user, bo_user)
       sync_user(user, bo_user, role)
@@ -47,13 +46,13 @@ class UserMigrationService
   end
 
   def back_office_user(email)
-    @collections[:back_office].find(email: email).first
+    @back_office_users.where(email: email).first
   end
 
   def create_user(user, role)
-    result = @collections[:back_office].insert_one(
-      email: user[:email],
-      encrypted_password: user[:encrypted_password],
+    result = User.collection.insert_one(
+      email: user.email,
+      encrypted_password: user.encrypted_password,
       sign_in_count: 0,
       failed_attempts: 0,
       role: role,
@@ -64,11 +63,9 @@ class UserMigrationService
   end
 
   def update_role(user, new_role)
-    result = @collections[:back_office]
-             .find(_id: user[:_id])
-             .update_one("$set": { role: new_role })
+    result = user.set(role: new_role)
 
-    action = result.n.positive? ? :update : :error
+    action = result.present? ? :update : :error
     add_result(user[:email], new_role, action)
   end
 
@@ -94,7 +91,7 @@ class UserMigrationService
   end
 
   def determine_role(user)
-    role = @collections[:roles].find(_id: user[:role_ids][0]).first
+    role = @roles.where(_id: user[:role_ids][0]).first
     convert_role(role[:name])
   end
 
