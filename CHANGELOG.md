@@ -1,5 +1,43 @@
 # Change Log
 
+## [v1.3.0](https://github.com/DEFRA/waste-carriers-back-office/tree/v1.3.0) (2018-11-12)
+[Full Changelog](https://github.com/DEFRA/waste-carriers-back-office/compare/v1.2.3...v1.3.0)
+
+**Implemented enhancements:**
+
+- Add rake task to sync internal users [\#182](https://github.com/DEFRA/waste-carriers-back-office/pull/182) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add new page for user management [\#180](https://github.com/DEFRA/waste-carriers-back-office/pull/180) ([irisfaraway](https://github.com/irisfaraway))
+- Add a menu to the back office [\#178](https://github.com/DEFRA/waste-carriers-back-office/pull/178) ([irisfaraway](https://github.com/irisfaraway))
+- Add ability to skip already anonymised emails [\#173](https://github.com/DEFRA/waste-carriers-back-office/pull/173) ([Cruikshanks](https://github.com/Cruikshanks))
+- Ensure output to STDOUT is immediate in anonymise [\#172](https://github.com/DEFRA/waste-carriers-back-office/pull/172) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add timings and alter output in anonymise email task [\#170](https://github.com/DEFRA/waste-carriers-back-office/pull/170) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add rake task to anonymise emails [\#165](https://github.com/DEFRA/waste-carriers-back-office/pull/165) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add config for renewal grace window [\#164](https://github.com/DEFRA/waste-carriers-back-office/pull/164) ([Cruikshanks](https://github.com/Cruikshanks))
+- Transfer a registration to a new account [\#161](https://github.com/DEFRA/waste-carriers-back-office/pull/161) ([irisfaraway](https://github.com/irisfaraway))
+- Transfer a registration to an existing account [\#153](https://github.com/DEFRA/waste-carriers-back-office/pull/153) ([irisfaraway](https://github.com/irisfaraway))
+
+**Fixed bugs:**
+
+- Remove active styling from menu links [\#186](https://github.com/DEFRA/waste-carriers-back-office/pull/186) ([irisfaraway](https://github.com/irisfaraway))
+- Use new env var to get backend path [\#185](https://github.com/DEFRA/waste-carriers-back-office/pull/185) ([irisfaraway](https://github.com/irisfaraway))
+- Downcase all email characters when transferring registration [\#179](https://github.com/DEFRA/waste-carriers-back-office/pull/179) ([irisfaraway](https://github.com/irisfaraway))
+- Fix blocked actions post grace window [\#169](https://github.com/DEFRA/waste-carriers-back-office/pull/169) ([Cruikshanks](https://github.com/Cruikshanks))
+- Add rake task to solve stuck renewals [\#162](https://github.com/DEFRA/waste-carriers-back-office/pull/162) ([Cruikshanks](https://github.com/Cruikshanks))
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `b535c6c` to `c9d8c00` [\#184](https://github.com/DEFRA/waste-carriers-back-office/pull/184) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump passenger from 5.3.6 to 5.3.7 [\#183](https://github.com/DEFRA/waste-carriers-back-office/pull/183) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump govuk\_template from 0.24.1 to 0.25.0 [\#177](https://github.com/DEFRA/waste-carriers-back-office/pull/177) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `e5d5f42` to `80a323f` [\#171](https://github.com/DEFRA/waste-carriers-back-office/pull/171) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump jbuilder from 2.7.0 to 2.8.0 [\#168](https://github.com/DEFRA/waste-carriers-back-office/pull/168) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump passenger from 5.3.5 to 5.3.6 [\#167](https://github.com/DEFRA/waste-carriers-back-office/pull/167) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[Security\] Bump rack from 1.6.10 to 1.6.11 [\#166](https://github.com/DEFRA/waste-carriers-back-office/pull/166) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `74171af` to `307ebcf` [\#160](https://github.com/DEFRA/waste-carriers-back-office/pull/160) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[Security\] Bump loofah from 2.2.2 to 2.2.3 [\#159](https://github.com/DEFRA/waste-carriers-back-office/pull/159) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop from 0.59.2 to 0.60.0 [\#158](https://github.com/DEFRA/waste-carriers-back-office/pull/158) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `bec6d58` to `74171af` [\#157](https://github.com/DEFRA/waste-carriers-back-office/pull/157) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v1.2.3](https://github.com/DEFRA/waste-carriers-back-office/tree/v1.2.3) (2018-10-24)
 [Full Changelog](https://github.com/DEFRA/waste-carriers-back-office/compare/v1.2.2...v1.2.3)
 
