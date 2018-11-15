@@ -16,7 +16,7 @@ class UserMigrationService
 
   def sync_admin
     BackendUsers::Admin.each do |user|
-      bo_user = back_office_user(user[:email])
+      bo_user = back_office_user(user.email)
       role = determine_admin_role(user)
       sync_user(user, bo_user, role)
     end
@@ -24,7 +24,7 @@ class UserMigrationService
 
   def sync_agency
     BackendUsers::AgencyUser.each do |user|
-      bo_user = back_office_user(user[:email])
+      bo_user = back_office_user(user.email)
       role = determine_agency_role(user, bo_user)
       sync_user(user, bo_user, role)
     end
@@ -36,7 +36,7 @@ class UserMigrationService
     elsif role_has_changed?(bo_user, backend_role)
       update_role(bo_user, backend_role)
     else
-      add_result(user[:email], backend_role, :skip)
+      add_result(user.email, backend_role, :skip)
     end
   end
 
@@ -58,14 +58,16 @@ class UserMigrationService
     )
 
     action = result.n.positive? ? :create : :error
-    add_result(user[:email], role, action)
+    add_result(user.email, role, action)
   end
 
   def update_role(user, new_role)
+    # We use Mongoid's atomic $set here so we just update the role without
+    # persisting other aspects of the model.
     result = user.set(role: new_role)
 
     action = result.present? ? :update : :error
-    add_result(user[:email], new_role, action)
+    add_result(user.email, new_role, action)
   end
 
   def determine_admin_role(user)
@@ -83,15 +85,15 @@ class UserMigrationService
     # an admin role, we leave it as is rather than overwriting it (in the
     # back office admins can do pretty much anything hence only one user
     # needed)
-    return bo_user[:role] if bo_user && admin_role?(bo_user[:role])
-    return "agency" unless user[:role_ids]
+    return bo_user.role if bo_user && admin_role?(bo_user.role)
+    return "agency" unless user.role_ids
 
     determine_role(user)
   end
 
   def determine_role(user)
-    role = BackendUsers::Role.where(_id: user[:role_ids][0]).first
-    convert_role(role[:name])
+    role = BackendUsers::Role.where(_id: user.role_ids[0]).first
+    convert_role(role.name)
   end
 
   def convert_role(role)
@@ -109,7 +111,7 @@ class UserMigrationService
   end
 
   def role_has_changed?(bo_user, backend_role)
-    bo_user[:role] != backend_role
+    bo_user.role != backend_role
   end
 
   def admin_role?(role)
