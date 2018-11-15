@@ -35,13 +35,13 @@ class UserMigrationService
     end
   end
 
-  def sync_user(user, bo_user, determined_role)
+  def sync_user(user, bo_user, backend_role)
     if bo_user.nil?
-      create_user(user, determined_role)
-    elsif role_has_changed?(bo_user, determined_role)
-      update_role(bo_user, determined_role)
+      create_user(user, backend_role)
+    elsif role_has_changed?(bo_user, backend_role)
+      update_role(bo_user, backend_role)
     else
-      add_result(user[:email], determined_role, :skip)
+      add_result(user[:email], backend_role, :skip)
     end
   end
 
@@ -109,8 +109,8 @@ class UserMigrationService
     new_role
   end
 
-  def role_has_changed?(bo_user, determined_role)
-    determined_role != bo_user[:role]
+  def role_has_changed?(bo_user, backend_role)
+    bo_user[:role] != backend_role
   end
 
   def admin_role?(role)
