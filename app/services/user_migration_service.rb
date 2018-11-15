@@ -45,6 +45,9 @@ class UserMigrationService
   end
 
   def create_user(user, role)
+    # We insert the new user directly into the collection so we can copy the
+    # encrypted password and the user can log in with the same credentials.
+    # Making a new user with User.new would not allow us to do this.
     result = User.collection.insert_one(
       email: user.email,
       encrypted_password: user.encrypted_password,
@@ -53,6 +56,7 @@ class UserMigrationService
       role: role,
       confirmed_at: Time.now
     )
+
     action = result.n.positive? ? :create : :error
     add_result(user[:email], role, action)
   end
