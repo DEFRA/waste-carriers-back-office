@@ -45,6 +45,16 @@ RSpec.describe UserMigrationService do
         user_migration_service.sync
         expect(matching_back_office_user.role).to eq("agency")
       end
+
+      it "adds the correct value to @results" do
+        result = {
+          action: :create,
+          email: agency_user.email,
+          role: "agency"
+        }
+        user_migration_service.sync
+        expect(user_migration_service.results).to include(result)
+      end
     end
 
     context "when there is a backend admin who isn't in the back office" do
@@ -66,6 +76,16 @@ RSpec.describe UserMigrationService do
         user_migration_service.sync
         expect(matching_back_office_user.role).to eq("agency_super")
       end
+
+      it "adds the correct value to @results" do
+        result = {
+          action: :create,
+          email: admin.email,
+          role: "agency_super"
+        }
+        user_migration_service.sync
+        expect(user_migration_service.results).to include(result)
+      end
     end
 
     context "when there is a backend user who is in the back office" do
@@ -79,6 +99,16 @@ RSpec.describe UserMigrationService do
           back_office_user_after = back_office_user.reload
           expect(back_office_user_before).to eq(back_office_user_after)
         end
+
+        it "adds the correct value to @results" do
+          result = {
+            action: :skip,
+            email: agency_user.email,
+            role: "agency"
+          }
+          user_migration_service.sync
+          expect(user_migration_service.results).to include(result)
+        end
       end
 
       context "when the role is different" do
@@ -91,6 +121,16 @@ RSpec.describe UserMigrationService do
           user_migration_service.sync
           role_after = back_office_user.reload.role
           expect(role_before).to_not eq(role_after)
+        end
+
+        it "adds the correct value to @results" do
+          result = {
+            action: :update,
+            email: agency_user.email,
+            role: "agency"
+          }
+          user_migration_service.sync
+          expect(user_migration_service.results).to include(result)
         end
       end
     end
