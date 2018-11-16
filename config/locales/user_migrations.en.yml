@@ -1,0 +1,5 @@
+en:
+  user_migrations:
+    new:
+      title: "Migrate users"
+      heading: "Migrate users from the backend"

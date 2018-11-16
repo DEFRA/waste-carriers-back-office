@@ -76,5 +76,10 @@ Rails.application.routes.draw do
       to: "users#index",
       as: :users
 
+  resources :user_migrations,
+        only: [:new, :create],
+        path: "bo/users/migrate",
+        path_names: { new: "" }
+
   mount WasteCarriersEngine::Engine => "/bo"
 end
