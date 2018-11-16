@@ -19,7 +19,7 @@ class TransientRegistrationSearchService
     criteria.merge!(WasteCarriersEngine::TransientRegistration.pending_payment) if @pending_payment
     criteria.merge!(WasteCarriersEngine::TransientRegistration.pending_approval) if @pending_conviction_check
 
-    criteria.page(page)
+    criteria.page(page).read(mode: :secondary)
   end
 
   private
