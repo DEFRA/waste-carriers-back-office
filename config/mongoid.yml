@@ -21,3 +21,5 @@ production:
       uri: <%= ENV['WCRS_REGSDB_URI'] %>
     users:
       uri: <%= ENV['WCRS_USERSDB_URI'] %>
+  options:
+    log_level: :info
