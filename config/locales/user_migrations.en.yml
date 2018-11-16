@@ -6,3 +6,4 @@ en:
     results:
       title: "Finished migrating users"
       heading: "Finished migrating users"
+      no_results: "No results"

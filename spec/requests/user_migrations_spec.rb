@@ -42,15 +42,16 @@ RSpec.describe "UserMigrations", type: :request do
       end
 
       it "copies unmigrated backend users" do
-        create(:agency_user)
-        number_of_back_office_users = User.count
+        agency_email = create(:agency_user).email
+        matching_users_before_migration = User.where(email: agency_email).count
         post "/bo/users/migrate"
-        expect(User.count).to eq(number_of_back_office_users + 1)
+        expect(User.where(email: agency_email).count).to eq(matching_users_before_migration + 1)
       end
 
       it "redirects to the results page" do
         post "/bo/users/migrate"
-        expect(response).to redirect_to(user_migration_results_path)
+        # We use include here so we don't have to check the details of the params
+        expect(response.location).to include(user_migration_results_path)
       end
     end
 
@@ -89,6 +90,28 @@ RSpec.describe "UserMigrations", type: :request do
       it "returns a 200 response" do
         get "/bo/users/migrate/results"
         expect(response).to have_http_status(200)
+      end
+
+      context "when there are results" do
+        let(:migration_results) do
+          [{ action: :create, email: "foo@example.com", role: "agency" },
+           { action: :update, email: "bar@example.com", role: "finance" }]
+        end
+        let(:params) do
+          { migration_results: migration_results }
+        end
+
+        it "displays the results on the page" do
+          get "/bo/users/migrate/results", params
+          expect(response.body).to include("foo@example.com")
+        end
+      end
+
+      context "when there no are results" do
+        it "displays an error" do
+          get "/bo/users/migrate/results"
+          expect(response.body).to include("No results")
+        end
       end
     end
 

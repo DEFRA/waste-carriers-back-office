@@ -5,5 +5,15 @@
     <h1 class="heading-large">
       <%= t(".heading") %>
     </h1>
+
+    <% if @migration_results.present? %>
+      <% @migration_results.each do |result| %>
+        <p><%= result %></p>
+      <% end %>
+    <% else %>
+      <p>
+        <%= t(".no_results") %>
+      </p>
+    <% end %>
   </div>
 </div>

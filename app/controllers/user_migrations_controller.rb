@@ -7,11 +7,14 @@ class UserMigrationsController < ApplicationController
   def new; end
 
   def create
-    migrate_users
-    redirect_to user_migration_results_path
+    results = migrate_users
+    params = { migration_results: results }
+    redirect_to user_migration_results_path(params)
   end
 
-  def results; end
+  def results
+    @migration_results = params[:migration_results]
+  end
 
   private
 
@@ -22,5 +25,6 @@ class UserMigrationsController < ApplicationController
   def migrate_users
     user_migration_service = UserMigrationService.new
     user_migration_service.sync
+    user_migration_service.results
   end
 end
