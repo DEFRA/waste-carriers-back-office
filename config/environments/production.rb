@@ -54,9 +54,11 @@ Rails.application.configure do
   # think the protocol is http and will try and redirect every request to an https equivalent.
   config.force_ssl = true
 
-  # Use the lowest log level to ensure availability of diagnostic information
-  # when problems arise.
-  config.log_level = :debug
+  # Use log level info due to the level being tied to Mongoid. At log level
+  # debug it means our logs are getting spammed by output from Mongoid and the
+  # MongoDb driver. We also hope to eek a little performance by not writing so
+  # much to the log
+  config.log_level = :info
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
