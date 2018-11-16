@@ -23,14 +23,14 @@ class DashboardsController < ApplicationController
   end
 
   def matching_renewals(page)
-    service = TransientRegistrationFinderService.new(
+    service = TransientRegistrationSearchService.new(
       @term,
       @in_progress,
       @pending_payment,
       @pending_conviction_check
     )
 
-    service.find(page)
+    service.search(page)
   end
 
   def search_terms_or_filters_present?

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TransientRegistrationFinderService
+class TransientRegistrationSearchService
   def initialize(term, in_progress, pending_payment, pending_conviction_check)
     @term = term
 
@@ -9,7 +9,7 @@ class TransientRegistrationFinderService
     @pending_conviction_check = pending_conviction_check
   end
 
-  def find(page)
+  def search(page)
     return WasteCarriersEngine::TransientRegistration.none if no_search_terms_or_filters?
 
     criteria = WasteCarriersEngine::TransientRegistration.order_by("metaData.lastModified": :desc)
