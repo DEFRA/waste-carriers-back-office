@@ -1,5 +1,14 @@
 # Change Log
 
+## [v1.3.1](https://github.com/DEFRA/waste-carriers-back-office/tree/v1.3.1) (2018-11-16)
+[Full Changelog](https://github.com/DEFRA/waste-carriers-back-office/compare/v1.3.0...v1.3.1)
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `d83e3b4` to `e283ec6` [\#190](https://github.com/DEFRA/waste-carriers-back-office/pull/190) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `b95d5ce` to `d83e3b4` [\#189](https://github.com/DEFRA/waste-carriers-back-office/pull/189) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `c9d8c00` to `b95d5ce` [\#188](https://github.com/DEFRA/waste-carriers-back-office/pull/188) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v1.3.0](https://github.com/DEFRA/waste-carriers-back-office/tree/v1.3.0) (2018-11-12)
 [Full Changelog](https://github.com/DEFRA/waste-carriers-back-office/compare/v1.2.3...v1.3.0)
 
