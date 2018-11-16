@@ -14,7 +14,7 @@ RSpec.describe TransientRegistrationSearchService do
                                                      in_progress,
                                                      pending_payment,
                                                      pending_conviction_check)
-    service.transient_registrations
+    service.search(1)
   end
 
   let(:non_matching_renewal) { create(:transient_registration) }
