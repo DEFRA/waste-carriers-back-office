@@ -94,16 +94,26 @@ RSpec.describe "UserMigrations", type: :request do
 
       context "when there are results" do
         let(:migration_results) do
-          [{ action: :create, email: "foo@example.com", role: "agency" },
-           { action: :update, email: "bar@example.com", role: "finance" }]
+          [{ action: "create", email: "foo@example.com", role: "agency_with_refund" },
+           { action: "update", email: "bar@example.com", role: "finance" }]
         end
         let(:params) do
           { migration_results: migration_results }
         end
 
-        it "displays the results on the page" do
+        it "displays an overview of results" do
           get "/bo/users/migrate/results", params
-          expect(response.body).to include("foo@example.com")
+          expect(response.body).to include("1 user was added to the back office")
+        end
+
+        it "displays the emails on the page" do
+          get "/bo/users/migrate/results", params
+          expect(response.body).to include("bar@example.com")
+        end
+
+        it "displays the roles on the page" do
+          get "/bo/users/migrate/results", params
+          expect(response.body).to include("agency with refund")
         end
       end
 

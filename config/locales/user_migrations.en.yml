@@ -16,4 +16,33 @@ en:
     results:
       title: "Finished migrating users"
       heading: "Finished migrating users"
+      results:
+        overview:
+          created:
+            one: "%{count} user was added to the back office"
+            other: "%{count} users were added to the back office"
+          updated:
+            one: "%{count} user had their role updated"
+            other: "%{count} users had their role updated"
+          skipped:
+            one: "%{count} user was not modified"
+            other: "%{count} users were not modified"
+          errored:
+            one: "%{count} error encountered"
+            other: "%{count} errors encountered"
+        subheading:
+          created: "Users added to back office"
+          updated: "Users with updated roles"
+          errored: "Unable to migrate due to errors"
+        table:
+          email: "Email"
+          role: "Role"
+          roles:
+            agency: "agency"
+            agency_with_refund: "agency with refund"
+            finance: "finance"
+            finance_admin: "finance admin"
+            agency_super: "agency super"
+            finance_super: "finance super"
       no_results: "No results"
+      user_button: "Return to manage back office users"

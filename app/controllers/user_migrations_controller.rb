@@ -13,7 +13,7 @@ class UserMigrationsController < ApplicationController
   end
 
   def results
-    @migration_results = params[:migration_results]
+    @migration_results = parse_results(params[:migration_results])
   end
 
   private
@@ -26,5 +26,17 @@ class UserMigrationsController < ApplicationController
     user_migration_service = UserMigrationService.new
     user_migration_service.sync
     user_migration_service.results
+  end
+
+  def parse_results(results)
+    return nil unless results.present?
+
+    parsed_results = {}
+    parsed_results[:created] = results.select { |r| r[:action] == "create" }
+    parsed_results[:updated] = results.select { |r| r[:action] == "update" }
+    parsed_results[:skipped] = results.select { |r| r[:action] == "skip" }
+    parsed_results[:errored] = results.select { |r| r[:action] == "error" }
+
+    parsed_results
   end
 end
