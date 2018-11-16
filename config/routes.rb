@@ -78,8 +78,12 @@ Rails.application.routes.draw do
 
   resources :user_migrations,
         only: [:new, :create],
-        path: "bo/users/migrate",
+        path: "/bo/users/migrate",
         path_names: { new: "" }
+
+  get "/bo/users/migrate/results",
+    to: "user_migrations#results",
+    as: :user_migration_results
 
   mount WasteCarriersEngine::Engine => "/bo"
 end

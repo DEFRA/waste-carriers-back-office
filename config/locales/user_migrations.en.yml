@@ -3,3 +3,6 @@ en:
     new:
       title: "Migrate users"
       heading: "Migrate users from the backend"
+    results:
+      title: "Finished migrating users"
+      heading: "Finished migrating users"
