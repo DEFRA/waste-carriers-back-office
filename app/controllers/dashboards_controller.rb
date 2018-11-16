@@ -5,7 +5,7 @@ class DashboardsController < ApplicationController
 
   def index
     set_term_and_filters
-    @transient_registrations = Kaminari.paginate_array(matching_renewals).page params[:page]
+    @transient_registrations = matching_renewals(params[:page])
     @search_terms_or_filters_present = search_terms_or_filters_present?
   end
 
@@ -22,13 +22,15 @@ class DashboardsController < ApplicationController
     filter_param.present? && filter_param == "true"
   end
 
-  def matching_renewals
-    service = TransientRegistrationFinderService.new(@term,
-                                                     @in_progress,
-                                                     @pending_payment,
-                                                     @pending_conviction_check)
+  def matching_renewals(page)
+    service = TransientRegistrationFinderService.new(
+      @term,
+      @in_progress,
+      @pending_payment,
+      @pending_conviction_check
+    )
 
-    service.transient_registrations
+    service.find(page)
   end
 
   def search_terms_or_filters_present?

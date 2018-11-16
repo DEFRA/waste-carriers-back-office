@@ -9,46 +9,26 @@ class TransientRegistrationFinderService
     @pending_conviction_check = pending_conviction_check
   end
 
-  def transient_registrations
-    return [] if no_search_terms_or_filters?
+  def find(page)
+    return WasteCarriersEngine::TransientRegistration.none if no_search_terms_or_filters?
 
-    transient_registrations = WasteCarriersEngine::TransientRegistration.all.order_by("metaData.lastModified": :desc)
+    criteria = WasteCarriersEngine::TransientRegistration.order_by("metaData.lastModified": :desc)
+    criteria.merge!(WasteCarriersEngine::TransientRegistration.search_term(@term)) if @term.present?
 
-    transient_registrations = search_results(transient_registrations)
-    transient_registrations = filter_results(transient_registrations)
+    criteria.merge!(WasteCarriersEngine::TransientRegistration.in_progress) if @in_progress
+    criteria.merge!(WasteCarriersEngine::TransientRegistration.pending_payment) if @pending_payment
+    criteria.merge!(WasteCarriersEngine::TransientRegistration.pending_approval) if @pending_conviction_check
 
-    transient_registrations
+    criteria.page(page)
   end
 
   private
 
   def no_search_terms_or_filters?
     return false if @term.present?
-
     return false if @in_progress || @pending_payment || @pending_conviction_check
 
     true
   end
 
-  def search_results(transient_registrations)
-    return transient_registrations unless @term.present?
-
-    # Regex to find strings which match the term, with no surrounding characters. The search is case-insensitive.
-    exact_match_regex = /\A#{@term}\z/i
-    # Regex to find strings which include the term. The search is case-insensitive.
-    partial_match_regex = /#{@term}/i
-
-    transient_registrations.any_of({ reg_identifier: exact_match_regex },
-                                   { company_name: partial_match_regex },
-                                   { last_name: partial_match_regex },
-                                   "addresses.postcode": partial_match_regex)
-  end
-
-  def filter_results(results)
-    results = results.select { |tr| tr.renewal_application_submitted? == false } if @in_progress
-    results = results.select { |tr| tr.pending_payment? == true } if @pending_payment
-    results = results.select { |tr| tr.pending_manual_conviction_check? == true } if @pending_conviction_check
-
-    results
-  end
 end
