@@ -41,6 +41,13 @@ RSpec.describe "UserMigrations", type: :request do
         sign_in(user)
       end
 
+      it "copies unmigrated backend users" do
+        create(:agency_user)
+        number_of_back_office_users = User.count
+        post "/bo/users/migrate"
+        expect(User.count).to eq(number_of_back_office_users + 1)
+      end
+
       it "redirects to the results page" do
         post "/bo/users/migrate"
         expect(response).to redirect_to(user_migration_results_path)
@@ -51,6 +58,13 @@ RSpec.describe "UserMigrations", type: :request do
       let(:user) { create(:user, :agency) }
       before(:each) do
         sign_in(user)
+      end
+
+      it "does not copy unmigrated backend users" do
+        create(:agency_user)
+        number_of_back_office_users = User.count
+        post "/bo/users/migrate"
+        expect(User.count).to eq(number_of_back_office_users)
       end
 
       it "redirects to the permissions error page" do
