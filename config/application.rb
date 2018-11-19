@@ -16,6 +16,10 @@ module WasteCarriersBackOffice
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Set Mongoid logging level to INFO. We have found mongoid to ber overly
+    # chatty in the logs. 
+    Mongoid.logger.level = Logger::INFO
+
     # We have an issue when deploying to our environments in that when
     # Capistrano runs the deploy:assets:precompile step (specifically bundle
     # exec rake assets:precompile) it does so having set RAILS_ENV to production.
