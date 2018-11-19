@@ -8,6 +8,12 @@
   </div>
 </div>
 
+<div class="grid-row">
+  <div class="column-full">
+    <p><%= link_to t(".options.migrate_link"), new_user_migration_path %></p>
+  </div>
+</div>
+
   <% if @users.present? %>
     <div class="grid-row">
       <div class="column-full">
