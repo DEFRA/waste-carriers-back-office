@@ -3,6 +3,8 @@ en:
     index:
       title: "Manage back office users"
       heading: "Manage back office users"
+      options:
+        migrate_link: "Migrate users from backend"
       user_list:
         th:
           email: "User email"

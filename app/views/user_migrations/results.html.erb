@@ -1,0 +1,57 @@
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <%= render("waste_carriers_engine/shared/back", back_path: users_path) %>
+
+    <h1 class="heading-large">
+      <%= t(".heading") %>
+    </h1>
+
+    <% if @migration_results.present? %>
+      <ul class="list list-bullet">
+        <% if @migration_results[:created].count.positive? %>
+          <li><%= t(".results.overview.created", count: @migration_results[:created].count) %></li>
+        <% end %>
+        <% if @migration_results[:updated].count.positive? %>
+          <li><%= t(".results.overview.updated", count: @migration_results[:updated].count) %></li>
+        <% end %>
+        <% if @migration_results[:skipped].count.positive? %>
+          <li><%= t(".results.overview.skipped", count: @migration_results[:skipped].count) %></li>
+        <% end %>
+        <% if @migration_results[:errored].count.positive? %>
+          <li><%= t(".results.overview.errored", count: @migration_results[:errored].count) %></li>
+        <% end %>
+      </ul>
+
+      <% [:created, :updated, :errored].each do |action| %>
+        <% if @migration_results[action].present? %>
+          <h2 class="heading-medium">
+            <%= t(".results.subheading.#{action}") %>
+          </h1>
+          <table>
+            <thead>
+              <tr>
+                <th><%= t(".results.table.email") %></th>
+                <th><%= t(".results.table.role") %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @migration_results[action].each do |result| %>
+                <tr>
+                  <td><%= result[:email] %></td>
+                  <td><%= t(".results.table.roles.#{result[:role]}", default: "UNKNOWN") %></td>
+                </tr>
+              <% end %>
+          </tbody>
+          </table>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>
+        <%= t(".no_results") %>
+      </p>
+    <% end %>
+
+    <%= link_to t(".user_button"), users_path, class: "button" %>
+  </div>
+
+</div>
