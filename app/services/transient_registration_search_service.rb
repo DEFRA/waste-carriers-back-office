@@ -12,7 +12,7 @@ class TransientRegistrationSearchService
   def search(page)
     return WasteCarriersEngine::TransientRegistration.none if no_search_terms_or_filters?
 
-    # The criteria when add results in a AND search (not an OR). So for a
+    # Each criteria when added results in an AND search (not an OR). So for a
     # renewal to be returned it must match all criteria selected. In some cases
     # this would be impossible, for example `pending_payment` filters on
     # renewals that have been submitted with a balance != 0. If you also
