@@ -12,6 +12,17 @@ class TransientRegistrationSearchService
   def search(page)
     return WasteCarriersEngine::TransientRegistration.none if no_search_terms_or_filters?
 
+    # The criteria when add results in a AND search (not an OR). So for a
+    # renewal to be returned it must match all criteria selected. In some cases
+    # this would be impossible, for example `pending_payment` filters on
+    # renewals that have been submitted with a balance != 0. If you also
+    # selected `in_progress` then you'd get nothing because a renewal can't be
+    # both.
+    #
+    # Also note the way criteria works in mongoid is that until we actually
+    # attempt to access a renewal e.g. with `.first` or ``.each` criteria is
+    # just a hash of filters. So when we're merging here we are merging filters
+    # not selected renewals!
     criteria = WasteCarriersEngine::TransientRegistration.order_by("metaData.lastModified": :desc)
     criteria.merge!(WasteCarriersEngine::TransientRegistration.search_term(@term)) if @term.present?
 
