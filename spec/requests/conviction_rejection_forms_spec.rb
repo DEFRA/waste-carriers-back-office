@@ -70,6 +70,11 @@ RSpec.describe "ConvictionRejectionForms", type: :request do
         expect(transient_registration.reload.metaData.status).to eq("REVOKED")
       end
 
+      it "updates the conviction_sign_off's workflow_state" do
+        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
+        expect(transient_registration.reload.conviction_sign_offs.first.workflow_state).to eq("rejected")
+      end
+
       context "when the params are invalid" do
         let(:params) do
           {
