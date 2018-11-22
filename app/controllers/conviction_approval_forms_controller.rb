@@ -25,6 +25,6 @@ class ConvictionApprovalFormsController < AdminFormsController
   private
 
   def update_conviction_sign_off
-    @transient_registration.conviction_sign_offs.first.approve(current_user)
+    @transient_registration.conviction_sign_offs.first.approve!(current_user)
   end
 end
