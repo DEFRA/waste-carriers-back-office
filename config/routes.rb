@@ -9,6 +9,7 @@ Rails.application.routes.draw do
              skip: [:invitations]
 
   get "/bo" => "dashboards#index"
+  get "/bo/convictions" => "convictions_dashboards#index", as: :convictions
 
   resources :transient_registrations,
             only: :show,
