@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
-  revision: 00d999b94d1e9f49da8312b7db6af60d4d52f725
+  revision: 4928531379f7c0358f9baaac3c47130d62b8db11
   branch: feature/conviction-check-states
   specs:
     waste_carriers_engine (0.0.1)
