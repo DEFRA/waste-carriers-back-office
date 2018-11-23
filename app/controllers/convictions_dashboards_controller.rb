@@ -15,6 +15,10 @@ class ConvictionsDashboardsController < ApplicationController
     ordered_and_paged(WasteCarriersEngine::TransientRegistration.convictions_checks_in_progress)
   end
 
+  def approved
+    ordered_and_paged(WasteCarriersEngine::TransientRegistration.convictions_approved)
+  end
+
   private
 
   def ordered_and_paged(transient_registrations)

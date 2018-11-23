@@ -12,6 +12,10 @@ en:
       title: "Convictions checks in progress"
       heading: "Convictions checks in progress"
       paragraph_1: "These renewal applications have relevant convictions and are currently being processed."
+    approved:
+      title: "Convictions checks approved"
+      heading: "Convictions checks approved"
+      paragraph_1: "These renewal applications have been approved during a conviction check."
   shared:
     convictions_dashboard_results:
       results:
