@@ -3,3 +3,11 @@ en:
     index:
       title: "Convictions dashboard"
       heading: "Convictions dashboard"
+      paragraph_1: "These renewal applications may have relevant convictions, and must be approved before they can be renewed."
+      results:
+        th:
+          reg_identifier: "Registration"
+          company_name: "Company name"
+          last_modified: "Last modified"
+          actions: "Actions"
+        convictions_details_button: "Conviction details"
