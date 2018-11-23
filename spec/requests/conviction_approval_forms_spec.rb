@@ -88,6 +88,11 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
         expect(transient_registration.reload.conviction_sign_offs.first.confirmed_by).to eq(user.email)
       end
 
+      it "updates the conviction_sign_off's workflow_state" do
+        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+        expect(transient_registration.reload.conviction_sign_offs.first.workflow_state).to eq("approved")
+      end
+
       context "when there is no pending payment" do
         before do
           transient_registration.finance_details = build(:finance_details, balance: 0)

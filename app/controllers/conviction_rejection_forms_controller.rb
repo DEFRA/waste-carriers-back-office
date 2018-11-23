@@ -24,7 +24,6 @@ class ConvictionRejectionFormsController < AdminFormsController
   private
 
   def reject_renewal
-    @transient_registration.metaData.revoke!
-    @transient_registration.metaData.save!
+    @transient_registration.conviction_sign_offs.first.reject!
   end
 end
