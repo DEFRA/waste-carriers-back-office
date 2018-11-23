@@ -1,0 +1,22 @@
+ul.dashboard_menu li {
+  display: inline-block;
+  margin-bottom: 1em;
+}
+
+ul.dashboard_menu li.title {
+  font-weight: bold;
+  margin: 1em 1em 1em 0;
+}
+
+ul.dashboard_menu li.current_page {
+  border-bottom: 4px solid $govuk-blue;
+}
+
+ul.dashboard_menu li.current_page span {
+  margin: 1em;
+}
+
+ul.dashboard_menu li a {
+  color: $govuk-blue;
+  margin: 1em;
+}

@@ -29,3 +29,11 @@ en:
           last_modified: "Last modified"
           actions: "Actions"
         convictions_details_button: "Conviction details"
+    convictions_dashboard_menu:
+      menu:
+        title: "Show:"
+        index: "All"
+        possible_matches: "Possible matches"
+        checks_in_progress: "Checks in progress"
+        approved: "Approved"
+        rejected: "Rejected"
