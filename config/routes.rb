@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "/bo" => "dashboards#index"
   get "/bo/convictions" => "convictions_dashboards#index", as: :convictions
   get "/bo/convictions/possible-matches" => "convictions_dashboards#possible_matches", as: :convictions_possible_matches
+  get "/bo/convictions/in-progress" => "convictions_dashboards#checks_in_progress", as: :convictions_checks_in_progress
 
   resources :transient_registrations,
             only: :show,

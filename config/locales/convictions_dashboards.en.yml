@@ -8,6 +8,10 @@ en:
       title: "Convictions with possible matches"
       heading: "Convictions with possible matches"
       paragraph_1: "These renewal applications have been flagged as possibly having relevant convictions, and must be reviewed."
+    checks_in_progress:
+      title: "Convictions checks in progress"
+      heading: "Convictions checks in progress"
+      paragraph_1: "These renewal applications have relevant convictions and are currently being processed."
   shared:
     convictions_dashboard_results:
       results:
