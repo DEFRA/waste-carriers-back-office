@@ -7,6 +7,10 @@ class ConvictionsDashboardsController < ApplicationController
     ordered_and_paged(WasteCarriersEngine::TransientRegistration.pending_approval)
   end
 
+  def possible_matches
+    ordered_and_paged(WasteCarriersEngine::TransientRegistration.convictions_possible_match)
+  end
+
   private
 
   def ordered_and_paged(transient_registrations)

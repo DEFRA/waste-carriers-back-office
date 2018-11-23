@@ -4,6 +4,10 @@ en:
       title: "Convictions dashboard"
       heading: "Convictions dashboard"
       paragraph_1: "These renewal applications may have relevant convictions, and must be approved before they can be renewed."
+    possible_matches:
+      title: "Convictions with possible matches"
+      heading: "Convictions with possible matches"
+      paragraph_1: "These renewal applications have been flagged as possibly having relevant convictions, and must be reviewed."
   shared:
     convictions_dashboard_results:
       results:
