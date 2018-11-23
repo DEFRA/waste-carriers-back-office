@@ -16,6 +16,10 @@ en:
       title: "Convictions checks approved"
       heading: "Convictions checks approved"
       paragraph_1: "These renewal applications have been approved during a conviction check."
+    rejected:
+      title: "Convictions checks rejected"
+      heading: "Convictions checks rejected"
+      paragraph_1: "These renewal applications have been rejected during a conviction check."
   shared:
     convictions_dashboard_results:
       results:
