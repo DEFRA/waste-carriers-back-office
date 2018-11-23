@@ -4,6 +4,8 @@ en:
       title: "Convictions dashboard"
       heading: "Convictions dashboard"
       paragraph_1: "These renewal applications may have relevant convictions, and must be approved before they can be renewed."
+  shared:
+    convictions_dashboard_results:
       results:
         th:
           reg_identifier: "Registration"

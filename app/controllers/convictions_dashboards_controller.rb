@@ -4,8 +4,13 @@ class ConvictionsDashboardsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @transient_registrations = WasteCarriersEngine::TransientRegistration.pending_approval
-                                                                         .order_by("metaData.lastModified": :desc)
-                                                                         .page params[:page]
+    ordered_and_paged(WasteCarriersEngine::TransientRegistration.pending_approval)
+  end
+
+  private
+
+  def ordered_and_paged(transient_registrations)
+    @transient_registrations = transient_registrations.order_by("metaData.lastModified": :desc)
+                                                      .page params[:page]
   end
 end
