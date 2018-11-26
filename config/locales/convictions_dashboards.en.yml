@@ -25,6 +25,7 @@ en:
           last_modified: "Last modified"
           actions: "Actions"
         convictions_details_button: "Conviction details"
+      no_results: "No results found."
     convictions_dashboard_menu:
       menu:
         title: "Show:"
