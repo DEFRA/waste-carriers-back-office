@@ -15,7 +15,6 @@ class DashboardsController < ApplicationController
     @term = params[:term]
     @in_progress = get_filter_value(params[:in_progress])
     @pending_payment = get_filter_value(params[:pending_payment])
-    @pending_conviction_check = get_filter_value(params[:pending_conviction_check])
   end
 
   def get_filter_value(filter_param)
@@ -26,8 +25,7 @@ class DashboardsController < ApplicationController
     service = TransientRegistrationSearchService.new(
       @term,
       @in_progress,
-      @pending_payment,
-      @pending_conviction_check
+      @pending_payment
     )
 
     service.search(page)
@@ -36,6 +34,6 @@ class DashboardsController < ApplicationController
   def search_terms_or_filters_present?
     return true if @term.present?
 
-    @in_progress || @pending_payment || @pending_conviction_check
+    @in_progress || @pending_payment
   end
 end
