@@ -1,3 +1,7 @@
+.button-alert {
+  @include button($yellow);
+}
+
 .button-warning {
   @include button($red);
 }

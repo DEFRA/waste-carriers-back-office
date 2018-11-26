@@ -46,10 +46,11 @@ en:
           confirmed_at: "Confirmed at"
           revoked_reason: "Comment"
       approve_or_reject:
-        heading: "Approve or reject this renewal"
+        heading: "Manage this conviction check"
         paragraph_1: "You can approve or reject this renewal based on this conviction information."
         paragraph_2: "If the renewal hasn't been paid for yet, it won't be renewed until payment is received and processed."
         buttons:
           approve: "Approve"
+          begin_checks: "Relevant conviction found"
           reject: "Reject"
-        no_permission: "You don't have permission to approve or reject this renewal based on conviction information."
+        no_permission: "You don't have permission to make conviction checks."
