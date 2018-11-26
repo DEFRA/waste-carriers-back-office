@@ -49,13 +49,6 @@
               <%= label_tag :pending_payment,
                             t(".search.filters.pending_payment") %>
             </div>
-            <div class="multiple-choice">
-              <%= check_box_tag :pending_conviction_check,
-                                "true",
-                                @pending_conviction_check %>
-              <%= label_tag :pending_conviction_check,
-                            t(".search.filters.pending_conviction_check") %>
-            </div>
           </div>
           <p><%= link_to t(".search.clear_all_link"), bo_path %></p>
         </div>

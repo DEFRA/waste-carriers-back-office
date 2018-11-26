@@ -21,7 +21,6 @@ en:
           paragraph_1: "Filter the results:"
           in_progress: "Application in progress"
           pending_payment: "Pending payment"
-          pending_conviction_check: "Pending manual convictions check"
         clear_all_link: "Clear all searches and filters"
       results:
         th:
