@@ -4,10 +4,11 @@ en:
       title: "Conviction details"
       heading: "Conviction information for %{reg_identifier}"
       status:
-        "true": "This renewal requires a conviction check before it can be approved."
-        "false": "This renewal does not require a conviction check before it can be approved."
+        possible_match: "This renewal may have matching or declared convictions and requires an initial review."
+        checks_in_progress: "This renewal has been reviewed and flagged as having relevant convictions."
         approved: "This renewal was approved after a review of the matching or declared convictions."
         rejected: "This renewal was rejected after a review of the matching or declared convictions."
+        not_required: "This renewal does not require a conviction check before it can be approved."
       declared_convictions:
         heading: "Declared convictions"
         "true": "Yes – the user declared there were relevant convictions."

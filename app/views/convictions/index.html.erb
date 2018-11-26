@@ -7,12 +7,10 @@
     </h1>
 
     <div class="panel">
-      <% if @transient_registration.conviction_check_approved? %>
-        <%= t(".status.approved") %>
-      <% elsif @transient_registration.metaData.REVOKED? %>
-        <%= t(".status.rejected") %>
+      <% if conviction_sign_off.present? %>
+        <%= t(".status.#{conviction_sign_off.workflow_state}") %>
       <% else %>
-        <%= t(".status.#{@transient_registration.conviction_check_required?}") %>
+        <%= t(".status.not_required") %>
       <% end %>
     </div>
 
