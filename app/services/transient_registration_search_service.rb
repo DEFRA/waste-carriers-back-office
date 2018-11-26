@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 class TransientRegistrationSearchService
-  def initialize(term, in_progress, pending_payment, pending_conviction_check)
+  def initialize(term, in_progress, pending_payment)
     @term = term
 
     @in_progress = in_progress
     @pending_payment = pending_payment
-    @pending_conviction_check = pending_conviction_check
   end
 
   def search(page)
@@ -28,7 +27,6 @@ class TransientRegistrationSearchService
 
     criteria.merge!(WasteCarriersEngine::TransientRegistration.in_progress) if @in_progress
     criteria.merge!(WasteCarriersEngine::TransientRegistration.pending_payment) if @pending_payment
-    criteria.merge!(WasteCarriersEngine::TransientRegistration.pending_approval) if @pending_conviction_check
 
     criteria.page(page).read(mode: :secondary)
   end
@@ -37,7 +35,7 @@ class TransientRegistrationSearchService
 
   def no_search_terms_or_filters?
     return false if @term.present?
-    return false if @in_progress || @pending_payment || @pending_conviction_check
+    return false if @in_progress || @pending_payment
 
     true
   end

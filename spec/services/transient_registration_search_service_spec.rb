@@ -7,13 +7,11 @@ RSpec.describe TransientRegistrationSearchService do
 
   let(:in_progress) { false }
   let(:pending_payment) { false }
-  let(:pending_conviction_check) { false }
 
   let(:transient_registrations) do
     service = TransientRegistrationSearchService.new(term,
                                                      in_progress,
-                                                     pending_payment,
-                                                     pending_conviction_check)
+                                                     pending_payment)
     service.search(1)
   end
 
@@ -122,35 +120,6 @@ RSpec.describe TransientRegistrationSearchService do
     it "does not display non-matching renewals" do
       paid_renewal = create(:transient_registration, :no_pending_payment)
       expect(transient_registrations).to_not include(paid_renewal)
-    end
-  end
-
-  context "when the pending_conviction_check filter is on" do
-    let(:pending_conviction_check) { true }
-
-    it "displays matching renewals" do
-      pending_conviction_check_renewal = create(:transient_registration, :requires_conviction_check)
-      expect(transient_registrations).to include(pending_conviction_check_renewal)
-    end
-
-    it "does not display non-matching renewals" do
-      no_conviction_check_renewal = create(:transient_registration, :does_not_require_conviction_check)
-      expect(transient_registrations).to_not include(no_conviction_check_renewal)
-    end
-  end
-
-  context "when multiple filters are on" do
-    let(:pending_payment) { true }
-    let(:pending_conviction_check) { true }
-
-    it "displays renewals which match all the filters" do
-      matches_both_filters = create(:transient_registration, :pending_payment, :requires_conviction_check)
-      expect(transient_registrations).to include(matches_both_filters)
-    end
-
-    it "does not display renewals which only match one filter" do
-      matches_one_filter = create(:transient_registration, :no_pending_payment, :requires_conviction_check)
-      expect(transient_registrations).to_not include(matches_one_filter)
     end
   end
 
