@@ -4,10 +4,6 @@ class ConvictionsDashboardsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    ordered_and_paged(WasteCarriersEngine::TransientRegistration.pending_approval)
-  end
-
-  def possible_matches
     ordered_and_paged(WasteCarriersEngine::TransientRegistration.convictions_possible_match)
   end
 

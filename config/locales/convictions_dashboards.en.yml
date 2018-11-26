@@ -1,10 +1,6 @@
 en:
   convictions_dashboards:
     index:
-      title: "Convictions dashboard"
-      heading: "Convictions dashboard"
-      paragraph_1: "These renewal applications may have relevant convictions, and must be approved before they can be renewed."
-    possible_matches:
       title: "Convictions with possible matches"
       heading: "Convictions with possible matches"
       paragraph_1: "These renewal applications have been flagged as possibly having relevant convictions, and must be reviewed."
@@ -32,8 +28,7 @@ en:
     convictions_dashboard_menu:
       menu:
         title: "Show:"
-        index: "All"
-        possible_matches: "Possible matches"
+        index: "Possible matches"
         checks_in_progress: "Checks in progress"
         approved: "Approved"
         rejected: "Rejected"

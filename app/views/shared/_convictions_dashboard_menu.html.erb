@@ -5,7 +5,7 @@
         <%= t(".menu.title") %>
       </li>
 
-      <% ["index", "possible_matches", "checks_in_progress", "approved", "rejected"].each do |action| %>
+      <% ["index", "checks_in_progress", "approved", "rejected"].each do |action| %>
         <% if action_name == action %>
           <li class="current_page">
             <span><%= t(".menu.#{action}") %></span>
