@@ -27,6 +27,12 @@ module ConvictionsHelper
     @transient_registration.relevant_people - people_with_matches
   end
 
+  def conviction_sign_off
+    return unless @transient_registration.conviction_sign_offs.present?
+
+    @transient_registration.conviction_sign_offs.first
+  end
+
   private
 
   def unknown_people_convictions?

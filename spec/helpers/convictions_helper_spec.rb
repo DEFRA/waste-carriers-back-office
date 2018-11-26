@@ -261,4 +261,28 @@ RSpec.describe ConvictionsHelper, type: :helper do
       end
     end
   end
+
+  describe "#conviction_sign_off" do
+    context "when the conviction_sign_off is not present" do
+      before do
+        transient_registration.conviction_sign_offs = nil
+      end
+
+      it "returns nil" do
+        expect(helper.conviction_sign_off).to eq(nil)
+      end
+    end
+
+    context "when a conviction_sign_off is present" do
+      let(:conviction_sign_off) { build(:conviction_sign_off) }
+
+      before do
+        transient_registration.conviction_sign_offs = [conviction_sign_off]
+      end
+
+      it "returns the conviction_sign_off" do
+        expect(helper.conviction_sign_off).to eq(conviction_sign_off)
+      end
+    end
+  end
 end
