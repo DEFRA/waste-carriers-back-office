@@ -11,7 +11,7 @@ class ConvictionsController < ApplicationController
     assign_registration_and_transient_registration(params[:reg_identifier])
     @transient_registration.conviction_sign_offs.first.begin_checks!
 
-    redirect_to transient_registration_convictions_path(@transient_registration.reg_identifier)
+    redirect_to convictions_path
   end
 
   private
