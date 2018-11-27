@@ -12,7 +12,8 @@ class ConvictionRejectionFormsController < AdminFormsController
     return unless super(ConvictionRejectionForm,
                         "conviction_rejection_form",
                         params[:conviction_rejection_form][:reg_identifier],
-                        { authorize_action: :authorize_action })
+                        { authorize_action: :authorize_action,
+                          success_path: convictions_checks_in_progress_path })
 
     reject_renewal
   end
