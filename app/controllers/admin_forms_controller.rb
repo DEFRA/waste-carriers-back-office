@@ -17,7 +17,7 @@ class AdminFormsController < ApplicationController
     authorize_if_required(options[:authorize_action])
 
     # Submit the form by getting the instance variable we just set
-    submit_form(instance_variable_get("@#{form}"), params[form])
+    submit_form(instance_variable_get("@#{form}"), params[form], options[:success_path])
   end
 
   private
@@ -31,9 +31,9 @@ class AdminFormsController < ApplicationController
     instance_variable_set("@#{form}", form_class.new(@transient_registration))
   end
 
-  def submit_form(form, params)
+  def submit_form(form, params, success_path)
     if form.submit(params)
-      redirect_to transient_registration_path(@transient_registration.reg_identifier)
+      redirect_to success_path || transient_registration_path(@transient_registration.reg_identifier)
       true
     else
       render :new
