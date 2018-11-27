@@ -44,6 +44,20 @@ FactoryBot.define do
       conviction_search_result { build(:conviction_search_result, :match_result_no) }
     end
 
+    trait :has_flagged_conviction_check do
+      workflow_state { "renewal_received_form" }
+      key_people { [build(:key_person, :requires_conviction_check)] }
+      conviction_search_result { build(:conviction_search_result, :match_result_yes) }
+      conviction_sign_offs { [build(:conviction_sign_off, :checks_in_progress)] }
+    end
+
+    trait :has_rejected_conviction_check do
+      workflow_state { "renewal_received_form" }
+      key_people { [build(:key_person, :requires_conviction_check)] }
+      conviction_search_result { build(:conviction_search_result, :match_result_yes) }
+      conviction_sign_offs { [build(:conviction_sign_off, :rejected)] }
+    end
+
     trait :has_finance_details do
       temp_cards { 0 }
       after(:build, :create) do |transient_registration|

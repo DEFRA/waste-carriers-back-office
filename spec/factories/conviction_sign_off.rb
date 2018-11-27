@@ -7,5 +7,13 @@ FactoryBot.define do
     trait :confirmed do
       confirmed { "yes" }
     end
+
+    trait :checks_in_progress do
+      workflow_state { "checks_in_progress" }
+    end
+
+    trait :rejected do
+      workflow_state { "rejected" }
+    end
   end
 end

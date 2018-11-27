@@ -150,8 +150,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
       end
 
       it "links to renewals which have have rejected conviction checks" do
-        last_modified_renewal = create(:transient_registration, :requires_conviction_check)
-        last_modified_renewal.conviction_sign_offs.first.reject!
+        last_modified_renewal = create(:transient_registration, :has_rejected_conviction_check)
         link_to_renewal = transient_registration_path(last_modified_renewal.reg_identifier)
 
         get "/bo/convictions/rejected"
