@@ -1,0 +1,47 @@
+<% if @transient_registrations.present? %>
+  <div class="grid-row">
+    <div class="column-full">
+      <table>
+        <thead>
+          <tr>
+            <th><%= t(".results.th.reg_identifier") %></th>
+            <th><%= t(".results.th.company_name") %></th>
+            <th><%= t(".results.th.last_modified") %></th>
+            <th><%= t(".results.th.actions") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @transient_registrations.each do |transient_registration| %>
+            <tr>
+              <td>
+                <%= transient_registration.reg_identifier %>
+              </td>
+              <td>
+                <%= transient_registration.company_name %>
+              </td>
+              <td>
+                <%= transient_registration.metaData.last_modified.in_time_zone("London").strftime("%H:%M %d/%m/%Y") %>
+              </td>
+              <td>
+                <%= link_to t(".results.convictions_details_button"), transient_registration_convictions_path(transient_registration.reg_identifier) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-full">
+      <nav role="navigation" class="pagination" aria-label="Pagination">
+        <div class="pagination__summary">
+          <%= page_entries_info @transient_registrations, entry_name: "item" %>
+        </div>
+        <%= paginate @transient_registrations %>
+      </nav>
+    </div>
+  </div>
+<% else %>
+  <p><%= t(".no_results") %></p>
+<% end %>

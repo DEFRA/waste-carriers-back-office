@@ -7,12 +7,10 @@
     </h1>
 
     <div class="panel">
-      <% if @transient_registration.conviction_check_approved? %>
-        <%= t(".status.approved") %>
-      <% elsif @transient_registration.metaData.REVOKED? %>
-        <%= t(".status.rejected") %>
+      <% if conviction_sign_off.present? %>
+        <%= t(".status.#{conviction_sign_off.workflow_state}") %>
       <% else %>
-        <%= t(".status.#{@transient_registration.conviction_check_required?}") %>
+        <%= t(".status.not_required") %>
       <% end %>
     </div>
 
@@ -130,8 +128,23 @@
         <p>
           <%= t(".approve_or_reject.paragraph_2") %>
         </p>
-        <%= link_to t(".approve_or_reject.buttons.approve"), new_transient_registration_conviction_approval_form_path(@transient_registration.reg_identifier), class: "button" %>
-        <%= link_to t(".approve_or_reject.buttons.reject"), new_transient_registration_conviction_rejection_form_path(@transient_registration.reg_identifier), class: "button-warning" %>
+        <% if conviction_sign_off.may_approve? %>
+          <%= link_to t(".approve_or_reject.buttons.approve"),
+                      new_transient_registration_conviction_approval_form_path(@transient_registration.reg_identifier),
+                      class: "button" %>
+        <% end %>
+
+        <% if conviction_sign_off.may_begin_checks? %>
+          <%= link_to t(".approve_or_reject.buttons.begin_checks"),
+                      convictions_begin_checks_path(@transient_registration.reg_identifier),
+                      class: "button-alert" %>
+        <% end %>
+
+        <% if conviction_sign_off.may_reject? %>
+        <%= link_to t(".approve_or_reject.buttons.reject"),
+                    new_transient_registration_conviction_rejection_form_path(@transient_registration.reg_identifier),
+                    class: "button-warning" %>
+        <% end %>
       <% else %>
         <%= t(".approve_or_reject.no_permission") %>
       <% end %>

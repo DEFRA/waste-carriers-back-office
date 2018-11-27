@@ -1,0 +1,21 @@
+<div class="grid-row">
+  <div class="column-full">
+    <ul class="dashboard_menu">
+      <li class="title">
+        <%= t(".menu.title") %>
+      </li>
+
+      <% ["index", "checks_in_progress", "approved", "rejected"].each do |action| %>
+        <% if action_name == action %>
+          <li class="current_page">
+            <span><%= t(".menu.#{action}") %></span>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to t(".menu.#{action}"), convictions_action_path(action) %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
