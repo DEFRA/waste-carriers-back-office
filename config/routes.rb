@@ -68,6 +68,10 @@ Rails.application.routes.draw do
                         path_names: { new: "" }
             end
 
+  get "/bo/transient-registrations/:reg_identifier/convictions/begin-checks",
+      to: "convictions#begin_checks",
+      as: :convictions_begin_checks
+
   resources :registration_transfers,
             only: [:new, :create],
             param: :reg_identifier,
