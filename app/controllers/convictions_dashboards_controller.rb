@@ -22,7 +22,7 @@ class ConvictionsDashboardsController < ApplicationController
   private
 
   def ordered_and_paged(transient_registrations)
-    @transient_registrations = transient_registrations.order_by("metaData.lastModified": :desc)
+    @transient_registrations = transient_registrations.order_by("metaData.lastModified": :asc)
                                                       .page params[:page]
   end
 end

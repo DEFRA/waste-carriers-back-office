@@ -3,6 +3,38 @@
 require "rails_helper"
 
 RSpec.describe "ConvictionsDashboards", type: :request do
+  let!(:link_to_possible_matches_renewal) do
+    renewal = create(:transient_registration, :requires_conviction_check)
+    # Make sure it's one of the 'oldest' renewals so would be top of the list
+    renewal.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+
+    transient_registration_path(renewal.reg_identifier)
+  end
+
+  let!(:link_to_checks_in_progress_renewal) do
+    renewal = create(:transient_registration, :has_flagged_conviction_check)
+    # Make sure it's one of the 'oldest' renewals so would be top of the list
+    renewal.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+
+    transient_registration_path(renewal.reg_identifier)
+  end
+
+  let!(:link_to_approved_renewal) do
+    renewal = create(:transient_registration, :has_approved_conviction_check)
+    # Make sure it's one of the 'oldest' renewals so would be top of the list
+    renewal.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+
+    transient_registration_path(renewal.reg_identifier)
+  end
+
+  let!(:link_to_rejected_renewal) do
+    renewal = create(:transient_registration, :has_rejected_conviction_check)
+    # Make sure it's one of the 'oldest' renewals so would be top of the list
+    renewal.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+
+    transient_registration_path(renewal.reg_identifier)
+  end
+
   describe "/bo/convictions" do
     context "when a valid user is signed in" do
       let(:user) { create(:user) }
@@ -21,20 +53,13 @@ RSpec.describe "ConvictionsDashboards", type: :request do
       end
 
       it "links to renewals which require an initial convictions check" do
-        last_modified_renewal = create(:transient_registration, :requires_conviction_check)
-        link_to_renewal = transient_registration_path(last_modified_renewal.reg_identifier)
-
         get "/bo/convictions"
-        expect(response.body).to include(link_to_renewal)
+        expect(response.body).to include(link_to_possible_matches_renewal)
       end
 
       it "does not link to renewals which don't require an initial convictions check" do
-        last_modified_renewal = create(:transient_registration, :requires_conviction_check)
-        last_modified_renewal.conviction_sign_offs.first.approve!(user)
-        link_to_renewal = transient_registration_path(last_modified_renewal.reg_identifier)
-
         get "/bo/convictions"
-        expect(response.body).to_not include(link_to_renewal)
+        expect(response.body).to_not include(link_to_checks_in_progress_renewal)
       end
     end
 
@@ -64,20 +89,13 @@ RSpec.describe "ConvictionsDashboards", type: :request do
       end
 
       it "links to renewals which have have ongoing conviction checks" do
-        last_modified_renewal = create(:transient_registration, :requires_conviction_check)
-        last_modified_renewal.conviction_sign_offs.first.begin_checks!
-        link_to_renewal = transient_registration_path(last_modified_renewal.reg_identifier)
-
         get "/bo/convictions/in-progress"
-        expect(response.body).to include(link_to_renewal)
+        expect(response.body).to include(link_to_checks_in_progress_renewal)
       end
 
       it "does not link to renewals which don't have ongoing conviction checks" do
-        last_modified_renewal = create(:transient_registration, :requires_conviction_check)
-        link_to_renewal = transient_registration_path(last_modified_renewal.reg_identifier)
-
         get "/bo/convictions/in-progress"
-        expect(response.body).to_not include(link_to_renewal)
+        expect(response.body).to_not include(link_to_rejected_renewal)
       end
     end
 
@@ -107,20 +125,13 @@ RSpec.describe "ConvictionsDashboards", type: :request do
       end
 
       it "links to renewals which have have approved conviction checks" do
-        last_modified_renewal = create(:transient_registration, :requires_conviction_check)
-        last_modified_renewal.conviction_sign_offs.first.approve!(user)
-        link_to_renewal = transient_registration_path(last_modified_renewal.reg_identifier)
-
         get "/bo/convictions/approved"
-        expect(response.body).to include(link_to_renewal)
+        expect(response.body).to include(link_to_approved_renewal)
       end
 
       it "does not link to renewals which don't have approved conviction checks" do
-        last_modified_renewal = create(:transient_registration, :requires_conviction_check)
-        link_to_renewal = transient_registration_path(last_modified_renewal.reg_identifier)
-
         get "/bo/convictions/approved"
-        expect(response.body).to_not include(link_to_renewal)
+        expect(response.body).to_not include(link_to_possible_matches_renewal)
       end
     end
 
@@ -150,19 +161,13 @@ RSpec.describe "ConvictionsDashboards", type: :request do
       end
 
       it "links to renewals which have have rejected conviction checks" do
-        last_modified_renewal = create(:transient_registration, :has_rejected_conviction_check)
-        link_to_renewal = transient_registration_path(last_modified_renewal.reg_identifier)
-
         get "/bo/convictions/rejected"
-        expect(response.body).to include(link_to_renewal)
+        expect(response.body).to include(link_to_rejected_renewal)
       end
 
       it "does not link to renewals which don't have rejected conviction checks" do
-        last_modified_renewal = create(:transient_registration, :requires_conviction_check)
-        link_to_renewal = transient_registration_path(last_modified_renewal.reg_identifier)
-
         get "/bo/convictions/rejected"
-        expect(response.body).to_not include(link_to_renewal)
+        expect(response.body).to_not include(link_to_possible_matches_renewal)
       end
     end
 

@@ -12,6 +12,10 @@ FactoryBot.define do
       workflow_state { "checks_in_progress" }
     end
 
+    trait :approved do
+      workflow_state { "approved" }
+    end
+
     trait :rejected do
       workflow_state { "rejected" }
     end
