@@ -5,7 +5,7 @@ class ChequePaymentFormsController < AdminFormsController
     super(ChequePaymentForm,
           "cheque_payment_form",
           params[:transient_registration_reg_identifier],
-          :authorize_action)
+          { authorize_action: :authorize_action })
   end
 
   def create
@@ -14,7 +14,7 @@ class ChequePaymentFormsController < AdminFormsController
     return unless super(ChequePaymentForm,
                         "cheque_payment_form",
                         params[:cheque_payment_form][:reg_identifier],
-                        :authorize_action)
+                        { authorize_action: :authorize_action })
 
     renew_if_possible
   end

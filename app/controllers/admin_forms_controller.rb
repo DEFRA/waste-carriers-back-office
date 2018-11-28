@@ -5,16 +5,16 @@
 class AdminFormsController < ApplicationController
   before_action :authenticate_user!
 
-  def new(form_class, form, reg_identifier, authorize_action = nil)
+  def new(form_class, form, reg_identifier, options = {})
     set_up_form(form_class, form, reg_identifier)
 
-    public_send(authorize_action, @transient_registration) if authorize_action.present?
+    authorize_if_required(options[:authorize_action])
   end
 
-  def create(form_class, form, reg_identifier, authorize_action = nil)
+  def create(form_class, form, reg_identifier, options = {})
     return false unless set_up_form(form_class, form, reg_identifier)
 
-    public_send(authorize_action, @transient_registration) if authorize_action.present?
+    authorize_if_required(options[:authorize_action])
 
     # Submit the form by getting the instance variable we just set
     submit_form(instance_variable_get("@#{form}"), params[form])
@@ -39,6 +39,10 @@ class AdminFormsController < ApplicationController
       render :new
       false
     end
+  end
+
+  def authorize_if_required(authorize_action)
+    public_send(authorize_action, @transient_registration) if authorize_action.present?
   end
 
   def find_transient_registration(reg_identifier)
