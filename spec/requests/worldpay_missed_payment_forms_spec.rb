@@ -86,31 +86,72 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
         expect(transient_registration.reload.finance_details.payments.first.updated_by_user).to eq(user.email)
       end
 
-      context "when there is no pending conviction check" do
-        before do
-          transient_registration.conviction_sign_offs = [build(:conviction_sign_off, :confirmed)]
-          # Disable the stubbing as we want to test the full behaviour this time
-          allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
+      context "when the transient_registration was in renewal_received" do
+        context "when there is no pending conviction check" do
+          before do
+            transient_registration.conviction_sign_offs = [build(:conviction_sign_off, :confirmed)]
+            # Disable the stubbing as we want to test the full behaviour this time
+            allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
+          end
+
+          it "renews the registration" do
+            updated_renewal_date = registration.expires_on + 3.years
+            post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/worldpay-missed", worldpay_missed_payment_form: params
+            expect(registration.reload.expires_on).to eq(updated_renewal_date)
+          end
         end
 
-        it "renews the registration" do
-          updated_renewal_date = registration.expires_on + 3.years
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/worldpay-missed", worldpay_missed_payment_form: params
-          expect(registration.reload.expires_on).to eq(updated_renewal_date)
+        context "when there is a pending conviction check" do
+          before do
+            transient_registration.conviction_sign_offs = [build(:conviction_sign_off)]
+            # Disable the stubbing as we want to test the full behaviour this time
+            allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
+          end
+
+          it "does not renew the registration" do
+            old_renewal_date = registration.expires_on
+            post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/worldpay-missed", worldpay_missed_payment_form: params
+            expect(registration.reload.expires_on).to eq(old_renewal_date)
+          end
         end
       end
 
-      context "when there is a pending conviction check" do
+      context "when the transient_registration was in worldpay_form" do
         before do
-          transient_registration.conviction_sign_offs = [build(:conviction_sign_off)]
-          # Disable the stubbing as we want to test the full behaviour this time
-          allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
+          transient_registration.update_attributes(workflow_state: "worldpay_form")
         end
 
-        it "does not renews the registration" do
-          old_renewal_date = registration.expires_on
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/worldpay-missed", worldpay_missed_payment_form: params
-          expect(registration.reload.expires_on).to eq(old_renewal_date)
+        context "when there is no pending conviction check" do
+          before do
+            transient_registration.conviction_sign_offs = [build(:conviction_sign_off, :confirmed)]
+            # Disable the stubbing as we want to test the full behaviour this time
+            allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
+          end
+
+          it "renews the registration" do
+            updated_renewal_date = registration.expires_on + 3.years
+            post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/worldpay-missed", worldpay_missed_payment_form: params
+            expect(registration.reload.expires_on).to eq(updated_renewal_date)
+          end
+        end
+
+        context "when there is a pending conviction check" do
+          before do
+            transient_registration.conviction_sign_offs = [build(:conviction_sign_off)]
+            # Disable the stubbing as we want to test the full behaviour this time
+            allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
+          end
+
+          it "changes the workflow_state to renewal_received" do
+            post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/worldpay-missed", worldpay_missed_payment_form: params
+            expect(transient_registration.reload.workflow_state).to eq("renewal_received_form")
+          end
+
+          it "does not renew the registration" do
+            old_renewal_date = registration.expires_on
+            post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/worldpay-missed", worldpay_missed_payment_form: params
+            expect(registration.reload.expires_on).to eq(old_renewal_date)
+          end
         end
       end
 
