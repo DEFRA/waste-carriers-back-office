@@ -55,9 +55,9 @@ RSpec.describe "ConvictionRejectionForms", type: :request do
         }
       end
 
-      it "redirects to the transient_registration page" do
+      it "redirects to the convictions page" do
         post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
-        expect(response).to redirect_to(transient_registration_path(transient_registration.reg_identifier))
+        expect(response).to redirect_to(convictions_checks_in_progress_path)
       end
 
       it "updates the revoked_reason" do

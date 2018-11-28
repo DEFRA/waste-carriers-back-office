@@ -5,7 +5,7 @@ class WorldpayMissedPaymentFormsController < AdminFormsController
     super(WorldpayMissedPaymentForm,
           "worldpay_missed_payment_form",
           params[:transient_registration_reg_identifier],
-          :authorize_action)
+          { authorize_action: :authorize_action })
   end
 
   def create
@@ -14,7 +14,7 @@ class WorldpayMissedPaymentFormsController < AdminFormsController
     return unless super(WorldpayMissedPaymentForm,
                         "worldpay_missed_payment_form",
                         params[:worldpay_missed_payment_form][:reg_identifier],
-                        :authorize_action)
+                        { authorize_action: :authorize_action })
 
     renew_if_possible
   end

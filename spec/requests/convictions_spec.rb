@@ -41,9 +41,9 @@ RSpec.describe "Convictions", type: :request do
         expect(transient_registration.reload.conviction_sign_offs.first.workflow_state).to eq("checks_in_progress")
       end
 
-      it "redirects to the index page" do
+      it "redirects to the convictions page" do
         get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/begin-checks"
-        expect(response).to redirect_to("/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions")
+        expect(response).to redirect_to(convictions_path)
       end
     end
   end

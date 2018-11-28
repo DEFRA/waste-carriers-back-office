@@ -5,14 +5,15 @@ class ConvictionApprovalFormsController < AdminFormsController
     super(ConvictionApprovalForm,
           "conviction_approval_form",
           params[:transient_registration_reg_identifier],
-          :authorize_action)
+          { authorize_action: :authorize_action })
   end
 
   def create
     return unless super(ConvictionApprovalForm,
                         "conviction_approval_form",
                         params[:conviction_approval_form][:reg_identifier],
-                        :authorize_action)
+                        { authorize_action: :authorize_action,
+                          success_path: convictions_path })
 
     update_conviction_sign_off
     renew_if_possible
