@@ -17,12 +17,15 @@ en:
           rejected: "This renewal was rejected during a convictions check and cannot be completed. The current registration will remain active until it expires."
           worldpay:
             paragraph_1: "The user is currently attempting to pay by WorldPay."
-            paragraph_2: "If an error has occurred and the user is stuck, you can send the renewal back to the payment summary page. They can try to pay with WorldPay again, or select an alternative payment method."
+            paragraph_2:
+              revert: "If an error has occurred and the user is stuck, you can send the renewal back to the payment summary page. They can try to pay with WorldPay again, or select an alternative payment method."
+              missed_payment: "If an error has occurred and payment has been received, but not recorded, you can record a missed WorldPay payment."
         actions:
           continue_button: "Continue as assisted digital renewal"
           payment_button: "Process payment"
           convictions_check_button: "Check conviction matches"
           revert_to_payment_summary_button: "Send back to payment summary"
+          missed_worldpay_payment_button: "Add a missed WorldPay payment"
       reg_information:
         heading: "Registration information"
         labels:
