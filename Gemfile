@@ -16,7 +16,7 @@ gem "jquery-rails"
 # mongoid supports MongoDb 3.6
 gem "mongoid", "~> 5.2.0"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
-gem "rails", "4.2.10"
+gem "rails", "4.2.11"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
