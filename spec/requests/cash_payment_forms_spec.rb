@@ -94,9 +94,11 @@ RSpec.describe "CashPaymentForms", type: :request do
         end
 
         it "renews the registration" do
-          updated_renewal_date = registration.expires_on + 3.years
+          expected_expiry_date = registration.expires_on.to_date + 3.years
           post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/cash", cash_payment_form: params
-          expect(registration.reload.expires_on).to eq(updated_renewal_date)
+          actual_expiry_date = registration.reload.expires_on.to_date
+
+          expect(actual_expiry_date).to eq(expected_expiry_date)
         end
       end
 
