@@ -89,10 +89,13 @@
                       <strong class="app-c-tag app-c-tag--success">
                         <%= t(".results.statuses.pending_payment") %>
                       </strong>
-                    <% end %>
-                    <% if transient_registration.pending_manual_conviction_check? %>
+                    <% elsif transient_registration.pending_manual_conviction_check? %>
                       <strong class="app-c-tag app-c-tag--warning">
                         <%= t(".results.statuses.pending_conviction_check") %>
+                      </strong>
+                    <% else %>
+                      <strong class="app-c-tag app-c-tag--danger">
+                        <%= t(".results.statuses.stuck") %>
                       </strong>
                     <% end %>
                 <% else %>
