@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
-  revision: 7e0608b9b774989f075b42ccec98233d29b64fa8
+  revision: 7b53a24a5ff987fb085b650083786b54f3cf71aa
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -203,7 +203,7 @@ GEM
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.6.27)
+    phonelib (0.6.28)
     powerpack (0.1.2)
     public_suffix (3.0.3)
     rack (1.6.11)
