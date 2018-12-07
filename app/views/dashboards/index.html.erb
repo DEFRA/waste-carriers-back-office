@@ -86,18 +86,16 @@
                   </strong>
                 <% elsif transient_registration.renewal_application_submitted? %>
                     <% if transient_registration.pending_payment? %>
-                      <% status_set = true %>
                       <strong class="app-c-tag app-c-tag--success">
                         <%= t(".results.statuses.pending_payment") %>
                       </strong>
                     <% end %>
                     <% if transient_registration.pending_manual_conviction_check? %>
-                      <% status_set = true %>
                       <strong class="app-c-tag app-c-tag--warning">
                         <%= t(".results.statuses.pending_conviction_check") %>
                       </strong>
                     <% end %>
-                    <% unless status_set %>
+                    <% if transient_registration.stuck? %>
                       <strong class="app-c-tag app-c-tag--danger">
                         <%= t(".results.statuses.stuck") %>
                       </strong>
