@@ -95,6 +95,11 @@
                         <%= t(".results.statuses.pending_conviction_check") %>
                       </strong>
                     <% end %>
+                    <% if transient_registration.stuck? %>
+                      <strong class="app-c-tag app-c-tag--danger">
+                        <%= t(".results.statuses.stuck") %>
+                      </strong>
+                    <% end %>
                 <% else %>
                   <strong class="app-c-tag">
                     <%= t(".results.statuses.in_progress") %>
