@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
-  revision: 1a031906e8310c1597e5a1c76cb91d473d927306
+  revision: 2c31d00cd27f52b16aaf918f8f8cb30c5d38ebfc
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -234,7 +234,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rainbow (3.0.0)
-    rake (12.3.1)
+    rake (12.3.2)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
