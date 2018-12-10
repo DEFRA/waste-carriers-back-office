@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do
-    redirect_to "/bo/permission"
+    redirect_to "/bo/pages/permission"
   end
 
   # http://jacopretorius.net/2014/01/force-page-to-reload-on-browser-back-in-rails.html

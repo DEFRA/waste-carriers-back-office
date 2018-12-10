@@ -48,7 +48,7 @@ RSpec.describe "WorldpayEscapes", type: :request do
 
       it "renders the permissions error page" do
         get "/bo/transient-registrations/#{reg_identifier}/revert-to-payment-summary"
-        expect(response).to redirect_to "/bo/permission"
+        expect(response).to redirect_to "/bo/pages/permission"
       end
     end
   end

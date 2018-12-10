@@ -41,7 +41,7 @@ RSpec.describe "CashPaymentForms", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/cash"
-        expect(response).to redirect_to("/bo/permission")
+        expect(response).to redirect_to("/bo/pages/permission")
       end
     end
   end
@@ -145,7 +145,7 @@ RSpec.describe "CashPaymentForms", type: :request do
 
       it "redirects to the permissions error page" do
         post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/cash", cash_payment_form: params
-        expect(response).to redirect_to("/bo/permission")
+        expect(response).to redirect_to("/bo/pages/permission")
       end
 
       it "does not create a new payment" do

@@ -36,7 +36,7 @@ RSpec.describe "ConvictionRejectionForms", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/reject"
-        expect(response).to redirect_to("/bo/permission")
+        expect(response).to redirect_to("/bo/pages/permission")
       end
     end
   end
@@ -115,7 +115,7 @@ RSpec.describe "ConvictionRejectionForms", type: :request do
 
       it "redirects to the permissions error page" do
         post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
-        expect(response).to redirect_to("/bo/permission")
+        expect(response).to redirect_to("/bo/pages/permission")
       end
 
       it "does not update the revoked_reason" do

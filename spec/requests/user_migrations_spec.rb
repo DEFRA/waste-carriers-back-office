@@ -29,7 +29,7 @@ RSpec.describe "UserMigrations", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/users/migrate"
-        expect(response).to redirect_to("/bo/permission")
+        expect(response).to redirect_to("/bo/pages/permission")
       end
     end
   end
@@ -70,7 +70,7 @@ RSpec.describe "UserMigrations", type: :request do
 
       it "redirects to the permissions error page" do
         post "/bo/users/migrate"
-        expect(response).to redirect_to("/bo/permission")
+        expect(response).to redirect_to("/bo/pages/permission")
       end
     end
   end
@@ -133,7 +133,7 @@ RSpec.describe "UserMigrations", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/users/migrate/results"
-        expect(response).to redirect_to("/bo/permission")
+        expect(response).to redirect_to("/bo/pages/permission")
       end
     end
   end

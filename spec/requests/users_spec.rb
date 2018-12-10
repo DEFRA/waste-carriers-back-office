@@ -40,7 +40,7 @@ RSpec.describe "Users", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/users"
-        expect(response).to redirect_to("/bo/permission")
+        expect(response).to redirect_to("/bo/pages/permission")
       end
     end
 

@@ -37,7 +37,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/transfer-registration/#{registration.reg_identifier}"
-        expect(response).to redirect_to("/bo/permission")
+        expect(response).to redirect_to("/bo/pages/permission")
       end
     end
 
@@ -106,7 +106,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
 
       it "redirects to the permissions error page" do
         post "/bo/transfer-registration", registration_transfer_form: params
-        expect(response).to redirect_to("/bo/permission")
+        expect(response).to redirect_to("/bo/pages/permission")
       end
     end
 
