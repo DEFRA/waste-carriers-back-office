@@ -79,13 +79,15 @@ end
 group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console
   gem "byebug"
+  # Apply our style guide to ensure consistency in how the code is written
+  gem "defra_ruby_style",
+      git: "https://github.com/DEFRA/defra-ruby-style",
+      branch: "master"
   # Shim to load environment variables from a .env file into ENV in development
   # and test
   gem "dotenv-rails"
   # Project uses RSpec as its test framework
   gem "rspec-rails", "~> 3.6"
-  # Rubocop to ensure consistency in how the code is written
-  gem "rubocop"
 end
 
 group :development do

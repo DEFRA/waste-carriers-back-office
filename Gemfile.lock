@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/DEFRA/defra-ruby-style
+  revision: 53a29901cbade724ccf7112518db3ec93875aba6
+  branch: master
+  specs:
+    defra_ruby_style (0.0.1)
+      rubocop
+
+GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
   revision: 56ab415e4b98d854e490cc02103c6177bb884b22
   branch: master
@@ -143,7 +151,7 @@ GEM
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
-    jaro_winkler (1.5.1)
+    jaro_winkler (1.5.2)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -342,6 +350,7 @@ DEPENDENCIES
   cancancan (~> 1.10)
   coffee-rails (~> 4.1.0)
   database_cleaner
+  defra_ruby_style!
   devise (>= 4.4.3)
   devise_invitable (~> 1.7.0)
   dotenv-rails
@@ -357,7 +366,6 @@ DEPENDENCIES
   passenger (~> 5.0, >= 5.0.30)
   rails (= 4.2.11)
   rspec-rails (~> 3.6)
-  rubocop
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   secure_headers (~> 5.0)
