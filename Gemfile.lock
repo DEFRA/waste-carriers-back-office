@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/DEFRA/defra-ruby-style
-  revision: 53a29901cbade724ccf7112518db3ec93875aba6
+  revision: b71cca90a7ced18c2eb2a08be3ec37bc6a25d3fb
   branch: master
   specs:
-    defra_ruby_style (0.0.1)
+    defra_ruby_style (0.0.2)
       rubocop
 
 GIT
