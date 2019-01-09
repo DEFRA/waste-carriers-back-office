@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/DEFRA/defra-ruby-style
-  revision: 53a29901cbade724ccf7112518db3ec93875aba6
-  branch: master
-  specs:
-    defra_ruby_style (0.0.1)
-      rubocop
-
-GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
   revision: 970b4ca5977fd390a9e97eb288a6bf52e25c60cf
   branch: master
@@ -97,6 +89,8 @@ GEM
     crass (1.0.4)
     database_cleaner (1.7.0)
     debug_inspector (0.0.3)
+    defra_ruby_style (0.0.2)
+      rubocop
     devise (4.5.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -350,7 +344,7 @@ DEPENDENCIES
   cancancan (~> 1.10)
   coffee-rails (~> 4.1.0)
   database_cleaner
-  defra_ruby_style!
+  defra_ruby_style
   devise (>= 4.4.3)
   devise_invitable (~> 1.7.0)
   dotenv-rails
