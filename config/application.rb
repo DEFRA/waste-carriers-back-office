@@ -17,28 +17,8 @@ module WasteCarriersBackOffice
     # -- all .rb files in that directory are automatically loaded.
 
     # Set Mongoid logging level to INFO. We have found mongoid to ber overly
-    # chatty in the logs. 
+    # chatty in the logs.
     Mongoid.logger.level = Logger::INFO
-
-    # We have an issue when deploying to our environments in that when
-    # Capistrano runs the deploy:assets:precompile step (specifically bundle
-    # exec rake assets:precompile) it does so having set RAILS_ENV to production.
-    # However we have no default value for the SECRET_KEY in production, and
-    # when the command runs an env var with the value has not been set. This
-    # causes Devise to throw an error which prevents the task from completing.
-    # We have found the simplest solution to the problem is to add this logic
-    # which determines if we are running in production and if the originating
-    # call was made from rake. If that's the case we can assume a task like
-    # assets:precompile is being run and therefore programmtically set the
-    # secret key, stopping devise from erroring.
-    # https://stackoverflow.com/a/15767148/6117745
-    def apply_dummy_secret_key?
-      return false unless Rails.env.production?
-      return false unless File.basename($0) == "rake"
-      return false unless config.secret_key_base.blank?
-
-      true
-    end
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
@@ -118,7 +98,5 @@ module WasteCarriersBackOffice
     config.generators do |g|
       g.orm :mongoid
     end
-
-    config.secret_key_base = "iamonlyherefordevisewhenraketasksarecalled" if apply_dummy_secret_key?
   end
 end
