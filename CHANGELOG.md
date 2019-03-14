@@ -1,5 +1,37 @@
 # Change Log
 
+## [v1.4.1](https://github.com/DEFRA/waste-carriers-back-office/tree/v1.4.1) (2019-01-25)
+[Full Changelog](https://github.com/DEFRA/waste-carriers-back-office/compare/v1.4.0...v1.4.1)
+
+**Closed issues:**
+
+- Dependabot can't resolve your Ruby dependency files [\#235](https://github.com/DEFRA/waste-carriers-back-office/issues/235)
+- Dependabot can't resolve your Ruby dependency files [\#234](https://github.com/DEFRA/waste-carriers-back-office/issues/234)
+- Dependabot can't resolve your Ruby dependency files [\#233](https://github.com/DEFRA/waste-carriers-back-office/issues/233)
+- Dependabot can't resolve your Ruby dependency files [\#232](https://github.com/DEFRA/waste-carriers-back-office/issues/232)
+- Dependabot can't resolve your Ruby dependency files [\#231](https://github.com/DEFRA/waste-carriers-back-office/issues/231)
+- Dependabot can't resolve your Ruby dependency files [\#230](https://github.com/DEFRA/waste-carriers-back-office/issues/230)
+- Dependabot can't resolve your Ruby dependency files [\#229](https://github.com/DEFRA/waste-carriers-back-office/issues/229)
+- Dependabot can't resolve your Ruby dependency files [\#228](https://github.com/DEFRA/waste-carriers-back-office/issues/228)
+- Dependabot can't resolve your Ruby dependency files [\#227](https://github.com/DEFRA/waste-carriers-back-office/issues/227)
+- Dependabot can't resolve your Ruby dependency files [\#226](https://github.com/DEFRA/waste-carriers-back-office/issues/226)
+
+**Merged pull requests:**
+
+- Bump rspec-rails from 3.8.1 to 3.8.2 [\#249](https://github.com/DEFRA/waste-carriers-back-office/pull/249) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `4ccdb83` to `517539b` [\#248](https://github.com/DEFRA/waste-carriers-back-office/pull/248) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `970b4ca` to `4ccdb83` [\#247](https://github.com/DEFRA/waste-carriers-back-office/pull/247) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump dotenv-rails from 2.5.0 to 2.6.0 [\#246](https://github.com/DEFRA/waste-carriers-back-office/pull/246) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Get defra-ruby-style from Rubygems [\#244](https://github.com/DEFRA/waste-carriers-back-office/pull/244) ([irisfaraway](https://github.com/irisfaraway))
+- Bump waste\_carriers\_engine from `8cccfb7` to `970b4ca` [\#243](https://github.com/DEFRA/waste-carriers-back-office/pull/243) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `56ab415` to `8cccfb7` [\#241](https://github.com/DEFRA/waste-carriers-back-office/pull/241) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Install defra-ruby-style for linting [\#240](https://github.com/DEFRA/waste-carriers-back-office/pull/240) ([irisfaraway](https://github.com/irisfaraway))
+- Bump waste\_carriers\_engine from `6cc5541` to `56ab415` [\#239](https://github.com/DEFRA/waste-carriers-back-office/pull/239) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Lock Travis to bundler 1.x [\#238](https://github.com/DEFRA/waste-carriers-back-office/pull/238) ([irisfaraway](https://github.com/irisfaraway))
+- Bump rubocop from 0.61.1 to 0.62.0 [\#236](https://github.com/DEFRA/waste-carriers-back-office/pull/236) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `131aff3` to `6cc5541` [\#225](https://github.com/DEFRA/waste-carriers-back-office/pull/225) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `6813c1c` to `131aff3` [\#224](https://github.com/DEFRA/waste-carriers-back-office/pull/224) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v1.4.0](https://github.com/DEFRA/waste-carriers-back-office/tree/v1.4.0) (2018-12-11)
 [Full Changelog](https://github.com/DEFRA/waste-carriers-back-office/compare/v1.3.1...v1.4.0)
 
