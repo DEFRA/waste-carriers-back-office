@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
-  revision: fcfb145f13f09be45dff20bde3e622dc63282af7
+  revision: fd979fb0959ed44a56ad21b6a783f5063cf0f026
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -12,7 +12,7 @@ GIT
       mongoid (~> 5.2.0)
       nokogiri
       phonelib
-      rails (= 4.2.11)
+      rails (~> 4.2.11)
       rest-client (~> 2.0)
       turbolinks
       uk_postcode
