@@ -47,7 +47,7 @@ Rails.application.routes.draw do
                         path: "payments/cheque",
                         path_names: { new: "" }
 
-               resources :postal_order_payment_forms,
+              resources :postal_order_payment_forms,
                         only: %i[new create],
                         path: "payments/postal-order",
                         path_names: { new: "" }
@@ -86,13 +86,13 @@ Rails.application.routes.draw do
       as: :users
 
   resources :user_migrations,
-        only: %i[new create],
-        path: "/bo/users/migrate",
-        path_names: { new: "" }
+            only: %i[new create],
+            path: "/bo/users/migrate",
+            path_names: { new: "" }
 
   get "/bo/users/migrate/results",
-    to: "user_migrations#results",
-    as: :user_migration_results
+      to: "user_migrations#results",
+      as: :user_migration_results
 
   mount WasteCarriersEngine::Engine => "/bo"
 end
