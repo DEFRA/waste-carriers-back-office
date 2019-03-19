@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
 
   root to: "application#redirect_root_to_dashboard"
@@ -96,3 +97,4 @@ Rails.application.routes.draw do
 
   mount WasteCarriersEngine::Engine => "/bo"
 end
+# rubocop:enable Metrics/BlockLength
