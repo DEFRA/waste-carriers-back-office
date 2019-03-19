@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "secure_headers"
 
 # A CSP is delivered via a HTTP response header, much like HSTS, and defines
