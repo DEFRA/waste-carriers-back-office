@@ -44,7 +44,7 @@ module WasteCarriersBackOffice
     }
 
     # Errbit config
-    config.airbrake_on = ENV["WCRS_USE_AIRBRAKE"] == "true" ? true : false
+    config.airbrake_on = ENV["WCRS_USE_AIRBRAKE"] == "true"
     config.airbrake_host = ENV["WCRS_AIRBRAKE_URL"]
     # Even though we may not want to enable airbrake, its initializer requires
     # a value for project ID and key else it errors.
