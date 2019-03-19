@@ -24,36 +24,36 @@ Rails.application.routes.draw do
                         only: :index
 
               resources :conviction_approval_forms,
-                        only: [:new, :create],
+                        only: %i[new create],
                         path: "convictions/approve",
                         path_names: { new: "" }
 
               resources :conviction_rejection_forms,
-                        only: [:new, :create],
+                        only: %i[new create],
                         path: "convictions/reject",
                         path_names: { new: "" }
 
               resources :payments,
-                        only: [:new, :create],
+                        only: %i[new create],
                         path_names: { new: "" }
 
               resources :cash_payment_forms,
-                        only: [:new, :create],
+                        only: %i[new create],
                         path: "payments/cash",
                         path_names: { new: "" }
 
               resources :cheque_payment_forms,
-                        only: [:new, :create],
+                        only: %i[new create],
                         path: "payments/cheque",
                         path_names: { new: "" }
 
                resources :postal_order_payment_forms,
-                        only: [:new, :create],
+                        only: %i[new create],
                         path: "payments/postal-order",
                         path_names: { new: "" }
 
               resources :transfer_payment_forms,
-                        only: [:new, :create],
+                        only: %i[new create],
                         path: "payments/transfer",
                         path_names: { new: "" }
 
@@ -63,7 +63,7 @@ Rails.application.routes.draw do
                         path_names: { new: "" }
 
               resources :worldpay_missed_payment_forms,
-                        only: [:new, :create],
+                        only: %i[new create],
                         path: "payments/worldpay-missed",
                         path_names: { new: "" }
             end
@@ -73,7 +73,7 @@ Rails.application.routes.draw do
       as: :convictions_begin_checks
 
   resources :registration_transfers,
-            only: [:new, :create],
+            only: %i[new create],
             param: :reg_identifier,
             path: "/bo/transfer-registration",
             path_names: { new: "/:reg_identifier" }
@@ -86,7 +86,7 @@ Rails.application.routes.draw do
       as: :users
 
   resources :user_migrations,
-        only: [:new, :create],
+        only: %i[new create],
         path: "/bo/users/migrate",
         path_names: { new: "" }
 
