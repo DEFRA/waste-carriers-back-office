@@ -34,13 +34,13 @@ SecureHeaders::Configuration.default do |config|
   #
   # We have to use single quotes here, even though it's against style - double doesn't work
   config.csp = {
-    default_src: %w('self'),
-    font_src: %w('self' data:),
-    img_src: %w('self' www.google-analytics.com),
-    object_src: %w('self'),
-    script_src: %w('self' 'unsafe-inline' www.googletagmanager.com www.google-analytics.com),
-    style_src: %w('self'),
-    report_uri: %w(https://environmentagency.report-uri.io/r/default/csp/enforce)
+    default_src: %w['self'],
+    font_src: %w['self' data:],
+    img_src: %w['self' www.google-analytics.com],
+    object_src: %w['self'],
+    script_src: %w['self' 'unsafe-inline' www.googletagmanager.com www.google-analytics.com],
+    style_src: %w['self'],
+    report_uri: %w[https://environmentagency.report-uri.io/r/default/csp/enforce]
   }
 
   config.x_content_type_options = "nosniff"

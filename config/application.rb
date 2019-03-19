@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require File.expand_path('../boot', __FILE__)
+require File.expand_path("../boot", __FILE__)
 
 require "active_model/railtie"
 require "action_controller/railtie"
@@ -33,10 +33,10 @@ module WasteCarriersBackOffice
     # Enable the asset pipeline
     config.assets.enabled = true
 
-    config.assets.precompile += %w(
+    config.assets.precompile += %w[
       application.css
       print.css
-    )
+    ]
 
     # Don't add field_with_errors div wrapper around fields with errors
     config.action_view.field_error_proc = proc { |html_tag, _instance|
