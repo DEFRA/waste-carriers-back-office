@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
-  revision: fd979fb0959ed44a56ad21b6a783f5063cf0f026
+  revision: e17e2571c4ad41acff00a34bb812d0b4efcbf44d
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -332,7 +332,8 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
-    wicked_pdf (1.1.0)
+    wicked_pdf (1.2.1)
+      activesupport
 
 PLATFORMS
   ruby
