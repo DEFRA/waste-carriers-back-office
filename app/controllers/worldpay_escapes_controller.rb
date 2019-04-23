@@ -36,9 +36,12 @@ class WorldpayEscapesController < ApplicationController
   end
 
   def log_worldpay_escape
-    message = "#{current_user.email} sent #{@transient_registration.reg_identifier} back to payment summary"
-    Rails.logger.debug message
-    Airbrake.notify message
+    params = {
+      user: current_user.email,
+      registration: @transient_registration.reg_identifier
+    }
+    Rails.logger.debug("#{params[:email]} sent #{params[:registration]} back to payment summary")
+    Airbrake.notify("Sent back to payment summary", params)
   end
 
   def continue_renewal_path
