@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-renewals
-  revision: 23802607787b44d730eff442476f87c6972cf437
+  revision: af2fcfd2cffb1c26d23cd098f3c7e4744aa54524
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -140,7 +140,7 @@ GEM
       sass (>= 3.2.0)
     govuk_template (0.26.0)
       rails (>= 3.1)
-    high_voltage (3.1.0)
+    high_voltage (3.1.1)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.9.5)
