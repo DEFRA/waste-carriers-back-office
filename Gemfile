@@ -46,7 +46,7 @@ gem "kaminari-mongoid", "~> 1.0"
 
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
-    git: "https://github.com/DEFRA/waste-carriers-renewals",
+    git: "https://github.com/DEFRA/waste-carriers-engine",
     branch: "master"
 
 # Allows us to automatically generate the change log from the tags, issues,
