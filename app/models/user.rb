@@ -16,7 +16,7 @@ class User
   end
 
   def invalidate_all_sessions!
-    self.session_token = SecureRandom.hex
+    update_attributes(session_token: SecureRandom.hex)
   end
 
   # Roles

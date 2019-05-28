@@ -61,7 +61,7 @@ RSpec.describe "Sessions", type: :request do
       it "updates the session_token" do
         old_session_token = user.session_token
         get destroy_user_session_path
-        expect(user.session_token).to_not eq(old_session_token)
+        expect(user.reload.session_token).to_not eq(old_session_token)
       end
     end
   end
