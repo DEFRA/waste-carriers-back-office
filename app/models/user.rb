@@ -16,7 +16,8 @@ class User
   end
 
   def invalidate_all_sessions!
-    update_attributes(session_token: SecureRandom.hex)
+    # Use set to avoid validation checks on other fields
+    set(session_token: SecureRandom.hex)
   end
 
   # Roles
