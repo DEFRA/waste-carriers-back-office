@@ -52,8 +52,8 @@ class AdminFormsController < ApplicationController
   def renew_if_possible
     renewal_completion_service = WasteCarriersEngine::RenewalCompletionService.new(@transient_registration)
     renewal_completion_service.complete_renewal
-  rescue StandardError => error
-    Airbrake.notify(error, reg_identifier: @registration.reg_identifier) if defined?(Airbrake)
-    Rails.logger.error "Failed to complete renewal for #{@registration.reg_identifier}: " + error.to_s
+  rescue StandardError => e
+    Airbrake.notify(e, reg_identifier: @registration.reg_identifier) if defined?(Airbrake)
+    Rails.logger.error "Failed to complete renewal for #{@registration.reg_identifier}: " + e.to_s
   end
 end
