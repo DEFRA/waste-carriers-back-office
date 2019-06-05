@@ -107,6 +107,18 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
 
           expect(actual_expiry_date).to eq(expected_expiry_date)
         end
+
+        context "when the RenewalCompletionService fails" do
+          before do
+            allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_raise(StandardError)
+          end
+
+          it "rescues the error" do
+            expect do
+              post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+            end.to_not raise_error
+          end
+        end
       end
 
       context "when there is a pending payment" do
