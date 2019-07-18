@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+module AdPrivacyPolicyHelper
+  def link_to_privacy_policy
+    path = File.join(Rails.configuration.wcrs_frontend_url, "privacy")
+
+    link_to(t(".privacy_policy"), path, target: "_blank")
+  end
+end
