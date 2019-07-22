@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get "/bo/convictions/rejected" => "convictions_dashboards#rejected", as: :convictions_rejected
 
   # Privacy policy
-  get "/ad-privacy-policy/:reg_identifier", to: "ad_privacy_policy#show", as: :ad_privacy_policy
+  get "/bo/ad-privacy-policy/:reg_identifier", to: "ad_privacy_policy#show", as: :ad_privacy_policy
 
   resources :transient_registrations,
             only: :show,
