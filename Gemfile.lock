@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 06a3f2072e599da85b1eb134f83fbb5eebc2c280
+  revision: 2ade67a488c2494091556d71cffb5d76ad44a8c2
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -191,7 +191,7 @@ GEM
     multi_json (1.13.1)
     multipart-post (2.0.0)
     netrc (0.11.0)
-    nokogiri (1.10.3)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     octokit (4.13.0)
       sawyer (~> 0.8.0, >= 0.5.3)
@@ -231,7 +231,7 @@ GEM
       activesupport (>= 4.2.0, < 5.0)
       nokogiri (~> 1.6)
       rails-deprecated_sanitizer (>= 1.0.1)
-    rails-html-sanitizer (1.1.0)
+    rails-html-sanitizer (1.2.0)
       loofah (~> 2.2, >= 2.2.2)
     railties (4.2.11.1)
       actionpack (= 4.2.11.1)
