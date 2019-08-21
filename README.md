@@ -1,6 +1,6 @@
 # Waste Carriers Back Office
 
-[![Build Status](https://travis-ci.org/DEFRA/waste-carriers-back-office.svg?branch=master)](https://travis-ci.org/DEFRA/waste-carriers-back-office)
+[![Build Status](https://travis-ci.com/DEFRA/waste-carriers-back-office.svg?branch=master)](https://travis-ci.com/DEFRA/waste-carriers-back-office)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1c4b6080a0833be52c60/maintainability)](https://codeclimate.com/github/DEFRA/waste-carriers-back-office/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/1c4b6080a0833be52c60/test_coverage)](https://codeclimate.com/github/DEFRA/waste-carriers-back-office/test_coverage)
 [![security](https://hakiri.io/github/DEFRA/waste-carriers-back-office/master.svg)](https://hakiri.io/github/DEFRA/waste-carriers-back-office/master)
