@@ -17,7 +17,7 @@ class RegistrationTransferForm < WasteCarriersEngine::BaseForm
     super(attributes, params[:reg_identifier])
   end
 
-  validates :email, :confirm_email, "waste_carriers_engine/email": true
+  validates :email, :confirm_email, "defra_ruby/validators/email": true
   validates :confirm_email, "waste_carriers_engine/matching_email": { compare_to: :email }
   validate :registration_transferred_successfully?
 
