@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 793bbfb88d320c910d134c0b4d194410f1110d86
+  revision: 926c925b1dfffe3b05d20d87fe7c04678055b18a
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -12,12 +12,10 @@ GIT
       jquery-rails
       mongoid (~> 5.2.0)
       nokogiri
-      phonelib
       rails (~> 4.2.11)
       rest-client (~> 2.0)
       turbolinks
       uk_postcode
-      validates_email_format_of
       wicked_pdf
 
 GEM
@@ -93,7 +91,7 @@ GEM
     debug_inspector (0.0.3)
     defra_ruby_style (0.1.2)
       rubocop
-    defra_ruby_validators (2.0.0)
+    defra_ruby_validators (2.1.0)
       activemodel
       os_map_ref
       phonelib
@@ -148,6 +146,7 @@ GEM
     govuk_template (0.26.0)
       rails (>= 3.1)
     high_voltage (3.1.2)
+    http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.9.5)
@@ -255,7 +254,8 @@ GEM
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
       railties (>= 4.2.0, < 6.0)
-    rest-client (2.0.2)
+    rest-client (2.1.0)
+      http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
