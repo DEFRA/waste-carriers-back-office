@@ -110,13 +110,16 @@ def page_through_transient_registrations(paging, counts)
   counts
 end
 
-# rubocop:disable Metrics/LineLength
 def update_addresses_for(results, klass, counts)
   results.each do |result|
     begin
       registration = klass.find(result["_id"])
-      reg_addr_corrected = update_address(registration.registered_address) if address_is_from_os_places?(registration.registered_address)
-      cnt_addr_corrected = update_address(registration.contact_address) if address_is_from_os_places?(registration.contact_address)
+      if address_is_from_os_places?(registration.registered_address)
+        reg_addr_corrected = update_address(registration.registered_address)
+      end
+      if address_is_from_os_places?(registration.contact_address)
+        cnt_addr_corrected = update_address(registration.contact_address)
+      end
       counts[:corrected] += 1 if reg_addr_corrected || cnt_addr_corrected
     rescue StandardError => e
       puts " ERROR"
@@ -130,7 +133,6 @@ def update_addresses_for(results, klass, counts)
 
   counts
 end
-# rubocop:enable Metrics/LineLength
 
 def address_is_from_os_places?(address)
   address.present? && address.address_mode == "address-results"
