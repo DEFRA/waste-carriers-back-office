@@ -19,9 +19,9 @@ en:
           other: "Found %{count} registrations"
         th:
           reg_identifier: "Registration"
-          company_name: "Company name"
-          last_modified: "Last modified"
+          business: "Business"
           status: "Status"
+          dates: "Dates"
           actions: "Actions"
         statuses:
           in_progress: "application in progress"
