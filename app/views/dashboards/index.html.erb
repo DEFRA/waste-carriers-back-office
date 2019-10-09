@@ -74,7 +74,7 @@
                 <%= result.company_name %>
                 <% if result.registered_address.present? %>
                   <p class="address font-xsmall">
-                    <%= displayable_address(result.registered_address).join(", ") %>
+                    <%= inline_registered_address(result) %>
                   </p>
                 <% end %>
               </td>
