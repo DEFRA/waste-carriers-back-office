@@ -7,15 +7,8 @@ en:
         sign_out_link: "Sign out"
       heading: "Waste carriers registrations"
       search:
-        paragraph_1: "You can search for a renewal by:"
-        searchable_attributes:
-          - "registration number"
-          - "company name"
-          - "last name of contact person"
-          - "postcode (if confirmed during renewal process)"
-        paragraph_2: "You can filter the search results, or search without a term to use the filters on their own."
-        label: "Search for renewals"
-        placeholder: "Enter your search term here"
+        label: "Search for a registration"
+        hint: "Using registration number, business or contact last name, postcode"
         submit: "Search"
       results:
         caption:

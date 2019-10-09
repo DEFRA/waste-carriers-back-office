@@ -19,17 +19,13 @@
 
 <div class="grid-row">
   <div class="column-full">
-    <p><%= t(".search.paragraph_1") %></p>
-    <ul class="list list-bullet">
-      <% t(".search.searchable_attributes").each do |attribute| %>
-        <li><%= attribute %></li>
-      <% end %>
-    </ul>
-    <p><%= t(".search.paragraph_2") %></p>
     <div class="form-group">
       <%= form_tag("/bo", method: :get) do %>
-        <%= label_tag :term, t(".search.label"), class: "form-label visually-hidden" %>
-        <%= text_field_tag :term, @term, placeholder: t(".search.placeholder"), class: "form-control" %>
+        <%= label_tag :term, class: "form-label" do %>
+          <%= t(".search.label") %>
+          <span class="form-hint"><%= t(".search.hint") %></span>
+        <% end %>
+        <%= text_field_tag :term, @term, class: "form-control", type: "search" %>
         <%= submit_tag t(".search.submit"), class: "button" %>
       <% end %>
     </div>
