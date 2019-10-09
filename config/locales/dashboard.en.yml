@@ -26,9 +26,9 @@ en:
         classes:
           renewal: "Renewal"
         statuses:
-          in_progress: "application in progress"
-          pending_payment: "pending payment"
-          pending_conviction_check: "pending convictions"
+          in_progress: "in progress"
+          pending_payment: "payment needed"
+          pending_conviction_check: "convictions"
           rejected: "rejected"
           stuck: "stuck"
         details_button: "Details"
