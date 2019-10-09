@@ -31,5 +31,7 @@ en:
           pending_conviction_check: "convictions"
           rejected: "rejected"
           stuck: "stuck"
+        date:
+          started: "Started %{date}"
         details_button: "Details"
         no_results: "No results found."
