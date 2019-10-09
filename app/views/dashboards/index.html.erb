@@ -49,7 +49,7 @@
 <% if @results.any? %>
   <div class="grid-row">
     <div class="column-full">
-      <table>
+      <table class="results">
         <caption>
           <h2 class="heading-medium">
             <%= t(".results.caption", count: @results.count) %>
@@ -65,31 +65,36 @@
           </tr>
         </thead>
         <tbody>
-          <% @results.each do |transient_registration| %>
+          <% @results.each do |result| %>
             <tr>
               <td>
-                <%= transient_registration.reg_identifier %>
+                <%= result.reg_identifier %>
               </td>
               <td>
-                <%= transient_registration.company_name %>
+                <%= result.company_name %>
+                <% if result.registered_address.present? %>
+                  <p class="address font-xsmall">
+                    <%= displayable_address(result.registered_address).join(", ") %>
+                  </p>
+                <% end %>
               </td>
               <td>
-                <% if transient_registration.metaData.REVOKED? %>
+                <% if result.metaData.REVOKED? %>
                   <strong class="app-c-tag app-c-tag--danger">
                     <%= t(".results.statuses.rejected") %>
                   </strong>
-                <% elsif transient_registration.renewal_application_submitted? %>
-                    <% if transient_registration.pending_payment? %>
+                <% elsif result.renewal_application_submitted? %>
+                    <% if result.pending_payment? %>
                       <strong class="app-c-tag app-c-tag--success">
                         <%= t(".results.statuses.pending_payment") %>
                       </strong>
                     <% end %>
-                    <% if transient_registration.pending_manual_conviction_check? %>
+                    <% if result.pending_manual_conviction_check? %>
                       <strong class="app-c-tag app-c-tag--warning">
                         <%= t(".results.statuses.pending_conviction_check") %>
                       </strong>
                     <% end %>
-                    <% if transient_registration.stuck? %>
+                    <% if result.stuck? %>
                       <strong class="app-c-tag app-c-tag--danger">
                         <%= t(".results.statuses.stuck") %>
                       </strong>
@@ -101,10 +106,10 @@
                 <% end %>
               </td>
               <td>
-                <%= transient_registration.metaData.last_modified.in_time_zone("London").strftime("%H:%M %d/%m/%Y") %>
+                <%= result.metaData.last_modified.in_time_zone("London").strftime("%H:%M %d/%m/%Y") %>
               </td>
               <td>
-                <%= link_to t(".results.details_button"), transient_registration_path(transient_registration.reg_identifier) %>
+                <%= link_to t(".results.details_button"), transient_registration_path(result.reg_identifier) %>
               </td>
             </tr>
           <% end %>
