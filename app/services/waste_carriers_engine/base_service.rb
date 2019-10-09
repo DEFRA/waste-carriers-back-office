@@ -3,11 +3,7 @@
 module WasteCarriersEngine
   class BaseService
     def self.run(attrs = nil)
-      if attrs
-        new.run(attrs)
-      else
-        new.run
-      end
+      new.run(attrs)
     end
   end
 end
