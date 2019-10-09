@@ -36,13 +36,13 @@
   </div>
 </div>
 
-<% if @transient_registrations.present? %>
+<% if @results.present? %>
   <div class="grid-row">
     <div class="column-full">
       <table>
         <caption>
           <h2 class="heading-medium">
-            <%= t(".results.caption", count: @transient_registrations.count) %>
+            <%= t(".results.caption", count: @results.count) %>
           </h2>
         </caption>
         <thead>
@@ -55,7 +55,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @transient_registrations.each do |transient_registration| %>
+          <% @results.each do |transient_registration| %>
             <tr>
               <td>
                 <%= transient_registration.reg_identifier %>
@@ -107,14 +107,14 @@
     <div class="column-full">
       <nav role="navigation" class="pagination" aria-label="Pagination">
         <div class="pagination__summary">
-          <%= page_entries_info @transient_registrations, entry_name: "item" %>
+          <%= page_entries_info @results, entry_name: "item" %>
         </div>
-        <%= paginate @transient_registrations %>
+        <%= paginate @results %>
       </nav>
     </div>
   </div>
 
-<% elsif @search_terms_or_filters_present %>
+<% elsif @term.present? %>
 
 <hr>
 
