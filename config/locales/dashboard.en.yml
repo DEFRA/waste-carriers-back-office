@@ -23,6 +23,9 @@ en:
           pending_payment: "Pending payment"
         clear_all_link: "Clear all searches and filters"
       results:
+        caption:
+          one: "Found 1 registration"
+          other: "Found %{count} registrations"
         th:
           reg_identifier: "Registration"
           company_name: "Company name"

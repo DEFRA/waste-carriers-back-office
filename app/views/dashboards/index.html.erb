@@ -61,6 +61,11 @@
   <div class="grid-row">
     <div class="column-full">
       <table>
+        <caption>
+          <h2 class="heading-medium">
+            <%= t(".results.caption", count: @transient_registrations.count) %>
+          </h2>
+        </caption>
         <thead>
           <tr>
             <th><%= t(".results.th.reg_identifier") %></th>
