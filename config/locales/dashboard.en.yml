@@ -23,6 +23,8 @@ en:
           status: "Status"
           dates: "Dates"
           actions: "Actions"
+        classes:
+          renewal: "Renewal"
         statuses:
           in_progress: "application in progress"
           pending_payment: "pending payment"

@@ -9,4 +9,8 @@ module DashboardsHelper
 
     address.join(", ")
   end
+
+  def result_type(result)
+    return "renewal" if result.is_a?(WasteCarriersEngine::TransientRegistration)
+  end
 end

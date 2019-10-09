@@ -22,4 +22,22 @@ RSpec.describe DashboardsHelper, type: :helper do
       end
     end
   end
+
+  describe "#result_type" do
+    context "when the result is a TransientRegistration" do
+      let(:result) { build(:transient_registration) }
+
+      it "returns 'renewal'" do
+        expect(helper.result_type(result)).to eq("renewal")
+      end
+    end
+
+    context "when the result is not a TransientRegistration" do
+      let(:result) { build(:registration) }
+
+      it "returns nil" do
+        expect(helper.result_type(result)).to eq(nil)
+      end
+    end
+  end
 end

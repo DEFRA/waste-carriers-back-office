@@ -79,6 +79,10 @@
                 <% end %>
               </td>
               <td>
+                <% if result_type(result).present? %>
+                  <%= t(".results.classes.#{result_type(result)}") %>
+                <% end %>
+
                 <% if result.metaData.REVOKED? %>
                   <strong class="app-c-tag app-c-tag--danger">
                     <%= t(".results.statuses.rejected") %>
