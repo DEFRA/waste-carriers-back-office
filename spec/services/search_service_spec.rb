@@ -2,12 +2,12 @@
 
 require "rails_helper"
 
-RSpec.describe TransientRegistrationSearchService do
+RSpec.describe SearchService do
   let(:page) { 1 }
   let(:term) { nil }
 
   let(:service) do
-    TransientRegistrationSearchService.run(page: page, term: term)
+    SearchService.run(page: page, term: term)
   end
 
   let(:non_matching_renewal) { create(:transient_registration) }

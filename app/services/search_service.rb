@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TransientRegistrationSearchService < ::WasteCarriersEngine::BaseService
+class SearchService < ::WasteCarriersEngine::BaseService
   def run(page:, term:)
     return [] if term.blank?
 
