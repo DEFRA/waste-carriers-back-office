@@ -1,11 +1,11 @@
 en:
   dashboards:
     index:
-      title: "Renewals dashboard"
+      title: "Waste carriers registrations"
       user_info:
         signed_in_user: "Signed in as %{email}."
         sign_out_link: "Sign out"
-      heading: "Renewals dashboard"
+      heading: "Waste carriers registrations"
       search:
         paragraph_1: "You can search for a renewal by:"
         searchable_attributes:
