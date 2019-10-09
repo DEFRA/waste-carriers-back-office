@@ -20,3 +20,12 @@ ul.dashboard_menu li a {
   color: $govuk-blue;
   margin: 1em;
 }
+
+.actions {
+  background-color: #EEEEEE;
+  padding: 0.5em;
+
+  h2 {
+    margin-top: 0;
+  }
+}

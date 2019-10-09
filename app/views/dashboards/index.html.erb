@@ -18,7 +18,7 @@
 </div>
 
 <div class="grid-row">
-  <div class="column-full">
+  <div class="column-two-thirds">
     <div class="form-group">
       <%= form_tag("/bo", method: :get) do %>
         <%= label_tag :term, class: "form-label" do %>
@@ -28,6 +28,20 @@
         <%= text_field_tag :term, @term, class: "form-control", type: "search" %>
         <%= submit_tag t(".search.submit"), class: "button" %>
       <% end %>
+    </div>
+  </div>
+
+  <div class="column-one-third">
+    <div class="actions">
+      <h2 class="heading-small">
+        <%= t(".actions.subheading") %>
+      </h2>
+      <ul>
+        <li>
+          <%= link_to t(".actions.new_registration"),
+                      "#{Rails.configuration.wcrs_backend_url}/registrations/start" %>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
