@@ -17,11 +17,6 @@ en:
         label: "Search for renewals"
         placeholder: "Enter your search term here"
         submit: "Search"
-        filters:
-          paragraph_1: "Filter the results:"
-          in_progress: "Application in progress"
-          pending_payment: "Pending payment"
-        clear_all_link: "Clear all searches and filters"
       results:
         caption:
           one: "Found 1 registration"

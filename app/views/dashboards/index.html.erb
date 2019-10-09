@@ -26,32 +26,11 @@
       <% end %>
     </ul>
     <p><%= t(".search.paragraph_2") %></p>
-    <div class="form-group panel panel-border-wide">
+    <div class="form-group">
       <%= form_tag("/bo", method: :get) do %>
         <%= label_tag :term, t(".search.label"), class: "form-label visually-hidden" %>
         <%= text_field_tag :term, @term, placeholder: t(".search.placeholder"), class: "form-control" %>
         <%= submit_tag t(".search.submit"), class: "button" %>
-
-        <div class="filters">
-          <p><%= t(".search.filters.paragraph_1") %></p>
-          <div class="form-group">
-            <div class="multiple-choice">
-              <%= check_box_tag :in_progress,
-                                "true",
-                                @in_progress %>
-              <%= label_tag :in_progress,
-                            t(".search.filters.in_progress") %>
-            </div>
-            <div class="multiple-choice">
-              <%= check_box_tag :pending_payment,
-                                "true",
-                                @pending_payment %>
-              <%= label_tag :pending_payment,
-                            t(".search.filters.pending_payment") %>
-            </div>
-          </div>
-          <p><%= link_to t(".search.clear_all_link"), bo_path %></p>
-        </div>
       <% end %>
     </div>
   </div>
