@@ -15,6 +15,12 @@ module ActionLinksHelper
     resource.pending_payment?
   end
 
+  def display_convictions_link_for?(resource)
+    return false unless display_transient_registration_links?(resource)
+
+    resource.pending_manual_conviction_check?
+  end
+
   private
 
   def display_transient_registration_links?(resource)

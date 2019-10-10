@@ -130,6 +130,11 @@
                       <%= link_to t(".results.actions.payment"), transient_registration_payments_path(result.reg_identifier) %>
                     </li>
                   <% end %>
+                  <% if display_convictions_link_for?(result) %>
+                    <li>
+                      <%= link_to t(".results.actions.convictions"), transient_registration_convictions_path(result.reg_identifier) %>
+                    </li>
+                  <% end %>
                 </ul>
               </td>
             </tr>
