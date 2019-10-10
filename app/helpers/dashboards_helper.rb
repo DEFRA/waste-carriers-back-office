@@ -5,7 +5,8 @@ module DashboardsHelper
 
   def inline_registered_address(result)
     address = displayable_address(result.registered_address)
-    return nil if address.empty?
+
+    return if address.empty?
 
     address.join(", ")
   end
