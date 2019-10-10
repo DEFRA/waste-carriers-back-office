@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class DashboardsController < ApplicationController
+  helper ActionLinksHelper
+
   before_action :authenticate_user!
 
   def index

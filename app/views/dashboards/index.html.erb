@@ -120,7 +120,7 @@
                   <li>
                     <%= link_to t(".results.actions.details"), transient_registration_path(result.reg_identifier) %>
                   </li>
-                  <% if can_be_resumed?(result) %>
+                  <% if display_resume_link_for?(result) %>
                     <li>
                       <%= link_to t(".results.actions.resume"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(result.reg_identifier) %>
                     </li>
