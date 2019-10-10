@@ -33,5 +33,11 @@ en:
           stuck: "stuck"
         date:
           started: "Started %{date}"
-        details_button: "Details"
+        actions:
+          convictions: "Conviction details"
+          details: "Details"
+          renew: "Renew"
+          resume: "Resume application"
+          payment: "Payment details"
+          transfer: "Transfer"
         no_results: "No results found."

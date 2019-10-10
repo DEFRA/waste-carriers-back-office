@@ -116,7 +116,16 @@
                                                            .strftime("%d/%m/%Y")) %>
               </td>
               <td>
-                <%= link_to t(".results.details_button"), transient_registration_path(result.reg_identifier) %>
+                <ul>
+                  <li>
+                    <%= link_to t(".results.actions.details"), transient_registration_path(result.reg_identifier) %>
+                  </li>
+                  <% if can_be_resumed?(result) %>
+                    <li>
+                      <%= link_to t(".results.actions.resume"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(result.reg_identifier) %>
+                    </li>
+                  <% end %>
+                </ul>
               </td>
             </tr>
           <% end %>

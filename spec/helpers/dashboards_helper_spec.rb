@@ -40,4 +40,42 @@ RSpec.describe DashboardsHelper, type: :helper do
       end
     end
   end
+
+  describe "#can_be_resumed?" do
+    context "when the result is not a TransientRegistration" do
+      let(:result) { build(:registration) }
+
+      it "returns false" do
+        expect(helper.can_be_resumed?(result)).to eq(false)
+      end
+    end
+
+    context "when the result is a TransientRegistration" do
+      let(:result) { build(:transient_registration) }
+
+      context "when the result has been submitted" do
+        before { result.workflow_state = "renewal_received_form" }
+
+        it "returns false" do
+          expect(helper.can_be_resumed?(result)).to eq(false)
+        end
+      end
+
+      context "when the result is in WorldPay" do
+        before { result.workflow_state = "worldpay_form" }
+
+        it "returns false" do
+          expect(helper.can_be_resumed?(result)).to eq(false)
+        end
+      end
+
+      context "when the result is in a resumable state" do
+        before { result.workflow_state = "location_form" }
+
+        it "returns true" do
+          expect(helper.can_be_resumed?(result)).to eq(true)
+        end
+      end
+    end
+  end
 end
