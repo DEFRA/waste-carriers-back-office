@@ -12,7 +12,7 @@ class ConvictionReasonForm < WasteCarriersEngine::BaseForm
 
     attributes = { metaData: meta_data }
 
-    super(attributes, params[:reg_identifier])
+    super(attributes)
   end
 
   validates :revoked_reason, presence: true

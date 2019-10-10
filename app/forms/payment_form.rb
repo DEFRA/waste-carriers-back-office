@@ -28,7 +28,7 @@ class PaymentForm < WasteCarriersEngine::BaseForm
 
     attributes = { finance_details: finance_details }
 
-    super(attributes, params[:reg_identifier])
+    super(attributes)
   end
 
   validates :amount, presence: true, numericality: { greater_than: 0 }
