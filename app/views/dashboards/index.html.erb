@@ -80,33 +80,33 @@
               </td>
               <td>
                 <% if result_type(result).present? %>
-                  <%= t(".results.classes.#{result_type(result)}") %>
+                  <%= t(".results.classes.#{result_type(result)}") %><br>
                 <% end %>
 
                 <% if result.metaData.REVOKED? %>
-                  <strong class="app-c-tag app-c-tag--danger">
+                  <span class="status-tag status-tag--rejected">
                     <%= t(".results.statuses.rejected") %>
-                  </strong>
+                  </span>
                 <% elsif result.renewal_application_submitted? %>
                     <% if result.pending_payment? %>
-                      <strong class="app-c-tag app-c-tag--success">
+                      <span class="status-tag status-tag--payment">
                         <%= t(".results.statuses.pending_payment") %>
-                      </strong>
+                      </span>
                     <% end %>
                     <% if result.pending_manual_conviction_check? %>
-                      <strong class="app-c-tag app-c-tag--warning">
+                      <span class="status-tag status-tag--convictions">
                         <%= t(".results.statuses.pending_conviction_check") %>
-                      </strong>
+                      </span>
                     <% end %>
                     <% if result.stuck? %>
-                      <strong class="app-c-tag app-c-tag--danger">
+                      <span class="status-tag status-tag--stuck">
                         <%= t(".results.statuses.stuck") %>
-                      </strong>
+                      </span>
                     <% end %>
                 <% else %>
-                  <strong class="app-c-tag">
+                  <span class="status-tag status-tag--in-progress">
                     <%= t(".results.statuses.in_progress") %>
-                  </strong>
+                  </span>
                 <% end %>
               </td>
               <td>
