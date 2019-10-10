@@ -25,6 +25,10 @@ ul.dashboard_menu li a {
   vertical-align: top;
 }
 
+.results td:last-child {
+  width: 9em;
+}
+
 .results p.address {
   margin-bottom: 0;
 }
