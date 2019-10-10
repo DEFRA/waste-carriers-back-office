@@ -15,6 +15,14 @@ RSpec.describe ActionLinksHelper, type: :helper do
     context "when the result is a TransientRegistration" do
       let(:result) { build(:transient_registration) }
 
+      context "when the result has been revoked" do
+        before { result.metaData.status = "REVOKED" }
+
+        it "returns false" do
+          expect(helper.display_resume_link_for?(result)).to eq(false)
+        end
+      end
+
       context "when the result has been submitted" do
         before { result.workflow_state = "renewal_received_form" }
 
@@ -36,6 +44,44 @@ RSpec.describe ActionLinksHelper, type: :helper do
 
         it "returns true" do
           expect(helper.display_resume_link_for?(result)).to eq(true)
+        end
+      end
+    end
+  end
+
+  describe "#display_payment_link_for?" do
+    context "when the result is not a TransientRegistration" do
+      let(:result) { build(:registration) }
+
+      it "returns false" do
+        expect(helper.display_payment_link_for?(result)).to eq(false)
+      end
+    end
+
+    context "when the result is a TransientRegistration" do
+      let(:result) { build(:transient_registration) }
+
+      context "when the result has been revoked" do
+        before { result.metaData.status = "REVOKED" }
+
+        it "returns false" do
+          expect(helper.display_payment_link_for?(result)).to eq(false)
+        end
+      end
+
+      context "when the result has no pending payment" do
+        let(:result) { build(:transient_registration, :no_pending_payment) }
+
+        it "returns false" do
+          expect(helper.display_payment_link_for?(result)).to eq(false)
+        end
+      end
+
+      context "when the result has a pending payment" do
+        let(:result) { build(:transient_registration, :pending_payment) }
+
+        it "returns true" do
+          expect(helper.display_payment_link_for?(result)).to eq(true)
         end
       end
     end

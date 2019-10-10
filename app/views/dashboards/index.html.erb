@@ -125,6 +125,11 @@
                       <%= link_to t(".results.actions.resume"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(result.reg_identifier) %>
                     </li>
                   <% end %>
+                  <% if display_payment_link_for?(result) %>
+                    <li>
+                      <%= link_to t(".results.actions.payment"), transient_registration_payments_path(result.reg_identifier) %>
+                    </li>
+                  <% end %>
                 </ul>
               </td>
             </tr>
