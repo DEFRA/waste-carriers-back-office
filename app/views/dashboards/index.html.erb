@@ -118,21 +118,45 @@
               <td>
                 <ul>
                   <li>
-                    <%= link_to t(".results.actions.details"), transient_registration_path(result.reg_identifier) %>
+                    <%= link_to transient_registration_path(result.reg_identifier) do %>
+                      <%= t(".results.actions.details.link_text") %>
+                      <span class="visually-hidden">
+                        <%= t(".results.actions.details.visually_hidden_text",
+                              name: result.company_name) %>
+                      </span>
+                    <% end %>
                   </li>
                   <% if display_resume_link_for?(result) %>
                     <li>
-                      <%= link_to t(".results.actions.resume"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(result.reg_identifier) %>
+                      <%= link_to WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(result.reg_identifier) do %>
+                        <%= t(".results.actions.resume.link_text") %>
+                        <span class="visually-hidden">
+                          <%= t(".results.actions.resume.visually_hidden_text",
+                                name: result.company_name) %>
+                        </span>
+                      <% end %>
                     </li>
                   <% end %>
                   <% if display_payment_link_for?(result) %>
                     <li>
-                      <%= link_to t(".results.actions.payment"), transient_registration_payments_path(result.reg_identifier) %>
+                      <%= link_to transient_registration_payments_path(result.reg_identifier) do %>
+                        <%= t(".results.actions.payment.link_text") %>
+                        <span class="visually-hidden">
+                          <%= t(".results.actions.payment.visually_hidden_text",
+                                name: result.company_name) %>
+                        </span>
+                      <% end %>
                     </li>
                   <% end %>
                   <% if display_convictions_link_for?(result) %>
                     <li>
-                      <%= link_to t(".results.actions.convictions"), transient_registration_convictions_path(result.reg_identifier) %>
+                      <%= link_to transient_registration_convictions_path(result.reg_identifier) do %>
+                        <%= t(".results.actions.convictions.link_text") %>
+                        <span class="visually-hidden">
+                          <%= t(".results.actions.convictions.visually_hidden_text",
+                                name: result.company_name) %>
+                        </span>
+                      <% end %>
                     </li>
                   <% end %>
                 </ul>

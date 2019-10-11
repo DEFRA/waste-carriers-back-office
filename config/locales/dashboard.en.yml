@@ -34,10 +34,22 @@ en:
         date:
           started: "Started %{date}"
         actions:
-          convictions: "Conviction details"
-          details: "Details"
-          renew: "Renew"
-          resume: "Resume application"
-          payment: "Payment details"
-          transfer: "Transfer"
+          convictions:
+            link_text: "Conviction details"
+            visually_hidden_text: "for %{name}"
+          details:
+            link_text: "Details"
+            visually_hidden_text: "for %{name}"
+          renew:
+            link_text: "Renew"
+            visually_hidden_text: "%{name}"
+          resume:
+            link_text: "Resume application"
+            visually_hidden_text: "for %{name}"
+          payment:
+            link_text: "Payment details"
+            visually_hidden_text: "for %{name}"
+          transfer:
+            link_text: "Transfer"
+            visually_hidden_text: "%{name}"
         no_results: "No results found."
