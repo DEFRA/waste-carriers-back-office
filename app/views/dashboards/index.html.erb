@@ -79,6 +79,8 @@
                 <% end %>
               </td>
               <td>
+                <% if result.is_a?(WasteCarriersEngine::TransientRegistration) %>
+
                 <% if result_type(result).present? %>
                   <%= t(".results.classes.#{result_type(result)}") %><br>
                 <% end %>
@@ -87,6 +89,12 @@
                   <span class="status-tag status-tag--<%= tag %>">
                     <%= t(".results.statuses.#{tag}") %>
                   </span>
+                <% end %>
+
+                <% else %>
+
+                  Registration
+
                 <% end %>
               </td>
               <td>
@@ -97,15 +105,17 @@
               </td>
               <td>
                 <ul>
-                  <li>
-                    <%= link_to transient_registration_path(result.reg_identifier) do %>
-                      <%= t(".results.actions.details.link_text") %>
-                      <span class="visually-hidden">
-                        <%= t(".results.actions.details.visually_hidden_text",
-                              name: result.company_name) %>
-                      </span>
-                    <% end %>
-                  </li>
+                  <% if display_details_link_for?(result) %>
+                    <li>
+                      <%= link_to transient_registration_path(result.reg_identifier) do %>
+                        <%= t(".results.actions.details.link_text") %>
+                        <span class="visually-hidden">
+                          <%= t(".results.actions.details.visually_hidden_text",
+                                name: result.company_name) %>
+                        </span>
+                      <% end %>
+                    </li>
+                  <% end %>
                   <% if display_resume_link_for?(result) %>
                     <li>
                       <%= link_to WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(result.reg_identifier) do %>
