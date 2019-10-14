@@ -123,5 +123,23 @@ RSpec.describe ActionLinksHelper, type: :helper do
         end
       end
     end
+
+    describe "#display_transfer_link_for?" do
+      context "when the result is not a Registration" do
+        let(:result) { build(:transient_registration) }
+
+        it "returns false" do
+          expect(helper.display_transfer_link_for?(result)).to eq(false)
+        end
+      end
+
+      context "when the result is a Registration" do
+        let(:result) { build(:registration) }
+
+        it "returns true" do
+          expect(helper.display_transfer_link_for?(result)).to eq(true)
+        end
+      end
+    end
   end
 end
