@@ -3,6 +3,24 @@
 require "rails_helper"
 
 RSpec.describe ActionLinksHelper, type: :helper do
+  describe "#display_details_link_for?" do
+    context "when the result is not a TransientRegistration" do
+      let(:result) { build(:registration) }
+
+      it "returns false" do
+        expect(helper.display_details_link_for?(result)).to eq(false)
+      end
+    end
+
+    context "when the result is a TransientRegistration" do
+      let(:result) { build(:transient_registration) }
+
+      it "returns true" do
+        expect(helper.display_details_link_for?(result)).to eq(true)
+      end
+    end
+  end
+
   describe "#display_resume_link_for?" do
     context "when the result is not a TransientRegistration" do
       let(:result) { build(:registration) }
