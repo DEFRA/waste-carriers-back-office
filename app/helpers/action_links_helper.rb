@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module ActionLinksHelper
+  def display_details_link_for?(resource)
+    resource.is_a?(WasteCarriersEngine::TransientRegistration)
+  end
+
   def display_resume_link_for?(resource)
     return false unless display_transient_registration_links?(resource)
     return false if resource.renewal_application_submitted?
