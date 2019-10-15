@@ -37,7 +37,7 @@ en:
           stuck: "stuck"
         date:
           expired: "Expired %{date}"
-          started: "Started %{date}"
+          last_modified: "Last updated %{date}"
           will_expire: "Expires %{date}"
         actions:
           convictions:

@@ -46,9 +46,9 @@ module DashboardsHelper
   end
 
   def last_modified_date(result)
-    I18n.t(".dashboards.index.results.date.started", date: result.metaData
-                                                                 .last_modified
-                                                                 .in_time_zone("London")
-                                                                 .strftime("%d/%m/%Y"))
+    I18n.t(".dashboards.index.results.date.last_modified", date: result.metaData
+                                                                       .last_modified
+                                                                       .in_time_zone("London")
+                                                                       .strftime("%d/%m/%Y"))
   end
 end
