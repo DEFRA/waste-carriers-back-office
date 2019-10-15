@@ -18,8 +18,18 @@ class StatusTagService < ::WasteCarriersEngine::BaseService
   private
 
   def metadata_status
-    return reg_metadata_status if @resource.is_a?(WasteCarriersEngine::Registration)
-    return transient_reg_metadata_status if @resource.is_a?(WasteCarriersEngine::TransientRegistration)
+    return :revoked if @resource.metaData.REVOKED?
+    return :refused if @resource.metaData.REFUSED?
+
+    if transient?
+      transient_reg_metadata_status
+    else
+      reg_metadata_status
+    end
+  end
+
+  def transient_reg_metadata_status
+    return :in_progress unless @resource.renewal_application_submitted?
   end
 
   def reg_metadata_status
@@ -28,32 +38,23 @@ class StatusTagService < ::WasteCarriersEngine::BaseService
     @resource.metaData.status.downcase.to_sym
   end
 
-  def transient_reg_metadata_status
-    return :revoked if @resource.metaData.REVOKED?
-    return :refused if @resource.metaData.REFUSED?
-    return :in_progress unless submitted_renewal?
-  end
-
   def pending_conviction_check
-    return nil unless submitted_renewal?
-
-    :pending_conviction_check if @resource.pending_manual_conviction_check?
+    :pending_conviction_check if submitted_renewal? && @resource.pending_manual_conviction_check?
   end
 
   def pending_payment
-    return nil unless submitted_renewal?
-
-    :pending_payment if @resource.pending_payment?
+    :pending_payment if submitted_renewal? && @resource.pending_payment?
   end
 
   def stuck
-    return nil unless submitted_renewal?
+    :stuck if transient? && @resource.stuck?
+  end
 
-    :stuck if @resource.stuck?
+  def transient?
+    @_transient ||= @resource.is_a?(WasteCarriersEngine::TransientRegistration)
   end
 
   def submitted_renewal?
-    @_submitted_renewal ||= @resource.is_a?(WasteCarriersEngine::TransientRegistration) &&
-                            @resource.renewal_application_submitted?
+    @_submitted_renewal ||= transient? && @resource.renewal_application_submitted?
   end
 end
