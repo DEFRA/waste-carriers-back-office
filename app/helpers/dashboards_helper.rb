@@ -22,6 +22,7 @@ module DashboardsHelper
   def result_date(result)
     return if refused_or_revoked?(result)
     return expired_date(result) if result.metaData.EXPIRED?
+    return will_expire_date(result) if result.is_a?(WasteCarriersEngine::Registration)
 
     last_modified_date(result)
   end
@@ -36,6 +37,12 @@ module DashboardsHelper
     I18n.t(".dashboards.index.results.date.expired", date: result.expires_on
                                                                  .in_time_zone("London")
                                                                  .strftime("%d/%m/%Y"))
+  end
+
+  def will_expire_date(result)
+    I18n.t(".dashboards.index.results.date.will_expire", date: result.expires_on
+                                                                     .in_time_zone("London")
+                                                                     .strftime("%d/%m/%Y"))
   end
 
   def last_modified_date(result)

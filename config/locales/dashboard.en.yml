@@ -38,6 +38,7 @@ en:
         date:
           expired: "Expired %{date}"
           started: "Started %{date}"
+          will_expire: "Expires %{date}"
         actions:
           convictions:
             link_text: "Conviction details"
