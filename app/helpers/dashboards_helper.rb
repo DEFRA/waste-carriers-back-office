@@ -21,6 +21,7 @@ module DashboardsHelper
 
   def result_date(result)
     return if refused_or_revoked?(result)
+    return expired_date(result) if result.metaData.EXPIRED?
 
     last_modified_date(result)
   end
@@ -29,6 +30,12 @@ module DashboardsHelper
 
   def refused_or_revoked?(result)
     %w[REFUSED REVOKED].include?(result.metaData.status)
+  end
+
+  def expired_date(result)
+    I18n.t(".dashboards.index.results.date.expired", date: result.expires_on
+                                                                 .in_time_zone("London")
+                                                                 .strftime("%d/%m/%Y"))
   end
 
   def last_modified_date(result)

@@ -36,6 +36,7 @@ en:
           revoked: "revoked"
           stuck: "stuck"
         date:
+          expired: "Expired %{date}"
           started: "Started %{date}"
         actions:
           convictions:

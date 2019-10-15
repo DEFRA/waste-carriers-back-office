@@ -50,6 +50,15 @@ RSpec.describe DashboardsHelper, type: :helper do
       end
     end
 
+    context "when the result is expired" do
+      before { result.metaData.status = "EXPIRED" }
+
+      it "returns the expected text" do
+        date = result.expires_on.strftime("%d/%m/%Y")
+        expect(helper.result_date(result)).to eq("Expired #{date}")
+      end
+    end
+
     context "when the result is active" do
       before { result.metaData.status = "ACTIVE" }
 
