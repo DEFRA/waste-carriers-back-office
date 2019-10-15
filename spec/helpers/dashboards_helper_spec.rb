@@ -40,4 +40,11 @@ RSpec.describe DashboardsHelper, type: :helper do
       end
     end
   end
+
+  describe "#result_date" do
+    it "returns the expected text" do
+      date = Date.today.strftime("%d/%m/%Y")
+      expect(helper.result_date(result)).to eq("Started #{date}")
+    end
+  end
 end

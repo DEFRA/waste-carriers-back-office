@@ -18,4 +18,11 @@ module DashboardsHelper
   def status_tags(result)
     StatusTagService.run(resource: result)
   end
+
+  def result_date(result)
+    I18n.t(".dashboards.index.results.date.started", date: result.metaData
+                                                                 .last_modified
+                                                                 .in_time_zone("London")
+                                                                 .strftime("%d/%m/%Y"))
+  end
 end
