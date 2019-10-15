@@ -26,10 +26,13 @@ en:
         classes:
           renewal: "Renewal"
         statuses:
+          active: "active"
+          expired: "expired"
           in_progress: "in progress"
-          pending_payment: "payment needed"
           pending_conviction_check: "convictions"
-          rejected: "rejected"
+          pending_payment: "payment needed"
+          refused: "refused"
+          revoked: "revoked"
           stuck: "stuck"
         date:
           started: "Started %{date}"

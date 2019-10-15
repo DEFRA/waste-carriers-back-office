@@ -79,42 +79,14 @@
                 <% end %>
               </td>
               <td>
-                <% if result.is_a?(WasteCarriersEngine::TransientRegistration) %>
-
                 <% if result_type(result).present? %>
                   <%= t(".results.classes.#{result_type(result)}") %><br>
                 <% end %>
 
-                <% if result.metaData.REVOKED? %>
-                  <span class="status-tag status-tag--rejected">
-                    <%= t(".results.statuses.rejected") %>
+                <% status_tags(result).each do |tag| %>
+                  <span class="status-tag status-tag--<%= tag %>">
+                    <%= t(".results.statuses.#{tag}") %>
                   </span>
-                <% elsif result.renewal_application_submitted? %>
-                    <% if result.pending_payment? %>
-                      <span class="status-tag status-tag--payment">
-                        <%= t(".results.statuses.pending_payment") %>
-                      </span>
-                    <% end %>
-                    <% if result.pending_manual_conviction_check? %>
-                      <span class="status-tag status-tag--convictions">
-                        <%= t(".results.statuses.pending_conviction_check") %>
-                      </span>
-                    <% end %>
-                    <% if result.stuck? %>
-                      <span class="status-tag status-tag--stuck">
-                        <%= t(".results.statuses.stuck") %>
-                      </span>
-                    <% end %>
-                <% else %>
-                  <span class="status-tag status-tag--in-progress">
-                    <%= t(".results.statuses.in_progress") %>
-                  </span>
-                <% end %>
-
-                <% else %>
-
-                  Registration
-
                 <% end %>
               </td>
               <td>
