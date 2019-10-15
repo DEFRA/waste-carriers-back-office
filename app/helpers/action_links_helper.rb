@@ -28,10 +28,7 @@ module ActionLinksHelper
   def display_renew_link_for?(resource)
     return false unless display_registration_links?(resource)
 
-    reg_identifier = resource.reg_identifier
-    transient_registration = WasteCarriersEngine::TransientRegistration.where(reg_identifier: reg_identifier).first ||
-                             WasteCarriersEngine::TransientRegistration.new(reg_identifier: reg_identifier)
-    transient_registration.can_be_renewed?
+    renewable_tier?(resource) && renewable_status?(resource) && renewable_date?(resource)
   end
 
   def display_transfer_link_for?(resource)
@@ -53,5 +50,21 @@ module ActionLinksHelper
     return false if resource.metaData.REFUSED?
 
     true
+  end
+
+  def renewable_tier?(resource)
+    resource.tier == "UPPER"
+  end
+
+  def renewable_status?(resource)
+    %w[ACTIVE EXPIRED].include?(resource.metaData.status)
+  end
+
+  def renewable_date?(resource)
+    check_service = WasteCarriersEngine::ExpiryCheckService.new(resource)
+    return true if check_service.in_expiry_grace_window?
+    return false if check_service.expired?
+
+    check_service.in_renewal_window?
   end
 end
