@@ -154,8 +154,20 @@ RSpec.describe ActionLinksHelper, type: :helper do
       context "when the result is a Registration" do
         let(:result) { build(:registration) }
 
-        it "returns true" do
-          expect(helper.display_transfer_link_for?(result)).to eq(true)
+        context "when the result has been revoked or refused" do
+          before { result.metaData.status = %w[REVOKED REFUSED].sample }
+
+          it "returns false" do
+            expect(helper.display_transfer_link_for?(result)).to eq(false)
+          end
+        end
+
+        context "when the result is not revoked or refused" do
+          before { result.metaData.status = %w[ACTIVE EXPIRED PENDING].sample }
+
+          it "returns true" do
+            expect(helper.display_transfer_link_for?(result)).to eq(true)
+          end
         end
       end
     end
