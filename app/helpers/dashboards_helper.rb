@@ -20,6 +20,18 @@ module DashboardsHelper
   end
 
   def result_date(result)
+    return if refused_or_revoked?(result)
+
+    last_modified_date(result)
+  end
+
+  private
+
+  def refused_or_revoked?(result)
+    %w[REFUSED REVOKED].include?(result.metaData.status)
+  end
+
+  def last_modified_date(result)
     I18n.t(".dashboards.index.results.date.started", date: result.metaData
                                                                  .last_modified
                                                                  .in_time_zone("London")

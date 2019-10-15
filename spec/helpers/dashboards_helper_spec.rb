@@ -42,9 +42,21 @@ RSpec.describe DashboardsHelper, type: :helper do
   end
 
   describe "#result_date" do
-    it "returns the expected text" do
-      date = Date.today.strftime("%d/%m/%Y")
-      expect(helper.result_date(result)).to eq("Started #{date}")
+    context "when the result is refused or revoked" do
+      before { result.metaData.status = %w[REFUSED REVOKED].sample }
+
+      it "returns nil" do
+        expect(helper.result_date(result)).to eq(nil)
+      end
+    end
+
+    context "when the result is active" do
+      before { result.metaData.status = "ACTIVE" }
+
+      it "returns the expected text" do
+        date = Date.today.strftime("%d/%m/%Y")
+        expect(helper.result_date(result)).to eq("Started #{date}")
+      end
     end
   end
 end
