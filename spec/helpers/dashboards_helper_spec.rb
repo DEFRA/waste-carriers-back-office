@@ -60,11 +60,22 @@ RSpec.describe DashboardsHelper, type: :helper do
     end
 
     context "when the result is active" do
-      before { result.metaData.status = "ACTIVE" }
+      context "when the result is a registration" do
+        let(:result) { build(:registration, :expires_soon) }
 
-      it "returns the expected text" do
-        date = Date.today.strftime("%d/%m/%Y")
-        expect(helper.result_date(result)).to eq("Started #{date}")
+        it "returns the expected text" do
+          date = result.expires_on.strftime("%d/%m/%Y")
+          expect(helper.result_date(result)).to eq("Expires #{date}")
+        end
+      end
+
+      context "when the result is a transient_registration" do
+        let(:result) { build(:transient_registration) }
+
+        it "returns the expected text" do
+          date = Date.today.strftime("%d/%m/%Y")
+          expect(helper.result_date(result)).to eq("Last updated #{date}")
+        end
       end
     end
   end
