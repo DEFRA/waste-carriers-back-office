@@ -16,23 +16,35 @@
   text-transform: uppercase;
 }
 
-.status-tag--convictions {
-  background-color: #d4351c;
+.status-tag--active {
+  background-color: #00703c;
 }
 
-.status-tag--in-progress {
+.status-tag--expired {
+  background-color: #b58840;
+}
+
+.status-tag--in_progress {
   background-color: #005ea5;
 }
 
-.status-tag--payment {
+.status-tag--pending_conviction_check {
+  background-color: #d4351c;
+}
+
+.status-tag--pending_payment {
   color: $black;
   background-color: #f47738;
 }
 
-.status-tag--stuck {
-  background-color: #d4351c;
+.status-tag--refused {
+  background-color: #6f777b;
 }
 
-.status-tag--rejected {
+.status-tag--revoked {
   background-color: #6f777b;
+}
+
+.status-tag--stuck {
+  background-color: #d4351c;
 }

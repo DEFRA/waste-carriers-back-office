@@ -14,4 +14,8 @@ module DashboardsHelper
   def result_type(result)
     return "renewal" if result.is_a?(WasteCarriersEngine::TransientRegistration)
   end
+
+  def status_tags(result)
+    StatusTagService.run(resource: result)
+  end
 end

@@ -34,6 +34,10 @@ module ActionLinksHelper
     transient_registration.can_be_renewed?
   end
 
+  def display_transfer_link_for?(resource)
+    display_registration_links?(resource)
+  end
+
   private
 
   def display_transient_registration_links?(resource)
