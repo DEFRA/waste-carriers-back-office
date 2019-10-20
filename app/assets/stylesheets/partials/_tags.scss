@@ -22,6 +22,7 @@
 
 .status-tag--expired {
   background-color: #b58840;
+  color: $black;
 }
 
 .status-tag--in_progress {
@@ -33,8 +34,8 @@
 }
 
 .status-tag--pending_payment {
-  color: $black;
   background-color: #f47738;
+  color: $black;
 }
 
 .status-tag--refused {
