@@ -7,6 +7,14 @@ class DashboardsController < ApplicationController
 
   def index
     @term = params[:term]
-    @results = SearchService.run(page: params[:page], term: @term)
+    search_and_count_results(params[:page])
+  end
+
+  private
+
+  def search_and_count_results(page)
+    result_data = SearchService.run(page: page, term: @term)
+    @result_count = result_data[:count]
+    @results = result_data[:results]
   end
 end
