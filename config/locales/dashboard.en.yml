@@ -28,6 +28,7 @@ en:
         statuses:
           active: "active"
           expired: "expired"
+          inactive: "inactive"
           in_progress: "in progress"
           pending_conviction_check: "convictions"
           pending_payment: "payment needed"
