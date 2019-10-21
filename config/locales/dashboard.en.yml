@@ -25,6 +25,7 @@ en:
           actions: "Actions"
         classes:
           renewal: "Renewal"
+          new_registration: "New registration"
         statuses:
           active: "active"
           expired: "expired"

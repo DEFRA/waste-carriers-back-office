@@ -27,16 +27,26 @@ RSpec.describe DashboardsHelper, type: :helper do
     context "when the result is a TransientRegistration" do
       let(:result) { build(:transient_registration) }
 
-      it "returns 'renewal'" do
-        expect(helper.result_type(result)).to eq("renewal")
+      it "returns :renewal" do
+        expect(helper.result_type(result)).to eq(:renewal)
       end
     end
 
     context "when the result is not a TransientRegistration" do
       let(:result) { build(:registration) }
 
-      it "returns nil" do
-        expect(helper.result_type(result)).to eq(nil)
+      context "when the result is pending" do
+        before { result.metaData.status = "PENDING" }
+
+        it "returns :new_registraton" do
+          expect(helper.result_type(result)).to eq(:new_registration)
+        end
+      end
+
+      context "when the result is not pending" do
+        it "returns nil" do
+          expect(helper.result_type(result)).to eq(nil)
+        end
       end
     end
   end

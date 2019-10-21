@@ -12,7 +12,8 @@ module DashboardsHelper
   end
 
   def result_type(result)
-    return "renewal" if result.is_a?(WasteCarriersEngine::TransientRegistration)
+    return :renewal if result.is_a?(WasteCarriersEngine::TransientRegistration)
+    return :new_registration if result.pending?
   end
 
   def status_tags(result)
