@@ -35,21 +35,19 @@ module DashboardsHelper
   end
 
   def expired_date(result)
-    I18n.t(".dashboards.index.results.date.expired", date: result.expires_on
-                                                                 .in_time_zone("London")
-                                                                 .strftime("%d/%m/%Y"))
+    formatted_date(:expired, result.expires_on)
   end
 
   def will_expire_date(result)
-    I18n.t(".dashboards.index.results.date.will_expire", date: result.expires_on
-                                                                     .in_time_zone("London")
-                                                                     .strftime("%d/%m/%Y"))
+    formatted_date(:will_expire, result.expires_on)
   end
 
   def last_modified_date(result)
-    I18n.t(".dashboards.index.results.date.last_modified", date: result.metaData
-                                                                       .last_modified
-                                                                       .in_time_zone("London")
-                                                                       .strftime("%d/%m/%Y"))
+    formatted_date(:last_modified, result.metaData.last_modified)
+  end
+
+  def formatted_date(text, date)
+    date = date.in_time_zone("London").to_formatted_s(:day_month_year_slashes)
+    I18n.t(".dashboards.index.results.date.#{text}", date: date)
   end
 end
