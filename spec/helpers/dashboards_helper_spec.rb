@@ -74,7 +74,7 @@ RSpec.describe DashboardsHelper, type: :helper do
 
         it "returns the expected text" do
           date = Date.today.strftime("%d/%m/%Y")
-          expect(helper.result_date(result)).to eq("Last updated #{date}")
+          expect(helper.result_date(result)).to eq("Updated #{date}")
         end
       end
     end
