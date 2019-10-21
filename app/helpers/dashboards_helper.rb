@@ -20,7 +20,7 @@ module DashboardsHelper
   end
 
   def result_date(result)
-    return if refused_or_revoked?(result)
+    return if deactivated?(result)
 
     return expired_date(result) if result.expired?
     return will_expire_date(result) if result.is_a?(WasteCarriersEngine::Registration)
@@ -30,8 +30,8 @@ module DashboardsHelper
 
   private
 
-  def refused_or_revoked?(result)
-    result.refused? || result.revoked?
+  def deactivated?(result)
+    result.inactive? || result.refused? || result.revoked?
   end
 
   def expired_date(result)

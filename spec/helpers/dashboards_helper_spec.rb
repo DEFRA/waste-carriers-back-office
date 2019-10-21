@@ -42,8 +42,8 @@ RSpec.describe DashboardsHelper, type: :helper do
   end
 
   describe "#result_date" do
-    context "when the result is refused or revoked" do
-      before { result.metaData.status = %w[REFUSED REVOKED].sample }
+    context "when the result is inactive, refused or revoked" do
+      before { result.metaData.status = %w[INACTIVE REFUSED REVOKED].sample }
 
       it "returns nil" do
         expect(helper.result_date(result)).to eq(nil)
