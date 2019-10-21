@@ -141,6 +141,17 @@
                       <% end %>
                     </li>
                   <% end %>
+                  <% if display_renew_link_for?(result) %>
+                    <li>
+                      <%= link_to WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(result.reg_identifier) do %>
+                        <%= t(".results.actions.renew.link_text") %>
+                        <span class="visually-hidden">
+                          <%= t(".results.actions.renew.visually_hidden_text",
+                                name: result.company_name) %>
+                        </span>
+                      <% end %>
+                    </li>
+                    <% end %>
                   <% if display_transfer_link_for?(result) %>
                     <li>
                       <%= link_to new_registration_transfer_path(result.reg_identifier) do %>

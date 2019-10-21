@@ -142,6 +142,36 @@ RSpec.describe ActionLinksHelper, type: :helper do
       end
     end
 
+    describe "#display_renew_link_for?" do
+      context "when the result is not a Registration" do
+        let(:result) { build(:transient_registration) }
+
+        it "returns false" do
+          expect(helper.display_renew_link_for?(result)).to eq(false)
+        end
+      end
+
+      context "when the result is a Registration" do
+        let(:result) { build(:registration) }
+
+        context "when the result cannot begin a renewal" do
+          before { allow(result).to receive(:can_start_renewal?).and_return(false) }
+
+          it "returns false" do
+            expect(helper.display_renew_link_for?(result)).to eq(false)
+          end
+        end
+
+        context "when the result can begin a renewal" do
+          before { allow(result).to receive(:can_start_renewal?).and_return(true) }
+
+          it "returns true" do
+            expect(helper.display_renew_link_for?(result)).to eq(true)
+          end
+        end
+      end
+    end
+
     describe "#display_transfer_link_for?" do
       context "when the result is not a Registration" do
         let(:result) { build(:transient_registration) }

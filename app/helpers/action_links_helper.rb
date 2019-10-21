@@ -25,6 +25,12 @@ module ActionLinksHelper
     resource.pending_manual_conviction_check?
   end
 
+  def display_renew_link_for?(resource)
+    return false unless display_registration_links?(resource)
+
+    resource.can_start_renewal?
+  end
+
   def display_transfer_link_for?(resource)
     display_registration_links?(resource)
   end
