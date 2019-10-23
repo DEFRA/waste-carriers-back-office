@@ -14,9 +14,13 @@ module ActionLinksHelper
   end
 
   def payment_link_for(resource)
-    return "#" unless resource.is_a?(WasteCarriersEngine::TransientRegistration)
-
-    transient_registration_payments_path(resource.reg_identifier)
+    if resource.is_a?(WasteCarriersEngine::TransientRegistration)
+      transient_registration_payments_path(resource.reg_identifier)
+    elsif resource.is_a?(WasteCarriersEngine::Registration)
+      "#{Rails.configuration.wcrs_frontend_url}/registrations/#{resource.id}/paymentstatus"
+    else
+      "#"
+    end
   end
 
   def convictions_link_for(resource)
