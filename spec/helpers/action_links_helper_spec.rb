@@ -66,8 +66,17 @@ RSpec.describe ActionLinksHelper, type: :helper do
       end
     end
 
-    context "when the resource is not a transient_registration" do
+    context "when the resource is a registration" do
       let(:resource) { build(:registration) }
+
+      it "returns the correct path" do
+        path = "#{Rails.configuration.wcrs_frontend_url}/registrations/#{resource.id}/approve"
+        expect(helper.convictions_link_for(resource)).to eq(path)
+      end
+    end
+
+    context "when the resource is not a registration or a transient_registration" do
+      let(:resource) { nil }
 
       it "returns the correct path" do
         expect(helper.convictions_link_for(resource)).to eq("#")

@@ -20,9 +20,13 @@ module ActionLinksHelper
   end
 
   def convictions_link_for(resource)
-    return "#" unless resource.is_a?(WasteCarriersEngine::TransientRegistration)
-
-    transient_registration_convictions_path(resource.reg_identifier)
+    if resource.is_a?(WasteCarriersEngine::TransientRegistration)
+      transient_registration_convictions_path(resource.reg_identifier)
+    elsif resource.is_a?(WasteCarriersEngine::Registration)
+      "#{Rails.configuration.wcrs_frontend_url}/registrations/#{resource.id}/approve"
+    else
+      "#"
+    end
   end
 
   def renew_link_for(resource)
