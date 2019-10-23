@@ -28,8 +28,20 @@ RSpec.describe StatusTagService do
       end
     end
 
-    it "does not include :pending_conviction_check in the response" do
-      expect(service).to_not include(:pending_conviction_check)
+    context "when there is a pending conviction check" do
+      before { allow(resource).to receive(:conviction_check_required?).and_return(true) }
+
+      it "includes :pending_conviction_check in the response" do
+        expect(service).to include(:pending_conviction_check)
+      end
+    end
+
+    context "when there is not a pending conviction check" do
+      before { allow(resource).to receive(:conviction_check_required?).and_return(false) }
+
+      it "does not include :pending_conviction_check in the response" do
+        expect(service).to_not include(:pending_conviction_check)
+      end
     end
 
     it "does not include :pending_payment in the response" do
