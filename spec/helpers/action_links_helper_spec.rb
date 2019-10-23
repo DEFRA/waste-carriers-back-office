@@ -3,6 +3,114 @@
 require "rails_helper"
 
 RSpec.describe ActionLinksHelper, type: :helper do
+  describe "details_link_for" do
+    context "when the resource is a transient_registration" do
+      let(:resource) { build(:transient_registration) }
+
+      it "returns the correct path" do
+        expect(helper.details_link_for(resource)).to eq(transient_registration_path(resource.reg_identifier))
+      end
+    end
+
+    context "when the resource is not a transient_registration" do
+      let(:resource) { build(:registration) }
+
+      it "returns the correct path" do
+        expect(helper.details_link_for(resource)).to eq("#")
+      end
+    end
+  end
+
+  describe "resume_link_for" do
+    context "when the resource is a transient_registration" do
+      let(:resource) { build(:transient_registration) }
+
+      it "returns the correct path" do
+        expect(helper.resume_link_for(resource)).to eq(WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier))
+      end
+    end
+
+    context "when the resource is not a transient_registration" do
+      let(:resource) { build(:registration) }
+
+      it "returns the correct path" do
+        expect(helper.resume_link_for(resource)).to eq("#")
+      end
+    end
+  end
+
+  describe "payment_link_for" do
+    context "when the resource is a transient_registration" do
+      let(:resource) { build(:transient_registration) }
+
+      it "returns the correct path" do
+        expect(helper.payment_link_for(resource)).to eq(transient_registration_payments_path(resource.reg_identifier))
+      end
+    end
+
+    context "when the resource is not a transient_registration" do
+      let(:resource) { build(:registration) }
+
+      it "returns the correct path" do
+        expect(helper.payment_link_for(resource)).to eq("#")
+      end
+    end
+  end
+
+  describe "convictions_link_for" do
+    context "when the resource is a transient_registration" do
+      let(:resource) { build(:transient_registration) }
+
+      it "returns the correct path" do
+        expect(helper.convictions_link_for(resource)).to eq(transient_registration_convictions_path(resource.reg_identifier))
+      end
+    end
+
+    context "when the resource is not a transient_registration" do
+      let(:resource) { build(:registration) }
+
+      it "returns the correct path" do
+        expect(helper.convictions_link_for(resource)).to eq("#")
+      end
+    end
+  end
+
+  describe "renew_link_for" do
+    context "when the resource is a registration" do
+      let(:resource) { create(:registration) }
+
+      it "returns the correct path" do
+        expect(helper.renew_link_for(resource)).to eq(WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier))
+      end
+    end
+
+    context "when the resource is not a registration" do
+      let(:resource) { create(:transient_registration) }
+
+      it "returns the correct path" do
+        expect(helper.renew_link_for(resource)).to eq("#")
+      end
+    end
+  end
+
+  describe "transfer_link_for" do
+    context "when the resource is a registration" do
+      let(:resource) { create(:registration) }
+
+      it "returns the correct path" do
+        expect(helper.transfer_link_for(resource)).to eq(new_registration_transfer_path(resource.reg_identifier))
+      end
+    end
+
+    context "when the resource is not a registration" do
+      let(:resource) { create(:transient_registration) }
+
+      it "returns the correct path" do
+        expect(helper.transfer_link_for(resource)).to eq("#")
+      end
+    end
+  end
+
   describe "#display_details_link_for?" do
     context "when the result is not a TransientRegistration" do
       let(:result) { build(:registration) }

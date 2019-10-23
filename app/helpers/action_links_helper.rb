@@ -1,6 +1,42 @@
 # frozen_string_literal: true
 
 module ActionLinksHelper
+  def details_link_for(resource)
+    return "#" unless resource.is_a?(WasteCarriersEngine::TransientRegistration)
+
+    transient_registration_path(resource.reg_identifier)
+  end
+
+  def resume_link_for(resource)
+    return "#" unless resource.is_a?(WasteCarriersEngine::TransientRegistration)
+
+    WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier)
+  end
+
+  def payment_link_for(resource)
+    return "#" unless resource.is_a?(WasteCarriersEngine::TransientRegistration)
+
+    transient_registration_payments_path(resource.reg_identifier)
+  end
+
+  def convictions_link_for(resource)
+    return "#" unless resource.is_a?(WasteCarriersEngine::TransientRegistration)
+
+    transient_registration_convictions_path(resource.reg_identifier)
+  end
+
+  def renew_link_for(resource)
+    return "#" unless resource.is_a?(WasteCarriersEngine::Registration)
+
+    WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier)
+  end
+
+  def transfer_link_for(resource)
+    return "#" unless resource.is_a?(WasteCarriersEngine::Registration)
+
+    new_registration_transfer_path(resource.reg_identifier)
+  end
+
   def display_details_link_for?(resource)
     resource.is_a?(WasteCarriersEngine::TransientRegistration)
   end
