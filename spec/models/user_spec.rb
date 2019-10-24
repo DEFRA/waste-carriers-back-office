@@ -68,6 +68,11 @@ RSpec.describe User, type: :model do
         should be_able_to(:update, transient_registration)
       end
 
+      it "should be able to renew" do
+        should be_able_to(:renew, transient_registration)
+        should be_able_to(:renew, registration)
+      end
+
       it "should be able to record a cash payment" do
         should be_able_to(:record_cash_payment, transient_registration)
       end
@@ -126,6 +131,11 @@ RSpec.describe User, type: :model do
 
       it "should be able to update a transient registration" do
         should be_able_to(:update, transient_registration)
+      end
+
+      it "should be able to renew" do
+        should be_able_to(:renew, transient_registration)
+        should be_able_to(:renew, registration)
       end
 
       it "should be able to record a cash payment" do
@@ -188,6 +198,11 @@ RSpec.describe User, type: :model do
         should_not be_able_to(:update, transient_registration)
       end
 
+      it "should not be able to renew" do
+        should_not be_able_to(:renew, transient_registration)
+        should_not be_able_to(:renew, registration)
+      end
+
       it "should not be able to record a cash payment" do
         should_not be_able_to(:record_cash_payment, transient_registration)
       end
@@ -246,6 +261,11 @@ RSpec.describe User, type: :model do
 
       it "should not be able to update a transient registration" do
         should_not be_able_to(:update, transient_registration)
+      end
+
+      it "should not be able to renew" do
+        should_not be_able_to(:renew, transient_registration)
+        should_not be_able_to(:renew, registration)
       end
 
       it "should not be able to record a cash payment" do
@@ -308,6 +328,11 @@ RSpec.describe User, type: :model do
         should be_able_to(:update, transient_registration)
       end
 
+      it "should be able to renew" do
+        should be_able_to(:renew, transient_registration)
+        should be_able_to(:renew, registration)
+      end
+
       it "should be able to record a cash payment" do
         should be_able_to(:record_cash_payment, transient_registration)
       end
@@ -366,6 +391,11 @@ RSpec.describe User, type: :model do
 
       it "should not be able to update a transient registration" do
         should_not be_able_to(:update, transient_registration)
+      end
+
+      it "should_not be able to renew" do
+        should_not be_able_to(:renew, transient_registration)
+        should_not be_able_to(:renew, registration)
       end
 
       it "should not be able to record a cash payment" do
