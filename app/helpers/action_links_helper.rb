@@ -33,7 +33,9 @@ module ActionLinksHelper
   end
 
   def display_transfer_link_for?(resource)
-    display_registration_links?(resource)
+    return false unless display_registration_links?(resource)
+
+    can?(:transfer, resource)
   end
 
   private
