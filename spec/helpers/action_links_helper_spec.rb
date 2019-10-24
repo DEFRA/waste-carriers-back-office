@@ -137,19 +137,31 @@ RSpec.describe ActionLinksHelper, type: :helper do
         end
       end
 
-      context "when the result has no pending convictions check" do
-        let(:result) { build(:transient_registration, :does_not_require_conviction_check) }
+      context "when the user does not have permission" do
+        before { allow(helper).to receive(:can?).and_return(false) }
 
         it "returns false" do
           expect(helper.display_convictions_link_for?(result)).to eq(false)
         end
       end
 
-      context "when the result has a pending convictions check" do
-        let(:result) { build(:transient_registration, :requires_conviction_check) }
+      context "when the user has permission" do
+        before { allow(helper).to receive(:can?).and_return(true) }
 
-        it "returns true" do
-          expect(helper.display_convictions_link_for?(result)).to eq(true)
+        context "when the result has no pending convictions check" do
+          let(:result) { build(:transient_registration, :does_not_require_conviction_check) }
+
+          it "returns false" do
+            expect(helper.display_convictions_link_for?(result)).to eq(false)
+          end
+        end
+
+        context "when the result has a pending convictions check" do
+          let(:result) { build(:transient_registration, :requires_conviction_check) }
+
+          it "returns true" do
+            expect(helper.display_convictions_link_for?(result)).to eq(true)
+          end
         end
       end
     end
