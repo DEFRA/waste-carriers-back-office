@@ -24,7 +24,7 @@ class Ability
     can :record_cheque_payment, WasteCarriersEngine::TransientRegistration
     can :record_postal_order_payment, WasteCarriersEngine::TransientRegistration
 
-    can :review_convictions, WasteCarriersEngine::TransientRegistration
+    can :review_convictions, :all
 
     can :revert_to_payment_summary, WasteCarriersEngine::TransientRegistration
 
