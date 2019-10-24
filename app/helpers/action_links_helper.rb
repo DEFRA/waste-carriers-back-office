@@ -10,7 +10,7 @@ module ActionLinksHelper
     return false if resource.renewal_application_submitted?
     return false if resource.workflow_state == "worldpay_form"
 
-    true
+    can?(:update, resource)
   end
 
   def display_payment_link_for?(resource)
