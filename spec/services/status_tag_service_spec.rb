@@ -32,8 +32,20 @@ RSpec.describe StatusTagService do
       expect(service).to_not include(:pending_conviction_check)
     end
 
-    it "does not include :pending_payment in the response" do
-      expect(service).to_not include(:pending_payment)
+    context "when there is a pending payment" do
+      before { allow(resource).to receive(:pending_payment?).and_return(true) }
+
+      it "includes :pending_payment in the response" do
+        expect(service).to include(:pending_payment)
+      end
+    end
+
+    context "when there is not a pending payment" do
+      before { allow(resource).to receive(:pending_payment?).and_return(false) }
+
+      it "does not include :pending_payment in the response" do
+        expect(service).to_not include(:pending_payment)
+      end
     end
 
     it "does not include :stuck in the response" do

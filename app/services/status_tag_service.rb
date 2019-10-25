@@ -43,7 +43,7 @@ class StatusTagService < ::WasteCarriersEngine::BaseService
   end
 
   def pending_payment
-    :pending_payment if submitted_renewal? && @resource.pending_payment?
+    :pending_payment if registration_or_submitted_renewal? && @resource.pending_payment?
   end
 
   def stuck
@@ -56,5 +56,9 @@ class StatusTagService < ::WasteCarriersEngine::BaseService
 
   def submitted_renewal?
     @_submitted_renewal ||= transient? && @resource.renewal_application_submitted?
+  end
+
+  def registration_or_submitted_renewal?
+    @_registration_or_submitted_renewal ||= submitted_renewal? || !transient?
   end
 end
