@@ -60,7 +60,7 @@ module ActionLinksHelper
   end
 
   def display_convictions_link_for?(resource)
-    return false unless display_transient_registration_links?(resource)
+    return false unless display_transient_registration_links?(resource) || display_registration_links?(resource)
     return false unless can?(:review_convictions, resource)
 
     resource.pending_manual_conviction_check?
