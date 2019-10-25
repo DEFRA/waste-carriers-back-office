@@ -22,5 +22,13 @@ FactoryBot.define do
       metaData { build(:metaData, status: :ACTIVE) }
       expires_on { 2.months.from_now }
     end
+
+    trait :pending_payment do
+      finance_details { build(:finance_details, :positive_balance) }
+    end
+
+    trait :no_pending_payment do
+      finance_details { build(:finance_details, :zero_balance) }
+    end
   end
 end
