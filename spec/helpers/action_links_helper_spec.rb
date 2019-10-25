@@ -197,11 +197,31 @@ RSpec.describe ActionLinksHelper, type: :helper do
   end
 
   describe "#display_payment_link_for?" do
-    context "when the result is not a TransientRegistration" do
+    context "when the result is a Registration" do
       let(:result) { build(:registration) }
 
-      it "returns false" do
-        expect(helper.display_payment_link_for?(result)).to eq(false)
+      context "when the result has been revoked" do
+        before { result.metaData.status = "REVOKED" }
+
+        it "returns false" do
+          expect(helper.display_payment_link_for?(result)).to eq(false)
+        end
+      end
+
+      context "when the result has no pending payment" do
+        let(:result) { build(:registration, :no_pending_payment) }
+
+        it "returns false" do
+          expect(helper.display_payment_link_for?(result)).to eq(false)
+        end
+      end
+
+      context "when the result has a pending payment" do
+        let(:result) { build(:registration, :pending_payment) }
+
+        it "returns true" do
+          expect(helper.display_payment_link_for?(result)).to eq(true)
+        end
       end
     end
 

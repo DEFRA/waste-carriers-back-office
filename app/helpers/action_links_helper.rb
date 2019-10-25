@@ -54,7 +54,7 @@ module ActionLinksHelper
   end
 
   def display_payment_link_for?(resource)
-    return false unless display_transient_registration_links?(resource)
+    return false unless display_transient_registration_links?(resource) || display_registration_links?(resource)
 
     resource.pending_payment?
   end
