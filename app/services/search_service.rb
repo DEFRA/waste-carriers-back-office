@@ -5,7 +5,7 @@ class SearchService < ::WasteCarriersEngine::BaseService
     return response_hash([]) if term.blank?
 
     @page = page
-    @term = Regexp.escape(term)
+    @term = term
 
     response_hash(search_results)
   end
