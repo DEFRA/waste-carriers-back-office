@@ -52,7 +52,7 @@
       <table class="results">
         <caption>
           <h2 class="heading-medium">
-            <%= t(".results.caption", count: @results.count) %>
+            <%= t(".results.caption", count: @result_count) %>
           </h2>
         </caption>
         <thead>
@@ -96,7 +96,7 @@
                 <ul>
                   <% if display_details_link_for?(result) %>
                     <li>
-                      <%= link_to transient_registration_path(result.reg_identifier) do %>
+                      <%= link_to details_link_for(result) do %>
                         <%= t(".results.actions.details.link_text") %>
                         <span class="visually-hidden">
                           <%= t(".results.actions.details.visually_hidden_text",
@@ -107,7 +107,7 @@
                   <% end %>
                   <% if display_resume_link_for?(result) %>
                     <li>
-                      <%= link_to WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(result.reg_identifier) do %>
+                      <%= link_to resume_link_for(result) do %>
                         <%= t(".results.actions.resume.link_text") %>
                         <span class="visually-hidden">
                           <%= t(".results.actions.resume.visually_hidden_text",
@@ -118,7 +118,7 @@
                   <% end %>
                   <% if display_payment_link_for?(result) %>
                     <li>
-                      <%= link_to transient_registration_payments_path(result.reg_identifier) do %>
+                      <%= link_to payment_link_for(result) do %>
                         <%= t(".results.actions.payment.link_text") %>
                         <span class="visually-hidden">
                           <%= t(".results.actions.payment.visually_hidden_text",
@@ -129,7 +129,7 @@
                   <% end %>
                   <% if display_convictions_link_for?(result) %>
                     <li>
-                      <%= link_to transient_registration_convictions_path(result.reg_identifier) do %>
+                      <%= link_to convictions_link_for(result) do %>
                         <%= t(".results.actions.convictions.link_text") %>
                         <span class="visually-hidden">
                           <%= t(".results.actions.convictions.visually_hidden_text",
@@ -140,7 +140,7 @@
                   <% end %>
                   <% if display_renew_link_for?(result) %>
                     <li>
-                      <%= link_to WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(result.reg_identifier) do %>
+                      <%= link_to renew_link_for(result) do %>
                         <%= t(".results.actions.renew.link_text") %>
                         <span class="visually-hidden">
                           <%= t(".results.actions.renew.visually_hidden_text",
@@ -151,7 +151,7 @@
                     <% end %>
                   <% if display_transfer_link_for?(result) %>
                     <li>
-                      <%= link_to new_registration_transfer_path(result.reg_identifier) do %>
+                      <%= link_to transfer_link_for(result) do %>
                         <%= t(".results.actions.transfer.link_text") %>
                         <span class="visually-hidden">
                           <%= t(".results.actions.transfer.visually_hidden_text",
