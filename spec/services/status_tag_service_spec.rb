@@ -29,7 +29,7 @@ RSpec.describe StatusTagService do
     end
 
     context "when there is a pending conviction check" do
-      before { allow(resource).to receive(:conviction_check_required?).and_return(true) }
+      before { allow(resource).to receive(:pending_manual_conviction_check?).and_return(true) }
 
       it "includes :pending_conviction_check in the response" do
         expect(service).to include(:pending_conviction_check)
@@ -37,7 +37,7 @@ RSpec.describe StatusTagService do
     end
 
     context "when there is not a pending conviction check" do
-      before { allow(resource).to receive(:conviction_check_required?).and_return(false) }
+      before { allow(resource).to receive(:pending_manual_conviction_check?).and_return(false) }
 
       it "does not include :pending_conviction_check in the response" do
         expect(service).to_not include(:pending_conviction_check)

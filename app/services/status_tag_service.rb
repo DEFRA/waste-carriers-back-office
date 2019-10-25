@@ -43,19 +43,7 @@ class StatusTagService < ::WasteCarriersEngine::BaseService
   # Conviction checks
 
   def pending_conviction_check
-    if transient?
-      transient_reg_pending_conviction_check
-    else
-      reg_pending_conviction_check
-    end
-  end
-
-  def transient_reg_pending_conviction_check
-    :pending_conviction_check if @resource.pending_manual_conviction_check?
-  end
-
-  def reg_pending_conviction_check
-    :pending_conviction_check if @resource.conviction_check_required?
+    :pending_conviction_check if registration_or_submitted_renewal? && @resource.pending_manual_conviction_check?
   end
 
   # Payments
@@ -78,5 +66,9 @@ class StatusTagService < ::WasteCarriersEngine::BaseService
 
   def submitted_renewal?
     @_submitted_renewal ||= transient? && @resource.renewal_application_submitted?
+  end
+
+  def registration_or_submitted_renewal?
+    @_registration_or_submitted_renewal ||= submitted_renewal? || !transient?
   end
 end
