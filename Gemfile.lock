@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: fc1acadc11fae5e890a4ba0eb9610dbc41da055a
-  branch: master
+  revision: 410af01437fc49cd8e461947b38b40675c130f84
+  branch: feature/reg-conviction-check
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)
