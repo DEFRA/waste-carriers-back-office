@@ -127,17 +127,6 @@
                       <% end %>
                     </li>
                   <% end %>
-                  <% if display_convictions_link_for?(result) %>
-                    <li>
-                      <%= link_to convictions_link_for(result) do %>
-                        <%= t(".results.actions.convictions.link_text") %>
-                        <span class="visually-hidden">
-                          <%= t(".results.actions.convictions.visually_hidden_text",
-                                name: result.company_name) %>
-                        </span>
-                      <% end %>
-                    </li>
-                  <% end %>
                   <% if display_renew_link_for?(result) %>
                     <li>
                       <%= link_to renew_link_for(result) do %>
