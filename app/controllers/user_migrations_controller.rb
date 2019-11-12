@@ -23,9 +23,7 @@ class UserMigrationsController < ApplicationController
   end
 
   def migrate_users
-    user_migration_service = UserMigrationService.new
-    user_migration_service.sync
-    user_migration_service.results
+    UserMigrationService.run
   end
 
   def parse_results(results)

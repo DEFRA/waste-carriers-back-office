@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
-class UserMigrationService
-  attr_reader :results
-
-  def initialize
+class UserMigrationService < ::WasteCarriersEngine::BaseService
+  def run
     @results = []
-  end
 
-  def sync
     sync_admin
     sync_agency
+
+    @results
   end
 
   private

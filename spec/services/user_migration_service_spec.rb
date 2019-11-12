@@ -3,17 +3,11 @@
 require "rails_helper"
 
 RSpec.describe UserMigrationService do
-  let(:user_migration_service) do
-    UserMigrationService.new
+  subject do
+    UserMigrationService.run
   end
 
-  describe "#initialize" do
-    it "should set the correct value to @results" do
-      expect(user_migration_service.results).to eq([])
-    end
-  end
-
-  describe "#sync" do
+  describe "#run" do
     before do
       create(:role)
     end
@@ -21,7 +15,7 @@ RSpec.describe UserMigrationService do
     context "when there are no backend users" do
       it "does not modify the back office users" do
         users_before_sync = User.all
-        user_migration_service.sync
+        subject
         expect(User.all).to eq(users_before_sync)
       end
     end
@@ -32,17 +26,17 @@ RSpec.describe UserMigrationService do
 
       it "creates a new back office user" do
         number_of_users_before_sync = User.all.count
-        user_migration_service.sync
+        subject
         expect(User.all.count).to eq(number_of_users_before_sync + 1)
       end
 
       it "uses the correct email" do
-        user_migration_service.sync
+        subject
         expect(matching_back_office_user.email).to eq(agency_user.email)
       end
 
       it "uses the correct role" do
-        user_migration_service.sync
+        subject
         expect(matching_back_office_user.role).to eq("agency")
       end
 
@@ -53,7 +47,7 @@ RSpec.describe UserMigrationService do
         end
 
         it "uses the correct role" do
-          user_migration_service.sync
+          subject
           expect(matching_back_office_user.role).to eq("agency_with_refund")
         end
       end
@@ -65,7 +59,7 @@ RSpec.describe UserMigrationService do
         end
 
         it "uses the correct role" do
-          user_migration_service.sync
+          subject
           expect(matching_back_office_user.role).to eq("finance")
         end
       end
@@ -77,19 +71,19 @@ RSpec.describe UserMigrationService do
         end
 
         it "uses the correct role" do
-          user_migration_service.sync
+          subject
           expect(matching_back_office_user.role).to eq("finance_admin")
         end
       end
 
-      it "adds the correct value to @results" do
+      it "adds the correct value to the results" do
         result = {
           action: :create,
           email: agency_user.email,
           role: "agency"
         }
-        user_migration_service.sync
-        expect(user_migration_service.results).to include(result)
+
+        expect(subject).to include(result)
       end
     end
 
@@ -99,17 +93,17 @@ RSpec.describe UserMigrationService do
 
       it "creates a new back office user" do
         number_of_users_before_sync = User.all.count
-        user_migration_service.sync
+        subject
         expect(User.all.count).to eq(number_of_users_before_sync + 1)
       end
 
       it "uses the correct email" do
-        user_migration_service.sync
+        subject
         expect(matching_back_office_user.email).to eq(admin.email)
       end
 
       it "uses the correct role" do
-        user_migration_service.sync
+        subject
         expect(matching_back_office_user.role).to eq("agency_super")
       end
 
@@ -120,19 +114,19 @@ RSpec.describe UserMigrationService do
         end
 
         it "uses the correct role" do
-          user_migration_service.sync
+          subject
           expect(matching_back_office_user.role).to eq("finance_super")
         end
       end
 
-      it "adds the correct value to @results" do
+      it "adds the correct value to the results" do
         result = {
           action: :create,
           email: admin.email,
           role: "agency_super"
         }
-        user_migration_service.sync
-        expect(user_migration_service.results).to include(result)
+
+        expect(subject).to include(result)
       end
     end
 
@@ -143,19 +137,19 @@ RSpec.describe UserMigrationService do
       context "when the role is the same" do
         it "does not modify the back office user" do
           back_office_user_before = back_office_user
-          user_migration_service.sync
+          subject
           back_office_user_after = back_office_user.reload
           expect(back_office_user_before).to eq(back_office_user_after)
         end
 
-        it "adds the correct value to @results" do
+        it "adds the correct value to the results" do
           result = {
             action: :skip,
             email: agency_user.email,
             role: "agency"
           }
-          user_migration_service.sync
-          expect(user_migration_service.results).to include(result)
+
+          expect(subject).to include(result)
         end
       end
 
@@ -166,19 +160,19 @@ RSpec.describe UserMigrationService do
 
         it "updates the back office user role" do
           role_before = back_office_user.role
-          user_migration_service.sync
+          subject
           role_after = back_office_user.reload.role
           expect(role_before).to_not eq(role_after)
         end
 
-        it "adds the correct value to @results" do
+        it "adds the correct value to the results" do
           result = {
             action: :update,
             email: agency_user.email,
             role: "agency"
           }
-          user_migration_service.sync
-          expect(user_migration_service.results).to include(result)
+
+          expect(subject).to include(result)
         end
       end
     end
