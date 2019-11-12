@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe UserMigrationService do
-  subject do
+  let(:service) do
     UserMigrationService.run
   end
 
@@ -15,7 +15,7 @@ RSpec.describe UserMigrationService do
     context "when there are no backend users" do
       it "does not modify the back office users" do
         users_before_sync = User.all
-        subject
+        service
         expect(User.all).to eq(users_before_sync)
       end
     end
@@ -26,17 +26,17 @@ RSpec.describe UserMigrationService do
 
       it "creates a new back office user" do
         number_of_users_before_sync = User.all.count
-        subject
+        service
         expect(User.all.count).to eq(number_of_users_before_sync + 1)
       end
 
       it "uses the correct email" do
-        subject
+        service
         expect(matching_back_office_user.email).to eq(agency_user.email)
       end
 
       it "uses the correct role" do
-        subject
+        service
         expect(matching_back_office_user.role).to eq("agency")
       end
 
@@ -47,7 +47,7 @@ RSpec.describe UserMigrationService do
         end
 
         it "uses the correct role" do
-          subject
+          service
           expect(matching_back_office_user.role).to eq("agency_with_refund")
         end
       end
@@ -59,7 +59,7 @@ RSpec.describe UserMigrationService do
         end
 
         it "uses the correct role" do
-          subject
+          service
           expect(matching_back_office_user.role).to eq("finance")
         end
       end
@@ -71,7 +71,7 @@ RSpec.describe UserMigrationService do
         end
 
         it "uses the correct role" do
-          subject
+          service
           expect(matching_back_office_user.role).to eq("finance_admin")
         end
       end
@@ -83,7 +83,7 @@ RSpec.describe UserMigrationService do
           role: "agency"
         }
 
-        expect(subject).to include(result)
+        expect(service).to include(result)
       end
     end
 
@@ -93,17 +93,17 @@ RSpec.describe UserMigrationService do
 
       it "creates a new back office user" do
         number_of_users_before_sync = User.all.count
-        subject
+        service
         expect(User.all.count).to eq(number_of_users_before_sync + 1)
       end
 
       it "uses the correct email" do
-        subject
+        service
         expect(matching_back_office_user.email).to eq(admin.email)
       end
 
       it "uses the correct role" do
-        subject
+        service
         expect(matching_back_office_user.role).to eq("agency_super")
       end
 
@@ -114,7 +114,7 @@ RSpec.describe UserMigrationService do
         end
 
         it "uses the correct role" do
-          subject
+          service
           expect(matching_back_office_user.role).to eq("finance_super")
         end
       end
@@ -126,7 +126,7 @@ RSpec.describe UserMigrationService do
           role: "agency_super"
         }
 
-        expect(subject).to include(result)
+        expect(service).to include(result)
       end
     end
 
@@ -137,7 +137,7 @@ RSpec.describe UserMigrationService do
       context "when the role is the same" do
         it "does not modify the back office user" do
           back_office_user_before = back_office_user
-          subject
+          service
           back_office_user_after = back_office_user.reload
           expect(back_office_user_before).to eq(back_office_user_after)
         end
@@ -149,7 +149,7 @@ RSpec.describe UserMigrationService do
             role: "agency"
           }
 
-          expect(subject).to include(result)
+          expect(service).to include(result)
         end
       end
 
@@ -160,7 +160,7 @@ RSpec.describe UserMigrationService do
 
         it "updates the back office user role" do
           role_before = back_office_user.role
-          subject
+          service
           role_after = back_office_user.reload.role
           expect(role_before).to_not eq(role_after)
         end
@@ -172,7 +172,7 @@ RSpec.describe UserMigrationService do
             role: "agency"
           }
 
-          expect(subject).to include(result)
+          expect(service).to include(result)
         end
       end
     end
