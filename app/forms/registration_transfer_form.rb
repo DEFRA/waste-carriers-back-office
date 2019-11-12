@@ -22,8 +22,7 @@ class RegistrationTransferForm < WasteCarriersEngine::BaseForm
   validate :registration_transferred_successfully?
 
   def registration_transferred_successfully?
-    registration_transfer_service = RegistrationTransferService.new(registration)
-    result = registration_transfer_service.transfer_to_user(email)
+    result = RegistrationTransferService.run(registration: registration, email: email)
 
     return true if %i[success_existing_user
                       success_new_user].include?(result)

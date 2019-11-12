@@ -16,7 +16,7 @@ RSpec.describe RegistrationTransferForm, type: :model do
       end
 
       before do
-        allow_any_instance_of(RegistrationTransferService).to receive(:transfer_to_user).and_return(:success_existing_user)
+        allow(RegistrationTransferService).to receive(:run).and_return(:success_existing_user)
       end
 
       it "should submit" do
@@ -96,7 +96,7 @@ RSpec.describe RegistrationTransferForm, type: :model do
   describe "#registration_transferred_successfully?" do
     context "when the RegistrationTransferService returns :success_existing_user" do
       before do
-        allow_any_instance_of(RegistrationTransferService).to receive(:transfer_to_user).and_return(:success_existing_user)
+        allow(RegistrationTransferService).to receive(:run).and_return(:success_existing_user)
       end
 
       it "is valid" do
@@ -106,7 +106,7 @@ RSpec.describe RegistrationTransferForm, type: :model do
 
     context "when the RegistrationTransferService returns :success_new_user" do
       before do
-        allow_any_instance_of(RegistrationTransferService).to receive(:transfer_to_user).and_return(:success_new_user)
+        allow(RegistrationTransferService).to receive(:run).and_return(:success_new_user)
       end
 
       it "is valid" do
@@ -116,7 +116,7 @@ RSpec.describe RegistrationTransferForm, type: :model do
 
     context "when the RegistrationTransferService returns :no_matching_user" do
       before do
-        allow_any_instance_of(RegistrationTransferService).to receive(:transfer_to_user).and_return(:no_matching_user)
+        allow(RegistrationTransferService).to receive(:run).and_return(:no_matching_user)
       end
 
       it "is not valid" do

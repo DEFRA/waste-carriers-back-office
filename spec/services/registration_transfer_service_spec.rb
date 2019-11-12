@@ -3,68 +3,51 @@
 require "rails_helper"
 
 RSpec.describe RegistrationTransferService do
-  let(:transient_registration) do
-    create(:renewing_registration, :ready_to_renew)
+  let(:registration) { create(:registration) }
+  let(:recipient_email) { external_user.email }
+
+  let(:service) do
+    RegistrationTransferService.run(registration: registration, email: recipient_email)
   end
 
-  let(:registration) do
-    WasteCarriersEngine::Registration.where(reg_identifier: transient_registration.reg_identifier).first
-  end
-
-  let(:registration_transfer_service) do
-    RegistrationTransferService.new(registration)
-  end
-
-  describe "#initialize" do
-    context "when a transient_registration exists" do
-      it "sets @transient_registration" do
-        instance_var = registration_transfer_service.instance_variable_get(:@transient_registration)
-        expect(instance_var).to eq(transient_registration)
-      end
-    end
-
-    context "when no transient_registration exists" do
-      let(:registration_transfer_service) do
-        RegistrationTransferService.new(create(:registration))
-      end
-
-      it "sets @transient_registration to nil" do
-        instance_var = registration_transfer_service.instance_variable_get(:@transient_registration)
-        expect(instance_var).to eq(nil)
-      end
-    end
-  end
-
-  describe "#transfer_to_user" do
+  describe "#run" do
     let(:external_user) { create(:external_user) }
-    let(:recipient_email) { external_user.email }
-    let(:transfer_to_user) { registration_transfer_service.transfer_to_user(recipient_email) }
 
     context "when there is an external user with a matching email" do
       it "updates the registration's account_email" do
-        transfer_to_user
+        service
         expect(registration.reload.account_email).to eq(recipient_email)
       end
 
-      it "updates the transient_registration's account_email" do
-        transfer_to_user
-        expect(transient_registration.reload.account_email).to eq(recipient_email)
+      context "when there is a transient_registration" do
+        let(:transient_registration) do
+          create(:renewing_registration, :ready_to_renew)
+        end
+
+        let(:registration) do
+          WasteCarriersEngine::Registration.where(reg_identifier: transient_registration.reg_identifier).first
+        end
+
+        it "updates the transient_registration's account_email" do
+          service
+          expect(transient_registration.reload.account_email).to eq(recipient_email)
+        end
       end
 
       it "sends an email" do
         old_emails_sent_count = ActionMailer::Base.deliveries.count
-        transfer_to_user
+        service
         expect(ActionMailer::Base.deliveries.count).to eq(old_emails_sent_count + 1)
       end
 
       it "sends an email to the correct address" do
-        transfer_to_user
+        service
         last_delivery = ActionMailer::Base.deliveries.last
         expect(last_delivery.header["to"].value).to eq(recipient_email)
       end
 
       it "returns :success_existing_user" do
-        expect(transfer_to_user).to eq(:success_existing_user)
+        expect(service).to eq(:success_existing_user)
       end
 
       context "when the mailer encounters an error" do
@@ -73,7 +56,7 @@ RSpec.describe RegistrationTransferService do
         end
 
         it "returns :success_existing_user" do
-          expect(transfer_to_user).to eq(:success_existing_user)
+          expect(service).to eq(:success_existing_user)
         end
       end
     end
@@ -83,34 +66,44 @@ RSpec.describe RegistrationTransferService do
 
       it "creates a new user" do
         old_matching_user_count = ExternalUser.where(email: recipient_email).length
-        transfer_to_user
+        service
         expect(ExternalUser.where(email: recipient_email).length).to eq(old_matching_user_count + 1)
       end
 
       it "updates the registration's account_email" do
-        transfer_to_user
+        service
         expect(registration.reload.account_email).to eq(recipient_email)
       end
 
-      it "updates the transient_registration's account_email" do
-        transfer_to_user
-        expect(transient_registration.reload.account_email).to eq(recipient_email)
+      context "when there is a transient_registration" do
+        let(:transient_registration) do
+          create(:renewing_registration, :ready_to_renew)
+        end
+
+        let(:registration) do
+          WasteCarriersEngine::Registration.where(reg_identifier: transient_registration.reg_identifier).first
+        end
+
+        it "updates the transient_registration's account_email" do
+          service
+          expect(transient_registration.reload.account_email).to eq(recipient_email)
+        end
       end
 
       it "sends an email" do
         old_emails_sent_count = ActionMailer::Base.deliveries.count
-        transfer_to_user
+        service
         expect(ActionMailer::Base.deliveries.count).to eq(old_emails_sent_count + 1)
       end
 
       it "sends an email to the correct address" do
-        transfer_to_user
+        service
         last_delivery = ActionMailer::Base.deliveries.last
         expect(last_delivery.header["to"].value).to eq(recipient_email)
       end
 
       it "returns :success_new_user" do
-        expect(transfer_to_user).to eq(:success_new_user)
+        expect(service).to eq(:success_new_user)
       end
     end
 
@@ -118,7 +111,7 @@ RSpec.describe RegistrationTransferService do
       let(:recipient_email) { nil }
 
       it "returns :no_matching_user" do
-        expect(registration_transfer_service.transfer_to_user(recipient_email)).to eq(:no_matching_user)
+        expect(service).to eq(:no_matching_user)
       end
     end
   end

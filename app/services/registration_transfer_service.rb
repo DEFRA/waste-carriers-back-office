@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-class RegistrationTransferService
-  def initialize(registration)
+class RegistrationTransferService < ::WasteCarriersEngine::BaseService
+  def run(registration:, email:)
     @registration = registration
     @transient_registration = find_transient_registration
-  end
+    @email = email
 
-  def transfer_to_user(email)
-    transfer_to_existing_user(email) || transfer_to_new_user(email) || :no_matching_user
+    transfer_to_existing_user || transfer_to_new_user || :no_matching_user
   end
 
   private
@@ -16,43 +15,43 @@ class RegistrationTransferService
     WasteCarriersEngine::RenewingRegistration.where(reg_identifier: @registration.reg_identifier).first
   end
 
-  def transfer_to_existing_user(email)
-    return nil unless email.present?
+  def transfer_to_existing_user
+    return nil unless @email.present?
 
-    return unless ExternalUser.where(email: email).first
+    return unless ExternalUser.where(email: @email).first
 
     # If a matching user exists, transfer and return a success status
-    update_account_emails(email)
+    update_account_emails
     send_existing_account_confirmation_email
 
     :success_existing_user
   end
 
-  def transfer_to_new_user(email)
-    return nil unless email.present?
+  def transfer_to_new_user
+    return nil unless @email.present?
 
-    token = invite_user_and_return_token(email)
+    token = invite_user_and_return_token
     return unless token.present?
 
     # If a new user is created, transfer and return a success status
-    update_account_emails(email)
+    update_account_emails
     send_new_account_confirmation_email(token)
 
     :success_new_user
   end
 
-  def invite_user_and_return_token(email)
-    ExternalUser.invite!(email: email, skip_invitation: true).raw_invitation_token
+  def invite_user_and_return_token
+    ExternalUser.invite!(email: @email, skip_invitation: true).raw_invitation_token
   end
 
-  def update_account_emails(email)
-    update_account_email_for(@registration, email)
-    update_account_email_for(@transient_registration, email) if @transient_registration.present?
+  def update_account_emails
+    update_account_email_for(@registration)
+    update_account_email_for(@transient_registration) if @transient_registration.present?
   end
 
-  def update_account_email_for(registration, email)
-    registration.account_email = email
-    registration.save!
+  def update_account_email_for(record)
+    record.account_email = @email
+    record.save!
   end
 
   def send_existing_account_confirmation_email
