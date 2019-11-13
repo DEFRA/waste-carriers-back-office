@@ -9,7 +9,7 @@
           <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
         </h1>
 
-        <% if @transient_registration.metaData.REVOKED? %>
+        <% if @transient_registration.rejected? %>
           <div class="panel">
             <h2 class="heading-medium">
               <%= t(".status.headings.rejected") %>
@@ -148,7 +148,7 @@
             <p>
               <%= t(".conviction_search_text.approved") %>
             </p>
-          <% elsif @transient_registration.metaData.REVOKED? %>
+          <% elsif @transient_registration.rejected? %>
             <%= link_to t(".conviction_link"), transient_registration_convictions_path(@transient_registration.reg_identifier), class: "pull-up"  %>
             <p>
               <%= t(".conviction_search_text.rejected") %>
