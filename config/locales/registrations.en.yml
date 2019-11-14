@@ -1,0 +1,163 @@
+en:
+  registrations:
+    show:
+      actions_box:
+        heading: "Actions for %{reg_identifier}"
+        links:
+          payment: "Process payment"
+      title: "Renewal details"
+      heading: "Registration %{reg_identifier}"
+      filler: "–"
+      status:
+        headings:
+          in_progress: "Application in progress"
+          submitted: "Application submitted"
+          rejected: "Application rejected"
+          pending_convictions: "Conviction check required"
+          pending_payment: "Payment required"
+        messages:
+          in_progress: "The current form is"
+          pending_payment: "£%{total} to pay"
+          pending_convictions_check: "A convictions check is required before this registration can be approved."
+          rejected: "This renewal was rejected during a convictions check and cannot be completed. The current registration will remain active until it expires."
+          worldpay:
+            paragraph_1: "The user is currently attempting to pay by WorldPay."
+            paragraph_2:
+              revert: "If an error has occurred and the user is stuck, you can send the renewal back to the payment summary page. They can try to pay with WorldPay again, or select an alternative payment method."
+              missed_payment: "If an error has occurred and payment has been received, but not recorded, you can record a missed WorldPay payment."
+        actions:
+          continue_button: "Continue as assisted digital renewal"
+          payment_button: "Process payment"
+          convictions_check_button: "Check conviction matches"
+          revert_to_payment_summary_button: "Send back to payment summary"
+          missed_worldpay_payment_button: "Add a missed WorldPay payment"
+      tier:
+        upper: Upper tier
+        lower: Lower tier
+      labels:
+        account: "Account: %{email}"
+        expires: "Expires: %{formatted_date}"
+        expired: "Expired: %{formatted_date}"
+      business_information:
+        heading: "Business information"
+        labels:
+          company_name: "Company name"
+          business_type: "Business type"
+          company_no: "Company number: %{number}"
+          location: "Place of business: %{location}"
+          registered_address: "Registered address:"
+      contact_information:
+        heading: "Contact details"
+        labels:
+          contact_name: "Contact name"
+          phone_number: "Contact phone"
+          contact_email: "Contact email"
+          contact_address: "Contact address"
+      person_information:
+        name: "Name"
+        dob: "Date of birth"
+        convictions: "Convictions"
+        has_convictions:
+          "yes": "Yes"
+          "no": "No"
+        heading:
+          localAuthority: "Chief executive details"
+          limitedCompany: "Company director details"
+          limitedLiabilityPartnership: "Member details"
+          overseas: "Business owner details"
+          partnership: "Partners details"
+          soleTrader: "Business owner details"
+      conviction_heading: "Convictions"
+      conviction_search_text:
+        "true": "This registration has matching or declared convictions."
+        "false": "There are no matching or declared convictions for this registration."
+        approved: "This renewal was approved after a review of the matching or declared convictions."
+        rejected: "This renewal was rejected after a review of the matching or declared convictions."
+        unknown: "This renewal application is still in progress, so there is no conviction match data yet."
+      conviction_link: "Conviction details"
+      conviction_information:
+        heading: "Conviction overview"
+        labels:
+          declared_convictions: "Declared convictions?"
+          business_conviction_search_result: "Matching convictions found for company?"
+          people_conviction_search_result: "Matching convictions found for people?"
+      finance_information:
+        heading_with_amount_owed: "Latest charges and payments: £%{amount} owed"
+        heading: "Latest charges and payments"
+        section_link_label: "Finance details"
+        balance:
+          zero: "All charges for this renewal have been fully paid."
+          positive: "There is an outstanding balance of £%{balance} on this renewal."
+          negative: "This renewal has been overpaid by £%{balance}."
+          no_data: "Application still in progress. No finance data yet."
+        cards:
+          one: "1 registration card"
+          many: "%{cards} registration cards"
+      order_information:
+        labels:
+          items: "Charges"
+          total_amount: "Total"
+          paid: "Paid"
+          payment_method: "Payment method"
+          order_code: "Order code"
+          world_pay_status: "WorldPay status"
+          date_last_updated: "Order last updated at"
+          updated_by_user: "Updated by"
+      payment_information:
+        heading: "Payment details"
+        labels:
+          amount: "Amount"
+          payment_type: "Payment type"
+          registration_reference: "Registration reference"
+          comment: "Comment"
+          date_received: "Date received"
+          date_entered: "Date entered"
+          updated_by_user: "Updated by"
+      card_information:
+        heading: "Registration cards (copy cards)"
+        labels:
+          temp_cards: "Number of cards ordered"
+      attributes:
+        business_type:
+          soleTrader: "Individual or sole trader"
+          limitedCompany: "Limited company"
+          partnership: "Partnership"
+          limitedLiabilityPartnership: "Limited liability partnership"
+          localAuthority: "Local authority or public body"
+          charity: "Charity or trust"
+          authority: "Local authority"
+          publicBody: "Public body"
+          other: "Other"
+          overseas: "Overseas"
+        declaration:
+          "1": "Yes"
+        finance_details:
+          payment:
+            payment_type:
+              CASH: "Cash"
+              CHEQUE: "Cheque"
+              POSTALORDER: "Postal order"
+              BANKTRANSFER: "Bank transfer"
+              WORLDPAY: "WorldPay"
+              WORLDPAY_MISSED: "WorldPay (manually added)"
+        key_people:
+          number_of_people_with_matching_convictions:
+            zero: "No"
+            one: "1 match found"
+            other: "%{count} matches found"
+        key_person:
+          conviction_search_result:
+            pending: "No data yet"
+        location:
+          england: "England"
+          wales: "Wales"
+          scotland: "Scotland"
+          northern_ireland: "Northern Ireland"
+          overseas: "Not in the United Kingdom"
+        registration_type:
+          carrier_dealer: "Carrier and dealer"
+          broker_dealer: "Broker and dealer"
+          carrier_broker_dealer: "Carrier, broker and dealer"
+        tier:
+          UPPER: "Upper"
+          LOWER: "Lower"

@@ -6,10 +6,10 @@
       <div class="column-two-thirds">
 
         <h1 class="heading-large">
-          <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
+          <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
         </h1>
 
-        <% if @transient_registration.rejected_conviction_checks? %>
+        <% if @registration.rejected_conviction_checks? %>
           <div class="panel">
             <h2 class="heading-medium">
               <%= t(".status.headings.rejected") %>
@@ -18,8 +18,8 @@
               <%= t(".status.messages.rejected") %>
             </p>
           </div>
-        <% elsif @transient_registration.renewal_application_submitted? %>
-          <% if @transient_registration.pending_manual_conviction_check? %>
+        <% elsif @registration.renewal_application_submitted? %>
+          <% if @registration.pending_manual_conviction_check? %>
             <div class="panel">
               <h2 class="heading-medium">
                 <%= t(".status.headings.pending_convictions") %>
@@ -30,15 +30,15 @@
             </div>
           <% end %>
 
-          <% if @transient_registration.pending_payment? %>
+          <% if @registration.pending_payment? %>
             <div class="panel">
               <h2 class="heading-medium">
                 <%= t(".status.headings.pending_payment") %>
               </h2>
               <p>
-                <%= t(".status.messages.pending_payment", total: display_pence_as_pounds(@transient_registration.finance_details.balance)) %>
+                <%= t(".status.messages.pending_payment", total: display_pence_as_pounds(@registration.finance_details.balance)) %>
               </p>
-              <%= link_to t(".status.actions.payment_button"), transient_registration_payments_path(@transient_registration.reg_identifier), class: 'button' %>
+              <%= link_to t(".status.actions.payment_button"), transient_registration_payments_path(@registration.reg_identifier), class: 'button' %>
             </div>
           <% end %>
         <% else %>
@@ -47,28 +47,28 @@
               <%= t(".status.headings.in_progress") %>
             </h2>
 
-            <% if @transient_registration.workflow_state == "worldpay_form" %>
+            <% if @registration.workflow_state == "worldpay_form" %>
               <p>
                 <%= t(".status.messages.worldpay.paragraph_1") %>
               </p>
 
-              <% if can? :revert_to_payment_summary, @transient_registration %>
+              <% if can? :revert_to_payment_summary, @registration %>
                 <p>
                   <%= t(".status.messages.worldpay.paragraph_2.revert") %>
                 </p>
-                <%= link_to t(".status.actions.revert_to_payment_summary_button"), new_transient_registration_worldpay_escape_path(@transient_registration.reg_identifier), class: 'button' %>
-              <% elsif can? :record_worldpay_missed_payment, @transient_registration %>
+                <%= link_to t(".status.actions.revert_to_payment_summary_button"), new_transient_registration_worldpay_escape_path(@registration.reg_identifier), class: 'button' %>
+              <% elsif can? :record_worldpay_missed_payment, @registration %>
                 <p>
                   <%= t(".status.messages.worldpay.paragraph_2.missed_payment") %>
                 </p>
-                <%= link_to t(".status.actions.missed_worldpay_payment_button"), new_transient_registration_worldpay_missed_payment_form_path(@transient_registration.reg_identifier), class: 'button' %>
+                <%= link_to t(".status.actions.missed_worldpay_payment_button"), new_transient_registration_worldpay_missed_payment_form_path(@registration.reg_identifier), class: 'button' %>
               <% end %>
             <% else %>
               <p>
                 <%= t(".status.messages.in_progress") %> "<%= display_current_workflow_state %>".
               </p>
-              <% if can? :update, @transient_registration %>
-                <%= link_to t(".status.actions.continue_button"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier), class: 'button' %>
+              <% if can? :update, @registration %>
+                <%= link_to t(".status.actions.continue_button"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@registration.reg_identifier), class: 'button' %>
               <% end %>
             <% end %>
           </div>
@@ -76,18 +76,18 @@
 
         <div class="panel wcr-panel wcr-panel-border-all">
           <h2 class="heading-medium">
-            <%= @transient_registration.company_name %>
+            <%= @registration.company_name %>
           </h2>
           <p class="lede">
-            <%= t(".tier.#{@transient_registration.tier.downcase}") %>
-            <% if @transient_registration.registration_type.present? %>
-              - <%= I18n.t(".transient_registrations.show.attributes.registration_type.#{@transient_registration.registration_type}") %>
+            <%= t(".tier.#{@registration.tier.downcase}") %>
+            <% if @registration.registration_type.present? %>
+              - <%= I18n.t(".transient_registrations.show.attributes.registration_type.#{@registration.registration_type}") %>
             <% end %>
           </p>
           <p>
             <%= t(".labels.expires", formatted_date: display_expiry_date) %>
             <br>
-            <%= t(".labels.account", email: @transient_registration.account_email) %>
+            <%= t(".labels.account", email: @registration.account_email) %>
           </p>
         </div>
         <div class="grid-row">
@@ -96,18 +96,18 @@
               <%= t(".contact_information.heading") %>
             </h2>
             <p>
-              <%= @transient_registration.first_name %> <%= @transient_registration.last_name %>
+              <%= @registration.first_name %> <%= @registration.last_name %>
             </p>
             <p>
-              <%= @transient_registration.phone_number %>
+              <%= @registration.phone_number %>
             </p>
             <p class="wcr-truncate-ellipsis">
-              <a href="mailto:<%= @transient_registration.contact_email %>" target="_top">
-                <%= @transient_registration.contact_email %>
+              <a href="mailto:<%= @registration.contact_email %>" target="_top">
+                <%= @registration.contact_email %>
               </a>
             </p>
             <p>
-              <% if @transient_registration.contact_address.present? %>
+              <% if @registration.contact_address.present? %>
                 <% display_contact_address.each do |line| %>
                   <%= line %><br>
                 <% end %>
@@ -119,15 +119,15 @@
               <%= t(".business_information.heading") %>
             </h2>
             <p>
-              <%= @transient_registration.company_name %>
+              <%= @registration.company_name %>
             </p>
-            <% if @transient_registration.company_no.present? %>
+            <% if @registration.company_no.present? %>
               <p>
-                <%= t(".business_information.labels.company_no", number: @transient_registration.company_no) %>
+                <%= t(".business_information.labels.company_no", number: @registration.company_no) %>
               </p>
             <% end %>
 
-            <% if @transient_registration.registered_address.present? %>
+            <% if @registration.registered_address.present? %>
               <p>
                 <%= t(".business_information.labels.registered_address") %> <br>
                 <% display_registered_address.each do |line| %>
@@ -143,23 +143,23 @@
         <hr/>
         <h2 class="heading-medium"><%= t(".conviction_heading") %></h2>
         <div>
-          <% if @transient_registration.conviction_check_approved? %>
-            <%= link_to t(".conviction_link"), transient_registration_convictions_path(@transient_registration.reg_identifier), class: "pull-up"  %>
+          <% if @registration.conviction_check_approved? %>
+            <%= link_to t(".conviction_link"), transient_registration_convictions_path(@registration.reg_identifier), class: "pull-up"  %>
             <p>
               <%= t(".conviction_search_text.approved") %>
             </p>
-          <% elsif @transient_registration.rejected_conviction_checks? %>
-            <%= link_to t(".conviction_link"), transient_registration_convictions_path(@transient_registration.reg_identifier), class: "pull-up"  %>
+          <% elsif @registration.rejected_conviction_checks? %>
+            <%= link_to t(".conviction_link"), transient_registration_convictions_path(@registration.reg_identifier), class: "pull-up"  %>
             <p>
               <%= t(".conviction_search_text.rejected") %>
             </p>
-          <% elsif @transient_registration.conviction_search_result.present? %>
+          <% elsif @registration.conviction_search_result.present? %>
             <p>
-              <%= t(".conviction_search_text.#{@transient_registration.conviction_check_required?}") %>
+              <%= t(".conviction_search_text.#{@registration.conviction_check_required?}") %>
             </p>
 
-            <% if @transient_registration.conviction_check_required? %>
-              <%= link_to t(".conviction_link"), transient_registration_convictions_path(@transient_registration.reg_identifier), class: "pull-up" %>
+            <% if @registration.conviction_check_required? %>
+              <%= link_to t(".conviction_link"), transient_registration_convictions_path(@registration.reg_identifier), class: "pull-up" %>
             <% end %>
           <% else %>
             <p>
@@ -171,23 +171,23 @@
         <hr>
 
         <h2 class="heading-medium">
-          <% if @transient_registration.unpaid_balance? %>
-            <%= t(".finance_information.heading_with_amount_owed", amount: display_pence_as_pounds(@transient_registration.finance_details.balance)) %>
-          <% elsif @transient_registration.finance_details.blank? %>
+          <% if @registration.unpaid_balance? %>
+            <%= t(".finance_information.heading_with_amount_owed", amount: display_pence_as_pounds(@registration.finance_details.balance)) %>
+          <% elsif @registration.finance_details.blank? %>
             <%= t(".finance_information.balance.no_data") %>
           <% else %>
             <%= t(".finance_information.heading") %>
           <% end %>
         </h2>
 
-        <% if @transient_registration.finance_details %>
+        <% if @registration.finance_details %>
           <p>
             <%= link_to t(".finance_information.section_link_label"), "#TODO_UNKNOWN"%>
           </p>
         <% end %>
 
-        <% if @transient_registration.finance_details&.orders&.any? %>
-          <% order = @transient_registration.finance_details.orders.first %>
+        <% if @registration.finance_details&.orders&.any? %>
+          <% order = @registration.finance_details.orders.first %>
           <table>
             <tbody>
               <tr>
@@ -228,7 +228,7 @@
                 </th>
                 <td>
                   <strong class="bold-small">
-                    £<%= display_pence_as_pounds(@transient_registration.amount_paid) %>
+                    £<%= display_pence_as_pounds(@registration.amount_paid) %>
                   </strong>
                 </td>
               </tr>
@@ -245,9 +245,9 @@
         <% end %>
 
 
-        <% if @transient_registration.main_people.any? %>
+        <% if @registration.main_people.any? %>
           <h2 class="heading-medium">
-            <%= t(".person_information.heading.#{@transient_registration.business_type}") %>
+            <%= t(".person_information.heading.#{@registration.business_type}") %>
           </h2>
 
           <table>
@@ -263,7 +263,7 @@
                   <%= t(".person_information.convictions") %>
                 </th>
               </tr>
-              <% @transient_registration.main_people.each do |person| %>
+              <% @registration.main_people.each do |person| %>
                 <tr>
                   <td>
                     <%= person.first_name %> <%= person.last_name %>
@@ -273,7 +273,7 @@
                   </td>
                   <td>
                     <% if person.conviction_check_required? %>
-                      <div class="bold-small">
+                      <div class="bold-xsmall">
                         <%= t(".person_information.has_convictions.yes") %>
                       </div>
                     <% else %>
@@ -289,12 +289,12 @@
       <div class="column-one-third">
         <div class="wcr-actions wcr-actions--push-down">
           <h2 class="heading-medium">
-            <%= t(".actions_box.heading", reg_identifier: @transient_registration.reg_identifier) %>
+            <%= t(".actions_box.heading", reg_identifier: @registration.reg_identifier) %>
           </h2>
           <ul>
-            <% if @transient_registration.pending_payment? %>
+            <% if @registration.pending_payment? %>
               <li>
-                <%= link_to t(".actions_box.links.payment"), transient_registration_payments_path(@transient_registration.reg_identifier) %>
+                <%= link_to t(".actions_box.links.payment"), transient_registration_payments_path(@registration.reg_identifier) %>
               </li>
             <% end %>
           </ul>

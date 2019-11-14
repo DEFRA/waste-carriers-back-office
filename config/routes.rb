@@ -26,6 +26,11 @@ Rails.application.routes.draw do
             param: :reg_identifier,
             path: "/bo/renewing-registrations"
 
+  resources :registrations,
+            only: :show,
+            param: :reg_identifier,
+            path: "/bo/registrations"
+
   resources :transient_registrations,
             only: [],
             param: :reg_identifier,

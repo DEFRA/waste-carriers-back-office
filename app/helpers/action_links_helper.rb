@@ -2,10 +2,14 @@
 
 module ActionLinksHelper
   def details_link_for(resource)
-    # TODO: return correct link if resource is `Registration`
-    return "#" unless resource.is_a?(WasteCarriersEngine::RenewingRegistration)
-
-    renewing_registration_path(resource.reg_identifier)
+    case resource
+    when WasteCarriersEngine::RenewingRegistration
+      renewing_registration_path(resource.reg_identifier)
+    when WasteCarriersEngine::Registration
+      registration_path(resource.reg_identifier)
+    else
+      "#"
+    end
   end
 
   def resume_link_for(resource)
@@ -47,7 +51,7 @@ module ActionLinksHelper
   end
 
   def display_details_link_for?(resource)
-    resource.is_a?(WasteCarriersEngine::RenewingRegistration)
+    resource.is_a?(WasteCarriersEngine::RenewingRegistration) || resource.is_a?(WasteCarriersEngine::Registration)
   end
 
   def display_resume_link_for?(resource)

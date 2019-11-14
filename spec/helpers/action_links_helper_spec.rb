@@ -4,18 +4,26 @@ require "rails_helper"
 
 RSpec.describe ActionLinksHelper, type: :helper do
   describe "details_link_for" do
-    context "when the resource is a transient_registration" do
+    context "when the resource is a renewing registration" do
       let(:resource) { build(:renewing_registration) }
 
-      it "returns the correct path" do
+      it "returns the renewing registration path" do
         expect(helper.details_link_for(resource)).to eq(renewing_registration_path(resource.reg_identifier))
       end
     end
 
-    context "when the resource is not a transient_registration" do
+    context "when the resource is a registration" do
       let(:resource) { build(:registration) }
 
-      it "returns the correct path" do
+      it "returns the registration path" do
+        expect(helper.details_link_for(resource)).to eq(registration_path(resource.reg_identifier))
+      end
+    end
+
+    context "when the resource is not a registration or a renewing registration" do
+      let(:resource) { double(:resource) }
+
+      it "returns a default path" do
         expect(helper.details_link_for(resource)).to eq("#")
       end
     end
@@ -130,8 +138,16 @@ RSpec.describe ActionLinksHelper, type: :helper do
   end
 
   describe "#display_details_link_for?" do
-    context "when the result is not a RenewingRegistration" do
+    context "when the result is a Registration" do
       let(:result) { build(:registration) }
+
+      it "returns true" do
+        expect(helper.display_details_link_for?(result)).to eq(true)
+      end
+    end
+
+    context "when the result is not a Registration or a RenewingRegistration" do
+      let(:result) { double(:result) }
 
       it "returns false" do
         expect(helper.display_details_link_for?(result)).to eq(false)
