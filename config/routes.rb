@@ -21,8 +21,13 @@ Rails.application.routes.draw do
   # Privacy policy
   get "/bo/ad-privacy-policy/:reg_identifier", to: "ad_privacy_policy#show", as: :ad_privacy_policy
 
-  resources :transient_registrations,
+  resources :renewing_registrations,
             only: :show,
+            param: :reg_identifier,
+            path: "/bo/renewing-registrations"
+
+  resources :transient_registrations,
+            only: [],
             param: :reg_identifier,
             path: "/bo/transient-registrations",
             path_names: { show: "/:reg_identifier" } do

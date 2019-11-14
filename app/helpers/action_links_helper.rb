@@ -2,9 +2,10 @@
 
 module ActionLinksHelper
   def details_link_for(resource)
+    # TODO: return correct link if resource is `Registration`
     return "#" unless resource.is_a?(WasteCarriersEngine::RenewingRegistration)
 
-    transient_registration_path(resource.reg_identifier)
+    renewing_registration_path(resource.reg_identifier)
   end
 
   def resume_link_for(resource)

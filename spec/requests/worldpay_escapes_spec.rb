@@ -38,7 +38,7 @@ RSpec.describe "WorldpayEscapes", type: :request do
 
         it "renders the transient_registration page" do
           get "/bo/transient-registrations/#{reg_identifier}/revert-to-payment-summary"
-          expect(response).to redirect_to transient_registration_path(reg_identifier)
+          expect(response).to redirect_to renewing_registration_path(reg_identifier)
         end
       end
     end

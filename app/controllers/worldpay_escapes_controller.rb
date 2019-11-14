@@ -11,7 +11,7 @@ class WorldpayEscapesController < ApplicationController
       log_worldpay_escape
       redirect_to continue_renewal_path
     else
-      redirect_to transient_registration_path(@transient_registration.reg_identifier)
+      redirect_to renewing_registration_path(@transient_registration.reg_identifier)
     end
   end
 

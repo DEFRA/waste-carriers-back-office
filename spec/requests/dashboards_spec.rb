@@ -24,7 +24,7 @@ RSpec.describe "Dashboards", type: :request do
         context "when there are matches" do
           it "links to renewal details pages" do
             last_modified_renewal = create(:renewing_registration)
-            link_to_renewal = transient_registration_path(last_modified_renewal.reg_identifier)
+            link_to_renewal = renewing_registration_path(last_modified_renewal.reg_identifier)
 
             get "/bo", term: last_modified_renewal.reg_identifier
             expect(response.body).to include(link_to_renewal)

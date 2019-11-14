@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-# TODO: Rename controller
-class TransientRegistrationsController < ApplicationController
+class RenewingRegistrationsController < ApplicationController
   before_action :authenticate_user!
 
   def show

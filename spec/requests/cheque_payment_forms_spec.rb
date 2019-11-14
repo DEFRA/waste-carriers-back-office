@@ -72,7 +72,7 @@ RSpec.describe "ChequePaymentForms", type: :request do
 
       it "redirects to the transient_registration page" do
         post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments/cheque", cheque_payment_form: params
-        expect(response).to redirect_to(transient_registration_path(transient_registration.reg_identifier))
+        expect(response).to redirect_to(renewing_registration_path(transient_registration.reg_identifier))
       end
 
       it "creates a new payment" do

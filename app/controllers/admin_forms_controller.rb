@@ -33,7 +33,7 @@ class AdminFormsController < ApplicationController
 
   def submit_form(form, params, success_path)
     if form.submit(params)
-      redirect_to success_path || transient_registration_path(@transient_registration.reg_identifier)
+      redirect_to success_path || renewing_registration_path(@transient_registration.reg_identifier)
       true
     else
       render :new
