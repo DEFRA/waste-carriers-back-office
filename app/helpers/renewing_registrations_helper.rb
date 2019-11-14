@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module TransientRegistrationsHelper
+module RenewingRegistrationsHelper
   def show_translation_or_filler(attribute)
     if @transient_registration[attribute].present?
-      I18n.t(".transient_registrations.show.attributes.#{attribute}.#{@transient_registration[attribute]}")
+      I18n.t(".renewing_registrations.show.attributes.#{attribute}.#{@transient_registration[attribute]}")
     else
-      I18n.t(".transient_registrations.show.filler")
+      I18n.t(".renewing_registrations.show.filler")
     end
   end
 
