@@ -2,9 +2,9 @@
 
 class RegistrationPresenter < WasteCarriersEngine::BasePresenter
   def displayable_location
-    location = @registration.show_translation_or_filler(:location)
+    location = show_translation_or_filler(:location)
 
-    t(".registrations.business_information.labels.location", location: location)
+    I18n.t(".registrations.show.business_information.labels.location", location: location)
   end
 
   def display_expiry_date
