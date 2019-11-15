@@ -77,7 +77,7 @@
             </p>
             <p>
               <% if @registration.contact_address.present? %>
-                <% @registration.display_contact_address.each do |line| %>
+                <% displayable_address(@registration.contact_address).each do |line| %>
                   <%= line %><br>
                 <% end %>
               <% end %>
@@ -99,13 +99,13 @@
             <% if @registration.registered_address.present? %>
               <p>
                 <%= t(".business_information.labels.registered_address") %> <br>
-                <% @registration.display_registered_address.each do |line| %>
+                <% displayable_address(@registration.registered_address).each do |line| %>
                   <%= line %><br>
                 <% end %>
               </p>
             <% end %>
             <p>
-              <%= t(".business_information.labels.location", location: @registration.show_translation_or_filler(:location)) %>
+              <%= @registration.displayable_location %>
             </p>
           </div>
         </div>

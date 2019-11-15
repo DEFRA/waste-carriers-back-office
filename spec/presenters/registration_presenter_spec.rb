@@ -1,0 +1,65 @@
+# frozen_string_literal: true
+
+RSpec.describe RegistrationPresenter do
+  let(:registration) { double(:registration) }
+
+  subject { described_class.new(registration) }
+
+  describe "#displayable_location" do
+    let(:registration) { double(:registration, location: location) }
+
+    context "when there is no location value" do
+      let(:location) { nil }
+
+      it "displays a placeholder" do
+        expect(subject.displayable_location).to eq("")
+      end
+    end
+
+    context "when there is a location value" do
+      let(:location) { "England" }
+
+      it "displays the location value" do
+        expect(subject.displayable_location).to eq("")
+      end
+    end
+  end
+
+  describe "#display_expiry_date" do
+    let(:expires_on) { Time.now }
+    let(:registration) { double(:registration, expires_on: expires_on) }
+
+    it "returns a date object" do
+      expect(subject.display_expiry_date).to be_a(Date)
+    end
+
+    context "when there is no expire date" do
+      let(:expires_on) { nil }
+
+      it "returns nil" do
+        expect(subject.display_expiry_date).to be_nil
+      end
+    end
+  end
+
+  describe "#finance_details_link" do
+    let(:registration) { double(:registration, id: "12345") }
+
+    before do
+      expect(Rails.configuration).to receive(:wcrs_frontend_url).and_return("http://example.com")
+    end
+
+    it "returns a link to the finance details page in thee old system" do
+      expect(subject.finance_details_link).to eq("http://example.com/registrations/12345/paymentstatus")
+    end
+  end
+
+  describe "#display_registration_status" do
+    let(:metadata) { double(:metadata, status: "PENDING") }
+    let(:registration) { double(:registration, metaData: metadata) }
+
+    it "returns a titleized status" do
+      expect(subject.display_registration_status).to eq("Pending")
+    end
+  end
+end

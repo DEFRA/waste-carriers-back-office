@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 class RegistrationPresenter < WasteCarriersEngine::BasePresenter
-  def show_translation_or_filler(attribute)
-    if send(attribute).present?
-      I18n.t(".registrations.show.attributes.#{attribute}.#{send(attribute)}")
-    else
-      I18n.t(".registrations.show.filler")
-    end
+  def displayable_location
+    location = @registration.show_translation_or_filler(:location)
+
+    t(".registrations.business_information.labels.location", location: location)
   end
 
   def display_expiry_date
@@ -21,26 +19,13 @@ class RegistrationPresenter < WasteCarriersEngine::BasePresenter
     metaData.status.titleize
   end
 
-  def display_registered_address
-    @view.displayable_address(registered_address)
-  end
+  private
 
-  def display_contact_address
-    @view.displayable_address(contact_address)
-  end
-
-  def key_people_with_conviction_search_results?
-    return false unless key_people.present?
-
-    results = key_people.select(&:conviction_search_result)
-
-    results.count.positive?
-  end
-
-  def number_of_people_with_matching_convictions
-    return 0 unless key_people.present?
-
-    all_requirements = key_people.map(&:conviction_check_required?)
-    all_requirements.count(true)
+  def show_translation_or_filler(attribute)
+    if send(attribute).present?
+      I18n.t(".registrations.show.attributes.#{attribute}.#{send(attribute)}")
+    else
+      I18n.t(".registrations.show.filler")
+    end
   end
 end
