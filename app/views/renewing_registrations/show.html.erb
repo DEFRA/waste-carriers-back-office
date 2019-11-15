@@ -182,7 +182,7 @@
 
         <% if @transient_registration.finance_details %>
           <p>
-            <%= link_to t(".finance_information.section_link_label"), "#TODO_UNKNOWN"%>
+            <%= link_to t(".finance_information.section_link_label"), payment_link_for(@transient_registration) %>
           </p>
         <% end %>
 

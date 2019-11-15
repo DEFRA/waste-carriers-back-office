@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: bb047bd7c43da79342c0424919e131b368b24863
-  branch: master
+  revision: 11319d5f9060fe43b75846f8494abb6f5dff2d48
+  branch: refuse-reject
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)

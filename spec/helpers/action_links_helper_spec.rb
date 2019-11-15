@@ -13,7 +13,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
 
     context "when the resource is a registration" do
-      let(:resource) { build(:registration) }
+      let(:resource) { build(:registration, reg_identifier: "CBDU1") }
 
       it "returns the registration path" do
         expect(helper.details_link_for(resource)).to eq(registration_path(resource.reg_identifier))
