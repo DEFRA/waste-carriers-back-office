@@ -49,7 +49,7 @@ RSpec.describe RegistrationPresenter do
       expect(Rails.configuration).to receive(:wcrs_frontend_url).and_return("http://example.com")
     end
 
-    it "returns a link to the finance details page in thee old system" do
+    it "returns a link to the finance details page in the old system" do
       expect(subject.finance_details_link).to eq("http://example.com/registrations/12345/paymentstatus")
     end
   end
