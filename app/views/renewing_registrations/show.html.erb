@@ -144,12 +144,10 @@
         <h2 class="heading-medium"><%= t(".conviction_heading") %></h2>
         <div>
           <% if @transient_registration.conviction_check_approved? %>
-            <%= link_to t(".conviction_link"), transient_registration_convictions_path(@transient_registration.reg_identifier), class: "pull-up"  %>
             <p>
               <%= t(".conviction_search_text.approved") %>
             </p>
           <% elsif @transient_registration.rejected_conviction_checks? %>
-            <%= link_to t(".conviction_link"), transient_registration_convictions_path(@transient_registration.reg_identifier), class: "pull-up"  %>
             <p>
               <%= t(".conviction_search_text.rejected") %>
             </p>
@@ -157,10 +155,6 @@
             <p>
               <%= t(".conviction_search_text.#{@transient_registration.conviction_check_required?}") %>
             </p>
-
-            <% if @transient_registration.conviction_check_required? %>
-              <%= link_to t(".conviction_link"), transient_registration_convictions_path(@transient_registration.reg_identifier), class: "pull-up" %>
-            <% end %>
           <% else %>
             <p>
               <%= t(".conviction_search_text.unknown") %>
