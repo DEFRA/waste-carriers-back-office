@@ -54,8 +54,10 @@
             <% end %>
           </p>
           <p>
-            <%= t(".labels.expires", formatted_date: @registration.display_expiry_date) %>
-            <br>
+            <% if @registration.upper_tier? %>
+              <%= t(".labels.expires", formatted_date: @registration.display_expiry_date) %>
+              <br>
+            <% end %>
             <%= t(".labels.account", email: @registration.account_email) %>
           </p>
         </div>
