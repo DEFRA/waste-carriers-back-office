@@ -58,8 +58,9 @@ en:
         dob: "Date of birth"
         convictions: "Convictions"
         has_convictions:
-          "yes": "Yes"
-          "no": "No"
+          "YES": "Yes"
+          "NO": "No"
+          "UNKNOWN": "Unknown"
         heading:
           localAuthority: "Chief executive details"
           limitedCompany: "Company director details"

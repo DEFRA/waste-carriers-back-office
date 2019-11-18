@@ -243,7 +243,7 @@
                   <td>
                     <% if person.conviction_check_required? %>
                       <div class="bold-xsmall">
-                        <%= t(".person_information.has_convictions.yes") %>
+                        <%= t(".person_information.has_convictions.#{person.conviction_search_result.match_result}") %>
                       </div>
                     <% else %>
                       <%= t(".person_information.has_convictions.no") %>
