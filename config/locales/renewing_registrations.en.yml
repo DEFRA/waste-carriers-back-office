@@ -59,7 +59,7 @@ en:
         convictions: "Convictions"
         has_convictions:
           "YES": "Yes"
-          "NO": "No"
+          "no": "No"
           "UNKNOWN": "Unknown"
         heading:
           localAuthority: "Chief executive details"
