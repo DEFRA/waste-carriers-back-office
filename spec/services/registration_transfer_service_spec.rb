@@ -6,7 +6,7 @@ RSpec.describe RegistrationTransferService do
   let(:registration) { create(:registration) }
   let(:recipient_email) { external_user.email }
 
-  let(:service) do
+  let(:run_service) do
     RegistrationTransferService.run(registration: registration, email: recipient_email)
   end
 
@@ -15,7 +15,7 @@ RSpec.describe RegistrationTransferService do
 
     context "when there is an external user with a matching email" do
       it "updates the registration's account_email" do
-        service
+        run_service
         expect(registration.reload.account_email).to eq(recipient_email)
       end
 
@@ -29,25 +29,25 @@ RSpec.describe RegistrationTransferService do
         end
 
         it "updates the transient_registration's account_email" do
-          service
+          run_service
           expect(transient_registration.reload.account_email).to eq(recipient_email)
         end
       end
 
       it "sends an email" do
         old_emails_sent_count = ActionMailer::Base.deliveries.count
-        service
+        run_service
         expect(ActionMailer::Base.deliveries.count).to eq(old_emails_sent_count + 1)
       end
 
       it "sends an email to the correct address" do
-        service
+        run_service
         last_delivery = ActionMailer::Base.deliveries.last
         expect(last_delivery.header["to"].value).to eq(recipient_email)
       end
 
       it "returns :success_existing_user" do
-        expect(service).to eq(:success_existing_user)
+        expect(run_service).to eq(:success_existing_user)
       end
 
       context "when the mailer encounters an error" do
@@ -56,7 +56,7 @@ RSpec.describe RegistrationTransferService do
         end
 
         it "returns :success_existing_user" do
-          expect(service).to eq(:success_existing_user)
+          expect(run_service).to eq(:success_existing_user)
         end
       end
     end
@@ -66,12 +66,12 @@ RSpec.describe RegistrationTransferService do
 
       it "creates a new user" do
         old_matching_user_count = ExternalUser.where(email: recipient_email).length
-        service
+        run_service
         expect(ExternalUser.where(email: recipient_email).length).to eq(old_matching_user_count + 1)
       end
 
       it "updates the registration's account_email" do
-        service
+        run_service
         expect(registration.reload.account_email).to eq(recipient_email)
       end
 
@@ -85,25 +85,25 @@ RSpec.describe RegistrationTransferService do
         end
 
         it "updates the transient_registration's account_email" do
-          service
+          run_service
           expect(transient_registration.reload.account_email).to eq(recipient_email)
         end
       end
 
       it "sends an email" do
         old_emails_sent_count = ActionMailer::Base.deliveries.count
-        service
+        run_service
         expect(ActionMailer::Base.deliveries.count).to eq(old_emails_sent_count + 1)
       end
 
       it "sends an email to the correct address" do
-        service
+        run_service
         last_delivery = ActionMailer::Base.deliveries.last
         expect(last_delivery.header["to"].value).to eq(recipient_email)
       end
 
       it "returns :success_new_user" do
-        expect(service).to eq(:success_new_user)
+        expect(run_service).to eq(:success_new_user)
       end
     end
 
@@ -111,7 +111,7 @@ RSpec.describe RegistrationTransferService do
       let(:recipient_email) { nil }
 
       it "returns :no_matching_user" do
-        expect(service).to eq(:no_matching_user)
+        expect(run_service).to eq(:no_matching_user)
       end
     end
   end
