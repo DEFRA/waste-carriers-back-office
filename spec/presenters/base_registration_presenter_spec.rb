@@ -25,7 +25,7 @@ RSpec.describe BaseRegistrationPresenter do
     end
   end
 
-    describe "#display_convictions_check_message" do
+  describe "#display_convictions_check_message" do
     context "when the registration is a lower tier registration" do
       let(:registration) { double(:registration, lower_tier?: true) }
 
