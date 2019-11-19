@@ -1,15 +1,21 @@
 en:
   shared:
     registrations:
-      show:
-        filler: "–"
-        attributes:
-          location:
-            england: "England"
-            wales: "Wales"
-            scotland: "Scotland"
-            northern_ireland: "Northern Ireland"
-            overseas: "Not in the United Kingdom"
-        business_information:
-          labels:
-            location: "Place of business: %{location}"
+      filler: "–"
+      conviction_search_text:
+        "true": "This registration has matching or declared convictions."
+        "false": "There are no convictions for this registration."
+        approved: "This registration was approved after a review of the matching or declared convictions."
+        rejected: "This registration was rejected after a review of the matching or declared convictions."
+        unknown: "This registration application is still in progress, so there is no conviction match data yet."
+        lower_tier: "Lower tier registration - convictions are not applicable"
+      attributes:
+        location:
+          england: "England"
+          wales: "Wales"
+          scotland: "Scotland"
+          northern_ireland: "Northern Ireland"
+          overseas: "Not in the United Kingdom"
+      business_information:
+        labels:
+          location: "Place of business: %{location}"

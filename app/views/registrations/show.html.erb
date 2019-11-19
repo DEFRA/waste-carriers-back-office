@@ -111,26 +111,14 @@
             </p>
           </div>
         </div>
+
         <hr/>
+
         <h2 class="heading-medium"><%= t(".conviction_heading") %></h2>
         <div>
-          <% if @registration.conviction_check_approved? %>
-            <p>
-              <%= t(".conviction_search_text.approved") %>
-            </p>
-          <% elsif @registration.rejected_conviction_checks? %>
-            <p>
-              <%= t(".conviction_search_text.rejected") %>
-            </p>
-          <% elsif @registration.conviction_search_result.present? %>
-            <p>
-              <%= t(".conviction_search_text.#{@registration.conviction_check_required?}") %>
-            </p>
-          <% else %>
-            <p>
-              <%= t(".conviction_search_text.unknown") %>
-            </p>
-          <% end %>
+          <p>
+            <%= @registration.display_convictions_check_message %>
+          </p>
         </div>
 
         <hr>
