@@ -82,42 +82,6 @@ en:
           declared_convictions: "Declared convictions?"
           business_conviction_search_result: "Matching convictions found for company?"
           people_conviction_search_result: "Matching convictions found for people?"
-      finance_information:
-        heading_with_amount_owed: "Latest charges and payments: £%{amount} owed"
-        heading: "Latest charges and payments"
-        section_link_label: "Finance details"
-        balance:
-          zero: "All charges for this renewal have been fully paid."
-          positive: "There is an outstanding balance of £%{balance} on this renewal."
-          negative: "This renewal has been overpaid by £%{balance}."
-          no_data: "Application still in progress. No finance data yet."
-        cards:
-          one: "1 registration card"
-          many: "%{cards} registration cards"
-      order_information:
-        labels:
-          items: "Charges"
-          total_amount: "Total"
-          paid: "Paid"
-          payment_method: "Payment method"
-          order_code: "Order code"
-          world_pay_status: "WorldPay status"
-          date_last_updated: "Order last updated at"
-          updated_by_user: "Updated by"
-      payment_information:
-        heading: "Payment details"
-        labels:
-          amount: "Amount"
-          payment_type: "Payment type"
-          registration_reference: "Registration reference"
-          comment: "Comment"
-          date_received: "Date received"
-          date_entered: "Date entered"
-          updated_by_user: "Updated by"
-      card_information:
-        heading: "Registration cards (copy cards)"
-        labels:
-          temp_cards: "Number of cards ordered"
       attributes:
         business_type:
           soleTrader: "Individual or sole trader"

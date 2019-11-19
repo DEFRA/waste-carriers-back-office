@@ -1,0 +1,78 @@
+<h2 class="heading-medium">
+  <% if resource.unpaid_balance? %>
+    <%= t(".finance_information.heading_with_amount_owed", amount: display_pence_as_pounds(resource.finance_details.balance)) %>
+  <% elsif resource.finance_details.blank? %>
+    <%= t(".finance_information.balance.no_data") %>
+  <% else %>
+    <%= t(".finance_information.heading") %>
+  <% end %>
+</h2>
+
+<% if resource.show_finance_details_link? %>
+  <p>
+    <%= link_to t(".finance_information.section_link_label"), payment_link_for(resource) %>
+  </p>
+<% end %>
+
+<% if resource.lower_tier? %>
+  <p>
+    <%= t(".finance_information.lower_tier_message") %>
+  </p>
+<% end %>
+
+<% if resource.show_order_details? %>
+  <table>
+    <tbody>
+      <tr>
+        <th>
+          <%= t(".order_information.labels.payment_method") %>
+        </th>
+        <td>
+          <%= resource.order.payment_method.titleize %>
+        </td>
+      </tr>
+      <% resource.order.order_items.each do |item| %>
+        <tr>
+          <th>
+            <%= item.description %>
+          </th>
+          <td>
+            £<%= display_pence_as_pounds(item.amount) %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <th>
+          <strong class="bold-small">
+            <%= t(".order_information.labels.total_amount") %>
+          </strong>
+        </th>
+        <td>
+          <strong class="bold-small">
+            £<%= display_pence_as_pounds(resource.order.total_amount) %>
+          </strong>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <strong class="bold-small">
+            <%= t(".order_information.labels.paid") %>
+          </strong>
+        </th>
+        <td>
+          <strong class="bold-small">
+            £<%= display_pence_as_pounds(resource.amount_paid) %>
+          </strong>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <%= t(".order_information.labels.order_code") %>
+        </th>
+        <td>
+          <%= resource.order.order_code %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
