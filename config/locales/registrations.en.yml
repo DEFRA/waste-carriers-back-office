@@ -149,12 +149,6 @@ en:
         key_person:
           conviction_search_result:
             pending: "No data yet"
-        location:
-          england: "England"
-          wales: "Wales"
-          scotland: "Scotland"
-          northern_ireland: "Northern Ireland"
-          overseas: "Not in the United Kingdom"
         registration_type:
           carrier_dealer: "Carrier and dealer"
           broker_dealer: "Broker and dealer"

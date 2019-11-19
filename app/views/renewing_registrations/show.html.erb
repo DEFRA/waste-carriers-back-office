@@ -65,9 +65,9 @@
               <% end %>
             <% else %>
               <p>
-                <%= t(".status.messages.in_progress") %> "<%= display_current_workflow_state %>".
+                <%= @transient_registration.display_current_workflow_state %>
               </p>
-              <% if can? :update, @transient_registration %>
+              <% if can? :renew, @transient_registration %>
                 <%= link_to t(".status.actions.continue_button"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier), class: 'button' %>
               <% end %>
             <% end %>
@@ -81,11 +81,11 @@
           <p class="lede">
             <%= t(".tier.#{@transient_registration.tier.downcase}") %>
             <% if @transient_registration.registration_type.present? %>
-              - <%= I18n.t(".transient_registrations.show.attributes.registration_type.#{@transient_registration.registration_type}") %>
+              - <%= I18n.t(".renewing_registrations.show.attributes.registration_type.#{@transient_registration.registration_type}") %>
             <% end %>
           </p>
           <p>
-            <%= t(".labels.expires", formatted_date: display_expiry_date) %>
+            <%= t(".labels.expires", formatted_date: @transient_registration.display_expiry_date) %>
             <br>
             <%= t(".labels.account", email: @transient_registration.account_email) %>
           </p>
@@ -108,7 +108,7 @@
             </p>
             <p>
               <% if @transient_registration.contact_address.present? %>
-                <% display_contact_address.each do |line| %>
+                <% displayable_address(@transient_registration.contact_address).each do |line| %>
                   <%= line %><br>
                 <% end %>
               <% end %>
@@ -130,13 +130,13 @@
             <% if @transient_registration.registered_address.present? %>
               <p>
                 <%= t(".business_information.labels.registered_address") %> <br>
-                <% display_registered_address.each do |line| %>
+                <% displayable_address(@transient_registration.registered_address).each do |line| %>
                   <%= line %><br>
                 <% end %>
               </p>
             <% end %>
             <p>
-              <%= t(".business_information.labels.location", location: show_translation_or_filler(:location)) %>
+              <%= @transient_registration.displayable_location %>
             </p>
           </div>
         </div>
