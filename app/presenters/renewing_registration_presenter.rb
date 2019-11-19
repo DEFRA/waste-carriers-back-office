@@ -2,7 +2,7 @@
 
 class RenewingRegistrationPresenter < BaseRegistrationPresenter
   def display_current_workflow_state
-    "#{I18n.t(".renewing_registrations.show.status.messages.in_progress")} \"#{current_workflow_state}\""
+    "#{I18n.t('.renewing_registrations.show.status.messages.in_progress')} \"#{current_workflow_state}\""
   end
 
   def display_expiry_date
