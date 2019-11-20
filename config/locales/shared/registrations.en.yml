@@ -16,9 +16,9 @@ en:
             scotland: "Scotland"
             northern_ireland: "Northern Ireland"
             overseas: "Not in the United Kingdom"
-        business_information:
-          labels:
-            location: "Place of business: %{location}"
+      business_information:
+        labels:
+          location: "Place of business: %{location}"
       filler: "–"
       conviction_search_text:
         "true": "This registration has matching or declared convictions."
