@@ -16,6 +16,26 @@ RSpec.describe RenewingRegistrationPresenter do
     end
   end
 
+  describe "#in_progress?" do
+    let(:renewing_registration) { double(:renewing_registration, renewal_application_submitted?: submitted) }
+
+    context "when the application is not yet submitted" do
+      let(:submitted) { false }
+
+      it "returns true" do
+        expect(subject).to be_in_progress
+      end
+    end
+
+    context "when the application is submitted" do
+      let(:submitted) { true }
+
+      it "returns false" do
+        expect(subject).to_not be_in_progress
+      end
+    end
+  end
+
   describe "#display_expiry_date" do
     let(:expires_on) { Time.now }
     let(:registration) { double(:registration, expires_on: expires_on) }
