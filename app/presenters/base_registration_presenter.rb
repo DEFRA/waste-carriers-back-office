@@ -25,6 +25,7 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     # TODO: For now all registrations are submitted in the new system. To update when we build front end flow.
     false
   end
+ 
   def show_finance_details_link?
     finance_details.present? && upper_tier?
   end
