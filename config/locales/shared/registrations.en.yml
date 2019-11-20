@@ -3,7 +3,7 @@ en:
     registrations:
       finance_details:
         finance_information:
-          lower_tier_message: "Lower tier registration - charge are not applicable."
+          lower_tier_message: "Lower tier registration - charges are not applicable."
           heading_with_amount_owed: "Latest charges and payments: £%{amount} owed"
           heading: "Latest charges and payments"
           section_link_label: "Finance details"
