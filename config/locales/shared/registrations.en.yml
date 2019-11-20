@@ -7,6 +7,7 @@ en:
           links:
             payment: "Process payment"
             continue_button: "Continue as assisted digital"
+            renew: "Renew"
       finance_details:
         finance_information:
           lower_tier_message: "Lower tier registration - charges are not applicable."

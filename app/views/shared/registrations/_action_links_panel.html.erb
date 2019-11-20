@@ -4,7 +4,7 @@
   </h2>
   <ul>
     <!-- TODO: This `can?` will need to be updated when we build NewRegistration -->
-    <% if can?(:renew, resource) && resource.in_progress? %>
+    <% if display_resume_link_for?(resource) %>
       <li>
         <%= link_to t(".actions_box.links.continue_button"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier) %>
       </li>
@@ -13,6 +13,12 @@
     <% if resource.pending_payment? %>
       <li>
         <%= link_to t(".actions_box.links.payment"), transient_registration_payments_path(resource.reg_identifier) %>
+      </li>
+    <% end %>
+
+    <% if display_renew_link_for?(resource) %>
+      <li>
+        <%= link_to t(".actions_box.links.renew"), transient_registration_payments_path(resource.reg_identifier) %>
       </li>
     <% end %>
   </ul>
