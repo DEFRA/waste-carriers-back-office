@@ -7,6 +7,20 @@ en:
           links:
             payment: "Process payment"
             continue_button: "Continue as assisted digital"
+      finance_details:
+        finance_information:
+          lower_tier_message: "Lower tier registration - charges are not applicable."
+          heading_with_amount_owed: "Latest charges and payments: £%{amount} owed"
+          heading: "Latest charges and payments"
+          section_link_label: "Finance details"
+          balance:
+            no_data: "Application still in progress. No finance data yet."
+        order_information:
+          labels:
+            total_amount: "Total"
+            paid: "Paid"
+            payment_method: "Payment method"
+            order_code: "Order code"
       show:
         filler: "–"
       attributes:
