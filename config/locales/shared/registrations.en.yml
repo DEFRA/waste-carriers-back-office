@@ -9,13 +9,13 @@ en:
             continue_button: "Continue as assisted digital"
       show:
         filler: "–"
-        attributes:
-          location:
-            england: "England"
-            wales: "Wales"
-            scotland: "Scotland"
-            northern_ireland: "Northern Ireland"
-            overseas: "Not in the United Kingdom"
+      attributes:
+        location:
+          england: "England"
+          wales: "Wales"
+          scotland: "Scotland"
+          northern_ireland: "Northern Ireland"
+          overseas: "Not in the United Kingdom"
       business_information:
         labels:
           location: "Place of business: %{location}"
