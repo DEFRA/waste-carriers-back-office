@@ -7,6 +7,11 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     I18n.t(".shared.registrations.show.business_information.labels.location", location: location)
   end
 
+  def in_progress?
+    # TODO: For now all registrations are submitted in the new system. To update when we build front end flow.
+    false
+  end
+
   private
 
   def show_translation_or_filler(attribute)

@@ -1,6 +1,12 @@
 en:
   shared:
     registrations:
+      action_links_panel:
+        actions_box:
+          heading: "Actions for %{reg_identifier}"
+          links:
+            payment: "Process payment"
+            continue_button: "Continue as assisted digital"
       show:
         filler: "–"
         attributes:

@@ -1,10 +1,6 @@
 en:
   registrations:
     show:
-      actions_box:
-        heading: "Actions for %{reg_identifier}"
-        links:
-          payment: "Process payment"
       title: "Registration details"
       heading: "Registration %{reg_identifier}"
       filler: "–"

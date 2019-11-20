@@ -281,18 +281,7 @@
         <% end %>
       </div>
       <div class="column-one-third">
-        <div class="wcr-actions wcr-actions--push-down">
-          <h2 class="heading-medium">
-            <%= t(".actions_box.heading", reg_identifier: @transient_registration.reg_identifier) %>
-          </h2>
-          <ul>
-            <% if @transient_registration.pending_payment? %>
-              <li>
-                <%= link_to t(".actions_box.links.payment"), transient_registration_payments_path(@transient_registration.reg_identifier) %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+        <%= render "shared/registrations/action_links_panel", resource: @transient_registration%>
       </div>
     </div>
   </div>

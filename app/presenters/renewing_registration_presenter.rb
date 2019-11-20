@@ -9,6 +9,10 @@ class RenewingRegistrationPresenter < BaseRegistrationPresenter
     registration.expires_on&.to_date
   end
 
+  def in_progress?
+    !renewal_application_submitted?
+  end
+
   private
 
   def current_workflow_state
