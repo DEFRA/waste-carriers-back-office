@@ -10,7 +10,6 @@ RSpec.describe BaseRegistrationPresenter do
       expect(subject).to_not be_in_progress
     end
   end
-  
   describe "#order" do
     let(:order) { double(:order) }
     let(:registration) do
