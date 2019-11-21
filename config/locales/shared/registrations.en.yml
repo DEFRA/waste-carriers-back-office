@@ -11,7 +11,7 @@ en:
       labels:
         expires: "Expires: %{formatted_date}"
         expired: "Expired: %{formatted_date}"
-      ceased_revoked:
+      ceased_revoked_panel:
         heading:
           ceased: "Ceased"
           revoked: "Revoked"
