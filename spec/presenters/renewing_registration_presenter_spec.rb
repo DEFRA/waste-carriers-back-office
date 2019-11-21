@@ -5,6 +5,18 @@ RSpec.describe RenewingRegistrationPresenter do
   let(:view_context) { double(:view_context) }
   subject { described_class.new(renewing_registration, view_context) }
 
+  describe "#finance_details_link" do
+    it "returns a link to the finance details page" do
+      link = double(:link)
+      reg_identifier = double(:reg_identifier)
+
+      expect(renewing_registration).to receive(:reg_identifier).and_return(reg_identifier)
+      expect(view_context).to receive(:transient_registration_payments_path).with(reg_identifier).and_return(link)
+
+      expect(subject.finance_details_link).to eq(link)
+    end
+  end
+
   describe "#display_current_workflow_state" do
     let(:workflow_state) { "a_workflow_state" }
     let(:renewing_registration) { double(:renewing_registration, workflow_state: workflow_state) }

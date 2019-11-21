@@ -5,9 +5,15 @@ en:
         actions_box:
           heading: "Actions for %{reg_identifier}"
           links:
-            payment: "Process payment"
             continue_button: "Continue as assisted digital"
             renew: "Renew"
+            transfer: "Transfer to another account"
+            edit: "Edit registration"
+            view_confirmation_letter: "View confirmation letter"
+            order_copy_cards: "Order copy cards"
+            payment_status: "Payment status"
+            revoke: "Revoke"
+            cease: "De-register"
       finance_details:
         finance_information:
           lower_tier_message: "Lower tier registration - charges are not applicable."

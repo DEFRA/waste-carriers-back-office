@@ -63,21 +63,52 @@ module ActionLinksHelper
   end
 
   def display_payment_link_for?(resource)
+    display_payment_details_link_for?(resource) && resource.pending_payment?
+  end
+
+  def display_payment_details_link_for?(resource)
     return false unless display_transient_registration_links?(resource) || display_registration_links?(resource)
 
-    resource.pending_payment?
+    resource.upper_tier?
+  end
+
+  def display_revoke_link_for?(resource)
+    return false unless display_registration_links?(resource)
+    return false unless can?(:revoke, WasteCarriersEngine::Registration)
+
+    resource.active?
+  end
+
+  def display_edit_link_for?(resource)
+    return false unless display_registration_links?(resource)
+
+    can?(:update, WasteCarriersEngine::Registration)
+  end
+
+  def display_view_confirmation_letter_link_for?(resource)
+    return false unless display_registration_links?(resource)
+    return false unless can?(:view_certificate, WasteCarriersEngine::Registration)
+
+    resource.active?
+  end
+
+  def display_order_copy_cards_link_for?(resource)
+    return false unless display_registration_links?(resource)
+    return false unless can?(:order_copy_cards, WasteCarriersEngine::Registration)
+
+    resource.active? && resource.upper_tier?
   end
 
   def display_convictions_link_for?(resource)
     return false unless display_transient_registration_links?(resource) || display_registration_links?(resource)
-    return false unless can?(:review_convictions, resource)
+    return false unless can?(:review_convictions, WasteCarriersEngine::Registration)
 
     resource.pending_manual_conviction_check?
   end
 
   def display_renew_link_for?(resource)
     return false unless display_registration_links?(resource)
-    return false unless can?(:renew, resource)
+    return false unless can?(:renew, WasteCarriersEngine::Registration)
 
     resource.can_start_renewal?
   end
@@ -85,7 +116,13 @@ module ActionLinksHelper
   def display_transfer_link_for?(resource)
     return false unless display_registration_links?(resource)
 
-    can?(:transfer, resource)
+    can?(:transfer_registration, WasteCarriersEngine::Registration)
+  end
+
+  def display_cease_link_for?(resource)
+    return false unless display_registration_links?(resource)
+
+    can?(:cease, WasteCarriersEngine::Registration)
   end
 
   private

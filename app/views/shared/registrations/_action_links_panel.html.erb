@@ -10,15 +10,55 @@
       </li>
     <% end %>
 
-    <% if resource.pending_payment? %>
-      <li>
-        <%= link_to t(".actions_box.links.payment"), transient_registration_payments_path(resource.reg_identifier) %>
-      </li>
-    <% end %>
-
     <% if display_renew_link_for?(resource) %>
       <li>
         <%= link_to t(".actions_box.links.renew"), transient_registration_payments_path(resource.reg_identifier) %>
+      </li>
+    <% end %>
+
+    <% if display_transfer_link_for?(resource) %>
+      <li>
+        <%= link_to t(".actions_box.links.transfer"), transfer_link_for(resource) %>
+      </li>
+    <% end %>
+
+    <li class="separated" />
+
+    <% if display_edit_link_for?(resource) %>
+      <li>
+        <%= link_to t(".actions_box.links.edit"), resource.edit_link %>
+      </li>
+    <% end %>
+
+    <% if display_view_confirmation_letter_link_for?(resource) %>
+      <li>
+        <%= link_to t(".actions_box.links.view_confirmation_letter"), resource.view_confirmation_letter_link %>
+      </li>
+    <% end %>
+
+    <li class="separated" />
+
+    <% if display_order_copy_cards_link_for?(resource) %>
+      <li>
+        <%= link_to t(".actions_box.links.order_copy_cards"), resource.order_copy_cards_link %>
+      </li>
+    <% end %>
+
+    <% if display_payment_link_for?(resource) %>
+      <li>
+        <%= link_to t(".actions_box.links.payment_status"), resource.finance_details_link%>
+      </li>
+    <% end %>
+
+    <% if display_revoke_link_for?(resource) %>
+      <li>
+        <%= link_to t(".actions_box.links.revoke"), resource.revoke_link %>
+      </li>
+    <% end %>
+
+    <% if display_cease_link_for?(resource) %>
+      <li>
+        <%= link_to t(".actions_box.links.cease"), resource.cease_link %>
       </li>
     <% end %>
   </ul>

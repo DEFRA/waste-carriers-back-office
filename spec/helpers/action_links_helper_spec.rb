@@ -279,6 +279,274 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
+  describe "#display_revoke_link_for?" do
+    context "when the resource is a registration" do
+      let(:resource) { build(:registration) }
+
+      before do
+        expect(helper).to receive(:can?).with(:revoke, WasteCarriersEngine::Registration).and_return(can)
+      end
+
+      context "when the user has permission for revoking" do
+        let(:can) { true }
+
+        before do
+          expect(resource).to receive(:active?).and_return(active)
+        end
+
+        context "when the resource is active" do
+          let(:active) { true }
+
+          it "returns true" do
+            expect(helper.display_revoke_link_for?(resource)).to be_truthy
+          end
+        end
+
+        context "when the resource is not active" do
+          let(:active) { false }
+
+          it "returns false" do
+            expect(helper.display_revoke_link_for?(resource)).to be_falsey
+          end
+        end
+      end
+
+      context "when the user has no permission for revoking" do
+        let(:can) { false }
+
+        it "returns false" do
+          expect(helper.display_revoke_link_for?(resource)).to be_falsey
+        end
+      end
+    end
+
+    context "when the resource is a transient registration" do
+      let(:resource) { build(:renewing_registration) }
+
+      it "returns false" do
+        expect(helper.display_revoke_link_for?(resource)).to be_falsey
+      end
+    end
+  end
+
+  describe "#display_edit_link_for?" do
+    context "when the resource is a registration" do
+      let(:resource) { build(:registration) }
+
+      before do
+        expect(helper).to receive(:can?).with(:update, WasteCarriersEngine::Registration).and_return(can)
+      end
+
+      context "when the user has permission for revoking" do
+        let(:can) { true }
+
+        it "returns true" do
+          expect(helper.display_edit_link_for?(resource)).to be_truthy
+        end
+      end
+
+      context "when the user has no permission for revoking" do
+        let(:can) { false }
+
+        it "returns false" do
+          expect(helper.display_edit_link_for?(resource)).to be_falsey
+        end
+      end
+    end
+
+    context "when the resource is a transient registration" do
+      let(:resource) { build(:renewing_registration) }
+
+      it "returns false" do
+        expect(helper.display_edit_link_for?(resource)).to be_falsey
+      end
+    end
+  end
+
+  describe "#display_view_confirmation_letter_link_for?" do
+    context "when the resource is a registration" do
+      let(:resource) { build(:registration) }
+
+      before do
+        expect(helper).to receive(:can?).with(:view_certificate, WasteCarriersEngine::Registration).and_return(can)
+      end
+
+      context "when the user has permission for revoking" do
+        let(:can) { true }
+
+        before do
+          expect(resource).to receive(:active?).and_return(active)
+        end
+
+        context "when the resource is active" do
+          let(:active) { true }
+
+          it "returns true" do
+            expect(helper.display_view_confirmation_letter_link_for?(resource)).to be_truthy
+          end
+        end
+
+        context "when the resource is not active" do
+          let(:active) { false }
+
+          it "returns false" do
+            expect(helper.display_view_confirmation_letter_link_for?(resource)).to be_falsey
+          end
+        end
+      end
+
+      context "when the user has no permission for revoking" do
+        let(:can) { false }
+
+        it "returns false" do
+          expect(helper.display_view_confirmation_letter_link_for?(resource)).to be_falsey
+        end
+      end
+    end
+
+    context "when the resource is a transient registration" do
+      let(:resource) { build(:renewing_registration) }
+
+      it "returns false" do
+        expect(helper.display_view_confirmation_letter_link_for?(resource)).to be_falsey
+      end
+    end
+  end
+
+  describe "#display_order_copy_cards_link_for?" do
+    context "when the resource is a registration" do
+      let(:resource) { build(:registration) }
+
+      before do
+        expect(helper).to receive(:can?).with(:order_copy_cards, WasteCarriersEngine::Registration).and_return(can)
+      end
+
+      context "when the user has permission for revoking" do
+        let(:can) { true }
+
+        before do
+          expect(resource).to receive(:active?).and_return(active)
+        end
+
+        context "when the resource is active" do
+          let(:active) { true }
+
+          before do
+            expect(resource).to receive(:upper_tier?).and_return(upper_tier)
+          end
+
+          context "when the resource is an upper tier" do
+            let(:upper_tier) { true }
+
+            it "returns true" do
+              expect(helper.display_order_copy_cards_link_for?(resource)).to be_truthy
+            end
+          end
+
+          context "when the resource is not an upper tier" do
+            let(:upper_tier) { false }
+
+            it "returns false" do
+              expect(helper.display_order_copy_cards_link_for?(resource)).to be_falsey
+            end
+          end
+        end
+
+        context "when the resource is not active" do
+          let(:active) { false }
+
+          it "returns false" do
+            expect(helper.display_order_copy_cards_link_for?(resource)).to be_falsey
+          end
+        end
+      end
+
+      context "when the user has no permission for revoking" do
+        let(:can) { false }
+
+        it "returns false" do
+          expect(helper.display_order_copy_cards_link_for?(resource)).to be_falsey
+        end
+      end
+    end
+
+    context "when the resource is a transient registration" do
+      let(:resource) { build(:renewing_registration) }
+
+      it "returns false" do
+        expect(helper.display_order_copy_cards_link_for?(resource)).to be_falsey
+      end
+    end
+  end
+
+  describe "#display_cease_link_for?" do
+    context "when the resource is a registration" do
+      let(:resource) { build(:registration) }
+
+      before do
+        expect(helper).to receive(:can?).with(:cease, WasteCarriersEngine::Registration).and_return(can)
+      end
+
+      context "when the user has permission for revoking" do
+        let(:can) { true }
+
+        it "returns true" do
+          expect(helper.display_cease_link_for?(resource)).to be_truthy
+        end
+      end
+
+      context "when the user has no permission for revoking" do
+        let(:can) { false }
+
+        it "returns false" do
+          expect(helper.display_cease_link_for?(resource)).to be_falsey
+        end
+      end
+    end
+
+    context "when the resource is a transient registration" do
+      let(:resource) { build(:renewing_registration) }
+
+      it "returns false" do
+        expect(helper.display_cease_link_for?(resource)).to be_falsey
+      end
+    end
+  end
+
+  describe "#display_payment_details_link_for?" do
+    context "when the result is a Registration" do
+      let(:result) { build(:registration) }
+
+      it "returns true" do
+        expect(helper.display_payment_details_link_for?(result)).to eq(true)
+      end
+
+      context "when the result has been revoked" do
+        before { result.metaData.status = "REVOKED" }
+
+        it "returns false" do
+          expect(helper.display_payment_details_link_for?(result)).to eq(false)
+        end
+      end
+    end
+
+    context "when the result is a RenewingRegistration" do
+      let(:result) { build(:renewing_registration) }
+
+      it "returns true" do
+        expect(helper.display_payment_details_link_for?(result)).to eq(true)
+      end
+
+      context "when the result has been revoked" do
+        before { result.metaData.status = "REVOKED" }
+
+        it "returns false" do
+          expect(helper.display_payment_details_link_for?(result)).to eq(false)
+        end
+      end
+    end
+  end
+
   describe "#display_convictions_link_for?" do
     context "when the result is a Registration" do
       let(:result) { build(:registration) }

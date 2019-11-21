@@ -10,7 +10,7 @@
 
 <% if resource.show_finance_details_link? %>
   <p>
-    <%= link_to t(".finance_information.section_link_label"), payment_link_for(resource) %>
+    <%= link_to t(".finance_information.section_link_label"), resource.finance_details_link %>
   </p>
 <% end %>
 

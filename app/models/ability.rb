@@ -19,12 +19,16 @@ class Ability
     # This covers everything mounted in the engine and used for the assisted digital journey, including WorldPay
     can :update, WasteCarriersEngine::RenewingRegistration
     can :renew, :all
+    can :view_certificate, WasteCarriersEngine::Registration
+    can :order_copy_cards, WasteCarriersEngine::Registration
 
     can :record_cash_payment, WasteCarriersEngine::RenewingRegistration
     can :record_cheque_payment, WasteCarriersEngine::RenewingRegistration
     can :record_postal_order_payment, WasteCarriersEngine::RenewingRegistration
 
     can :review_convictions, :all
+    can :revoke, WasteCarriersEngine::Registration
+    can :cease, WasteCarriersEngine::Registration
 
     can :revert_to_payment_summary, WasteCarriersEngine::RenewingRegistration
 
@@ -32,10 +36,12 @@ class Ability
   end
 
   def permissions_for_finance_user
+    can :view_certificate, WasteCarriersEngine::Registration
     can :record_transfer_payment, WasteCarriersEngine::RenewingRegistration
   end
 
   def permissions_for_finance_admin_user
+    can :view_certificate, WasteCarriersEngine::Registration
     can :record_worldpay_missed_payment, WasteCarriersEngine::RenewingRegistration
   end
 
