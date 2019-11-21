@@ -47,24 +47,8 @@
           <%= render "shared/registrations/ceased_revoked_panel", resource: @registration %>
         <% end %>
 
-        <div class="panel wcr-panel wcr-panel-border-all">
-          <h2 class="heading-medium">
-            <%= @registration.company_name %>
-          </h2>
-          <p class="lede">
-            <%= t(".tier.#{@registration.tier.downcase}") %>
-            <% if @registration.registration_type.present? %>
-              - <%= I18n.t(".registrations.show.attributes.registration_type.#{@registration.registration_type}") %>
-            <% end %>
-          </p>
-          <p>
-            <% if @registration.display_expiry_text.present? %>
-              <%= @registration.display_expiry_text %>
-              <br>
-            <% end %>
-            <%= t(".labels.account", email: @registration.account_email) %>
-          </p>
-        </div>
+        <%= render "shared/registrations/company_details_panel", resource: @registration %>
+
         <div class="grid-row">
           <div class="column-one-half wcr-side-info-box">
             <h2 class="heading-medium">

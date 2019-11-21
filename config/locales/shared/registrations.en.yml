@@ -1,6 +1,17 @@
 en:
   shared:
     registrations:
+      company_details_panel:
+        tier:
+          upper: Upper tier
+          lower: Lower tier
+        labels:
+          account: "Account: %{email}"
+        attributes:
+          registration_type:
+            carrier_dealer: "Carrier and dealer"
+            broker_dealer: "Broker and dealer"
+            carrier_broker_dealer: "Carrier, broker and dealer"
       action_links_panel:
         actions_box:
           heading: "Actions for %{reg_identifier}"
