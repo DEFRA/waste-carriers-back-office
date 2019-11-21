@@ -79,10 +79,6 @@ class Ability
     user.role == "agency_with_refund"
   end
 
-  def in_agency_user_group?(user)
-    %w[agency agency_with_refund].include?(user.role)
-  end
-
   def finance_user?(user)
     user.role == "finance"
   end
