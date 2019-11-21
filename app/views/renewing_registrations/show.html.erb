@@ -10,14 +10,7 @@
         </h1>
 
         <% if @transient_registration.rejected_conviction_checks? %>
-          <div class="panel">
-            <h2 class="heading-medium">
-              <%= t(".status.headings.rejected") %>
-            </h2>
-            <p>
-              <%= t(".status.messages.rejected") %>
-            </p>
-          </div>
+          <%= render "shared/registrations/rejected_conviction_checks_details", resource: @transient_registration %>
         <% elsif @transient_registration.renewal_application_submitted? %>
           <% if @transient_registration.pending_manual_conviction_check? %>
             <div class="panel">

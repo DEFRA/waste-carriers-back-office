@@ -5,6 +5,14 @@ class RenewingRegistrationPresenter < BaseRegistrationPresenter
     "#{I18n.t('.renewing_registrations.show.status.messages.in_progress')} \"#{current_workflow_state}\""
   end
 
+  def rejected_header
+    I18n.t(".renewing_registrations.show.status.headings.rejected")
+  end
+
+  def rejected_message
+    I18n.t(".renewing_registrations.show.status.messages.rejected")
+  end
+
   def display_expiry_date
     registration.expires_on&.to_date
   end

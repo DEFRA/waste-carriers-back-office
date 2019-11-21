@@ -20,14 +20,7 @@
               </p>
             </div>
           <% elsif @registration.rejected_conviction_checks? %>
-            <div class="panel">
-              <h2 class="heading-medium">
-                <%= t(".status.headings.rejected") %>
-              </h2>
-              <p>
-                <%= t(".status.messages.rejected") %>
-              </p>
-            </div>
+            <%= render "shared/registrations/rejected_conviction_checks_details", resource: @registration %>
           <% end %>
 
           <% if @registration.pending_payment? %>
