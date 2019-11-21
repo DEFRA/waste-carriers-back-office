@@ -7,6 +7,14 @@ en:
           links:
             payment: "Process payment"
             continue_button: "Continue as assisted digital"
+      ceased_revoked:
+        heading:
+          ceased: "Ceased on %{date}"
+          revoked: "Revoked on %{date}"
+        person:
+          ceased: "Ceased by: %{person}"
+          revoked: "revoked by: %{person}"
+        reason: "Reason:"
       finance_details:
         finance_information:
           lower_tier_message: "Lower tier registration - charges are not applicable."
