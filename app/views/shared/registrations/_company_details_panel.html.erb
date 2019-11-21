@@ -1,0 +1,18 @@
+<div class="panel wcr-panel wcr-panel-border-all">
+  <h2 class="heading-medium">
+    <%= resource.company_name %>
+  </h2>
+  <p class="lede">
+    <%= t(".tier.#{resource.tier.downcase}") %>
+    <% if resource.registration_type.present? %>
+      - <%= t(".attributes.registration_type.#{resource.registration_type}") %>
+    <% end %>
+  </p>
+  <p>
+    <% if resource.display_expiry_text.present? %>
+      <%= resource.display_expiry_text %>
+      <br>
+    <% end %>
+    <%= t(".labels.account", email: resource.account_email) %>
+  </p>
+</div>

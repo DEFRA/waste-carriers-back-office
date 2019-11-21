@@ -78,24 +78,8 @@
           <%= render "shared/registrations/expired_panel", resource: @transient_registration %>
         <% end %>
 
-        <div class="panel wcr-panel wcr-panel-border-all">
-          <h2 class="heading-medium">
-            <%= @transient_registration.company_name %>
-          </h2>
-          <p class="lede">
-            <%= t(".tier.#{@transient_registration.tier.downcase}") %>
-            <% if @transient_registration.registration_type.present? %>
-              - <%= I18n.t(".renewing_registrations.show.attributes.registration_type.#{@transient_registration.registration_type}") %>
-            <% end %>
-          </p>
-          <p>
-            <% if @transient_registration.display_expiry_text.present? %>
-              <%= @transient_registration.display_expiry_text %>
-              <br>
-            <% end %>
-            <%= t(".labels.account", email: @transient_registration.account_email) %>
-          </p>
-        </div>
+        <%= render "shared/registrations/company_details_panel", resource: @transient_registration %>
+
         <div class="grid-row">
           <div class="column-one-half wcr-side-info-box">
             <h2 class="heading-medium">
@@ -201,7 +185,7 @@
         <% end %>
       </div>
       <div class="column-one-third">
-        <%= render "shared/registrations/action_links_panel", resource: @transient_registration%>
+        <%= render "shared/registrations/action_links_panel", resource: @transient_registration %>
       </div>
     </div>
   </div>
