@@ -7,6 +7,9 @@ en:
           links:
             payment: "Process payment"
             continue_button: "Continue as assisted digital"
+      labels:
+        expires: "Expires: %{formatted_date}"
+        expired: "Expired: %{formatted_date}"
       finance_details:
         finance_information:
           lower_tier_message: "Lower tier registration - charges are not applicable."
