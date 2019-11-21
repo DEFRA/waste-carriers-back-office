@@ -1,0 +1,50 @@
+<div class="grid-row">
+  <div class="column-one-half wcr-side-info-box">
+    <h2 class="heading-medium">
+      <%= t(".contact_information.heading") %>
+    </h2>
+    <p>
+      <%= resource.first_name %> <%= resource.last_name %>
+    </p>
+    <p>
+      <%= resource.phone_number %>
+    </p>
+    <p class="wcr-truncate-ellipsis">
+      <a href="mailto:<%= resource.contact_email %>" target="_top">
+        <%= resource.contact_email %>
+      </a>
+    </p>
+    <p>
+      <% if resource.contact_address.present? %>
+        <% displayable_address(resource.contact_address).each do |line| %>
+          <%= line %><br>
+        <% end %>
+      <% end %>
+    </p>
+  </div>
+  <div class="column-one-half wcr-side-info-box">
+    <h2 class="heading-medium">
+      <%= t(".business_information.heading") %>
+    </h2>
+    <p>
+      <%= resource.company_name %>
+    </p>
+    <% if resource.company_no.present? %>
+      <p>
+        <%= t(".business_information.labels.company_no", number: resource.company_no) %>
+      </p>
+    <% end %>
+
+    <% if resource.registered_address.present? %>
+      <p>
+        <%= t(".business_information.labels.registered_address") %> <br>
+        <% displayable_address(resource.registered_address).each do |line| %>
+          <%= line %><br>
+        <% end %>
+      </p>
+    <% end %>
+    <p>
+      <%= resource.displayable_location %>
+    </p>
+  </div>
+</div>

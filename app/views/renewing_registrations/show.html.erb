@@ -92,56 +92,9 @@
             <%= t(".labels.account", email: @transient_registration.account_email) %>
           </p>
         </div>
-        <div class="grid-row">
-          <div class="column-one-half wcr-side-info-box">
-            <h2 class="heading-medium">
-              <%= t(".contact_information.heading") %>
-            </h2>
-            <p>
-              <%= @transient_registration.first_name %> <%= @transient_registration.last_name %>
-            </p>
-            <p>
-              <%= @transient_registration.phone_number %>
-            </p>
-            <p class="wcr-truncate-ellipsis">
-              <a href="mailto:<%= @transient_registration.contact_email %>" target="_top">
-                <%= @transient_registration.contact_email %>
-              </a>
-            </p>
-            <p>
-              <% if @transient_registration.contact_address.present? %>
-                <% displayable_address(@transient_registration.contact_address).each do |line| %>
-                  <%= line %><br>
-                <% end %>
-              <% end %>
-            </p>
-          </div>
-          <div class="column-one-half wcr-side-info-box">
-            <h2 class="heading-medium">
-              <%= t(".business_information.heading") %>
-            </h2>
-            <p>
-              <%= @transient_registration.company_name %>
-            </p>
-            <% if @transient_registration.company_no.present? %>
-              <p>
-                <%= t(".business_information.labels.company_no", number: @transient_registration.company_no) %>
-              </p>
-            <% end %>
 
-            <% if @transient_registration.registered_address.present? %>
-              <p>
-                <%= t(".business_information.labels.registered_address") %> <br>
-                <% displayable_address(@transient_registration.registered_address).each do |line| %>
-                  <%= line %><br>
-                <% end %>
-              </p>
-            <% end %>
-            <p>
-              <%= @transient_registration.displayable_location %>
-            </p>
-          </div>
-        </div>
+        <%= render "shared/registrations/contact_and_business_details_panels", resource: @transient_registration %>
+
         <hr/>
 
         <h2 class="heading-medium"><%= t(".conviction_heading") %></h2>

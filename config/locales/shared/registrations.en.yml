@@ -1,6 +1,22 @@
 en:
   shared:
     registrations:
+      contact_and_business_details_panels:
+        contact_information:
+          heading: "Contact details"
+          labels:
+            contact_name: "Contact name"
+            phone_number: "Contact phone"
+            contact_email: "Contact email"
+            contact_address: "Contact address"
+        business_information:
+          heading: "Business information"
+          labels:
+            company_name: "Company name"
+            business_type: "Business type"
+            company_no: "Company number: %{number}"
+            location: "Place of business: %{location}"
+            registered_address: "Registered address:"
       action_links_panel:
         actions_box:
           heading: "Actions for %{reg_identifier}"

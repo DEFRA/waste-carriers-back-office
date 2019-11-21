@@ -61,56 +61,8 @@
             <%= t(".labels.account", email: @registration.account_email) %>
           </p>
         </div>
-        <div class="grid-row">
-          <div class="column-one-half wcr-side-info-box">
-            <h2 class="heading-medium">
-              <%= t(".contact_information.heading") %>
-            </h2>
-            <p>
-              <%= @registration.first_name %> <%= @registration.last_name %>
-            </p>
-            <p>
-              <%= @registration.phone_number %>
-            </p>
-            <p class="wcr-truncate-ellipsis">
-              <a href="mailto:<%= @registration.contact_email %>" target="_top">
-                <%= @registration.contact_email %>
-              </a>
-            </p>
-            <p>
-              <% if @registration.contact_address.present? %>
-                <% displayable_address(@registration.contact_address).each do |line| %>
-                  <%= line %><br>
-                <% end %>
-              <% end %>
-            </p>
-          </div>
-          <div class="column-one-half wcr-side-info-box">
-            <h2 class="heading-medium">
-              <%= t(".business_information.heading") %>
-            </h2>
-            <p>
-              <%= @registration.company_name %>
-            </p>
-            <% if @registration.company_no.present? %>
-              <p>
-                <%= t(".business_information.labels.company_no", number: @registration.company_no) %>
-              </p>
-            <% end %>
 
-            <% if @registration.registered_address.present? %>
-              <p>
-                <%= t(".business_information.labels.registered_address") %> <br>
-                <% displayable_address(@registration.registered_address).each do |line| %>
-                  <%= line %><br>
-                <% end %>
-              </p>
-            <% end %>
-            <p>
-              <%= @registration.displayable_location %>
-            </p>
-          </div>
-        </div>
+        <%= render "shared/registrations/contact_and_business_details_panels", resource: @registration %>
 
         <hr/>
 
