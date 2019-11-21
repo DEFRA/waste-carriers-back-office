@@ -9,11 +9,8 @@ en:
             continue_button: "Continue as assisted digital"
       ceased_revoked:
         heading:
-          ceased: "Ceased on %{date}"
-          revoked: "Revoked on %{date}"
-        person:
-          ceased: "Ceased by: %{person}"
-          revoked: "revoked by: %{person}"
+          ceased: "Ceased"
+          revoked: "Revoked"
         reason: "Reason:"
       finance_details:
         finance_information:

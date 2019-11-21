@@ -1,11 +1,8 @@
 <% if resource.revoked? %>
   <div class="panel panel-border-wide">
     <h2 class="heading-medium">
-      <%= t(".heading.ceased", date: "TODO") %>
+      <%= t(".heading.ceased") %>
     </h2>
-    <p>
-      <%= t(".person.ceased", person: "TODO") %>
-    </p>
     <p>
       <%= t(".reason") %> <%= resource.metaData.revoked_reason %>
     </p>
