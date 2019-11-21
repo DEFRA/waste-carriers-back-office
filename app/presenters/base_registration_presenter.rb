@@ -30,6 +30,14 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     revoked? || inactive?
   end
 
+  def ceased_revoked_heading
+    if revoked?
+      I18n.t(".shared.registrations.ceased_revoked_panel.heading.revoked")
+    elsif inactive?
+      I18n.t(".shared.registrations.ceased_revoked_panel.heading.ceased")
+    end
+  end
+
   def show_finance_details_link?
     finance_details.present? && upper_tier?
   end
