@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rails_helper"
+
 RSpec.describe BaseRegistrationPresenter do
   let(:registration) { double(:registration) }
   let(:view_context) { double(:view_context) }
