@@ -32,6 +32,21 @@ en:
         lower: Lower tier
       labels:
         account: "Account: %{email}"
+      business_information:
+        heading: "Business information"
+        labels:
+          company_name: "Company name"
+          business_type: "Business type"
+          company_no: "Company number: %{number}"
+          location: "Place of business: %{location}"
+          registered_address: "Registered address:"
+      contact_information:
+        heading: "Contact details"
+        labels:
+          contact_name: "Contact name"
+          phone_number: "Contact phone"
+          contact_email: "Contact email"
+          contact_address: "Contact address"
       person_information:
         name: "Name"
         dob: "Date of birth"
@@ -90,10 +105,3 @@ en:
         key_person:
           conviction_search_result:
             pending: "No data yet"
-        registration_type:
-          carrier_dealer: "Carrier and dealer"
-          broker_dealer: "Broker and dealer"
-          carrier_broker_dealer: "Carrier, broker and dealer"
-        tier:
-          UPPER: "Upper"
-          LOWER: "Lower"
