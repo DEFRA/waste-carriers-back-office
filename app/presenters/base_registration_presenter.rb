@@ -38,6 +38,16 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     finance_details&.orders&.first
   end
 
+  def display_expiry_text
+    return unless upper_tier?
+
+    if expired?
+      I18n.t(".shared.registrations.labels.expired", formatted_date: display_expiry_date)
+    else
+      I18n.t(".shared.registrations.labels.expires", formatted_date: display_expiry_date)
+    end
+  end
+
   private
 
   def show_translation_or_filler(attribute)

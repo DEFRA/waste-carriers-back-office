@@ -85,8 +85,10 @@
             <% end %>
           </p>
           <p>
-            <%= t(".labels.expires", formatted_date: @transient_registration.display_expiry_date) %>
-            <br>
+            <% if @transient_registration.display_expiry_text.present? %>
+              <%= @transient_registration.display_expiry_text %>
+              <br>
+            <% end %>
             <%= t(".labels.account", email: @transient_registration.account_email) %>
           </p>
         </div>
