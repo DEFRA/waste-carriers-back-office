@@ -7,7 +7,7 @@
       <%= t(".person.ceased", person: "TODO") %>
     </p>
     <p>
-      <%= t(".reason") %> TODO
+      <%= t(".reason") %> <%= resource.metaData.revoked_reason %>
     </p>
   </div>
 <% end %>
