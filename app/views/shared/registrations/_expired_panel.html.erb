@@ -1,7 +1,7 @@
 <% if resource.expired? %>
   <div class="panel panel-border-wide">
     <h2 class="heading-medium">
-      <%= t(".heading", date: "TODO") %>
+      <%= t(".heading", date: resource.display_expiry_date) %>
     </h2>
     <% if resource.can_start_renewal? %>
       <%= link_to t(".links.renew"),
