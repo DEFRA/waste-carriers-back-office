@@ -91,11 +91,19 @@ module ActionLinksHelper
   private
 
   def display_transient_registration_links?(resource)
-    resource.is_a?(WasteCarriersEngine::RenewingRegistration) && not_revoked_or_refused?(resource)
+    a_transient_registration?(resource) && not_revoked_or_refused?(resource)
   end
 
   def display_registration_links?(resource)
-    resource.is_a?(WasteCarriersEngine::Registration) && not_revoked_or_refused?(resource)
+    a_registration?(resource) && not_revoked_or_refused?(resource)
+  end
+
+  def a_registration?(resource)
+    resource.is_a?(WasteCarriersEngine::Registration) || resource.is_a?(RegistrationPresenter)
+  end
+
+  def a_transient_registration?(resource)
+    resource.is_a?(RenewingRegistrationPresenter) || resource.is_a?(WasteCarriersEngine::RenewingRegistration)
   end
 
   def not_revoked_or_refused?(resource)

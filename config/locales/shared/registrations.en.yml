@@ -7,6 +7,7 @@ en:
           links:
             payment: "Process payment"
             continue_button: "Continue as assisted digital"
+            renew: "Renew"
       labels:
         expires: "Expires: %{formatted_date}"
         expired: "Expired: %{formatted_date}"
