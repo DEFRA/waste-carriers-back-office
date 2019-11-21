@@ -3,6 +3,14 @@
     <h2 class="heading-medium">
       <%= t(".heading", date: "TODO") %>
     </h2>
-    <%= link_to t(".links.renew"), "#", class: 'button' %>
+    <% if resource.can_start_renewal? %>
+      <%= link_to t(".links.renew"),
+                  WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier),
+                  class: 'button' %>
+    <% else %>
+      <%= link_to t(".links.new_registration"),
+                  "#{Rails.configuration.wcrs_backend_url}/registrations/start",
+                  class: 'button' %>
+    <% end %>
   </div>
 <% end %>
