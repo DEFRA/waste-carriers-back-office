@@ -74,7 +74,9 @@
           </div>
         <% end %>
 
-        <%= render "shared/registrations/ceased_revoked_panel", resource: @transient_registration %>
+        <% if @transient_registration.show_ceased_revoked_panel? %>
+          <%= render "shared/registrations/ceased_revoked_panel", resource: @transient_registration %>
+        <% end %>
 
         <div class="panel wcr-panel wcr-panel-border-all">
           <h2 class="heading-medium">
