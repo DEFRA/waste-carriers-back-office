@@ -1,0 +1,8 @@
+<% if resource.expired? %>
+  <div class="panel panel-border-wide">
+    <h2 class="heading-medium">
+      <%= t(".heading", date: "TODO") %>
+    </h2>
+    <%= link_to t(".links.renew"), "#", class: 'button' %>
+  </div>
+<% end %>

@@ -74,6 +74,8 @@
           </div>
         <% end %>
 
+        <%= render "shared/registrations/expired_panel", resource: @transient_registration %>
+
         <div class="panel wcr-panel wcr-panel-border-all">
           <h2 class="heading-medium">
             <%= @transient_registration.company_name %>
