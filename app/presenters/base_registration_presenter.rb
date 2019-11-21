@@ -26,6 +26,10 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     false
   end
 
+  def show_ceased_revoked_panel?
+    revoked? || inactive?
+  end
+
   def show_finance_details_link?
     finance_details.present? && upper_tier?
   end
