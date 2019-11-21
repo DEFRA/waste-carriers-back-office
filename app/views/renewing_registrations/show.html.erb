@@ -85,12 +85,10 @@
             <% end %>
           </p>
           <p>
-            <% if @transient_registration.expired? %>
-              <%= t(".labels.expired", formatted_date: @transient_registration.display_expiry_date) %>
-            <% else %>
-              <%= t(".labels.expires", formatted_date: @transient_registration.display_expiry_date) %>
+            <% if @transient_registration.display_expiry_text.present? %>
+              <%= @transient_registration.display_expiry_text %>
+              <br>
             <% end %>
-            <br>
             <%= t(".labels.account", email: @transient_registration.account_email) %>
           </p>
         </div>
