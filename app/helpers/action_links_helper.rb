@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ModuleLength
 module ActionLinksHelper
   def details_link_for(resource)
     case resource
@@ -150,3 +151,4 @@ module ActionLinksHelper
     true
   end
 end
+# rubocop:enable Metrics/ModuleLength
