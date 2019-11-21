@@ -32,8 +32,6 @@ en:
         lower: Lower tier
       labels:
         account: "Account: %{email}"
-        expires: "Expires: %{formatted_date}"
-        expired: "Expired: %{formatted_date}"
       business_information:
         heading: "Business information"
         labels:
