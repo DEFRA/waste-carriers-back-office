@@ -4,7 +4,6 @@
 
     <div class="grid-row">
       <div class="column-two-thirds">
-
         <h1 class="heading-large">
           <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
         </h1>
@@ -13,14 +12,7 @@
           <%= render "shared/registrations/rejected_conviction_checks_details", resource: @transient_registration %>
         <% elsif @transient_registration.renewal_application_submitted? %>
           <% if @transient_registration.pending_manual_conviction_check? %>
-            <div class="panel">
-              <h2 class="heading-medium">
-                <%= t(".status.headings.pending_convictions") %>
-              </h2>
-              <p>
-                <%= t(".status.messages.pending_convictions_check") %>
-              </p>
-            </div>
+            <%= render "shared/registrations/pending_convictions_panel", resource: @transient_registration %>
           <% end %>
 
           <% if @transient_registration.pending_payment? %>

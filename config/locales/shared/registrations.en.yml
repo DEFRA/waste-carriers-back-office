@@ -17,6 +17,12 @@ en:
             company_no: "Company number: %{number}"
             location: "Place of business: %{location}"
             registered_address: "Registered address:"
+      pending_convictions_panel:
+        status:
+          headings:
+            pending_convictions: "Conviction check required"
+          messages:
+            pending_convictions_check: "A convictions check is required before this registration can be approved."
       company_details_panel:
         tier:
           upper: Upper tier
