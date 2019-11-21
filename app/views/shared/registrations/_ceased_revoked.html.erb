@@ -7,8 +7,10 @@
         <%= t(".heading.ceased") %>
       <% end %>
     </h2>
-    <p>
-      <%= t(".reason") %> <%= resource.metaData.revoked_reason %>
-    </p>
+    <% if resource.metaData.revoked_reason.present? && can?(:view_revoked_reasons, resource) %>
+      <p>
+        <%= t(".reason") %> <%= resource.metaData.revoked_reason %>
+      </p>
+    <% end %>
   </div>
 <% end %>
