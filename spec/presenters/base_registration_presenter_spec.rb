@@ -47,7 +47,7 @@ RSpec.describe BaseRegistrationPresenter do
     end
   end
 
-  describe "#ceased_revoked_heading" do
+  describe "#ceased_revoked_header" do
     let(:revoked) { false }
     let(:inactive) { false }
     let(:registration) do
@@ -60,7 +60,7 @@ RSpec.describe BaseRegistrationPresenter do
 
     context "when it is neither revoked nor inactive" do
       it "returns nil" do
-        expect(subject.ceased_revoked_heading).to be_nil
+        expect(subject.ceased_revoked_header).to be_nil
       end
     end
 
@@ -68,9 +68,9 @@ RSpec.describe BaseRegistrationPresenter do
       let(:revoked) { true }
 
       it "returns 'Revoked'" do
-        heading = "Revoked"
+        header = "Revoked"
 
-        expect(subject.ceased_revoked_heading).to eq(heading)
+        expect(subject.ceased_revoked_header).to eq(header)
       end
     end
 
@@ -78,9 +78,9 @@ RSpec.describe BaseRegistrationPresenter do
       let(:inactive) { true }
 
       it "returns 'Ceased'" do
-        heading = "Ceased"
+        header = "Ceased"
 
-        expect(subject.ceased_revoked_heading).to eq(heading)
+        expect(subject.ceased_revoked_header).to eq(header)
       end
     end
   end

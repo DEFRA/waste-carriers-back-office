@@ -30,7 +30,7 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     revoked? || inactive?
   end
 
-  def ceased_revoked_heading
+  def ceased_revoked_header
     if revoked?
       I18n.t(".shared.registrations.ceased_revoked_panel.heading.revoked")
     elsif inactive?

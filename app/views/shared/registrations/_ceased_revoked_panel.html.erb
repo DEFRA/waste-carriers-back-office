@@ -1,6 +1,6 @@
 <div class="panel panel-border-wide">
   <h2 class="heading-medium">
-    <%= resource.ceased_revoked_heading %>
+    <%= resource.ceased_revoked_header %>
   </h2>
   <% if resource.metaData.revoked_reason.present? && can?(:view_revoked_reasons, resource) %>
     <p>
