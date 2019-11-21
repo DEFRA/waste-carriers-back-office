@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rails_helper"
+
 RSpec.describe BaseRegistrationPresenter do
   let(:registration) { double(:registration) }
   let(:view_context) { double(:view_context) }
@@ -10,6 +12,7 @@ RSpec.describe BaseRegistrationPresenter do
       expect(subject).to_not be_in_progress
     end
   end
+
   describe "#order" do
     let(:order) { double(:order) }
     let(:registration) do
@@ -204,6 +207,47 @@ RSpec.describe BaseRegistrationPresenter do
           message = "This registration application is still in progress, so there is no conviction match data yet."
 
           expect(subject.display_convictions_check_message).to eq(message)
+        end
+      end
+    end
+  end
+
+  describe "#display_expiry_text" do
+    let(:upper_tier) { false }
+    let(:expired) { false }
+    let(:registration) do
+      double(
+        :registration,
+        expired?: expired,
+        upper_tier?: upper_tier,
+        display_expiry_date: "1 January 2020"
+      )
+    end
+
+    context "when the registration is not upper tier" do
+      it "returns nil" do
+        expect(subject.display_expiry_text).to eq(nil)
+      end
+    end
+
+    context "when the registration is upper tier" do
+      let(:upper_tier) { true }
+
+      context "when it is not expired" do
+        it "displays the 'expires' message" do
+          message = "Expires: 1 January 2020"
+
+          expect(subject.display_expiry_text).to eq(message)
+        end
+      end
+
+      context "when it is expired" do
+        let(:expired) { true }
+
+        it "displays the 'expired' message" do
+          message = "Expired: 1 January 2020"
+
+          expect(subject.display_expiry_text).to eq(message)
         end
       end
     end
