@@ -17,6 +17,14 @@ en:
             company_no: "Company number: %{number}"
             location: "Place of business: %{location}"
             registered_address: "Registered address:"
+      pending_payment_panel:
+        status:
+          headings:
+            pending_payment: "Payment required"
+          messages:
+            pending_payment: "£%{total} to pay"
+          actions:
+            payment_button: "Process payment"
       pending_convictions_panel:
         status:
           headings:

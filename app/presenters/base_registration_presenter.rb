@@ -21,6 +21,10 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     end
   end
 
+  def finance_details_balance
+    finance_details.balance
+  end
+
   def in_progress?
     # TODO: For now all registrations are submitted in the new system. To update when we build front end flow.
     false

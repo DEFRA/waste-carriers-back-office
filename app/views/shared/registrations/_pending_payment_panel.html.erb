@@ -3,7 +3,7 @@
     <%= t(".status.headings.pending_payment") %>
   </h2>
   <p>
-    <%= t(".status.messages.pending_payment", total: display_pence_as_pounds(registration.finance_details.balance)) %>
+    <%= t(".status.messages.pending_payment", total: display_pence_as_pounds(resource.finance_details_balance)) %>
   </p>
-  <%= link_to t(".status.actions.payment_button"), transient_registration_payments_path(registration.reg_identifier), class: 'button' %>
+  <%= link_to t(".status.actions.payment_button"), resource.finance_details_link, class: 'button' %>
 </div>

@@ -9,10 +9,8 @@ en:
           in_progress: "Application in progress"
           submitted: "Application submitted"
           rejected: "Application rejected"
-          pending_payment: "Payment required"
         messages:
           in_progress: "The current form is"
-          pending_payment: "£%{total} to pay"
           rejected: "This registration was rejected during a convictions check and cannot be completed."
           worldpay:
             paragraph_1: "The user is currently attempting to pay by WorldPay."
@@ -21,7 +19,6 @@ en:
               missed_payment: "If an error has occurred and payment has been received, but not recorded, you can record a missed WorldPay payment."
         actions:
           continue_button: "Continue as assisted digital registration"
-          payment_button: "Process payment"
           convictions_check_button: "Check conviction matches"
           revert_to_payment_summary_button: "Send back to payment summary"
           missed_worldpay_payment_button: "Add a missed WorldPay payment"

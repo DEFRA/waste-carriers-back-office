@@ -13,6 +13,18 @@ RSpec.describe BaseRegistrationPresenter do
     end
   end
 
+  describe "#finance_details_balance" do
+    it "returns the finance details balance" do
+      finance_details = double(:finance_details)
+      balance = double(:balance)
+
+      expect(registration).to receive(:finance_details).and_return(finance_details)
+      expect(finance_details).to receive(:balance).and_return(balance)
+
+      expect(subject.finance_details_balance).to eq(balance)
+    end
+  end
+
   describe "#show_ceased_revoked_panel?" do
     let(:revoked) { false }
     let(:inactive) { false }

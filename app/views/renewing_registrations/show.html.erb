@@ -16,15 +16,7 @@
           <% end %>
 
           <% if @transient_registration.pending_payment? %>
-            <div class="panel">
-              <h2 class="heading-medium">
-                <%= t(".status.headings.pending_payment") %>
-              </h2>
-              <p>
-                <%= t(".status.messages.pending_payment", total: display_pence_as_pounds(@transient_registration.finance_details.balance)) %>
-              </p>
-              <%= link_to t(".status.actions.payment_button"), transient_registration_payments_path(@transient_registration.reg_identifier), class: 'button' %>
-            </div>
+            <%= render "shared/registrations/pending_payment_panel", resource: @transient_registration %>
           <% end %>
         <% else %>
           <div class="panel">
