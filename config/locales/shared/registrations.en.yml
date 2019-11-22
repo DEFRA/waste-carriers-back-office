@@ -1,6 +1,17 @@
 en:
   shared:
     registrations:
+      company_details_panel:
+        tier:
+          upper: Upper tier
+          lower: Lower tier
+        labels:
+          account: "Account: %{email}"
+        attributes:
+          registration_type:
+            carrier_dealer: "Carrier and dealer"
+            broker_dealer: "Broker and dealer"
+            carrier_broker_dealer: "Carrier, broker and dealer"
       action_links_panel:
         actions_box:
           heading: "Actions for %{reg_identifier}"
@@ -14,6 +25,11 @@ en:
             payment_status: "Payment status"
             revoke: "Revoke"
             cease: "De-register"
+      expired_panel:
+        heading: "Expired on %{date}"
+        links:
+          renew: "Renew"
+          new_registration: "Start new registration"
       labels:
         expires: "Expires: %{formatted_date}"
         expired: "Expired: %{formatted_date}"

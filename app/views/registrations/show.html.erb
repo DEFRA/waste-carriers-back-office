@@ -20,14 +20,7 @@
               </p>
             </div>
           <% elsif @registration.rejected_conviction_checks? %>
-            <div class="panel">
-              <h2 class="heading-medium">
-                <%= t(".status.headings.rejected") %>
-              </h2>
-              <p>
-                <%= t(".status.messages.rejected") %>
-              </p>
-            </div>
+            <%= render "shared/registrations/rejected_conviction_checks_details", resource: @registration %>
           <% end %>
 
           <% if @registration.pending_payment? %>
@@ -43,24 +36,12 @@
           <% end %>
         <% end %>
 
-        <div class="panel wcr-panel wcr-panel-border-all">
-          <h2 class="heading-medium">
-            <%= @registration.company_name %>
-          </h2>
-          <p class="lede">
-            <%= t(".tier.#{@registration.tier.downcase}") %>
-            <% if @registration.registration_type.present? %>
-              - <%= I18n.t(".registrations.show.attributes.registration_type.#{@registration.registration_type}") %>
-            <% end %>
-          </p>
-          <p>
-            <% if @registration.display_expiry_text.present? %>
-              <%= @registration.display_expiry_text %>
-              <br>
-            <% end %>
-            <%= t(".labels.account", email: @registration.account_email) %>
-          </p>
-        </div>
+        <% if @registration.expired? %>
+          <%= render "shared/registrations/expired_panel", resource: @registration %>
+        <% end %>
+
+        <%= render "shared/registrations/company_details_panel", resource: @registration %>
+
         <div class="grid-row">
           <div class="column-one-half wcr-side-info-box">
             <h2 class="heading-medium">
