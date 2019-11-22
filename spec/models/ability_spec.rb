@@ -8,13 +8,6 @@ RSpec.describe Ability, type: :model do
   let(:user) { double(:user, role: role) }
   subject(:ability) { Ability.new(user) }
 
-  let(:registration) do
-    create(:registration)
-  end
-  let(:transient_registration) do
-    create(:renewing_registration)
-  end
-
   # Agency users have ascending permissions - each tier has the permissions of
   # the previous one, plus additional privileges.
 
