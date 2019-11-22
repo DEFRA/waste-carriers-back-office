@@ -3,23 +3,23 @@
 RSpec.shared_examples "finance_super examples" do
   # Finance super users can only manage users:
   it "should be able to manage back office users" do
-    should be_able_to(:manage_back_office_users, user)
+    should be_able_to(:manage_back_office_users, User.new)
   end
 
   it "should be able to create an agency user" do
-    should be_able_to(:create_agency_user, user)
+    should be_able_to(:create_agency_user, User.new)
   end
 
   it "should be able to create an agency_with_refund user" do
-    should be_able_to(:create_agency_with_refund_user, user)
+    should be_able_to(:create_agency_with_refund_user, User.new)
   end
 
   it "should be able to create a finance user" do
-    should be_able_to(:create_finance_user, user)
+    should be_able_to(:create_finance_user, User.new)
   end
 
   it "should be able to create a finance admin user" do
-    should be_able_to(:create_finance_admin_user, user)
+    should be_able_to(:create_finance_admin_user, User.new)
   end
 
   # Everything else is off-limits.

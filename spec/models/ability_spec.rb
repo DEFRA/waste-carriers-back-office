@@ -5,7 +5,7 @@ require "rails_helper"
 
 RSpec.describe Ability, type: :model do
   let(:role) {}
-  let(:user) { create(:user, role: role) }
+  let(:user) { double(:user, role: role) }
   subject(:ability) { Ability.new(user) }
 
   let(:registration) do
