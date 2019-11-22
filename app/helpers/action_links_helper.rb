@@ -45,12 +45,6 @@ module ActionLinksHelper
     WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier)
   end
 
-  def transfer_link_for(resource)
-    return "#" unless resource.is_a?(WasteCarriersEngine::Registration)
-
-    new_registration_transfer_path(resource.reg_identifier)
-  end
-
   def display_details_link_for?(resource)
     resource.is_a?(WasteCarriersEngine::RenewingRegistration) || resource.is_a?(WasteCarriersEngine::Registration)
   end
