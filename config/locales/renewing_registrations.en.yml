@@ -22,21 +22,6 @@ en:
           convictions_check_button: "Check conviction matches"
           revert_to_payment_summary_button: "Send back to payment summary"
           missed_worldpay_payment_button: "Add a missed WorldPay payment"
-      person_information:
-        name: "Name"
-        dob: "Date of birth"
-        convictions: "Convictions"
-        has_convictions:
-          "YES": "Yes"
-          "no": "No"
-          "UNKNOWN": "Unknown"
-        heading:
-          localAuthority: "Chief executive details"
-          limitedCompany: "Company director details"
-          limitedLiabilityPartnership: "Member details"
-          overseas: "Business owner details"
-          partnership: "Partners details"
-          soleTrader: "Business owner details"
       conviction_heading: "Convictions"
       conviction_link: "Conviction details"
       conviction_information:

@@ -1,0 +1,38 @@
+<h2 class="heading-medium">
+  <%= t(".person_information.heading.#{resource.business_type}") %>
+</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <th>
+        <%= t(".person_information.name") %>
+      </th>
+      <th>
+        <%= t(".person_information.dob") %>
+      </th>
+      <th>
+        <%= t(".person_information.convictions") %>
+      </th>
+    </tr>
+    <% resource.main_people.each do |person| %>
+      <tr>
+        <td>
+          <%= person.first_name %> <%= person.last_name %>
+        </td>
+        <td>
+          <%= person.dob.to_date %>
+        </td>
+        <td>
+          <% if person.conviction_check_required? %>
+            <div class="bold-small">
+              <%= t(".person_information.has_convictions.#{person.conviction_search_result.match_result}") %>
+            </div>
+          <% else %>
+            <%= t(".person_information.has_convictions.no") %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

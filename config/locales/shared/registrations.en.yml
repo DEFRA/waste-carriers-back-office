@@ -1,6 +1,22 @@
 en:
   shared:
     registrations:
+      main_people_details:
+        person_information:
+          name: "Name"
+          dob: "Date of birth"
+          convictions: "Convictions"
+          has_convictions:
+            "YES": "Yes"
+            "no": "No"
+            "UNKNOWN": "Unknown"
+          heading:
+            localAuthority: "Chief executive details"
+            limitedCompany: "Company director details"
+            limitedLiabilityPartnership: "Member details"
+            overseas: "Business owner details"
+            partnership: "Partners details"
+            soleTrader: "Business owner details"
       contact_and_business_details_panels:
         contact_information:
           heading: "Contact details"

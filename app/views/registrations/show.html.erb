@@ -47,46 +47,10 @@
         <%= render "shared/registrations/finance_details", resource: @registration %>
 
         <% if @registration.main_people.any? %>
-          <h2 class="heading-medium">
-            <%= t(".person_information.heading.#{@registration.business_type}") %>
-          </h2>
-
-          <table>
-            <tbody>
-              <tr>
-                <th>
-                  <%= t(".person_information.name") %>
-                </th>
-                <th>
-                  <%= t(".person_information.dob") %>
-                </th>
-                <th>
-                  <%= t(".person_information.convictions") %>
-                </th>
-              </tr>
-              <% @registration.main_people.each do |person| %>
-                <tr>
-                  <td>
-                    <%= person.first_name %> <%= person.last_name %>
-                  </td>
-                  <td>
-                    <%= person.dob.to_date %>
-                  </td>
-                  <td>
-                    <% if person.conviction_check_required? %>
-                      <div class="bold-small">
-                        <%= t(".person_information.has_convictions.#{person.conviction_search_result.match_result}") %>
-                      </div>
-                    <% else %>
-                      <%= t(".person_information.has_convictions.no") %>
-                    <% end %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+          <%= render "shared/registrations/main_people_details", resource: @registration %>
         <% end %>
       </div>
+
       <div class="column-one-third">
         <%= render "shared/registrations/action_links_panel", resource: @registration %>
       </div>
