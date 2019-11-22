@@ -78,6 +78,10 @@
           <%= render "shared/registrations/ceased_revoked_panel", resource: @transient_registration %>
         <% end %>
 
+        <% if @transient_registration.expired? %>
+          <%= render "shared/registrations/expired_panel", resource: @transient_registration %>
+        <% end %>
+
         <%= render "shared/registrations/company_details_panel", resource: @transient_registration %>
 
         <div class="grid-row">

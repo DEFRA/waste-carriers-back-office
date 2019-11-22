@@ -19,6 +19,11 @@ en:
             payment: "Process payment"
             continue_button: "Continue as assisted digital"
             renew: "Renew"
+      expired_panel:
+        heading: "Expired on %{date}"
+        links:
+          renew: "Renew"
+          new_registration: "Start new registration"
       labels:
         expires: "Expires: %{formatted_date}"
         expired: "Expired: %{formatted_date}"
