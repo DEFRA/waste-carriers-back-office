@@ -27,21 +27,6 @@ en:
           convictions_check_button: "Check conviction matches"
           revert_to_payment_summary_button: "Send back to payment summary"
           missed_worldpay_payment_button: "Add a missed WorldPay payment"
-      business_information:
-        heading: "Business information"
-        labels:
-          company_name: "Company name"
-          business_type: "Business type"
-          company_no: "Company number: %{number}"
-          location: "Place of business: %{location}"
-          registered_address: "Registered address:"
-      contact_information:
-        heading: "Contact details"
-        labels:
-          contact_name: "Contact name"
-          phone_number: "Contact phone"
-          contact_email: "Contact email"
-          contact_address: "Contact address"
       person_information:
         name: "Name"
         dob: "Date of birth"
