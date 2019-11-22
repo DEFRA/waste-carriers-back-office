@@ -17,6 +17,7 @@ en:
             overseas: "Business owner details"
             partnership: "Partners details"
             soleTrader: "Business owner details"
+            publicBody: "Public body"
       contact_and_business_details_panels:
         contact_information:
           heading: "Contact details"
@@ -66,7 +67,7 @@ en:
             renew: "Renew"
             transfer: "Transfer to another account"
             edit: "Edit registration"
-            view_confirmation_letter: "View confirmation letter"
+            view_confirmation_letter: "View certificate"
             order_copy_cards: "Order copy cards"
             payment_status: "Payment status"
             revoke: "Revoke"
@@ -117,4 +118,4 @@ en:
         approved: "This registration was approved after a review of the matching or declared convictions."
         rejected: "This registration was rejected after a review of the matching or declared convictions."
         unknown: "This registration application is still in progress, so there is no conviction match data yet."
-        lower_tier: "Lower tier registration - convictions are not applicable"
+        lower_tier: "Lower tier registration - convictions are not applicable."

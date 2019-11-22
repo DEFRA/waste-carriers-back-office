@@ -211,7 +211,7 @@ RSpec.describe BaseRegistrationPresenter do
       let(:registration) { double(:registration, lower_tier?: true) }
 
       it "returns the lower tier text" do
-        message = "Lower tier registration - convictions are not applicable"
+        message = "Lower tier registration - convictions are not applicable."
 
         expect(subject.display_convictions_check_message).to eq(message)
       end
