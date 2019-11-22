@@ -27,11 +27,6 @@ en:
           convictions_check_button: "Check conviction matches"
           revert_to_payment_summary_button: "Send back to payment summary"
           missed_worldpay_payment_button: "Add a missed WorldPay payment"
-      tier:
-        upper: Upper tier
-        lower: Lower tier
-      labels:
-        account: "Account: %{email}"
       business_information:
         heading: "Business information"
         labels:
