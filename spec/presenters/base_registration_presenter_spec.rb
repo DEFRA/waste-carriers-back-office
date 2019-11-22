@@ -13,6 +13,78 @@ RSpec.describe BaseRegistrationPresenter do
     end
   end
 
+  describe "#show_ceased_revoked_panel?" do
+    let(:revoked) { false }
+    let(:inactive) { false }
+    let(:registration) do
+      double(
+        :registration,
+        revoked?: revoked,
+        inactive?: inactive
+      )
+    end
+
+    context "when it is neither revoked nor inactive" do
+      it "returns false" do
+        expect(subject.show_ceased_revoked_panel?).to be_falsey
+      end
+    end
+
+    context "when it is revoked" do
+      let(:revoked) { true }
+
+      it "returns true" do
+        expect(subject.show_ceased_revoked_panel?).to be_truthy
+      end
+    end
+
+    context "when it is inactive" do
+      let(:inactive) { true }
+
+      it "returns true" do
+        expect(subject.show_ceased_revoked_panel?).to be_truthy
+      end
+    end
+  end
+
+  describe "#ceased_revoked_header" do
+    let(:revoked) { false }
+    let(:inactive) { false }
+    let(:registration) do
+      double(
+        :registration,
+        revoked?: revoked,
+        inactive?: inactive
+      )
+    end
+
+    context "when it is neither revoked nor inactive" do
+      it "returns nil" do
+        expect(subject.ceased_revoked_header).to be_nil
+      end
+    end
+
+    context "when it is revoked" do
+      let(:revoked) { true }
+
+      it "returns 'Revoked'" do
+        header = "Revoked"
+
+        expect(subject.ceased_revoked_header).to eq(header)
+      end
+    end
+
+    context "when it is inactive" do
+      let(:inactive) { true }
+
+      it "returns 'Ceased'" do
+        header = "Ceased"
+
+        expect(subject.ceased_revoked_header).to eq(header)
+      end
+    end
+  end
+
   describe "#order" do
     let(:order) { double(:order) }
     let(:registration) do

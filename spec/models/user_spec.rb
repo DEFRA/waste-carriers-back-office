@@ -97,6 +97,10 @@ RSpec.describe User, type: :model do
         should be_able_to(:review_convictions, transient_registration)
       end
 
+      it "should not be able to view revoked reasons" do
+        should_not be_able_to(:view_revoked_reasons, transient_registration)
+      end
+
       it "should be able to revert to payment summary" do
         should be_able_to(:revert_to_payment_summary, transient_registration)
       end
@@ -160,6 +164,10 @@ RSpec.describe User, type: :model do
 
       it "should be able to review convictions" do
         should be_able_to(:review_convictions, transient_registration)
+      end
+
+      it "should be able to view revoked reasons" do
+        should be_able_to(:view_revoked_reasons, transient_registration)
       end
 
       it "should be able to revert to payment summary" do
@@ -227,6 +235,10 @@ RSpec.describe User, type: :model do
         should_not be_able_to(:review_convictions, transient_registration)
       end
 
+      it "should not be able to view revoked reasons" do
+        should_not be_able_to(:view_revoked_reasons, transient_registration)
+      end
+
       it "should not be able to revert to payment summary" do
         should_not be_able_to(:revert_to_payment_summary, transient_registration)
       end
@@ -290,6 +302,10 @@ RSpec.describe User, type: :model do
 
       it "should not be able to review convictions" do
         should_not be_able_to(:review_convictions, transient_registration)
+      end
+
+      it "should not be able to view revoked reasons" do
+        should_not be_able_to(:view_revoked_reasons, transient_registration)
       end
 
       it "should not be able to revert to payment summary" do
@@ -357,6 +373,10 @@ RSpec.describe User, type: :model do
         should be_able_to(:review_convictions, transient_registration)
       end
 
+      it "should be able to view revoked reasons" do
+        should be_able_to(:view_revoked_reasons, transient_registration)
+      end
+
       it "should be able to revert to payment summary" do
         should be_able_to(:revert_to_payment_summary, transient_registration)
       end
@@ -420,6 +440,10 @@ RSpec.describe User, type: :model do
 
       it "should not be able to review convictions" do
         should_not be_able_to(:review_convictions, transient_registration)
+      end
+
+      it "should not be able to view revoked reasons" do
+        should_not be_able_to(:view_revoked_reasons, transient_registration)
       end
 
       it "should not be able to revert to payment summary" do

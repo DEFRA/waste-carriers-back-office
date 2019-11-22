@@ -4,18 +4,27 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    permissions_for_agency_user_group if in_agency_user_group?(user)
-    permissions_for_finance_user if finance_user?(user)
-    permissions_for_finance_admin_user if finance_admin_user?(user)
-    permissions_for_agency_super_user if agency_super_user?(user)
-    permissions_for_finance_super_user if finance_super_user?(user)
+    assign_agency_user_permissions(user)
+    assign_finance_user_permissions(user)
   end
 
   private
 
+  def assign_agency_user_permissions(user)
+    permissions_for_agency_user if agency_user?(user)
+    permissions_for_agency_user_with_refund if agency_user_with_refund?(user)
+    permissions_for_agency_super_user if agency_super_user?(user)
+  end
+
+  def assign_finance_user_permissions(user)
+    permissions_for_finance_user if finance_user?(user)
+    permissions_for_finance_admin_user if finance_admin_user?(user)
+    permissions_for_finance_super_user if finance_super_user?(user)
+  end
+
   # Permissions for specific roles
 
-  def permissions_for_agency_user_group
+  def permissions_for_agency_user
     # This covers everything mounted in the engine and used for the assisted digital journey, including WorldPay
     can :update, WasteCarriersEngine::RenewingRegistration
     can :renew, :all
@@ -31,6 +40,12 @@ class Ability
     can :transfer_registration, WasteCarriersEngine::Registration
   end
 
+  def permissions_for_agency_user_with_refund
+    permissions_for_agency_user
+
+    can :view_revoked_reasons, :all
+  end
+
   def permissions_for_finance_user
     can :record_transfer_payment, WasteCarriersEngine::RenewingRegistration
   end
@@ -40,7 +55,7 @@ class Ability
   end
 
   def permissions_for_agency_super_user
-    permissions_for_agency_user_group
+    permissions_for_agency_user_with_refund
 
     can :manage_back_office_users, :all
     can :create_agency_user, User
@@ -56,8 +71,12 @@ class Ability
 
   # Checks to see if role matches
 
-  def in_agency_user_group?(user)
-    %w[agency agency_with_refund].include?(user.role)
+  def agency_user?(user)
+    user.role == "agency"
+  end
+
+  def agency_user_with_refund?(user)
+    user.role == "agency_with_refund"
   end
 
   def finance_user?(user)

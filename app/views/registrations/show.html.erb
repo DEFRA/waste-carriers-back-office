@@ -20,14 +20,7 @@
               </p>
             </div>
           <% elsif @registration.rejected_conviction_checks? %>
-            <div class="panel">
-              <h2 class="heading-medium">
-                <%= t(".status.headings.rejected") %>
-              </h2>
-              <p>
-                <%= t(".status.messages.rejected") %>
-              </p>
-            </div>
+            <%= render "shared/registrations/rejected_conviction_checks_details", resource: @registration %>
           <% end %>
 
           <% if @registration.pending_payment? %>
@@ -41,6 +34,14 @@
               <%= link_to t(".status.actions.payment_button"), @registration.finance_details_link, class: 'button' %>
             </div>
           <% end %>
+        <% end %>
+
+        <% if @registration.show_ceased_revoked_panel? %>
+          <%= render "shared/registrations/ceased_revoked_panel", resource: @registration %>
+        <% end %>
+
+        <% if @registration.expired? %>
+          <%= render "shared/registrations/expired_panel", resource: @registration %>
         <% end %>
 
         <%= render "shared/registrations/company_details_panel", resource: @registration %>
