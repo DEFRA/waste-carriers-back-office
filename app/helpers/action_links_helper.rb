@@ -3,10 +3,9 @@
 # rubocop:disable Metrics/ModuleLength
 module ActionLinksHelper
   def details_link_for(resource)
-    case resource
-    when WasteCarriersEngine::RenewingRegistration
+    if a_transient_registration?(resource)
       renewing_registration_path(resource.reg_identifier)
-    when WasteCarriersEngine::Registration
+    elsif a_registration?(resource)
       registration_path(resource.reg_identifier)
     else
       "#"
@@ -14,15 +13,15 @@ module ActionLinksHelper
   end
 
   def resume_link_for(resource)
-    return "#" unless resource.is_a?(WasteCarriersEngine::RenewingRegistration)
+    return "#" unless a_transient_registration?(resource)
 
     WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier)
   end
 
   def payment_link_for(resource)
-    if resource.is_a?(WasteCarriersEngine::RenewingRegistration)
+    if a_transient_registration?(resource)
       transient_registration_payments_path(resource.reg_identifier)
-    elsif resource.is_a?(WasteCarriersEngine::Registration)
+    elsif a_registration?(resource)
       "#{Rails.configuration.wcrs_frontend_url}/registrations/#{resource.id}/paymentstatus"
     else
       "#"
@@ -30,9 +29,9 @@ module ActionLinksHelper
   end
 
   def convictions_link_for(resource)
-    if resource.is_a?(WasteCarriersEngine::RenewingRegistration)
+    if a_transient_registration?(resource)
       transient_registration_convictions_path(resource.reg_identifier)
-    elsif resource.is_a?(WasteCarriersEngine::Registration)
+    elsif a_registration?(resource)
       "#{Rails.configuration.wcrs_frontend_url}/registrations/#{resource.id}/approve"
     else
       "#"
@@ -40,19 +39,19 @@ module ActionLinksHelper
   end
 
   def renew_link_for(resource)
-    return "#" unless resource.is_a?(WasteCarriersEngine::Registration)
+    return "#" unless a_registration?(resource)
 
     WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier)
   end
 
   def transfer_link_for(resource)
-    return "#" unless resource.is_a?(WasteCarriersEngine::Registration)
+    return "#" unless a_registration?(resource)
 
     new_registration_transfer_path(resource.reg_identifier)
   end
 
   def display_details_link_for?(resource)
-    resource.is_a?(WasteCarriersEngine::RenewingRegistration) || resource.is_a?(WasteCarriersEngine::Registration)
+    a_transient_registration?(resource) || a_registration?(resource)
   end
 
   def display_resume_link_for?(resource)
@@ -145,8 +144,8 @@ module ActionLinksHelper
   end
 
   def not_revoked_or_refused?(resource)
-    return false if resource.metaData.REVOKED?
-    return false if resource.metaData.REFUSED?
+    return false if resource.revoked?
+    return false if resource.refused?
 
     true
   end
