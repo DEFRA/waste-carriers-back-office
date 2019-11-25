@@ -26,7 +26,7 @@ class RegistrationPresenter < BaseRegistrationPresenter
   end
 
   def order_copy_cards_link
-    "#{Rails.configuration.wcrs_frontend_url}/your-registration/#{id}/order-copy_cards"
+    "#{Rails.configuration.wcrs_frontend_url}/your-registration/#{id}/order/order-copy_cards"
   end
 
   def revoke_link

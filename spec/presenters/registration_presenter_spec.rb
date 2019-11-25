@@ -90,7 +90,7 @@ RSpec.describe RegistrationPresenter do
     end
 
     it "returns a link to the order copy cards page in the old system" do
-      expect(subject.order_copy_cards_link).to eq("http://example.com/your-registration/12345/order-copy_cards")
+      expect(subject.order_copy_cards_link).to eq("http://example.com/your-registration/12345/order/order-copy_cards")
     end
   end
 
