@@ -39,7 +39,7 @@ class Ability
     can :revoke, WasteCarriersEngine::Registration
     can :cease, WasteCarriersEngine::Registration
 
-    can :revert_to_payment_summary, WasteCarriersEngine::RenewingRegistration
+    can :revert_to_payment_summary, :all
 
     can :transfer_registration, WasteCarriersEngine::Registration
   end
