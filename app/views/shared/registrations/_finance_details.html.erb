@@ -28,10 +28,10 @@
           <%= t(".order_information.labels.payment_method") %>
         </th>
         <td>
-          <%= resource.order.payment_method.titleize %>
+          <%= resource.latest_order.payment_method.titleize %>
         </td>
       </tr>
-      <% resource.order.order_items.each do |item| %>
+      <% resource.latest_order.order_items.each do |item| %>
         <tr>
           <th>
             <%= item.description %>
@@ -49,19 +49,7 @@
         </th>
         <td>
           <strong class="bold-small">
-            £<%= display_pence_as_pounds(resource.order.total_amount) %>
-          </strong>
-        </td>
-      </tr>
-      <tr>
-        <th>
-          <strong class="bold-small">
-            <%= t(".order_information.labels.paid") %>
-          </strong>
-        </th>
-        <td>
-          <strong class="bold-small">
-            £<%= display_pence_as_pounds(resource.amount_paid) %>
+            £<%= display_pence_as_pounds(resource.latest_order.total_amount) %>
           </strong>
         </td>
       </tr>
@@ -70,7 +58,7 @@
           <%= t(".order_information.labels.order_code") %>
         </th>
         <td>
-          <%= resource.order.order_code %>
+          <%= resource.latest_order.order_code %>
         </td>
       </tr>
     </tbody>

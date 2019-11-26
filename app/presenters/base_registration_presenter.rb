@@ -50,8 +50,8 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     finance_details&.orders&.any? && upper_tier?
   end
 
-  def order
-    finance_details&.orders&.first
+  def latest_order
+    finance_details&.orders&.order_by(dateCreated: :desc)&.first
   end
 
   def display_expiry_text

@@ -97,17 +97,21 @@ RSpec.describe BaseRegistrationPresenter do
     end
   end
 
-  describe "#order" do
-    let(:order) { double(:order) }
+  describe "#latest_order" do
+    let(:latest_order) { double(:order) }
     let(:registration) do
       double(
         :registration,
-        finance_details: double(:finance_details, orders: [order])
+        finance_details: double(:finance_details, orders: double(:orders))
       )
     end
 
-    it "returns the first order in the list of finance details orders" do
-      expect(subject.order).to eq(order)
+    it "returns the last order in the list of finance details orders" do
+      scope = double(:scope)
+      expect(registration.finance_details.orders).to receive(:order_by).with(dateCreated: :desc).and_return(scope)
+      expect(scope).to receive(:first).and_return(latest_order)
+
+      expect(subject.latest_order).to eq(latest_order)
     end
   end
 
