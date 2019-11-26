@@ -22,7 +22,7 @@ module ActionLinksHelper
     if a_transient_registration?(resource)
       transient_registration_payments_path(resource.reg_identifier)
     elsif a_registration?(resource)
-      "#{Rails.configuration.wcrs_frontend_url}/registrations/#{resource.id}/paymentstatus"
+      "#{Rails.configuration.wcrs_backend_url}/registrations/#{resource.id}/paymentstatus"
     else
       "#"
     end
@@ -32,7 +32,7 @@ module ActionLinksHelper
     if a_transient_registration?(resource)
       transient_registration_convictions_path(resource.reg_identifier)
     elsif a_registration?(resource)
-      "#{Rails.configuration.wcrs_frontend_url}/registrations/#{resource.id}/approve"
+      "#{Rails.configuration.wcrs_backend_url}/registrations/#{resource.id}/approve"
     else
       "#"
     end

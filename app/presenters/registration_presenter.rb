@@ -14,27 +14,27 @@ class RegistrationPresenter < BaseRegistrationPresenter
   end
 
   def finance_details_link
-    "#{Rails.configuration.wcrs_frontend_url}/registrations/#{id}/paymentstatus"
+    "#{Rails.configuration.wcrs_backend_url}/registrations/#{id}/paymentstatus"
   end
 
   def edit_link
-    "#{Rails.configuration.wcrs_frontend_url}/registrations/#{id}/edit?edit-process=1"
+    "#{Rails.configuration.wcrs_backend_url}/registrations/#{id}/edit?edit-process=1"
   end
 
   def view_confirmation_letter_link
-    "#{Rails.configuration.wcrs_frontend_url}/registrations/#{id}/view"
+    "#{Rails.configuration.wcrs_backend_url}/registrations/#{id}/view"
   end
 
   def order_copy_cards_link
-    "#{Rails.configuration.wcrs_frontend_url}/your-registration/#{id}/order/order-copy_cards"
+    "#{Rails.configuration.wcrs_backend_url}/your-registration/#{id}/order/order-copy_cards"
   end
 
   def revoke_link
-    "#{Rails.configuration.wcrs_frontend_url}/registrations/#{id}/revoke"
+    "#{Rails.configuration.wcrs_backend_url}/registrations/#{id}/revoke"
   end
 
   def cease_link
-    "#{Rails.configuration.wcrs_frontend_url}/registrations/#{id}/confirm_delete"
+    "#{Rails.configuration.wcrs_backend_url}/registrations/#{id}/confirm_delete"
   end
 
   def display_registration_status
