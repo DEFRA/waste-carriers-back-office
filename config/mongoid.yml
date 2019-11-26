@@ -13,8 +13,6 @@ test:
       uri: <%= ENV['WCRS_TEST_REGSDB_URI'] || 'mongodb://mongoUser:password1234@localhost:27017/waste-carriers-test' %>
     users:
       uri: <%= ENV['WCRS_TEST_USERSDB_URI'] || 'mongodb://mongoUser:password1234@localhost:27017/waste-carriers-users-test' %>
-  options:
-    raise_not_found_error: false
 production:
   clients:
     default:
