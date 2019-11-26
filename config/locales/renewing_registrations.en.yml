@@ -2,7 +2,7 @@ en:
   renewing_registrations:
     show:
       title: "Renewal details"
-      heading: "Registration %{reg_identifier}"
+      heading: "Renewal %{reg_identifier}"
       filler: "–"
       status:
         headings:
@@ -18,7 +18,7 @@ en:
               revert: "If an error has occurred and the user is stuck, you can send the renewal back to the payment summary page. They can try to pay with WorldPay again, or select an alternative payment method."
               missed_payment: "If an error has occurred and payment has been received, but not recorded, you can record a missed WorldPay payment."
         actions:
-          continue_button: "Continue as assisted digital renewal"
+          continue_button: "Continue as assisted digital"
           convictions_check_button: "Check conviction matches"
           revert_to_payment_summary_button: "Send back to payment summary"
           missed_worldpay_payment_button: "Add a missed WorldPay payment"
