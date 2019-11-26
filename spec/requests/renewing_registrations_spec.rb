@@ -33,10 +33,10 @@ RSpec.describe "RenewingRegistrations", type: :request do
       end
 
       context "when no matching transient_registration exists" do
-        context "when a registration exist with that identifier" do
+        context "when a registrations exist with that reg_identifier" do
           let(:registration) { create(:registration) }
 
-          it "rerdirects to the registration details page" do
+          it "redirects to the registration details page" do
             get "/bo/renewing-registrations/#{registration.reg_identifier}"
 
             expect(response).to redirect_to(registration_path(registration.reg_identifier))
