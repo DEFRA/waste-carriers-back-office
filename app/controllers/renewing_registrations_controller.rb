@@ -5,7 +5,7 @@ class RenewingRegistrationsController < ApplicationController
 
   def show
     begin
-      transient_registration = WasteCarriersEngine::RenewingRegistration.find_by reg_identifier: params[:reg_identifier]
+      transient_registration = fetch_renewing_registration
     rescue Mongoid::Errors::DocumentNotFound
       scope = WasteCarriersEngine::Registration.where(reg_identifier: params[:reg_identifier])
 
@@ -15,5 +15,11 @@ class RenewingRegistrationsController < ApplicationController
     end
 
     @transient_registration = RenewingRegistrationPresenter.new(transient_registration, view_context)
+  end
+
+  private
+
+  def fetch_renewing_registration
+    WasteCarriersEngine::RenewingRegistration.find_by(reg_identifier: params[:reg_identifier])
   end
 end
