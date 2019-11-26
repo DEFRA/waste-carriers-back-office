@@ -5,13 +5,13 @@ class RenewingRegistrationsController < ApplicationController
 
   def show
     begin
-      transient_registration = WasteCarriersEngine::RenewingRegistration.find_by(reg_identifier: params[:reg_identifier])
+      transient_registration = WasteCarriersEngine::RenewingRegistration.find_by reg_identifier: params[:reg_identifier]
     rescue Mongoid::Errors::DocumentNotFound
-      if WasteCarriersEngine::Registration.where(reg_identifier: params[:reg_identifier]).any?
-        return redirect_to registration_path(params[:reg_identifier])
-      else
-        return redirect_to bo_path
-      end
+      scope = WasteCarriersEngine::Registration.where(reg_identifier: params[:reg_identifier]).any?
+
+      return redirect_to registration_path(params[:reg_identifier]) if scope.any?
+
+      return redirect_to bo_path
     end
 
     @transient_registration = RenewingRegistrationPresenter.new(transient_registration, view_context)
