@@ -50,7 +50,7 @@ RSpec.describe RegistrationPresenter do
     let(:registration) { double(:registration, id: "12345") }
 
     before do
-      expect(Rails.configuration).to receive(:wcrs_frontend_url).and_return("http://example.com")
+      expect(Rails.configuration).to receive(:wcrs_backend_url).and_return("http://example.com")
     end
 
     it "returns a link to the finance details page in the old system" do
@@ -62,7 +62,7 @@ RSpec.describe RegistrationPresenter do
     let(:registration) { double(:registration, id: "12345") }
 
     before do
-      expect(Rails.configuration).to receive(:wcrs_frontend_url).and_return("http://example.com")
+      expect(Rails.configuration).to receive(:wcrs_backend_url).and_return("http://example.com")
     end
 
     it "returns a link to the edit page in the old system" do
@@ -74,7 +74,7 @@ RSpec.describe RegistrationPresenter do
     let(:registration) { double(:registration, id: "12345") }
 
     before do
-      expect(Rails.configuration).to receive(:wcrs_frontend_url).and_return("http://example.com")
+      expect(Rails.configuration).to receive(:wcrs_backend_url).and_return("http://example.com")
     end
 
     it "returns a link to the confirmation letter page in the old system" do
@@ -86,7 +86,7 @@ RSpec.describe RegistrationPresenter do
     let(:registration) { double(:registration, id: "12345") }
 
     before do
-      expect(Rails.configuration).to receive(:wcrs_frontend_url).and_return("http://example.com")
+      expect(Rails.configuration).to receive(:wcrs_backend_url).and_return("http://example.com")
     end
 
     it "returns a link to the order copy cards page in the old system" do
@@ -98,7 +98,7 @@ RSpec.describe RegistrationPresenter do
     let(:registration) { double(:registration, id: "12345") }
 
     before do
-      expect(Rails.configuration).to receive(:wcrs_frontend_url).and_return("http://example.com")
+      expect(Rails.configuration).to receive(:wcrs_backend_url).and_return("http://example.com")
     end
 
     it "returns a link to the revoke feature in the old system" do
@@ -110,7 +110,7 @@ RSpec.describe RegistrationPresenter do
     let(:registration) { double(:registration, id: "12345") }
 
     before do
-      expect(Rails.configuration).to receive(:wcrs_frontend_url).and_return("http://example.com")
+      expect(Rails.configuration).to receive(:wcrs_backend_url).and_return("http://example.com")
     end
 
     it "returns a link to the delete feature in the old system" do

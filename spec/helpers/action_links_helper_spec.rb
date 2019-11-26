@@ -60,7 +60,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:registration) }
 
       it "returns the correct path" do
-        path = "#{Rails.configuration.wcrs_frontend_url}/registrations/#{resource.id}/paymentstatus"
+        path = "#{Rails.configuration.wcrs_backend_url}/registrations/#{resource.id}/paymentstatus"
         expect(helper.payment_link_for(resource)).to eq(path)
       end
     end
@@ -87,7 +87,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:registration) }
 
       it "returns the correct path" do
-        path = "#{Rails.configuration.wcrs_frontend_url}/registrations/#{resource.id}/approve"
+        path = "#{Rails.configuration.wcrs_backend_url}/registrations/#{resource.id}/approve"
         expect(helper.convictions_link_for(resource)).to eq(path)
       end
     end
