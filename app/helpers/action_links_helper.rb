@@ -66,6 +66,8 @@ module ActionLinksHelper
   end
 
   def display_payment_details_link_for?(resource)
+    # TODO: delete next line filter when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
+    return false if a_registration?(resource)
     return false unless display_transient_registration_links?(resource) || display_registration_links?(resource)
 
     resource.upper_tier?
