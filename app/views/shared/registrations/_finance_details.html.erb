@@ -8,7 +8,7 @@
   <% end %>
 </h2>
 
-<% if resource.show_finance_details_link? %>
+<% if resource.show_finance_details_link? && display_payment_link_for?(resource) %>
   <p>
     <%= link_to t(".finance_information.section_link_label"), resource.finance_details_link %>
   </p>

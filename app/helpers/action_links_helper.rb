@@ -21,8 +21,9 @@ module ActionLinksHelper
   def payment_link_for(resource)
     if a_transient_registration?(resource)
       transient_registration_payments_path(resource.reg_identifier)
-    elsif a_registration?(resource)
-      "#{Rails.configuration.wcrs_backend_url}/registrations/#{resource.id}/paymentstatus"
+    # TODO: re-implement when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
+    # elsif a_registration?(resource)
+    #   "#{Rails.configuration.wcrs_backend_url}/registrations/#{resource.id}/paymentstatus"
     else
       "#"
     end
@@ -31,8 +32,9 @@ module ActionLinksHelper
   def convictions_link_for(resource)
     if a_transient_registration?(resource)
       transient_registration_convictions_path(resource.reg_identifier)
-    elsif a_registration?(resource)
-      "#{Rails.configuration.wcrs_backend_url}/registrations/#{resource.id}/approve"
+    # TODO: re-implement when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
+    # elsif a_registration?(resource)
+    #   "#{Rails.configuration.wcrs_backend_url}/registrations/#{resource.id}/approve"
     else
       "#"
     end
@@ -57,6 +59,9 @@ module ActionLinksHelper
   end
 
   def display_payment_link_for?(resource)
+    # TODO: delete next line filter when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
+    return false if a_registration?(resource)
+
     display_payment_details_link_for?(resource) && resource.pending_payment?
   end
 
@@ -67,6 +72,8 @@ module ActionLinksHelper
   end
 
   def display_revoke_link_for?(resource)
+    # TODO: delete next line filter when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
+    return false if a_registration?(resource)
     return false unless display_registration_links?(resource)
     return false unless can?(:revoke, WasteCarriersEngine::Registration)
 
@@ -74,6 +81,8 @@ module ActionLinksHelper
   end
 
   def display_edit_link_for?(resource)
+    # TODO: delete next line filter when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
+    return false if a_registration?(resource)
     return false unless display_registration_links?(resource)
 
     can?(:update, WasteCarriersEngine::Registration)
@@ -87,6 +96,8 @@ module ActionLinksHelper
   end
 
   def display_order_copy_cards_link_for?(resource)
+    # TODO: delete next line filter when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
+    return false if a_registration?(resource)
     return false unless display_registration_links?(resource)
     return false unless can?(:order_copy_cards, WasteCarriersEngine::Registration)
 
@@ -114,6 +125,8 @@ module ActionLinksHelper
   end
 
   def display_cease_link_for?(resource)
+    # TODO: delete next line filter when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
+    return false if a_registration?(resource)
     return false unless display_registration_links?(resource)
 
     can?(:cease, WasteCarriersEngine::Registration)
