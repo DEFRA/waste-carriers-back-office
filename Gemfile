@@ -44,6 +44,12 @@ gem "govuk_template", "~> 0.23"
 gem "kaminari", "~> 1.1"
 gem "kaminari-mongoid", "~> 1.0"
 
+# Use Whenever to manage cron tasks
+gem "whenever", "~> 0.10.0"
+
+# Use the Defra Ruby Aws gem for loading files to AWS buckets
+gem "defra_ruby_aws", "~> 0.2.0"
+
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",
@@ -101,4 +107,7 @@ group :test do
   # Generates a test coverage report on every `bundle exec rspec` call. We use
   # the output to feed CodeClimate's stats and analysis
   gem "simplecov", require: false
+
+  # Allow automated testing of the whenever schedule
+  gem "whenever-test", "~> 1.0"
 end
