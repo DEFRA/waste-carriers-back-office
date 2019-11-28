@@ -30,8 +30,7 @@
       </li>
     <% end %>
 
-    <!-- TODO: put back the check when internal route exists https://eaflood.atlassian.net/browse/RUBY-786 -->
-    <% if false #display_view_confirmation_letter_link_for?(resource) %>
+    <% if display_view_confirmation_letter_link_for?(resource) %>
       <li>
         <%= link_to t(".actions_box.links.view_confirmation_letter"), resource.view_confirmation_letter_link %>
       </li>
