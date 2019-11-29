@@ -2,20 +2,22 @@
 
 module Reports
   class EprSerializer < BaseSerializer
-    ATTRIBUTES = [].freeze # TODO
+    # TODO
+    ATTRIBUTES = [:reg_identifier].freeze
 
     private
 
-    def registration_exemptions_scope
+    def registrations_scope
       # TODO
-      # WasteExemptionsEngine::RegistrationExemption.all_active_exemptions
+      ::WasteCarriersEngine::Registration.all
     end
 
-    def parse_registration_exemption(_registration_exemption)
+    def parse_registration(registration)
       ATTRIBUTES.map do |attribute|
         # TODO
-        # presenter = ExemptionEprReportPresenter.new(registration_exemption)
+        # presenter = ExemptionEprReportPresenter.new(registration)
         # presenter.public_send(attribute)
+        registration.public_send(attribute)
       end
     end
   end

@@ -55,7 +55,6 @@ module WasteCarriersBackOffice
     config.airbrake_key = ENV["WCRS_BACKOFFICE_AIRBRAKE_PROJECT_KEY"] || "dummy"
 
     # Data export config
-    config.export_batch_size = ENV["EXPORT_SERVICE_BATCH_SIZE"] || 1000
     config.epr_reports_bucket_name = ENV["AWS_DAILY_EXPORT_BUCKET"]
     config.epr_export_filename = ENV["EPR_DAILY_REPORT_FILE_NAME"] || "waste_carriers_epr_daily_full"
 
