@@ -20,7 +20,7 @@ module Reports
 
         expect(DefraRuby::Aws).to receive(:get_bucket).and_return(bucket)
         expect(File).to receive(:new).and_return(file)
-        expect(File).to receive(:exists?).and_return(true)
+        expect(File).to receive(:exist?).and_return(true)
         expect(bucket).to receive(:load).with(file).and_return(result)
 
         expect(File).to receive(:unlink)
