@@ -36,5 +36,11 @@ FactoryBot.define do
       conviction_search_result { build(:conviction_search_result, :match_result_yes) }
       conviction_sign_offs { [build(:conviction_sign_off)] }
     end
+
+    trait :has_flagged_conviction_check do
+      key_people { [build(:key_person, :requires_conviction_check)] }
+      conviction_search_result { build(:conviction_search_result, :match_result_yes) }
+      conviction_sign_offs { [build(:conviction_sign_off, :checks_in_progress)] }
+    end
   end
 end

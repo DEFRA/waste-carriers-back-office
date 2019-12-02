@@ -27,7 +27,8 @@ class ConvictionsDashboardsController < ApplicationController
   end
 
   def list_of_checks_in_progress
-    WasteCarriersEngine::RenewingRegistration.submitted.convictions_checks_in_progress
+    WasteCarriersEngine::RenewingRegistration.submitted.convictions_checks_in_progress +
+      WasteCarriersEngine::Registration.convictions_checks_in_progress
   end
 
   def list_of_approved
