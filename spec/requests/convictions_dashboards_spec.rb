@@ -3,6 +3,14 @@
 require "rails_helper"
 
 RSpec.describe "ConvictionsDashboards", type: :request do
+  let!(:link_to_possible_matches_registration) do
+    registration = create(:registration, :requires_conviction_check)
+    # Make sure it's one of the 'oldest' registrations so would be top of the list
+    registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+
+    transient_registration_convictions_path(registration.reg_identifier)
+  end
+
   let!(:link_to_possible_matches_renewal) do
     renewal = create(:renewing_registration, :requires_conviction_check)
     # Make sure it's one of the 'oldest' renewals so would be top of the list
@@ -52,6 +60,11 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         expect(response).to have_http_status(200)
       end
 
+      it "links to registrations which require an initial convictions check" do
+        get "/bo/convictions"
+        expect(response.body).to include(link_to_possible_matches_registration)
+      end
+
       it "links to renewals which require an initial convictions check" do
         get "/bo/convictions"
         expect(response.body).to include(link_to_possible_matches_renewal)
@@ -93,6 +106,11 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         expect(response.body).to include(link_to_checks_in_progress_renewal)
       end
 
+      it "does not link to registrations which don't have ongoing conviction checks" do
+        get "/bo/convictions/in-progress"
+        expect(response.body).to_not include(link_to_possible_matches_registration)
+      end
+
       it "does not link to renewals which don't have ongoing conviction checks" do
         get "/bo/convictions/in-progress"
         expect(response.body).to_not include(link_to_rejected_renewal)
@@ -129,6 +147,11 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         expect(response.body).to include(link_to_approved_renewal)
       end
 
+      it "does not link to registrations which don't have approved conviction checks" do
+        get "/bo/convictions/approved"
+        expect(response.body).to_not include(link_to_possible_matches_registration)
+      end
+
       it "does not link to renewals which don't have approved conviction checks" do
         get "/bo/convictions/approved"
         expect(response.body).to_not include(link_to_possible_matches_renewal)
@@ -163,6 +186,11 @@ RSpec.describe "ConvictionsDashboards", type: :request do
       it "links to renewals which have have rejected conviction checks" do
         get "/bo/convictions/rejected"
         expect(response.body).to include(link_to_rejected_renewal)
+      end
+
+      it "does not link to registrations which don't have rejected conviction checks" do
+        get "/bo/convictions/rejected"
+        expect(response.body).to_not include(link_to_possible_matches_registration)
       end
 
       it "does not link to renewals which don't have rejected conviction checks" do

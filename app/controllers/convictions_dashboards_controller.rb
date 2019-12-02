@@ -22,7 +22,8 @@ class ConvictionsDashboardsController < ApplicationController
   private
 
   def list_of_possible_matches
-    WasteCarriersEngine::RenewingRegistration.submitted.convictions_possible_match
+    WasteCarriersEngine::RenewingRegistration.submitted.convictions_possible_match +
+      WasteCarriersEngine::Registration.convictions_possible_match
   end
 
   def list_of_checks_in_progress
@@ -37,8 +38,9 @@ class ConvictionsDashboardsController < ApplicationController
     WasteCarriersEngine::RenewingRegistration.submitted.convictions_rejected
   end
 
-  def ordered_and_paged(transient_registrations)
-    @transient_registrations = transient_registrations.order_by("metaData.lastModified": :asc)
-                                                      .page params[:page]
+  def ordered_and_paged(matches)
+    ordered_matches = matches.sort_by { |match| match.metaData.last_modified }
+
+    @transient_registrations = Kaminari.paginate_array(ordered_matches).page(params[:page])
   end
 end
