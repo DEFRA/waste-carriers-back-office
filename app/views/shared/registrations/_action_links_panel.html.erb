@@ -12,7 +12,7 @@
 
     <% if display_renew_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.renew"), transient_registration_payments_path(resource.reg_identifier) %>
+        <%= link_to t(".actions_box.links.renew"), renew_link_for(resource) %>
       </li>
     <% end %>
 
