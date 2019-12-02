@@ -32,7 +32,8 @@ class ConvictionsDashboardsController < ApplicationController
   end
 
   def list_of_approved
-    WasteCarriersEngine::RenewingRegistration.submitted.convictions_approved
+    WasteCarriersEngine::RenewingRegistration.submitted.convictions_approved +
+      WasteCarriersEngine::Registration.convictions_approved.where("metaData.status": "PENDING")
   end
 
   def list_of_rejected

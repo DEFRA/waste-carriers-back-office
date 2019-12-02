@@ -18,8 +18,16 @@ FactoryBot.define do
 
     metaData { build(:metaData) }
 
+    trait :pending do
+      metaData { build(:metaData, :pending) }
+    end
+
+    trait :active do
+      metaData { build(:metaData, :active) }
+    end
+
     trait :expires_soon do
-      metaData { build(:metaData, status: :ACTIVE) }
+      metaData { build(:metaData, :active) }
       expires_on { 2.months.from_now }
     end
 
@@ -41,6 +49,12 @@ FactoryBot.define do
       key_people { [build(:key_person, :requires_conviction_check)] }
       conviction_search_result { build(:conviction_search_result, :match_result_yes) }
       conviction_sign_offs { [build(:conviction_sign_off, :checks_in_progress)] }
+    end
+
+    trait :has_approved_conviction_check do
+      key_people { [build(:key_person, :requires_conviction_check)] }
+      conviction_search_result { build(:conviction_search_result, :match_result_yes) }
+      conviction_sign_offs { [build(:conviction_sign_off, :approved)] }
     end
 
     trait :has_rejected_conviction_check do
