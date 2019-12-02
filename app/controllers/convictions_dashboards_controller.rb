@@ -43,6 +43,6 @@ class ConvictionsDashboardsController < ApplicationController
   def ordered_and_paged(matches)
     ordered_matches = matches.sort_by { |match| match.metaData.last_modified }
 
-    @transient_registrations = Kaminari.paginate_array(ordered_matches).page(params[:page])
+    @results = Kaminari.paginate_array(ordered_matches).page(params[:page])
   end
 end
