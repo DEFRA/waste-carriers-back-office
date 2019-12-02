@@ -4,19 +4,19 @@ class ConvictionsDashboardsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    ordered_and_paged(WasteCarriersEngine::RenewingRegistration.convictions_possible_match)
+    ordered_and_paged(WasteCarriersEngine::RenewingRegistration.submitted.convictions_possible_match)
   end
 
   def checks_in_progress
-    ordered_and_paged(WasteCarriersEngine::RenewingRegistration.convictions_checks_in_progress)
+    ordered_and_paged(WasteCarriersEngine::RenewingRegistration.submitted.convictions_checks_in_progress)
   end
 
   def approved
-    ordered_and_paged(WasteCarriersEngine::RenewingRegistration.convictions_approved)
+    ordered_and_paged(WasteCarriersEngine::RenewingRegistration.submitted.convictions_approved)
   end
 
   def rejected
-    ordered_and_paged(WasteCarriersEngine::RenewingRegistration.convictions_rejected)
+    ordered_and_paged(WasteCarriersEngine::RenewingRegistration.submitted.convictions_rejected)
   end
 
   private
