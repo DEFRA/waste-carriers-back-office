@@ -12,4 +12,8 @@ class BaseConvictionPresenter < WasteCarriersEngine::BasePresenter
   def approved_or_revoked?
     conviction_check_approved? || revoked?
   end
+
+  def people_with_matches
+    key_people.select(&:conviction_check_required?)
+  end
 end

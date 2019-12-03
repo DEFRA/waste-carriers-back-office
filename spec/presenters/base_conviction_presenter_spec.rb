@@ -5,11 +5,21 @@ require "rails_helper"
 RSpec.describe BaseConvictionPresenter do
   let(:conviction_sign_off) { double(:conviction_sign_off, workflow_state: "possible_match") }
   let(:conviction_sign_offs) { [conviction_sign_off] }
+
+  let(:conviction_check_required) { false }
+  let(:key_person) do
+    double(:key_person,
+           conviction_check_required?: conviction_check_required)
+  end
+  let(:key_people) { [key_person] }
+
   let(:conviction_check_approved) {}
   let(:revoked) {}
+
   let(:registration) do
     double(:registration,
            conviction_sign_offs: conviction_sign_offs,
+           key_people: key_people,
            conviction_check_approved?: conviction_check_approved,
            revoked?: revoked)
   end
@@ -62,6 +72,36 @@ RSpec.describe BaseConvictionPresenter do
 
         it "returns false" do
           expect(subject.approved_or_revoked?).to eq(false)
+        end
+      end
+    end
+  end
+
+  describe "#people_with_matches" do
+    context "when there are no key people" do
+      let(:key_people) { [] }
+
+      it "returns an empty array" do
+        expect(subject.people_with_matches).to eq([])
+      end
+    end
+
+    context "when there is a key person" do
+      let(:key_people) { [key_person] }
+
+      context "when a conviction check is not required" do
+        let(:conviction_check_required) { false }
+
+        it "returns an empty array" do
+          expect(subject.people_with_matches).to eq([])
+        end
+      end
+
+      context "when a conviction check is required" do
+        let(:conviction_check_required) { true }
+
+        it "includes the person in the array" do
+          expect(subject.people_with_matches).to eq([key_person])
         end
       end
     end

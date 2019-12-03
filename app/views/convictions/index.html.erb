@@ -35,7 +35,7 @@
     </p>
 
     <% if people_convictions == true %>
-      <% people_with_matches.each do |person| %>
+      <% @resource.people_with_matches.each do |person| %>
         <h3 class="heading-small">
           <% if person.person_type == "KEY" %>
             <%= t(".people_convictions.person_heading.#{@resource.business_type}") %>
