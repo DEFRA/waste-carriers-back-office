@@ -3,19 +3,19 @@ en:
     index:
       title: "Convictions with possible matches"
       heading: "Convictions with possible matches"
-      paragraph_1: "These renewal applications have been flagged as possibly having relevant convictions, and must be reviewed."
+      paragraph_1: "These applications have been flagged as possibly having relevant convictions, and must be reviewed."
     checks_in_progress:
       title: "Convictions checks in progress"
       heading: "Convictions checks in progress"
-      paragraph_1: "These renewal applications have relevant convictions and are currently being processed."
+      paragraph_1: "These applications have relevant convictions and are currently being processed."
     approved:
       title: "Convictions checks approved"
       heading: "Convictions checks approved"
-      paragraph_1: "These renewal applications have been approved during a conviction check."
+      paragraph_1: "These applications have been approved during a conviction check."
     rejected:
       title: "Convictions checks rejected"
       heading: "Convictions checks rejected"
-      paragraph_1: "These renewal applications have been rejected during a conviction check."
+      paragraph_1: "These applications have been rejected during a conviction check."
   shared:
     convictions_dashboard_results:
       results:
