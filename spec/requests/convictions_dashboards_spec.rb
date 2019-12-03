@@ -43,6 +43,15 @@ RSpec.describe "ConvictionsDashboards", type: :request do
     transient_registration_convictions_path(registration.reg_identifier)
   end
 
+  let!(:link_to_new_from_frontend_registration) do
+    registration = create(:registration, :requires_conviction_check, :pending)
+    # Make sure it's one of the 'oldest' registrations so would be top of the list
+    registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+    registration.conviction_sign_offs.first.unset(:workflow_state)
+
+    transient_registration_convictions_path(registration.reg_identifier)
+  end
+
   let!(:link_to_possible_matches_renewal) do
     renewal = create(:renewing_registration, :requires_conviction_check)
     # Make sure it's one of the 'oldest' renewals so would be top of the list
@@ -96,6 +105,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         get "/bo/convictions"
 
         expect(response.body).to include(link_to_possible_matches_registration)
+        expect(response.body).to include(link_to_new_from_frontend_registration)
         expect(response.body).to include(link_to_possible_matches_renewal)
 
         expect(response.body).to_not include(link_to_checks_in_progress_registration)
@@ -135,6 +145,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         expect(response.body).to include(link_to_checks_in_progress_renewal)
 
         expect(response.body).to_not include(link_to_possible_matches_registration)
+        expect(response.body).to_not include(link_to_new_from_frontend_registration)
         expect(response.body).to_not include(link_to_rejected_renewal)
       end
     end
@@ -172,6 +183,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
 
         expect(response.body).to_not include(link_to_active_approved_registration)
         expect(response.body).to_not include(link_to_possible_matches_registration)
+        expect(response.body).to_not include(link_to_new_from_frontend_registration)
         expect(response.body).to_not include(link_to_possible_matches_renewal)
       end
     end
@@ -208,6 +220,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
 
         expect(response.body).to_not include(link_to_rejected_registration)
         expect(response.body).to_not include(link_to_possible_matches_registration)
+        expect(response.body).to_not include(link_to_new_from_frontend_registration)
         expect(response.body).to_not include(link_to_possible_matches_renewal)
       end
     end

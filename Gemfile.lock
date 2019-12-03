@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 227691e2c3a41a74d6221268fdce5b969dc87976
-  branch: master
+  revision: f7798b1681d22a9a4dfd70043ff1c232d05769ba
+  branch: feature/conv-no-workflow-state
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)
