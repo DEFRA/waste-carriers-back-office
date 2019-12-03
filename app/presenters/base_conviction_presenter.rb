@@ -47,6 +47,10 @@ class BaseConvictionPresenter < WasteCarriersEngine::BasePresenter
     conviction_search_result.present? && business_has_matching_or_unknown_conviction?
   end
 
+  def display_people_convictions?
+    !unknown_people_convictions? && key_person_has_matching_or_unknown_conviction?
+  end
+
   def approved_or_revoked?
     conviction_check_approved? || revoked?
   end

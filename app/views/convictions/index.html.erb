@@ -34,7 +34,7 @@
       <%= @resource.people_convictions_message %>
     </p>
 
-    <% if people_convictions == true %>
+    <% if @resource.display_people_convictions? %>
       <% @resource.people_with_matches.each do |person| %>
         <h3 class="heading-small">
           <% if person.person_type == "KEY" %>

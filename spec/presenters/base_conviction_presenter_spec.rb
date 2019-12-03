@@ -221,6 +221,47 @@ RSpec.describe BaseConvictionPresenter do
     end
   end
 
+  describe "#display_people_convictions?" do
+    context "when there are no key people" do
+      let(:key_people) { [] }
+
+      it "returns false" do
+        expect(subject.display_people_convictions?).to eq(false)
+      end
+    end
+
+    context "when there are key people" do
+      context "when conviction_search_result is not present" do
+        let(:key_person) { double(:key_person, conviction_search_result: nil) }
+
+        it "returns false" do
+          expect(subject.display_people_convictions?).to eq(false)
+        end
+      end
+
+      context "when conviction_search_result is present" do
+        let(:conviction_search_result) { double(:conviction_search_result) }
+        let(:key_person) { double(:key_person, conviction_search_result: conviction_search_result) }
+
+        context "when key_person_has_matching_or_unknown_conviction? is true" do
+          let(:key_person_has_matching_or_unknown_conviction) { true }
+
+          it "returns true" do
+            expect(subject.display_people_convictions?).to eq(true)
+          end
+        end
+
+        context "when key_person_has_matching_or_unknown_conviction? is false" do
+          let(:key_person_has_matching_or_unknown_conviction) { false }
+
+          it "returns false" do
+            expect(subject.display_people_convictions?).to eq(false)
+          end
+        end
+      end
+    end
+  end
+
   describe "#approved_or_revoked?" do
     context "when conviction_check_approved? is true" do
       let(:conviction_check_approved) { true }
