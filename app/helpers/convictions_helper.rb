@@ -2,44 +2,44 @@
 
 module ConvictionsHelper
   def declared_convictions
-    return "unknown" unless @transient_registration.declared_convictions.present?
+    return "unknown" unless @resource.declared_convictions.present?
 
-    @transient_registration.declared_convictions == "yes"
+    @resource.declared_convictions == "yes"
   end
 
   def business_convictions
-    return "unknown" unless @transient_registration.conviction_search_result.present?
+    return "unknown" unless @resource.conviction_search_result.present?
 
-    @transient_registration.business_has_matching_or_unknown_conviction?
+    @resource.business_has_matching_or_unknown_conviction?
   end
 
   def people_convictions
     return "unknown" if unknown_people_convictions?
 
-    @transient_registration.key_person_has_matching_or_unknown_conviction?
+    @resource.key_person_has_matching_or_unknown_conviction?
   end
 
   def people_with_matches
-    @transient_registration.key_people.select(&:conviction_check_required?)
+    @resource.key_people.select(&:conviction_check_required?)
   end
 
   def relevant_people_without_matches
-    @transient_registration.relevant_people - people_with_matches
+    @resource.relevant_people - people_with_matches
   end
 
   def conviction_sign_off
-    return unless @transient_registration.conviction_sign_offs.present?
+    return unless @resource.conviction_sign_offs.present?
 
-    @transient_registration.conviction_sign_offs.first
+    @resource.conviction_sign_offs.first
   end
 
   private
 
   def unknown_people_convictions?
-    return true unless @transient_registration.key_people.present?
+    return true unless @resource.key_people.present?
 
     # Check to see if any conviction_search_results are present
-    conviction_search_results = @transient_registration.key_people.map(&:conviction_search_result).compact
+    conviction_search_results = @resource.key_people.map(&:conviction_search_result).compact
     conviction_search_results.count.zero?
   end
 end
