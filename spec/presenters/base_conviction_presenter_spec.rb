@@ -27,6 +27,22 @@ RSpec.describe BaseConvictionPresenter do
   let(:view_context) { double(:view_context) }
   subject { described_class.new(registration, view_context) }
 
+  describe "#sign_off" do
+    context "when the conviction_sign_off is not present" do
+      let(:conviction_sign_offs) { [] }
+
+      it "returns nil" do
+        expect(subject.sign_off).to eq(nil)
+      end
+    end
+
+    context "when a conviction_sign_off is present" do
+      it "returns the conviction_sign_off" do
+        expect(subject.sign_off).to eq(conviction_sign_off)
+      end
+    end
+  end
+
   describe "#conviction_status_message" do
     context "when a conviction_sign_off is present" do
       it "returns the correct message" do
