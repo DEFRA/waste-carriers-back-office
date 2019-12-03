@@ -6,11 +6,4 @@ module RegistrationTransfersHelper
     user = ExternalUser.where(email: email).first
     user.invitation_created_at.present? && user.invitation_accepted_at.blank?
   end
-
-  def continue_after_transfer_link(registration)
-    [Rails.configuration.wcrs_backend_url,
-     "/registrations?utf8=%E2%9C%93&q=",
-     registration.reg_identifier,
-     "&commit=Search&searchWithin=any"].join
-  end
 end
