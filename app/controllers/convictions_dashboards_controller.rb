@@ -23,7 +23,8 @@ class ConvictionsDashboardsController < ApplicationController
 
   def list_of_possible_matches
     WasteCarriersEngine::RenewingRegistration.submitted.convictions_possible_match +
-      WasteCarriersEngine::Registration.convictions_possible_match
+      WasteCarriersEngine::Registration.convictions_possible_match +
+      WasteCarriersEngine::Registration.convictions_new_without_status
   end
 
   def list_of_checks_in_progress
