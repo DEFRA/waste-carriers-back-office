@@ -1,9 +1,9 @@
 <div class="grid-row">
   <div class="column-two-thirds">
-    <%= render("waste_carriers_engine/shared/back", back_path: renewing_registration_path(@transient_registration.reg_identifier)) %>
+    <%= render("waste_carriers_engine/shared/back", back_path: renewing_registration_path(@resource.reg_identifier)) %>
 
     <h1 class="heading-large">
-      <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
+      <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
     </h1>
 
     <div class="panel">
@@ -28,7 +28,7 @@
       <%= t(".business_convictions.#{business_convictions}") %>
     </p>
     <% if business_convictions == true %>
-      <%= render("shared/conviction_search_result", conviction_search_result: @transient_registration.conviction_search_result, person: nil) %>
+      <%= render("shared/conviction_search_result", conviction_search_result: @resource.conviction_search_result, person: nil) %>
     <% end %>
 
     <h2 class="heading-medium">
@@ -42,7 +42,7 @@
       <% people_with_matches.each do |person| %>
         <h3 class="heading-small">
           <% if person.person_type == "KEY" %>
-            <%= t(".people_convictions.person_heading.#{@transient_registration.business_type}") %>
+            <%= t(".people_convictions.person_heading.#{@resource.business_type}") %>
           <% else %>
             <%= t(".people_convictions.person_heading.relevant") %>
           <% end %>
@@ -67,7 +67,7 @@
       <% end %>
     <% end %>
 
-    <% if @transient_registration.conviction_check_approved? || @transient_registration.metaData.REVOKED? %>
+    <% if @resource.conviction_check_approved? || @resource.metaData.REVOKED? %>
     <table>
       <caption class="heading-medium">
         <%= t(".conviction_sign_off.heading") %>
@@ -78,9 +78,9 @@
             <%= t(".conviction_sign_off.labels.status") %>
           </td>
           <td>
-            <% if @transient_registration.conviction_check_approved? %>
+            <% if @resource.conviction_check_approved? %>
               <%= t(".conviction_sign_off.labels.status_values.approved") %>
-            <% elsif @transient_registration.metaData.REVOKED? %>
+            <% elsif @resource.metaData.REVOKED? %>
               <%= t(".conviction_sign_off.labels.status_values.rejected") %>
             <% end %>
           </td>
@@ -90,26 +90,26 @@
             <%= t(".conviction_sign_off.labels.revoked_reason") %>
           </td>
           <td>
-            <%= @transient_registration.metaData.revoked_reason %>
+            <%= @resource.metaData.revoked_reason %>
           </td>
         </tr>
-        <% if @transient_registration.conviction_sign_offs.first.confirmed_by.present? %>
+        <% if @resource.conviction_sign_offs.first.confirmed_by.present? %>
         <tr>
           <td>
             <%= t(".conviction_sign_off.labels.confirmed_by") %>
           </td>
           <td>
-            <%= @transient_registration.conviction_sign_offs.first.confirmed_by %>
+            <%= @resource.conviction_sign_offs.first.confirmed_by %>
           </td>
         </tr>
         <% end %>
-        <% if @transient_registration.conviction_sign_offs.first.confirmed_at.present? %>
+        <% if @resource.conviction_sign_offs.first.confirmed_at.present? %>
         <tr>
           <td>
             <%= t(".conviction_sign_off.labels.confirmed_at") %>
           </td>
           <td>
-            <%= @transient_registration.conviction_sign_offs.first.confirmed_at.in_time_zone("London").strftime("%A %e %B %Y at %l:%M%P") %>
+            <%= @resource.conviction_sign_offs.first.confirmed_at.in_time_zone("London").strftime("%A %e %B %Y at %l:%M%P") %>
           </td>
         </tr>
         <% end %>
@@ -117,11 +117,11 @@
     </table>
     <% end %>
 
-    <% if @transient_registration.renewal_application_submitted? && @transient_registration.conviction_check_required? %>
+    <% if @resource.renewal_application_submitted? && @resource.conviction_check_required? %>
       <h2 class="heading-medium">
         <%= t(".approve_or_reject.heading") %>
       </h2>
-      <% if can? :review_convictions, @transient_registration %>
+      <% if can? :review_convictions, @resource %>
         <p>
           <%= t(".approve_or_reject.paragraph_1") %>
         </p>
@@ -130,19 +130,19 @@
         </p>
         <% if conviction_sign_off.may_approve? %>
           <%= link_to t(".approve_or_reject.buttons.approve"),
-                      new_transient_registration_conviction_approval_form_path(@transient_registration.reg_identifier),
+                      new_transient_registration_conviction_approval_form_path(@resource.reg_identifier),
                       class: "button" %>
         <% end %>
 
         <% if conviction_sign_off.may_begin_checks? %>
           <%= link_to t(".approve_or_reject.buttons.begin_checks"),
-                      convictions_begin_checks_path(@transient_registration.reg_identifier),
+                      convictions_begin_checks_path(@resource.reg_identifier),
                       class: "button-alert" %>
         <% end %>
 
         <% if conviction_sign_off.may_reject? %>
         <%= link_to t(".approve_or_reject.buttons.reject"),
-                    new_transient_registration_conviction_rejection_form_path(@transient_registration.reg_identifier),
+                    new_transient_registration_conviction_rejection_form_path(@resource.reg_identifier),
                     class: "button-warning" %>
         <% end %>
       <% else %>
