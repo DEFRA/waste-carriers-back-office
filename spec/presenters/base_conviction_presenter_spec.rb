@@ -3,6 +3,7 @@
 require "rails_helper"
 
 RSpec.describe BaseConvictionPresenter do
+  let(:conviction_search_result) {}
   let(:conviction_sign_off) { double(:conviction_sign_off, workflow_state: "possible_match") }
   let(:conviction_sign_offs) { [conviction_sign_off] }
 
@@ -15,14 +16,19 @@ RSpec.describe BaseConvictionPresenter do
   end
   let(:key_people) { [key_person] }
 
+  let(:business_has_matching_or_unknown_conviction) {}
   let(:conviction_check_approved) {}
   let(:revoked) {}
 
   let(:registration) do
     double(:registration,
+           # Attributes and relations
+           conviction_search_result: conviction_search_result,
            conviction_sign_offs: conviction_sign_offs,
            declared_convictions: declared_convictions,
            key_people: key_people,
+           # Method responses
+           business_has_matching_or_unknown_conviction?: business_has_matching_or_unknown_conviction,
            conviction_check_approved?: conviction_check_approved,
            revoked?: revoked)
   end
@@ -94,6 +100,42 @@ RSpec.describe BaseConvictionPresenter do
         message = "Unknown – the user has not answered this question yet."
 
         expect(subject.declared_convictions_message).to eq(message)
+      end
+    end
+  end
+
+  describe "#business_convictions_message" do
+    context "when conviction_search_result is missing" do
+      let(:conviction_search_result) {}
+
+      it "returns the correct message" do
+        message = "Unknown – the automated conviction checks have not run yet. This may be because the registration application is still in progress."
+
+        expect(subject.business_convictions_message).to eq(message)
+      end
+    end
+
+    context "when conviction_search_result is present" do
+      let(:conviction_search_result) { double(:conviction_search_result) }
+
+      context "when business_has_matching_or_unknown_conviction? is true" do
+        let(:business_has_matching_or_unknown_conviction) { true }
+
+        it "returns the correct message" do
+          message = "There is a possible matching conviction for the business:"
+
+          expect(subject.business_convictions_message).to eq(message)
+        end
+      end
+
+      context "when business_has_matching_or_unknown_conviction? is false" do
+        let(:business_has_matching_or_unknown_conviction) { false }
+
+        it "returns the correct message" do
+          message = "No matching convictions were found for the business."
+
+          expect(subject.business_convictions_message).to eq(message)
+        end
       end
     end
   end

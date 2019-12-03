@@ -23,6 +23,16 @@ class BaseConvictionPresenter < WasteCarriersEngine::BasePresenter
     end
   end
 
+  def business_convictions_message
+    if conviction_search_result.blank?
+      I18n.t(".convictions.index.business_convictions.unknown")
+    elsif business_has_matching_or_unknown_conviction?
+      I18n.t(".convictions.index.business_convictions.yes")
+    else
+      I18n.t(".convictions.index.business_convictions.no")
+    end
+  end
+
   def approved_or_revoked?
     conviction_check_approved? || revoked?
   end

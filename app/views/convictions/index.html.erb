@@ -21,7 +21,7 @@
       <%= t(".business_convictions.heading") %>
     </h2>
     <p>
-      <%= t(".business_convictions.#{business_convictions}") %>
+      <%= @resource.business_convictions_message %>
     </p>
     <% if business_convictions == true %>
       <%= render("shared/conviction_search_result", conviction_search_result: @resource.conviction_search_result, person: nil) %>

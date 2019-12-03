@@ -16,8 +16,8 @@ en:
         unknown: "Unknown – the user has not answered this question yet."
       business_convictions:
         heading: Matching convictions for the business
-        "true": "There is a possible matching conviction for the business:"
-        "false": "No matching convictions were found for the business."
+        "yes": "There is a possible matching conviction for the business:"
+        "no": "No matching convictions were found for the business."
         unknown: "Unknown – the automated conviction checks have not run yet. This may be because the registration application is still in progress."
       people_convictions:
         heading: People with matching convictions
