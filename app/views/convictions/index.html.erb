@@ -117,7 +117,7 @@
     </table>
     <% end %>
 
-    <% if @resource.renewal_application_submitted? && @resource.conviction_check_required? %>
+    <% if @resource.display_actions? %>
       <h2 class="heading-medium">
         <%= t(".approve_or_reject.heading") %>
       </h2>
