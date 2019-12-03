@@ -4,11 +4,11 @@ en:
       title: "Conviction details"
       heading: "Conviction information for %{reg_identifier}"
       status:
-        possible_match: "This renewal may have matching or declared convictions and requires an initial review."
-        checks_in_progress: "This renewal has been reviewed and flagged as having relevant convictions."
-        approved: "This renewal was approved after a review of the matching or declared convictions."
-        rejected: "This renewal was rejected after a review of the matching or declared convictions."
-        not_required: "This renewal does not require a conviction check before it can be approved."
+        possible_match: "This registration may have matching or declared convictions and requires an initial review."
+        checks_in_progress: "This registration has been reviewed and flagged as having relevant convictions."
+        approved: "This registration was approved after a review of the matching or declared convictions."
+        rejected: "This registration was rejected after a review of the matching or declared convictions."
+        not_required: "This registration does not require a conviction check before it can be approved."
       declared_convictions:
         heading: "Declared convictions"
         "true": "Yes – the user declared there were relevant convictions."
@@ -18,12 +18,12 @@ en:
         heading: Matching convictions for the business
         "true": "There is a possible matching conviction for the business:"
         "false": "No matching convictions were found for the business."
-        unknown: "Unknown – the automated conviction checks have not run yet. This may be because the renewal application is still in progress."
+        unknown: "Unknown – the automated conviction checks have not run yet. This may be because the registration application is still in progress."
       people_convictions:
         heading: People with matching convictions
         "true": "There are possible matching convictions for the following people:"
         "false": "No matching convictions were found for people."
-        unknown: "Unknown – the automated conviction checks have not run yet. This may be because the renewal application is still in progress."
+        unknown: "Unknown – the automated conviction checks have not run yet. This may be because the registration application is still in progress."
         person_heading:
           localAuthority: "Chief executive"
           limitedCompany: "Company director"
@@ -47,8 +47,8 @@ en:
           revoked_reason: "Comment"
       approve_or_reject:
         heading: "Manage this conviction check"
-        paragraph_1: "You can approve or reject this renewal based on this conviction information."
-        paragraph_2: "If the renewal hasn't been paid for yet, it won't be renewed until payment is received and processed."
+        paragraph_1: "You can approve or reject this registration based on this conviction information."
+        paragraph_2: "If the registration hasn't been paid for yet, it won't be renewed until payment is received and processed."
         buttons:
           approve: "Approve"
           begin_checks: "Relevant conviction found"

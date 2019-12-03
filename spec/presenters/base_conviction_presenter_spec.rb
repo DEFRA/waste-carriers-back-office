@@ -20,7 +20,7 @@ RSpec.describe BaseConvictionPresenter do
   describe "#conviction_status_message" do
     context "when a conviction_sign_off is present" do
       it "returns the correct message" do
-        message = "This renewal may have matching or declared convictions and requires an initial review."
+        message = "This registration may have matching or declared convictions and requires an initial review."
 
         expect(subject.conviction_status_message).to eq(message)
       end
@@ -30,7 +30,7 @@ RSpec.describe BaseConvictionPresenter do
       let(:conviction_sign_offs) { [] }
 
       it "returns the correct message" do
-        message = "This renewal does not require a conviction check before it can be approved."
+        message = "This registration does not require a conviction check before it can be approved."
 
         expect(subject.conviction_status_message).to eq(message)
       end
