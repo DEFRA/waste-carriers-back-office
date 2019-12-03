@@ -5,5 +5,13 @@ FactoryBot.define do
     date_registered { Time.current }
     status { :ACTIVE }
     revoked_reason { "reason" }
+
+    trait :active do
+      status { :ACTIVE }
+    end
+
+    trait :pending do
+      status { :PENDING }
+    end
   end
 end

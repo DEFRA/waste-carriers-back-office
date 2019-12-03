@@ -1,4 +1,4 @@
-<% if @transient_registrations.present? %>
+<% if @results.present? %>
   <div class="grid-row">
     <div class="column-full">
       <table>
@@ -11,19 +11,19 @@
           </tr>
         </thead>
         <tbody>
-          <% @transient_registrations.each do |transient_registration| %>
+          <% @results.each do |result| %>
             <tr>
               <td>
-                <%= transient_registration.reg_identifier %>
+                <%= result.reg_identifier %>
               </td>
               <td>
-                <%= transient_registration.company_name %>
+                <%= result.company_name %>
               </td>
               <td>
-                <%= transient_registration.metaData.last_modified.in_time_zone("London").strftime("%H:%M %d/%m/%Y") %>
+                <%= result.metaData.last_modified.in_time_zone("London").strftime("%H:%M %d/%m/%Y") %>
               </td>
               <td>
-                <%= link_to t(".results.convictions_details_button"), transient_registration_convictions_path(transient_registration.reg_identifier) %>
+                <%= link_to t(".results.convictions_details_button"), transient_registration_convictions_path(result.reg_identifier) %>
               </td>
             </tr>
           <% end %>
@@ -36,9 +36,9 @@
     <div class="column-full">
       <nav role="navigation" class="pagination" aria-label="Pagination">
         <div class="pagination__summary">
-          <%= page_entries_info @transient_registrations, entry_name: "item" %>
+          <%= page_entries_info @results, entry_name: "item" %>
         </div>
-        <%= paginate @transient_registrations %>
+        <%= paginate @results %>
       </nav>
     </div>
   </div>
