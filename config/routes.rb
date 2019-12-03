@@ -29,7 +29,10 @@ Rails.application.routes.draw do
   resources :registrations,
             only: :show,
             param: :reg_identifier,
-            path: "/bo/registrations"
+            path: "/bo/registrations" do
+              resources :convictions,
+                        only: :index
+            end
 
   resources :transient_registrations,
             only: [],
