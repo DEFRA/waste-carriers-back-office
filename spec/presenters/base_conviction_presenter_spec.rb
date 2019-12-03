@@ -15,6 +15,7 @@ RSpec.describe BaseConvictionPresenter do
            conviction_check_required?: conviction_check_required)
   end
   let(:key_people) { [key_person] }
+  let(:relevant_people) {}
 
   let(:business_has_matching_or_unknown_conviction) {}
   let(:conviction_check_approved) {}
@@ -28,6 +29,7 @@ RSpec.describe BaseConvictionPresenter do
            conviction_sign_offs: conviction_sign_offs,
            declared_convictions: declared_convictions,
            key_people: key_people,
+           relevant_people: relevant_people,
            # Method responses
            business_has_matching_or_unknown_conviction?: business_has_matching_or_unknown_conviction,
            conviction_check_approved?: conviction_check_approved,
@@ -317,6 +319,36 @@ RSpec.describe BaseConvictionPresenter do
 
         it "includes the person in the array" do
           expect(subject.people_with_matches).to eq([key_person])
+        end
+      end
+    end
+  end
+
+  describe "#relevant_people_without_matches" do
+    context "when there are no relevant people" do
+      let(:relevant_people) { [] }
+
+      it "returns an empty array" do
+        expect(subject.relevant_people_without_matches).to eq([])
+      end
+    end
+
+    context "when there is a relevant person" do
+      let(:relevant_people) { [key_person] }
+
+      context "when a conviction check is not required for that person" do
+        let(:conviction_check_required) { false }
+
+        it "includes the person in the array" do
+          expect(subject.relevant_people_without_matches).to eq([key_person])
+        end
+      end
+
+      context "when a conviction check is required for that person" do
+        let(:conviction_check_required) { true }
+
+        it "returns an empty array" do
+          expect(subject.relevant_people_without_matches).to eq([])
         end
       end
     end

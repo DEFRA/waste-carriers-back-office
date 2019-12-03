@@ -59,6 +59,10 @@ class BaseConvictionPresenter < WasteCarriersEngine::BasePresenter
     key_people.select(&:conviction_check_required?)
   end
 
+  def relevant_people_without_matches
+    relevant_people - people_with_matches
+  end
+
   private
 
   def unknown_people_convictions?

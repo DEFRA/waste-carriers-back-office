@@ -47,14 +47,14 @@
       <% end %>
     <% end %>
 
-    <% if relevant_people_without_matches.present? %>
+    <% if @resource.relevant_people_without_matches.present? %>
       <h2 class="heading-medium">
         <%= t(".unmatched_people.heading") %>
       </h2>
       <p>
         <%= t(".unmatched_people.paragraph") %>
       </p>
-      <% relevant_people_without_matches.each do |person| %>
+      <% @resource.relevant_people_without_matches.each do |person| %>
         <table>
           <tbody>
             <%= render("shared/person_table_rows", person: person) %>
