@@ -11,4 +11,12 @@ module ConvictionsDashboardsHelper
     }
     action_paths[action.to_sym]
   end
+
+  def details_path(resource)
+    if resource.is_a?(WasteCarriersEngine::Registration)
+      registration_convictions_path(resource.reg_identifier)
+    elsif resource.is_a?(WasteCarriersEngine::RenewingRegistration)
+      transient_registration_convictions_path(resource.reg_identifier)
+    end
+  end
 end
