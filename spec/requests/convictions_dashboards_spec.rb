@@ -8,7 +8,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
     # Make sure it's one of the 'oldest' registrations so would be top of the list
     registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
 
-    transient_registration_convictions_path(registration.reg_identifier)
+    registration_convictions_path(registration.reg_identifier)
   end
 
   let!(:link_to_checks_in_progress_registration) do
@@ -16,7 +16,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
     # Make sure it's one of the 'oldest' registrations so would be top of the list
     registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
 
-    transient_registration_convictions_path(registration.reg_identifier)
+    registration_convictions_path(registration.reg_identifier)
   end
 
   let!(:link_to_pending_approved_registration) do
@@ -24,7 +24,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
     # Make sure it's one of the 'oldest' registrations so would be top of the list
     registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
 
-    transient_registration_convictions_path(registration.reg_identifier)
+    registration_convictions_path(registration.reg_identifier)
   end
 
   let!(:link_to_active_approved_registration) do
@@ -32,7 +32,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
     # Make sure it's one of the 'oldest' registrations so would be top of the list
     registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
 
-    transient_registration_convictions_path(registration.reg_identifier)
+    registration_convictions_path(registration.reg_identifier)
   end
 
   let!(:link_to_rejected_registration) do
@@ -40,7 +40,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
     # Make sure it's one of the 'oldest' registrations so would be top of the list
     registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
 
-    transient_registration_convictions_path(registration.reg_identifier)
+    registration_convictions_path(registration.reg_identifier)
   end
 
   let!(:link_to_new_from_frontend_registration) do
@@ -49,7 +49,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
     registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
     registration.conviction_sign_offs.first.unset(:workflow_state)
 
-    transient_registration_convictions_path(registration.reg_identifier)
+    registration_convictions_path(registration.reg_identifier)
   end
 
   let!(:link_to_possible_matches_renewal) do
