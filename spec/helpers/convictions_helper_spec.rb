@@ -6,7 +6,7 @@ RSpec.describe ConvictionsHelper, type: :helper do
   let(:transient_registration) { build(:renewing_registration) }
 
   before do
-    assign(:transient_registration, transient_registration)
+    assign(:resource, transient_registration)
   end
 
   describe "#declared_convictions" do
