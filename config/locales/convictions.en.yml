@@ -21,8 +21,8 @@ en:
         unknown: "Unknown – the automated conviction checks have not run yet. This may be because the registration application is still in progress."
       people_convictions:
         heading: People with matching convictions
-        "true": "There are possible matching convictions for the following people:"
-        "false": "No matching convictions were found for people."
+        "yes": "There are possible matching convictions for the following people:"
+        "no": "No matching convictions were found for people."
         unknown: "Unknown – the automated conviction checks have not run yet. This may be because the registration application is still in progress."
         person_heading:
           localAuthority: "Chief executive"

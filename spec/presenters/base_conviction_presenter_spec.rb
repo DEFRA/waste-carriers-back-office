@@ -18,6 +18,7 @@ RSpec.describe BaseConvictionPresenter do
 
   let(:business_has_matching_or_unknown_conviction) {}
   let(:conviction_check_approved) {}
+  let(:key_person_has_matching_or_unknown_conviction) {}
   let(:revoked) {}
 
   let(:registration) do
@@ -30,6 +31,7 @@ RSpec.describe BaseConvictionPresenter do
            # Method responses
            business_has_matching_or_unknown_conviction?: business_has_matching_or_unknown_conviction,
            conviction_check_approved?: conviction_check_approved,
+           key_person_has_matching_or_unknown_conviction?: key_person_has_matching_or_unknown_conviction,
            revoked?: revoked)
   end
 
@@ -135,6 +137,55 @@ RSpec.describe BaseConvictionPresenter do
           message = "No matching convictions were found for the business."
 
           expect(subject.business_convictions_message).to eq(message)
+        end
+      end
+    end
+  end
+
+  describe "#people_convictions_message" do
+    context "when there are no key people" do
+      let(:key_people) { [] }
+
+      it "returns the correct message" do
+        message = "Unknown – the automated conviction checks have not run yet. This may be because the registration application is still in progress."
+
+        expect(subject.people_convictions_message).to eq(message)
+      end
+    end
+
+    context "when there are key people" do
+      context "when conviction_search_result is not present" do
+        let(:key_person) { double(:key_person, conviction_search_result: nil) }
+
+        it "returns the correct message" do
+          message = "Unknown – the automated conviction checks have not run yet. This may be because the registration application is still in progress."
+
+          expect(subject.people_convictions_message).to eq(message)
+        end
+      end
+
+      context "when conviction_search_result is present" do
+        let(:conviction_search_result) { double(:conviction_search_result) }
+        let(:key_person) { double(:key_person, conviction_search_result: conviction_search_result) }
+
+        context "when key_person_has_matching_or_unknown_conviction? is true" do
+          let(:key_person_has_matching_or_unknown_conviction) { true }
+
+          it "returns the correct message" do
+            message = "There are possible matching convictions for the following people:"
+
+            expect(subject.people_convictions_message).to eq(message)
+          end
+        end
+
+        context "when key_person_has_matching_or_unknown_conviction? is false" do
+          let(:key_person_has_matching_or_unknown_conviction) { false }
+
+          it "returns the correct message" do
+            message = "No matching convictions were found for people."
+
+            expect(subject.people_convictions_message).to eq(message)
+          end
         end
       end
     end

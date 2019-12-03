@@ -33,11 +33,31 @@ class BaseConvictionPresenter < WasteCarriersEngine::BasePresenter
     end
   end
 
+  def people_convictions_message
+    if unknown_people_convictions?
+      I18n.t(".convictions.index.people_convictions.unknown")
+    elsif key_person_has_matching_or_unknown_conviction?
+      I18n.t(".convictions.index.people_convictions.yes")
+    else
+      I18n.t(".convictions.index.people_convictions.no")
+    end
+  end
+
   def approved_or_revoked?
     conviction_check_approved? || revoked?
   end
 
   def people_with_matches
     key_people.select(&:conviction_check_required?)
+  end
+
+  private
+
+  def unknown_people_convictions?
+    return true unless key_people.present?
+
+    # Check to see if any conviction_search_results are present
+    conviction_search_results = key_people.map(&:conviction_search_result).compact
+    conviction_search_results.count.zero?
   end
 end
