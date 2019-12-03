@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
 module ConvictionsHelper
-  def business_convictions
-    return "unknown" unless @resource.conviction_search_result.present?
-
-    @resource.business_has_matching_or_unknown_conviction?
-  end
-
   def people_convictions
     return "unknown" if unknown_people_convictions?
 

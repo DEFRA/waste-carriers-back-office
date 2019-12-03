@@ -23,7 +23,7 @@
     <p>
       <%= @resource.business_convictions_message %>
     </p>
-    <% if business_convictions == true %>
+    <% if @resource.display_business_convictions? %>
       <%= render("shared/conviction_search_result", conviction_search_result: @resource.conviction_search_result, person: nil) %>
     <% end %>
 

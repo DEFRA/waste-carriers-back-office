@@ -191,6 +191,36 @@ RSpec.describe BaseConvictionPresenter do
     end
   end
 
+  describe "#display_business_convictions?" do
+    context "when conviction_search_result is missing" do
+      let(:conviction_search_result) {}
+
+      it "returns false" do
+        expect(subject.display_business_convictions?).to eq(false)
+      end
+    end
+
+    context "when conviction_search_result is present" do
+      let(:conviction_search_result) { double(:conviction_search_result) }
+
+      context "when business_has_matching_or_unknown_conviction? is true" do
+        let(:business_has_matching_or_unknown_conviction) { true }
+
+        it "returns true" do
+          expect(subject.display_business_convictions?).to eq(true)
+        end
+      end
+
+      context "when business_has_matching_or_unknown_conviction? is false" do
+        let(:business_has_matching_or_unknown_conviction) { false }
+
+        it "returns false" do
+          expect(subject.display_business_convictions?).to eq(false)
+        end
+      end
+    end
+  end
+
   describe "#approved_or_revoked?" do
     context "when conviction_check_approved? is true" do
       let(:conviction_check_approved) { true }
