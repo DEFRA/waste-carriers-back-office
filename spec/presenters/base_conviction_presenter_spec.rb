@@ -5,9 +5,13 @@ require "rails_helper"
 RSpec.describe BaseConvictionPresenter do
   let(:conviction_sign_off) { double(:conviction_sign_off, workflow_state: "possible_match") }
   let(:conviction_sign_offs) { [conviction_sign_off] }
+  let(:conviction_check_approved) {}
+  let(:revoked) {}
   let(:registration) do
     double(:registration,
-           conviction_sign_offs: conviction_sign_offs)
+           conviction_sign_offs: conviction_sign_offs,
+           conviction_check_approved?: conviction_check_approved,
+           revoked?: revoked)
   end
 
   let(:view_context) { double(:view_context) }
@@ -29,6 +33,36 @@ RSpec.describe BaseConvictionPresenter do
         message = "This renewal does not require a conviction check before it can be approved."
 
         expect(subject.conviction_status_message).to eq(message)
+      end
+    end
+  end
+
+  describe "#approved_or_revoked?" do
+    context "when conviction_check_approved? is true" do
+      let(:conviction_check_approved) { true }
+
+      it "returns true" do
+        expect(subject.approved_or_revoked?).to eq(true)
+      end
+    end
+
+    context "when conviction_check_approved? is false" do
+      let(:conviction_check_approved) { false }
+
+      context "when revoked? is true" do
+        let(:revoked) { true }
+
+        it "returns true" do
+          expect(subject.approved_or_revoked?).to eq(true)
+        end
+      end
+
+      context "when revoked? is false" do
+        let(:revoked) { false }
+
+        it "returns false" do
+          expect(subject.approved_or_revoked?).to eq(false)
+        end
       end
     end
   end

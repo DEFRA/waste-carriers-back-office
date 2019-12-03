@@ -8,4 +8,8 @@ class BaseConvictionPresenter < WasteCarriersEngine::BasePresenter
       I18n.t(".convictions.index.status.not_required")
     end
   end
+
+  def approved_or_revoked?
+    conviction_check_approved? || revoked?
+  end
 end

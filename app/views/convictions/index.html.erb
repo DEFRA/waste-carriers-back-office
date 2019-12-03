@@ -63,7 +63,7 @@
       <% end %>
     <% end %>
 
-    <% if @resource.conviction_check_approved? || @resource.metaData.REVOKED? %>
+    <% if @resource.approved_or_revoked? %>
     <table>
       <caption class="heading-medium">
         <%= t(".conviction_sign_off.heading") %>
@@ -76,7 +76,7 @@
           <td>
             <% if @resource.conviction_check_approved? %>
               <%= t(".conviction_sign_off.labels.status_values.approved") %>
-            <% elsif @resource.metaData.REVOKED? %>
+            <% elsif @resource.revoked? %>
               <%= t(".conviction_sign_off.labels.status_values.rejected") %>
             <% end %>
           </td>
