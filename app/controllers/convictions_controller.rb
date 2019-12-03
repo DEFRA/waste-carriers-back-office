@@ -25,10 +25,12 @@ class ConvictionsController < ApplicationController
   end
 
   def find_registration(reg_identifier)
-    @resource = WasteCarriersEngine::Registration.find_by(reg_identifier: reg_identifier)
+    registration = WasteCarriersEngine::Registration.find_by(reg_identifier: reg_identifier)
+    @resource = RegistrationConvictionPresenter.new(registration, view_context)
   end
 
   def find_renewing_registration(reg_identifier)
-    @resource = WasteCarriersEngine::RenewingRegistration.find_by(reg_identifier: reg_identifier)
+    renewing_registration = WasteCarriersEngine::RenewingRegistration.find_by(reg_identifier: reg_identifier)
+    @resource = RenewingRegistrationConvictionPresenter.new(renewing_registration, view_context)
   end
 end
