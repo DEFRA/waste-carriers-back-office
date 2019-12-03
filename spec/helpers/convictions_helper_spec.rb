@@ -9,38 +9,6 @@ RSpec.describe ConvictionsHelper, type: :helper do
     assign(:resource, transient_registration)
   end
 
-  describe "#declared_convictions" do
-    context "when the value is not present" do
-      before do
-        transient_registration.declared_convictions = nil
-      end
-
-      it "returns 'unknown'" do
-        expect(helper.declared_convictions).to eq("unknown")
-      end
-    end
-
-    context "when the value is 'yes'" do
-      before do
-        transient_registration.declared_convictions = "yes"
-      end
-
-      it "returns true" do
-        expect(helper.declared_convictions).to eq(true)
-      end
-    end
-
-    context "when the value is 'no'" do
-      before do
-        transient_registration.declared_convictions = "no"
-      end
-
-      it "returns false" do
-        expect(helper.declared_convictions).to eq(false)
-      end
-    end
-  end
-
   describe "#business_convictions" do
     context "when the conviction_search_result is not present" do
       before do

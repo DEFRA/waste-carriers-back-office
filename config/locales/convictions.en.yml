@@ -11,8 +11,8 @@ en:
         not_required: "This registration does not require a conviction check before it can be approved."
       declared_convictions:
         heading: "Declared convictions"
-        "true": "Yes – the user declared there were relevant convictions."
-        "false": "No – the user said there were no relevant convictions to declare."
+        "yes": "Yes – the user declared there were relevant convictions."
+        "no": "No – the user said there were no relevant convictions to declare."
         unknown: "Unknown – the user has not answered this question yet."
       business_convictions:
         heading: Matching convictions for the business

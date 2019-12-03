@@ -6,6 +6,8 @@ RSpec.describe BaseConvictionPresenter do
   let(:conviction_sign_off) { double(:conviction_sign_off, workflow_state: "possible_match") }
   let(:conviction_sign_offs) { [conviction_sign_off] }
 
+  let(:declared_convictions) {}
+
   let(:conviction_check_required) { false }
   let(:key_person) do
     double(:key_person,
@@ -19,6 +21,7 @@ RSpec.describe BaseConvictionPresenter do
   let(:registration) do
     double(:registration,
            conviction_sign_offs: conviction_sign_offs,
+           declared_convictions: declared_convictions,
            key_people: key_people,
            conviction_check_approved?: conviction_check_approved,
            revoked?: revoked)
@@ -59,6 +62,38 @@ RSpec.describe BaseConvictionPresenter do
         message = "This registration does not require a conviction check before it can be approved."
 
         expect(subject.conviction_status_message).to eq(message)
+      end
+    end
+  end
+
+  describe "#declared_convictions_message" do
+    context "when declared_convictions is 'yes'" do
+      let(:declared_convictions) { "yes" }
+
+      it "returns the correct message" do
+        message = "Yes – the user declared there were relevant convictions."
+
+        expect(subject.declared_convictions_message).to eq(message)
+      end
+    end
+
+    context "when declared_convictions is 'no'" do
+      let(:declared_convictions) { "no" }
+
+      it "returns the correct message" do
+        message = "No – the user said there were no relevant convictions to declare."
+
+        expect(subject.declared_convictions_message).to eq(message)
+      end
+    end
+
+    context "when declared_convictions is blank" do
+      let(:declared_convictions) {}
+
+      it "returns the correct message" do
+        message = "Unknown – the user has not answered this question yet."
+
+        expect(subject.declared_convictions_message).to eq(message)
       end
     end
   end

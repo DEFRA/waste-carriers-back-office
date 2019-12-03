@@ -13,6 +13,16 @@ class BaseConvictionPresenter < WasteCarriersEngine::BasePresenter
     end
   end
 
+  def declared_convictions_message
+    if declared_convictions == "yes"
+      I18n.t(".convictions.index.declared_convictions.yes")
+    elsif declared_convictions == "no"
+      I18n.t(".convictions.index.declared_convictions.no")
+    else
+      I18n.t(".convictions.index.declared_convictions.unknown")
+    end
+  end
+
   def approved_or_revoked?
     conviction_check_approved? || revoked?
   end

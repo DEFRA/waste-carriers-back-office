@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
 module ConvictionsHelper
-  def declared_convictions
-    return "unknown" unless @resource.declared_convictions.present?
-
-    @resource.declared_convictions == "yes"
-  end
-
   def business_convictions
     return "unknown" unless @resource.conviction_search_result.present?
 
