@@ -14,16 +14,16 @@
       <%= t(".declared_convictions.heading") %>
     </h2>
     <p>
-      <%= t(".declared_convictions.#{declared_convictions}") %>
+      <%= @resource.declared_convictions_message %>
     </p>
 
     <h2 class="heading-medium">
       <%= t(".business_convictions.heading") %>
     </h2>
     <p>
-      <%= t(".business_convictions.#{business_convictions}") %>
+      <%= @resource.business_convictions_message %>
     </p>
-    <% if business_convictions == true %>
+    <% if @resource.display_business_convictions? %>
       <%= render("shared/conviction_search_result", conviction_search_result: @resource.conviction_search_result, person: nil) %>
     <% end %>
 
@@ -31,11 +31,11 @@
       <%= t(".people_convictions.heading") %>
     </h2>
     <p>
-      <%= t(".people_convictions.#{people_convictions}") %>
+      <%= @resource.people_convictions_message %>
     </p>
 
-    <% if people_convictions == true %>
-      <% people_with_matches.each do |person| %>
+    <% if @resource.display_people_convictions? %>
+      <% @resource.people_with_matches.each do |person| %>
         <h3 class="heading-small">
           <% if person.person_type == "KEY" %>
             <%= t(".people_convictions.person_heading.#{@resource.business_type}") %>
@@ -47,14 +47,14 @@
       <% end %>
     <% end %>
 
-    <% if relevant_people_without_matches.present? %>
+    <% if @resource.relevant_people_without_matches.present? %>
       <h2 class="heading-medium">
         <%= t(".unmatched_people.heading") %>
       </h2>
       <p>
         <%= t(".unmatched_people.paragraph") %>
       </p>
-      <% relevant_people_without_matches.each do |person| %>
+      <% @resource.relevant_people_without_matches.each do |person| %>
         <table>
           <tbody>
             <%= render("shared/person_table_rows", person: person) %>
@@ -89,23 +89,23 @@
             <%= @resource.metaData.revoked_reason %>
           </td>
         </tr>
-        <% if @resource.conviction_sign_offs.first.confirmed_by.present? %>
+        <% if @resource.sign_off.confirmed_by.present? %>
         <tr>
           <td>
             <%= t(".conviction_sign_off.labels.confirmed_by") %>
           </td>
           <td>
-            <%= @resource.conviction_sign_offs.first.confirmed_by %>
+            <%= @resource.sign_off.confirmed_by %>
           </td>
         </tr>
         <% end %>
-        <% if @resource.conviction_sign_offs.first.confirmed_at.present? %>
+        <% if @resource.sign_off.confirmed_at.present? %>
         <tr>
           <td>
             <%= t(".conviction_sign_off.labels.confirmed_at") %>
           </td>
           <td>
-            <%= @resource.conviction_sign_offs.first.confirmed_at.in_time_zone("London").strftime("%A %e %B %Y at %l:%M%P") %>
+            <%= @resource.sign_off.confirmed_at.in_time_zone("London").to_formatted_s(:weekday_day_month_year_at_time) %>
           </td>
         </tr>
         <% end %>
@@ -124,19 +124,19 @@
         <p>
           <%= t(".approve_or_reject.paragraph_2") %>
         </p>
-        <% if conviction_sign_off.may_approve? %>
+        <% if @resource.sign_off.may_approve? %>
           <%= link_to t(".approve_or_reject.buttons.approve"),
                       new_transient_registration_conviction_approval_form_path(@resource.reg_identifier),
                       class: "button" %>
         <% end %>
 
-        <% if conviction_sign_off.may_begin_checks? %>
+        <% if @resource.sign_off.may_begin_checks? %>
           <%= link_to t(".approve_or_reject.buttons.begin_checks"),
                       convictions_begin_checks_path(@resource.reg_identifier),
                       class: "button-alert" %>
         <% end %>
 
-        <% if conviction_sign_off.may_reject? %>
+        <% if @resource.sign_off.may_reject? %>
         <%= link_to t(".approve_or_reject.buttons.reject"),
                     new_transient_registration_conviction_rejection_form_path(@resource.reg_identifier),
                     class: "button-warning" %>

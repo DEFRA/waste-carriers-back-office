@@ -11,18 +11,18 @@ en:
         not_required: "This registration does not require a conviction check before it can be approved."
       declared_convictions:
         heading: "Declared convictions"
-        "true": "Yes – the user declared there were relevant convictions."
-        "false": "No – the user said there were no relevant convictions to declare."
+        "yes": "Yes – the user declared there were relevant convictions."
+        "no": "No – the user said there were no relevant convictions to declare."
         unknown: "Unknown – the user has not answered this question yet."
       business_convictions:
         heading: Matching convictions for the business
-        "true": "There is a possible matching conviction for the business:"
-        "false": "No matching convictions were found for the business."
+        "yes": "There is a possible matching conviction for the business:"
+        "no": "No matching convictions were found for the business."
         unknown: "Unknown – the automated conviction checks have not run yet. This may be because the registration application is still in progress."
       people_convictions:
         heading: People with matching convictions
-        "true": "There are possible matching convictions for the following people:"
-        "false": "No matching convictions were found for people."
+        "yes": "There are possible matching convictions for the following people:"
+        "no": "No matching convictions were found for people."
         unknown: "Unknown – the automated conviction checks have not run yet. This may be because the registration application is still in progress."
         person_heading:
           localAuthority: "Chief executive"
