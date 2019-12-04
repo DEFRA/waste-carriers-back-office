@@ -132,7 +132,7 @@
 
         <% if @resource.sign_off.may_begin_checks? %>
           <%= link_to t(".approve_or_reject.buttons.begin_checks"),
-                      convictions_begin_checks_path(@resource.reg_identifier),
+                      @resource.begin_checks_path,
                       class: "button-alert" %>
         <% end %>
 

@@ -3,13 +3,39 @@
 require "rails_helper"
 
 RSpec.describe RegistrationConvictionPresenter do
-  let(:registration) { double(:registration) }
+  let(:reg_identifier) { "CBDU1" }
+  let(:conviction_check_required) {}
+  let(:registration) do
+    double(:registration,
+           reg_identifier: reg_identifier,
+           conviction_check_required?: conviction_check_required)
+  end
   let(:view_context) { double(:view_context) }
   subject { described_class.new(registration, view_context) }
 
   describe "#display_actions?" do
-    it "returns false" do
-      expect(subject.display_actions?).to eq(false)
+    context "when conviction_check_required? is false" do
+      let(:conviction_check_required) { false }
+
+      it "returns false" do
+        expect(subject.display_actions?).to eq(false)
+      end
+    end
+
+    context "when conviction_check_required? is true" do
+      let(:conviction_check_required) { true }
+
+      it "returns true" do
+        expect(subject.display_actions?).to eq(true)
+      end
+    end
+  end
+
+  describe "#begin_checks_path" do
+    it "returns the correct path" do
+      expected_path = "/bo/registrations/#{reg_identifier}/convictions/begin-checks"
+
+      expect(subject.begin_checks_path).to eq(expected_path)
     end
   end
 end
