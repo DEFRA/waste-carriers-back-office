@@ -2,6 +2,6 @@
 
 class RegistrationConvictionPresenter < BaseConvictionPresenter
   def display_actions?
-    false
+    conviction_check_required?
   end
 end
