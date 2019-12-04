@@ -54,7 +54,7 @@ RSpec.describe "Convictions", type: :request do
     end
   end
 
-  describe "/bo/transient-registrations/:reg_identifier/convictions/begin-checks" do
+  describe "/bo/transient-registrations/:transient_registration_reg_identifier/convictions/begin-checks" do
     context "when a valid user is signed in" do
       let(:user) { create(:user) }
       before(:each) do

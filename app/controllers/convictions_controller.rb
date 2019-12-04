@@ -8,7 +8,7 @@ class ConvictionsController < ApplicationController
   end
 
   def begin_checks
-    find_resource(find_renewing_registration(params[:reg_identifier]))
+    find_resource(params)
     @resource.conviction_sign_offs.first.begin_checks!
 
     redirect_to convictions_path
