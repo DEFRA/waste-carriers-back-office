@@ -9,18 +9,14 @@
         <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
       </h1>
 
-      <% if @conviction_approval_form.errors[:revoked_reason].any? %>
-      <div class="form-group form-group-error">
-      <% else %>
-      <div class="form-group">
-      <% end %>
+      <div class="form-group <%= "form-group-error" if @conviction_approval_form.errors[:revoked_reason].any? %>">
         <fieldset id="company_name">
           <legend class="visuallyhidden">
             <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
           </legend>
 
           <% if @conviction_approval_form.errors[:revoked_reason].any? %>
-          <span class="error-message"><%= @conviction_approval_form.errors[:revoked_reason].join(", ") %></span>
+            <span class="error-message"><%= @conviction_approval_form.errors[:revoked_reason].join(", ") %></span>
           <% end %>
 
           <%= f.label :revoked_reason, t(".revoked_reason_label"), class: "form-label" %>
