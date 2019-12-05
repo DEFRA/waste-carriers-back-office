@@ -32,6 +32,11 @@ Rails.application.routes.draw do
             path: "/bo/registrations" do
               resources :convictions,
                         only: :index
+
+              resources :registration_conviction_approval_forms,
+                        only: %i[new create],
+                        path: "convictions/approve",
+                        path_names: { new: "" }
             end
 
   resources :transient_registrations,
