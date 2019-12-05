@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "RegistrationConvictionRejectionForms", type: :request do
-  let(:registration) { create(:registration, :requires_conviction_check, :no_pending_payment) }
+  let(:registration) { create(:registration, :has_flagged_conviction_check) }
 
   describe "GET /bo/registrations/:reg_identifier/convictions/reject" do
     context "when a valid user is signed in" do
@@ -65,12 +65,12 @@ RSpec.describe "RegistrationConvictionRejectionForms", type: :request do
         expect(registration.reload.metaData.revoked_reason).to eq(params[:revoked_reason])
       end
 
-      skip "updates the conviction_sign_off's workflow_state" do
+      it "updates the conviction_sign_off's workflow_state" do
         post "/bo/registrations/#{registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
-        expect(registration.reload.conviction_sign_offs.first.workflow_state).to eq("rejectd")
+        expect(registration.reload.conviction_sign_offs.first.workflow_state).to eq("rejected")
       end
 
-      skip "does not reject the registration" do
+      skip "rejects the registration" do
       end
 
       context "when the params are invalid" do
