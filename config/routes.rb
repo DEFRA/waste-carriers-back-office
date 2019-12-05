@@ -33,6 +33,11 @@ Rails.application.routes.draw do
               resources :convictions,
                         only: :index
 
+              resources :registration_conviction_approval_forms,
+                        only: %i[new create],
+                        path: "convictions/approve",
+                        path_names: { new: "" }
+              
               resources :registration_conviction_rejection_forms,
                         only: %i[new create],
                         path: "convictions/reject",

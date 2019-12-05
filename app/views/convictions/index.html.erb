@@ -126,7 +126,7 @@
         </p>
         <% if @resource.sign_off.may_approve? %>
           <%= link_to t(".approve_or_reject.buttons.approve"),
-                      new_transient_registration_conviction_approval_form_path(@resource.reg_identifier),
+                      @resource.approve_path,
                       class: "button" %>
         <% end %>
 
