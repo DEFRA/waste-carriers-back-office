@@ -24,7 +24,9 @@ en:
           company_name: "Company name"
           last_modified: "Last modified"
           actions: "Actions"
-        convictions_details_button: "Conviction details"
+        details_link:
+          text: "Conviction details"
+          visually_hidden_text: "for %{name}"
       no_results: "No results found."
     convictions_dashboard_menu:
       menu:
