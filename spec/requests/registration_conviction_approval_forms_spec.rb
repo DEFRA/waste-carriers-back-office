@@ -65,22 +65,22 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
         expect(registration.reload.metaData.revoked_reason).to eq(params[:revoked_reason])
       end
 
-      skip "updates the conviction_sign_off's confirmed" do
+      it "updates the conviction_sign_off's confirmed" do
         post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", conviction_approval_form: params
         expect(registration.reload.conviction_sign_offs.first.confirmed).to eq("yes")
       end
 
-      skip "updates the conviction_sign_off's confirmed_at" do
+      it "updates the conviction_sign_off's confirmed_at" do
         post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", conviction_approval_form: params
         expect(registration.reload.conviction_sign_offs.first.confirmed_at).to be_a(DateTime)
       end
 
-      skip "updates the conviction_sign_off's confirmed_by" do
+      it "updates the conviction_sign_off's confirmed_by" do
         post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", conviction_approval_form: params
         expect(registration.reload.conviction_sign_offs.first.confirmed_by).to eq(user.email)
       end
 
-      skip "updates the conviction_sign_off's workflow_state" do
+      it "updates the conviction_sign_off's workflow_state" do
         post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", conviction_approval_form: params
         expect(registration.reload.conviction_sign_offs.first.workflow_state).to eq("approved")
       end
