@@ -1,10 +1,10 @@
 en:
   registration_conviction_approval_forms:
     new:
-      title: "Approve a renewal with possible convictions"
-      heading: "Approve a renewal with possible convictions: %{reg_identifier}"
+      title: "Approve a registration with possible convictions"
+      heading: "Approve a registration with possible convictions: %{reg_identifier}"
       revoked_reason_label: "Reason for approval"
-      renewal_message: "If there is no unpaid balance, approving this conviction check will automatically complete the renewal."
+      warning: "If there is no unpaid balance, approving this conviction check will automatically complete the registration."
       approve_button: "Approve this renewal"
   activemodel:
     errors:
