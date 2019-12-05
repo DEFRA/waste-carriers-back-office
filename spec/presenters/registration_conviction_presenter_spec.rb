@@ -38,4 +38,12 @@ RSpec.describe RegistrationConvictionPresenter do
       expect(subject.begin_checks_path).to eq(expected_path)
     end
   end
+
+  describe "#approve_path" do
+    it "returns the correct path" do
+      expected_path = "/bo/registrations/#{reg_identifier}/convictions/approve"
+
+      expect(subject.approve_path).to eq(expected_path)
+    end
+  end
 end
