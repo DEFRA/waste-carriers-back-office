@@ -9,11 +9,7 @@
         <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
       </h1>
 
-      <% if @conviction_rejection_form.errors[:revoked_reason].any? %>
-      <div class="form-group form-group-error">
-      <% else %>
-      <div class="form-group">
-      <% end %>
+      <div class="form-group <%= "form-group-error" if @conviction_rejection_form.errors[:revoked_reason].any? %>">
         <fieldset id="company_name">
           <legend class="visuallyhidden">
             <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
