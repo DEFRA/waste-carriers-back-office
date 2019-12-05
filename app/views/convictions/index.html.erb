@@ -138,7 +138,7 @@
 
         <% if @resource.sign_off.may_reject? %>
         <%= link_to t(".approve_or_reject.buttons.reject"),
-                    new_transient_registration_conviction_rejection_form_path(@resource.reg_identifier),
+                    @resource.reject_path,
                     class: "button-warning" %>
         <% end %>
       <% else %>
