@@ -37,6 +37,11 @@ Rails.application.routes.draw do
                         only: %i[new create],
                         path: "convictions/approve",
                         path_names: { new: "" }
+
+              resources :registration_conviction_rejection_forms,
+                        only: %i[new create],
+                        path: "convictions/reject",
+                        path_names: { new: "" }
             end
 
   resources :transient_registrations,
