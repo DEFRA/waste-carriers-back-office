@@ -24,6 +24,7 @@ class RegistrationConvictionRejectionFormsController < ApplicationController
 
   def submit_form
     if @conviction_rejection_form.submit(params[:conviction_rejection_form])
+      reject_check
       redirect_to convictions_path
       true
     else
@@ -38,5 +39,9 @@ class RegistrationConvictionRejectionFormsController < ApplicationController
 
   def authorize_action
     authorize! :review_convictions, @registration
+  end
+
+  def reject_check
+    @registration.conviction_sign_offs.first.reject!
   end
 end
