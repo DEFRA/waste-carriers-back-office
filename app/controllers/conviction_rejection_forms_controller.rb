@@ -25,6 +25,6 @@ class ConvictionRejectionFormsController < AdminFormsController
   private
 
   def reject_renewal
-    @transient_registration.conviction_sign_offs.first.reject!
+    @transient_registration.conviction_sign_offs.first.reject!(current_user)
   end
 end

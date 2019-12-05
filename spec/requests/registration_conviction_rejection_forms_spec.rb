@@ -65,12 +65,24 @@ RSpec.describe "RegistrationConvictionRejectionForms", type: :request do
         expect(registration.reload.metaData.revoked_reason).to eq(params[:revoked_reason])
       end
 
+      it "updates the conviction_sign_off's confirmed_at" do
+        post "/bo/registrations/#{registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
+        expect(registration.reload.conviction_sign_offs.first.confirmed_at).to be_a(DateTime)
+      end
+
+      it "updates the conviction_sign_off's confirmed_by" do
+        post "/bo/registrations/#{registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
+        expect(registration.reload.conviction_sign_offs.first.confirmed_by).to eq(user.email)
+      end
+
       it "updates the conviction_sign_off's workflow_state" do
         post "/bo/registrations/#{registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
         expect(registration.reload.conviction_sign_offs.first.workflow_state).to eq("rejected")
       end
 
-      skip "rejects the registration" do
+      it "refuses the registration" do
+        post "/bo/registrations/#{registration.reg_identifier}/convictions/reject", conviction_rejection_form: params
+        expect(registration.reload.metaData.status).to eq("REFUSED")
       end
 
       context "when the params are invalid" do

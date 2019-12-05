@@ -42,6 +42,6 @@ class RegistrationConvictionRejectionFormsController < ApplicationController
   end
 
   def reject_check
-    @registration.conviction_sign_offs.first.reject!
+    @registration.conviction_sign_offs.first.reject!(current_user)
   end
 end
