@@ -20,7 +20,7 @@
           </legend>
 
           <% if @conviction_rejection_form.errors[:revoked_reason].any? %>
-          <span class="error-message"><%= @conviction_rejection_form.errors[:revoked_reason].join(", ") %></span>
+            <span class="error-message"><%= @conviction_rejection_form.errors[:revoked_reason].join(", ") %></span>
           <% end %>
 
           <%= f.label :revoked_reason, t(".revoked_reason_label"), class: "form-label" %>
