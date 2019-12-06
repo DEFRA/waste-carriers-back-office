@@ -68,7 +68,7 @@ FactoryBot.define do
     trait :has_finance_details do
       temp_cards { 0 }
       after(:build, :create) do |transient_registration|
-        WasteCarriersEngine::FinanceDetails.new_finance_details(transient_registration, :bank_transfer, build(:user))
+        transient_registration.prepare_for_payment(:bank_transfer, build(:user))
       end
     end
   end
