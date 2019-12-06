@@ -9,10 +9,10 @@
           <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
         </h1>
 
-        <% if @registration.pending_manual_conviction_check? %>
-          <%= render "shared/registrations/pending_convictions_panel", resource: @registration %>
-        <% elsif @registration.rejected_conviction_checks? %>
+        <% if @registration.rejected_conviction_checks? %>
           <%= render "shared/registrations/rejected_conviction_checks_details", resource: @registration %>
+        <% elsif @registration.pending_manual_conviction_check? %>
+          <%= render "shared/registrations/pending_convictions_panel", resource: @registration %>
         <% end %>
 
         <% if @registration.pending_payment? %>
