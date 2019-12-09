@@ -85,18 +85,19 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
         expect(registration.reload.conviction_sign_offs.first.workflow_state).to eq("approved")
       end
 
-      skip "when there is no pending payment" do
+      context "when there is no pending payment" do
         it "activates the registration" do
-        end
-
-        skip "when the RegistrationCompletionService fails" do
-          it "rescues the error" do
-          end
+          post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+          expect(registration.reload).to be_active
         end
       end
 
-      skip "when there is a pending payment" do
+      context "when there is a pending payment" do
+        let(:registration) { create(:registration, :requires_conviction_check, :pending_payment) }
+
         it "does not activate the registration" do
+          post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+          expect(registration.reload).to be_pending
         end
       end
 

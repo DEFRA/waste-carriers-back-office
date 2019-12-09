@@ -25,6 +25,7 @@ class RegistrationConvictionApprovalFormsController < ApplicationController
   def submit_form
     if @conviction_approval_form.submit(params[:conviction_approval_form])
       approve_check
+      renew_if_possible
       redirect_to convictions_path
       true
     else
@@ -43,5 +44,11 @@ class RegistrationConvictionApprovalFormsController < ApplicationController
 
   def approve_check
     @registration.conviction_sign_offs.first.approve!(current_user)
+  end
+
+  def renew_if_possible
+    return if @registration.unpaid_balance?
+
+    WasteCarriersEngine::RegistrationCompletionService.run(registration: @registration)
   end
 end
