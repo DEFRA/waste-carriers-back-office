@@ -55,7 +55,7 @@
       </div>
     </details>
 
-    <p><%= link_to "Continue", WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(reg_identifier: @reg_identifier), class: "button" %></p>
+    <p><%= link_to "Continue", WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(token: @reg_identifier), class: "button" %></p>
     <p><%= t(".last_updated") %></p>
   </div>
 </div>

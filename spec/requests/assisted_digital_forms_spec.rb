@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "Assisted Digital Forms", type: :request do
   let(:registration) { create(:registration, :expires_soon) }
 
-  describe "GET /bo/renew/:reg_identifier" do
+  describe "GET /bo/:reg_identifier/renew" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency) }
       before(:each) do
@@ -13,7 +13,7 @@ RSpec.describe "Assisted Digital Forms", type: :request do
       end
 
       it "renders the new template" do
-        get "/bo/renew/#{registration.reg_identifier}"
+        get "/bo/#{registration.reg_identifier}/renew"
         expect(response).to render_template(:new)
       end
     end
@@ -25,17 +25,13 @@ RSpec.describe "Assisted Digital Forms", type: :request do
       end
 
       it "redirects to the permissions error page" do
-        get "/bo/renew/#{registration.reg_identifier}"
+        get "/bo/#{registration.reg_identifier}/renew"
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
   end
 
-  describe "POST /bo/renew/:reg_identifier" do
-    let(:params) do
-      { reg_identifier: registration.reg_identifier }
-    end
-
+  describe "POST /bo/:reg_identifier/renew" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency) }
       before(:each) do
@@ -44,7 +40,7 @@ RSpec.describe "Assisted Digital Forms", type: :request do
 
       it "creates a new transient registration" do
         expected_tr_count = WasteCarriersEngine::RenewingRegistration.count + 1
-        post "/bo/renew/", renewal_start_form: params
+        post "/bo/#{registration.reg_identifier}/renew"
         updated_tr_count = WasteCarriersEngine::RenewingRegistration.count
 
         expect(expected_tr_count).to eq(updated_tr_count)
@@ -59,14 +55,14 @@ RSpec.describe "Assisted Digital Forms", type: :request do
 
       it "does not create a new transient registration" do
         expected_tr_count = WasteCarriersEngine::RenewingRegistration.count
-        post "/bo/renew/", renewal_start_form: params
+        post "/bo/#{registration.reg_identifier}/renew"
         updated_tr_count = WasteCarriersEngine::RenewingRegistration.count
 
         expect(expected_tr_count).to eq(updated_tr_count)
       end
 
       it "redirects to the permissions error page" do
-        post "/bo/renew/", renewal_start_form: params
+        post "/bo/#{registration.reg_identifier}/renew"
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end

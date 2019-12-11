@@ -29,7 +29,7 @@ RSpec.describe "RenewingRegistrations", type: :request do
 
       it "includes a link to continue the renewal" do
         get "/bo/renewing-registrations/#{transient_registration.reg_identifier}"
-        expect(response.body).to include("/bo/renew/#{transient_registration.reg_identifier}")
+        expect(response.body).to include("/bo/#{transient_registration.reg_identifier}/renew")
       end
 
       context "when no matching transient_registration exists" do
