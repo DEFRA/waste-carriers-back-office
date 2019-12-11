@@ -15,7 +15,7 @@ module ActionLinksHelper
   def resume_link_for(resource)
     return "#" unless a_transient_registration?(resource)
 
-    WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier)
+    ad_privacy_policy_path(resource.reg_identifier)
   end
 
   def payment_link_for(resource)
@@ -43,7 +43,7 @@ module ActionLinksHelper
   def renew_link_for(resource)
     return "#" unless a_registration?(resource)
 
-    WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier)
+    ad_privacy_policy_path(resource.reg_identifier)
   end
 
   def display_details_link_for?(resource)

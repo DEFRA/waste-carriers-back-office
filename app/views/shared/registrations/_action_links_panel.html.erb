@@ -6,7 +6,7 @@
     <!-- TODO: This `display_resume_link_for?` will need to be updated when we build NewRegistration -->
     <% if display_resume_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.continue_button"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier) %>
+        <%= link_to t(".actions_box.links.continue_button"), resume_link_for(resource) %>
       </li>
     <% end %>
 

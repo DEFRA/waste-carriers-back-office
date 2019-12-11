@@ -34,7 +34,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:renewing_registration) }
 
       it "returns the correct path" do
-        expect(helper.resume_link_for(resource)).to eq(WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier))
+        expect(helper.resume_link_for(resource)).to eq(ad_privacy_policy_path(resource.reg_identifier))
       end
     end
 
@@ -108,7 +108,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { create(:registration) }
 
       it "returns the correct path" do
-        expect(helper.renew_link_for(resource)).to eq(WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier))
+        expect(helper.renew_link_for(resource)).to eq(ad_privacy_policy_path(resource.reg_identifier))
       end
     end
 
