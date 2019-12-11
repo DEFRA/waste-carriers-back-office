@@ -52,7 +52,6 @@ RSpec.describe "RegistrationTransfers", type: :request do
   describe "POST /bo/transfer-registration" do
     let(:params) do
       {
-        reg_identifier: registration.reg_identifier,
         email: other_external_user.email,
         confirm_email: other_external_user.email
       }

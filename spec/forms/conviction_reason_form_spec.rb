@@ -8,7 +8,6 @@ RSpec.describe ConvictionReasonForm, type: :model do
       let(:conviction_reason_form) { build(:conviction_reason_form) }
       let(:valid_params) do
         {
-          reg_identifier: conviction_reason_form.reg_identifier,
           revoked_reason: conviction_reason_form.revoked_reason
         }
       end
@@ -42,7 +41,6 @@ RSpec.describe ConvictionReasonForm, type: :model do
       let(:conviction_reason_form) { build(:conviction_reason_form) }
       let(:invalid_params) do
         {
-          reg_identifier: nil,
           revoked_reason: nil
         }
       end

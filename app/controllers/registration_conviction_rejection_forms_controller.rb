@@ -8,7 +8,7 @@ class RegistrationConvictionRejectionFormsController < ApplicationController
   end
 
   def create
-    return false unless build_form(params[:conviction_rejection_form][:reg_identifier])
+    return false unless build_form(params[:registration_reg_identifier])
 
     authorize_action
 

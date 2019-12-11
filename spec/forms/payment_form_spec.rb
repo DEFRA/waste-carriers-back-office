@@ -12,7 +12,6 @@ RSpec.describe PaymentForm, type: :model do
     context "when the form is valid" do
       let(:valid_params) do
         {
-          reg_identifier: payment_form.reg_identifier,
           amount: payment_form.amount,
           comment: payment_form.comment,
           updated_by_user: payment_form.updated_by_user,
@@ -99,11 +98,7 @@ RSpec.describe PaymentForm, type: :model do
     end
 
     context "when the form is not valid" do
-      let(:invalid_params) do
-        {
-          reg_identifier: payment_form.reg_identifier
-        }
-      end
+      let(:invalid_params) { {} }
       let(:payment_type) { "FOO" }
 
       it "should not submit" do

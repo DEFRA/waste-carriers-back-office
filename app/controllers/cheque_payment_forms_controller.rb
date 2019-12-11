@@ -13,7 +13,7 @@ class ChequePaymentFormsController < AdminFormsController
 
     return unless super(ChequePaymentForm,
                         "cheque_payment_form",
-                        params[:cheque_payment_form][:reg_identifier],
+                        params[:transient_registration_reg_identifier],
                         { authorize_action: :authorize_action })
 
     renew_if_possible

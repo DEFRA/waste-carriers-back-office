@@ -13,7 +13,7 @@ class WorldpayMissedPaymentFormsController < AdminFormsController
 
     return unless super(WorldpayMissedPaymentForm,
                         "worldpay_missed_payment_form",
-                        params[:worldpay_missed_payment_form][:reg_identifier],
+                        params[:transient_registration_reg_identifier],
                         { authorize_action: :authorize_action })
 
     change_state_if_possible

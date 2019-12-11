@@ -50,7 +50,6 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
 
       let(:params) do
         {
-          reg_identifier: registration.reg_identifier,
           revoked_reason: "foo"
         }
       end
@@ -134,7 +133,6 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
 
       let(:params) do
         {
-          reg_identifier: registration.reg_identifier,
           revoked_reason: "foo"
         }
       end

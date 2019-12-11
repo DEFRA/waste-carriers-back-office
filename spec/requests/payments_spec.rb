@@ -33,7 +33,6 @@ RSpec.describe "Payments", type: :request do
 
       let(:params) do
         {
-          reg_identifier: transient_registration.reg_identifier,
           payment_type: "transfer"
         }
       end

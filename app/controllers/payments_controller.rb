@@ -9,7 +9,7 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    find_transient_registration(params[:payment_form][:reg_identifier])
+    find_transient_registration(params[:transient_registration_reg_identifier])
 
     payment_type = params[:payment_form][:payment_type]
 

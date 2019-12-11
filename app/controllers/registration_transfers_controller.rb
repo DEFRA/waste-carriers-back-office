@@ -10,7 +10,7 @@ class RegistrationTransfersController < ApplicationController
   end
 
   def create
-    return false unless build_form(params[:registration_transfer_form][:reg_identifier])
+    return false unless build_form(params[:reg_identifier])
 
     authorize_action
 

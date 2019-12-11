@@ -13,7 +13,7 @@ class PostalOrderPaymentFormsController < AdminFormsController
 
     return unless super(PostalOrderPaymentForm,
                         "postal_order_payment_form",
-                        params[:postal_order_payment_form][:reg_identifier],
+                        params[:transient_registration_reg_identifier],
                         { authorize_action: :authorize_action })
 
     renew_if_possible

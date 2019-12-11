@@ -9,7 +9,6 @@ RSpec.describe RegistrationTransferForm, type: :model do
     context "when the form is valid" do
       let(:valid_params) do
         {
-          reg_identifier: registration_transfer_form.reg_identifier,
           email: registration_transfer_form.email,
           confirm_email: registration_transfer_form.confirm_email
         }
@@ -27,7 +26,6 @@ RSpec.describe RegistrationTransferForm, type: :model do
     context "when the form is not valid" do
       let(:invalid_params) do
         {
-          reg_identifier: nil,
           email: nil,
           confirm_email: nil
         }
@@ -41,7 +39,6 @@ RSpec.describe RegistrationTransferForm, type: :model do
     context "when the params contain uppercase letters" do
       let(:uppercase_params) do
         {
-          reg_identifier: registration_transfer_form.reg_identifier,
           email: "UPPERCASElowercase@example.com",
           confirm_email: "UPPERCASElowercase@example.com"
         }

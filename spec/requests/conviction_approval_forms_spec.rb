@@ -58,7 +58,6 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
 
       let(:params) do
         {
-          reg_identifier: transient_registration.reg_identifier,
           revoked_reason: "foo"
         }
       end
@@ -138,7 +137,6 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
       context "when the params are invalid" do
         let(:params) do
           {
-            reg_identifier: transient_registration.reg_identifier,
             revoked_reason: ""
           }
         end
@@ -168,7 +166,6 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
 
       let(:params) do
         {
-          reg_identifier: transient_registration.reg_identifier,
           revoked_reason: "foo"
         }
       end

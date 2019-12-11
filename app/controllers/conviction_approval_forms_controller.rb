@@ -11,7 +11,7 @@ class ConvictionApprovalFormsController < AdminFormsController
   def create
     return unless super(ConvictionApprovalForm,
                         "conviction_approval_form",
-                        params[:conviction_approval_form][:reg_identifier],
+                        params[:transient_registration_reg_identifier],
                         { authorize_action: :authorize_action,
                           success_path: convictions_path })
 

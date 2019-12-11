@@ -49,7 +49,6 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
   describe "POST /bo/transient-registrations/:reg_identifier/payments/worldpay-missed" do
     let(:params) do
       {
-        reg_identifier: transient_registration.reg_identifier,
         amount: transient_registration.finance_details.balance,
         comment: "foo",
         registration_reference: "foo",
@@ -162,7 +161,6 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
       context "when the params are invalid" do
         let(:params) do
           {
-            reg_identifier: transient_registration.reg_identifier,
             revoked_reason: ""
           }
         end
