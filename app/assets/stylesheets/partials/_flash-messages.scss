@@ -1,0 +1,27 @@
+.error-summary.flash-message {
+  border-color: #00703c;
+  background-color: #00703c;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.error-summary.flash-success {
+  border-color: #1d70b8;
+  background-color: #1d70b8;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.flash-success .error-summary-list a:link,
+.flash-success .error-summary-list a:visited,
+.flash-success .error-summary-list a:hover,
+.flash-success .error-summary-list a:active,
+.flash-success .error-summary-list p,
+.flash-message .error-summary-list a:link,
+.flash-message .error-summary-list a:visited,
+.flash-message .error-summary-list a:hover,
+.flash-message .error-summary-list a:active,
+.flash-message .error-summary-list p {
+  color: #ffffff;
+  font-size: 24px;
+ }
