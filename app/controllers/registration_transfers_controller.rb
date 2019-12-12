@@ -4,13 +4,13 @@ class RegistrationTransfersController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    build_form(params[:reg_identifier])
+    build_form(params[:registration_reg_identifier])
 
     authorize_action
   end
 
   def create
-    return false unless build_form(params[:reg_identifier])
+    return false unless build_form(params[:registration_reg_identifier])
 
     authorize_action
 
@@ -18,7 +18,7 @@ class RegistrationTransfersController < ApplicationController
   end
 
   def success
-    find_registration(params[:reg_identifier])
+    find_registration(params[:registration_reg_identifier])
   end
 
   private
@@ -30,7 +30,7 @@ class RegistrationTransfersController < ApplicationController
 
   def submit_form
     if @registration_transfer_form.submit(params[:registration_transfer_form])
-      redirect_to registration_transfer_success_path(params[:registration_transfer_form][:reg_identifier])
+      redirect_to registration_registration_transfer_success_path(params[:registration_reg_identifier])
       true
     else
       render :new

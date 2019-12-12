@@ -42,6 +42,16 @@ Rails.application.routes.draw do
                         only: %i[new create],
                         path: "convictions/reject",
                         path_names: { new: "" }
+
+              resources :registration_transfers,
+                        only: %i[new create],
+                        param: :reg_identifier,
+                        path: "transfer",
+                        path_names: { new: "" }
+
+              get "transfer/success",
+                  to: "registration_transfers#success",
+                  as: :registration_transfer_success
             end
 
   resources :transient_registrations,
@@ -104,15 +114,6 @@ Rails.application.routes.draw do
   get "/bo/transient-registrations/:transient_registration_reg_identifier/convictions/begin-checks",
       to: "convictions#begin_checks",
       as: :transient_registration_convictions_begin_checks
-
-  resources :registration_transfers,
-            only: %i[new create],
-            param: :reg_identifier,
-            path: "/bo/transfer-registration",
-            path_names: { new: "/:reg_identifier" }
-  get "/bo/transfer-registration/:reg_identifier/success",
-      to: "registration_transfers#success",
-      as: :registration_transfer_success
 
   get "/bo/users",
       to: "users#index",
