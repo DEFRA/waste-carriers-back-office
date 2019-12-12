@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RegistrationTransferForm < BaseRegistrationForm
+class RegistrationTransferForm < WasteCarriersEngine::BaseForm
   attr_accessor :email, :confirm_email, :registration
 
   def initialize(registration)

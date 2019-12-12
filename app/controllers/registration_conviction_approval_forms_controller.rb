@@ -19,7 +19,7 @@ class RegistrationConvictionApprovalFormsController < ApplicationController
 
   def build_form(reg_identifier)
     find_registration(reg_identifier)
-    @conviction_approval_form = RegistrationConvictionApprovalForm.new(@registration)
+    @conviction_approval_form = ConvictionApprovalForm.new(@registration)
   end
 
   def submit_form
