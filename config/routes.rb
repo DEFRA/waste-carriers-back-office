@@ -128,6 +128,6 @@ Rails.application.routes.draw do
       to: "user_migrations#results",
       as: :user_migration_results
 
-  mount WasteCarriersEngine::Engine => "/bo"
+  mount WasteCarriersEngine::Engine => "/bo", as: "basic_app_engine"
 end
 # rubocop:enable Metrics/BlockLength

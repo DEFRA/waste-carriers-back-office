@@ -40,7 +40,7 @@
 
     <% if display_order_copy_cards_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.order_copy_cards"), resource.order_copy_cards_link %>
+        <%= link_to t(".actions_box.links.order_copy_cards"), basic_app_engine.new_copy_cards_form_path(resource.reg_identifier) %>
       </li>
     <% end %>
 
