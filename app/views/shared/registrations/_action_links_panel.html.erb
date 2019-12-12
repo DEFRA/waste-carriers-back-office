@@ -26,13 +26,13 @@
 
     <% if display_edit_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.edit"), resource.edit_link %>
+        <%= link_to t(".actions_box.links.edit"), "#" %>
       </li>
     <% end %>
 
     <% if display_view_confirmation_letter_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.view_confirmation_letter"), resource.view_confirmation_letter_link %>
+        <%= link_to t(".actions_box.links.view_confirmation_letter"), "#" %>
       </li>
     <% end %>
 
@@ -46,19 +46,19 @@
 
     <% if display_payment_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.payment_status"), resource.finance_details_link%>
+        <%= link_to t(".actions_box.links.payment_status"), "#" %>
       </li>
     <% end %>
 
     <% if display_revoke_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.revoke"), resource.revoke_link %>
+        <%= link_to t(".actions_box.links.revoke"), "#" %>
       </li>
     <% end %>
 
     <% if display_cease_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.cease"), resource.cease_link %>
+        <%= link_to t(".actions_box.links.cease"), "#" %>
       </li>
     <% end %>
   </ul>
