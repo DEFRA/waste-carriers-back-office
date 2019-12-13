@@ -45,7 +45,7 @@
                 <%= @transient_registration.display_current_workflow_state %>
               </p>
               <% if can? :renew, @transient_registration %>
-                <%= link_to t(".status.actions.continue_button"), WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(@transient_registration.reg_identifier), class: 'button' %>
+                <%= link_to t(".status.actions.continue_button"), resume_link_for(@transient_registration), class: 'button' %>
               <% end %>
             <% end %>
           </div>
