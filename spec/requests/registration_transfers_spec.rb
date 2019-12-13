@@ -115,4 +115,52 @@ RSpec.describe "RegistrationTransfers", type: :request do
       end
     end
   end
+
+  describe "GET /bo/registrations/:reg_identifier/transfer/success" do
+    before do
+      # Page expects the registration's account email to belong to an actual user
+      create(:external_user, email: registration.account_email)
+    end
+
+    context "when a valid user is signed in" do
+      let(:user) { create(:user, :agency) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "renders the success template" do
+        get "/bo/registrations/#{registration.reg_identifier}/transfer/success"
+        expect(response).to render_template(:success)
+      end
+
+      it "includes the registration info on the page" do
+        get "/bo/registrations/#{registration.reg_identifier}/transfer/success"
+        expect(response.body).to include("Registration #{registration.reg_identifier} has been transferred")
+      end
+
+      it "returns a 200 response" do
+        get "/bo/registrations/#{registration.reg_identifier}/transfer/success"
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "when a non-agency user is signed in" do
+      let(:user) { create(:user, :finance) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "redirects to the permissions error page" do
+        get "/bo/registrations/#{registration.reg_identifier}/transfer/success"
+        expect(response).to redirect_to("/bo/pages/permission")
+      end
+    end
+
+    context "when a user is not signed in" do
+      it "redirects to the sign-in page" do
+        get "/bo/registrations/#{registration.reg_identifier}/transfer/success"
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
 end

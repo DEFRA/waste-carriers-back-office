@@ -19,6 +19,7 @@ class RegistrationTransfersController < ApplicationController
 
   def success
     find_registration(params[:registration_reg_identifier])
+    authorize_action
   end
 
   private
