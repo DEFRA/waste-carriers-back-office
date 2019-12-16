@@ -1,0 +1,14 @@
+en:
+  user_activations:
+    activate_form:
+      title: "Activate user"
+      heading: "Activate user"
+      paragraph_1: "You are about to activate this user:"
+      paragraph_2: "Once activated, this user will be able to access and use the back office."
+      button: "Activate"
+    deactivate_form:
+      title: "Deactivate user"
+      heading: "Deactivate user"
+      paragraph_1: "You are about to deactivate this user:"
+      paragraph_2: "Once deactivated, this user will not be able to access and use the back office."
+      button: "Deactivate"

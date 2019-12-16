@@ -126,6 +126,11 @@ Rails.application.routes.draw do
       to: "users#index",
       as: :users
 
+  get "/bo/users/activate/:id", to: "user_activations#activate_form", as: :activate_user_form
+  get "/bo/users/deactivate/:id", to: "user_activations#deactivate_form", as: :deactivate_user_form
+  post "/bo/users/activate/:id", to: "user_activations#activate", as: :activate_user
+  post "/bo/users/deactivate/:id", to: "user_activations#deactivate", as: :deactivate_user
+
   resources :user_migrations,
             only: %i[new create],
             path: "/bo/users/migrate",

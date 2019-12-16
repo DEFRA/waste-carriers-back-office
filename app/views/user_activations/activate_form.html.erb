@@ -1,0 +1,21 @@
+<div class="grid-row">
+  <div class="column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: users_path) %>
+
+    <h1 class="heading-large">
+      <%= t(".heading") %>
+    </h1>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="column-full">
+    <p><%= t(".paragraph_1") %></p>
+    <p><%= @user.email %></p>
+    <p><%= t(".paragraph_2") %></p>
+
+    <%= button_to t(".button"),
+              activate_user_path(@user.id),
+              class: "button" %>
+  </div>
+</div>
