@@ -32,3 +32,12 @@ en:
           activate:
             link_text: "Activate"
             visually_hidden_text: " %{email}"
+  mongoid:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              blank: "You must enter a password"
+              too_short: "The password must be at least 8 characters long"
+              invalid_format: "The password must contain uppercase letters, lowercase letters and numbers"
