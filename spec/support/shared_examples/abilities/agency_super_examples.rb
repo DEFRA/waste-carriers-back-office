@@ -5,7 +5,7 @@ RSpec.shared_examples "agency_super examples" do
     should be_able_to(:manage_back_office_users, User)
   end
 
-  it "should be able to create an agency user" do
-    should be_able_to(:create_agency_user, User)
+  it "should be able to manage agency users" do
+    should be_able_to(:manage_agency_users, User)
   end
 end

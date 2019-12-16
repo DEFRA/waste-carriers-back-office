@@ -64,15 +64,12 @@ class Ability
     permissions_for_agency_user_with_refund
 
     can :manage_back_office_users, :all
-    can :create_agency_user, User
+    can :manage_agency_users, :all
   end
 
   def permissions_for_finance_super_user
     can :manage_back_office_users, User
-    can :create_agency_user, User
-    can :create_agency_with_refund_user, User
-    can :create_finance_user, User
-    can :create_finance_admin_user, User
+    can :manage_finance_users, :all
   end
 
   # Checks to see if role matches

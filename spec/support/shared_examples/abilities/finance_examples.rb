@@ -49,27 +49,19 @@ RSpec.shared_examples "finance examples" do
     should_not be_able_to(:revert_to_payment_summary, WasteCarriersEngine::RenewingRegistration)
   end
 
+  it "should not be able to transfer a registration" do
+    should_not be_able_to(:transfer_registration, WasteCarriersEngine::Registration)
+  end
+
   it "should not be able to manage back office users" do
     should_not be_able_to(:manage_back_office_users, User)
   end
 
-  it "should not be able to create an agency user" do
-    should_not be_able_to(:create_agency_user, User)
+  it "should not be able to manage agency users" do
+    should_not be_able_to(:manage_agency_users, User)
   end
 
-  it "should not be able to create an agency_with_refund user" do
-    should_not be_able_to(:create_agency_with_refund_user, User)
-  end
-
-  it "should not be able to create a finance user" do
-    should_not be_able_to(:create_finance_user, User)
-  end
-
-  it "should not be able to create a finance admin user" do
-    should_not be_able_to(:create_finance_admin_user, User)
-  end
-
-  it "should not be able to transfer a registration" do
-    should_not be_able_to(:transfer_registration, WasteCarriersEngine::Registration)
+  it "should not be able to manage finance users" do
+    should_not be_able_to(:manage_finance_users, User)
   end
 end

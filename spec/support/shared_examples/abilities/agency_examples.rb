@@ -38,15 +38,7 @@ RSpec.shared_examples "agency examples" do
 
   # All agency users should NOT be able to do this:
 
-  it "should not be able to create an agency_with_refund user" do
-    should_not be_able_to(:create_agency_with_refund_user, User)
-  end
-
-  it "should not be able to create a finance user" do
-    should_not be_able_to(:create_finance_user, User)
-  end
-
-  it "should not be able to create a finance admin user" do
-    should_not be_able_to(:create_finance_admin_user, User)
+  it "should not be able to manage finance users" do
+    should_not be_able_to(:manage_finance_users, User)
   end
 end
