@@ -39,6 +39,14 @@ class User
     %w[finance finance_admin finance_super].include?(role)
   end
 
+  # Permissions
+
+  def ability
+    @ability ||= Ability.new(self)
+  end
+
+  delegate :can?, :cannot?, to: :ability
+
   # Validations
 
   validates :role, inclusion: { in: ROLES }

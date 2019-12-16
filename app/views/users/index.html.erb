@@ -39,26 +39,28 @@
                   <%= t(".user_list.statuses.active") %>
                 </td>
                 <td>
-                  <ul>
-                    <li>
-                      <%= link_to "#" do %>
-                        <%= t(".user_list.actions.change_role.link_text") %>
-                        <span class="visually-hidden">
-                         <%= t(".user_list.actions.change_role.visually_hidden_text",
-                               email: user.email) %>
-                       </span>
-                     <% end %>
-                    </li>
-                    <li>
-                      <%= link_to "#" do %>
-                        <%= t(".user_list.actions.deactivate.link_text") %>
-                        <span class="visually-hidden">
-                         <%= t(".user_list.actions.deactivate.visually_hidden_text",
-                               email: user.email) %>
-                       </span>
-                     <% end %>
-                    </li>
-                  </ul>
+                  <% if display_user_actions?(user, current_user) %>
+                    <ul>
+                      <li>
+                        <%= link_to "#" do %>
+                          <%= t(".user_list.actions.change_role.link_text") %>
+                          <span class="visually-hidden">
+                           <%= t(".user_list.actions.change_role.visually_hidden_text",
+                                 email: user.email) %>
+                         </span>
+                       <% end %>
+                      </li>
+                      <li>
+                        <%= link_to "#" do %>
+                          <%= t(".user_list.actions.deactivate.link_text") %>
+                          <span class="visually-hidden">
+                           <%= t(".user_list.actions.deactivate.visually_hidden_text",
+                                 email: user.email) %>
+                         </span>
+                       <% end %>
+                      </li>
+                    </ul>
+                  <% end %>
                 </td>
               </tr>
             <% end %>
