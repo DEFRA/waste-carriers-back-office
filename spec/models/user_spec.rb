@@ -22,6 +22,15 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#activate!" do
+    let(:user) { build(:user, :inactive) }
+
+    it "makes the user active" do
+      user.activate!
+      expect(user.active).to eq(true)
+    end
+  end
+
   describe "#password" do
     context "when the user's password meets the requirements" do
       let(:user) { build(:user, password: "Secret123") }

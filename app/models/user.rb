@@ -26,6 +26,10 @@ class User
     active == true
   end
 
+  def activate!
+    update!(active: true)
+  end
+
   # Roles
 
   ROLES = %w[agency
