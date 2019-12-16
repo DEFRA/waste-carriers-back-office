@@ -30,6 +30,10 @@ class User
     update!(active: true)
   end
 
+  def deactivate!
+    update!(active: false)
+  end
+
   # Roles
 
   ROLES = %w[agency
