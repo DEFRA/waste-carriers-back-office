@@ -10,6 +10,7 @@ en:
           email: "User email"
           role: "Role"
           status: "Status"
+          actions: "Actions"
         roles:
           agency: "agency"
           agency_with_refund: "agency with refund"
@@ -21,3 +22,13 @@ en:
           active: "active"
           deactivated: "deactivated"
           invited: "invitation sent"
+        actions:
+          change_role:
+            link_text: "Change role"
+            visually_hidden_text: " of %{email}"
+          deactivate:
+            link_text: "Deactivate"
+            visually_hidden_text: " %{email}"
+          activate:
+            link_text: "Activate"
+            visually_hidden_text: " %{email}"
