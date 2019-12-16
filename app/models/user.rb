@@ -31,6 +31,14 @@ class User
 
   field :role, type: String
 
+  def in_agency_group?
+    %w[agency agency_with_refund agency_super].include?(role)
+  end
+
+  def in_finance_group?
+    %w[finance finance_admin finance_super].include?(role)
+  end
+
   # Validations
 
   validates :role, inclusion: { in: ROLES }
