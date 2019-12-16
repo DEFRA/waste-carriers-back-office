@@ -4,6 +4,24 @@ require "cancan/matchers"
 require "rails_helper"
 
 RSpec.describe User, type: :model do
+  describe "#active?" do
+    context "when 'active' is true" do
+      let(:user) { User.new(active: true) }
+
+      it "returns true" do
+        expect(user.active?).to eq(true)
+      end
+    end
+
+    context "when 'active' is false" do
+      let(:user) { User.new(active: false) }
+
+      it "returns false" do
+        expect(user.active?).to eq(false)
+      end
+    end
+  end
+
   describe "#password" do
     context "when the user's password meets the requirements" do
       let(:user) { build(:user, password: "Secret123") }

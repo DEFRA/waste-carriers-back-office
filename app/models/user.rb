@@ -22,6 +22,10 @@ class User
     set(session_token: SecureRandom.hex)
   end
 
+  def active?
+    active == true
+  end
+
   # Roles
 
   ROLES = %w[agency
