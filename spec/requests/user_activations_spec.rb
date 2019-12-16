@@ -64,6 +64,11 @@ RSpec.describe "User Activations", type: :request do
           post "/bo/users/activate/#{inactive_user.id}"
           expect(response).to redirect_to(users_path)
         end
+
+        it "activates the user" do
+          post "/bo/users/activate/#{inactive_user.id}"
+          expect(inactive_user.reload.active?).to eq(true)
+        end
       end
 
       context "when the user to be activated is already active" do
@@ -86,6 +91,11 @@ RSpec.describe "User Activations", type: :request do
         it "redirects to the user list" do
           post "/bo/users/deactivate/#{active_user.id}"
           expect(response).to redirect_to(users_path)
+        end
+
+        it "deactivates the user" do
+          post "/bo/users/deactivate/#{active_user.id}"
+          expect(active_user.reload.active?).to eq(false)
         end
       end
 
