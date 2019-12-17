@@ -7,10 +7,12 @@ class User
   # Use the User database
   store_in client: "users", collection: "back_office_users"
 
-  # Devise security improvements, used to invalidate old sessions on logout
-  # Taken from https://makandracards.com/makandra/53562-devise-invalidating-all-sessions-for-a-user
   field :session_token, type: String
 
+  delegate :can?, :cannot?, to: :ability
+
+  # Devise security improvements, used to invalidate old sessions on logout
+  # Taken from https://makandracards.com/makandra/53562-devise-invalidating-all-sessions-for-a-user
   def authenticatable_salt
     "#{super}#{session_token}"
   end
@@ -42,10 +44,8 @@ class User
   # Permissions
 
   def ability
-    @ability ||= Ability.new(self)
+    @_ability ||= Ability.new(self)
   end
-
-  delegate :can?, :cannot?, to: :ability
 
   # Validations
 
