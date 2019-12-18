@@ -6,7 +6,7 @@ module Reports
   RSpec.describe BaseSerializer do
 
     class TestObject < Reports::BaseSerializer
-      ATTRIBUTES = [:reg_identifier].freeze
+      ATTRIBUTES = { reg_identifier: "reg_identifier" }.freeze
 
       def registrations_scope
         ::WasteCarriersEngine::Registration.all # Will not actually be called, just stubbed
@@ -26,7 +26,7 @@ module Reports
         expect(registration).to receive(:reg_identifier).and_return("CBDU0000")
         expect(WasteCarriersEngine::Registration).to receive(:all).and_return([registration])
 
-        expect(subject.to_csv).to eq("reg_identifier\nCBDU0000\n")
+        expect(subject.to_csv).to eq("\"reg_identifier\"\n\"CBDU0000\"\n")
       end
     end
   end

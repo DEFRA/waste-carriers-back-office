@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 0a8b196b624959eac3693185d727d2c6b1872755
-  branch: master
+  revision: 1410d70bdb5fc875e4f6dd7064afb0086c13521c
+  branch: 737-epr-export
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)

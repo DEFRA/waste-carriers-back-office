@@ -5,8 +5,8 @@ require "csv"
 module Reports
   class BaseSerializer
     def to_csv
-      CSV.generate do |csv|
-        csv << self.class::ATTRIBUTES
+      CSV.generate(force_quotes: true) do |csv|
+        csv << self.class::ATTRIBUTES.values
 
         registrations_data do |exemption_data|
           csv << exemption_data
