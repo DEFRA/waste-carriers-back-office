@@ -7,4 +7,4 @@ Time::DATE_FORMATS[:weekday_day_month_year_at_time] = "%A %e %B %Y at %l:%M%P"
 # For example: 2 December 2019
 Time::DATE_FORMATS[:day_month_year] = "%d %B %Y"
 # For example: 2019-12-02
-Time::DATE_FORMATS[:reports_year_month_day] = "%Y-%m-%d"
+Time::DATE_FORMATS[:year_month_day_hyphens] = "%Y-%m-%d"

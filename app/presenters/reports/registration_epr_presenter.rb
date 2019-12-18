@@ -7,7 +7,7 @@ module Reports
              to: :company_address, prefix: true
 
     def metadata_date_activated
-      metaData&.date_activated&.to_formatted_s(:reports_year_month_day)
+      metaData&.date_activated&.to_formatted_s(:year_month_day_hyphens)
     end
 
     def registration_type
@@ -19,7 +19,7 @@ module Reports
     def expires_on
       return if lower_tier?
 
-      super&.to_formatted_s(:reports_year_month_day)
+      super&.to_formatted_s(:year_month_day_hyphens)
     end
 
     def company_no
