@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 0a8b196b624959eac3693185d727d2c6b1872755
+  revision: c4431eb481ba626e51d0bcab024dad768d9343cf
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -338,7 +338,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    thor (1.0.0)
+    thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.9)
     turbolinks (5.2.1)
