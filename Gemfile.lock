@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 1410d70bdb5fc875e4f6dd7064afb0086c13521c
-  branch: 737-epr-export
+  revision: 5a3f49ef246f33cc2e32cdce969065a1fb607fc2
+  branch: master
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)
@@ -338,7 +338,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    thor (1.0.0)
+    thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.9)
     turbolinks (5.2.1)
