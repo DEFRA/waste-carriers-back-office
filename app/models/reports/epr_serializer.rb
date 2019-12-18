@@ -2,7 +2,6 @@
 
 module Reports
   class EprSerializer < BaseSerializer
-    # TODO
     ATTRIBUTES = {
       reg_identifier: "Registration number",
       company_name: "Organisation name",
@@ -27,11 +26,11 @@ module Reports
 
     private
 
-    def registrations_scope
+    def scope
       ::WasteCarriersEngine::Registration.active
     end
 
-    def parse_registration(registration)
+    def parse_object(registration)
       ATTRIBUTES.map do |key, _value|
         presenter = RegistrationEprPresenter.new(registration, nil)
         presenter.public_send(key)

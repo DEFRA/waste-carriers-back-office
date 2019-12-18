@@ -8,11 +8,11 @@ module Reports
     class TestObject < Reports::BaseSerializer
       ATTRIBUTES = { reg_identifier: "reg_identifier" }.freeze
 
-      def registrations_scope
+      def scope
         ::WasteCarriersEngine::Registration.all # Will not actually be called, just stubbed
       end
 
-      def parse_registration(registration)
+      def parse_object(registration)
         [registration.reg_identifier]
       end
     end
