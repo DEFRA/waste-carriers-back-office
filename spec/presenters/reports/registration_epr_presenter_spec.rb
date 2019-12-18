@@ -54,8 +54,6 @@ module Reports
         let(:lower_tier) { false }
 
         it "returns the object expires_on formatted" do
-          result = double(:result)
-
           expect(registration).to receive(:expires_on).and_return(Time.new(2015, 1, 1))
 
           expect(subject.expires_on).to eq("2015-01-01")
@@ -146,7 +144,7 @@ module Reports
 
           expect(registration).to receive(:registration_type).and_return(result)
 
-         expect(subject.registration_type).to eq(result)
+          expect(subject.registration_type).to eq(result)
         end
       end
     end
