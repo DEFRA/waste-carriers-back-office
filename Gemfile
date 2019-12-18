@@ -35,6 +35,9 @@ gem "cancancan", "~> 1.10"
 gem "devise", ">= 4.4.3"
 gem "devise_invitable", "~> 1.7.0"
 
+# Manage, create and open zip files https://github.com/rubyzip/rubyzip
+gem "rubyzip"
+
 gem "secure_headers", "~> 5.0"
 
 # GOV.UK styling
