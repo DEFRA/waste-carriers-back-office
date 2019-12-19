@@ -36,7 +36,11 @@
                   <%= t(".user_list.roles.#{user.role}") %>
                 </td>
                 <td>
-                  <%= t(".user_list.statuses.active") %>
+                  <% if user.active? %>
+                    <%= t(".user_list.statuses.active") %>
+                  <% else %>
+                    <%= t(".user_list.statuses.deactivated") %>
+                  <% end %>
                 </td>
                 <td>
                   <% if display_user_actions?(user, current_user) %>
