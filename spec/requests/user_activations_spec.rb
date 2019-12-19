@@ -6,6 +6,8 @@ RSpec.describe "User Activations", type: :request do
   let(:active_user) { create(:user, :agency) }
   let(:inactive_user) { create(:user, :agency, :inactive) }
 
+  before { allow_any_instance_of(User).to receive(:valid?).and_return(true) }
+
   describe "GET /bo/users/activate/:id" do
     context "when a super user is signed in" do
       let(:user) { create(:user, :agency_super) }
