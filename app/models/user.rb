@@ -7,6 +7,7 @@ class User
   # Use the User database
   store_in client: "users", collection: "back_office_users"
 
+  field :active, type: Boolean, default: true
   field :session_token, type: String
 
   delegate :can?, :cannot?, to: :ability
@@ -27,11 +28,11 @@ class User
   end
 
   def activate!
-    update!(active: true)
+    update_attribute(:active, true)
   end
 
   def deactivate!
-    update!(active: false)
+    update_attribute(:active, false)
   end
 
   # Roles
