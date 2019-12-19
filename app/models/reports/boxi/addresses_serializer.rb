@@ -2,7 +2,7 @@
 
 module Reports
   module Boxi
-    class AddressesSerializer < BaseSerializer
+    class AddressesSerializer < ::Reports::Boxi::BaseSerializer
       ATTRIBUTES = {
         uid: "RegistrationUID",
         address_type: "AddressType",
