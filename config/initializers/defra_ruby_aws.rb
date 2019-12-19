@@ -13,7 +13,7 @@ DefraRuby::Aws.configure do |c|
   }
 
   boxy_bucket = {
-    name: ENV["AWS_DAILY_EXPORT_BUCKET"],
+    name: ENV["AWS_BOXI_EXPORT_BUCKET"],
     region: ENV["AWS_REGION"],
     credentials: {
       access_key_id: ENV["AWS_BOXI_EXPORT_ACCESS_KEY_ID"],
