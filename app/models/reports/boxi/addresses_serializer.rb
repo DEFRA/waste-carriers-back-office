@@ -1,0 +1,45 @@
+# frozen_string_literal: true
+
+module Reports
+  module Boxi
+    class AddressesSerializer < BaseSerializer
+      ATTRIBUTES = {
+        uid: "RegistrationUID",
+        address_type: "AddressType",
+        uprn: "UPRN",
+        house_number: "Premises",
+        address_line_1: "AddressLine1",
+        address_line_2: "AddressLine2",
+        address_line_3: "AddressLine3",
+        address_line_4: "AddressLine4",
+        town_city: "TownCity",
+        postcode: "Postcode",
+        country: "Country",
+        easting: "Easting",
+        northing: "Northing",
+        first_name: "CorrespondentFirstName",
+        last_name: "CorrespondentLastName"
+      }.freeze
+
+      def add_entries_for(registration, uid)
+        registration.addresses.each do |address|
+          csv << parse_address(address, uid)
+        end
+      end
+
+      def parse_address(address, uid)
+        ATTRIBUTES.map do |key, _value|
+          if key == :uid
+            uid
+          else
+            address.public_send(key)
+          end
+        end
+      end
+
+      def file_name
+        "addresses.csv"
+      end
+    end
+  end
+end

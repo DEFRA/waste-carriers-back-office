@@ -9,15 +9,7 @@ module Reports
 
     def run
       Dir.mktmpdir do |dir_path|
-        # TODO: Implement serializers
-        # Boxi::AddressesSerializer.export_to_file(dir_path)
-        # Boxi::KeyPeopleSerializer.export_to_file(dir_path)
-        # Boxi::OrderItems.export_to_file(dir_path)
-        # Boxi::OrdersSerializer.export_to_file(dir_path)
-        # Boxi::OrderItemsSerializer.export_to_file(dir_path)
-        # Boxi::PaymentsSerializer.export_to_file(dir_path)
-        # Boxi::RegistrationsSerializer.export_to_file(dir_path)
-        # Boxi::SignOffsSerializer.export_to_file(dir_path)
+        GenerateBoxiFilesService.run(dir_path)
 
         zip_export_files(dir_path)
 

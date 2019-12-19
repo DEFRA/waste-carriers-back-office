@@ -15,6 +15,7 @@ module Reports
         # populate test dir
         File.open(file_path, "w")
 
+        expect(GenerateBoxiFilesService).to receive(:run).with(temp_dir)
         expect(Dir).to receive(:mktmpdir).and_yield(temp_dir)
         expect(Zip::File).to receive(:open).and_yield(zipfile)
         expect(zipfile).to receive(:add).with("test_file.csv", file_path)
