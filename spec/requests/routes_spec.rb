@@ -4,6 +4,10 @@ require "rails_helper"
 
 RSpec.describe "Root", type: :request do
   describe "GET /" do
+    before(:each) do
+      sign_in(create(:user))
+    end
+
     it "redirects to /bo" do
       get "/"
       expect(response).to redirect_to(bo_path)
@@ -59,6 +63,17 @@ RSpec.describe "Root", type: :request do
       it "redirects the user to the renewal start page" do
         get "/bo/#{registration.reg_identifier}/renew"
         expect(response.body).to include("You are about to renew your registration")
+      end
+    end
+
+    context "when a deactivated user is signed in" do
+      let(:registration) { create(:registration, reg_identifier: "CBDU12345") }
+
+      before { sign_in(create(:user, :inactive)) }
+
+      it "redirects to the deactivated page" do
+        get "/bo/#{registration.reg_identifier}/renew"
+        expect(response).to redirect_to("/bo/pages/deactivated")
       end
     end
   end

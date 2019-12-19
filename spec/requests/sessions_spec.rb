@@ -63,6 +63,15 @@ RSpec.describe "Sessions", type: :request do
         get destroy_user_session_path
         expect(user.reload.session_token).to_not eq(old_session_token)
       end
+
+      context "when the user is inactive" do
+        let(:user) { create(:user, :inactive) }
+
+        it "signs the user out" do
+          get destroy_user_session_path
+          expect(controller.current_user).to be_nil
+        end
+      end
     end
   end
 end
