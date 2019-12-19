@@ -67,9 +67,12 @@ RSpec.describe "Root", type: :request do
     end
 
     context "when a deactivated user is signed in" do
+      let(:user) { create(:user, :inactive) }
       let(:registration) { create(:registration, reg_identifier: "CBDU12345") }
 
-      before { sign_in(create(:user, :inactive)) }
+      before(:each) do
+        sign_in(user)
+      end
 
       it "redirects to the deactivated page" do
         get "/bo/#{registration.reg_identifier}/renew"
