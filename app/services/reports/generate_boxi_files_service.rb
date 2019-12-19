@@ -4,14 +4,14 @@ module Reports
   class GenerateBoxiFilesService < ::WasteCarriersEngine::BaseService
     ALL_SERIALIZERS = [
       # TODO
-      Boxi::AddressesSerializer#,
+      Boxi::AddressesSerializer
       # Boxi::KeyPeopleSerializer,
       # Boxi::OrderItemsSerializer,
       # Boxi::OrdersSerializer,
       # Boxi::PaymentsSerializer,
       # Boxi::RegistrationsSerializer,
       # Boxi::SignOffsSerializer
-    ]
+    ].freeze
 
     attr_reader :dir_path
 

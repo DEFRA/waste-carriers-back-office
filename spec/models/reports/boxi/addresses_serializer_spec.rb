@@ -8,22 +8,22 @@ module Reports
       let(:dir) { "/tmp/test" }
       let(:csv) { double(:csv) }
       let(:headers) do
-        [
-          "RegistrationUID",
-          "AddressType",
-          "UPRN",
-          "Premises",
-          "AddressLine1",
-          "AddressLine2",
-          "AddressLine3",
-          "AddressLine4",
-          "TownCity",
-          "Postcode",
-          "Country",
-          "Easting",
-          "Northing",
-          "CorrespondentFirstName",
-          "CorrespondentLastName"
+        %w[
+          RegistrationUID
+          AddressType
+          UPRN
+          Premises
+          AddressLine1
+          AddressLine2
+          AddressLine3
+          AddressLine4
+          TownCity
+          Postcode
+          Country
+          Easting
+          Northing
+          CorrespondentFirstName
+          CorrespondentLastName
         ]
       end
       subject { described_class.new(dir) }

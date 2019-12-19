@@ -9,7 +9,7 @@ module Reports
   RSpec.describe GenerateBoxiFilesService do
     describe ".run" do
       it "generates CSV files for the boxi exports in a given folder" do
-        registration = create(:registration)
+        create(:registration)
 
         temp_dir = Dir.mktmpdir
 
@@ -18,7 +18,7 @@ module Reports
         # Test addresses file gets created
         addresses_file_path = File.join(temp_dir, "addresses.csv")
 
-        expect(File.exists?(addresses_file_path)).to be_truthy
+        expect(File.exist?(addresses_file_path)).to be_truthy
         expect(File.read(addresses_file_path)).to_not be_empty
 
         # TODO
