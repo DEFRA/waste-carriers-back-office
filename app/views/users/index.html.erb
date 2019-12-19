@@ -55,13 +55,23 @@
                        <% end %>
                       </li>
                       <li>
-                        <%= link_to "#" do %>
-                          <%= t(".user_list.actions.deactivate.link_text") %>
-                          <span class="visually-hidden">
-                           <%= t(".user_list.actions.deactivate.visually_hidden_text",
-                                 email: user.email) %>
-                         </span>
-                       <% end %>
+                        <% if user.active? %>
+                          <%= link_to deactivate_user_form_path(user.id) do %>
+                            <%= t(".user_list.actions.deactivate.link_text") %>
+                            <span class="visually-hidden">
+                              <%= t(".user_list.actions.deactivate.visually_hidden_text",
+                                    email: user.email) %>
+                            </span>
+                          <% end %>
+                        <% else %>
+                          <%= link_to activate_user_form_path(user.id) do %>
+                            <%= t(".user_list.actions.activate.link_text") %>
+                            <span class="visually-hidden">
+                              <%= t(".user_list.actions.activate.visually_hidden_text",
+                                    email: user.email) %>
+                            </span>
+                          <% end %>
+                        <% end %>
                       </li>
                     </ul>
                   <% end %>
