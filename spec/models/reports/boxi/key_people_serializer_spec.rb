@@ -28,7 +28,7 @@ module Reports
       describe "#add_entries_for" do
         let(:registration) { double(:registration) }
 
-        it "creates an entry in the csv for each address in the registration" do
+        it "creates an entry in the csv for each key person in the registration" do
           key_person = double(:key_person)
           presenter = double(:presenter)
 
