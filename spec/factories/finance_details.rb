@@ -6,6 +6,17 @@ FactoryBot.define do
       balance { 100 }
     end
 
+    trait :has_paid_order_and_payment do
+      orders { [build(:order, :has_required_data)] }
+      payments do
+        [
+          build(:payment, :bank_transfer, amount: 10_500),
+          build(:payment, :bank_transfer, amount: 500)
+        ]
+      end
+      after(:build, :create, &:update_balance)
+    end
+
     trait :zero_balance do
       balance { 0 }
     end

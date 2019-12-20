@@ -5,8 +5,8 @@ module Reports
     ALL_SERIALIZERS = [
       # TODO
       Boxi::AddressesSerializer,
-      Boxi::KeyPeopleSerializer
-      # Boxi::OrderItemsSerializer,
+      Boxi::KeyPeopleSerializer,
+      Boxi::OrderItemsSerializer
       # Boxi::OrdersSerializer,
       # Boxi::PaymentsSerializer,
       # Boxi::RegistrationsSerializer,
