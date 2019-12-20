@@ -39,8 +39,13 @@ module Reports
         expect(File.exist?(orders_path)).to be_truthy
         expect(File.read(orders_path)).to_not be_empty
 
-        # TODO
         # Test payments file gets created
+        orders_path = File.join(temp_dir, "payments.csv")
+
+        expect(File.exist?(orders_path)).to be_truthy
+        expect(File.read(orders_path)).to_not be_empty
+
+        # TODO
         # Test registrations file gets created
         # Test sign_offs file gets created
       end
