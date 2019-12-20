@@ -27,6 +27,8 @@ module Reports
         end
       end
 
+      private
+
       def parse_address(address, uid)
         ATTRIBUTES.map do |key, _value|
           if key == :uid

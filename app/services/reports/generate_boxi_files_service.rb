@@ -4,8 +4,8 @@ module Reports
   class GenerateBoxiFilesService < ::WasteCarriersEngine::BaseService
     ALL_SERIALIZERS = [
       # TODO
-      Boxi::AddressesSerializer
-      # Boxi::KeyPeopleSerializer,
+      Boxi::AddressesSerializer,
+      Boxi::KeyPeopleSerializer
       # Boxi::OrderItemsSerializer,
       # Boxi::OrdersSerializer,
       # Boxi::PaymentsSerializer,
