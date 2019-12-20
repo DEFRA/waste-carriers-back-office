@@ -31,7 +31,7 @@ module Reports
       describe "#add_entries_for" do
         let(:registration) { double(:registration) }
 
-        it "creates an entry in the csv for each order_item in the registration" do
+        it "creates an entry in the csv for each order in the registration" do
           order = double(:order)
           finance_details = double(:finance_details)
 
