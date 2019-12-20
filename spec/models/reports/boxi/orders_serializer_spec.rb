@@ -60,7 +60,6 @@ module Reports
           expect(order).to receive(:date_last_updated).and_return("date_last_updated")
           expect(order).to receive(:updated_by_user).and_return("updated_by_user")
 
-
           expect(csv).to receive(:<<).with(values)
 
           subject.add_entries_for(registration, 0)
