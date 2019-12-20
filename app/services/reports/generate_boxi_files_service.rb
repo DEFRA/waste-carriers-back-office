@@ -6,8 +6,8 @@ module Reports
       # TODO
       Boxi::AddressesSerializer,
       Boxi::KeyPeopleSerializer,
-      Boxi::OrderItemsSerializer
-      # Boxi::OrdersSerializer,
+      Boxi::OrderItemsSerializer,
+      Boxi::OrdersSerializer
       # Boxi::PaymentsSerializer,
       # Boxi::RegistrationsSerializer,
       # Boxi::SignOffsSerializer
