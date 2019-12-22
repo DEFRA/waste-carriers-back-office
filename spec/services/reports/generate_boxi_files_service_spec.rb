@@ -51,9 +51,11 @@ module Reports
         expect(File.exist?(registrations_path)).to be_truthy
         expect(File.read(registrations_path)).to_not be_empty
 
-        # TODO
-        # Test registrations file gets created
         # Test sign_offs file gets created
+        sign_offs_path = File.join(temp_dir, "sign_offs.csv")
+
+        expect(File.exist?(sign_offs_path)).to be_truthy
+        expect(File.read(sign_offs_path)).to_not be_empty
       end
     end
   end
