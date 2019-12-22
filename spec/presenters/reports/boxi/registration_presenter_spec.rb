@@ -1,0 +1,76 @@
+# frozen_string_literal: true
+
+require "rails_helper"
+
+module Reports
+  module Boxi
+    RSpec.describe ::Reports::Boxi::RegistrationPresenter do
+      let(:registration) { double(:registration) }
+
+      subject { described_class.new(registration, nil) }
+
+      describe "#finance_details_balance" do
+        it "returns a formatted date" do
+          finance_details = double(:finance_details)
+
+          expect(registration).to receive(:finance_details).and_return(finance_details)
+          expect(finance_details).to receive(:balance).and_return(0)
+
+          expect(subject.finance_details_balance).to eq("0.00")
+        end
+      end
+
+      describe "#metadata_date_registered" do
+        it "returns a formatted date" do
+          metadata = double(:metadata)
+
+          expect(registration).to receive(:metaData).and_return(metadata)
+          expect(metadata).to receive(:date_registered).and_return(Date.new(2019, 11, 11))
+
+          expect(subject.metadata_date_registered).to eq("2019-11-11T00:00Z")
+        end
+      end
+
+      describe "#metadata_date_activated" do
+        it "returns a formatted date" do
+          metadata = double(:metadata)
+
+          expect(registration).to receive(:metaData).and_return(metadata)
+          expect(metadata).to receive(:date_activated).and_return(Date.new(2019, 11, 11))
+
+          expect(subject.metadata_date_activated).to eq("2019-11-11T00:00Z")
+        end
+      end
+
+      describe "#metadata_date_last_modified" do
+        it "returns a formatted date" do
+          metadata = double(:metadata)
+
+          expect(registration).to receive(:metaData).and_return(metadata)
+          expect(metadata).to receive(:last_modified).and_return(Date.new(2019, 11, 11))
+
+          expect(subject.metadata_date_last_modified).to eq("2019-11-11T00:00Z")
+        end
+      end
+
+      describe "#conviction_search_result_searched_at" do
+        it "returns a formatted date" do
+          conviction_search_result = double(:conviction_search_result)
+
+          expect(registration).to receive(:conviction_search_result).and_return(conviction_search_result)
+          expect(conviction_search_result).to receive(:searched_at).and_return(Date.new(2019, 11, 11))
+
+          expect(subject.conviction_search_result_searched_at).to eq("2019-11-11T00:00Z")
+        end
+      end
+
+      describe "#expires_on" do
+        it "returns a formatted date" do
+          expect(registration).to receive(:expires_on).and_return(Date.new(2019, 11, 11))
+
+          expect(subject.expires_on).to eq("2019-11-11T00:00Z")
+        end
+      end
+    end
+  end
+end

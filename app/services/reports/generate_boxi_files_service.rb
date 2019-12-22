@@ -8,8 +8,8 @@ module Reports
       Boxi::KeyPeopleSerializer,
       Boxi::OrderItemsSerializer,
       Boxi::OrdersSerializer,
-      Boxi::PaymentsSerializer
-      # Boxi::RegistrationsSerializer,
+      Boxi::PaymentsSerializer,
+      Boxi::RegistrationsSerializer,
       # Boxi::SignOffsSerializer
     ].freeze
 
