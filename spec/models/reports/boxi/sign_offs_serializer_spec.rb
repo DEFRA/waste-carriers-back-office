@@ -28,7 +28,6 @@ module Reports
         it "creates an entry in the csv for each order_item in the registration" do
           sign_off = double(:sign_off)
           presenter = double(:presenter)
-          conviction_sign_offs = double(:conviction_sign_offs)
 
           values = [
             0,
