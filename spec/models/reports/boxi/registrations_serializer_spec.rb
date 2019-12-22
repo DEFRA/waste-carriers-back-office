@@ -51,9 +51,7 @@ module Reports
         let(:registration) { double(:registration) }
 
         it "creates an entry in the csv for each order_item in the registration" do
-          payment = double(:payment)
           presenter = double(:presenter)
-          finance_details = double(:finance_details)
 
           values = [
             0,

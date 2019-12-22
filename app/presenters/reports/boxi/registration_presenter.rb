@@ -9,9 +9,10 @@ module Reports
       delegate :match_result, to: :conviction_search_result, prefix: true, allow_nil: true
 
       def finance_details_balance
-        balance = finance_details&.balance&.to_f
+        balance = finance_details&.balance&.to_f || 0.00
+        cents = balance / 100
 
-        "%.2f" % (balance / 100)
+        format("%<cents>.2f", cents: cents)
       end
 
       def metadata_date_registered

@@ -18,11 +18,11 @@ module Reports
         contact_email: "ContactEmail",
         account_email: "AccountEmail",
         metadata_status: "Status",
-        finance_details_balance: "Balance", # Cents, like 0.00
-        metadata_revoked_reason:"RevokedReason",
-        metadata_date_registered: "RegistrationTimestamp", # "2019-11-19T18:50Z"
-        metadata_date_activated: "ActivationTimestamp", # "2019-11-19T18:50Z"
-        expires_on: "ExpiryTimestamp", # "2019-11-19T18:50Z"
+        finance_details_balance: "Balance",
+        metadata_revoked_reason: "RevokedReason",
+        metadata_date_registered: "RegistrationTimestamp",
+        metadata_date_activated: "ActivationTimestamp",
+        expires_on: "ExpiryTimestamp",
         metadata_date_last_modified: "LastModifiedTimestamp",
         metadata_route: "Route",
         other_businesses: "OtherBusinesses",
@@ -32,7 +32,7 @@ module Reports
         declaration: "Declaration",
         declared_convictions: "DeclaredConvictions",
         conviction_search_result_match_result: "OrganisationFlaggedForReview",
-        conviction_search_result_searched_at: "ReviewFlagTimestamp" # "2019-11-19T18:43Z"
+        conviction_search_result_searched_at: "ReviewFlagTimestamp"
       }.freeze
 
       def add_entries_for(registration, uid)

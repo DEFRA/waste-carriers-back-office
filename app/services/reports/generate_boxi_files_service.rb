@@ -9,7 +9,7 @@ module Reports
       Boxi::OrderItemsSerializer,
       Boxi::OrdersSerializer,
       Boxi::PaymentsSerializer,
-      Boxi::RegistrationsSerializer,
+      Boxi::RegistrationsSerializer
       # Boxi::SignOffsSerializer
     ].freeze
 
