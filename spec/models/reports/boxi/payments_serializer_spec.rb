@@ -60,7 +60,6 @@ module Reports
           expect(presenter).to receive(:date_entered).and_return("date_entered")
           expect(presenter).to receive(:updated_by_user).and_return("updated_by_user")
 
-
           expect(csv).to receive(:<<).with(values)
 
           subject.add_entries_for(registration, 0)
