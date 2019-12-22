@@ -29,8 +29,6 @@ module Reports
         ATTRIBUTES.map do |key, _value|
           if key == :uid
             uid
-          elsif key == :order_uid
-            order_uid
           else
             presenter.public_send(key)
           end
