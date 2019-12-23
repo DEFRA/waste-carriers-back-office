@@ -52,7 +52,6 @@ module Reports
         expect(File.read(registrations_path)).to_not be_empty
 
         # TODO
-        # Test registrations file gets created
         # Test sign_offs file gets created
       end
     end
