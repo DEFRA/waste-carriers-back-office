@@ -5,7 +5,7 @@ module Reports
     class RegistrationPresenter < WasteCarriersEngine::BasePresenter
       delegate :status, :route, :revoked_reason, to: :metadata, prefix: true
 
-      delegate :balance, to: :finance_details, prefix: true
+      delegate :balance, to: :finance_details, prefix: true, allow_nil: true
       delegate :match_result, to: :conviction_search_result, prefix: true, allow_nil: true
 
       def finance_details_balance
