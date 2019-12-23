@@ -10,7 +10,7 @@ module Reports
       subject { described_class.new(registration, nil) }
 
       describe "#finance_details_balance" do
-        it "returns a formatted date" do
+        it "returns the balance formatted as pounds and pence" do
           finance_details = double(:finance_details)
 
           expect(registration).to receive(:finance_details).and_return(finance_details)
