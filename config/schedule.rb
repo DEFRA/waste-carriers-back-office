@@ -23,9 +23,9 @@ every :day, at: (ENV["EXPORT_SERVICE_EPR_EXPORT_TIME"] || "21:05"), roles: [:db]
 end
 
 # This is the BOXI export job. When run this will generate a zip file of CSV's,
-# each of which contains the data from the WEX database table e.g. registrations
+# each of which contains the data from the WCR database table e.g. registrations
 # to registrations.csv, addresses to addresses.csv. This is then uploaded to AWS
-# S3 from where it is grabbed by a process that imports it into the WEX BOXI
+# S3 from where it is grabbed by a process that imports it into the WCR BOXI
 # universe
 every :day, at: (ENV["EXPORT_SERVICE_BOXI_EXPORT_TIME"] || "22:00"), roles: [:db] do
   rake "reports:export:boxi"
