@@ -1,7 +1,7 @@
 <h2 class="heading-medium">
   <% if resource.unpaid_balance? %>
     <%= t(".finance_information.heading_with_amount_owed", amount: display_pence_as_pounds(resource.finance_details.balance)) %>
-  <% elsif resource.finance_details.blank? %>
+  <% elsif resource.show_no_finance_details_data? %>
     <%= t(".finance_information.balance.no_data") %>
   <% else %>
     <%= t(".finance_information.heading") %>

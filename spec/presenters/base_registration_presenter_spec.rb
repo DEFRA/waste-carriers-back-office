@@ -13,6 +13,44 @@ RSpec.describe BaseRegistrationPresenter do
     end
   end
 
+  describe "#show_no_finance_details_data?" do
+    before do
+      expect(registration).to receive(:upper_tier?).and_return(upper_tier)
+    end
+
+    context "when the registration is an upper tier" do
+      let(:upper_tier) { true }
+
+      before do
+        expect(registration).to receive(:finance_details).and_return(finance_details)
+      end
+
+      context "when finance details object is missing" do
+        let(:finance_details) { nil }
+
+        it "returns true" do
+          expect(subject.show_no_finance_details_data?).to be_truthy
+        end
+      end
+
+      context "when finance details object is present" do
+        let(:finance_details) { "Something" }
+
+        it "returns false" do
+          expect(subject.show_no_finance_details_data?).to be_falsey
+        end
+      end
+    end
+
+    context "when the registration is a lower tier registration" do
+      let(:upper_tier) { false }
+
+      it "returns false" do
+        expect(subject.show_no_finance_details_data?).to be_falsey
+      end
+    end
+  end
+
   describe "#finance_details_balance" do
     it "returns the finance details balance" do
       finance_details = double(:finance_details)

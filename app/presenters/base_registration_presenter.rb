@@ -21,6 +21,10 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     end
   end
 
+  def show_no_finance_details_data?
+    upper_tier? && finance_details.blank?
+  end
+
   def finance_details_balance
     finance_details.balance
   end
