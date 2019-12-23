@@ -15,13 +15,20 @@ RSpec.describe "Whenever schedule" do
 
   it "makes sure 'rake' statements exist" do
     rake_jobs = schedule.jobs[:rake]
-    expect(rake_jobs.count).to eq(1)
+    expect(rake_jobs.count).to eq(2)
   end
 
   it "picks up the EPR export run frequency and time" do
     job_details = schedule.jobs[:rake].find { |h| h[:task] == "reports:export:epr" }
 
     expect(job_details[:every][0]).to eq(:day)
-    expect(job_details[:every][1][:at]).to eq("22:05")
+    expect(job_details[:every][1][:at]).to eq("21:05")
+  end
+
+  it "picks up the BOXI export run frequency and time" do
+    job_details = schedule.jobs[:rake].find { |h| h[:task] == "reports:export:boxi" }
+
+    expect(job_details[:every][0]).to eq(:day)
+    expect(job_details[:every][1][:at]).to eq("22:00")
   end
 end
