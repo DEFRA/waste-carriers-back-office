@@ -80,10 +80,9 @@ module ActionLinksHelper
   end
 
   def display_revoke_link_for?(resource)
-    # TODO: delete next line filter when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
-    return false if a_registration?(resource)
     return false unless display_registration_links?(resource)
     return false unless can?(:revoke, WasteCarriersEngine::Registration)
+    return false unless can?(:cease, WasteCarriersEngine::Registration)
 
     resource.active?
   end

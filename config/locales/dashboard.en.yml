@@ -53,6 +53,9 @@ en:
           resume:
             link_text: "Resume application"
             visually_hidden_text: "for %{name}"
+          cease_or_revoke:
+            link_text: "De-register or revoke"
+            visually_hidden_text: "for %{name}"
           payment:
             link_text: "Payment details"
             visually_hidden_text: "for %{name}"

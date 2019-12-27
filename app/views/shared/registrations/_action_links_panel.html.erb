@@ -52,7 +52,7 @@
 
     <% if display_revoke_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.revoke"), "#" %>
+        <%= link_to t(".actions_box.links.revoke"), WasteCarriersEngine::Engine.routes.url_helpers.new_cease_or_revoke_form_path(resource.reg_identifier) %>
       </li>
     <% end %>
 
