@@ -70,7 +70,7 @@ en:
             view_confirmation_letter: "View certificate"
             order_copy_cards: "Order copy cards"
             payment_status: "Payment status"
-            revoke: "De-register or revoke"
+            revoke: "Cease or revoke"
       expired_panel:
         heading: "Expired on %{date}"
         links:
