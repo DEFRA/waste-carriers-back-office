@@ -1,0 +1,10 @@
+en:
+  shared:
+    registrations:
+      balance:
+        heading: "Balance"
+        status: "Status"
+        amount: "Amount in £"
+        overpaid: "There have been an overpayment" # TODO: Check with UCD people
+        needs_payment: "Payment required"
+        paid_in_full: "Paid in full"

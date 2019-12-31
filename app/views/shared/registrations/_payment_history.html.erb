@@ -1,0 +1,51 @@
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h2 class="heading-medium">
+      <%= t(".heading") %>
+    </h2>
+
+    <table>
+      <tbody>
+        <thead>
+          <tr>
+            <th>
+              <%= t(".date") %>
+            </th>
+            <th>
+              <%= t(".method") %>
+            </th>
+            <th>
+              <%= t(".reference") %>
+            </th>
+            <th>
+              <%= t(".comment") %>
+            </th>
+            <th class="numeric">
+              <%= t(".amount") %>
+            </th>
+          </tr>
+        </thead>
+
+        <% @finance_details.payments.each do |payment| %>
+          <tr>
+            <td>
+              <%= payment.date_received.to_formatted_s(:day_month_year_time_slashes) %>
+            </td>
+            <td>
+              <%= t(".payment_type.#{payment.payment_type}") %>
+            </td>
+            <td>
+              <%= payment.order_key %>/<%= payment.registration_reference %>
+            </td>
+            <td>
+              <%= payment.comment %>
+            </td>
+            <td class="numeric">
+              <%= display_pence_as_pounds_and_cents(payment.amount) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

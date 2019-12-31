@@ -1,0 +1,8 @@
+en:
+  shared:
+    registrations:
+      charges_and_amendments:
+        heading: "Charges and amendments"
+        date: "Date"
+        charge: "Charge"
+        amount: "Amount in £"

@@ -1,0 +1,41 @@
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h2 class="heading-medium">
+      <%= t(".heading") %>
+    </h2>
+
+    <table>
+      <tbody>
+        <thead>
+          <tr>
+            <th>
+              <%= t(".date") %>
+            </th>
+            <th>
+              <%= t(".charge") %>
+            </th>
+            <th class="numeric">
+              <%= t(".amount") %>
+            </th>
+          </tr>
+        </thead>
+
+        <% @finance_details.orders.each do |order| %>
+          <% order.order_items.each do |order_item| %>
+            <tr>
+              <td>
+                <%= order.date_created.to_formatted_s(:day_month_year_time_slashes) %>
+              </td>
+              <td>
+                <%= order_item.description %>
+              </td>
+              <td class="numeric">
+                <%= display_pence_as_pounds_and_cents(order_item.amount) %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

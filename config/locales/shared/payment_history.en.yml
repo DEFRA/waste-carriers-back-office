@@ -1,0 +1,17 @@
+en:
+  shared:
+    registrations:
+      payment_history:
+        heading: "Payment history"
+        date: "Date"
+        method: "Method"
+        reference: "Reference"
+        comment: "Comment"
+        amount: "Amount in £"
+        payment_type:
+          CASH: "Cash"
+          CHEQUE: "Cheque"
+          POSTALORDER: "Postal order"
+          BANKTRANSFER: "Bank transfer"
+          WORLDPAY: "WorldPay"
+          WORLDPAY_MISSED: "WorldPay (manually added)"

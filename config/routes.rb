@@ -43,6 +43,9 @@ Rails.application.routes.draw do
                         path: "convictions/reject",
                         path_names: { new: "" }
 
+              resource :finance_details,
+                       only: :show
+
               resources :registration_transfers,
                         only: %i[new create],
                         param: :reg_identifier,

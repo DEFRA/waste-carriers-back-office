@@ -1,0 +1,38 @@
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h2 class="heading-medium">
+      <%= t(".heading") %>
+    </h2>
+
+    <table>
+      <tbody>
+        <thead>
+          <tr>
+            <th>
+              <%= t(".status") %>
+            </th>
+            <th class="numeric">
+              <%= t(".amount") %>
+            </th>
+          </tr>
+        </thead>
+
+        <tr>
+          <td>
+            <% case %>
+            <% when finance_details.balance > 0 %>
+              <%= t(".overpaid") %>
+            <% when finance_details.balance < 0 %>
+              <%= t(".needs_payment") %>
+            <% when finance_details.balance == 0 %>
+              <%= t(".paid_in_full") %>
+            <% end %>
+          </td>
+          <td class="numeric">
+            <%= display_pence_as_pounds_and_cents(finance_details.balance) %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
