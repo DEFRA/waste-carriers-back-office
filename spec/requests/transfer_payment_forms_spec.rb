@@ -152,7 +152,7 @@ RSpec.describe "TransferPaymentForms", type: :request do
         end
 
         it "redirects to the worldpay_missed payment form" do
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments", payment_form: params
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/transient_payments", payment_form: params
           expect(response).to redirect_to(new_transient_registration_worldpay_missed_payment_form_path)
         end
       end

@@ -20,7 +20,7 @@ module ActionLinksHelper
 
   def payment_link_for(resource)
     if a_transient_registration?(resource)
-      transient_registration_payments_path(resource.reg_identifier)
+      transient_registration_transient_payments_path(resource.reg_identifier)
     # TODO: re-implement when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
     # elsif a_registration?(resource)
     #   "#{Rails.configuration.wcrs_backend_url}/registrations/#{resource.id}/paymentstatus"

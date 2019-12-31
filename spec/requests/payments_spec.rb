@@ -2,10 +2,10 @@
 
 require "rails_helper"
 
-RSpec.describe "Payments", type: :request do
+RSpec.describe "TransientPayments", type: :request do
   let(:transient_registration) { create(:renewing_registration) }
 
-  describe "GET /bo/transient-registrations/:reg_identifier/payments" do
+  describe "GET /bo/transient-registrations/:reg_identifier/transient_payments" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency) }
       before(:each) do
@@ -13,18 +13,18 @@ RSpec.describe "Payments", type: :request do
       end
 
       it "renders the new template" do
-        get "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments"
+        get "/bo/transient-registrations/#{transient_registration.reg_identifier}/transient_payments"
         expect(response).to render_template(:new)
       end
 
       it "returns a 200 response" do
-        get "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments"
+        get "/bo/transient-registrations/#{transient_registration.reg_identifier}/transient_payments"
         expect(response).to have_http_status(200)
       end
     end
   end
 
-  describe "POST /bo/transient-registrations/:reg_identifier/payments" do
+  describe "POST /bo/transient-registrations/:reg_identifier/transient_payments" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency) }
       before(:each) do
@@ -43,7 +43,7 @@ RSpec.describe "Payments", type: :request do
         end
 
         it "redirects to the cash payment form" do
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments", payment_form: params
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/transient_payments", payment_form: params
           expect(response).to redirect_to(new_transient_registration_cash_payment_form_path)
         end
       end
@@ -54,7 +54,7 @@ RSpec.describe "Payments", type: :request do
         end
 
         it "redirects to the cheque payment form" do
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments", payment_form: params
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/transient_payments", payment_form: params
           expect(response).to redirect_to(new_transient_registration_cheque_payment_form_path)
         end
       end
@@ -65,7 +65,7 @@ RSpec.describe "Payments", type: :request do
         end
 
         it "redirects to the postal order payment form" do
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments", payment_form: params
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/transient_payments", payment_form: params
           expect(response).to redirect_to(new_transient_registration_postal_order_payment_form_path)
         end
       end
@@ -76,7 +76,7 @@ RSpec.describe "Payments", type: :request do
         end
 
         it "redirects to the transfer payment form" do
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments", payment_form: params
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/transient_payments", payment_form: params
           expect(response).to redirect_to(new_transient_registration_transfer_payment_form_path)
         end
       end
@@ -87,7 +87,7 @@ RSpec.describe "Payments", type: :request do
         end
 
         it "redirects to the worldpay_missed payment form" do
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments", payment_form: params
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/transient_payments", payment_form: params
           expect(response).to redirect_to(new_transient_registration_worldpay_missed_payment_form_path)
         end
       end
@@ -98,7 +98,7 @@ RSpec.describe "Payments", type: :request do
         end
 
         it "renders the new template" do
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/payments", payment_form: params
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/transient_payments", payment_form: params
           expect(response).to render_template(:new)
         end
       end

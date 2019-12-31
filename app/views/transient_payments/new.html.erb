@@ -2,7 +2,7 @@
   <div class="column-two-thirds">
     <%= render("waste_carriers_engine/shared/back", back_path: renewing_registration_path(@transient_registration.reg_identifier)) %>
 
-    <%= form_for(:payment_form, url: transient_registration_payments_path) do |f| %>
+    <%= form_for(:payment_form, url: transient_registration_transient_payments_path) do |f| %>
       <h1 class="heading-large">
         <%= t(".heading") %>
       </h1>

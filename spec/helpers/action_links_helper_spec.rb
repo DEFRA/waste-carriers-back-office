@@ -52,7 +52,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:renewing_registration) }
 
       it "returns the correct path" do
-        expect(helper.payment_link_for(resource)).to eq(transient_registration_payments_path(resource.reg_identifier))
+        expect(helper.payment_link_for(resource)).to eq(transient_registration_transient_payments_path(resource.reg_identifier))
       end
     end
 

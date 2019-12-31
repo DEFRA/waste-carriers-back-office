@@ -72,7 +72,7 @@ Rails.application.routes.draw do
                         path: "convictions/reject",
                         path_names: { new: "" }
 
-              resources :payments,
+              resources :transient_payments,
                         only: %i[new create],
                         path_names: { new: "" }
 

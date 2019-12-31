@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PaymentsController < ApplicationController
+class TransientPaymentsController < ApplicationController
   before_action :authenticate_user!
   before_action :define_payment_types
 
