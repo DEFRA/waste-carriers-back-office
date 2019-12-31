@@ -1,0 +1,10 @@
+en:
+  shared:
+    registrations:
+      finance_action_links:
+        enter_payment: "Enter payment"
+        reverse_payment: "Reverse payment"
+        write_off_l: "Write off (Form L)"
+        write_off_s: "Write off (small)"
+        adjust_charge: "Adjust charge"
+        refund: "Refund"
