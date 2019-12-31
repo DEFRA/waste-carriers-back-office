@@ -18,20 +18,10 @@
     <% if @registration.pending_payment? %>
       <%= render "shared/registrations/pending_payment_panel", resource: @registration %>
     <% end %>
-
   </div>
 </div>
 
-<div class="grid-row">
-  <div class="column-full">
-    <%= link_to t(".links.enter_payment"), "#TODO", class: "button" %>
-    <%= link_to t(".links.reverse_payment"), "#TODO", class: "button" %>
-    <%= link_to t(".links.write_off_l"), "#TODO", class: "button" %>
-    <%= link_to t(".links.write_off_s"), "#TODO", class: "button" %>
-    <%= link_to t(".links.adjust_charge"), "#TODO", class: "button" %>
-    <%= link_to t(".links.refund"), "#TODO", class: "button" %>
-  </div>
-</div>
+<%= render "shared/registrations/finance_action_links", registration: @registration %>
 
 <%= render "shared/registrations/charges_and_amendments", finance_details: @finance_details %>
 <%= render "shared/registrations/payment_history", finance_details: @finance_details %>
