@@ -21,9 +21,9 @@
           <td>
             <% case %>
             <% when finance_details.balance > 0 %>
-              <%= t(".overpaid") %>
-            <% when finance_details.balance < 0 %>
               <%= t(".needs_payment") %>
+            <% when finance_details.balance < 0 %>
+              <%= t(".overpaid") %>
             <% when finance_details.balance == 0 %>
               <%= t(".paid_in_full") %>
             <% end %>
