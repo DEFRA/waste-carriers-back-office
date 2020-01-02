@@ -191,43 +191,6 @@ RSpec.describe BaseRegistrationPresenter do
     end
   end
 
-  describe "#show_finance_details_link?" do
-    let(:upper_tier) { true }
-    let(:registration) do
-      double(
-        :registration,
-        finance_details: finance_details,
-        upper_tier?: upper_tier
-      )
-    end
-
-    context "when there are finance details available" do
-      let(:finance_details) { double(:finance_details) }
-
-      context "when the registration is an upper tier" do
-        it "returns true" do
-          expect(subject.show_finance_details_link?).to be_truthy
-        end
-      end
-
-      context "when the registration is a lower tier" do
-        let(:upper_tier) { false }
-
-        it "returns false" do
-          expect(subject.show_finance_details_link?).to be_falsey
-        end
-      end
-    end
-
-    context "when there are no finance details available" do
-      let(:finance_details) { nil }
-
-      it "returns false" do
-        expect(subject.show_finance_details_link?).to be_falsey
-      end
-    end
-  end
-
   describe "#displayable_location" do
     let(:registration) { double(:registration, location: location) }
 

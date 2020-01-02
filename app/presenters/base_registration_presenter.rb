@@ -46,10 +46,6 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     end
   end
 
-  def show_finance_details_link?
-    finance_details.present? && upper_tier?
-  end
-
   def show_order_details?
     finance_details&.orders&.any? && upper_tier?
   end

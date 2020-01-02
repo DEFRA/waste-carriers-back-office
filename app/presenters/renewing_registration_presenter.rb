@@ -21,10 +21,6 @@ class RenewingRegistrationPresenter < BaseRegistrationPresenter
     !renewal_application_submitted?
   end
 
-  def finance_details_link
-    @view.transient_registration_transient_payments_path(reg_identifier)
-  end
-
   private
 
   def current_workflow_state
