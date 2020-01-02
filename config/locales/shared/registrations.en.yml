@@ -69,7 +69,7 @@ en:
             edit: "Edit registration"
             view_confirmation_letter: "View certificate"
             order_copy_cards: "Order copy cards"
-            payment_status: "Payment details"
+            payment_details: "Payment details"
             revoke: "Cease or revoke"
       expired_panel:
         heading: "Expired on %{date}"
