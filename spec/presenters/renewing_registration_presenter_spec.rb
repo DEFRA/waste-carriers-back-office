@@ -13,7 +13,7 @@ RSpec.describe RenewingRegistrationPresenter do
       reg_identifier = double(:reg_identifier)
 
       expect(renewing_registration).to receive(:reg_identifier).and_return(reg_identifier)
-      expect(view_context).to receive(:transient_registration_payments_path).with(reg_identifier).and_return(link)
+      expect(view_context).to receive(:transient_registration_transient_payments_path).with(reg_identifier).and_return(link)
 
       expect(subject.finance_details_link).to eq(link)
     end

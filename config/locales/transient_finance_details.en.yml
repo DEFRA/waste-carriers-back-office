@@ -1,0 +1,4 @@
+en:
+  transient_finance_details:
+    show:
+      heading: "Payment details for %{reg_identifier}"

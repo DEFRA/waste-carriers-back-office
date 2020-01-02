@@ -22,7 +22,7 @@ class RenewingRegistrationPresenter < BaseRegistrationPresenter
   end
 
   def finance_details_link
-    @view.transient_registration_payments_path(reg_identifier)
+    @view.transient_registration_transient_payments_path(reg_identifier)
   end
 
   private

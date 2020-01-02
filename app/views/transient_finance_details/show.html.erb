@@ -1,0 +1,28 @@
+<div class="grid-row">
+  <div class="column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: registration_path(@transient_registration.reg_identifier)) %>
+
+    <h1 class="heading-large">
+      <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
+    </h1>
+
+    <%= render("shared/message", message: flash[:message]) if flash[:message].present? %>
+    <%= render("shared/error", error: flash[:error], details: flash[:error_details]) if flash[:error].present? %>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <%= render "shared/company_details_panel", registration: @transient_registration %>
+
+    <% if @transient_registration.pending_payment? %>
+      <%= render "shared/registrations/pending_payment_panel", resource: @transient_registration %>
+    <% end %>
+  </div>
+</div>
+
+<%= render "shared/registrations/finance_action_links", registration: @transient_registration %>
+
+<%= render "shared/registrations/charges_and_amendments", finance_details: @finance_details %>
+<%= render "shared/registrations/payment_history", finance_details: @finance_details %>
+<%= render "shared/registrations/balance", finance_details: @finance_details %>

@@ -57,6 +57,18 @@ Rails.application.routes.draw do
                   as: :registration_transfer_success
             end
 
+  # These routes uses `token` to identify the correct transient object (#TODO: merge with other routes when they move to token)
+  resources :transient_registrations,
+            only: [],
+            param: :token,
+            path: "/bo/transient-registrations",
+            path_names: { show: "/:token" } do
+              resource :finance_details,
+                         controller: :transient_finance_details,
+                         only: :show
+            end
+
+  # These routes uses `reg_identifier` to identify the correct transient object (#TODO: Make it token)
   resources :transient_registrations,
             only: [],
             param: :reg_identifier,
