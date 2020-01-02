@@ -47,34 +47,6 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
-  describe "payment_link_for" do
-    context "when the resource is a transient_registration" do
-      let(:resource) { build(:renewing_registration) }
-
-      it "returns the correct path" do
-        expect(helper.payment_link_for(resource)).to eq(transient_registration_transient_payments_path(resource.reg_identifier))
-      end
-    end
-
-    # TODO: re-implement when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
-    # context "when the resource is a registration" do
-    #   let(:resource) { build(:registration) }
-
-    #   it "returns the correct path" do
-    #     path = "#{Rails.configuration.wcrs_backend_url}/registrations/#{resource.id}/paymentstatus"
-    #     expect(helper.payment_link_for(resource)).to eq(path)
-    #   end
-    # end
-
-    context "when the resource is not a registration or a transient_registration" do
-      let(:resource) { nil }
-
-      it "returns the correct path" do
-        expect(helper.payment_link_for(resource)).to eq("#")
-      end
-    end
-  end
-
   describe "convictions_link_for" do
     context "when the resource is a transient_registration" do
       let(:resource) { build(:renewing_registration) }
@@ -224,64 +196,43 @@ RSpec.describe ActionLinksHelper, type: :helper do
   end
 
   describe "#display_payment_link_for?" do
-    context "when the result is a Registration" do
-      let(:result) { build(:registration) }
+    let(:resource) { double(:resource) }
 
-      it "returns false" do
-        expect(helper.display_payment_link_for?(result)).to eq(false)
-      end
-
-      # TODO: re-implement when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
-      # context "when the result has been revoked" do
-      #   before { result.metaData.status = "REVOKED" }
-
-      #   it "returns false" do
-      #     expect(helper.display_payment_link_for?(result)).to eq(false)
-      #   end
-      # end
-
-      # context "when the result has no pending payment" do
-      #   let(:result) { build(:registration, :no_pending_payment) }
-
-      #   it "returns false" do
-      #     expect(helper.display_payment_link_for?(result)).to eq(false)
-      #   end
-      # end
-
-      # context "when the result has a pending payment" do
-      #   let(:result) { build(:registration, :pending_payment) }
-
-      #   it "returns true" do
-      #     expect(helper.display_payment_link_for?(result)).to eq(true)
-      #   end
-      # end
+    before do
+      expect(resource).to receive(:upper_tier?).and_return(upper_tier)
     end
 
-    context "when the result is a RenewingRegistration" do
-      let(:result) { build(:renewing_registration) }
+    context "when the resource is an upper tier" do
+      let(:upper_tier) { true }
 
-      context "when the result has been revoked" do
-        before { result.metaData.status = "REVOKED" }
-
-        it "returns false" do
-          expect(helper.display_payment_link_for?(result)).to eq(false)
-        end
+      it "returns true" do
+        expect(helper.display_payment_link_for?(resource)).to be_truthy
       end
+    end
 
-      context "when the result has no pending payment" do
-        let(:result) { build(:renewing_registration, :no_pending_payment) }
+    context "when the resource is not an upper tier" do
+      let(:upper_tier) { false }
 
-        it "returns false" do
-          expect(helper.display_payment_link_for?(result)).to eq(false)
-        end
+      it "returns false" do
+        expect(helper.display_payment_link_for?(resource)).to be_falsey
       end
+    end
+  end
 
-      context "when the result has a pending payment" do
-        let(:result) { build(:renewing_registration, :pending_payment) }
+  describe "#payment_link_for" do
+    context "when the resource is a registration" do
+      let(:resource) { build(:registration, reg_identifier: "CBDU223") }
 
-        it "returns true" do
-          expect(helper.display_payment_link_for?(result)).to eq(true)
-        end
+      it "returns a path to the registration's finance details page" do
+        expect(helper.payment_link_for(resource)).to eq(registration_finance_details_path("CBDU223"))
+      end
+    end
+
+    context "when the resource is a transient registration" do
+      let(:resource) { build(:renewing_registration, token: "1234") }
+
+      it "returns a path to the transient registration's finance details page" do
+        expect(helper.payment_link_for(resource)).to eq(transient_registration_finance_details_path("1234"))
       end
     end
   end
