@@ -46,7 +46,7 @@
 
     <% if display_payment_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.payment_details"), payment_link_for(resource)  %>
+        <%= link_to t(".actions_box.links.payment_details"), finance_details_path(resource.finance_details._id)  %>
       </li>
     <% end %>
 

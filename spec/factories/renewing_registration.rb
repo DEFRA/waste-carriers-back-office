@@ -7,6 +7,8 @@ FactoryBot.define do
 
     addresses { [build(:address, :registered), build(:address, :contact)] }
 
+    finance_details { build(:finance_details, :has_paid_order_and_payment) }
+
     # Create a new registration when initializing
     initialize_with { new(reg_identifier: create(:registration, :expires_soon).reg_identifier) }
 

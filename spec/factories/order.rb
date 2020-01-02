@@ -7,6 +7,7 @@ FactoryBot.define do
         [WasteCarriersEngine::OrderItem.new_renewal_item,
          WasteCarriersEngine::OrderItem.new_copy_cards_item(1)]
       end
+      payment_method { "card" }
       total_amount { order_items.sum { |item| item[:amount] } }
       date_created { Time.now }
     end

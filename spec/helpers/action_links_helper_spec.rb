@@ -219,24 +219,6 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
-  describe "#payment_link_for" do
-    context "when the resource is a registration" do
-      let(:resource) { build(:registration, reg_identifier: "CBDU223") }
-
-      it "returns a path to the registration's finance details page" do
-        expect(helper.payment_link_for(resource)).to eq(registration_finance_details_path("CBDU223"))
-      end
-    end
-
-    context "when the resource is a transient registration" do
-      let(:resource) { build(:renewing_registration, token: "1234") }
-
-      it "returns a path to the transient registration's finance details page" do
-        expect(helper.payment_link_for(resource)).to eq(transient_registration_finance_details_path("1234"))
-      end
-    end
-  end
-
   describe "#display_revoke_link_for?" do
     context "when the resource is a registration" do
       let(:resource) { build(:registration) }

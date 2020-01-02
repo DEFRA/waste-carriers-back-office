@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   # Privacy policy
   get "/bo/ad-privacy-policy/:reg_identifier", to: "ad_privacy_policy#show", as: :ad_privacy_policy
 
+  resources :finance_details,
+            only: :show
+
   resources :renewing_registrations,
             only: :show,
             param: :reg_identifier,
@@ -43,9 +46,6 @@ Rails.application.routes.draw do
                         path: "convictions/reject",
                         path_names: { new: "" }
 
-              resource :finance_details,
-                       only: :show
-
               resources :registration_transfers,
                         only: %i[new create],
                         param: :reg_identifier,
@@ -57,22 +57,6 @@ Rails.application.routes.draw do
                   as: :registration_transfer_success
             end
 
-  # These routes uses `token` to identify the correct transient object
-  # TODO: merge with other routes when they move to token
-  resources :transient_registrations,
-            only: [],
-            param: :token,
-            path: "/bo/transient-registrations",
-            path_names: { show: "/:token" } do
-              resource(
-                :finance_details,
-                controller: :transient_finance_details,
-                only: :show
-              )
-            end
-
-  # These routes uses `reg_identifier` to identify the correct transient object
-  # TODO: Change these routes to use :token rather than :reg_identifier
   resources :transient_registrations,
             only: [],
             param: :reg_identifier,

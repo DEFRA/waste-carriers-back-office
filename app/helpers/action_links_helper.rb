@@ -18,16 +18,6 @@ module ActionLinksHelper
     ad_privacy_policy_path(resource.reg_identifier)
   end
 
-  def payment_link_for(resource)
-    if a_transient_registration?(resource)
-      transient_registration_finance_details_path(resource.token)
-    elsif a_registration?(resource)
-      registration_finance_details_path(resource.reg_identifier)
-    else
-      "#"
-    end
-  end
-
   def convictions_link_for(resource)
     if a_transient_registration?(resource)
       transient_registration_convictions_path(resource.reg_identifier)

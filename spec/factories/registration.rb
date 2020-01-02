@@ -13,6 +13,8 @@ FactoryBot.define do
     phone_number { "03708 506506" }
     tier { "UPPER" }
 
+    finance_details { build(:finance_details, :has_paid_order_and_payment) }
+
     addresses { [build(:address, :registered), build(:address, :contact)] }
     key_people { [build(:key_person, :does_not_require_conviction_check)] }
 
