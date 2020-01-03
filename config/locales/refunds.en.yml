@@ -1,0 +1,12 @@
+en:
+  refunds:
+    index:
+      heading: "Which payment do you want to refund?"
+      date: "Date"
+      type: "Type"
+      reference: "Reference"
+      amount: "Amount"
+      action: "Action"
+      refund_payment: "Refund payment"
+      refund_payment_alt: "Refund payment from %{date} by %{method} for %{amount}"
+

@@ -1,0 +1,68 @@
+<div class="grid-row">
+  <div class="column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: finance_details_path(@registration._id)) %>
+
+    <h1 class="heading-large">
+      <%= t(".heading") %>
+    </h1>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <%= render "shared/company_details_panel", registration: @registration %>
+
+    <table>
+      <tbody>
+        <thead>
+          <tr>
+            <th>
+              <%= t(".date") %>
+            </th>
+            <th>
+              <%= t(".type") %>
+            </th>
+            <th>
+              <%= t(".reference") %>
+            </th>
+            <th class="numeric">
+              <%= t(".amount") %>
+            </th>
+            <th>
+              <%= t(".action") %>
+            </th>
+          </tr>
+        </thead>
+
+        <% @payments.each do |payment| %>
+          <tr>
+            <td>
+              <%= payment.date_received.to_formatted_s(:day_month_year_time_slashes) %>
+            </td>
+            <td>
+              <%= t("shared.payment_type.#{payment.payment_type}") %>
+            </td>
+            <td>
+              <%= payment.order_key %>/<%= payment.registration_reference %>
+            </td>
+            <td class="numeric">
+              <%= display_pence_as_pounds_and_cents(payment.amount) %>
+            </td>
+            <td>
+              <%= link_to new_finance_details_refund_path(@registration._id, order_key: payment.order_key) do %>
+                <%= t(".refund_payment") %>
+                <span class="visually-hidden">
+                  <%= t(".refund_payment_alt",
+                        date: payment.date_received.to_formatted_s(:day_month_year_time_slashes),
+                        method: t("shared.payment_type.#{payment.payment_type}"),
+                        amount: display_pence_as_pounds_and_cents(payment.amount)) %>
+                </span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
