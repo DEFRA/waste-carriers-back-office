@@ -1,0 +1,13 @@
+en:
+  shared:
+    payment_type:
+      CASH: "Cash"
+      CHEQUE: "Cheque"
+      POSTALORDER: "Postal order"
+      BANKTRANSFER: "Bank transfer"
+      WORLDPAY: "Card"
+      WORLDPAY_MISSED: "Card (manually added)"
+      REFUND: "Refund"
+      WRITEOFFSMALL: "Write off (small)"
+      WRITEOFFLARGE: "Write off (Form L)"
+      REVERSAL: "Reversal"
