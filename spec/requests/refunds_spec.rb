@@ -6,7 +6,7 @@ RSpec.describe "Refunds", type: :request do
   describe "GET /bo/finance_details/:_id/refunds" do
     context "when a valid user is signed in" do
       let(:user) { create(:user) }
-      let(:renewing_registration) { create(:renewing_registration, :has_finance_details) }
+      let(:renewing_registration) { create(:renewing_registration) }
 
       before(:each) do
         sign_in(user)
@@ -32,14 +32,15 @@ RSpec.describe "Refunds", type: :request do
   describe "GET /bo/finance_details/:_id/refunds/new" do
     context "when a valid user is signed in" do
       let(:user) { create(:user) }
-      let(:renewing_registration) { create(:renewing_registration, :has_finance_details) }
+      let(:renewing_registration) { create(:renewing_registration) }
+      let(:payment) { renewing_registration.finance_details.payments.first }
 
       before(:each) do
         sign_in(user)
       end
 
       it "renders the index template and returns a 200 status" do
-        get new_finance_details_refund_path(renewing_registration._id)
+        get new_finance_details_refund_path(renewing_registration._id, order_key: payment.order_key)
 
         expect(response).to render_template(:new)
         expect(response).to have_http_status(200)
@@ -48,7 +49,7 @@ RSpec.describe "Refunds", type: :request do
 
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
-        get new_finance_details_refund_path("foo")
+        get new_finance_details_refund_path("foo", order_key: "bar")
 
         expect(response).to redirect_to(new_user_session_path)
       end
