@@ -8,13 +8,11 @@ class RefundsController < ApplicationController
   def index
     find_registration(params[:finance_details_id])
 
-    # @finance_details = @registration.finance_details
     @payments = @registration.finance_details.payments.refundable
   end
 
   def new
-    find_registration(params[:id])
-    find_payment(params[:order_key])
+    find_registration(params[:finance_details_id])
   end
 
   def create

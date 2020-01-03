@@ -39,16 +39,16 @@ RSpec.describe "Refunds", type: :request do
       end
 
       it "renders the index template and returns a 200 status" do
-        get new_finance_details_refunds_path(renewing_registration._id)
+        get new_finance_details_refund_path(renewing_registration._id)
 
-        expect(response).to render_template(:index)
+        expect(response).to render_template(:new)
         expect(response).to have_http_status(200)
       end
     end
 
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
-        get new_finance_details_refunds_path("foo")
+        get new_finance_details_refund_path("foo")
 
         expect(response).to redirect_to(new_user_session_path)
       end
