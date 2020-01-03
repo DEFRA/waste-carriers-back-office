@@ -18,14 +18,15 @@ class RefundsController < ApplicationController
   end
 
   def create
-    find_registration(params[:id])
-    find_payment(params[:order_key])
+    # TODO
+    # find_registration(params[:id])
+    # find_payment(params[:order_key])
 
-    CreateRefundService.run(@payment)
+    # CreateRefundService.run(@payment)
 
-    flash[:message] = "#{@payment.balance} refunded successfully"
+    # flash[:message] = "#{@payment.balance} refunded successfully"
 
-    redirect_to finance_details_path(@registration._id)
+    # redirect_to finance_details_path(@registration._id)
   end
 
   private
