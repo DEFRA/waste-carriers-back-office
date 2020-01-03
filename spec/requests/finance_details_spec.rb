@@ -15,7 +15,7 @@ RSpec.describe "FinanceDetails", type: :request do
         let(:renewing_registration) { create(:renewing_registration, :has_finance_details) }
 
         it "renders the show template and returns a 200 status" do
-          get finance_details_path(renewing_registration.finance_details._id)
+          get finance_details_path(renewing_registration._id)
 
           expect(response).to render_template(:show)
           expect(response).to have_http_status(200)
@@ -26,7 +26,7 @@ RSpec.describe "FinanceDetails", type: :request do
         let(:registration) { create(:registration, :has_orders_and_payments) }
 
         it "renders the show template and returns a 200 status" do
-          get finance_details_path(registration.finance_details._id)
+          get finance_details_path(registration._id)
 
           expect(response).to render_template(:show)
           expect(response).to have_http_status(200)

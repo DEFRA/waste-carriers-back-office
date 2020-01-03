@@ -135,7 +135,7 @@
                   <% end %>
                   <% if display_payment_link_for?(result) %>
                     <li>
-                      <%= link_to finance_details_path(result.finance_details._id) do %>
+                      <%= link_to finance_details_path(result._id) do %>
                         <%= t(".results.actions.payment.link_text") %>
                         <span class="visually-hidden">
                           <%= t(".results.actions.payment.visually_hidden_text",
