@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: c4bc02e2ec7fb8d6ca96a4997cf0c87c307bd45a
-  branch: master
+  revision: 2efeeda8235fbf7fd83b726f2fac0607f3586b9c
+  branch: payment-types-and-default-currency
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)

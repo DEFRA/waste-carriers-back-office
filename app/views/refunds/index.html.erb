@@ -49,14 +49,18 @@
               <%= display_pence_as_pounds_and_cents(payment.amount) %>
             </td>
             <td>
-              <%= link_to new_finance_details_refund_path(@registration._id, order_key: payment.order_key) do %>
-                <%= t(".refund_payment") %>
-                <span class="visually-hidden">
-                  <%= t(".refund_payment_alt",
-                        date: payment.date_received.to_formatted_s(:day_month_year_time_slashes),
-                        method: t("shared.payment_type.#{payment.payment_type}"),
-                        amount: display_pence_as_pounds_and_cents(payment.amount)) %>
-                </span>
+              <% if payment.already_refunded? %>
+                <%= payment.refunded_message %>
+              <% else %>
+                <%= link_to new_finance_details_refund_path(@registration._id, order_key: payment.order_key) do %>
+                  <%= t(".refund_payment") %>
+                  <span class="visually-hidden">
+                    <%= t(".refund_payment_alt",
+                          date: payment.date_received.to_formatted_s(:day_month_year_time_slashes),
+                          method: t("shared.payment_type.#{payment.payment_type}"),
+                          amount: display_pence_as_pounds_and_cents(payment.amount)) %>
+                  </span>
+                <% end %>
               <% end %>
             </td>
           </tr>

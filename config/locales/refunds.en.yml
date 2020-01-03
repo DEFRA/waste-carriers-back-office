@@ -1,5 +1,12 @@
 en:
   refunds:
+    comments:
+      manual: "A manual refund has been requested for this payment"
+      card: "A refund has been requested for this worldpay payment"
+    refunded_message:
+      manual: "Refund: A manual refund has been requested for this payment"
+      card: "Refund: %{refund_status}"
+    flash_message: "£%{amount} refunded successfully"
     index:
       heading: "Which payment do you want to refund?"
       date: "Date"
@@ -9,4 +16,11 @@ en:
       action: "Action"
       refund_payment: "Refund payment"
       refund_payment_alt: "Refund payment from %{date} by %{method} for %{amount}"
+    new:
+      heading:
+        card: "Confirm the card payment refund"
+        cash: "Confirm the cash payment refund"
+      amount: "Amount: £%{amount}"
+      confirm: "Confirm refund"
+      order_code: "Order code %{order_code}"
 

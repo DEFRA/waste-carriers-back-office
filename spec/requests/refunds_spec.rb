@@ -57,5 +57,35 @@ RSpec.describe "Refunds", type: :request do
   end
 
   # TODO
-  skip "POST /bo/finance_details/:_id/refunds/:order_key"
+  describe "POST /bo/finance_details/:_id/refunds/:order_key" do
+    context "when a valid user is signed in" do
+      let(:user) { create(:user) }
+      let(:renewing_registration) { create(:renewing_registration) }
+      let(:payment) { renewing_registration.finance_details.payments.first }
+
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "creates a refund payment, redirects to the finance details page and returns a 302 status" do
+        expected_payments_count = renewing_registration.finance_details.payments.count + 1
+
+        post finance_details_refunds_path(renewing_registration._id), order_key: payment.order_key
+
+        renewing_registration.reload
+        expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
+
+        expect(response).to redirect_to(finance_details_path(renewing_registration._id))
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    context "when a user is not signed in" do
+      it "redirects to the sign-in page" do
+        post finance_details_refunds_path("foo"), order_key: "bar"
+
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
 end

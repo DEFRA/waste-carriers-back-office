@@ -1,1 +1,40 @@
-TODO
+<div class="grid-row">
+  <div class="column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: finance_details_refunds_path(@registration._id)) %>
+
+    <h1 class="heading-large">
+      <% if @payment.worldpay? || @payment.worldpay_missed? %>
+        <%= t(".heading.card") %>
+      <% else %>
+        <%= t(".heading.cash") %>
+      <% end %>
+    </h1>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <%= render "shared/company_details_panel", registration: @registration %>
+
+    <p>
+      <strong>
+        <%= t(".amount", amount: display_pence_as_pounds_and_cents(@payment.amount)) %>
+      </strong>
+    </p>
+
+    <p>
+      <strong>
+        <%= t(".order_code", order_code: @payment.order_key) %>
+      </strong>
+    </p>
+
+    <%= form_tag(finance_details_refunds_path(@registration._id)) do %>
+      <%= hidden_field_tag :order_key, @payment.order_key %>
+
+      <div class="form-group">
+        <%= submit_tag t(".confirm"), class: "button" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

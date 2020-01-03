@@ -56,7 +56,7 @@ gem "defra_ruby_aws", "~> 0.2.0"
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",
-    branch: "master"
+    branch: "payment-types-and-default-currency"
 
 # Allows us to automatically generate the change log from the tags, issues,
 # labels and pull requests on GitHub. Added as a dependency so all dev's have
