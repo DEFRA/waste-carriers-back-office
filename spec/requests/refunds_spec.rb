@@ -56,7 +56,6 @@ RSpec.describe "Refunds", type: :request do
     end
   end
 
-  # TODO
   describe "POST /bo/finance_details/:_id/refunds/:order_key" do
     context "when a valid user is signed in" do
       let(:user) { create(:user) }
