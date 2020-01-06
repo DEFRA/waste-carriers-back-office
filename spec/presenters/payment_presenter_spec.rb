@@ -7,18 +7,18 @@ RSpec.describe PaymentPresenter do
     it "given a list of objects, returns a list of instances of itself" do
       view = double(:view)
 
-      object_1 = double(:object_1)
-      object_2 = double(:object_2)
+      object1 = double(:object1)
+      object2 = double(:object2)
 
-      presenter_1 = double(:presenter_1)
-      presenter_2 = double(:presenter_2)
+      presenter1 = double(:presenter1)
+      presenter2 = double(:presenter2)
 
-      collection = [object_1, object_2]
+      collection = [object1, object2]
 
-      expect(described_class).to receive(:new).with(object_1, view).and_return(presenter_1)
-      expect(described_class).to receive(:new).with(object_2, view).and_return(presenter_2)
+      expect(described_class).to receive(:new).with(object1, view).and_return(presenter1)
+      expect(described_class).to receive(:new).with(object2, view).and_return(presenter2)
 
-      expect(described_class.create_from_collection(collection, view)).to eq([presenter_1, presenter_2])
+      expect(described_class.create_from_collection(collection, view)).to eq([presenter1, presenter2])
     end
   end
 

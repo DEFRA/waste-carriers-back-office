@@ -3,7 +3,7 @@
 class PaymentPresenter < WasteCarriersEngine::BasePresenter
   def self.create_from_collection(payments, view)
     payments.map do |payment|
-      self.new(payment, view)
+      new(payment, view)
     end
   end
 

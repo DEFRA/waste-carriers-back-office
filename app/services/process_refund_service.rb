@@ -22,11 +22,8 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     refund.registration_reference = payment.registration_reference
     refund.updated_by_user = user.email
 
-    if payment.worldpay? || payment.worldpay_missed?
-      refund.comment = I18n.t("refunds.comment.card")
-    else
-      refund.comment = I18n.t("refunds.comment.manual")
-    end
+    refund.comment = I18n.t("refunds.comment.manual")
+    refund.comment = I18n.t("refunds.comment.card") if payment.worldpay? || payment.worldpay_missed?
 
     refund
   end
