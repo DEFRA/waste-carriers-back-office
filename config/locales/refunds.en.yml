@@ -6,7 +6,9 @@ en:
     refunded_message:
       manual: "Refund: A manual refund has been requested for this payment"
       card: "Refund: %{refund_status}"
-    flash_message: "£%{amount} refunded successfully"
+    flash_messages:
+      successfull: "£%{amount} refunded successfully"
+      error: "There have been a problem communicating with Worldpay. Please try again."
     index:
       heading: "Which payment do you want to refund?"
       date: "Date"

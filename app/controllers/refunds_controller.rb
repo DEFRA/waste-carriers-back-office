@@ -22,13 +22,20 @@ class RefundsController < ApplicationController
     find_registration(params[:finance_details_id])
     find_payment(params[:order_key])
 
-    ProcessRefundService.run(
+    response = ProcessRefundService.run(
       finance_details: @registration.finance_details,
       payment: @payment,
       user: current_user
     )
 
-    flash[:message] = I18n.t("refunds.flash_message", amount: display_pence_as_pounds_and_cents(@payment.amount))
+    if response
+      flash[:message] = I18n.t(
+        "refunds.flash_messages.successfull",
+        amount: display_pence_as_pounds_and_cents(@payment.amount)
+      )
+    else
+      flash[:error] = I18n.t("refunds.flash_messages.error")
+    end
 
     redirect_to finance_details_path(@registration._id)
   end

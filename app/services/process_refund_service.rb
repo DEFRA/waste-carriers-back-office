@@ -1,18 +1,29 @@
 # frozen_string_literal: true
 
 class ProcessRefundService < WasteCarriersEngine::BaseService
-  attr_reader :payment
-
   def run(finance_details:, payment:, user:)
-    finance_details.payments << build_refund_for(payment, user)
+    @payment = payment
+    @user = user
+
+    return false if card_payment? && !card_refund_result
+
+    finance_details.payments << build_refund
 
     finance_details.update_balance
     finance_details.save!
+
+    true
   end
 
   private
 
-  def build_refund_for(payment, user)
+  attr_reader :payment, :user
+
+  def card_refund_result
+    @_card_refund_result ||= ::Worldpay::RefundService.run(payment: payment)
+  end
+
+  def build_refund
     refund = WasteCarriersEngine::Payment.new(payment_type: WasteCarriersEngine::Payment::REFUND)
 
     refund.order_key = "#{payment.order_key}_REFUNDED"
@@ -21,10 +32,18 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     refund.date_received = Date.current
     refund.registration_reference = payment.registration_reference
     refund.updated_by_user = user.email
-
-    refund.comment = I18n.t("refunds.comment.manual")
-    refund.comment = I18n.t("refunds.comment.card") if payment.worldpay? || payment.worldpay_missed?
+    refund.comment = refund_comment
 
     refund
+  end
+
+  def card_payment?
+    payment.worldpay? || payment.worldpay_missed?
+  end
+
+  def refund_comment
+    return I18n.t("refunds.comment.card") if card_payment?
+
+    I18n.t("refunds.comment.manual")
   end
 end

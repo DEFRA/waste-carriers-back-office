@@ -67,6 +67,9 @@ RSpec.describe "Refunds", type: :request do
       end
 
       it "creates a refund payment, redirects to the finance details page and returns a 302 status" do
+        payment.payment_type = WasteCarriersEngine::Payment::CASH
+        payment.save
+
         expected_payments_count = renewing_registration.finance_details.payments.count + 1
 
         post finance_details_refunds_path(renewing_registration._id), order_key: payment.order_key
@@ -76,6 +79,39 @@ RSpec.describe "Refunds", type: :request do
 
         expect(response).to redirect_to(finance_details_path(renewing_registration._id))
         expect(response).to have_http_status(302)
+      end
+
+      context "when the paument is a worldpay payment" do
+        it "creates a refund payment, redirects to the finance details page, sends a confirmation to worldpay and returns a 302 status" do
+          payment.payment_type = WasteCarriersEngine::Payment::WORLDPAY
+          payment.save
+
+          worldpay_valid_response = <<-XML
+            <?xml version=\"1.0\" encoding=\"UTF-8\"?>
+            <!DOCTYPE paymentService PUBLIC \"-//WorldPay//DTD WorldPay PaymentService v1//EN\" \"http://dtd.worldpay.com/paymentService_v1.dtd\">
+            <paymentService version=\"1.4\" merchantCode=\"EASERRSIMMOTO\">
+              <reply>
+                <ok>
+                  <refundReceived orderCode=\"\">
+                    <amount value=\"100\" currencyCode=\"GBP\" exponent=\"2\" debitCreditIndicator=\"credit\"/>
+                  </refundReceived>
+                </ok>
+              </reply>
+            </paymentService>
+          XML
+
+          stub_request(:get, "https://secure-test.worldpay.com/jsp/merchant/xml/paymentService.jsp").to_return(body: worldpay_valid_response)
+
+          expected_payments_count = renewing_registration.finance_details.payments.count + 1
+
+          post finance_details_refunds_path(renewing_registration._id), order_key: payment.order_key
+
+          renewing_registration.reload
+          expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
+
+          expect(response).to redirect_to(finance_details_path(renewing_registration._id))
+          expect(response).to have_http_status(302)
+        end
       end
     end
 
