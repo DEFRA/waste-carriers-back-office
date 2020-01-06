@@ -4,7 +4,7 @@ require "rails_helper"
 
 module Reports
   module Boxi
-    RSpec.describe PaymentPresenter do
+    RSpec.describe ::Reports::Boxi::PaymentPresenter do
       let(:payment) { double(:payment) }
 
       subject { described_class.new(payment, nil) }

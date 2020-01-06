@@ -10,7 +10,7 @@ class RefundsController < ApplicationController
     find_registration(params[:finance_details_id])
 
     payments = @registration.finance_details.payments.refundable
-    @payments = PaymentPresenter.create_from_collection(payments, view_context)
+    @payments = ::PaymentPresenter.create_from_collection(payments, view_context)
   end
 
   def new

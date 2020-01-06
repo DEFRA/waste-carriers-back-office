@@ -24,7 +24,7 @@ module Reports
       private
 
       def parse_payment(payment, uid)
-        presenter = PaymentPresenter.new(payment, nil)
+        presenter = Reports::Boxi::PaymentPresenter.new(payment, nil)
 
         ATTRIBUTES.map do |key, _value|
           if key == :uid
