@@ -8,7 +8,7 @@ RSpec.describe "User Activations", type: :request do
   let(:active_user) { create(:user, role: subject_user_role) }
   let(:inactive_user) { create(:user, :inactive, role: subject_user_role) }
 
-  describe "GET /bo/users/deactivate/:id" do
+  describe "GET /bo/users/:id/deactivate" do
     context "when a super user is signed in" do
       let(:user) { create(:user, role: current_user_role) }
       before(:each) do
@@ -45,7 +45,7 @@ RSpec.describe "User Activations", type: :request do
     end
   end
 
-  describe "POST /bo/users/deactivate" do
+  describe "POST /bo/users/:id/deactivate" do
     context "when a super user is signed in" do
       let(:user) { create(:user, role: current_user_role) }
       before(:each) do
