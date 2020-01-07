@@ -2,8 +2,8 @@
 
 module Worldpay
   class RefundService < ::WasteCarriersEngine::BaseService
-    include ::WasteCarriersEngine::CanSendWorldpayRequest
-    include ::WasteCarriersEngine::CanBuildWorldpayXml
+    # include ::WasteCarriersEngine::CanSendWorldpayRequest
+    # include ::WasteCarriersEngine::CanBuildWorldpayXml
 
     def run(payment:)
       return unless payment.worldpay? || payment.worldpay_missed?
@@ -35,5 +35,52 @@ module Worldpay
 
       builder.to_xml
     end
+
+    def build_doctype(xml)
+        xml.doc.create_internal_subset(
+          "paymentService",
+          "-//WorldPay/DTD WorldPay PaymentService v1/EN",
+          "http://dtd.worldpay.com/paymentService_v1.dtd"
+        )
+      end
+
+      def merchant_code
+        @_merchant_code ||= Rails.configuration.worldpay_merchantcode
+      end
+    def send_request(xml)
+        Rails.logger.debug "Sending initial request to WorldPay: #{xml}"
+
+        # begin
+          response = RestClient::Request.execute(
+            method: :get,
+            url: url,
+            payload: xml,
+            headers: {
+              "Authorization" => authorization
+            }
+          )
+
+          Rails.logger.debug "Received response from WorldPay: #{response}"
+
+          response
+        # end
+      end
+
+      def url
+        @_url ||= Rails.configuration.worldpay_url
+      end
+
+      def authorization
+        @_authorization ||= "Basic " + Base64.encode64(username + ":" + password).to_s
+      end
+
+      def username
+        @_username ||= Rails.configuration.worldpay_username
+      end
+
+      def password
+        @_password ||= Rails.configuration.worldpay_password
+      end
+
   end
 end
