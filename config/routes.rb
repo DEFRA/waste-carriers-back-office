@@ -128,8 +128,7 @@ Rails.application.routes.draw do
 
   resources :users,
             only: [],
-            path: "/bo/users",
-            path_names: { show: "/:id" } do
+            path: "/bo/users" do
               resources :user_activations,
                         as: :activations,
                         only: %i[new create],
