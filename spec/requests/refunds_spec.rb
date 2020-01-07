@@ -81,7 +81,7 @@ RSpec.describe "Refunds", type: :request do
         expect(response).to have_http_status(302)
       end
 
-      context "when the paument is a worldpay payment" do
+      context "when the payment is a worldpay payment" do
         it "creates a refund payment, redirects to the finance details page, sends a confirmation to worldpay and returns a 302 status" do
           payment.payment_type = WasteCarriersEngine::Payment::WORLDPAY
           payment.save
@@ -111,6 +111,27 @@ RSpec.describe "Refunds", type: :request do
 
           expect(response).to redirect_to(finance_details_path(renewing_registration._id))
           expect(response).to have_http_status(302)
+        end
+
+        context "when the request to worldpay returns unexpected results" do
+          it "does not create a payment and redirects to the finance details page" do
+            payment.payment_type = WasteCarriersEngine::Payment::WORLDPAY
+            payment.save
+
+            worldpay_response = ""
+
+            stub_request(:get, "https://secure-test.worldpay.com/jsp/merchant/xml/paymentService.jsp").to_return(body: worldpay_response)
+
+            expected_payments_count = renewing_registration.finance_details.payments.count
+
+            post finance_details_refunds_path(renewing_registration._id), order_key: payment.order_key
+
+            renewing_registration.reload
+            expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
+
+            expect(response).to redirect_to(finance_details_path(renewing_registration._id))
+            expect(response).to have_http_status(302)
+          end
         end
       end
     end
