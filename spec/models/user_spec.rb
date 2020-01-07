@@ -20,6 +20,14 @@ RSpec.describe User, type: :model do
         expect(user.active?).to eq(false)
       end
     end
+
+    context "when 'active' is nil" do
+      let(:user) { User.new(active: nil) }
+
+      it "returns true" do
+        expect(user.active?).to eq(true)
+      end
+    end
   end
 
   describe "#activate!" do

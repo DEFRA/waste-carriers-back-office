@@ -24,7 +24,7 @@ class User
   end
 
   def active?
-    active == true
+    active == true || active.nil?
   end
 
   def activate!
