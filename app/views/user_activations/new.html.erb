@@ -15,7 +15,7 @@
     <p><%= t(".paragraph_2") %></p>
 
     <%= button_to t(".button"),
-              deactivate_user_path(@user.id),
+              user_activations_path(@user.id),
               class: "button" %>
   </div>
 </div>

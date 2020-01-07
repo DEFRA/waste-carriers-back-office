@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-class UserActivationsController < UserActivityController
+class UserDeactivationsController < UserActivityController
   include UsersHelper
 
   private
 
   def user_activity_level_is_wrong?
-    @user.active?
+    !@user.active?
   end
 
   def perform_activation_action
-    @user.activate!
+    @user.deactivate!
   end
 end

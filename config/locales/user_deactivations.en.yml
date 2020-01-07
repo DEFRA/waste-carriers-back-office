@@ -1,0 +1,8 @@
+en:
+  user_deactivations:
+    new:
+      title: "Deactivate user"
+      heading: "Deactivate user"
+      paragraph_1: "You are about to deactivate this user:"
+      paragraph_2: "Once deactivated, this user will not be able to access and use the back office."
+      button: "Deactivate"

@@ -126,10 +126,23 @@ Rails.application.routes.draw do
       to: "users#index",
       as: :users
 
-  get "/bo/users/activate/:id", to: "user_activations#activate_form", as: :activate_user_form
-  get "/bo/users/deactivate/:id", to: "user_activations#deactivate_form", as: :deactivate_user_form
-  post "/bo/users/activate/:id", to: "user_activations#activate", as: :activate_user
-  post "/bo/users/deactivate/:id", to: "user_activations#deactivate", as: :deactivate_user
+  resources :users,
+            only: [],
+            param: :id,
+            path: "/bo/users",
+            path_names: { show: "/:id" } do
+              resources :user_activations,
+                        as: :activations,
+                        only: %i[new create],
+                        path: "activate",
+                        path_names: { new: "" }
+
+              resources :user_deactivations,
+                        as: :deactivations,
+                        only: %i[new create],
+                        path: "deactivate",
+                        path_names: { new: "" }
+            end
 
   resources :user_migrations,
             only: %i[new create],
