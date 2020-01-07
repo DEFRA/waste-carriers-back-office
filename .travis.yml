@@ -48,7 +48,7 @@ before_script:
   # Run rubocop. Its installed as a dependency (hence no install step) as this
   # allows projects to control the version they are using (rather than getting)
   # surprise build failures.
-  # - bundle exec rubocop
+  - bundle exec rubocop
 
 after_script:
   - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
