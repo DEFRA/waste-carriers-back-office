@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
     return if skip_auth_on_this_controller?
 
     authenticate_user!
-    redirect_to "/bo/pages/deactivated" if current_user_cannot_use_back_office?
+    redirect_to "/bo/pages/deactivated" if current_user_is_deactivated?
   end
 
   # http://jacopretorius.net/2014/01/force-page-to-reload-on-browser-back-in-rails.html
@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
     controller.include?("pages") || controller.include?("devise")
   end
 
-  def current_user_cannot_use_back_office?
+  def current_user_is_deactivated?
     # Don't try to check user permissions if the user isn't logged in
     return false if current_user.blank?
 
