@@ -12,6 +12,13 @@
   font-size: 24px;
 }
 
+.error-summary.flash-error {
+  border-color: #df3034;
+  background-color: #df3034;
+  color: #ffffff;
+  font-size: 24px;
+}
+
 .flash-success .error-summary-list a:link,
 .flash-success .error-summary-list a:visited,
 .flash-success .error-summary-list a:hover,
