@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "Refunds", type: :request do
   describe "GET /bo/finance_details/:_id/refunds" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
 
       before(:each) do
@@ -31,7 +31,7 @@ RSpec.describe "Refunds", type: :request do
 
   describe "GET /bo/finance_details/:_id/refunds/new" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
       let(:payment) { renewing_registration.finance_details.payments.first }
 
@@ -58,7 +58,7 @@ RSpec.describe "Refunds", type: :request do
 
   describe "POST /bo/finance_details/:_id/refunds/:order_key" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
       let(:payment) { renewing_registration.finance_details.payments.first }
 
@@ -141,6 +141,16 @@ RSpec.describe "Refunds", type: :request do
         post finance_details_refunds_path("foo"), order_key: "bar"
 
         expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    context "when a user with the wrong permissions is signed in" do
+      it "redirects to the permissions page" do
+        sign_in(create(:user))
+
+        post finance_details_refunds_path("foo"), order_key: "bar"
+
+        expect(response).to redirect_to("/bo/pages/permission")
       end
     end
   end

@@ -5,6 +5,7 @@ class RefundsController < ApplicationController
   include FinanceDetailsHelper
 
   before_action :authenticate_user!
+  before_action :authorise_user!
 
   def index
     find_registration(params[:finance_details_id])
@@ -44,5 +45,9 @@ class RefundsController < ApplicationController
 
   def find_payment(order_key)
     @payment = @registration.finance_details.payments.refundable.find_by(order_key: order_key)
+  end
+
+  def authorise_user!
+    authorize! :refund, WasteCarriersEngine::Registration
   end
 end

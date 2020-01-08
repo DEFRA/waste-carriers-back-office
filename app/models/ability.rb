@@ -50,6 +50,7 @@ class Ability
     permissions_for_agency_user
 
     can :view_revoked_reasons, :all
+    can :refund, :all
   end
 
   def permissions_for_finance_user
