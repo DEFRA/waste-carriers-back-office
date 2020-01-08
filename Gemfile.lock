@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: aeee1c0bac40e7255d1c113dc36603d6e688e9c2
-  branch: master
+  revision: 96f60eff1ed403f69113472f787eb8c17d8422b6
+  branch: add-error-flash-partial
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)
