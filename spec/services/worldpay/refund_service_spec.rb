@@ -3,7 +3,7 @@
 module Worldpay
   RSpec.describe RefundService do
     let(:payment) { double(:payment) }
-    let(:result) { described_class.run(payment: payment) }
+    let(:result) { described_class.run(payment: payment, amount: 100) }
 
     describe ".run" do
       context "when the payment is not a worldpay payment nor a worldpay_missed payment" do

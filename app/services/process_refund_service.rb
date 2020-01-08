@@ -2,9 +2,11 @@
 
 class ProcessRefundService < WasteCarriersEngine::BaseService
   def run(finance_details:, payment:, user:)
+    @finance_details = finance_details
     @payment = payment
     @user = user
 
+    return false if amount_to_refund == 0
     return false if card_payment? && !card_refund_result
 
     finance_details.payments << build_refund
@@ -17,17 +19,26 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
 
   private
 
-  attr_reader :payment, :user
+  attr_reader :payment, :user, :finance_details
 
   def card_refund_result
-    @_card_refund_result ||= ::Worldpay::RefundService.run(payment: payment)
+    @_card_refund_result ||= ::Worldpay::RefundService.run(payment: payment, amount: amount_to_refund)
+  end
+
+  def amount_to_refund
+    # We can never refund unless there have been an overpayment.
+    return 0 unless finance_details.balance.negative?
+
+    overpayment = (-1 * finance_details.balance)
+
+    [overpayment, payment.amount].min
   end
 
   def build_refund
     refund = WasteCarriersEngine::Payment.new(payment_type: WasteCarriersEngine::Payment::REFUND)
 
     refund.order_key = "#{payment.order_key}_REFUNDED"
-    refund.amount = payment.amount * -1
+    refund.amount = amount_to_refund
     refund.date_entered = Date.current
     refund.date_received = Date.current
     refund.registration_reference = payment.registration_reference
