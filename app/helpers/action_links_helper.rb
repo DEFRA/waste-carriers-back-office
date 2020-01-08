@@ -57,6 +57,12 @@ module ActionLinksHelper
     resource.upper_tier?
   end
 
+  def display_refund_link_for?(resource)
+    return false if resource.balance >= 0
+
+    can?(:refund, resource)
+  end
+
   def display_payment_details_link_for?(resource)
     # TODO: delete next line filter when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
     return false if a_registration?(resource)

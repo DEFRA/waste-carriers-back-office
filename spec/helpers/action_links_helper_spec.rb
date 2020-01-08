@@ -137,6 +137,46 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
+  describe "#display_refund_link_for?" do
+    let(:resource) { build(:finance_details, balance: balance) }
+
+    context "when the resource has a positive balance" do
+      let(:balance) { 5 }
+
+      it "returns false" do
+        expect(helper.display_refund_link_for?(resource)).to be_falsey
+      end
+    end
+
+    context "when the resource has a balance of 0" do
+      let(:balance) { 0 }
+
+      it "returns false" do
+        expect(helper.display_refund_link_for?(resource)).to be_falsey
+      end
+    end
+
+    context "when the resource has a negative balance" do
+      let(:balance) { -20 }
+
+      context "when the user has the permissions to refund" do
+        it "returns true" do
+          expect(helper).to receive(:can?).with(:refund, resource).and_return(true)
+
+          expect(helper.display_refund_link_for?(resource)).to be_truthy
+        end
+      end
+
+      context "when the user does not have the permissions to refund" do
+        it "returns false" do
+          expect(helper).to receive(:can?).with(:refund, resource).and_return(false)
+
+          expect(helper.display_refund_link_for?(resource)).to be_falsey
+        end
+      end
+    end
+  end
+
   describe "#display_resume_link_for?" do
     context "when the result is not a RenewingRegistration" do
       let(:result) { build(:registration) }
