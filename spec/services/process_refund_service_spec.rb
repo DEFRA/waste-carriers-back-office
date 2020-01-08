@@ -15,7 +15,7 @@ RSpec.describe ProcessRefundService do
       allow(payment).to receive(:worldpay?).and_return(worldpay)
     end
 
-    context "when the amount to refund is 0" do
+    context "when the registration balance is not negative" do
       let(:finance_details) { double(:finance_details, balance: 500) }
 
       it "returns false and does not create a payment" do
