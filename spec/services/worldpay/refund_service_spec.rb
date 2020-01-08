@@ -7,11 +7,11 @@ module Worldpay
 
     describe ".run" do
       context "when the payment is not a worldpay payment nor a worldpay_missed payment" do
-        it "returns nil" do
+        it "returns false" do
           expect(payment).to receive(:worldpay?).and_return(false)
           expect(payment).to receive(:worldpay_missed?).and_return(false)
 
-          expect(result).to be_nil
+          expect(result).to be_falsey
         end
       end
 

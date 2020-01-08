@@ -6,7 +6,7 @@ module Worldpay
     include ::WasteCarriersEngine::CanBuildWorldpayXml
 
     def run(payment:)
-      return unless payment.worldpay? || payment.worldpay_missed?
+      return false unless payment.worldpay? || payment.worldpay_missed?
 
       xml = build_refund_xml(payment)
       response = send_request(xml)
