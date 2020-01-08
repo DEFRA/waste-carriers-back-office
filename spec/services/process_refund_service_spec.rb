@@ -18,7 +18,7 @@ RSpec.describe ProcessRefundService do
       let(:worldpay) { true }
 
       context "when a request to worldpay fails" do
-        it "returns false and do not create a payment" do
+        it "returns false and does not create a payment" do
           expect(Worldpay::RefundService).to receive(:run).with(payment: payment).and_return(false)
 
           expect(described_class.run(finance_details: finance_details, payment: payment, user: user)).to be_falsey

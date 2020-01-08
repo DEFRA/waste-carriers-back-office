@@ -7,8 +7,8 @@ en:
       manual: "Refund: A manual refund has been requested for this payment"
       card: "Refund: %{refund_status}"
     flash_messages:
-      successfull: "£%{amount} refunded successfully"
-      error: "There have been a problem communicating with Worldpay. Please try again."
+      successful: "£%{amount} refunded successfully"
+      error: "There has been a problem communicating with Worldpay. Please try again."
     index:
       heading: "Which payment do you want to refund?"
       date: "Date"
@@ -25,4 +25,3 @@ en:
       amount: "Amount: £%{amount}"
       confirm: "Confirm refund"
       order_code: "Order code %{order_code}"
-
