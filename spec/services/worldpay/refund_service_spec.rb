@@ -18,7 +18,6 @@ module Worldpay
       context "when the payment is a worldpay payment" do
         before do
           expect(payment).to receive(:worldpay?).and_return(true)
-          expect(payment).to receive(:amount).and_return(100)
           expect(payment).to receive(:order_key).and_return("foo")
         end
 
