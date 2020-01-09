@@ -9,7 +9,7 @@
        <%= t(".heading") %>
      </h1>
 
-     <p><%= t(".paragraph_1.#{@user.role}", email: @user.email) %></p>
+     <p><%= t(".paragraph_1.#{@old_role}", email: @user.email) %></p>
 
      <%= render("waste_carriers_engine/shared/errors", object: @user) %>
 

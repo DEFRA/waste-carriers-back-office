@@ -45,6 +45,32 @@ RSpec.describe "User Roles", type: :request do
         expect(response).to redirect_to(users_path)
       end
 
+      context "when the params are invalid" do
+        let(:params) { { role: "foo" } }
+
+        it "does not update the user role" do
+          post "/users/#{role_change_user.id}/role", user: params
+          expect(role_change_user.reload.role).to eq("agency")
+        end
+
+        it "renders the edit template" do
+          post "/users/#{role_change_user.id}/role", user: params
+          expect(response).to render_template(:edit)
+        end
+      end
+
+      context "when the params are blank" do
+        it "does not update the user role" do
+          post "/users/#{role_change_user.id}/role"
+          expect(role_change_user.reload.role).to eq("agency")
+        end
+
+        it "renders the edit template" do
+          post "/users/#{role_change_user.id}/role"
+          expect(response).to render_template(:edit)
+        end
+      end
+
       context "when the current user does not have permission to manage this user" do
         let(:role_change_user) { create(:user, :finance) }
 
