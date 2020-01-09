@@ -17,6 +17,8 @@ class RefundsController < ApplicationController
   def new
     find_registration(params[:finance_details_id])
     find_payment(params[:order_key])
+
+    @presenter = RefundPresenter.new(@registration.finance_details, @payment)
   end
 
   def create

@@ -22,6 +22,9 @@ en:
       heading:
         card: "Confirm the card payment refund"
         cash: "Confirm the cash payment refund"
-      amount: "Amount: £%{amount}"
+      transaction_to_refund: "Transaction to refund"
+      total_amount_paid: "Total amount paid"
+      total_amount_due: "Total amount due"
+      balance_to_refund: "Balance that will be refunded"
       confirm: "Confirm refund"
       order_code: "Order code %{order_code}"
