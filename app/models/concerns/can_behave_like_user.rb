@@ -47,7 +47,6 @@ module CanBehaveLikeUser
     field :locked_at,       type: Time
 
     # Validations
-    validates :password, presence: true, length: { in: 8..128 }
     validate :password_must_have_lowercase_uppercase_and_numeric
   end
   # rubocop:enable Metrics/BlockLength
