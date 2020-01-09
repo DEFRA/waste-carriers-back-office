@@ -68,7 +68,7 @@ en:
             transfer: "Transfer to another account"
             edit: "Edit registration"
             view_confirmation_letter: "View certificate"
-            order_copy_cards: "Order copy cards"
+            order_copy_cards: "Order registration cards"
             payment_details: "Payment details"
             revoke: "Cease or revoke"
       expired_panel:
