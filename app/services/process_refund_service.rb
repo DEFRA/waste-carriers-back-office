@@ -29,6 +29,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     # We can never refund unless there have been an overpayment.
     return 0 unless finance_details.balance.negative?
 
+    # A quick maths trick to convert a negative value to a postive one
     overpayment = (-1 * finance_details.balance)
 
     [overpayment, payment.amount].min
