@@ -1,0 +1,5 @@
+en:
+  user_roles:
+    edit:
+      title: "Change a user's role"
+      heading: "Change a user's role"

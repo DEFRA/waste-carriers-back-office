@@ -127,6 +127,9 @@ Rails.application.routes.draw do
       to: "users#index",
       as: :users
 
+  get "/users/:id/role", to: "user_roles#edit", as: :user_role_form
+  post "/users/:id/role", to: "user_roles#update", as: :user_role
+
   resources :user_migrations,
             only: %i[new create],
             path: "/bo/users/migrate",
