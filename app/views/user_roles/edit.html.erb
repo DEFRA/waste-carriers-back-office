@@ -1,7 +1,23 @@
 <div class="grid-row">
   <div class="column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: users_path) %>
+    <%= form_for @user,
+                 url: user_role_path(@user),
+                 html: { method: :post } do |f| %>
+
      <h1 class="heading-large">
        <%= t(".heading") %>
      </h1>
+
+     <p><%= t(".paragraph_1.#{@user.role}", email: @user.email) %></p>
+
+     <%= render("waste_carriers_engine/shared/errors", object: @user) %>
+
+     <%= render("shared/select_role", resource: @user, f: f) %>
+
+     <div class="form-group">
+       <%= f.submit t(".submit_button"), class: "button" %>
+     </div>
+   <% end %>
   </div>
 </div>

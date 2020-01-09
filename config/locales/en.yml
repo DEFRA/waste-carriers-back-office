@@ -34,6 +34,17 @@ en:
       name: "Name"
       position: "Position"
       dob: "Date of birth"
+      shared:
+    select_role:
+      roles:
+        legend: "Select a role:"
+        options:
+          agency: "Agency user"
+          agency_with_refund: "Agency user with refund"
+          finance: "Finance user"
+          finance_admin: "Finance admin user"
+          agency_super: "Agency super user"
+          finance_super: "Finance super user"
 
   # Kaminari overrides
   helpers:

@@ -3,3 +3,11 @@ en:
     edit:
       title: "Change a user's role"
       heading: "Change a user's role"
+      paragraph_1:
+        agency: "%{email} is currently an agency user."
+        agency_with_refund: "%{email} is currently an agency user with refund."
+        finance: "%{email} is currently a finance user."
+        finance_admin: "%{email} is currently a finance admin user."
+        agency_super: "%{email} is currently an agency super user."
+        finance_super: "%{email} is currently a finance super user."
+      submit_button: "Change role"
