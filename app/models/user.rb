@@ -41,6 +41,10 @@ class User
     %w[finance finance_admin finance_super].include?(role)
   end
 
+  def change_role!(new_role)
+    update!(role: new_role)
+  end
+
   # Permissions
 
   def ability
