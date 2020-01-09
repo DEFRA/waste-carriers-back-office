@@ -32,3 +32,18 @@ en:
           activate:
             link_text: "Activate"
             visually_hidden_text: " %{email}"
+  mongoid:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "Enter an email address"
+              invalid: "Enter a valid email address - there’s a mistake in that one"
+              taken: "There is already a user with this email"
+            password:
+              blank: "You must enter a password"
+              too_short: "The password must be at least 8 characters long"
+              invalid_format: "The password must contain uppercase letters, lowercase letters and numbers"
+            role:
+              inclusion: "You must select a role"
