@@ -28,13 +28,20 @@ RSpec.describe "User Roles", type: :request do
   end
 
   describe "POST /users/:id/role" do
+    let(:params) { { role: "agency_with_refund" } }
+
     context "when a super user is signed in" do
       before(:each) do
         sign_in(create(:user, :agency_super))
       end
 
+      it "updates the user role" do
+        post "/users/#{role_change_user.id}/role", user: params
+        expect(role_change_user.reload.role).to eq(params[:role])
+      end
+
       it "redirects to the user list" do
-        post "/users/#{role_change_user.id}/role"
+        post "/users/#{role_change_user.id}/role", user: params
         expect(response).to redirect_to(users_path)
       end
 
@@ -42,7 +49,7 @@ RSpec.describe "User Roles", type: :request do
         let(:role_change_user) { create(:user, :finance) }
 
         it "redirects to the permissions error page" do
-          get "/users/#{role_change_user.id}/role"
+          get "/users/#{role_change_user.id}/role", user: params
           expect(response).to redirect_to("/bo/pages/permission")
         end
       end
