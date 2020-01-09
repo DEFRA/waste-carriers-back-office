@@ -9,7 +9,7 @@ class UserRolesController < ApplicationController
   def edit; end
 
   def update
-    @user.change_role!(params[:user][:role])
+    @user.change_role(params[:user][:role])
     redirect_to users_url
   end
 
