@@ -6,7 +6,7 @@
     <%= link_to t(".write_off_s"), "#TODO", class: "button" %>
     <%= link_to t(".adjust_charge"), "#TODO", class: "button" %>
 
-    <% if can?(:refund, @registration) %>
+    <% if display_refund_link_for?(@registration.finance_details) %>
       <%= link_to t(".refund"), finance_details_refunds_path(@registration._id), class: "button" %>
     <% end %>
   </div>
