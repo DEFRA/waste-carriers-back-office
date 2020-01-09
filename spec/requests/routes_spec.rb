@@ -74,9 +74,9 @@ RSpec.describe "Root", type: :request do
         sign_in(user)
       end
 
-      it "redirects to the deactivated page" do
+      it "returns a 302 (redirect) response" do
         get "/bo/#{registration.reg_identifier}/renew"
-        expect(response).to redirect_to("/bo/pages/deactivated")
+        expect(response).to have_http_status(302)
       end
     end
   end
