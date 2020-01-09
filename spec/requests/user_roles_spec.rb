@@ -15,6 +15,15 @@ RSpec.describe "User Roles", type: :request do
         get "/users/#{role_change_user.id}/role"
         expect(response).to render_template(:edit)
       end
+
+      context "when the current user does not have permission to manage this user" do
+        let(:role_change_user) { create(:user, :finance) }
+
+        it "redirects to the permissions error page" do
+          get "/users/#{role_change_user.id}/role"
+          expect(response).to redirect_to("/bo/pages/permission")
+        end
+      end
     end
   end
 
@@ -27,6 +36,15 @@ RSpec.describe "User Roles", type: :request do
       it "redirects to the user list" do
         post "/users/#{role_change_user.id}/role"
         expect(response).to redirect_to(users_path)
+      end
+
+      context "when the current user does not have permission to manage this user" do
+        let(:role_change_user) { create(:user, :finance) }
+
+        it "redirects to the permissions error page" do
+          get "/users/#{role_change_user.id}/role"
+          expect(response).to redirect_to("/bo/pages/permission")
+        end
       end
     end
   end
