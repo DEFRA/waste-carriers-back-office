@@ -19,8 +19,14 @@ en:
         email_label: "Email"
         submit_button: "Send invitation"
       edit:
-        heading: "Accept your invitation"
+        heading: "Create a new back office account"
+        pragraph_1: "To finish setting up your account, you need to create a password."
         password_label: "Password"
+        password_hint:
+          text: "It must:"
+          list_item_1: "have at least 8 characters"
+          list_item_2: "include some numbers"
+          list_item_3: "have a mix of lower and upper case letters"
         password_confirmation_label: "Confirm password"
         submit_button: "Create account"
     mailer:
