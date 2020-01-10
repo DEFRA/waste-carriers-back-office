@@ -37,10 +37,12 @@
                   <%= t(".user_list.roles.#{user.role}") %>
                 </td>
                 <td>
-                  <% if user.active? %>
-                    <%= t(".user_list.statuses.active") %>
-                  <% else %>
+                  <% if !user.active? %>
                     <%= t(".user_list.statuses.deactivated") %>
+                  <% elsif user.invitation_token.present? %>
+                    <%= t(".user_list.statuses.invited") %>
+                  <% else %>
+                    <%= t(".user_list.statuses.active") %>
                   <% end %>
                 </td>
                 <td>
