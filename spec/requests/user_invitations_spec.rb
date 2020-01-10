@@ -58,6 +58,22 @@ RSpec.describe "User Invitations", type: :request do
         post "/bo/users/invitation", params
         expect(User.find_by(email: email).role).to eq(role)
       end
+
+      context "when the current user does not have permission to select this role" do
+        let(:role) { :finance }
+
+        it "does not create a new user" do
+          old_user_count = User.count
+
+          post "/bo/users/invitation", params
+          expect(User.count).to eq(old_user_count)
+        end
+
+        it "renders the new template" do
+          post "/bo/users/invitation", params
+          expect(response).to render_template(:new)
+        end
+      end
     end
 
     context "when a non-super user is signed in" do
