@@ -1,0 +1,35 @@
+<div class="grid-row">
+  <div class="column-full">
+    <%= form_for resource,
+                 as: resource_name,
+                 url: invitation_path(resource_name),
+                 html: { method: :put } do |f| %>
+
+       <h1 class="heading-large">
+         <%= t(".heading") %>
+       </h1>
+
+      <%= render("waste_exemptions_engine/shared/errors", object: resource) %>
+
+      <%= f.hidden_field :invitation_token %>
+
+      <% if f.object.class.require_password_on_accepting %>
+        <% if resource.errors[:password].any? %>
+        <div class="form-group <%= "form-group-error" if resource.errors[:role].any? %>">
+          <%= f.label :password, t(".password_label"), class: "form-label" %>
+          <%= f.password_field :password, class: "form-control" %>
+        </div>
+
+        <% if resource.errors[:password_confirmation].any? %>
+        <div class="form-group <%= "form-group-error" if resource.errors[:role].any? %>">
+          <%= f.label :password_confirmation, t(".password_confirmation_label"), class: "form-label" %>
+          <%= f.password_field :password_confirmation, class: "form-control" %>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.submit t(".submit_button"), class: "button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

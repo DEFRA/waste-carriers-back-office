@@ -16,8 +16,10 @@ en:
         email_label: "Email"
         submit_button: "Send invitation"
       edit:
-        header: "Set your password"
-        submit_button: "Set my password"
+        heading: "Accept your invitation"
+        password_label: "Password"
+        password_confirmation_label: "Confirm password"
+        submit_button: "Create account"
     mailer:
       invitation_instructions:
         subject: "Invitation instructions"
