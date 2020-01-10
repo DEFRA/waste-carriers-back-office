@@ -42,9 +42,9 @@ RSpec.describe "User Invitations", type: :request do
         sign_in(user)
       end
 
-      it "redirects to the root path" do
+      it "redirects to the users path" do
         post "/bo/users/invitation", params
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(users_path)
       end
 
       it "creates a new user" do

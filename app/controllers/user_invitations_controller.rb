@@ -14,4 +14,8 @@ class UserInvitationsController < Devise::InvitationsController
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:invite, keys: [:role])
   end
+
+  def after_invite_path_for(_resource)
+    users_path
+  end
 end
