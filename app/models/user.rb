@@ -24,21 +24,24 @@ class User
 
   # Roles
 
-  ROLES = %w[agency
-             agency_with_refund
-             finance
-             finance_admin
-             agency_super
-             finance_super].freeze
+  AGENCY_ROLES = %w[agency
+                    agency_with_refund
+                    agency_super].freeze
+
+  FINANCE_ROLES = %w[finance
+                     finance_admin
+                     finance_super].freeze
+
+  ROLES = (AGENCY_ROLES + FINANCE_ROLES).freeze
 
   field :role, type: String
 
   def in_agency_group?
-    %w[agency agency_with_refund agency_super].include?(role)
+    AGENCY_ROLES.include?(role)
   end
 
   def in_finance_group?
-    %w[finance finance_admin finance_super].include?(role)
+    FINANCE_ROLES.include?(role)
   end
 
   def change_role(new_role)
