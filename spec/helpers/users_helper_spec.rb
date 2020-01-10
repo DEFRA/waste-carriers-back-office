@@ -27,4 +27,34 @@ RSpec.describe UsersHelper, type: :helper do
       end
     end
   end
+
+  describe "#display_user_actions?" do
+    let(:in_agency_group) { false }
+    let(:in_finance_group) { false }
+    let(:current_user) do
+      double(:current_user,
+             in_agency_group?: in_agency_group,
+             in_finance_group?: in_finance_group)
+    end
+
+    context "when the current user is in the agency user group" do
+      let(:in_agency_group) { true }
+
+      it "returns User::AGENCY_ROLES" do
+        roles = %w[list of roles]
+        stub_const("User::AGENCY_ROLES", roles)
+        expect(helper.current_user_group_roles(current_user)).to eq(roles)
+      end
+    end
+
+    context "when the current user is in the finance user group" do
+      let(:in_finance_group) { true }
+
+      it "returns User::FINANCE_ROLES" do
+        roles = %w[list of roles]
+        stub_const("User::FINANCE_ROLES", roles)
+        expect(helper.current_user_group_roles(current_user)).to eq(roles)
+      end
+    end
+  end
 end
