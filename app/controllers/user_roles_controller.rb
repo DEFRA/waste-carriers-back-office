@@ -9,7 +9,7 @@ class UserRolesController < ApplicationController
   def edit; end
 
   def update
-    if @user.change_role(params.dig(:user, :role))
+    if successful_role_change?
       redirect_to users_url
     else
       render :edit
@@ -27,5 +27,14 @@ class UserRolesController < ApplicationController
     return if current_user.can?(:modify_user, @user)
 
     raise CanCan::AccessDenied
+  end
+
+  def selected_role_is_valid?(role)
+    current_user_group_roles(current_user).include?(role)
+  end
+
+  def successful_role_change?
+    role = params.dig(:user, :role)
+    selected_role_is_valid?(role) && @user.change_role(role)
   end
 end

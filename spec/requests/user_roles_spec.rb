@@ -71,6 +71,20 @@ RSpec.describe "User Roles", type: :request do
         end
       end
 
+      context "when the current user does not have permission to select this role" do
+        let(:params) { { role: "finance_super" } }
+
+        it "does not update the user role" do
+          post "/users/#{role_change_user.id}/role", user: params
+          expect(role_change_user.reload.role).to eq("agency")
+        end
+
+        it "renders the edit template" do
+          post "/users/#{role_change_user.id}/role", user: params
+          expect(response).to render_template(:edit)
+        end
+      end
+
       context "when the current user does not have permission to manage this user" do
         let(:role_change_user) { create(:user, :finance) }
 
