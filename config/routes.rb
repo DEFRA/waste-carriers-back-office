@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root to: "application#redirect_root_to_dashboard"
 
   devise_for :users,
-             controllers: { sessions: "sessions" },
+             controllers: { invitations: "user_invitations", sessions: "sessions" },
              path: "/bo/users",
              path_names: { sign_in: "sign_in", sign_out: "sign_out" }
 

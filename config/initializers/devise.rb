@@ -128,6 +128,10 @@ Devise.setup do |config|
   # the user will need to manually log in after accepting the invite.
   config.allow_insecure_sign_in_after_accept = true
 
+  # If this is true, run validations on the new user before sending the invite.
+  # If false, validate when they accept.
+  config.validate_on_invite = true
+
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
   # confirming their account. For instance, if set to 2.days, the user will be

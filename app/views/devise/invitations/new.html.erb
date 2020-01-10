@@ -20,6 +20,8 @@
         </div>
       <% end %>
 
+      <%= render("shared/select_role", resource: resource, f: f) %>
+
       <div class="form-group">
         <%= f.submit t(".submit_button"), class: "button" %>
       </div>

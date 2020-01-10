@@ -18,8 +18,10 @@ RSpec.describe "User Invitations", type: :request do
   end
 
   describe "POST /bo/users/invitation" do
+    let(:email) { attributes_for(:user)[:email] }
+    let(:role) { attributes_for(:user)[:role] }
     let(:params) do
-      { user: { email: attributes_for(:user)[:email] } }
+      { user: { email: email, role: role } }
     end
 
     context "when a super user is signed in" do
@@ -38,6 +40,11 @@ RSpec.describe "User Invitations", type: :request do
 
         post "/bo/users/invitation", params
         expect(User.count).to eq(old_user_count + 1)
+      end
+
+      it "assigns the correct role to the user" do
+        post "/bo/users/invitation", params
+        expect(User.find_by(email: email).role).to eq(role)
       end
     end
   end
