@@ -1,8 +1,4 @@
-<% if resource.errors[:role].any? %>
-<div class="form-group form-group-error">
-<% else %>
-<div class="form-group">
-<% end %>
+<div class="form-group <%= "form-group-error" if resource.errors[:role].any? %>">
   <fieldset id="role">
     <legend>
       <%= t(".roles.legend") %>
