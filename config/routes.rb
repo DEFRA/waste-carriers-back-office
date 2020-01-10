@@ -144,9 +144,9 @@ Rails.application.routes.draw do
 
               resources :user_roles,
                         as: :roles,
-                        only: %i[edit update],
+                        only: %i[new create],
                         path: "role",
-                        path_names: { edit: "" } 
+                        path_names: { new: "" }
             end
 
   resources :user_migrations,

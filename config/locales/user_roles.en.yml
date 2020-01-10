@@ -1,6 +1,6 @@
 en:
   user_roles:
-    edit:
+    new:
       title: "Change a user's role"
       heading: "Change a user's role"
       paragraph_1:

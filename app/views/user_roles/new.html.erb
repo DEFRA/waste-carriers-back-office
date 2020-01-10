@@ -2,7 +2,7 @@
   <div class="column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: users_path) %>
     <%= form_for @user,
-                 url: user_role_path(@user),
+                 url: user_roles_path(@user),
                  html: { method: :post } do |f| %>
 
      <h1 class="heading-large">

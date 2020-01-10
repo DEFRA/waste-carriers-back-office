@@ -12,4 +12,16 @@ module UsersHelper
       User::FINANCE_ROLES
     end
   end
+
+  private
+
+  def assign_user
+    @user = User.find(params[:user_id])
+  end
+
+  def check_modification_permissions
+    return if current_user.can?(:modify_user, @user)
+
+    raise CanCan::AccessDenied
+  end
 end

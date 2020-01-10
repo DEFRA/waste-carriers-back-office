@@ -46,7 +46,7 @@
                   <% if display_user_actions?(user, current_user) %>
                     <ul>
                       <li>
-                        <%= link_to user_role_form_path(user.id) do %>
+                        <%= link_to user_roles_path(user.id) do %>
                           <%= t(".user_list.actions.change_role.link_text") %>
                           <span class="visually-hidden">
                            <%= t(".user_list.actions.change_role.visually_hidden_text",
