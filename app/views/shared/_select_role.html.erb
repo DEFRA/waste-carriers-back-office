@@ -9,7 +9,7 @@
     </legend>
 
     <% if resource.errors[:role].any? %>
-    <span class="error-message"><%= resource.errors[:role].join(", ") %></span>
+      <span class="error-message"><%= resource.errors[:role].join(", ") %></span>
     <% end %>
 
     <% current_user_group_roles(current_user).each do |role| %>
