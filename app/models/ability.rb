@@ -67,12 +67,20 @@ class Ability
     permissions_for_agency_user_with_refund
 
     can :manage_back_office_users, :all
-    can :manage_agency_users, :all
+    # rubocop:disable Style/SymbolProc
+    can :modify_user, User do |user|
+      user.in_agency_group?
+    end
+    # rubocop:enable Style/SymbolProc
   end
 
   def permissions_for_finance_super_user
     can :manage_back_office_users, User
-    can :manage_finance_users, :all
+    # rubocop:disable Style/SymbolProc
+    can :modify_user, User do |user|
+      user.in_finance_group?
+    end
+    # rubocop:enable Style/SymbolProc
   end
 
   # Checks to see if role matches

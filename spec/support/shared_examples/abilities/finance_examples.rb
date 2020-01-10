@@ -61,11 +61,13 @@ RSpec.shared_examples "finance examples" do
     should_not be_able_to(:manage_back_office_users, User)
   end
 
-  it "should not be able to manage agency users" do
-    should_not be_able_to(:manage_agency_users, User)
+  it "should not be able to modify agency users" do
+    user = build(:user, :agency)
+    should_not be_able_to(:modify_user, user)
   end
 
-  it "should not be able to manage finance users" do
-    should_not be_able_to(:manage_finance_users, User)
+  it "should not be able to modify finance users" do
+    user = build(:user, :finance)
+    should_not be_able_to(:modify_user, user)
   end
 end
