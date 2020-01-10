@@ -17,13 +17,13 @@ RSpec.describe RefundPresenter do
     end
   end
 
-  describe ".amount_due" do
+  describe ".total_amount_due" do
     let(:order1) { double(:order, total_amount: 100) }
     let(:order2) { double(:order, total_amount: 600) }
     let(:finance_details) { double(:finance_details, orders: [order1, order2]) }
 
     it "returns the total amount of all orders made by a user to a registration" do
-      expect(subject.amount_due).to eq(700)
+      expect(subject.total_amount_due).to eq(700)
     end
   end
 

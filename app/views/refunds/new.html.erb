@@ -40,7 +40,7 @@
               <%= t(".total_amount_due") %>
             </td>
             <td class="numeric">
-              £<%= display_pence_as_pounds_and_cents(@presenter.amount_due) %>
+              £<%= display_pence_as_pounds_and_cents(@presenter.total_amount_due) %>
             </td>
           </tr>
           <tr>
@@ -75,4 +75,3 @@
     <% end %>
   </div>
 </div>
-

@@ -13,8 +13,8 @@ class RefundPresenter < WasteCarriersEngine::BasePresenter
     end
   end
 
-  def amount_due
-    @_amount_due ||= orders.inject(0) do |memo, order|
+  def total_amount_due
+    @_total_amount_due ||= orders.inject(0) do |memo, order|
       memo + order.total_amount
     end
   end
