@@ -34,7 +34,6 @@ en:
       name: "Name"
       position: "Position"
       dob: "Date of birth"
-      shared:
     select_role:
       roles:
         legend: "Select a role:"
