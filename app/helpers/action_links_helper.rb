@@ -58,6 +58,7 @@ module ActionLinksHelper
   end
 
   def display_refund_link_for?(resource)
+    return false unless resource.present?
     return false if resource.balance >= 0
 
     can?(:refund, resource)

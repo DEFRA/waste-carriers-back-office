@@ -140,6 +140,12 @@ RSpec.describe ActionLinksHelper, type: :helper do
   describe "#display_refund_link_for?" do
     let(:resource) { build(:finance_details, balance: balance) }
 
+    context "when the resource is nil" do
+      it "returns false" do
+        expect(helper.display_refund_link_for?(nil)).to be_falsey
+      end
+    end
+
     context "when the resource has a positive balance" do
       let(:balance) { 5 }
 
