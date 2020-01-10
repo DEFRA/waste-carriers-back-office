@@ -1,6 +1,7 @@
-<% content_for :title, I18n.t(".pages.deactivated.title")  %>
+<% content_for :title, t(".title")  %>
 
 <div class="text">
-  <h1 class="heading-large"><%= I18n.t(".pages.deactivated.heading") %></h1>
-  <p><%= I18n.t(".pages.deactivated.text") %></p>
+  <h1 class="heading-large"><%= t(".heading") %></h1>
+  <p><%= t(".text") %></p>
+  <p><%= link_to t(".sign_out_link"), main_app.destroy_user_session_path %></p>
 </div>

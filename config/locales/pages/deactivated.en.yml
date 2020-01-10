@@ -4,3 +4,4 @@ en:
       title: "Your account has been deactivated"
       heading: "Your account has been deactivated"
       text: "You cannot use the Waste Carriers Back Office unless your account is active. If you believe you should have access, contact an NCCC super user."
+      sign_out_link: "Sign out"
