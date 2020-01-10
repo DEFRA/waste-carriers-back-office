@@ -12,7 +12,7 @@
     <span class="error-message"><%= resource.errors[:role].join(", ") %></span>
     <% end %>
 
-    <% User::ROLES.each do |role| %>
+    <% current_user_group_roles(current_user).each do |role| %>
       <div class="multiple-choice">
         <%= f.radio_button :role, role %>
         <%= f.label :role, t(".roles.options.#{role}"), value: role %>
