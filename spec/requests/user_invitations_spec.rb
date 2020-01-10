@@ -15,6 +15,18 @@ RSpec.describe "User Invitations", type: :request do
         expect(response).to render_template(:new)
       end
     end
+
+    context "when a non-super user is signed in" do
+      let(:user) { create(:user, :agency) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "redirects to the permissions error page" do
+        get "/bo/users/invitation/new"
+        expect(response).to redirect_to("/bo/pages/permission")
+      end
+    end
   end
 
   describe "POST /bo/users/invitation" do
@@ -45,6 +57,18 @@ RSpec.describe "User Invitations", type: :request do
       it "assigns the correct role to the user" do
         post "/bo/users/invitation", params
         expect(User.find_by(email: email).role).to eq(role)
+      end
+    end
+
+    context "when a non-super user is signed in" do
+      let(:user) { create(:user, :agency) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "redirects to the permissions error page" do
+        post "/bo/users/invitation", params
+        expect(response).to redirect_to("/bo/pages/permission")
       end
     end
   end
