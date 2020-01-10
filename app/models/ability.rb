@@ -31,8 +31,6 @@ class Ability
   def permissions_for_agency_user
     # This covers everything mounted in the engine and used for the assisted digital journey, including WorldPay
     can :update, WasteCarriersEngine::RenewingRegistration
-    can :cease, WasteCarriersEngine::Registration
-    can :revoke, WasteCarriersEngine::Registration
     can :renew, :all
     can :view_certificate, WasteCarriersEngine::Registration
     can :order_copy_cards, WasteCarriersEngine::Registration
@@ -42,8 +40,6 @@ class Ability
     can :record_postal_order_payment, WasteCarriersEngine::RenewingRegistration
 
     can :review_convictions, :all
-    can :revoke, WasteCarriersEngine::Registration
-    can :cease, WasteCarriersEngine::Registration
 
     can :revert_to_payment_summary, :all
 
@@ -55,6 +51,8 @@ class Ability
 
     can :view_revoked_reasons, :all
     can :refund, :all
+    can :cease, WasteCarriersEngine::Registration
+    can :revoke, WasteCarriersEngine::Registration
   end
 
   def permissions_for_finance_user

@@ -29,6 +29,14 @@ RSpec.shared_examples "finance_admin examples" do
     should_not be_able_to(:refund, WasteCarriersEngine::Registration)
   end
 
+  it "should not be able to cease a registration" do
+    should_not be_able_to(:cease, WasteCarriersEngine::Registration)
+  end
+
+  it "should not be able to revoke a registration" do
+    should_not be_able_to(:revoke, WasteCarriersEngine::Registration)
+  end
+
   it "should not be able to record a cheque payment" do
     should_not be_able_to(:record_cheque_payment, WasteCarriersEngine::RenewingRegistration)
   end
