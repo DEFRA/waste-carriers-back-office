@@ -20,7 +20,7 @@ en:
         submit_button: "Send invitation"
       edit:
         heading: "Create a new back office account"
-        pragraph_1: "To finish setting up your account, you need to create a password."
+        paragraph_1: "To finish setting up your account, you need to create a password."
         password_label: "Password"
         password_hint:
           text: "It must:"

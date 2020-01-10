@@ -11,14 +11,13 @@
 
        <p><%= t(".paragraph_1") %></p>
 
-      <%= render("waste_exemptions_engine/shared/errors", object: resource) %>
+      <%= render("waste_carriers_engine/shared/errors", object: resource) %>
 
       <%= f.hidden_field :invitation_token %>
 
       <% if f.object.class.require_password_on_accepting %>
-        <% if resource.errors[:password].any? %>
         <div class="form-group <%= "form-group-error" if resource.errors[:role].any? %>">
-          <% f.label :password, class: "form-label" do %>
+          <%= f.label :password, class: "form-label" do %>
             <%= t(".password_label") %>
             <span class="form-hint">
               <%= t(".password_hint.text") %>
@@ -32,7 +31,6 @@
           <%= f.password_field :password, class: "form-control" %>
         </div>
 
-        <% if resource.errors[:password_confirmation].any? %>
         <div class="form-group <%= "form-group-error" if resource.errors[:role].any? %>">
           <%= f.label :password_confirmation, t(".password_confirmation_label"), class: "form-label" %>
           <%= f.password_field :password_confirmation, class: "form-control" %>
