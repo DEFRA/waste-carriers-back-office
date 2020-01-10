@@ -1,0 +1,8 @@
+en:
+  user_activations:
+    new:
+      title: "Activate user"
+      heading: "Activate user"
+      paragraph_1: "You are about to activate this user:"
+      paragraph_2: "Once activated, this user will be able to access and use the back office."
+      button: "Activate"

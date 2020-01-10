@@ -4,14 +4,23 @@ require "rails_helper"
 
 RSpec.describe ProcessRefundService do
   describe ".run" do
-    let(:finance_details) { double(:finance_details) }
+    let(:finance_details) { double(:finance_details, balance: -500) }
     let(:payment) { double(:payment, order_key: "123", registration_reference: "registration_reference", amount: 1_500) }
     let(:user) { double(:user, email: "user@example.com") }
     let(:payments) { double(:payments) }
     let(:refund) { double(:refund) }
+    let(:worldpay) { true }
 
     before do
       allow(payment).to receive(:worldpay?).and_return(worldpay)
+    end
+
+    context "when the registration balance is not negative" do
+      let(:finance_details) { double(:finance_details, balance: 500) }
+
+      it "returns false and does not create a payment" do
+        expect(described_class.run(finance_details: finance_details, payment: payment, user: user)).to be_falsey
+      end
     end
 
     context "when the payment is a card payment" do
@@ -19,7 +28,7 @@ RSpec.describe ProcessRefundService do
 
       context "when a request to worldpay fails" do
         it "returns false and does not create a payment" do
-          expect(Worldpay::RefundService).to receive(:run).with(payment: payment).and_return(false)
+          expect(Worldpay::RefundService).to receive(:run).with(payment: payment, amount: 500).and_return(false)
 
           expect(described_class.run(finance_details: finance_details, payment: payment, user: user)).to be_falsey
         end
@@ -38,14 +47,14 @@ RSpec.describe ProcessRefundService do
           expect(refund).to receive(:order_key=).with("123_REFUNDED")
           expect(refund).to receive(:date_entered=).with(Date.current)
           expect(refund).to receive(:date_received=).with(Date.current)
-          expect(refund).to receive(:amount=).with(-1_500)
+          expect(refund).to receive(:amount=).with(500)
           expect(refund).to receive(:registration_reference=).with("registration_reference")
           expect(refund).to receive(:updated_by_user=).with("user@example.com")
 
           expect(I18n).to receive(:t).with("refunds.comment.card").and_return(description)
           expect(refund).to receive(:comment=).with(description)
 
-          expect(Worldpay::RefundService).to receive(:run).with(payment: payment).and_return(true)
+          expect(Worldpay::RefundService).to receive(:run).with(payment: payment, amount: 500).and_return(true)
 
           expect(described_class.run(finance_details: finance_details, payment: payment, user: user)).to be_truthy
         end
@@ -72,7 +81,7 @@ RSpec.describe ProcessRefundService do
         expect(refund).to receive(:order_key=).with("123_REFUNDED")
         expect(refund).to receive(:date_entered=).with(Date.current)
         expect(refund).to receive(:date_received=).with(Date.current)
-        expect(refund).to receive(:amount=).with(-1_500)
+        expect(refund).to receive(:amount=).with(500)
         expect(refund).to receive(:registration_reference=).with("registration_reference")
         expect(refund).to receive(:updated_by_user=).with("user@example.com")
 

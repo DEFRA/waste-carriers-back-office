@@ -17,6 +17,17 @@ FactoryBot.define do
       after(:build, :create, &:update_balance)
     end
 
+    trait :has_overpaid_order_and_payment do
+      orders { [build(:order, :has_required_data)] }
+      payments do
+        [
+          build(:payment, :bank_transfer, amount: 100_500),
+          build(:payment, :bank_transfer, amount: 500)
+        ]
+      end
+      after(:build, :create, &:update_balance)
+    end
+
     trait :zero_balance do
       balance { 0 }
     end

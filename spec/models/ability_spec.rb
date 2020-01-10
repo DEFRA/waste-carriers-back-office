@@ -5,7 +5,8 @@ require "rails_helper"
 
 RSpec.describe Ability, type: :model do
   let(:role) {}
-  let(:user) { double(:user, role: role) }
+  let(:active) { true }
+  let(:user) { double(:user, role: role, active?: active) }
   subject(:ability) { Ability.new(user) }
 
   # Agency users have ascending permissions - each tier has the permissions of
@@ -17,6 +18,8 @@ RSpec.describe Ability, type: :model do
     include_examples "agency_super examples"
     include_examples "agency_with_refund examples"
     include_examples "agency examples"
+
+    include_examples "active and inactive examples"
   end
 
   context "when the user role is agency_with_refund" do
@@ -25,6 +28,8 @@ RSpec.describe Ability, type: :model do
     include_examples "below agency_super examples"
     include_examples "agency_with_refund examples"
     include_examples "agency examples"
+
+    include_examples "active and inactive examples"
   end
 
   context "when the user role is agency" do
@@ -33,6 +38,8 @@ RSpec.describe Ability, type: :model do
     include_examples "below agency_super examples"
     include_examples "below agency_with_refund examples"
     include_examples "agency examples"
+
+    include_examples "active and inactive examples"
   end
 
   # Finance users do not have ascending permissions.
@@ -41,17 +48,23 @@ RSpec.describe Ability, type: :model do
     let(:role) { "finance_super" }
 
     include_examples "finance_super examples"
+
+    include_examples "active and inactive examples"
   end
 
   context "when the user role is finance_admin" do
     let(:role) { "finance_admin" }
 
     include_examples "finance_admin examples"
+
+    include_examples "active and inactive examples"
   end
 
   context "when the user role is finance" do
     let(:role) { "finance" }
 
     include_examples "finance examples"
+
+    include_examples "active and inactive examples"
   end
 end

@@ -10,6 +10,10 @@ FactoryBot.define do
 
     role { "agency" }
 
+    trait :inactive do
+      active { false }
+    end
+
     trait :agency do
       role { "agency" }
     end

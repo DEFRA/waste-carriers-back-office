@@ -4,6 +4,10 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    return unless user.active?
+
+    can :use_back_office, :all
+
     assign_agency_user_permissions(user)
     assign_finance_user_permissions(user)
   end

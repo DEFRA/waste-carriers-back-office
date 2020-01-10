@@ -16,17 +16,55 @@
   <div class="column-two-thirds">
     <%= render "shared/company_details_panel", registration: @registration %>
 
-    <p>
-      <strong>
-        <%= t(".amount", amount: display_pence_as_pounds_and_cents(@payment.amount)) %>
-      </strong>
-    </p>
-
-    <p>
-      <strong>
-        <%= t(".order_code", order_code: @payment.order_key) %>
-      </strong>
-    </p>
+    <div class="form-group">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <%= t(".transaction_to_refund") %>
+            </td>
+            <td class="numeric">
+              £<%= display_pence_as_pounds_and_cents(@payment.amount) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".total_amount_paid") %>
+            </td>
+            <td class="numeric">
+              £<%= display_pence_as_pounds_and_cents(@presenter.total_amount_paid) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t(".total_amount_due") %>
+            </td>
+            <td class="numeric">
+              £<%= display_pence_as_pounds_and_cents(@presenter.total_amount_due) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong class="bold">
+                <%= t(".balance_to_refund") %>
+              </strong>
+            </td>
+            <td class="numeric">
+              <strong class="bold">
+                £<%= display_pence_as_pounds_and_cents(@presenter.balance_to_refund) %>
+              </strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="form-group">
+      <p>
+        <strong>
+          <%= t(".order_code", order_code: @payment.order_key) %>
+        </strong>
+      </p>
+    </div>
 
     <%= form_tag(finance_details_refunds_path(@registration._id)) do %>
       <%= hidden_field_tag :order_key, @payment.order_key %>
@@ -37,4 +75,3 @@
     <% end %>
   </div>
 </div>
-

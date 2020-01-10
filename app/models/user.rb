@@ -7,6 +7,7 @@ class User
   # Use the User database
   store_in client: "users", collection: "back_office_users"
 
+  field :active, type: Boolean, default: true
   field :session_token, type: String
 
   delegate :can?, :cannot?, to: :ability
@@ -20,6 +21,18 @@ class User
   def invalidate_all_sessions!
     # Use set to avoid validation checks on other fields
     set(session_token: SecureRandom.hex)
+  end
+
+  def active?
+    active == true || active.nil?
+  end
+
+  def activate!
+    update_attribute(:active, true)
+  end
+
+  def deactivate!
+    update_attribute(:active, false)
   end
 
   # Roles

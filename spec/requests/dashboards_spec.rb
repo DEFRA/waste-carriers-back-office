@@ -40,6 +40,15 @@ RSpec.describe "Dashboards", type: :request do
       end
     end
 
+    context "when a deactivated user is signed in" do
+      before { sign_in(create(:user, :inactive)) }
+
+      it "redirects to the deactivated page" do
+        get "/bo"
+        expect(response).to redirect_to("/bo/pages/deactivated")
+      end
+    end
+
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
         get "/bo"

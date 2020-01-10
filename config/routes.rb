@@ -127,8 +127,27 @@ Rails.application.routes.draw do
       to: "users#index",
       as: :users
 
-  get "/users/:id/role", to: "user_roles#edit", as: :user_role_form
-  post "/users/:id/role", to: "user_roles#update", as: :user_role
+  resources :users,
+            only: [],
+            path: "/bo/users" do
+              resources :user_activations,
+                        as: :activations,
+                        only: %i[new create],
+                        path: "activate",
+                        path_names: { new: "" }
+
+              resources :user_deactivations,
+                        as: :deactivations,
+                        only: %i[new create],
+                        path: "deactivate",
+                        path_names: { new: "" }
+
+              resources :user_roles,
+                        as: :roles,
+                        only: %i[edit update],
+                        path: "role",
+                        path_names: { edit: "" } 
+            end
 
   resources :user_migrations,
             only: %i[new create],

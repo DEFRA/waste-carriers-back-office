@@ -36,7 +36,11 @@
                   <%= t(".user_list.roles.#{user.role}") %>
                 </td>
                 <td>
-                  <%= t(".user_list.statuses.active") %>
+                  <% if user.active? %>
+                    <%= t(".user_list.statuses.active") %>
+                  <% else %>
+                    <%= t(".user_list.statuses.deactivated") %>
+                  <% end %>
                 </td>
                 <td>
                   <% if display_user_actions?(user, current_user) %>
@@ -51,13 +55,23 @@
                        <% end %>
                       </li>
                       <li>
-                        <%= link_to "#" do %>
-                          <%= t(".user_list.actions.deactivate.link_text") %>
-                          <span class="visually-hidden">
-                           <%= t(".user_list.actions.deactivate.visually_hidden_text",
-                                 email: user.email) %>
-                         </span>
-                       <% end %>
+                        <% if user.active? %>
+                          <%= link_to user_deactivations_path(user.id) do %>
+                            <%= t(".user_list.actions.deactivate.link_text") %>
+                            <span class="visually-hidden">
+                              <%= t(".user_list.actions.deactivate.visually_hidden_text",
+                                    email: user.email) %>
+                            </span>
+                          <% end %>
+                        <% else %>
+                          <%= link_to user_activations_path(user.id) do %>
+                            <%= t(".user_list.actions.activate.link_text") %>
+                            <span class="visually-hidden">
+                              <%= t(".user_list.actions.activate.visually_hidden_text",
+                                    email: user.email) %>
+                            </span>
+                          <% end %>
+                        <% end %>
                       </li>
                     </ul>
                   <% end %>
