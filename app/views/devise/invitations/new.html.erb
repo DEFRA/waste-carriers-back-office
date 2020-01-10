@@ -1,0 +1,28 @@
+<div class="grid-row">
+  <div class="column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: users_path) %>
+
+    <%= form_for resource,
+                 as: resource_name,
+                 url: invitation_path(resource_name),
+                 html: { method: :post } do |f| %>
+
+      <h1 class="heading-large">
+        <%= t(".heading") %>
+      </h1>
+
+      <%= render("waste_carriers_engine/shared/errors", object: resource) %>
+
+      <% resource.class.invite_key_fields.each do |field| %>
+        <div class="form-group <%= "form-group-error" if resource.errors[:role].any? %>">
+          <%= f.label field, t(".#{field}_label"), class: "form-label" %>
+          <%= f.text_field field, class: "form-control" %>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.submit t(".submit_button"), class: "button" %>
+      </div>
+    <% end %>
+  </div>
+</div>
