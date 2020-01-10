@@ -7,7 +7,7 @@ class UserInvitationsController < Devise::InvitationsController
   before_action :configure_permitted_parameters
 
   def create
-    if selected_role_is_valid?(params.dig(:user, :role))
+    if selected_role_is_in_allowed_group?(params.dig(:user, :role))
       super
     else
       new
@@ -27,9 +27,5 @@ class UserInvitationsController < Devise::InvitationsController
 
   def after_invite_path_for(_resource)
     users_path
-  end
-
-  def selected_role_is_valid?(role)
-    current_user_group_roles(current_user).include?(role)
   end
 end

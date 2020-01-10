@@ -24,4 +24,8 @@ module UsersHelper
 
     raise CanCan::AccessDenied
   end
+
+  def selected_role_is_in_allowed_group?(role)
+    current_user_group_roles(current_user).include?(role)
+  end
 end

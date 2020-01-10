@@ -23,12 +23,8 @@ class UserRolesController < ApplicationController
     @old_role = User.find(@user.id).role
   end
 
-  def selected_role_is_valid?(role)
-    current_user_group_roles(current_user).include?(role)
-  end
-
   def successful_role_change?
     role = params.dig(:user, :role)
-    selected_role_is_valid?(role) && @user.change_role(role)
+    selected_role_is_in_allowed_group?(role) && @user.change_role(role)
   end
 end
