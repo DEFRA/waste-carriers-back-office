@@ -31,14 +31,12 @@ en:
         submit_button: "Create account"
     mailer:
       invitation_instructions:
-        subject: "Invitation instructions"
-        hello: "Hello %{email}"
-        someone_invited_you: "You have been invited to join the service. Accept this invitation by clicking the link below. You can only use this link once."
-        accept: "Accept invitation"
-        ignore: "If you don't want to accept the invitation please ignore this email.<br />Your account won't be created until you access the link above and set your password."
+        subject: "Confirm a waste carriers back office account"
+        paragraph_1: "Hello %{email}"
+        paragraph_2: "You have been added as a user to the back office system for the waste carriers service (%{url})"
+        paragraph_3: "Use the link below to confirm this."
+        paragraph_4: "This link will expire on %{due_date}."
+        paragraph_5: "If you don't want to confirm the account, please ignore this email."
   time:
     formats:
-      devise:
-        mailer:
-          invitation_instructions:
-            accept_until_format: "%B %d, %Y %I:%M %p"
+      accept_until_format: "%e %B %Y at %l:%M%P"
