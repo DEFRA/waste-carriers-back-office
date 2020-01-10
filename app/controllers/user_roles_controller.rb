@@ -24,7 +24,7 @@ class UserRolesController < ApplicationController
   end
 
   def check_activation_permissions
-    return if agency_with_permission?(@user, current_user) || finance_with_permission?(@user, current_user)
+    return if current_user.can?(:modify_user, @user)
 
     raise CanCan::AccessDenied
   end
