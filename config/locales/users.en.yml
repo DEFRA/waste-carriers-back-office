@@ -4,6 +4,7 @@ en:
       title: "Manage back office users"
       heading: "Manage back office users"
       options:
+        invite_link: "Invite a new user"
         migrate_link: "Migrate users from backend"
       user_list:
         th:
