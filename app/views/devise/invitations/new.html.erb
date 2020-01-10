@@ -11,6 +11,10 @@
         <%= t(".heading") %>
       </h1>
 
+      <p><%= t(".paragraph_1") %></p>
+      <p><%= t(".paragraph_2") %></p>
+      <p><%= t(".paragraph_3") %></p>
+
       <%= render("waste_carriers_engine/shared/errors", object: resource) %>
 
       <% resource.class.invite_key_fields.each do |field| %>

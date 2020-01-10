@@ -13,6 +13,9 @@ en:
       invitation_removed: "Your invitation was removed"
       new:
         heading: "Invite a new user"
+        paragraph_1: "The new user will receive an email containing a confirmation link."
+        paragraph_2: "They must follow the link and create a password before they can access this system."
+        paragraph_3: "Email links expire after 2 weeks."
         email_label: "Email"
         submit_button: "Send invitation"
       edit:
