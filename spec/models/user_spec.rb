@@ -30,6 +30,25 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#deactivated?" do
+    let(:user) { User.new }
+    context "when 'active?' returns true" do
+      before { expect(user).to receive(:active?).and_return(true) }
+
+      it "returns false" do
+        expect(user.deactivated?).to eq(false)
+      end
+    end
+
+    context "when 'active?' returns false" do
+      before { expect(user).to receive(:active?).and_return(false) }
+
+      it "returns true" do
+        expect(user.deactivated?).to eq(true)
+      end
+    end
+  end
+
   describe "#activate!" do
     let(:user) { build(:user, :inactive) }
 
