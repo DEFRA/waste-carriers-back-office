@@ -111,7 +111,7 @@
                       <% end %>
                     </li>
                   <% end %>
-                  <% if display_revoke_link_for?(result) %>
+                  <% if display_cease_or_revoke_link_for?(result) %>
                     <li>
                       <%= link_to WasteCarriersEngine::Engine.routes.url_helpers.new_cease_or_revoke_form_path(result.reg_identifier) do %>
                         <%= t(".results.actions.cease_or_revoke.link_text") %>

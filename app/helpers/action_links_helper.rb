@@ -67,7 +67,7 @@ module ActionLinksHelper
     resource.upper_tier? && resource.finance_details.present?
   end
 
-  def display_revoke_link_for?(resource)
+  def display_cease_or_revoke_link_for?(resource)
     return false unless display_registration_links?(resource)
     return false unless can?(:revoke, WasteCarriersEngine::Registration)
     return false unless can?(:cease, WasteCarriersEngine::Registration)
@@ -117,14 +117,6 @@ module ActionLinksHelper
     return false unless display_registration_links?(resource)
 
     can?(:transfer_registration, WasteCarriersEngine::Registration)
-  end
-
-  def display_cease_link_for?(resource)
-    # TODO: delete next line filter when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
-    return false if a_registration?(resource)
-    return false unless display_registration_links?(resource)
-
-    can?(:cease, WasteCarriersEngine::Registration)
   end
 
   private

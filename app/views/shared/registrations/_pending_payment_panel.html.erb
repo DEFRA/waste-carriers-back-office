@@ -5,7 +5,6 @@
   <p>
     <%= t(".status.messages.pending_payment", total: display_pence_as_pounds(resource.finance_details.balance)) %>
   </p>
-  <!-- TODO: delete condition when internal route exists https://eaflood.atlassian.net/browse/RUBY-786 -->
   <% if display_payment_link_for?(resource) %>
     <%= link_to t(".status.actions.payment_button"), transient_registration_transient_payments_path(resource.reg_identifier), class: 'button' %>
   <% end %>

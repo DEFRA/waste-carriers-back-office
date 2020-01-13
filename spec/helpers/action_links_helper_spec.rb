@@ -259,7 +259,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
-  describe "#display_revoke_link_for?" do
+  describe "#display_cease_or_revoke_link_for?" do
     context "when the resource is a registration" do
       let(:resource) { build(:registration) }
 
@@ -278,7 +278,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:active) { true }
 
           it "returns true" do
-            expect(helper.display_revoke_link_for?(resource)).to be_truthy
+            expect(helper.display_cease_or_revoke_link_for?(resource)).to be_truthy
           end
         end
 
@@ -286,7 +286,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:active) { false }
 
           it "returns false" do
-            expect(helper.display_revoke_link_for?(resource)).to be_falsey
+            expect(helper.display_cease_or_revoke_link_for?(resource)).to be_falsey
           end
         end
       end
@@ -295,7 +295,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:can) { false }
 
         it "returns false" do
-          expect(helper.display_revoke_link_for?(resource)).to be_falsey
+          expect(helper.display_cease_or_revoke_link_for?(resource)).to be_falsey
         end
       end
     end
@@ -304,7 +304,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:renewing_registration) }
 
       it "returns false" do
-        expect(helper.display_revoke_link_for?(resource)).to be_falsey
+        expect(helper.display_cease_or_revoke_link_for?(resource)).to be_falsey
       end
     end
   end
@@ -465,45 +465,6 @@ RSpec.describe ActionLinksHelper, type: :helper do
 
       it "returns false" do
         expect(helper.display_order_copy_cards_link_for?(resource)).to be_falsey
-      end
-    end
-  end
-
-  describe "#display_cease_link_for?" do
-    context "when the resource is a registration" do
-      let(:resource) { build(:registration) }
-
-      it "returns false" do
-        expect(helper.display_cease_link_for?(resource)).to eq(false)
-      end
-
-      # TODO: re-implement when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
-      # before do
-      #   expect(helper).to receive(:can?).with(:cease, WasteCarriersEngine::Registration).and_return(can)
-      # end
-
-      # context "when the user has permission for revoking" do
-      #   let(:can) { true }
-
-      #   it "returns true" do
-      #     expect(helper.display_cease_link_for?(resource)).to be_truthy
-      #   end
-      # end
-
-      # context "when the user has no permission for revoking" do
-      #   let(:can) { false }
-
-      #   it "returns false" do
-      #     expect(helper.display_cease_link_for?(resource)).to be_falsey
-      #   end
-      # end
-    end
-
-    context "when the resource is a transient registration" do
-      let(:resource) { build(:renewing_registration) }
-
-      it "returns false" do
-        expect(helper.display_cease_link_for?(resource)).to be_falsey
       end
     end
   end
