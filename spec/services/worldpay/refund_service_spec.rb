@@ -43,7 +43,7 @@ module Worldpay
 
           it "sends a request using ecom merchant code, user name and password" do
             request_headers = {
-              "Authorization" => "Basic #{Base64.encode64("worldpay_ecom_username:worldpay_ecom_password").to_s}"
+              "Authorization" => "Basic #{Base64.encode64('worldpay_ecom_username:worldpay_ecom_password')}"
             }
 
             expect(RestClient::Request).to receive(:execute).with(hash_including(headers: request_headers))
