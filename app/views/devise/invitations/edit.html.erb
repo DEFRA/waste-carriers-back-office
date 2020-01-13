@@ -15,27 +15,25 @@
 
       <%= f.hidden_field :invitation_token %>
 
-      <% if f.object.class.require_password_on_accepting %>
-        <div class="form-group <%= "form-group-error" if resource.errors[:role].any? %>">
-          <%= f.label :password, class: "form-label" do %>
-            <%= t(".password_label") %>
-            <span class="form-hint">
-              <%= t(".password_hint.text") %>
-              <ul class="list list-bullet">
-                <li><%= t(".password_hint.list_item_1") %></li>
-                <li><%= t(".password_hint.list_item_2") %></li>
-                <li><%= t(".password_hint.list_item_3") %></li>
-              </ul>
-            </span>
-          <% end %>
-          <%= f.password_field :password, class: "form-control" %>
-        </div>
+      <div class="form-group <%= "form-group-error" if resource.errors[:role].any? %>">
+        <%= f.label :password, class: "form-label" do %>
+          <%= t(".password_label") %>
+          <span class="form-hint">
+            <%= t(".password_hint.text") %>
+            <ul class="list list-bullet">
+              <li><%= t(".password_hint.list_item_1") %></li>
+              <li><%= t(".password_hint.list_item_2") %></li>
+              <li><%= t(".password_hint.list_item_3") %></li>
+            </ul>
+          </span>
+        <% end %>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
 
-        <div class="form-group <%= "form-group-error" if resource.errors[:role].any? %>">
-          <%= f.label :password_confirmation, t(".password_confirmation_label"), class: "form-label" %>
-          <%= f.password_field :password_confirmation, class: "form-control" %>
-        </div>
-      <% end %>
+      <div class="form-group <%= "form-group-error" if resource.errors[:role].any? %>">
+        <%= f.label :password_confirmation, t(".password_confirmation_label"), class: "form-label" %>
+        <%= f.password_field :password_confirmation, class: "form-control" %>
+      </div>
 
       <div class="form-group">
         <%= f.submit t(".submit_button"), class: "button" %>
