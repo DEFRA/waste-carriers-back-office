@@ -1,4 +1,5 @@
 en:
   finance_details:
     show:
+      title: "Payment details"
       heading: "Payment details for %{reg_identifier}"
