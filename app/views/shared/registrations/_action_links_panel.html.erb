@@ -44,7 +44,7 @@
       </li>
     <% end %>
 
-    <% if display_payment_link_for?(resource) %>
+    <% if display_finance_details_link_for?(resource) %>
       <li>
         <%= link_to t(".actions_box.links.payment_details"), finance_details_path(resource._id)  %>
       </li>

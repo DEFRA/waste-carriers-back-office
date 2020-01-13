@@ -133,7 +133,7 @@
                       <% end %>
                     </li>
                   <% end %>
-                  <% if display_payment_link_for?(result) %>
+                  <% if display_finance_details_link_for?(result) %>
                     <li>
                       <%= link_to finance_details_path(result._id) do %>
                         <%= t(".results.actions.payment.link_text") %>

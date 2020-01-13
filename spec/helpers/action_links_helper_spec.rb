@@ -112,27 +112,27 @@ RSpec.describe ActionLinksHelper, type: :helper do
   end
 
   describe "#display_details_link_for?" do
-    context "when the result is a Registration" do
-      let(:result) { build(:registration) }
+    context "when the resource is a Registration" do
+      let(:resource) { build(:registration) }
 
       it "returns true" do
-        expect(helper.display_details_link_for?(result)).to eq(true)
+        expect(helper.display_details_link_for?(resource)).to eq(true)
       end
     end
 
-    context "when the result is not a Registration or a RenewingRegistration" do
-      let(:result) { double(:result) }
+    context "when the resource is not a Registration or a RenewingRegistration" do
+      let(:resource) { double(:resource) }
 
       it "returns false" do
-        expect(helper.display_details_link_for?(result)).to eq(false)
+        expect(helper.display_details_link_for?(resource)).to eq(false)
       end
     end
 
-    context "when the result is a RenewingRegistration" do
-      let(:result) { build(:renewing_registration) }
+    context "when the resource is a RenewingRegistration" do
+      let(:resource) { build(:renewing_registration) }
 
       it "returns true" do
-        expect(helper.display_details_link_for?(result)).to eq(true)
+        expect(helper.display_details_link_for?(resource)).to eq(true)
       end
     end
   end
@@ -178,49 +178,49 @@ RSpec.describe ActionLinksHelper, type: :helper do
   end
 
   describe "#display_resume_link_for?" do
-    context "when the result is not a RenewingRegistration" do
-      let(:result) { build(:registration) }
+    context "when the resource is not a RenewingRegistration" do
+      let(:resource) { build(:registration) }
 
       it "returns false" do
-        expect(helper.display_resume_link_for?(result)).to eq(false)
+        expect(helper.display_resume_link_for?(resource)).to eq(false)
       end
     end
 
-    context "when the result is a RenewingRegistration" do
-      let(:result) { build(:renewing_registration) }
+    context "when the resource is a RenewingRegistration" do
+      let(:resource) { build(:renewing_registration) }
 
-      context "when the result has been revoked" do
-        before { result.metaData.status = "REVOKED" }
+      context "when the resource has been revoked" do
+        before { resource.metaData.status = "REVOKED" }
 
         it "returns false" do
-          expect(helper.display_resume_link_for?(result)).to eq(false)
+          expect(helper.display_resume_link_for?(resource)).to eq(false)
         end
       end
 
-      context "when the result has been submitted" do
-        before { result.workflow_state = "renewal_received_form" }
+      context "when the resource has been submitted" do
+        before { resource.workflow_state = "renewal_received_form" }
 
         it "returns false" do
-          expect(helper.display_resume_link_for?(result)).to eq(false)
+          expect(helper.display_resume_link_for?(resource)).to eq(false)
         end
       end
 
-      context "when the result is in WorldPay" do
-        before { result.workflow_state = "worldpay_form" }
+      context "when the resource is in WorldPay" do
+        before { resource.workflow_state = "worldpay_form" }
 
         it "returns false" do
-          expect(helper.display_resume_link_for?(result)).to eq(false)
+          expect(helper.display_resume_link_for?(resource)).to eq(false)
         end
       end
 
-      context "when the result is in a resumable state" do
-        before { result.workflow_state = "location_form" }
+      context "when the resource is in a resumable state" do
+        before { resource.workflow_state = "location_form" }
 
         context "when the user does not have permission" do
           before { allow(helper).to receive(:can?).and_return(false) }
 
           it "returns false" do
-            expect(helper.display_resume_link_for?(result)).to eq(false)
+            expect(helper.display_resume_link_for?(resource)).to eq(false)
           end
         end
 
@@ -228,7 +228,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           before { allow(helper).to receive(:can?).and_return(true) }
 
           it "returns true" do
-            expect(helper.display_resume_link_for?(result)).to eq(true)
+            expect(helper.display_resume_link_for?(resource)).to eq(true)
           end
         end
       end
@@ -508,54 +508,44 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
-  describe "#display_payment_details_link_for?" do
-    context "when the result is a Registration" do
-      let(:result) { build(:registration) }
+  describe "#display_finance_details_link_for?" do
+    let(:upper_tier) { true }
+    let(:finance_details) { double(:finance_details) }
+    let(:resource) { double(:registration, finance_details: finance_details, upper_tier?: upper_tier) }
 
-      it "returns false" do
-        expect(helper.display_payment_details_link_for?(result)).to eq(false)
+    context "when the resource is an upper tier" do
+      context "when the resource has finance details" do
+        it "returns true" do
+          expect(helper.display_finance_details_link_for?(resource)).to be_truthy
+        end
       end
 
-      # TODO: re-implement when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
-      # it "returns true" do
-      #   expect(helper.display_payment_details_link_for?(result)).to eq(true)
-      # end
-
-      # context "when the result has been revoked" do
-      #   before { result.metaData.status = "REVOKED" }
-
-      #   it "returns false" do
-      #     expect(helper.display_payment_details_link_for?(result)).to eq(false)
-      #   end
-      # end
+      context "when the resource has no finance details" do
+        let(:finance_details) { nil }
+        it "returns false" do
+          expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+        end
+      end
     end
 
-    context "when the result is a RenewingRegistration" do
-      let(:result) { build(:renewing_registration) }
+    context "when the resource is not an upper tier" do
+      let(:upper_tier) { false }
 
-      it "returns true" do
-        expect(helper.display_payment_details_link_for?(result)).to eq(true)
-      end
-
-      context "when the result has been revoked" do
-        before { result.metaData.status = "REVOKED" }
-
-        it "returns false" do
-          expect(helper.display_payment_details_link_for?(result)).to eq(false)
-        end
+      it "returns false" do
+        expect(helper.display_finance_details_link_for?(resource)).to be_falsey
       end
     end
   end
 
   describe "#display_convictions_link_for?" do
-    context "when the result is a Registration" do
-      let(:result) { build(:registration) }
+    context "when the resource is a Registration" do
+      let(:resource) { build(:registration) }
 
-      context "when the result has been revoked" do
-        before { result.metaData.status = "REVOKED" }
+      context "when the resource has been revoked" do
+        before { resource.metaData.status = "REVOKED" }
 
         it "returns false" do
-          expect(helper.display_convictions_link_for?(result)).to eq(false)
+          expect(helper.display_convictions_link_for?(resource)).to eq(false)
         end
       end
 
@@ -563,39 +553,39 @@ RSpec.describe ActionLinksHelper, type: :helper do
         before { allow(helper).to receive(:can?).and_return(false) }
 
         it "returns false" do
-          expect(helper.display_convictions_link_for?(result)).to eq(false)
+          expect(helper.display_convictions_link_for?(resource)).to eq(false)
         end
       end
 
       context "when the user has permission" do
         before { allow(helper).to receive(:can?).and_return(true) }
 
-        context "when the result has no pending convictions check" do
-          let(:result) { build(:renewing_registration, :does_not_require_conviction_check) }
+        context "when the resource has no pending convictions check" do
+          let(:resource) { build(:renewing_registration, :does_not_require_conviction_check) }
 
           it "returns false" do
-            expect(helper.display_convictions_link_for?(result)).to eq(false)
+            expect(helper.display_convictions_link_for?(resource)).to eq(false)
           end
         end
 
-        context "when the result has a pending convictions check" do
-          let(:result) { build(:renewing_registration, :requires_conviction_check) }
+        context "when the resource has a pending convictions check" do
+          let(:resource) { build(:renewing_registration, :requires_conviction_check) }
 
           it "returns true" do
-            expect(helper.display_convictions_link_for?(result)).to eq(true)
+            expect(helper.display_convictions_link_for?(resource)).to eq(true)
           end
         end
       end
     end
 
-    context "when the result is a RenewingRegistration" do
-      let(:result) { build(:renewing_registration) }
+    context "when the resource is a RenewingRegistration" do
+      let(:resource) { build(:renewing_registration) }
 
-      context "when the result has been revoked" do
-        before { result.metaData.status = "REVOKED" }
+      context "when the resource has been revoked" do
+        before { resource.metaData.status = "REVOKED" }
 
         it "returns false" do
-          expect(helper.display_convictions_link_for?(result)).to eq(false)
+          expect(helper.display_convictions_link_for?(resource)).to eq(false)
         end
       end
 
@@ -603,67 +593,67 @@ RSpec.describe ActionLinksHelper, type: :helper do
         before { allow(helper).to receive(:can?).and_return(false) }
 
         it "returns false" do
-          expect(helper.display_convictions_link_for?(result)).to eq(false)
+          expect(helper.display_convictions_link_for?(resource)).to eq(false)
         end
       end
 
       context "when the user has permission" do
         before { allow(helper).to receive(:can?).and_return(true) }
 
-        context "when the result has no pending convictions check" do
-          let(:result) { build(:renewing_registration, :does_not_require_conviction_check) }
+        context "when the resource has no pending convictions check" do
+          let(:resource) { build(:renewing_registration, :does_not_require_conviction_check) }
 
           it "returns false" do
-            expect(helper.display_convictions_link_for?(result)).to eq(false)
+            expect(helper.display_convictions_link_for?(resource)).to eq(false)
           end
         end
 
-        context "when the result has a pending convictions check" do
-          let(:result) { build(:renewing_registration, :requires_conviction_check) }
+        context "when the resource has a pending convictions check" do
+          let(:resource) { build(:renewing_registration, :requires_conviction_check) }
 
           it "returns true" do
-            expect(helper.display_convictions_link_for?(result)).to eq(true)
+            expect(helper.display_convictions_link_for?(resource)).to eq(true)
           end
         end
       end
     end
 
     describe "#display_renew_link_for?" do
-      context "when the result is not a Registration" do
-        let(:result) { build(:renewing_registration) }
+      context "when the resource is not a Registration" do
+        let(:resource) { build(:renewing_registration) }
 
         it "returns false" do
-          expect(helper.display_renew_link_for?(result)).to eq(false)
+          expect(helper.display_renew_link_for?(resource)).to eq(false)
         end
       end
 
-      context "when the result is a Registration" do
-        let(:result) { build(:registration) }
+      context "when the resource is a Registration" do
+        let(:resource) { build(:registration) }
 
         context "when the user does not have permission" do
           before { allow(helper).to receive(:can?).and_return(false) }
 
           it "returns false" do
-            expect(helper.display_renew_link_for?(result)).to eq(false)
+            expect(helper.display_renew_link_for?(resource)).to eq(false)
           end
         end
 
         context "when the user has permission" do
           before { allow(helper).to receive(:can?).and_return(true) }
 
-          context "when the result cannot begin a renewal" do
-            before { allow(result).to receive(:can_start_renewal?).and_return(false) }
+          context "when the resource cannot begin a renewal" do
+            before { allow(resource).to receive(:can_start_renewal?).and_return(false) }
 
             it "returns false" do
-              expect(helper.display_renew_link_for?(result)).to eq(false)
+              expect(helper.display_renew_link_for?(resource)).to eq(false)
             end
           end
 
-          context "when the result can begin a renewal" do
-            before { allow(result).to receive(:can_start_renewal?).and_return(true) }
+          context "when the resource can begin a renewal" do
+            before { allow(resource).to receive(:can_start_renewal?).and_return(true) }
 
             it "returns true" do
-              expect(helper.display_renew_link_for?(result)).to eq(true)
+              expect(helper.display_renew_link_for?(resource)).to eq(true)
             end
           end
         end
@@ -671,33 +661,33 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
 
     describe "#display_transfer_link_for?" do
-      context "when the result is not a Registration" do
-        let(:result) { build(:renewing_registration) }
+      context "when the resource is not a Registration" do
+        let(:resource) { build(:renewing_registration) }
 
         it "returns false" do
-          expect(helper.display_transfer_link_for?(result)).to eq(false)
+          expect(helper.display_transfer_link_for?(resource)).to eq(false)
         end
       end
 
-      context "when the result is a Registration" do
-        let(:result) { build(:registration) }
+      context "when the resource is a Registration" do
+        let(:resource) { build(:registration) }
 
-        context "when the result has been revoked or refused" do
-          before { result.metaData.status = %w[REVOKED REFUSED].sample }
+        context "when the resource has been revoked or refused" do
+          before { resource.metaData.status = %w[REVOKED REFUSED].sample }
 
           it "returns false" do
-            expect(helper.display_transfer_link_for?(result)).to eq(false)
+            expect(helper.display_transfer_link_for?(resource)).to eq(false)
           end
         end
 
-        context "when the result is not revoked or refused" do
-          before { result.metaData.status = %w[ACTIVE EXPIRED PENDING].sample }
+        context "when the resource is not revoked or refused" do
+          before { resource.metaData.status = %w[ACTIVE EXPIRED PENDING].sample }
 
           context "when the user does not have permission" do
             before { allow(helper).to receive(:can?).and_return(false) }
 
             it "returns false" do
-              expect(helper.display_transfer_link_for?(result)).to eq(false)
+              expect(helper.display_transfer_link_for?(resource)).to eq(false)
             end
           end
 
@@ -705,7 +695,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
             before { allow(helper).to receive(:can?).and_return(true) }
 
             it "returns true" do
-              expect(helper.display_transfer_link_for?(result)).to eq(true)
+              expect(helper.display_transfer_link_for?(resource)).to eq(true)
             end
           end
         end
