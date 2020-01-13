@@ -140,12 +140,6 @@ RSpec.describe ActionLinksHelper, type: :helper do
   describe "#display_refund_link_for?" do
     let(:resource) { build(:finance_details, balance: balance) }
 
-    context "when the resource is nil" do
-      it "returns false" do
-        expect(helper.display_refund_link_for?(nil)).to be_falsey
-      end
-    end
-
     context "when the resource has a positive balance" do
       let(:balance) { 5 }
 
@@ -242,7 +236,8 @@ RSpec.describe ActionLinksHelper, type: :helper do
   end
 
   describe "#display_payment_link_for?" do
-    let(:resource) { double(:resource) }
+    let(:finance_details) { "foo" }
+    let(:resource) { double(:resource, finance_details: finance_details) }
 
     before do
       expect(resource).to receive(:upper_tier?).and_return(upper_tier)
@@ -251,8 +246,18 @@ RSpec.describe ActionLinksHelper, type: :helper do
     context "when the resource is an upper tier" do
       let(:upper_tier) { true }
 
-      it "returns true" do
-        expect(helper.display_payment_link_for?(resource)).to be_truthy
+      context "when the resource has finance details" do
+        it "returns true" do
+          expect(helper.display_payment_link_for?(resource)).to be_truthy
+        end
+      end
+
+      context "when the resource has no finance details" do
+        let(:finance_details) { nil }
+
+        it "returns false" do
+          expect(helper.display_payment_link_for?(resource)).to be_falsey
+        end
       end
     end
 
