@@ -87,8 +87,11 @@ module WasteCarriersBackOffice
     config.worldpay_url = ENV["WCRS_WORLDPAY_URL"] || "https://secure-test.worldpay.com/jsp/merchant/xml/paymentService.jsp"
     config.worldpay_admin_code = ENV["WCRS_WORLDPAY_ADMIN_CODE"]
     config.worldpay_merchantcode = ENV["WCRS_WORLDPAY_MOTO_MERCHANTCODE"]
+    config.worldpay_ecom_merchantcode = ENV["WCRS_WORLDPAY_ECOM_MERCHANTCODE"]
     config.worldpay_username = ENV["WCRS_WORLDPAY_MOTO_USERNAME"]
     config.worldpay_password = ENV["WCRS_WORLDPAY_MOTO_PASSWORD"]
+    config.worldpay_ecom_username = ENV["WCRS_WORLDPAY_ECOM_USERNAME"]
+    config.worldpay_ecom_password = ENV["WCRS_WORLDPAY_ECOM_PASSWORD"]
     config.worldpay_macsecret = ENV["WCRS_WORLDPAY_MOTO_MACSECRET"]
 
     # Emails

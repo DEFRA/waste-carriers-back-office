@@ -22,7 +22,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   attr_reader :payment, :user, :finance_details
 
   def card_refund_result
-    @_card_refund_result ||= ::Worldpay::RefundService.run(payment: payment, amount: amount_to_refund)
+    @_card_refund_result ||= ::Worldpay::RefundService.run(payment: payment, amount: amount_to_refund, merchant_code: order.merchant_id)
   end
 
   def amount_to_refund
@@ -47,6 +47,10 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     refund.comment = refund_comment
 
     refund
+  end
+
+  def order
+    @_order ||= finance_details.orders.find_by(order_code: payment.order_key)
   end
 
   def card_payment?

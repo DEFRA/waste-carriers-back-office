@@ -4,7 +4,9 @@ require "rails_helper"
 
 RSpec.describe ProcessRefundService do
   describe ".run" do
-    let(:finance_details) { double(:finance_details, balance: -500) }
+    let(:orders) { double(:orders) }
+    let(:order) { double(:order, merchant_id: "merchant_code") }
+    let(:finance_details) { double(:finance_details, balance: -500, orders: orders) }
     let(:payment) { double(:payment, order_key: "123", registration_reference: "registration_reference", amount: 1_500) }
     let(:user) { double(:user, email: "user@example.com") }
     let(:payments) { double(:payments) }
@@ -13,6 +15,7 @@ RSpec.describe ProcessRefundService do
 
     before do
       allow(payment).to receive(:worldpay?).and_return(worldpay)
+      allow(orders).to receive(:find_by).and_return(order)
     end
 
     context "when the registration balance is not negative" do
@@ -28,7 +31,7 @@ RSpec.describe ProcessRefundService do
 
       context "when a request to worldpay fails" do
         it "returns false and does not create a payment" do
-          expect(Worldpay::RefundService).to receive(:run).with(payment: payment, amount: 500).and_return(false)
+          expect(Worldpay::RefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(false)
 
           expect(described_class.run(finance_details: finance_details, payment: payment, user: user)).to be_falsey
         end
@@ -54,7 +57,7 @@ RSpec.describe ProcessRefundService do
           expect(I18n).to receive(:t).with("refunds.comment.card").and_return(description)
           expect(refund).to receive(:comment=).with(description)
 
-          expect(Worldpay::RefundService).to receive(:run).with(payment: payment, amount: 500).and_return(true)
+          expect(Worldpay::RefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(true)
 
           expect(described_class.run(finance_details: finance_details, payment: payment, user: user)).to be_truthy
         end
