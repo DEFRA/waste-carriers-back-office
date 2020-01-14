@@ -5,12 +5,14 @@ module Worldpay
     include ::WasteCarriersEngine::CanSendWorldpayRequest
     include ::WasteCarriersEngine::CanBuildWorldpayXml
 
-    def run(payment:, amount:)
+    def run(payment:, amount:, merchant_code:)
       return false unless payment.worldpay? || payment.worldpay_missed?
 
-      xml = build_refund_xml(payment, amount)
-      response = send_request(xml)
+      @payment = payment
+      @amount = amount
+      @merchant_code = merchant_code
 
+      response = send_request(xml)
       parsed_reponse = Nokogiri::XML(response)
 
       parsed_reponse.xpath("//paymentService/reply/ok/refundReceived").present?
@@ -18,7 +20,9 @@ module Worldpay
 
     private
 
-    def build_refund_xml(payment, amount)
+    attr_reader :payment, :amount, :merchant_code
+
+    def xml
       builder = Nokogiri::XML::Builder.new do |xml|
         build_doctype(xml)
 
@@ -34,6 +38,24 @@ module Worldpay
       end
 
       builder.to_xml
+    end
+
+    def ecom_order?
+      return true if merchant_code == Rails.configuration.worldpay_ecom_merchantcode
+
+      false
+    end
+
+    def username
+      return Rails.configuration.worldpay_ecom_username if ecom_order?
+
+      Rails.configuration.worldpay_username
+    end
+
+    def password
+      return Rails.configuration.worldpay_ecom_password if ecom_order?
+
+      Rails.configuration.worldpay_password
     end
   end
 end

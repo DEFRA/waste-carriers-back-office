@@ -489,9 +489,29 @@ RSpec.describe ActionLinksHelper, type: :helper do
       end
     end
 
+  describe "#display_finance_details_link_for?" do
+    let(:upper_tier) { true }
+    let(:finance_details) { double(:finance_details) }
+    let(:resource) { double(:registration, finance_details: finance_details, upper_tier?: upper_tier) }
+
+    context "when the resource is an upper tier" do
+      context "when the resource has finance details" do
+        it "returns true" do
+          expect(helper.display_finance_details_link_for?(resource)).to be_truthy
+        end
+      end
+
+      context "when the resource has no finance details" do
+        let(:finance_details) { nil }
+        it "returns false" do
+          expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+        end
+      end
+    end
+
     context "when the resource is not an upper tier" do
       let(:upper_tier) { false }
-
+      
       it "returns false" do
         expect(helper.display_finance_details_link_for?(resource)).to be_falsey
       end

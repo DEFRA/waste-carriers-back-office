@@ -10,6 +10,7 @@ en:
       successful: "£%{amount} refunded successfully"
       error: "Sorry, there has been a problem communicating with Worldpay. Please try again."
     index:
+      title: "Refund a payment"
       heading: "Which payment do you want to refund?"
       date: "Date"
       type: "Type"
@@ -19,6 +20,7 @@ en:
       refund_payment: "Refund payment"
       refund_payment_alt: "Refund payment from %{date} by %{method} for %{amount}"
     new:
+      title: "Confirm refund"
       heading:
         card: "Confirm the card payment refund"
         cash: "Confirm the cash payment refund"

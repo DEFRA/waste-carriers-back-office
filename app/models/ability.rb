@@ -4,7 +4,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    return unless user.active?
+    return if user.deactivated?
 
     can :use_back_office, :all
 

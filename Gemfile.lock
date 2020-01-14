@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: b337d827eaad5b0971c4c82affe07a134cab959e
+  revision: 51e3a1a44898873b10866c199ecd96f6f7af270e
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -105,7 +105,7 @@ GEM
       unicode_utils (~> 1.4)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
-    crass (1.0.5)
+    crass (1.0.6)
     database_cleaner (1.7.0)
     debug_inspector (0.0.3)
     defra_ruby_aws (0.2.0)
@@ -209,7 +209,7 @@ GEM
     mime-types-data (3.2019.1009)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.13.0)
+    minitest (5.14.0)
     mongo (2.11.2)
       bson (>= 4.6.0, < 5.0.0)
     mongoid (5.2.1)

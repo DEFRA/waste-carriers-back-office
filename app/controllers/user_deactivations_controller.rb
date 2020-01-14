@@ -6,7 +6,7 @@ class UserDeactivationsController < UserActivityController
   private
 
   def user_activity_level_is_wrong?
-    !@user.active?
+    @user.deactivated?
   end
 
   def perform_activation_action

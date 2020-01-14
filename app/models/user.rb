@@ -27,6 +27,10 @@ class User
     active == true || active.nil?
   end
 
+  def deactivated?
+    !active?
+  end
+
   def activate!
     update_attribute(:active, true)
   end
