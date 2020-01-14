@@ -236,27 +236,28 @@ RSpec.describe ActionLinksHelper, type: :helper do
   end
 
   describe "#display_payment_link_for?" do
-    let(:resource) { double(:resource) }
+    # TODO: Temporary - for release only. See: https://eaflood.atlassian.net/browse/RUBY-846
+    # let(:resource) { double(:resource) }
 
-    before do
-      expect(resource).to receive(:upper_tier?).and_return(upper_tier)
-    end
+    # before do
+    #   expect(resource).to receive(:upper_tier?).and_return(upper_tier)
+    # end
 
-    context "when the resource is an upper tier" do
-      let(:upper_tier) { true }
+    # context "when the resource is an upper tier" do
+    #   let(:upper_tier) { true }
 
-      it "returns true" do
-        expect(helper.display_payment_link_for?(resource)).to be_truthy
-      end
-    end
+    #   it "returns true" do
+    #     expect(helper.display_payment_link_for?(resource)).to be_truthy
+    #   end
+    # end
 
-    context "when the resource is not an upper tier" do
-      let(:upper_tier) { false }
+    # context "when the resource is not an upper tier" do
+    #   let(:upper_tier) { false }
 
-      it "returns false" do
-        expect(helper.display_payment_link_for?(resource)).to be_falsey
-      end
-    end
+    #   it "returns false" do
+    #     expect(helper.display_payment_link_for?(resource)).to be_falsey
+    #   end
+    # end
   end
 
   describe "#display_cease_or_revoke_link_for?" do
@@ -474,28 +475,33 @@ RSpec.describe ActionLinksHelper, type: :helper do
     let(:finance_details) { double(:finance_details) }
     let(:resource) { double(:registration, finance_details: finance_details, upper_tier?: upper_tier) }
 
-    context "when the resource is an upper tier" do
-      context "when the resource has finance details" do
-        it "returns true" do
-          expect(helper.display_finance_details_link_for?(resource)).to be_truthy
-        end
-      end
-
-      context "when the resource has no finance details" do
-        let(:finance_details) { nil }
-        it "returns false" do
-          expect(helper.display_finance_details_link_for?(resource)).to be_falsey
-        end
-      end
+    # TODO: Temporary - for release only. See: https://eaflood.atlassian.net/browse/RUBY-846
+    it "returns false" do
+      expect(helper.display_finance_details_link_for?(resource)).to be_falsey
     end
 
-    context "when the resource is not an upper tier" do
-      let(:upper_tier) { false }
+    # context "when the resource is an upper tier" do
+    #   context "when the resource has finance details" do
+    #     it "returns true" do
+    #       expect(helper.display_finance_details_link_for?(resource)).to be_truthy
+    #     end
+    #   end
 
-      it "returns false" do
-        expect(helper.display_finance_details_link_for?(resource)).to be_falsey
-      end
-    end
+    #   context "when the resource has no finance details" do
+    #     let(:finance_details) { nil }
+    #     it "returns false" do
+    #       expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+    #     end
+    #   end
+    # end
+
+    # context "when the resource is not an upper tier" do
+    #   let(:upper_tier) { false }
+
+    #   it "returns false" do
+    #     expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+    #   end
+    # end
   end
 
   describe "#display_convictions_link_for?" do
