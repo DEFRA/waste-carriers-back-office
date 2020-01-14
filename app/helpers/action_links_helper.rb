@@ -70,7 +70,7 @@ module ActionLinksHelper
     # TODO: Temporary - for release only. See: https://eaflood.atlassian.net/browse/RUBY-846
     return false
 
-    resource.upper_tier? && resource.finance_details.present?
+    # resource.upper_tier? && resource.finance_details.present?
   end
 
   def display_cease_or_revoke_link_for?(resource)
