@@ -68,9 +68,9 @@ module ActionLinksHelper
 
   def display_finance_details_link_for?(resource)
     # TODO: Temporary - for release only. See: https://eaflood.atlassian.net/browse/RUBY-846
-    return false
-
     # resource.upper_tier? && resource.finance_details.present?
+
+    false
   end
 
   def display_cease_or_revoke_link_for?(resource)
