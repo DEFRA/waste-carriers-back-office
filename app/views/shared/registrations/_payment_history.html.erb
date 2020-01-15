@@ -5,27 +5,26 @@
     </h2>
 
     <table>
+      <thead>
+        <tr>
+          <th>
+            <%= t(".date") %>
+          </th>
+          <th>
+            <%= t(".method") %>
+          </th>
+          <th>
+            <%= t(".reference") %>
+          </th>
+          <th>
+            <%= t(".comment") %>
+          </th>
+          <th class="numeric">
+            <%= t(".amount") %>
+          </th>
+        </tr>
+      </thead>
       <tbody>
-        <thead>
-          <tr>
-            <th>
-              <%= t(".date") %>
-            </th>
-            <th>
-              <%= t(".method") %>
-            </th>
-            <th>
-              <%= t(".reference") %>
-            </th>
-            <th>
-              <%= t(".comment") %>
-            </th>
-            <th class="numeric">
-              <%= t(".amount") %>
-            </th>
-          </tr>
-        </thead>
-
         <% @finance_details.payments.each do |payment| %>
           <tr>
             <td>

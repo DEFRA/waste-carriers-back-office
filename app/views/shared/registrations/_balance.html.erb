@@ -5,18 +5,17 @@
     </h2>
 
     <table>
+      <thead>
+        <tr>
+          <th>
+            <%= t(".status") %>
+          </th>
+          <th class="numeric">
+            <%= t(".amount") %>
+          </th>
+        </tr>
+      </thead>
       <tbody>
-        <thead>
-          <tr>
-            <th>
-              <%= t(".status") %>
-            </th>
-            <th class="numeric">
-              <%= t(".amount") %>
-            </th>
-          </tr>
-        </thead>
-
         <tr>
           <td>
             <% case %>

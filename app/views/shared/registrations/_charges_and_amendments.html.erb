@@ -5,21 +5,20 @@
     </h2>
 
     <table>
+      <thead>
+        <tr>
+          <th>
+            <%= t(".date") %>
+          </th>
+          <th>
+            <%= t(".charge") %>
+          </th>
+          <th class="numeric">
+            <%= t(".amount") %>
+          </th>
+        </tr>
+      </thead>
       <tbody>
-        <thead>
-          <tr>
-            <th>
-              <%= t(".date") %>
-            </th>
-            <th>
-              <%= t(".charge") %>
-            </th>
-            <th class="numeric">
-              <%= t(".amount") %>
-            </th>
-          </tr>
-        </thead>
-
         <% @finance_details.orders.each do |order| %>
           <% order.order_items.each do |order_item| %>
             <tr>
