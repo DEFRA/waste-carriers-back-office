@@ -25,6 +25,9 @@ class RefundsController < ApplicationController
     find_registration(params[:finance_details_id])
     find_payment(params[:order_key])
 
+    presenter = RefundPresenter.new(@registration.finance_details, @payment)
+    amount_to_refund = presenter.balance_to_refund
+
     response = ProcessRefundService.run(
       finance_details: @registration.finance_details,
       payment: @payment,
@@ -34,7 +37,7 @@ class RefundsController < ApplicationController
     if response
       flash[:message] = I18n.t(
         "refunds.flash_messages.successful",
-        amount: display_pence_as_pounds_and_cents(@payment.amount)
+        amount: display_pence_as_pounds_and_cents(amount_to_refund)
       )
     else
       flash[:error] = I18n.t("refunds.flash_messages.error")
