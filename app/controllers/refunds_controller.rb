@@ -35,7 +35,7 @@ class RefundsController < ApplicationController
     )
 
     if response
-      flash[:message] = I18n.t(
+      flash[:success] = I18n.t(
         "refunds.flash_messages.successful",
         amount: display_pence_as_pounds_and_cents(amount_to_refund)
       )
