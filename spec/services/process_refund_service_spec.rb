@@ -68,6 +68,10 @@ RSpec.describe ProcessRefundService do
     context "when the payment is a cash payment" do
       let(:worldpay) { false }
 
+      before do
+        allow(payment).to receive(:worldpay_missed?).and_return(false)
+      end
+
       it "generates a new refund payment and associate it with the right finance details" do
         description = double(:description)
 

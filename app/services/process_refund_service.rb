@@ -62,7 +62,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   end
 
   def refund_comment
-    return I18n.t("refunds.comments.card") if payment.worldpay? && payment.worldpay_missed?
+    return I18n.t("refunds.comments.card") if payment.worldpay? || payment.worldpay_missed?
 
     I18n.t("refunds.comments.manual")
   end
