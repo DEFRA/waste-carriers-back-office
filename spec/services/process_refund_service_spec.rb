@@ -50,7 +50,7 @@ RSpec.describe ProcessRefundService do
           expect(refund).to receive(:order_key=).with("123_REFUNDED")
           expect(refund).to receive(:date_entered=).with(Date.current)
           expect(refund).to receive(:date_received=).with(Date.current)
-          expect(refund).to receive(:amount=).with(500)
+          expect(refund).to receive(:amount=).with(-500)
           expect(refund).to receive(:registration_reference=).with("registration_reference")
           expect(refund).to receive(:updated_by_user=).with("user@example.com")
 
@@ -84,7 +84,7 @@ RSpec.describe ProcessRefundService do
         expect(refund).to receive(:order_key=).with("123_REFUNDED")
         expect(refund).to receive(:date_entered=).with(Date.current)
         expect(refund).to receive(:date_received=).with(Date.current)
-        expect(refund).to receive(:amount=).with(500)
+        expect(refund).to receive(:amount=).with(-500)
         expect(refund).to receive(:registration_reference=).with("registration_reference")
         expect(refund).to receive(:updated_by_user=).with("user@example.com")
 

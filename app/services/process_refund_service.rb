@@ -43,7 +43,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     refund = WasteCarriersEngine::Payment.new(payment_type: WasteCarriersEngine::Payment::REFUND)
 
     refund.order_key = "#{payment.order_key}_REFUNDED"
-    refund.amount = amount_to_refund
+    refund.amount = -amount_to_refund
     refund.date_entered = Date.current
     refund.date_received = Date.current
     refund.registration_reference = payment.registration_reference
