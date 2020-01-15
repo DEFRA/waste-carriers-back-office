@@ -58,7 +58,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   end
 
   def card_payment?
-    payment.worldpay? || payment.worldpay_missed?
+    payment.worldpay?
   end
 
   def refund_comment
