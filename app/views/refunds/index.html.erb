@@ -13,27 +13,26 @@
     <%= render "shared/company_details_panel", registration: @registration %>
 
     <table>
+      <thead>
+        <tr>
+          <th>
+            <%= t(".date") %>
+          </th>
+          <th>
+            <%= t(".type") %>
+          </th>
+          <th>
+            <%= t(".reference") %>
+          </th>
+          <th class="numeric">
+            <%= t(".amount") %>
+          </th>
+          <th>
+            <%= t(".action") %>
+          </th>
+        </tr>
+      </thead>
       <tbody>
-        <thead>
-          <tr>
-            <th>
-              <%= t(".date") %>
-            </th>
-            <th>
-              <%= t(".type") %>
-            </th>
-            <th>
-              <%= t(".reference") %>
-            </th>
-            <th class="numeric">
-              <%= t(".amount") %>
-            </th>
-            <th>
-              <%= t(".action") %>
-            </th>
-          </tr>
-        </thead>
-
         <% @payments.each do |payment| %>
           <tr>
             <td>
