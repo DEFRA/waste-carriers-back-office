@@ -18,10 +18,16 @@
       <%= render("waste_carriers_engine/shared/errors", object: resource) %>
 
       <% resource.class.invite_key_fields.each do |field| %>
-        <div class="form-group <%= "form-group-error" if resource.errors[:role].any? %>">
-          <%= f.label field, t(".#{field}_label"), class: "form-label" %>
-          <%= f.text_field field, class: "form-control" %>
-        </div>
+        <fieldset id="<%= field %>">
+          <% if resource.errors[field].any? %>
+            <span class="error-message"><%= resource.errors[field].join(", ") %></span>
+          <% end %>
+
+          <div class="form-group <%= "form-group-error" if resource.errors[field].any? %>">
+            <%= f.label field, t(".#{field}_label"), class: "form-label" %>
+            <%= f.text_field field, class: "form-control" %>
+          </div>
+        </fieldset>
       <% end %>
 
       <%= render("shared/select_role", resource: resource, f: f) %>
