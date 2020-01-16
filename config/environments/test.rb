@@ -33,7 +33,7 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
   # Required for testing user invitations
-  config.action_mailer.default_url_options = { host: config.wcrs_back_office_url, protocol: "http" }
+  config.action_mailer.default_url_options = { host: config.wcrs_back_office_url, protocol: "https" }
 
   # Randomize the order test cases are executed.
   config.active_support.test_order = :random

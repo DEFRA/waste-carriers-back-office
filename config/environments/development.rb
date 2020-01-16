@@ -16,7 +16,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Sending e-mails is required for user management and registration e-mails
-  config.action_mailer.default_url_options = { host: config.wcrs_back_office_url, protocol: "http" }
+  config.action_mailer.default_url_options = { host: config.wcrs_back_office_url, protocol: "https" }
 
   # Don't care if the mailer can't send (if set to false)
   config.action_mailer.raise_delivery_errors = false
