@@ -7,11 +7,16 @@ class InvalidConvictionDataError < StandardError; end
 
 class ConvictionImportService < ::WasteCarriersEngine::BaseService
   def run(csv)
+    @old_convictions = WasteCarriersEngine::ConvictionsCheck::Entity.all
+    @new_convictions = []
+
     convictions_data = parse_data(csv)
 
     convictions_data.each do |line|
       add_conviction_record(line)
     end
+
+    update_convictions_in_database
   end
 
   private
@@ -30,7 +35,7 @@ class ConvictionImportService < ::WasteCarriersEngine::BaseService
     validate_conviction_data(conviction)
 
     attributes = prepare_attributes(conviction)
-    WasteCarriersEngine::ConvictionsCheck::Entity.new(attributes).save
+    @new_convictions << WasteCarriersEngine::ConvictionsCheck::Entity.new(attributes)
   end
 
   def prepare_attributes(conviction)
@@ -57,5 +62,10 @@ class ConvictionImportService < ::WasteCarriersEngine::BaseService
     return true if data["Offender"].present?
 
     raise InvalidConvictionDataError, "Offender name missing"
+  end
+
+  def update_convictions_in_database
+    @old_convictions.each(&:destroy!)
+    @new_convictions.each(&:save!)
   end
 end

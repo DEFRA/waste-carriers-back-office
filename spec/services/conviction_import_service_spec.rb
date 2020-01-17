@@ -9,6 +9,11 @@ RSpec.describe ConvictionImportService do
   end
 
   describe "#run" do
+    let(:old_conviction_name) { "Old Conviction" }
+    before do
+      WasteCarriersEngine::ConvictionsCheck::Entity.new(name: old_conviction_name).save
+    end
+
     context "when given CSV in a string as an argument" do
       let(:csv) do
         %(
@@ -41,40 +46,54 @@ Apex Limited,,11111111,ABC,99999999
 
         expect { run_service }.to change { matching_person_conviction.count }.from(0).to(1)
       end
+
+      it "destroys the old convictions" do
+        old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
+
+        expect { run_service }.to change { old_conviction.count }.from(1).to(0)
+      end
     end
-  end
 
-  context "when valid CSV data is not provided" do
-    let(:csv) { :not_a_csv }
+    context "when valid CSV data is not provided" do
+      let(:csv) { :not_a_csv }
 
-    it "raises an InvalidCSVError" do
-      expect { run_service }.to raise_error(InvalidCSVError)
+      it "raises an InvalidCSVError and doesn't update any conviction data" do
+        old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
+
+        expect { run_service }.to raise_error(InvalidCSVError).and change { old_conviction.count }.by(0)
+      end
     end
-  end
 
-  context "when the CSV does not contain valid convictions headers" do
-    let(:csv) do
-      %(
+    context "when the CSV does not contain valid convictions headers" do
+      let(:csv) do
+        %(
 Ingredient,Quantity,Measurement
 flour,1,cup
 baking soda,2,tablespoons
 )
-    end
-
-    it "raises an InvalidConvictionDataError" do
-      expect { run_service }.to raise_error(InvalidConvictionDataError, "Invalid headers")
-    end
-
-    context "when the CSV does not contain offender names" do
-      let(:csv) do
-        %(
-Offender,Birth Date,Company No.,System Flag,Inc Number
-,,11111111,ABC,99999999
-)
       end
 
-      it "raises an InvalidConvictionDataError" do
-        expect { run_service }.to raise_error(InvalidConvictionDataError, "Offender name missing")
+      it "raises an InvalidConvictionDataError and doesn't update any conviction data" do
+        old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
+
+        expect { run_service }.to raise_error(InvalidConvictionDataError, "Invalid headers").and change { old_conviction.count }.by(0)
+      end
+
+      context "when the CSV does not contain offender names" do
+        let(:csv) do
+          %(
+Offender,Birth Date,Company No.,System Flag,Inc Number
+Apex Limited,,11111111,ABC,99999999
+,,11111111,ABC,99999999
+)
+        end
+
+        it "raises an InvalidConvictionDataError and doesn't update any conviction data" do
+          old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
+          new_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: "Apex Limited")
+
+          expect { run_service }.to raise_error(InvalidConvictionDataError, "Offender name missing").and change { old_conviction.count }.by(0).and change { new_conviction.count }.by(0)
+        end
       end
     end
   end
