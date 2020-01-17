@@ -43,4 +43,39 @@ Apex Limited,,11111111,ABC,99999999
       end
     end
   end
+
+  context "when valid CSV data is not provided" do
+    let(:csv) { :not_a_csv }
+
+    it "raises an InvalidCSVError" do
+      expect { run_service }.to raise_error(InvalidCSVError)
+    end
+  end
+
+  context "when the CSV does not contain valid convictions headers" do
+    let(:csv) do
+      %(
+Ingredient,Quantity,Measurement
+flour,1,cup
+baking soda,2,tablespoons
+)
+    end
+
+    it "raises an InvalidConvictionDataError" do
+      expect { run_service }.to raise_error(InvalidConvictionDataError, "Invalid headers")
+    end
+
+    context "when the CSV does not contain offender names" do
+      let(:csv) do
+        %(
+Offender,Birth Date,Company No.,System Flag,Inc Number
+,,11111111,ABC,99999999
+)
+      end
+
+      it "raises an InvalidConvictionDataError" do
+        expect { run_service }.to raise_error(InvalidConvictionDataError, "Offender name missing")
+      end
+    end
+  end
 end
