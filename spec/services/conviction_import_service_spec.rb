@@ -20,6 +20,7 @@ RSpec.describe ConvictionImportService do
 Offender,Birth Date,Company No.,System Flag,Inc Number
 Apex Limited,,11111111,ABC,99999999
 "Doe, John",01/01/1991,,DFG,
+   Whitespace Inc   , , , ,
 )
       end
 
@@ -45,6 +46,18 @@ Apex Limited,,11111111,ABC,99999999
         )
 
         expect { run_service }.to change { matching_person_conviction.count }.from(0).to(1)
+      end
+
+      it "trims excess whitespace" do
+        matching_trimmed_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(
+          name: "Whitespace Inc",
+          date_of_birth: nil,
+          company_number: nil,
+          system_flag: nil,
+          incident_number: nil
+        )
+
+        expect { run_service }.to change { matching_trimmed_conviction.count }.from(0).to(1)
       end
 
       it "destroys the old convictions" do

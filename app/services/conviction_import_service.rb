@@ -49,12 +49,14 @@ class ConvictionImportService < ::WasteCarriersEngine::BaseService
   end
 
   def prepare_attributes(conviction)
+    # Strip whitespace from each one if possible, then call 'presence'
+    # to return nil instead of a blank string
     {
-      name: conviction["Offender"],
+      name: conviction["Offender"]&.strip.presence,
       date_of_birth: conviction["Birth Date"],
-      company_number: conviction["Company No."],
-      system_flag: conviction["System Flag"],
-      incident_number: conviction["Inc Number"]
+      company_number: conviction["Company No."]&.strip.presence,
+      system_flag: conviction["System Flag"]&.strip.presence,
+      incident_number: conviction["Inc Number"]&.strip.presence
     }
   end
 
