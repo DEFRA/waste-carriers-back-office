@@ -12,18 +12,10 @@ RSpec.describe ConvictionImportService do
     context "when given CSV in a string as an argument" do
       let(:csv) do
         %(
+Offender,Birth Date,Company No.,System Flag,Inc Number
 Apex Limited,,11111111,ABC,99999999
 "Doe, John",01/01/1991,,DFG,
 )
-      end
-
-      it "returns an array of arrays" do
-        array_data = [
-          ["Apex Limited", nil, "11111111", "ABC", "99999999"],
-          ["Doe, John", "01/01/1991", nil, "DFG", nil]
-        ]
-
-        expect(run_service).to eq(array_data)
       end
 
       it "creates valid business convictions" do
