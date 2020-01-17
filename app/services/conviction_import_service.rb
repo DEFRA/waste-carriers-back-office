@@ -10,16 +10,26 @@ class ConvictionImportService < ::WasteCarriersEngine::BaseService
     @old_convictions = WasteCarriersEngine::ConvictionsCheck::Entity.all
     @new_convictions = []
 
-    convictions_data = parse_data(csv)
-
-    convictions_data.each do |line|
-      add_conviction_record(line)
-    end
-
+    convert_data_to_convictions(csv)
     update_convictions_in_database
   end
 
   private
+
+  def convert_data_to_convictions(csv)
+    convictions_data = parse_data(csv)
+
+    validate_headers(convictions_data)
+
+    convictions_data.each do |line|
+      make_new_conviction_object(line)
+    end
+  end
+
+  def update_convictions_in_database
+    @old_convictions.each(&:destroy!)
+    @new_convictions.each(&:save!)
+  end
 
   def parse_data(csv)
     CSV.parse(csv,
@@ -31,8 +41,8 @@ class ConvictionImportService < ::WasteCarriersEngine::BaseService
     raise InvalidCSVError
   end
 
-  def add_conviction_record(conviction)
-    validate_conviction_data(conviction)
+  def make_new_conviction_object(conviction)
+    validate_row(conviction)
 
     attributes = prepare_attributes(conviction)
     @new_convictions << WasteCarriersEngine::ConvictionsCheck::Entity.new(attributes)
@@ -48,24 +58,15 @@ class ConvictionImportService < ::WasteCarriersEngine::BaseService
     }
   end
 
-  def validate_conviction_data(data)
-    valid_headers?(data) && name_is_present?(data)
-  end
-
-  def valid_headers?(data)
-    return true if data.headers == ["Offender", "Birth Date", "Company No.", "System Flag", "Inc Number"]
+  def validate_headers(data)
+    return if data.headers == ["Offender", "Birth Date", "Company No.", "System Flag", "Inc Number"]
 
     raise InvalidConvictionDataError, "Invalid headers"
   end
 
-  def name_is_present?(data)
-    return true if data["Offender"].present?
+  def validate_row(row)
+    return if row["Offender"].present?
 
     raise InvalidConvictionDataError, "Offender name missing"
-  end
-
-  def update_convictions_in_database
-    @old_convictions.each(&:destroy!)
-    @new_convictions.each(&:save!)
   end
 end
