@@ -33,7 +33,7 @@ Apex Limited,,11111111,ABC,99999999
       it "creates valid person convictions" do
         matching_person_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(
           name: "Doe, John",
-          date_of_birth: "01/01/1991",
+          date_of_birth: Date.new(1991, 1, 1),
           company_number: nil,
           system_flag: "DFG",
           incident_number: nil

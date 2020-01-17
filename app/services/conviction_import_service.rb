@@ -14,7 +14,11 @@ class ConvictionImportService < ::WasteCarriersEngine::BaseService
   private
 
   def parse_data(csv)
-    CSV.parse(csv, headers: true, liberal_parsing: true, skip_blanks: true)
+    CSV.parse(csv,
+              converters: :date,
+              headers: true,
+              liberal_parsing: true,
+              skip_blanks: true)
   end
 
   def add_conviction_record(conviction)
