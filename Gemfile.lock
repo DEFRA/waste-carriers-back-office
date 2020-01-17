@@ -110,6 +110,8 @@ GEM
     debug_inspector (0.0.3)
     defra_ruby_aws (0.2.0)
       aws-sdk-s3
+    defra_ruby_mocks (1.0.0)
+      rails (~> 4.2.11.1)
     defra_ruby_style (0.1.3)
       rubocop (~> 0.75)
     defra_ruby_validators (2.2.0)
@@ -390,6 +392,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   database_cleaner
   defra_ruby_aws (~> 0.2.0)
+  defra_ruby_mocks (~> 1.0)
   defra_ruby_style
   devise (>= 4.4.3)
   devise_invitable (~> 1.7.0)

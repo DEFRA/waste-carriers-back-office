@@ -58,6 +58,16 @@ gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",
     branch: "master"
 
+# Use the defra ruby mocks engine to add support for mocking external services
+# in live environment. Essentially with this gem added and enabled the app
+# also becomes a 'mock' for external services like companies house.
+# This then allows us to performance test our services without fear of being
+# reported for causing undue loads on the external services we use.
+# With the environment properly configured, when any app in an environment needs
+# to call Companies House, instead it will call this app which will mock the end
+# point and return the response expected.
+gem "defra_ruby_mocks", "~> 1.0"
+
 # Allows us to automatically generate the change log from the tags, issues,
 # labels and pull requests on GitHub. Added as a dependency so all dev's have
 # access to it to generate a log, and so they are using the same version.
