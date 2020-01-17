@@ -25,6 +25,30 @@ Apex Limited,,11111111,ABC,99999999
 
         expect(run_service).to eq(array_data)
       end
+
+      it "creates valid business convictions" do
+        matching_business_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(
+          name: "Apex Limited",
+          date_of_birth: nil,
+          company_number: "11111111",
+          system_flag: "ABC",
+          incident_number: "99999999"
+        )
+
+        expect { run_service }.to change { matching_business_conviction.count }.from(0).to(1)
+      end
+
+      it "creates valid person convictions" do
+        matching_person_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(
+          name: "Doe, John",
+          date_of_birth: "01/01/1991",
+          company_number: nil,
+          system_flag: "DFG",
+          incident_number: nil
+        )
+
+        expect { run_service }.to change { matching_person_conviction.count }.from(0).to(1)
+      end
     end
   end
 end
