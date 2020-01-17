@@ -37,5 +37,9 @@ FactoryBot.define do
     trait :finance_super do
       role { "finance_super" }
     end
+
+    trait :developer do
+      role { "developer" }
+    end
   end
 end

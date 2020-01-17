@@ -47,6 +47,10 @@
     {
       "email" : "finance-admin-user@wcr.gov.uk",
       "role" : "finance_admin"
+    },
+    {
+      "email" : "developer@wcr.gov.uk",
+      "role" : "developer"
     }
   ]
 }
