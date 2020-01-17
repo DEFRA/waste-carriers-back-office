@@ -85,8 +85,11 @@ class UserMigrationService < ::WasteCarriersEngine::BaseService
     # So when syncing agency users, if the role found in the back office is
     # an admin role, we leave it as is rather than overwriting it (in the
     # back office admins can do pretty much anything hence only one user
-    # needed)
-    return bo_user.role if bo_user && admin_role?(bo_user.role)
+    # needed).
+    # We also don't want to overwrite developer permissions, as this role
+    # did not exist in the old frontend, so developer accounts may be
+    # categorised as agency users there.
+    return bo_user.role if bo_user && role_should_not_be_modified?(bo_user.role)
     return "agency" unless user.role_ids
 
     determine_role(user)
@@ -115,8 +118,8 @@ class UserMigrationService < ::WasteCarriersEngine::BaseService
     bo_user.role != backend_role
   end
 
-  def admin_role?(role)
-    %w[agency_super finance_super].include?(role)
+  def role_should_not_be_modified?(role)
+    %w[agency_super finance_super developer].include?(role)
   end
 
   def add_result(email, role, action)

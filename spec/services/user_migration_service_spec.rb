@@ -174,6 +174,29 @@ RSpec.describe UserMigrationService do
 
           expect(run_service).to include(result)
         end
+
+        context "when the back office role is developer" do
+          before do
+            back_office_user.update_attributes(role: "developer")
+          end
+
+          it "does not modify the back office user" do
+            back_office_user_before = back_office_user
+            run_service
+            back_office_user_after = back_office_user.reload
+            expect(back_office_user_before).to eq(back_office_user_after)
+          end
+
+          it "adds the correct value to the results" do
+            result = {
+              action: :skip,
+              email: agency_user.email,
+              role: "developer"
+            }
+
+            expect(run_service).to include(result)
+          end
+        end
       end
     end
   end
