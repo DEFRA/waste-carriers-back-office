@@ -44,5 +44,6 @@ en:
             finance_admin: "finance admin"
             agency_super: "agency super"
             finance_super: "finance super"
+            developer: "developer"
       no_results: "No results"
       user_button: "Return to manage back office users"

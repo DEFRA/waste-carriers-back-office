@@ -44,6 +44,7 @@ en:
           finance_admin: "Finance admin user"
           agency_super: "Agency super user"
           finance_super: "Finance super user"
+          developer: "Developer"
 
   # Kaminari overrides
   helpers:

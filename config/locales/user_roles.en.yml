@@ -10,4 +10,5 @@ en:
         finance_admin: "%{email} is currently a finance admin user."
         agency_super: "%{email} is currently an agency super user."
         finance_super: "%{email} is currently a finance super user."
+        developer: "%{email} is currently a developer."
       submit_button: "Change role"
