@@ -18,7 +18,7 @@ class Ability
     permissions_for_agency_user if agency_user?(user)
     permissions_for_agency_user_with_refund if agency_user_with_refund?(user)
     permissions_for_agency_super_user if agency_super_user?(user)
-    permissions_for_agency_user if developer?(user)
+    permissions_for_developer_user if developer?(user)
   end
 
   def assign_finance_user_permissions(user)
@@ -84,6 +84,12 @@ class Ability
       user.in_finance_group?
     end
     # rubocop:enable Style/SymbolProc
+  end
+
+  def permissions_for_developer_user
+    permissions_for_agency_user
+
+    can :import_conviction_data, :all
   end
 
   # Checks to see if role matches
