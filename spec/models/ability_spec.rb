@@ -42,6 +42,16 @@ RSpec.describe Ability, type: :model do
     include_examples "active and inactive examples"
   end
 
+  context "when the user role is developer" do
+    let(:role) { "developer" }
+
+    include_examples "below agency_super examples"
+    include_examples "below agency_with_refund examples"
+    include_examples "agency examples"
+
+    include_examples "active and inactive examples"
+  end
+
   # Finance users do not have ascending permissions.
 
   context "when the user role is finance_super" do

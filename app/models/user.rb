@@ -43,7 +43,8 @@ class User
 
   AGENCY_ROLES = %w[agency
                     agency_with_refund
-                    agency_super].freeze
+                    agency_super
+                    developer].freeze
 
   FINANCE_ROLES = %w[finance
                      finance_admin

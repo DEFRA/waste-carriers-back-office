@@ -18,6 +18,7 @@ class Ability
     permissions_for_agency_user if agency_user?(user)
     permissions_for_agency_user_with_refund if agency_user_with_refund?(user)
     permissions_for_agency_super_user if agency_super_user?(user)
+    permissions_for_agency_user if developer?(user)
   end
 
   def assign_finance_user_permissions(user)
@@ -109,5 +110,9 @@ class Ability
 
   def finance_super_user?(user)
     user.role == "finance_super"
+  end
+
+  def developer?(user)
+    user.role == "developer"
   end
 end
