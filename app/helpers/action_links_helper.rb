@@ -45,6 +45,14 @@ module ActionLinksHelper
     a_transient_registration?(resource) || a_registration?(resource)
   end
 
+  def display_write_off_small_link_for?(resource)
+    can?(:write_off_small, resource) && resource.balance != 0
+  end
+
+  def display_write_off_large_link_for?(resource)
+    can?(:write_off_large, resource) && resource.balance != 0
+  end
+
   def display_resume_link_for?(resource)
     return false unless display_transient_registration_links?(resource)
     return false if resource.renewal_application_submitted?

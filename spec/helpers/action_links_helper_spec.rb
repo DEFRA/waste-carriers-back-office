@@ -29,6 +29,76 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
+  describe "#display_write_off_small_link_for?" do
+    let(:balance) { 0 }
+    let(:resource) { double(:resource, balance: balance) }
+
+    before do
+      allow(helper).to receive(:can?).and_return(can)
+    end
+
+    context "when the user has permission to write off small" do
+      let(:can) { true }
+
+      context "when the balance is equal to 0" do
+        it "returns false" do
+          expect(helper.display_write_off_small_link_for?(resource)).to be_falsey
+        end
+      end
+
+      context "when the balance is different from 0" do
+        let(:balance) { 4 }
+
+        it "returns true" do
+          expect(helper.display_write_off_small_link_for?(resource)).to be_truthy
+        end
+      end
+    end
+
+    context "when the user does not have permissions to write off small" do
+      let(:can) { false }
+
+      it "returns false" do
+        expect(helper.display_write_off_small_link_for?(resource)).to be_falsey
+      end
+    end
+  end
+
+  describe "#display_write_off_large_link_for?" do
+    let(:balance) { 0 }
+    let(:resource) { double(:resource, balance: balance) }
+
+    before do
+      allow(helper).to receive(:can?).and_return(can)
+    end
+
+    context "when the user has permission to write off small" do
+      let(:can) { true }
+
+      context "when the balance is equal to 0" do
+        it "returns false" do
+          expect(helper.display_write_off_large_link_for?(resource)).to be_falsey
+        end
+      end
+
+      context "when the balance is different from 0" do
+        let(:balance) { 4 }
+
+        it "returns true" do
+          expect(helper.display_write_off_large_link_for?(resource)).to be_truthy
+        end
+      end
+    end
+
+    context "when the user does not have permissions to write off small" do
+      let(:can) { false }
+
+      it "returns false" do
+        expect(helper.display_write_off_large_link_for?(resource)).to be_falsey
+      end
+    end
+  end
+
   describe "resume_link_for" do
     context "when the resource is a transient_registration" do
       let(:resource) { build(:renewing_registration) }
