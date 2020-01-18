@@ -73,6 +73,9 @@ module WasteCarriersBackOffice
     config.os_places_service_url = ENV["WCRS_OS_PLACES_DOMAIN"] || "http://localhost:8005"
     config.host = config.wcrs_back_office_url
 
+    # Finance
+    config.write_off_agency_user_cap = ENV["WRITE_OFF_AGENCY_USER_CAP"] || "500"
+
     # Fees
     config.renewal_charge = ENV["WCRS_RENEWAL_CHARGE"].to_i
     config.type_change_charge = ENV["WCRS_TYPE_CHANGE_CHARGE"].to_i

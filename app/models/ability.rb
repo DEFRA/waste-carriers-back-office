@@ -45,6 +45,12 @@ class Ability
     can :revert_to_payment_summary, :all
 
     can :transfer_registration, WasteCarriersEngine::Registration
+
+    # rubocop:disable Style/SymbolProc
+    can :write_off_small, WasteCarriersEngine::FinanceDetails do |finance_details|
+      finance_details.zero_difference_balance < WasteCarriersBackOffice::Application.config.write_off_agency_user_cap.to_i
+    end
+    # rubocop:enable Style/SymbolProc
   end
 
   def permissions_for_agency_user_with_refund
@@ -62,6 +68,7 @@ class Ability
   end
 
   def permissions_for_finance_admin_user
+    can :write_off_large, WasteCarriersEngine::FinanceDetails
     can :view_certificate, WasteCarriersEngine::Registration
     can :record_worldpay_missed_payment, WasteCarriersEngine::RenewingRegistration
   end
