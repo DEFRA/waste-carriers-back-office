@@ -26,6 +26,9 @@ Rails.application.routes.draw do
               resources :refunds,
                         only: %i[index new create],
                         param: :order_key
+
+              resource :write_off,
+                       only: %i[new create]
             end
 
   resources :renewing_registrations,

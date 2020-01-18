@@ -1,0 +1,16 @@
+en:
+  write_offs:
+    new:
+      title: "Write off a difference"
+      heading: "Write off a difference for %{reg_identifier}"
+      write_off: "Write off £%{amount}"
+      reason: "Reason"
+      confirm: "Write off"
+  activemodel:
+    errors:
+      models:
+        write_off_form:
+          attributes:
+            comment:
+              blank: "Enter a comment or note"
+              too_long: "Comment or note must be 250 characters or fewer"
