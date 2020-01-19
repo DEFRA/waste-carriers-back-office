@@ -1,7 +1,7 @@
 en:
   write_offs:
     flash_messages:
-      successful: "%{amount} write off completed successfully"
+      successful: "£%{amount} write off completed successfully"
     new:
       title: "Write off a difference"
       heading: "Write off a difference for %{reg_identifier}"
