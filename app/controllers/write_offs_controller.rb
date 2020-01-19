@@ -19,7 +19,7 @@ class WriteOffsController < ApplicationController
 
     amount_to_write_off = @registration.finance_details.zero_difference_balance
 
-    if @write_off_form.submit(write_off_form_params)
+    if @write_off_form.submit(write_off_form_params, current_user)
       flash[:success] = I18n.t(
         "write_off.flash_messages.successful",
         amount: display_pence_as_pounds_and_cents(amount_to_write_off)

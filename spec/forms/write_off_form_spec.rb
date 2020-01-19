@@ -3,7 +3,9 @@
 require "rails_helper"
 
 RSpec.describe WriteOffForm do
-  subject { described_class.new(build(:renewing_registration)) }
+  let(:renewing_registration) { build(:renewing_registration) }
+  let(:user) { double(:user) }
+  subject { described_class.new(renewing_registration) }
 
   describe "#submit" do
     before do
@@ -12,14 +14,25 @@ RSpec.describe WriteOffForm do
 
     context "when the object is valid" do
       let(:valid) { true }
-      # TODO
+
+      it "runs the write off service" do
+        comment = double(:comment)
+
+        expect(ProcessWriteOffService).to receive(:run).with(
+          finance_details: renewing_registration.finance_details,
+          user: user,
+          comment: comment
+        )
+
+        expect(subject.submit({ comment: comment }, user)).to eq(true)
+      end
     end
 
     context "when the object is invalid" do
       let(:valid) { false }
 
       it "returns false" do
-        expect(subject.submit({})).to eq(false)
+        expect(subject.submit({}, user)).to eq(false)
       end
     end
   end
