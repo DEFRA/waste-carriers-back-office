@@ -21,7 +21,7 @@ class WriteOffsController < ApplicationController
 
     if @write_off_form.submit(write_off_form_params, current_user)
       flash[:success] = I18n.t(
-        "write_off.flash_messages.successful",
+        "write_offs.flash_messages.successful",
         amount: display_pence_as_pounds_and_cents(amount_to_write_off)
       )
 

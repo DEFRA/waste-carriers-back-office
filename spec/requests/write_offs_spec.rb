@@ -82,9 +82,14 @@ RSpec.describe "WriteOffs", type: :request do
           }
         end
 
-        it "returns a 302 status and redirects to the finance details page" do
+        it "generates a new payment, returns a 302 status and redirects to the finance details page" do
+          expected_payments_count = renewing_registration.finance_details.payments.count + 1
+
           post finance_details_write_off_path(renewing_registration._id), params
 
+          renewing_registration.reload
+
+          expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
           expect(response).to have_http_status(302)
           expect(response).to redirect_to(finance_details_path(renewing_registration._id))
         end
