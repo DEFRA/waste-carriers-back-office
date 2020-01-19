@@ -45,7 +45,7 @@ RSpec.describe ProcessWriteOffService do
 
           expect(WasteCarriersEngine::Payment).to receive(:new).with(payment_type: "WRITEOFFLARGE").and_return(write_off)
           expect(write_off).to receive(:order_key=)
-          expect(write_off).to receive(:amount=).with(-4)
+          expect(write_off).to receive(:amount=).with(4)
           expect(write_off).to receive(:date_entered=)
           expect(write_off).to receive(:date_received=)
           expect(write_off).to receive(:registration_reference=)
@@ -68,7 +68,7 @@ RSpec.describe ProcessWriteOffService do
 
           expect(WasteCarriersEngine::Payment).to receive(:new).with(payment_type: "WRITEOFFSMALL").and_return(write_off)
           expect(write_off).to receive(:order_key=)
-          expect(write_off).to receive(:amount=).with(-4)
+          expect(write_off).to receive(:amount=).with(4)
           expect(write_off).to receive(:date_entered=)
           expect(write_off).to receive(:date_received=)
           expect(write_off).to receive(:registration_reference=)
@@ -94,7 +94,7 @@ RSpec.describe ProcessWriteOffService do
 
           expect(WasteCarriersEngine::Payment).to receive(:new).and_return(write_off)
           expect(write_off).to receive(:order_key=)
-          expect(write_off).to receive(:amount=).with(4)
+          expect(write_off).to receive(:amount=).with(-4)
           expect(write_off).to receive(:date_entered=)
           expect(write_off).to receive(:date_received=)
           expect(write_off).to receive(:registration_reference=)
