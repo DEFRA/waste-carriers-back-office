@@ -14,7 +14,7 @@ class WriteOffForm < WasteCarriersEngine::BaseForm
     ProcessWriteOffService.run(
       finance_details: transient_registration.finance_details,
       user: user,
-      comment: self.comment
+      comment: comment
     )
 
     true

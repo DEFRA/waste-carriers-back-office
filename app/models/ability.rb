@@ -46,11 +46,9 @@ class Ability
 
     can :transfer_registration, WasteCarriersEngine::Registration
 
-    # rubocop:disable Style/SymbolProc
     can :write_off_small, WasteCarriersEngine::FinanceDetails do |finance_details|
-      finance_details.zero_difference_balance < WasteCarriersBackOffice::Application.config.write_off_agency_user_cap.to_i
+      finance_details.zero_difference_balance < write_off_agency_user_cap
     end
-    # rubocop:enable Style/SymbolProc
   end
 
   def permissions_for_agency_user_with_refund
@@ -127,5 +125,9 @@ class Ability
 
   def developer?(user)
     user.role == "developer"
+  end
+
+  def write_off_agency_user_cap
+    @_write_off_agency_user_cap ||= WasteCarriersBackOffice::Application.config.write_off_agency_user_cap.to_i
   end
 end

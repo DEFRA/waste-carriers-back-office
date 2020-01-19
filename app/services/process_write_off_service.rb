@@ -20,9 +20,8 @@ class ProcessWriteOffService < WasteCarriersEngine::BaseService
   def build_write_off(comment)
     write_off = WasteCarriersEngine::Payment.new(payment_type: payment_type)
 
-    write_off.order_key = SecureRandom.uuid.split('-').last
+    write_off.order_key = SecureRandom.uuid.split("-").last
     write_off.amount = amount_to_write_off
-
 
     write_off.date_entered = Date.current
     write_off.date_received = Date.current
@@ -34,7 +33,7 @@ class ProcessWriteOffService < WasteCarriersEngine::BaseService
   end
 
   def amount_to_write_off
-    return finance_details.zero_difference_balance if finance_details.unpaid_balance > 0
+    return finance_details.zero_difference_balance if finance_details.unpaid_balance.positive?
 
     finance_details.zero_difference_balance * -1
   end
