@@ -1,0 +1,46 @@
+<div class="grid-row">
+  <div class="column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: finance_details_refunds_path(@registration._id)) %>
+
+    <h1 class="heading-large">
+      <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
+    </h1>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <div class="form-group">
+      <%= render "shared/company_details_panel", registration: @registration %>
+    </div>
+
+    <div class="form-group">
+      <p class="strong">
+        <%= t(".write_off", amount: display_pence_as_pounds_and_cents(@finance_details.zero_difference_balance)) %>
+      </p>
+    </div>
+
+    <%= form_for(@write_off_form, url: finance_details_write_off_path(@registration._id)) do |f| %>
+      <%= render("waste_carriers_engine/shared/errors", object: @write_off_form) %>
+
+      <div class="form-group <%= "form-group-error" if @write_off_form.errors[:comment].any? %>">
+        <fieldset id="write_off">
+          <legend class="visuallyhidden">
+            <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
+          </legend>
+
+          <% if @write_off_form.errors[:comment].any? %>
+            <span class="error-message"><%= @write_off_form.errors[:comment].join(", ") %></span>
+          <% end %>
+
+          <%= f.label :comment, t(".reason"), class: "form-label" %>
+          <%= f.text_area :comment, class: "form-control" %>
+        </fieldset>
+      </div>
+
+      <div class="form-group">
+        <%= submit_tag t(".confirm"), class: "button" %>
+      </div>
+    <% end %>
+  </div>
+</div>
