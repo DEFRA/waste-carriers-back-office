@@ -16,8 +16,12 @@ RSpec.shared_examples "finance examples" do
     should_not be_able_to(:update, WasteCarriersEngine::RenewingRegistration)
   end
 
-  it "should not be able to write off finance details" do
+  it "should not be able to write off large finance details" do
     should_not be_able_to(:write_off_large, WasteCarriersEngine::FinanceDetails)
+  end
+
+  it "should not be able to write off small finance details" do
+    should_not be_able_to(:write_off_small, WasteCarriersEngine::FinanceDetails)
   end
 
   it "should not be able to renew" do

@@ -16,6 +16,10 @@ RSpec.shared_examples "agency examples" do
     should be_able_to(:review_convictions, WasteCarriersEngine::RenewingRegistration)
   end
 
+  it "should not be able to write off large" do
+    should_not be_able_to(:write_off_large, WasteCarriersEngine::FinanceDetails)
+  end
+
   context ":write_off_small" do
     let(:finance_details) { build(:finance_details, balance: balance) }
 

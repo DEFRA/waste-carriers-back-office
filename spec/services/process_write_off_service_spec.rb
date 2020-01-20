@@ -22,9 +22,6 @@ RSpec.describe ProcessWriteOffService do
 
     let(:result) { described_class.run(finance_details: finance_details, user: user, comment: comment) }
 
-    before do
-
-    end
     context "when the balance is 0" do
       let(:balance) { 0 }
       it "returns false" do
