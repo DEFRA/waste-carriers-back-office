@@ -1,9 +1,9 @@
 <div class="grid-row">
   <div class="column-full">
-    <%= render("waste_carriers_engine/shared/back", back_path: registration_path(@registration.reg_identifier)) %>
+    <%= render("waste_carriers_engine/shared/back", back_path: registration_path(@resource.reg_identifier)) %>
 
     <h1 class="heading-large">
-      <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
+      <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
     </h1>
 
     <%= render("shared/message", message: flash[:message]) if flash[:message].present? %>
@@ -14,15 +14,15 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <%= render "shared/company_details_panel", registration: @registration %>
+    <%= render "shared/company_details_panel", registration: @resource %>
 
-    <% if @registration.pending_payment? %>
-      <%= render "shared/registrations/pending_payment_panel", resource: @registration %>
+    <% if @resource.pending_payment? %>
+      <%= render "shared/registrations/pending_payment_panel", resource: @resource %>
     <% end %>
   </div>
 </div>
 
-<%= render "shared/registrations/finance_action_links", registration: @registration %>
+<%= render "shared/registrations/finance_action_links", registration: @resource %>
 
 <%= render "shared/registrations/charges_and_amendments", finance_details: @finance_details %>
 <%= render "shared/registrations/payment_history", finance_details: @finance_details %>

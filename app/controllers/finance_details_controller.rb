@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
 class FinanceDetailsController < ApplicationController
-  include CanFetchRegistrationOrTransientRegistration
+  include CanFetchResource
 
-  before_action :authenticate_user!
+  prepend_before_action :authenticate_user!
 
   def show
-    find_registration(params[:id])
-
-    @finance_details = @registration.finance_details
+    @finance_details = @resource.finance_details
   end
 end
