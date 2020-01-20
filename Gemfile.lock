@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 3b1bcac22d0682295bc1814585de267033fb8ee9
-  branch: balance-difference-from-zero
+  revision: b0dd26bbae122be6f26d31881884551934e704bc
+  branch: master
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)
