@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
               resource :finance_details,
                        only: :show,
-                       path: "/bo/finance-details"
+                       path: "finance-details"
 
               resource :write_off_form,
                        only: %i[new create],
