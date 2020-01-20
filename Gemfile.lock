@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 613aa832125c00a7c13b9343dd37a1f9d0c2a276
+  revision: b0dd26bbae122be6f26d31881884551934e704bc
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
