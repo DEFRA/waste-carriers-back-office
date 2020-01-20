@@ -41,9 +41,10 @@ RSpec.describe "ConvictionImports", type: :request do
         sign_in(user)
       end
 
-      it "redirects to the results page" do
+      it "redirects to the results page and displays a flash message" do
         post "/bo/import-convictions"
         expect(response).to redirect_to("/bo")
+        expect(request.flash[:success]).to eq("Convictions data has been updated successfully. 0 records in database.")
       end
     end
 
