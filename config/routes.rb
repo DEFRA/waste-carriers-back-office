@@ -27,7 +27,7 @@ Rails.application.routes.draw do
                         only: %i[index new create],
                         param: :order_key
 
-              resource :write_off,
+              resource :write_off_form,
                        only: %i[new create]
             end
 

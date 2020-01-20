@@ -1,5 +1,5 @@
 en:
-  write_offs:
+  write_off_forms:
     flash_messages:
       successful: "£%{amount} write off completed successfully"
     new:
