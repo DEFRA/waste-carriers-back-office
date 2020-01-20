@@ -27,6 +27,9 @@ Rails.application.routes.draw do
                         only: %i[index new create],
                         param: :order_key
 
+              resources :payments,
+                        only: %i[new create]
+
               resource :finance_details,
                        only: :show,
                        path: "finance-details"
@@ -85,10 +88,6 @@ Rails.application.routes.draw do
               resources :conviction_rejection_forms,
                         only: %i[new create],
                         path: "convictions/reject",
-                        path_names: { new: "" }
-
-              resources :transient_payments,
-                        only: %i[new create],
                         path_names: { new: "" }
 
               resources :cash_payment_forms,
