@@ -2,7 +2,7 @@
   <%= render("waste_carriers_engine/shared/errors", object: form) %>
 
   <p>
-    <%= t(".current_balance", balance: display_pence_as_pounds(@transient_registration.finance_details.balance)) %>
+    <%= t(".current_balance", balance: display_pence_as_pounds(resource.finance_details.balance)) %>
   </p>
 
   <% if form.errors[:amount].any? %>

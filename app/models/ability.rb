@@ -36,7 +36,7 @@ class Ability
     can :view_certificate, WasteCarriersEngine::Registration
     can :order_copy_cards, WasteCarriersEngine::Registration
 
-    can :record_cash_payment, WasteCarriersEngine::RenewingRegistration
+    can :record_cash_payment, :all
     can :record_cheque_payment, WasteCarriersEngine::RenewingRegistration
     can :record_postal_order_payment, WasteCarriersEngine::RenewingRegistration
 

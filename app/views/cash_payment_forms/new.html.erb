@@ -1,11 +1,16 @@
 <div class="grid-row">
   <div class="column-two-thirds">
-    <%= render("waste_carriers_engine/shared/back", back_path: renewing_registration_path(@transient_registration.reg_identifier)) %>
+    <%= render("waste_carriers_engine/shared/back", back_path: resource_finance_details_path(@resource._id)) %>
 
     <h1 class="heading-large">
-      <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
+      <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
     </h1>
 
-    <%= render("shared/payment_form", form: @cash_payment_form, path: transient_registration_cash_payment_forms_path) %>
+    <%= render(
+      "shared/payment_form",
+      form: @cash_payment_form,
+      path: resource_cash_payment_forms_path(@resource._id),
+      resource: @resource
+    ) %>
   </div>
 </div>
