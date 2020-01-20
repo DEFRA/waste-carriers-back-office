@@ -1,5 +1,5 @@
 en:
-  transient_payments:
+  payments:
     new:
       title: "Add a payment"
       heading: "How was this payment made?"

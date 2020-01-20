@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
-class TransientPaymentsController < ApplicationController
-  before_action :authenticate_user!
+class PaymentsController < ApplicationController
+  include CanFetchResource
+
+  prepend_before_action :authenticate_user!
   before_action :define_payment_types
 
-  def new
-    find_transient_registration(params[:transient_registration_reg_identifier])
-  end
+  def new; end
 
   def create
-    find_transient_registration(params[:transient_registration_reg_identifier])
-
     payment_type = params[:payment_form][:payment_type]
 
     if valid_payment_type?(payment_type)
@@ -26,10 +24,6 @@ class TransientPaymentsController < ApplicationController
     @payment_types = payment_types
   end
 
-  def find_transient_registration(reg_identifier)
-    @transient_registration = WasteCarriersEngine::RenewingRegistration.where(reg_identifier: reg_identifier).first
-  end
-
   def payment_types
     %w[cash
        cheque
@@ -43,6 +37,9 @@ class TransientPaymentsController < ApplicationController
   end
 
   def payment_path(payment_type)
-    public_send("new_transient_registration_#{payment_type}_payment_form_path")
+    public_send(
+      "new_transient_registration_#{payment_type}_payment_form_path",
+      transient_registration_reg_identifier: @resource.reg_identifier
+    )
   end
 end
