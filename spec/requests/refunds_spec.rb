@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Refunds", type: :request do
-  describe "GET /bo/finance_details/:_id/refunds" do
+  describe "GET /bo/resources/:_id/refunds" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
@@ -13,7 +13,7 @@ RSpec.describe "Refunds", type: :request do
       end
 
       it "renders the index template and returns a 200 status" do
-        get finance_details_refunds_path(renewing_registration._id)
+        get resource_refunds_path(renewing_registration._id)
 
         expect(response).to render_template(:index)
         expect(response).to have_http_status(200)
@@ -22,7 +22,7 @@ RSpec.describe "Refunds", type: :request do
 
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
-        get finance_details_refunds_path("foo")
+        get resource_refunds_path("foo")
 
         expect(response).to redirect_to(new_user_session_path)
       end
@@ -40,7 +40,7 @@ RSpec.describe "Refunds", type: :request do
       end
 
       it "renders the index template and returns a 200 status" do
-        get new_finance_details_refund_path(renewing_registration._id, order_key: payment.order_key)
+        get new_resource_refund_path(renewing_registration._id, order_key: payment.order_key)
 
         expect(response).to render_template(:new)
         expect(response).to have_http_status(200)
@@ -49,7 +49,7 @@ RSpec.describe "Refunds", type: :request do
 
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
-        get new_finance_details_refund_path("foo", order_key: "bar")
+        get new_resource_refund_path("foo", order_key: "bar")
 
         expect(response).to redirect_to(new_user_session_path)
       end
@@ -72,12 +72,12 @@ RSpec.describe "Refunds", type: :request do
 
         expected_payments_count = renewing_registration.finance_details.payments.count + 1
 
-        post finance_details_refunds_path(renewing_registration._id), order_key: payment.order_key
+        post resource_refunds_path(renewing_registration._id), order_key: payment.order_key
 
         renewing_registration.reload
         expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
 
-        expect(response).to redirect_to(finance_details_path(renewing_registration._id))
+        expect(response).to redirect_to(resource_finance_details_path(renewing_registration._id))
         expect(response).to have_http_status(302)
       end
 
@@ -104,12 +104,12 @@ RSpec.describe "Refunds", type: :request do
 
           expected_payments_count = renewing_registration.finance_details.payments.count + 1
 
-          post finance_details_refunds_path(renewing_registration._id), order_key: payment.order_key
+          post resource_refunds_path(renewing_registration._id), order_key: payment.order_key
 
           renewing_registration.reload
           expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
 
-          expect(response).to redirect_to(finance_details_path(renewing_registration._id))
+          expect(response).to redirect_to(resource_finance_details_path(renewing_registration._id))
           expect(response).to have_http_status(302)
         end
 
@@ -124,12 +124,12 @@ RSpec.describe "Refunds", type: :request do
 
             expected_payments_count = renewing_registration.finance_details.payments.count
 
-            post finance_details_refunds_path(renewing_registration._id), order_key: payment.order_key
+            post resource_refunds_path(renewing_registration._id), order_key: payment.order_key
 
             renewing_registration.reload
             expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
 
-            expect(response).to redirect_to(finance_details_path(renewing_registration._id))
+            expect(response).to redirect_to(resource_finance_details_path(renewing_registration._id))
             expect(response).to have_http_status(302)
           end
         end
@@ -138,7 +138,7 @@ RSpec.describe "Refunds", type: :request do
 
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
-        post finance_details_refunds_path("foo"), order_key: "bar"
+        post resource_refunds_path("foo"), order_key: "bar"
 
         expect(response).to redirect_to(new_user_session_path)
       end
@@ -148,7 +148,7 @@ RSpec.describe "Refunds", type: :request do
       it "redirects to the permissions page" do
         sign_in(create(:user))
 
-        post finance_details_refunds_path("foo"), order_key: "bar"
+        post resource_refunds_path("foo"), order_key: "bar"
 
         expect(response).to redirect_to("/bo/pages/permission")
       end

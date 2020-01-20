@@ -1,6 +1,6 @@
 <div class="grid-row">
   <div class="column-full">
-    <%= render("waste_carriers_engine/shared/back", back_path: finance_details_refunds_path(@registration._id)) %>
+    <%= render("waste_carriers_engine/shared/back", back_path: resource_refunds_path(@resource._id)) %>
 
     <h1 class="heading-large">
       <%= t(".heading") %>
@@ -10,7 +10,7 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <%= render "shared/company_details_panel", registration: @registration %>
+    <%= render "shared/company_details_panel", registration: @resource %>
 
     <div class="form-group">
       <table>
@@ -62,7 +62,7 @@
       </p>
     </div>
 
-    <%= form_tag(finance_details_refunds_path(@registration._id)) do %>
+    <%= form_tag(resource_refunds_path(@resource._id)) do %>
       <%= hidden_field_tag :order_key, @payment.order_key %>
 
       <div class="form-group">
