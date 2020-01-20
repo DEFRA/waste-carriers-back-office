@@ -6,6 +6,10 @@ module CanFetchResource
   included do
     before_action :fetch_resource
 
+    rescue_from BSON::ObjectId::Invalid do
+      redirect_to "/bo/pages/invalid"
+    end
+
     private
 
     def fetch_resource
