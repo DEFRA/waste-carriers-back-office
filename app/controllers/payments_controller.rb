@@ -38,7 +38,7 @@ class PaymentsController < ApplicationController
 
   def payment_path(payment_type)
     public_send(
-      "new_transient_registration_#{payment_type}_payment_form_path",
+      "new_resource_#{payment_type}_payment_form_path",
       transient_registration_reg_identifier: @resource.reg_identifier
     )
   end
