@@ -3,11 +3,7 @@
     <%= render("waste_carriers_engine/shared/back", back_path: finance_details_refunds_path(@registration._id)) %>
 
     <h1 class="heading-large">
-      <% if @payment.worldpay? || @payment.worldpay_missed? %>
-        <%= t(".heading.card") %>
-      <% else %>
-        <%= t(".heading.cash") %>
-      <% end %>
+      <%= t(".heading") %>
     </h1>
   </div>
 </div>
