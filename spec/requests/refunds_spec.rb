@@ -29,7 +29,7 @@ RSpec.describe "Refunds", type: :request do
     end
   end
 
-  describe "GET /bo/finance_details/:_id/refunds/new" do
+  describe "GET /bo/resource/:_id/refunds/new" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
@@ -56,7 +56,7 @@ RSpec.describe "Refunds", type: :request do
     end
   end
 
-  describe "POST /bo/finance_details/:_id/refunds/:order_key" do
+  describe "POST /bo/resource/:_id/refunds/:order_key" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
