@@ -5,6 +5,11 @@ class PaymentForm < WasteCarriersEngine::BaseForm
                 :order_key, :payment_type, :registration_reference, :updated_by_user,
                 :finance_details, :order, :payment
 
+  validates :amount, presence: true, numericality: { greater_than: 0 }
+  validates :comment, length: { maximum: 250 }
+  validates :date_received, presence: true
+  validates :registration_reference, presence: true
+
   def initialize(transient_registration)
     super
     self.order = transient_registration.finance_details.orders.first
@@ -30,11 +35,6 @@ class PaymentForm < WasteCarriersEngine::BaseForm
 
     super(attributes)
   end
-
-  validates :amount, presence: true, numericality: { greater_than: 0 }
-  validates :comment, length: { maximum: 250 }
-  validates :date_received, presence: true
-  validates :registration_reference, presence: true
 
   private
 
