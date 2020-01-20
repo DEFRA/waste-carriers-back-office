@@ -3,6 +3,11 @@
 require "rails_helper"
 
 RSpec.describe PaymentPresenter do
+  let(:finance_details) { double(:finance_details) }
+  let(:payment) { double(:payment, finance_details: finance_details, order_key: "123") }
+
+  subject { described_class.new(payment, nil) }
+
   describe ".create_from_collection" do
     it "given a list of objects, returns a list of instances of itself" do
       view = double(:view)
@@ -21,11 +26,6 @@ RSpec.describe PaymentPresenter do
       expect(described_class.create_from_collection(collection, view)).to eq([presenter1, presenter2])
     end
   end
-
-  let(:finance_details) { double(:finance_details) }
-  let(:payment) { double(:payment, finance_details: finance_details, order_key: "123") }
-
-  subject { described_class.new(payment, nil) }
 
   describe "#already_refunded?" do
     before do
@@ -59,11 +59,11 @@ RSpec.describe PaymentPresenter do
     before do
       scope = double(:scope)
 
-      expect(finance_details).to receive(:payments).and_return(scope)
-      expect(scope).to receive(:where).with(order_key: "123_REFUNDED").and_return([refunded_payment])
+      allow(finance_details).to receive(:payments).and_return(scope)
+      allow(scope).to receive(:where).with(order_key: "123_REFUNDED").and_return([refunded_payment])
 
-      expect(payment).to receive(:worldpay?).and_return(worldpay)
-      expect(refunded_payment).to receive(:world_pay_payment_status).and_return(world_pay_payment_status)
+      allow(payment).to receive(:worldpay?).and_return(worldpay)
+      allow(refunded_payment).to receive(:world_pay_payment_status).and_return(world_pay_payment_status)
     end
 
     context "when the payment is a card paymend" do
@@ -83,9 +83,7 @@ RSpec.describe PaymentPresenter do
       it "returns a cash payment refunded message" do
         result = double(:result)
 
-        expect(payment).to receive(:worldpay_missed?).and_return(false)
-
-        expect(I18n).to receive(:t).with(".refunds.refunded_message.manual", refund_status: world_pay_payment_status).and_return(result)
+        expect(I18n).to receive(:t).with(".refunds.refunded_message.manual").and_return(result)
         expect(subject.refunded_message).to eq(result)
       end
 

@@ -12,10 +12,11 @@ class PaymentPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def refunded_message
-    key = "manual"
-    key = "card" if worldpay? || worldpay_missed?
-
-    I18n.t(".refunds.refunded_message.#{key}", refund_status: refunded_payment.world_pay_payment_status)
+    if worldpay?
+      I18n.t(".refunds.refunded_message.card", refund_status: refunded_payment.world_pay_payment_status)
+    else
+      I18n.t(".refunds.refunded_message.manual")
+    end
   end
 
   private
