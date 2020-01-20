@@ -7,3 +7,4 @@ en:
       button: "Submit data"
     flash_messages:
       successful: "Convictions data has been updated successfully. %{count} records in database."
+      error: "Error occurred while importing data: %{error}"
