@@ -39,7 +39,7 @@ RSpec.shared_examples "agency examples" do
       end
     end
 
-    context "when the zero difference balance is equal to the setted cap" do
+    context "when the zero-difference balance is equal to the write-off cap for agency users" do
       let(:balance) { WasteCarriersBackOffice::Application.config.write_off_agency_user_cap.to_i }
 
       it "should not be able to write off" do
