@@ -28,7 +28,8 @@ Rails.application.routes.draw do
                         param: :order_key
 
               resource :write_off_form,
-                       only: %i[new create]
+                       only: %i[new create],
+                       path: "write_off"
             end
 
   resources :renewing_registrations,
