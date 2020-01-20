@@ -10,5 +10,7 @@ en:
       warning: "This will overwrite all existing conviction data."
       button: "Submit data"
     flash_messages:
-      successful: "Convictions data has been updated successfully. %{count} records in database."
+      successful:
+        one: "Convictions data has been updated successfully. %{count} record in database."
+        other: "Convictions data has been updated successfully. %{count} records in database."
       error: "Error occurred while importing data: %{error}"
