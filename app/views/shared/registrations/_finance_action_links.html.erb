@@ -4,17 +4,17 @@
     <%= link_to t(".reverse_payment"), "#TODO", class: "button wcr-finance-button" %>
 
     <% if display_write_off_large_link_for?(registration.finance_details) %>
-      <%= link_to t(".write_off_l"), new_finance_details_write_off_form_path(registration._id), class: "button wcr-finance-button" %>
+      <%= link_to t(".write_off_l"), new_resource_write_off_form_path(registration._id), class: "button wcr-finance-button" %>
     <% end %>
 
     <% if display_write_off_small_link_for?(registration.finance_details) %>
-      <%= link_to t(".write_off_s"), new_finance_details_write_off_form_path(registration._id), class: "button wcr-finance-button" %>
+      <%= link_to t(".write_off_s"), new_resource_write_off_form_path(registration._id), class: "button wcr-finance-button" %>
     <% end %>
 
     <%= link_to t(".adjust_charge"), "#TODO", class: "button wcr-finance-button" %>
 
     <% if display_refund_link_for?(registration.finance_details) %>
-      <%= link_to t(".refund"), finance_details_refunds_path(registration._id), class: "button wcr-finance-button" %>
+      <%= link_to t(".refund"), resource_refunds_path(registration._id), class: "button wcr-finance-button" %>
     <% end %>
   </div>
 </div>
