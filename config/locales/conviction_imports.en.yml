@@ -1,0 +1,7 @@
+en:
+  conviction_imports:
+    new:
+      title: "Import conviction data"
+      heading: "Import conviction data"
+      paragraph_1: "Paste a CSV into this text field to replace the existing convictions data."
+      button: "Submit data"

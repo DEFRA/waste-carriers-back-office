@@ -157,6 +157,11 @@ Rails.application.routes.draw do
       to: "user_migrations#results",
       as: :user_migration_results
 
+  resources :conviction_imports,
+            only: %i[new create],
+            path: "/bo/import-convictions",
+            path_names: { new: "" }
+
   mount DefraRubyMocks::Engine => "/bo/mocks"
 
   mount WasteCarriersEngine::Engine => "/bo", as: "basic_app_engine"
