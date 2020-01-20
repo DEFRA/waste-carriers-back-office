@@ -1,9 +1,9 @@
 <div class="grid-row">
   <div class="column-full">
-    <%= render("waste_carriers_engine/shared/back", back_path: finance_details_refunds_path(@registration._id)) %>
+    <%= render("waste_carriers_engine/shared/back", back_path: resource_refunds_path(@resource._id)) %>
 
     <h1 class="heading-large">
-      <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
+      <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
     </h1>
   </div>
 </div>
@@ -11,7 +11,7 @@
 <div class="grid-row">
   <div class="column-two-thirds">
     <div class="form-group">
-      <%= render "shared/company_details_panel", registration: @registration %>
+      <%= render "shared/company_details_panel", registration: @resource %>
     </div>
 
     <div class="form-group">
@@ -20,13 +20,13 @@
       </p>
     </div>
 
-    <%= form_for(@write_off_form, url: finance_details_write_off_form_path(@registration._id)) do |f| %>
+    <%= form_for(@write_off_form, url: resource_write_off_form_path(@resource._id)) do |f| %>
       <%= render("waste_carriers_engine/shared/errors", object: @write_off_form) %>
 
       <div class="form-group <%= "form-group-error" if @write_off_form.errors[:comment].any? %>">
         <fieldset id="write_off">
           <legend class="visuallyhidden">
-            <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
+            <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
           </legend>
 
           <% if @write_off_form.errors[:comment].any? %>

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "WriteOffForms", type: :request do
-  describe "GET /bo/finance_details/:_id/write_off/new" do
+  describe "GET /bo/resource/:_id/write_off/new" do
     context "when an agency user is signed in" do
       let(:user) { create(:user, :agency) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
@@ -19,7 +19,7 @@ RSpec.describe "WriteOffForms", type: :request do
         end
 
         it "renders the new template and returns a 200 status" do
-          get new_finance_details_write_off_form_path(renewing_registration._id)
+          get new_resource_write_off_form_path(renewing_registration._id)
 
           expect(response).to render_template(:new)
           expect(response).to have_http_status(200)
@@ -32,7 +32,7 @@ RSpec.describe "WriteOffForms", type: :request do
         end
 
         it "redirects to the permissions page" do
-          get new_finance_details_write_off_form_path(renewing_registration._id)
+          get new_resource_write_off_form_path(renewing_registration._id)
 
           expect(response).to redirect_to("/bo/pages/permission")
         end
@@ -48,7 +48,7 @@ RSpec.describe "WriteOffForms", type: :request do
       end
 
       it "renders the new template and returns a 200 status" do
-        get new_finance_details_write_off_form_path(renewing_registration._id)
+        get new_resource_write_off_form_path(renewing_registration._id)
 
         expect(response).to render_template(:new)
         expect(response).to have_http_status(200)
@@ -57,14 +57,14 @@ RSpec.describe "WriteOffForms", type: :request do
 
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
-        get new_finance_details_write_off_form_path("foo")
+        get new_resource_write_off_form_path("foo")
 
         expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
 
-  describe "POST /bo/finance_details/:_id/write_off" do
+  describe "POST /bo/resource/:_id/write_off" do
     context "when a finance admin user is signed in" do
       let(:user) { create(:user, :finance_admin) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
@@ -85,20 +85,20 @@ RSpec.describe "WriteOffForms", type: :request do
         it "generates a new payment, updates the registration balance, returns a 302 status and redirects to the finance details page" do
           expected_payments_count = renewing_registration.finance_details.payments.count + 1
 
-          post finance_details_write_off_form_path(renewing_registration._id), params
+          post resource_write_off_form_path(renewing_registration._id), params
 
           renewing_registration.reload
 
           expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
           expect(renewing_registration.finance_details.balance).to eq(0)
           expect(response).to have_http_status(302)
-          expect(response).to redirect_to(finance_details_path(renewing_registration._id))
+          expect(response).to redirect_to(resource_finance_details_path(renewing_registration._id))
         end
       end
 
       context "when the request data are not valid" do
         it "returns a 200 status and renders the :new template" do
-          post finance_details_write_off_form_path(renewing_registration._id), {}
+          post resource_write_off_form_path(renewing_registration._id), {}
 
           expect(response).to have_http_status(200)
           expect(response).to render_template(:new)
