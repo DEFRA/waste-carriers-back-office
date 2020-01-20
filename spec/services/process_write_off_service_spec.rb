@@ -57,7 +57,7 @@ RSpec.describe ProcessWriteOffService do
         end
       end
 
-      context "when the user has not write_off_large permissions" do
+      context "when the user does not have write_off_large permissions" do
         let(:can) { false }
 
         it "generates a new write off small payment and assigns it to the finance details" do

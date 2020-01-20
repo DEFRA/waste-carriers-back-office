@@ -23,7 +23,7 @@ RSpec.shared_examples "agency examples" do
   context ":write_off_small" do
     let(:finance_details) { build(:finance_details, balance: balance) }
 
-    context "when the zero difference balance is less than the setted cap" do
+    context "when the zero-difference balance is less than the write-off cap for agency users" do
       let(:balance) { WasteCarriersBackOffice::Application.config.write_off_agency_user_cap.to_i - 1 }
 
       it "should be able to write off" do
