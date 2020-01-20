@@ -20,16 +20,19 @@ Rails.application.routes.draw do
   # Privacy policy
   get "/bo/ad-privacy-policy/:reg_identifier", to: "ad_privacy_policy#show", as: :ad_privacy_policy
 
-  resources :finance_details,
-            path: "/bo/finance-details",
-            only: :show do
+  resources :resources,
+            path: "/bo/resources" do
               resources :refunds,
                         only: %i[index new create],
                         param: :order_key
 
+              resource :finance_details,
+                       only: :show,
+                       path: "/bo/finance-details",
+
               resource :write_off_form,
                        only: %i[new create],
-                       path: "write_off"
+                       path: "write-off"
             end
 
   resources :renewing_registrations,
