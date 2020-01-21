@@ -30,6 +30,6 @@ class BankTransferPaymentFormsController < ResourceFormsController
   end
 
   def authorize_user
-    authorize! :record_transfer_payment, @resource
+    authorize! :record_bank_transfer_payment, @resource
   end
 end

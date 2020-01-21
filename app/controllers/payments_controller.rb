@@ -28,7 +28,7 @@ class PaymentsController < ApplicationController
     %w[cash
        cheque
        postal_order
-       transfer
+       bank_transfer
        worldpay_missed]
   end
 

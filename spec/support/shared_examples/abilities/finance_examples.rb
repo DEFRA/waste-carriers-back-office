@@ -3,7 +3,7 @@
 RSpec.shared_examples "finance examples" do
   # Finance users can only do two things:
   it "should be able to record a transfer payment" do
-    should be_able_to(:record_transfer_payment, WasteCarriersEngine::RenewingRegistration)
+    should be_able_to(:record_bank_transfer_payment, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "should be able to view the certificate" do

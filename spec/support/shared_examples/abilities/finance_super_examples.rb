@@ -51,7 +51,7 @@ RSpec.shared_examples "finance_super examples" do
   end
 
   it "should not be able to record a transfer payment" do
-    should_not be_able_to(:record_transfer_payment, WasteCarriersEngine::RenewingRegistration)
+    should_not be_able_to(:record_bank_transfer_payment, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "should not be able to record a worldpay payment" do

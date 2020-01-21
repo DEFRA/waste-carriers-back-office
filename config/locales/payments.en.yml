@@ -4,7 +4,7 @@ en:
       title: "Add a payment"
       heading: "How was this payment made?"
       options:
-        transfer: "Bank transfer"
+        bank_transfer: "Bank transfer"
         cash: "Cash"
         cheque: "Cheque"
         postal_order: "Postal order"
