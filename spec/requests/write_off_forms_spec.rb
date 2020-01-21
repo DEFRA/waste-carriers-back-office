@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "WriteOffForms", type: :request do
-  describe "GET /bo/resource/:_id/write_off/new" do
+  describe "GET /bo/resource/:_id/write-off/new" do
     context "when an agency user is signed in" do
       let(:user) { create(:user, :agency) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
@@ -64,7 +64,7 @@ RSpec.describe "WriteOffForms", type: :request do
     end
   end
 
-  describe "POST /bo/resource/:_id/write_off" do
+  describe "POST /bo/resource/:_id/write-off" do
     context "when a finance admin user is signed in" do
       let(:user) { create(:user, :finance_admin) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
