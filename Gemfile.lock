@@ -393,7 +393,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   database_cleaner
   defra_ruby_aws (~> 0.2.0)
-  defra_ruby_mocks (~> 1.0)
+  defra_ruby_mocks (~> 1.1)
   defra_ruby_style
   devise (>= 4.4.3)
   devise_invitable (~> 1.7.0)
