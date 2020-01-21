@@ -62,7 +62,7 @@ class Ability
 
   def permissions_for_finance_user
     can :view_certificate, WasteCarriersEngine::Registration
-    can :record_transfer_payment, WasteCarriersEngine::RenewingRegistration
+    can :record_transfer_payment, :all
   end
 
   def permissions_for_finance_admin_user
