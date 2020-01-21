@@ -1,25 +1,35 @@
 # frozen_string_literal: true
 
-class PostalOrderPaymentFormsController < AdminFormsController
+class PostalOrderPaymentFormsController < ResourceFormsController
+  include CanRenewIfPossible
+
   def new
     super(PostalOrderPaymentForm,
-          "postal_order_payment_form",
-          params[:transient_registration_reg_identifier],
-          { authorize_action: :authorize_action })
+          "postal_order_payment_form")
   end
 
   def create
     params[:postal_order_payment_form][:updated_by_user] = current_user.email
 
     return unless super(PostalOrderPaymentForm,
-                        "postal_order_payment_form",
-                        params[:transient_registration_reg_identifier],
-                        { authorize_action: :authorize_action })
-
-    renew_if_possible
+                        "postal_order_payment_form")
   end
 
-  def authorize_action(transient_registration)
-    authorize! :record_postal_order_payment, transient_registration
+  private
+
+  def postal_order_payment_form_params
+    params.fetch(:postal_order_payment_form, {}).permit(
+      :amount,
+      :comment,
+      :registration_reference,
+      :date_received_day,
+      :date_received_month,
+      :date_received_year,
+      :updated_by_user
+    )
+  end
+
+  def authorize_user
+    authorize! :record_postal_order_payment, @resource
   end
 end

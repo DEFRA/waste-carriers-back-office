@@ -38,7 +38,7 @@ class Ability
 
     can :record_cash_payment, :all
     can :record_cheque_payment, :all
-    can :record_postal_order_payment, WasteCarriersEngine::RenewingRegistration
+    can :record_postal_order_payment, :all
 
     can :review_convictions, :all
 
