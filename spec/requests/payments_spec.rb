@@ -54,7 +54,7 @@ RSpec.describe "Payments", type: :request do
         it "redirects to the cash payment form" do
           post "/bo/resources/#{transient_registration._id}/payments", payment_form: params
 
-          expect(response).to redirect_to(new_transient_registration_cash_payment_form_path(transient_registration_reg_identifier: transient_registration.reg_identifier))
+          expect(response).to redirect_to(new_resource_cash_payment_form_path(transient_registration_reg_identifier: transient_registration.reg_identifier))
         end
       end
 
@@ -66,7 +66,7 @@ RSpec.describe "Payments", type: :request do
         it "redirects to the cheque payment form" do
           post "/bo/resources/#{transient_registration._id}/payments", payment_form: params
 
-          expect(response).to redirect_to(new_transient_registration_cheque_payment_form_path(transient_registration_reg_identifier: transient_registration.reg_identifier))
+          expect(response).to redirect_to(new_resource_cheque_payment_form_path(transient_registration_reg_identifier: transient_registration.reg_identifier))
         end
       end
 
@@ -78,19 +78,19 @@ RSpec.describe "Payments", type: :request do
         it "redirects to the postal order payment form" do
           post "/bo/resources/#{transient_registration._id}/payments", payment_form: params
 
-          expect(response).to redirect_to(new_transient_registration_postal_order_payment_form_path(transient_registration_reg_identifier: transient_registration.reg_identifier))
+          expect(response).to redirect_to(new_resource_postal_order_payment_form_path(transient_registration_reg_identifier: transient_registration.reg_identifier))
         end
       end
 
       context "when the payment_type is transfer" do
         before do
-          params[:payment_type] = "transfer"
+          params[:payment_type] = "bank_transfer"
         end
 
         it "redirects to the transfer payment form" do
           post "/bo/resources/#{transient_registration._id}/payments", payment_form: params
 
-          expect(response).to redirect_to(new_transient_registration_transfer_payment_form_path(transient_registration_reg_identifier: transient_registration.reg_identifier))
+          expect(response).to redirect_to(new_resource_bank_transfer_payment_form_path(transient_registration_reg_identifier: transient_registration.reg_identifier))
         end
       end
 
@@ -102,7 +102,7 @@ RSpec.describe "Payments", type: :request do
         it "redirects to the worldpay_missed payment form" do
           post "/bo/resources/#{transient_registration._id}/payments", payment_form: params
 
-          expect(response).to redirect_to(new_transient_registration_worldpay_missed_payment_form_path(transient_registration_reg_identifier: transient_registration.reg_identifier))
+          expect(response).to redirect_to(new_resource_worldpay_missed_payment_form_path(transient_registration_reg_identifier: transient_registration.reg_identifier))
         end
       end
 

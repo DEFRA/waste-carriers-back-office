@@ -52,7 +52,7 @@
 
     <% if display_payment_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.process_payment"), transient_registration_transient_payments_path(resource.reg_identifier) %>
+        <%= link_to t(".actions_box.links.process_payment"), resource_payments_path(resource.reg_identifier) %>
       </li>
     <% end %>
 
