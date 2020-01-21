@@ -110,7 +110,8 @@ GEM
     debug_inspector (0.0.3)
     defra_ruby_aws (0.2.0)
       aws-sdk-s3
-    defra_ruby_mocks (1.0.0)
+    defra_ruby_mocks (1.1.0)
+      nokogiri
       rails (~> 4.2.11.1)
     defra_ruby_style (0.1.3)
       rubocop (~> 0.75)
