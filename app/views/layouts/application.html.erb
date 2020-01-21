@@ -29,6 +29,12 @@
                               main_app.users_path %>
                 </li>
               <% end %>
+              <% if can?(:import_conviction_data, current_user) %>
+                <li>
+                  <%= link_to t("layouts.application.menu.conviction_imports"),
+                              main_app.conviction_imports_path %>
+                </li>
+              <% end %>
             </ul>
           </nav>
       <% else %>

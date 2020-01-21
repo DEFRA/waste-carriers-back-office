@@ -8,6 +8,7 @@ en:
         dashboard: "Registrations search"
         convictions: "Conviction checks"
         users: "Manage users"
+        conviction_imports: "Import conviction data"
   shared:
     conviction_search_result:
       match_result: "Match result"

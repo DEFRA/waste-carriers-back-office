@@ -19,6 +19,7 @@
 
 <div class="grid-row">
   <div class="column-full">
+    <%= render("shared/success", message: flash[:success]) if flash[:success].present? %>
     <%= render("shared/message", message: flash[:message]) if flash[:message].present? %>
   </div>
 </div>

@@ -1,0 +1,16 @@
+en:
+  conviction_imports:
+    new:
+      title: "Import conviction data"
+      heading: "Import conviction data"
+      paragraph_1: "The service uses this data when checking for conviction matches. To update the matches, paste the contents of a CSV of convictions into the textarea."
+      textarea_label: "Convictions data"
+      textarea_hint_1: "The first line must be the headers, for example:"
+      textarea_hint_2: "Offender,Birth Date,Company No.,System Flag,Inc Number"
+      warning: "This will overwrite all existing conviction data."
+      button: "Submit data"
+    flash_messages:
+      successful:
+        one: "Convictions data has been updated successfully. %{count} record in database."
+        other: "Convictions data has been updated successfully. %{count} records in database."
+      error: "Error occurred while importing data: %{error}"
