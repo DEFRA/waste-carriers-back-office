@@ -14,6 +14,7 @@ class ResourceFormsController < ApplicationController
 
   def create(form_class, form)
     return false unless set_up_form(form_class, form)
+
     params = send("#{form}_params")
 
     # Submit the form by getting the instance variable we just set
