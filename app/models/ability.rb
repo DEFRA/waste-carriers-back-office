@@ -68,7 +68,7 @@ class Ability
   def permissions_for_finance_admin_user
     can :write_off_large, WasteCarriersEngine::FinanceDetails
     can :view_certificate, WasteCarriersEngine::Registration
-    can :record_worldpay_missed_payment, WasteCarriersEngine::RenewingRegistration
+    can :record_worldpay_missed_payment, :all
   end
 
   def permissions_for_agency_super_user
