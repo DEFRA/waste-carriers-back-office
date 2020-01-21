@@ -35,6 +35,11 @@ Rails.application.routes.draw do
                         path: "payments/cash",
                         path_names: { new: "" }
 
+              resources :cheque_payment_forms,
+                        only: %i[new create],
+                        path: "payments/cheque",
+                        path_names: { new: "" }
+
               resource :finance_details,
                        only: :show,
                        path: "finance-details"
@@ -93,11 +98,6 @@ Rails.application.routes.draw do
               resources :conviction_rejection_forms,
                         only: %i[new create],
                         path: "convictions/reject",
-                        path_names: { new: "" }
-
-              resources :cheque_payment_forms,
-                        only: %i[new create],
-                        path: "payments/cheque",
                         path_names: { new: "" }
 
               resources :postal_order_payment_forms,
