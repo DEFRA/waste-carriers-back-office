@@ -24,13 +24,15 @@ module Reports
       private
 
       def parse_order_item(order_item, uid, order_uid)
+        presenter = OrderItemPresenter.new(order_item, nil)
+
         ATTRIBUTES.map do |key, _value|
           if key == :uid
             uid
           elsif key == :order_uid
             order_uid
           else
-            order_item.public_send(key)
+            presenter.public_send(key)
           end
         end
       end

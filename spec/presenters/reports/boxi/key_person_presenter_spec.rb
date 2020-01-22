@@ -54,7 +54,7 @@ module Reports
             searched_at = Time.new(2019, 11, 19)
 
             expect(conviction_search_result).to receive(:searched_at).and_return(searched_at)
-            expect(subject.review_flag_timestamp).to eq("2019-11-19T00:00Z")
+            expect(subject.review_flag_timestamp.to_s).to eq("2019-11-19T00:00Z")
           end
         end
       end

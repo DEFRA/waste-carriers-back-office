@@ -13,7 +13,7 @@ module Reports
         it "returns a formatted date" do
           expect(payment).to receive(:date_received).and_return(Date.new(2019, 11, 11))
 
-          expect(subject.date_received).to eq("2019-11-11T00:00Z")
+          expect(subject.date_received.to_s).to eq("2019-11-11T00:00Z")
         end
       end
 
@@ -21,7 +21,7 @@ module Reports
         it "returns a formatted date" do
           expect(payment).to receive(:date_entered).and_return(Date.new(2019, 11, 11))
 
-          expect(subject.date_entered).to eq("2019-11-11T00:00Z")
+          expect(subject.date_entered.to_s).to eq("2019-11-11T00:00Z")
         end
       end
     end

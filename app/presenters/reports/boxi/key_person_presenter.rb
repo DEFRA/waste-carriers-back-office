@@ -8,7 +8,7 @@ module Reports
       end
 
       def review_flag_timestamp
-        conviction_search_result&.searched_at
+        conviction_search_result&.searched_at&.to_datetime&.to_formatted_s(:calendar_date_and_local_time)
       end
     end
   end
