@@ -16,6 +16,9 @@ module Reports
       }.freeze
 
       def add_entries_for(registration, uid)
+        return unless registration.finance_details.present?
+        return unless registration.finance_details.payments.present?
+
         registration.finance_details.payments.each do |payment|
           csv << parse_payment(payment, uid)
         end

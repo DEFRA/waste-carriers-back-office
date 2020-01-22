@@ -17,6 +17,9 @@ module Reports
       }.freeze
 
       def add_entries_for(registration, uid)
+        return unless registration.finance_details.present?
+        return unless registration.finance_details.orders.present?
+
         registration.finance_details.orders.each.with_index do |order, order_uid|
           csv << parse_order(order, uid, order_uid)
         end

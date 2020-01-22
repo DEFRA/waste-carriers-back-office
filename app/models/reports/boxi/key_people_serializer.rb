@@ -14,6 +14,8 @@ module Reports
       }.freeze
 
       def add_entries_for(registration, uid)
+        return unless registration.key_people.present?
+
         registration.key_people.each do |key_person|
           csv << parse_key_person(key_person, uid)
         end

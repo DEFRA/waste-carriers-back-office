@@ -22,6 +22,8 @@ module Reports
       }.freeze
 
       def add_entries_for(registration, uid)
+        return unless registration.addresses.present?
+
         registration.addresses.each do |address|
           csv << parse_address(address, uid)
         end

@@ -20,11 +20,6 @@ module Reports
       end
       subject { described_class.new(dir) }
 
-      before do
-        expect(CSV).to receive(:open).and_return(csv)
-        expect(csv).to receive(:<<).with(headers)
-      end
-
       describe "#add_entries_for" do
         let(:registration) { double(:registration) }
 
@@ -42,7 +37,7 @@ module Reports
             "review_flag_timestamp"
           ]
 
-          expect(registration).to receive(:key_people).and_return([key_person])
+          allow(registration).to receive(:key_people).and_return([key_person])
           expect(KeyPersonPresenter).to receive(:new).with(key_person, nil).and_return(presenter)
 
           expect(presenter).to receive(:person_type).and_return("person_type")
@@ -52,9 +47,19 @@ module Reports
           expect(presenter).to receive(:flagged_for_review).and_return("flagged_for_review")
           expect(presenter).to receive(:review_flag_timestamp).and_return("review_flag_timestamp")
 
+          expect(CSV).to receive(:open).and_return(csv)
+          expect(csv).to receive(:<<).with(headers)
           expect(csv).to receive(:<<).with(values)
 
           subject.add_entries_for(registration, 0)
+        end
+
+        context "when there are no key people" do
+          it "does nothing and returns nil" do
+            allow(registration).to receive(:key_people).and_return(nil)
+
+            expect(subject.add_entries_for(registration, 0)).to be_nil
+          end
         end
       end
     end

@@ -42,11 +42,6 @@ module Reports
       end
       subject { described_class.new(dir) }
 
-      before do
-        expect(CSV).to receive(:open).and_return(csv)
-        expect(csv).to receive(:<<).with(headers)
-      end
-
       describe "#add_entries_for" do
         let(:registration) { double(:registration) }
 
@@ -116,6 +111,8 @@ module Reports
           expect(presenter).to receive(:conviction_search_result_match_result).and_return("conviction_search_result_match_result")
           expect(presenter).to receive(:conviction_search_result_searched_at).and_return("conviction_search_result_searched_at")
 
+          expect(CSV).to receive(:open).and_return(csv)
+          expect(csv).to receive(:<<).with(headers)
           expect(csv).to receive(:<<).with(values)
 
           subject.add_entries_for(registration, 0)

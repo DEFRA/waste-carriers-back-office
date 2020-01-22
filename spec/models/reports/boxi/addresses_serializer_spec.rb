@@ -28,11 +28,6 @@ module Reports
       end
       subject { described_class.new(dir) }
 
-      before do
-        expect(CSV).to receive(:open).and_return(csv)
-        expect(csv).to receive(:<<).with(headers)
-      end
-
       describe "#add_entries_for" do
         let(:registration) { double(:registration) }
 
@@ -57,7 +52,7 @@ module Reports
             "last_name"
           ]
 
-          expect(registration).to receive(:addresses).and_return([address])
+          allow(registration).to receive(:addresses).and_return([address])
           expect(address).to receive(:address_type).and_return("address_type")
           expect(address).to receive(:uprn).and_return("uprn")
           expect(address).to receive(:house_number).and_return("house_number")
@@ -73,9 +68,19 @@ module Reports
           expect(address).to receive(:first_name).and_return("first_name")
           expect(address).to receive(:last_name).and_return("last_name")
 
+          expect(CSV).to receive(:open).and_return(csv)
+          expect(csv).to receive(:<<).with(headers)
           expect(csv).to receive(:<<).with(values)
 
           subject.add_entries_for(registration, 0)
+        end
+
+        context "when there are no addresses" do
+          it "does nothing and returns nil" do
+            allow(registration).to receive(:addresses).and_return(nil)
+
+            expect(subject.add_entries_for(registration, 0)).to be_nil
+          end
         end
       end
     end
