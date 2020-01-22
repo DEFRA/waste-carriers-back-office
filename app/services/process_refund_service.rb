@@ -50,9 +50,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     refund.updated_by_user = user.email
     refund.comment = refund_comment
 
-    if card_payment?
-      refund.world_pay_payment_status = "AUTHORISED"
-    end
+    refund.world_pay_payment_status = "AUTHORISED" if card_payment?
 
     refund
   end
