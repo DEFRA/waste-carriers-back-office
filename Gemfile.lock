@@ -330,7 +330,7 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    secure_headers (5.0.5)
+    secure_headers (5.1.0)
       useragent (>= 0.15.0)
     simplecov (0.17.1)
       docile (~> 1.1)
