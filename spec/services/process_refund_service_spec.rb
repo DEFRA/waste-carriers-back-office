@@ -53,6 +53,7 @@ RSpec.describe ProcessRefundService do
           expect(refund).to receive(:amount=).with(-500)
           expect(refund).to receive(:registration_reference=).with("registration_reference")
           expect(refund).to receive(:updated_by_user=).with("user@example.com")
+          expect(refund).to receive(:world_pay_payment_status=).with("AUTHORISED")
 
           expect(I18n).to receive(:t).with("refunds.comments.card").and_return(description)
           expect(refund).to receive(:comment=).with(description)

@@ -50,6 +50,10 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     refund.updated_by_user = user.email
     refund.comment = refund_comment
 
+    if card_payment?
+      refund.world_pay_payment_status = "AUTHORISED"
+    end
+
     refund
   end
 
@@ -62,7 +66,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   end
 
   def refund_comment
-    return I18n.t("refunds.comments.card") if payment.worldpay?
+    return I18n.t("refunds.comments.card") if card_payment?
 
     I18n.t("refunds.comments.manual")
   end
