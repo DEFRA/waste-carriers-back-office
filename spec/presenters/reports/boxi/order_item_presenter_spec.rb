@@ -17,6 +17,16 @@ module Reports
           expect(subject.last_updated.to_s).to eq("2019-11-19T00:00Z")
         end
       end
+
+      describe "#amount" do
+        it "returns the amount in pounds" do
+          amount = 500
+
+          allow(order_item).to receive(:amount).and_return(amount)
+
+          expect(subject.amount).to eq("5.00")
+        end
+      end
     end
   end
 end

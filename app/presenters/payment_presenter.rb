@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PaymentPresenter < WasteCarriersEngine::BasePresenter
+  include FinanceDetailsHelper
+
   def self.create_from_collection(payments, view)
     payments.map do |payment|
       new(payment, view)
@@ -17,6 +19,10 @@ class PaymentPresenter < WasteCarriersEngine::BasePresenter
     else
       I18n.t(".refunds.refunded_message.manual")
     end
+  end
+
+  def amount
+    super && display_pence_as_pounds_and_cents(super)
   end
 
   private

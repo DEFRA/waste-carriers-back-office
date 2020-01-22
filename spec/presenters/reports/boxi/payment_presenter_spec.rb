@@ -24,6 +24,16 @@ module Reports
           expect(subject.date_entered.to_s).to eq("2019-11-11T00:00Z")
         end
       end
+
+      describe "#amount" do
+        it "returns the amount in pounds" do
+          amount = 500
+
+          allow(payment).to receive(:amount).and_return(amount)
+
+          expect(subject.amount).to eq("5.00")
+        end
+      end
     end
   end
 end

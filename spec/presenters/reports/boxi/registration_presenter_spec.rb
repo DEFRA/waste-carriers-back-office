@@ -13,8 +13,8 @@ module Reports
         it "returns the balance formatted as pounds and pence" do
           finance_details = double(:finance_details)
 
-          expect(registration).to receive(:finance_details).and_return(finance_details)
-          expect(finance_details).to receive(:balance).and_return(0)
+          allow(registration).to receive(:finance_details).and_return(finance_details)
+          allow(finance_details).to receive(:balance).and_return(0)
 
           expect(subject.finance_details_balance).to eq("0.00")
         end

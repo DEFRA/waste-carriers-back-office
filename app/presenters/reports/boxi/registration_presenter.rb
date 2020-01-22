@@ -3,16 +3,15 @@
 module Reports
   module Boxi
     class RegistrationPresenter < WasteCarriersEngine::BasePresenter
+      include FinanceDetailsHelper
+
       delegate :status, :route, :revoked_reason, to: :metadata, prefix: true
 
       delegate :balance, to: :finance_details, prefix: true, allow_nil: true
       delegate :match_result, to: :conviction_search_result, prefix: true, allow_nil: true
 
       def finance_details_balance
-        balance = finance_details&.balance&.to_f || 0.00
-        cents = balance / 100
-
-        format("%<cents>.2f", cents: cents)
+        finance_details&.balance && display_pence_as_pounds_and_cents(finance_details.balance)
       end
 
       def metadata_date_registered
