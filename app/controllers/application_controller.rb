@@ -32,6 +32,10 @@ class ApplicationController < ActionController::Base
     new_user_session_path
   end
 
+  def after_sign_up_path_for(*)
+    bo_path
+  end
+
   rescue_from CanCan::AccessDenied do
     redirect_to "/bo/pages/permission"
   end
