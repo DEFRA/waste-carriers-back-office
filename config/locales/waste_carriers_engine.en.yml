@@ -1,6 +1,5 @@
 en:
   waste_carriers_engine:
-    dashboard_link: "/registrations"
     renewal_received_forms:
       new:
         conviction_check_subheading: This renewal requires a conviction check
