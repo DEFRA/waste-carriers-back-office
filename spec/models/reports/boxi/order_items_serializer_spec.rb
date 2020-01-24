@@ -42,6 +42,7 @@ module Reports
           allow(registration).to receive(:finance_details).and_return(finance_details)
           allow(finance_details).to receive(:orders).and_return([order])
           allow(order).to receive(:order_items).and_return([order_item])
+
           expect(OrderItemPresenter).to receive(:new).with(order_item, nil).and_return(presenter)
 
           expect(presenter).to receive(:type).and_return("type")

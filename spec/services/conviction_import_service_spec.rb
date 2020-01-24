@@ -21,6 +21,7 @@ Offender,Birth Date,Company No.,System Flag,Inc Number
 Apex Limited,,11111111,ABC,99999999
 "Doe, John",01/01/1991,,DFG,
    Whitespace Inc   , , , ,
+"Birthday, Missing",,,XYZ
 )
       end
 
@@ -44,8 +45,15 @@ Apex Limited,,11111111,ABC,99999999
           system_flag: "DFG",
           incident_number: nil
         )
+        matching_no_birthdate_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(
+          name: "Birthday, Missing",
+          date_of_birth: nil,
+          company_number: nil,
+          system_flag: "XYZ",
+          incident_number: nil
+        )
 
-        expect { run_service }.to change { matching_person_conviction.count }.from(0).to(1)
+        expect { run_service }.to change { matching_person_conviction.count }.from(0).to(1).and change { matching_no_birthdate_conviction.count }.from(0).to(1)
       end
 
       it "trims excess whitespace" do
@@ -106,6 +114,22 @@ Apex Limited,,11111111,ABC,99999999
           new_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: "Apex Limited")
 
           expect { run_service }.to raise_error(InvalidConvictionDataError, "Offender name missing").and change { old_conviction.count }.by(0).and change { new_conviction.count }.by(0)
+        end
+      end
+
+      context "when the CSV contains an invalid date" do
+        let(:csv) do
+          %(
+Offender,Birth Date,Company No.,System Flag,Inc Number
+"Doe, John",notadate,,DFG,
+)
+        end
+
+        it "raises an InvalidConvictionDataError and doesn't update any conviction data" do
+          old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
+          new_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: "Doe, John")
+
+          expect { run_service }.to raise_error(InvalidConvictionDataError, "Invalid date of birth").and change { old_conviction.count }.by(0).and change { new_conviction.count }.by(0)
         end
       end
     end

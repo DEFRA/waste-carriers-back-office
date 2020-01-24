@@ -67,8 +67,20 @@ class ConvictionImportService < ::WasteCarriersEngine::BaseService
   end
 
   def validate_row(row)
-    return if row["Offender"].present?
+    validate_name(row["Offender"]) && validate_date_of_birth(row["Birth Date"])
+  end
+
+  def validate_name(name)
+    return true if name.present?
 
     raise InvalidConvictionDataError, "Offender name missing"
+  end
+
+  def validate_date_of_birth(date_of_birth)
+    return true if date_of_birth.blank?
+
+    Date.parse(date_of_birth)
+  rescue ArgumentError
+    raise InvalidConvictionDataError, "Invalid date of birth"
   end
 end

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 66748c8900262574c638a83410c8c6ba9b8fb753
+  revision: a7ba0e71fa7706cc0112c4edd51c1d88b3ef9cf9
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -85,7 +85,7 @@ GEM
     bcrypt (3.1.13)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    bson (4.7.0)
+    bson (4.7.1)
     builder (3.2.4)
     byebug (11.0.1)
     cancancan (1.17.0)
@@ -213,8 +213,8 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
-    mongo (2.11.2)
-      bson (>= 4.6.0, < 5.0.0)
+    mongo (2.11.3)
+      bson (>= 4.4.2, < 5.0.0)
     mongoid (5.2.1)
       activemodel (~> 4.0)
       mongo (>= 2.4.1, < 3.0.0)
@@ -330,7 +330,7 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    secure_headers (5.1.0)
+    secure_headers (5.2.0)
       useragent (>= 0.15.0)
     simplecov (0.17.1)
       docile (~> 1.1)
