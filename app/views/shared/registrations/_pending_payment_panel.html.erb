@@ -6,6 +6,6 @@
     <%= t(".status.messages.pending_payment", total: display_pence_as_pounds(resource.finance_details.balance)) %>
   </p>
   <% if display_payment_link_for?(resource) %>
-    <%= link_to t(".status.actions.payment_button"), resource_payments_path(resource.reg_identifier), class: 'button' %>
+    <%= link_to t(".status.actions.payment_button"), resource_payments_path(resource._id), class: 'button' %>
   <% end %>
 </div>
