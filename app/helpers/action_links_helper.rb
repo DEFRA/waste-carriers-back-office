@@ -62,9 +62,6 @@ module ActionLinksHelper
   end
 
   def display_payment_link_for?(resource)
-    # TODO: Temporary - for release only. See: https://eaflood.atlassian.net/browse/RUBY-846
-    return false if a_registration?(resource)
-
     resource.upper_tier?
   end
 
