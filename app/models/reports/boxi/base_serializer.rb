@@ -28,6 +28,12 @@ module Reports
 
         csv
       end
+
+      def sanitize(string)
+        return unless string.respond_to?(:gsub)
+
+        string.gsub("\n", ".")
+      end
     end
   end
 end

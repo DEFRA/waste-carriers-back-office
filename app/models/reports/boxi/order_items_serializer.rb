@@ -37,7 +37,7 @@ module Reports
           elsif key == :order_uid
             order_uid
           else
-            presenter.public_send(key)
+            sanitize(presenter.public_send(key))
           end
         end
       end

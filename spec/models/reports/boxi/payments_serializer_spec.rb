@@ -62,6 +62,23 @@ module Reports
           subject.add_entries_for(registration, 0)
         end
 
+        it "sanitize data before inserting them in the csv" do
+          payment = double(:payment)
+          presenter = double(:presenter, comment: "string to sanitize\n").as_null_object
+          finance_details = double(:finance_details)
+
+          allow(registration).to receive(:finance_details).and_return(finance_details)
+          allow(finance_details).to receive(:payments).and_return([payment])
+          allow(PaymentPresenter).to receive(:new).with(payment, nil).and_return(presenter)
+
+          allow(CSV).to receive(:open).and_return(csv)
+          allow(csv).to receive(:<<).with(headers)
+
+          expect(csv).to receive(:<<).with(array_including("string to sanitize."))
+
+          subject.add_entries_for(registration, 0)
+        end
+
         context "when there are no finance details available" do
           it "does nothing and returns nil" do
             expect(registration).to receive(:finance_details).and_return(nil)

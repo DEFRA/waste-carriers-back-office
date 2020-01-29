@@ -117,6 +117,19 @@ module Reports
 
           subject.add_entries_for(registration, 0)
         end
+
+        it "sanitize data before inserting them in the csv" do
+          presenter = double(:presenter, metadata_revoked_reason: "string to sanitize\n").as_null_object
+
+          allow(RegistrationPresenter).to receive(:new).with(registration, nil).and_return(presenter)
+
+          allow(CSV).to receive(:open).and_return(csv)
+          allow(csv).to receive(:<<).with(headers)
+
+          expect(csv).to receive(:<<).with(array_including("string to sanitize."))
+
+          subject.add_entries_for(registration, 0)
+        end
       end
     end
   end

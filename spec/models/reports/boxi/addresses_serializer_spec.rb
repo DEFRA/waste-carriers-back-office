@@ -75,6 +75,19 @@ module Reports
           subject.add_entries_for(registration, 0)
         end
 
+        it "sanitize data before inserting them in the csv" do
+          address = double(:address, address_line_1: "string to sanitize\n").as_null_object
+
+          allow(registration).to receive(:addresses).and_return([address])
+          allow(CSV).to receive(:open).and_return(csv)
+
+          allow(csv).to receive(:<<).with(headers)
+
+          expect(csv).to receive(:<<).with(array_including("string to sanitize."))
+
+          subject.add_entries_for(registration, 0)
+        end
+
         context "when there are no addresses" do
           it "does nothing and returns nil" do
             allow(registration).to receive(:addresses).and_return(nil)

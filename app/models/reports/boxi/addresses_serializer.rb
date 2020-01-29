@@ -36,7 +36,7 @@ module Reports
           if key == :uid
             uid
           else
-            address.public_send(key)
+            sanitize(address.public_send(key))
           end
         end
       end

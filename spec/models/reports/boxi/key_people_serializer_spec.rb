@@ -54,6 +54,21 @@ module Reports
           subject.add_entries_for(registration, 0)
         end
 
+        it "sanitize data before inserting them in the csv" do
+          key_person = double(:key_person)
+          presenter = double(:presenter, position: "string to sanitize\n").as_null_object
+
+          allow(registration).to receive(:key_people).and_return([key_person])
+          allow(KeyPersonPresenter).to receive(:new).with(key_person, nil).and_return(presenter)
+
+          allow(CSV).to receive(:open).and_return(csv)
+          allow(csv).to receive(:<<).with(headers)
+
+          expect(csv).to receive(:<<).with(array_including("string to sanitize."))
+
+          subject.add_entries_for(registration, 0)
+        end
+
         context "when there are no key people" do
           it "does nothing and returns nil" do
             allow(registration).to receive(:key_people).and_return(nil)

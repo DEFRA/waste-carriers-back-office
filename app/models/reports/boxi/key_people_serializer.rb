@@ -30,7 +30,7 @@ module Reports
           if key == :uid
             uid
           else
-            presenter.public_send(key)
+            sanitize(presenter.public_send(key))
           end
         end
       end
