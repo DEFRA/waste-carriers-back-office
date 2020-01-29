@@ -17,7 +17,10 @@ module Reports
     def run(dir_path)
       @dir_path = dir_path
 
-      registrations.each.with_index do |registration, uid|
+      registrations.each.with_index do |registration, index|
+        # Start counting from 1 rather than from 0
+        uid = index + 1
+
         serializers.each do |serializer|
           serializer.add_entries_for(registration, uid)
         end

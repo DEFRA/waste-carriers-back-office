@@ -33,7 +33,7 @@ module Reports
 
           values = [
             0,
-            0,
+            1,
             "order_code",
             "payment_method",
             "total_amount",

@@ -31,7 +31,7 @@ module Reports
 
           values = [
             0,
-            0,
+            1,
             "type",
             "amount",
             "description",
