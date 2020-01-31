@@ -29,10 +29,20 @@ module Reports
         csv
       end
 
+      # This is designed to handle the different types of newline we may find
+      # in a string we are looking to export to a CSV file. For example we
+      # need to go from something like this
+      #
+      #    "regsitered in error!\r\nAG See Pat for info. "
+      #
+      # to this
+      #
+      #    "regsitered in error! AG See Pat for info."
+      #
       def sanitize(string)
-        return unless string.respond_to?(:gsub)
+        return unless string.respond_to?(:squish)
 
-        string.gsub("\n", ".")
+        string.squish
       end
     end
   end

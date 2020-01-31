@@ -60,7 +60,7 @@ module Reports
 
         it "sanitize data before inserting them in the csv" do
           order = double(:order)
-          presenter = double(:presenter, description: "string to sanitize\n").as_null_object
+          presenter = double(:presenter, description: " string to\r\nsanitize\n").as_null_object
           order_item = double(:order_item)
           finance_details = double(:finance_details)
 
@@ -72,7 +72,7 @@ module Reports
           allow(CSV).to receive(:open).and_return(csv)
           allow(csv).to receive(:<<).with(headers)
 
-          expect(csv).to receive(:<<).with(array_including("string to sanitize."))
+          expect(csv).to receive(:<<).with(array_including("string to sanitize"))
 
           subject.add_entries_for(registration, 0)
         end
