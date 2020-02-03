@@ -40,7 +40,7 @@ module Reports
       #    "regsitered in error! AG See Pat for info."
       #
       def sanitize(string)
-        return unless string.respond_to?(:squish)
+        return string unless string.respond_to?(:squish)
 
         string.squish
       end
