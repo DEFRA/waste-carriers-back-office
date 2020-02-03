@@ -21,17 +21,15 @@ module Reports
       subject { described_class.new(dir) }
 
       describe "#add_entries_for" do
-        let(:registration) { double(:registration) }
+        let(:order) { double(:order) }
 
-        it "creates an entry in the csv for each order_item in the registration" do
-          order = double(:order)
+        it "creates an entry in the csv for each order_item in the order" do
           presenter = double(:presenter)
           order_item = double(:order_item)
-          finance_details = double(:finance_details)
 
           values = [
             0,
-            1,
+            0,
             "type",
             "amount",
             "description",
@@ -39,8 +37,6 @@ module Reports
             "last_updated"
           ]
 
-          allow(registration).to receive(:finance_details).and_return(finance_details)
-          allow(finance_details).to receive(:orders).and_return([order])
           allow(order).to receive(:order_items).and_return([order_item])
 
           expect(OrderItemPresenter).to receive(:new).with(order_item, nil).and_return(presenter)
@@ -55,17 +51,13 @@ module Reports
           expect(csv).to receive(:<<).with(headers)
           expect(csv).to receive(:<<).with(values)
 
-          subject.add_entries_for(registration, 0)
+          subject.add_entries_for(order, 0, 0)
         end
 
         it "sanitize data before inserting them in the csv" do
-          order = double(:order)
           presenter = double(:presenter, description: "string to sanitize\n").as_null_object
           order_item = double(:order_item)
-          finance_details = double(:finance_details)
 
-          allow(registration).to receive(:finance_details).and_return(finance_details)
-          allow(finance_details).to receive(:orders).and_return([order])
           allow(order).to receive(:order_items).and_return([order_item])
           allow(OrderItemPresenter).to receive(:new).with(order_item, nil).and_return(presenter)
 
@@ -74,23 +66,14 @@ module Reports
 
           expect(csv).to receive(:<<).with(array_including("string to sanitize."))
 
-          subject.add_entries_for(registration, 0)
+          subject.add_entries_for(order, 0, 0)
         end
 
-        context "when there are no finance details available" do
+        context "when there are no order items available" do
           it "does nothing and returns nil" do
-            allow(registration).to receive(:finance_details).and_return(nil)
+            allow(order).to receive(:order_items).and_return(nil)
 
-            expect(subject.add_entries_for(registration, 0)).to be_nil
-          end
-        end
-
-        context "when there are no orders available" do
-          it "does nothing and returns nil" do
-            finance_details = double(:finance_details, orders: nil)
-            allow(registration).to receive(:finance_details).and_return(finance_details)
-
-            expect(subject.add_entries_for(registration, 0)).to be_nil
+            expect(subject.add_entries_for(order, 0, 0)).to be_nil
           end
         end
       end

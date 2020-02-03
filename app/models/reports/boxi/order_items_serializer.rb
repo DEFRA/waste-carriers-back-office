@@ -13,19 +13,11 @@ module Reports
         last_updated: "LastModifiedTimestamp"
       }.freeze
 
-      def add_entries_for(registration, uid)
-        return unless registration.finance_details.present?
-        return unless registration.finance_details.orders.present?
+      def add_entries_for(order, registration_uid, order_uid)
+        return unless order.order_items.present?
 
-        registration.finance_details.orders.each.with_index do |order, index|
-          # Start counting from 1 rather than from 0
-          order_uid = index + 1
-
-          next unless order.order_items.present?
-
-          order.order_items.each do |order_item|
-            csv << parse_order_item(order_item, uid, order_uid)
-          end
+        order.order_items.each do |order_item|
+          csv << parse_order_item(order_item, registration_uid, order_uid)
         end
       end
 

@@ -16,16 +16,8 @@ module Reports
         updated_by_user: "LastModifiedBy"
       }.freeze
 
-      def add_entries_for(registration, uid)
-        return unless registration.finance_details.present?
-        return unless registration.finance_details.orders.present?
-
-        registration.finance_details.orders.each.with_index do |order, index|
-          # Start counting from 1 rather than from 0
-          order_uid = index + 1
-
-          csv << parse_order(order, uid, order_uid)
-        end
+      def add_entries_for(order, registration_uid, order_uid)
+        csv << parse_order(order, registration_uid, order_uid)
       end
 
       private
