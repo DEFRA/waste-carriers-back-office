@@ -95,6 +95,8 @@ Rails.application.routes.draw do
               get "transfer/success",
                   to: "registration_transfers#success",
                   as: :registration_transfer_success
+
+              get "certificate", to: "certificates#show", as: :certificate
             end
 
   resources :transient_registrations,

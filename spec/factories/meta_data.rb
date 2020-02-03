@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :metaData, class: WasteCarriersEngine::MetaData do
     date_registered { Time.current }
+    date_activated { Time.current }
     status { :ACTIVE }
     revoked_reason { "reason" }
 
@@ -11,6 +12,7 @@ FactoryBot.define do
     end
 
     trait :pending do
+      date_activated { nil }
       status { :PENDING }
     end
   end
