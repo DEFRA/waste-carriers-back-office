@@ -55,7 +55,7 @@ module Reports
         end
 
         it "sanitize data before inserting them in the csv" do
-          presenter = double(:presenter, description: "string to sanitize\n").as_null_object
+          presenter = double(:presenter, description: " string to\r\nsanitize\n").as_null_object
 
           order_item = double(:order_item)
 
