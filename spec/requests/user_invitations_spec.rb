@@ -88,4 +88,29 @@ RSpec.describe "User Invitations", type: :request do
       end
     end
   end
+
+  describe "PUT /bo/users/invitation" do
+    let(:user) { build(:user) }
+    let(:password) { attributes_for(:user)[:password] }
+    let(:params) do
+      {
+        user: {
+          password: password,
+          confirm_password: password,
+          invitation_token: user.raw_invitation_token
+        }
+      }
+    end
+
+    before do
+      user.invite!
+    end
+
+    context "when the user accepts an invitation and sets a valid password" do
+      it "redirects to the back office dashboard path" do
+        put "/bo/users/invitation", params
+        expect(response).to redirect_to(bo_path)
+      end
+    end
+  end
 end

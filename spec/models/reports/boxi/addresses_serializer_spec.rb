@@ -76,14 +76,14 @@ module Reports
         end
 
         it "sanitize data before inserting them in the csv" do
-          address = double(:address, address_line_1: "string to sanitize\n").as_null_object
+          address = double(:address, address_line_1: " string to\r\nsanitize\n").as_null_object
 
           allow(registration).to receive(:addresses).and_return([address])
           allow(CSV).to receive(:open).and_return(csv)
 
           allow(csv).to receive(:<<).with(headers)
 
-          expect(csv).to receive(:<<).with(array_including("string to sanitize."))
+          expect(csv).to receive(:<<).with(array_including("string to sanitize"))
 
           subject.add_entries_for(registration, 0)
         end

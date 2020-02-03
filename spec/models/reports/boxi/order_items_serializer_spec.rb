@@ -56,6 +56,7 @@ module Reports
 
         it "sanitize data before inserting them in the csv" do
           presenter = double(:presenter, description: "string to sanitize\n").as_null_object
+
           order_item = double(:order_item)
 
           allow(order).to receive(:order_items).and_return([order_item])
@@ -64,7 +65,7 @@ module Reports
           allow(CSV).to receive(:open).and_return(csv)
           allow(csv).to receive(:<<).with(headers)
 
-          expect(csv).to receive(:<<).with(array_including("string to sanitize."))
+          expect(csv).to receive(:<<).with(array_including("string to sanitize"))
 
           subject.add_entries_for(order, 0, 0)
         end

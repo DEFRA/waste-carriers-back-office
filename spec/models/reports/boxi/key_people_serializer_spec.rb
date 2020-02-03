@@ -56,7 +56,7 @@ module Reports
 
         it "sanitize data before inserting them in the csv" do
           key_person = double(:key_person)
-          presenter = double(:presenter, position: "string to sanitize\n").as_null_object
+          presenter = double(:presenter, position: " string to\r\nsanitize\n").as_null_object
 
           allow(registration).to receive(:key_people).and_return([key_person])
           allow(KeyPersonPresenter).to receive(:new).with(key_person, nil).and_return(presenter)
@@ -64,7 +64,7 @@ module Reports
           allow(CSV).to receive(:open).and_return(csv)
           allow(csv).to receive(:<<).with(headers)
 
-          expect(csv).to receive(:<<).with(array_including("string to sanitize."))
+          expect(csv).to receive(:<<).with(array_including("string to sanitize"))
 
           subject.add_entries_for(registration, 0)
         end
