@@ -16,7 +16,7 @@ module Reports
     ORDER_SERIALIZERS = [
       Boxi::OrderItemsSerializer,
       Boxi::OrdersSerializer
-    ]
+    ].freeze
 
     attr_reader :dir_path
 
