@@ -30,7 +30,7 @@ module WasteCarriersBackOffice
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
     # config.i18n.default_locale = :de
 
-    config.autoload_paths += %W(#{config.root}/app/forms/concerns)
+    config.autoload_paths << "#{config.root}/app/forms/concerns"
 
     # Enable the asset pipeline
     config.assets.enabled = true

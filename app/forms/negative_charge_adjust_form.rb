@@ -13,6 +13,6 @@ class NegativeChargeAdjustForm < WasteCarriersEngine::BaseForm
     return false unless valid?
 
     # Negative amount as this is a negative charge adjust
-    self.amount = string_to_cents(self.amount) * -1
+    self.amount = string_to_cents(amount) * -1
   end
 end

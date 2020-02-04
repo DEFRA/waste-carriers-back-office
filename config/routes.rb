@@ -66,17 +66,17 @@ Rails.application.routes.draw do
               resource :charge_adjust_start_form,
                        only: %i[new create],
                        path: "payments/charge-adjust",
-                        path_names: { new: "" }
+                       path_names: { new: "" }
 
               resource :negative_charge_adjust_form,
-                        only: %i[new create],
-                        path: "payments/charge-adjust/negative",
-                        path_names: { new: "" }
+                       only: %i[new create],
+                       path: "payments/charge-adjust/negative",
+                       path_names: { new: "" }
 
               resource :positive_charge_adjust_form,
-                        only: %i[new create],
-                        path: "payments/charge-adjust/positive",
-                        path_names: { new: "" }
+                       only: %i[new create],
+                       path: "payments/charge-adjust/positive",
+                       path_names: { new: "" }
             end
 
   resources :renewing_registrations,

@@ -12,6 +12,6 @@ class PositiveChargeAdjustForm < WasteCarriersEngine::BaseForm
 
     return false unless valid?
 
-    self.amount = string_to_cents(self.amount)
+    self.amount = string_to_cents(amount)
   end
 end
