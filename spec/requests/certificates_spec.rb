@@ -14,7 +14,7 @@ RSpec.describe "Certificates", type: :request do
       get "/bo/registrations/#{registration.reg_identifier}/certificate"
 
       expect(response.content_type).to eq("application/pdf")
-      expected_content_disposition = "inline; filename=\"#{registration.reference}.pdf\""
+      expected_content_disposition = "inline; filename=\"#{registration.reg_identifier}.pdf\""
       expect(response.headers["Content-Disposition"]).to eq(expected_content_disposition)
     end
 
