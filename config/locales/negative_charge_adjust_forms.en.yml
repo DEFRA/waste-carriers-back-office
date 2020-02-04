@@ -1,0 +1,31 @@
+en:
+  negative_charge_adjust_forms:
+    messages:
+      success: "%{amount} charge adjust completed succesfully"
+    new:
+      title: "Negative charge adjustment (credit)"
+      heading: "Negative charge adjustment (credit) for %{reg_identifier}"
+      fields:
+        amount:
+          label: "Amount"
+          hint: "For example 120.50"
+        reference:
+          label: "Transaction reference"
+        description:
+          label: "Reason"
+      confirm: "Continue"
+  activemodel:
+    errors:
+      models:
+        positive_charge_adjust_form:
+          attributes:
+            amount:
+              blank: "Enter amount"
+              invalid: "Amount is invalid"
+            description:
+              blank: "Enter a reason"
+              too_long: "Description must be %{count} characters or fewer"
+            reference:
+              blank: "Enter the tansaction reference"
+
+

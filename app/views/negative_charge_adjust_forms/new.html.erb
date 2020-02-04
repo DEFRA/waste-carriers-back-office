@@ -1,0 +1,61 @@
+<div class="grid-row">
+  <div class="column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: resource_charge_adjust_start_form_path(@resource._id)) %>
+
+    <h1 class="heading-large">
+      <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
+    </h1>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <div class="form-group">
+      <%= render "shared/company_details_panel", registration: @resource %>
+    </div>
+
+    <%= form_for(@negative_charge_adjust_form, url: resource_negative_charge_adjust_form_path(@resource._id)) do |f| %>
+      <%= render("waste_carriers_engine/shared/errors", object: @negative_charge_adjust_form) %>
+
+      <div class="form-group <%= "form-group-error" if @negative_charge_adjust_form.errors[:amount].any? %>">
+        <fieldset id="amount">
+          <% if @negative_charge_adjust_form.errors[:amount].any? %>
+            <span class="error-message"><%= @negative_charge_adjust_form.errors[:amount].join(", ") %></span>
+          <% end %>
+
+          <%= f.label :amount, class: "form-label" do %>
+            <%= t(".fields.amount.label") %>
+            <span class="form-hint"><%= t(".fields.amount.hint") %></span>
+          <% end %>
+          <%= f.text_field :amount, class: "form-control" %>
+        </fieldset>
+      </div>
+
+      <div class="form-group <%= "form-group-error" if @negative_charge_adjust_form.errors[:reference].any? %>">
+        <fieldset id="reference">
+          <% if @negative_charge_adjust_form.errors[:reference].any? %>
+            <span class="error-message"><%= @negative_charge_adjust_form.errors[:reference].join(", ") %></span>
+          <% end %>
+
+          <%= f.label :reference, t(".fields.reference.label"), class: "form-label" %>
+          <%= f.text_field :reference, class: "form-control" %>
+        </fieldset>
+      </div>
+
+      <div class="form-group <%= "form-group-error" if @negative_charge_adjust_form.errors[:description].any? %>">
+        <fieldset id="description">
+          <% if @negative_charge_adjust_form.errors[:description].any? %>
+            <span class="error-message"><%= @negative_charge_adjust_form.errors[:description].join(", ") %></span>
+          <% end %>
+
+          <%= f.label :description, t(".fields.description.label"), class: "form-label" %>
+          <%= f.text_area :description, class: "form-control" %>
+        </fieldset>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit t(".confirm"), class: "button" %>
+      </div>
+    <% end %>
+  </div>
+</div>
