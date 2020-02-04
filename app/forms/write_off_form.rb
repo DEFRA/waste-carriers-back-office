@@ -3,7 +3,7 @@
 class WriteOffForm < WasteCarriersEngine::BaseForm
   attr_accessor :comment
 
-  validates :comment, presence: true, length: { maximum: 250 }
+  validates :comment, presence: true, length: { maximum: 500 }
 
   def submit(params, user)
     # Assign the params for validation
