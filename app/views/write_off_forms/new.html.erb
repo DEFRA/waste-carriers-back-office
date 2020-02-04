@@ -2,6 +2,8 @@
   <div class="column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: resource_finance_details_path(@resource._id)) %>
 
+    <%= render("waste_carriers_engine/shared/errors", object: @write_off_form) %>
+
     <h1 class="heading-large">
       <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
     </h1>
@@ -19,8 +21,6 @@
     </h2>
 
     <%= form_for(@write_off_form, url: resource_write_off_form_path(@resource._id)) do |f| %>
-      <%= render("waste_carriers_engine/shared/errors", object: @write_off_form) %>
-
       <div class="form-group <%= "form-group-error" if @write_off_form.errors[:comment].any? %>">
         <fieldset id="write_off">
           <legend class="visuallyhidden">
