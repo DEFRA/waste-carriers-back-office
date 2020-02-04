@@ -14,11 +14,9 @@
       <%= render "shared/company_details_panel", registration: @resource %>
     </div>
 
-    <div class="form-group">
-      <p class="strong">
-        <%= t(".write_off", amount: display_pence_as_pounds_and_cents(@finance_details.zero_difference_balance)) %>
-      </p>
-    </div>
+    <h2 class="heading-medium strong">
+      <%= t(".write_off", amount: display_pence_as_pounds_and_cents(@finance_details.zero_difference_balance)) %>
+    </h2>
 
     <%= form_for(@write_off_form, url: resource_write_off_form_path(@resource._id)) do |f| %>
       <%= render("waste_carriers_engine/shared/errors", object: @write_off_form) %>
