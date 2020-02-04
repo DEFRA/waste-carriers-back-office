@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: c96208caf6ba39c7c436c7362a234bbd5ec945a6
+  revision: cbc99d5419cd93023dd6286f46d6a261de6a8daf
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -424,6 +424,7 @@ DEPENDENCIES
   webmock (~> 3.4)
   whenever (~> 0.10.0)
   whenever-test (~> 1.0)
+  wicked_pdf
 
 RUBY VERSION
    ruby 2.4.2p198
