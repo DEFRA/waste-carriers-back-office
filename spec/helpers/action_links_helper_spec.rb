@@ -181,6 +181,24 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
+  describe "certificate_link_for" do
+    context "when the resource is a registration" do
+      let(:resource) { create(:registration) }
+
+      it "returns the correct path" do
+        expect(helper.certificate_link_for(resource)).to eq(registration_certificate_path(resource.reg_identifier))
+      end
+    end
+
+    context "when the resource is not a registration" do
+      let(:resource) { create(:renewing_registration) }
+
+      it "returns the correct path" do
+        expect(helper.certificate_link_for(resource)).to eq("#")
+      end
+    end
+  end
+
   describe "#display_details_link_for?" do
     context "when the resource is a Registration" do
       let(:resource) { build(:registration) }
@@ -419,57 +437,52 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
-  describe "#display_view_confirmation_letter_link_for?" do
+  describe "#display_certificate_link_for?" do
     context "when the resource is a registration" do
       let(:resource) { build(:registration) }
 
-      it "returns false" do
-        expect(helper.display_view_confirmation_letter_link_for?(resource)).to eq(false)
+      before do
+        expect(helper).to receive(:can?).with(:view_certificate, WasteCarriersEngine::Registration).and_return(can)
       end
 
-      # TODO: re-implement when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
-      # before do
-      #   expect(helper).to receive(:can?).with(:view_certificate, WasteCarriersEngine::Registration).and_return(can)
-      # end
+      context "when the user has permission to view the certificate" do
+        let(:can) { true }
 
-      # context "when the user has permission for revoking" do
-      #   let(:can) { true }
+        before do
+          expect(resource).to receive(:active?).and_return(active)
+        end
 
-      #   before do
-      #     expect(resource).to receive(:active?).and_return(active)
-      #   end
+        context "when the resource is active" do
+          let(:active) { true }
 
-      #   context "when the resource is active" do
-      #     let(:active) { true }
+          it "returns true" do
+            expect(helper.display_certificate_link_for?(resource)).to be_truthy
+          end
+        end
 
-      #     it "returns true" do
-      #       expect(helper.display_view_confirmation_letter_link_for?(resource)).to be_truthy
-      #     end
-      #   end
+        context "when the resource is not active" do
+          let(:active) { false }
 
-      #   context "when the resource is not active" do
-      #     let(:active) { false }
+          it "returns false" do
+            expect(helper.display_certificate_link_for?(resource)).to be_falsey
+          end
+        end
+      end
 
-      #     it "returns false" do
-      #       expect(helper.display_view_confirmation_letter_link_for?(resource)).to be_falsey
-      #     end
-      #   end
-      # end
+      context "when the user has no permission to view the certificate" do
+        let(:can) { false }
 
-      # context "when the user has no permission for revoking" do
-      #   let(:can) { false }
-
-      #   it "returns false" do
-      #     expect(helper.display_view_confirmation_letter_link_for?(resource)).to be_falsey
-      #   end
-      # end
+        it "returns false" do
+          expect(helper.display_certificate_link_for?(resource)).to be_falsey
+        end
+      end
     end
 
     context "when the resource is a transient registration" do
       let(:resource) { build(:renewing_registration) }
 
       it "returns false" do
-        expect(helper.display_view_confirmation_letter_link_for?(resource)).to be_falsey
+        expect(helper.display_certificate_link_for?(resource)).to be_falsey
       end
     end
   end

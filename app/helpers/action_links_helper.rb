@@ -41,6 +41,12 @@ module ActionLinksHelper
     new_registration_registration_transfer_path(resource.reg_identifier)
   end
 
+  def certificate_link_for(resource)
+    return "#" unless a_registration?(resource)
+
+    registration_certificate_path(resource.reg_identifier)
+  end
+
   def display_details_link_for?(resource)
     a_transient_registration?(resource) || a_registration?(resource)
   end
@@ -99,9 +105,7 @@ module ActionLinksHelper
     can?(:update, WasteCarriersEngine::Registration)
   end
 
-  def display_view_confirmation_letter_link_for?(resource)
-    # TODO: delete next line filter when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
-    return false if a_registration?(resource)
+  def display_certificate_link_for?(resource)
     return false unless display_registration_links?(resource)
     return false unless can?(:view_certificate, WasteCarriersEngine::Registration)
 

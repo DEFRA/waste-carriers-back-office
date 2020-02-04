@@ -30,9 +30,9 @@
       </li>
     <% end %>
 
-    <% if display_view_confirmation_letter_link_for?(resource) %>
+    <% if display_certificate_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.view_confirmation_letter"), "#" %>
+        <%= link_to t(".actions_box.links.certificate"), certificate_link_for(resource) %>
       </li>
     <% end %>
 
