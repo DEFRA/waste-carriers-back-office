@@ -16,4 +16,8 @@ RSpec.shared_examples "below agency_with_refund examples" do
   it "should not be able to revoke a registration" do
     should_not be_able_to(:revoke, WasteCarriersEngine::Registration)
   end
+
+  it "should not be able to write off small" do
+    should_not be_able_to(:write_off_small, WasteCarriersEngine::FinanceDetails)
+  end
 end
