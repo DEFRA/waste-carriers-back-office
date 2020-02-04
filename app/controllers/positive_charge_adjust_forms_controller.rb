@@ -1,0 +1,34 @@
+# frozen_string_literal: true
+
+class PositiveChargeAdjustFormsController < ResourceFormsController
+  include FinanceDetailsHelper
+
+  def new
+    super(PositiveChargeAdjustForm, "positive_charge_adjust_form")
+  end
+
+  def create
+    return unless super(PositiveChargeAdjustForm, "positive_charge_adjust_form")
+
+    ProcessChargeAdjustService.run(
+      finance_details: @resource.finance_details,
+      form: @positive_charge_adjust_form,
+      user: current_user
+    )
+
+    flash[:success] = I18n.t(
+      "positive_charge_adjust_forms.messages.success",
+      amount: display_pence_as_pounds_and_cents(@positive_charge_adjust_form.amount)
+    )
+  end
+
+  private
+
+  def positive_charge_adjust_form_params
+    params.fetch(:positive_charge_adjust_form, {}).permit(:amount, :reference, :description)
+  end
+
+  def authorize_user
+    raise CanCan::AccessDenied unless can?(:charge_adjust, @resource)
+  end
+end
