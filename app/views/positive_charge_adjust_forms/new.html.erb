@@ -2,6 +2,8 @@
   <div class="column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: resource_charge_adjust_start_form_path(@resource._id)) %>
 
+    <%= render("waste_carriers_engine/shared/errors", object: @positive_charge_adjust_form) %>
+
     <h1 class="heading-large">
       <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
     </h1>
@@ -15,8 +17,6 @@
     </div>
 
     <%= form_for(@positive_charge_adjust_form, url: resource_positive_charge_adjust_form_path(@resource._id)) do |f| %>
-      <%= render("waste_carriers_engine/shared/errors", object: @positive_charge_adjust_form) %>
-
       <div class="form-group <%= "form-group-error" if @positive_charge_adjust_form.errors[:amount].any? %>">
         <fieldset id="amount">
           <% if @positive_charge_adjust_form.errors[:amount].any? %>
