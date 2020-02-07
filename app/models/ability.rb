@@ -47,10 +47,10 @@ class Ability
     permissions_for_agency_user
 
     can :view_revoked_reasons, :all
-    can :refund, :all
     can :cease, WasteCarriersEngine::Registration
     can :revoke, WasteCarriersEngine::Registration
 
+    can :refund, :all
     can :record_cash_payment, :all
     can :record_cheque_payment, :all
     can :record_postal_order_payment, :all
