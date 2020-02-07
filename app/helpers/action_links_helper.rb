@@ -41,12 +41,6 @@ module ActionLinksHelper
     new_registration_registration_transfer_path(resource.reg_identifier)
   end
 
-  def certificate_link_for(resource)
-    return "#" unless a_registration?(resource)
-
-    registration_certificate_path(resource.reg_identifier)
-  end
-
   def display_details_link_for?(resource)
     a_transient_registration?(resource) || a_registration?(resource)
   end

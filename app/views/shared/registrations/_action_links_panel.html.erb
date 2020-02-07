@@ -32,7 +32,7 @@
 
     <% if display_certificate_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.certificate"), certificate_link_for(resource) %>
+        <%= link_to t(".actions_box.links.certificate"), registration_certificate_path(resource.reg_identifier) %>
       </li>
     <% end %>
 
