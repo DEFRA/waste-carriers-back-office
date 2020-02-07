@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ModuleLength
 module ActionLinksHelper
   def details_link_for(resource)
     if a_transient_registration?(resource)
@@ -130,4 +129,3 @@ module ActionLinksHelper
     true
   end
 end
-# rubocop:enable Metrics/ModuleLength
