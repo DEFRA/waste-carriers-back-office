@@ -7,8 +7,6 @@ module ActionLinksHelper
       renewing_registration_path(resource.reg_identifier)
     elsif a_registration?(resource)
       registration_path(resource.reg_identifier)
-    else
-      "#"
     end
   end
 

@@ -19,14 +19,6 @@ RSpec.describe ActionLinksHelper, type: :helper do
         expect(helper.details_link_for(resource)).to eq(registration_path(resource.reg_identifier))
       end
     end
-
-    context "when the resource is not a registration or a renewing registration" do
-      let(:resource) { double(:resource) }
-
-      it "returns a default path" do
-        expect(helper.details_link_for(resource)).to eq("#")
-      end
-    end
   end
 
   describe "#display_write_off_small_link_for?" do
