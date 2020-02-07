@@ -16,17 +16,6 @@ module ActionLinksHelper
     ad_privacy_policy_path(resource.reg_identifier)
   end
 
-  def convictions_link_for(resource)
-    if a_transient_registration?(resource)
-      transient_registration_convictions_path(resource.reg_identifier)
-    # TODO: re-implement when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
-    # elsif a_registration?(resource)
-    #   "#{Rails.configuration.wcrs_backend_url}/registrations/#{resource.id}/approve"
-    else
-      "#"
-    end
-  end
-
   def renew_link_for(resource)
     ad_privacy_policy_path(resource.reg_identifier)
   end
@@ -103,13 +92,6 @@ module ActionLinksHelper
     return false unless can?(:order_copy_cards, WasteCarriersEngine::Registration)
 
     resource.active? && resource.upper_tier?
-  end
-
-  def display_convictions_link_for?(resource)
-    return false unless display_transient_registration_links?(resource) || display_registration_links?(resource)
-    return false unless can?(:review_convictions, WasteCarriersEngine::Registration)
-
-    resource.pending_manual_conviction_check?
   end
 
   def display_renew_link_for?(resource)
