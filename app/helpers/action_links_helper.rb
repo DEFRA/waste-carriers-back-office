@@ -13,8 +13,6 @@ module ActionLinksHelper
   end
 
   def resume_link_for(resource)
-    return "#" unless a_transient_registration?(resource)
-
     ad_privacy_policy_path(resource.reg_identifier)
   end
 
@@ -30,8 +28,6 @@ module ActionLinksHelper
   end
 
   def renew_link_for(resource)
-    return "#" unless a_registration?(resource)
-
     ad_privacy_policy_path(resource.reg_identifier)
   end
 
