@@ -14,8 +14,8 @@ module CanRenewIfPossible
       renewal_completion_service = WasteCarriersEngine::RenewalCompletionService.new(@resource)
       renewal_completion_service.complete_renewal
     rescue StandardError => e
-      Airbrake.notify(e, reg_identifier: @resource.reg_identifier) if defined?(Airbrake)
-      Rails.logger.error "Failed to complete renewal for #{@resource.reg_identifier}: " + e.to_s
+      Airbrake.notify(e, reg_identifier: @resource.reg_identifier)
+      Rails.logger.error e
     end
   end
 end
