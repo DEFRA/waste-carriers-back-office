@@ -35,12 +35,6 @@ module ActionLinksHelper
     ad_privacy_policy_path(resource.reg_identifier)
   end
 
-  def transfer_link_for(resource)
-    return "#" unless a_registration?(resource)
-
-    new_registration_registration_transfer_path(resource.reg_identifier)
-  end
-
   def display_details_link_for?(resource)
     a_transient_registration?(resource) || a_registration?(resource)
   end

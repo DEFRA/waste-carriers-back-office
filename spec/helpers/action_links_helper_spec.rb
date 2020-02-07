@@ -163,24 +163,6 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
-  describe "transfer_link_for" do
-    context "when the resource is a registration" do
-      let(:resource) { create(:registration) }
-
-      it "returns the correct path" do
-        expect(helper.transfer_link_for(resource)).to eq(new_registration_registration_transfer_path(resource.reg_identifier))
-      end
-    end
-
-    context "when the resource is not a registration" do
-      let(:resource) { create(:renewing_registration) }
-
-      it "returns the correct path" do
-        expect(helper.transfer_link_for(resource)).to eq("#")
-      end
-    end
-  end
-
   describe "#display_details_link_for?" do
     context "when the resource is a Registration" do
       let(:resource) { build(:registration) }
