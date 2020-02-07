@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: a531943753e7b1375e26e9bc9a63582d2d90c915
-  branch: implement-defra-ruby-alert
+  revision: 7c2cb01a0227a02c2481cacf6271584027a634f9
+  branch: master
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)
