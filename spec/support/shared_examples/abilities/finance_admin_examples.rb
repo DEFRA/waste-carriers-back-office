@@ -46,6 +46,10 @@ RSpec.shared_examples "finance_admin examples" do
     should_not be_able_to(:revoke, WasteCarriersEngine::Registration)
   end
 
+  it "should not be able to edit a registration" do
+    should_not be_able_to(:edit, WasteCarriersEngine::Registration)
+  end
+
   it "should not be able to record a cheque payment" do
     should_not be_able_to(:record_cheque_payment, WasteCarriersEngine::RenewingRegistration)
   end

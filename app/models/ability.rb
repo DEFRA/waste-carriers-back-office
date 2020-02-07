@@ -35,6 +35,7 @@ class Ability
     can :renew, :all
     can :view_certificate, WasteCarriersEngine::Registration
     can :order_copy_cards, WasteCarriersEngine::Registration
+    can :edit, WasteCarriersEngine::Registration
 
     can :review_convictions, :all
 

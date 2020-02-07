@@ -12,6 +12,10 @@ RSpec.shared_examples "agency examples" do
     should be_able_to(:renew, WasteCarriersEngine::Registration)
   end
 
+  it "should be able to edit a registration" do
+    should be_able_to(:edit, WasteCarriersEngine::Registration)
+  end
+
   it "should be able to review convictions" do
     should be_able_to(:review_convictions, WasteCarriersEngine::RenewingRegistration)
   end
