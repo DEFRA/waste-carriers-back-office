@@ -12,7 +12,7 @@ RSpec.describe "CashPaymentForms", type: :request do
 
   describe "GET /bo/resources/:_id/payments/cash" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, :agency_with_refund) }
       before(:each) do
         sign_in(user)
       end
@@ -70,7 +70,7 @@ RSpec.describe "CashPaymentForms", type: :request do
     end
 
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, :agency_with_refund) }
 
       before(:each) do
         sign_in(user)
