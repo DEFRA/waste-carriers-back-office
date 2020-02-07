@@ -3,6 +3,7 @@
 class WriteOffFormsController < ApplicationController
   include CanFetchResource
   include FinanceDetailsHelper
+  include CanRenewIfPossible
 
   prepend_before_action :authenticate_user!
 
