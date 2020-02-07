@@ -82,6 +82,8 @@ class Ability
   end
 
   def permissions_for_finance_super_user
+    permissions_for_finance_admin_user
+
     can :manage_back_office_users, User
     # rubocop:disable Style/SymbolProc
     can :modify_user, User do |user|

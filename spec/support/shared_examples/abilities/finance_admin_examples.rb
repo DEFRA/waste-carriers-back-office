@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "finance_admin examples" do
-  # Finance admin users can only do two things:
+  # finance_admin and finance_super users should be able to do this:
+
   it "should be able to record a worldpay payment" do
     should be_able_to(:record_worldpay_missed_payment, WasteCarriersEngine::RenewingRegistration)
   end
@@ -10,7 +11,7 @@ RSpec.shared_examples "finance_admin examples" do
     should be_able_to(:view_certificate, WasteCarriersEngine::Registration)
   end
 
-  # Everything else is off-limits.
+  # finance_admin and finance_super users should not be able to do this:
 
   it "should not be able to update a transient registration" do
     should_not be_able_to(:update, WasteCarriersEngine::RenewingRegistration)
@@ -73,17 +74,8 @@ RSpec.shared_examples "finance_admin examples" do
     should_not be_able_to(:transfer_registration, WasteCarriersEngine::Registration)
   end
 
-  it "should not be able to manage back office users" do
-    should_not be_able_to(:manage_back_office_users, User)
-  end
-
   it "should not be able to modify agency users" do
     user = build(:user, :agency)
-    should_not be_able_to(:modify_user, user)
-  end
-
-  it "should not be able to modify finance users" do
-    user = build(:user, :finance)
     should_not be_able_to(:modify_user, user)
   end
 end

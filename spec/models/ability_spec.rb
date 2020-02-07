@@ -66,6 +66,7 @@ RSpec.describe Ability, type: :model do
     let(:role) { "finance_super" }
 
     include_examples "finance_super examples"
+    include_examples "finance_admin examples"
 
     include_examples "non-developer examples"
 
@@ -75,6 +76,7 @@ RSpec.describe Ability, type: :model do
   context "when the user role is finance_admin" do
     let(:role) { "finance_admin" }
 
+    include_examples "below finance_super examples"
     include_examples "finance_admin examples"
 
     include_examples "non-developer examples"
