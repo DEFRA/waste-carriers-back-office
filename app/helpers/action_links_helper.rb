@@ -68,11 +68,10 @@ module ActionLinksHelper
   end
 
   def display_edit_link_for?(resource)
-    # TODO: delete next line filter when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
-    return false if a_registration?(resource)
     return false unless display_registration_links?(resource)
+    return false unless can?(:edit, WasteCarriersEngine::Registration)
 
-    can?(:update, WasteCarriersEngine::Registration)
+    resource.active?
   end
 
   def display_certificate_link_for?(resource)
