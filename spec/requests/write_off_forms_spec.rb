@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "WriteOffForms", type: :request do
   describe "GET /bo/resource/:_id/write-off/new" do
     context "when an agency user is signed in" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
 
       before(:each) do
@@ -67,7 +67,7 @@ RSpec.describe "WriteOffForms", type: :request do
   describe "POST /bo/resource/:_id/write-off" do
     context "when a finance admin user is signed in" do
       let(:user) { create(:user, :finance_admin) }
-      let(:renewing_registration) { create(:renewing_registration, :overpaid) }
+      let(:renewing_registration) { create(:renewing_registration, :overpaid, workflow_state: :renewal_received_form) }
 
       before(:each) do
         sign_in(user)
@@ -83,14 +83,17 @@ RSpec.describe "WriteOffForms", type: :request do
         end
 
         it "generates a new payment, updates the registration balance, returns a 302 status and redirects to the finance details page" do
-          expected_payments_count = renewing_registration.finance_details.payments.count + 1
+          registration = renewing_registration.registration
+          before_request_payments_count = registration.finance_details.payments.count
 
           post resource_write_off_form_path(renewing_registration._id), params
 
-          renewing_registration.reload
+          transient_registrations_count = WasteCarriersEngine::RenewingRegistration.where(reg_identifier: renewing_registration.reg_identifier).count
+          registration.reload
 
-          expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
-          expect(renewing_registration.finance_details.balance).to eq(0)
+          expect(transient_registrations_count).to eq(0)
+          expect(registration.finance_details.payments.count).to be > before_request_payments_count
+          expect(registration.finance_details.balance).to eq(0)
           expect(response).to have_http_status(302)
           expect(response).to redirect_to(resource_finance_details_path(renewing_registration._id))
         end

@@ -18,7 +18,7 @@
 
     <% if display_transfer_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.transfer"), transfer_link_for(resource) %>
+        <%= link_to t(".actions_box.links.transfer"), new_registration_registration_transfer_path(resource.reg_identifier) %>
       </li>
     <% end %>
 
@@ -26,13 +26,13 @@
 
     <% if display_edit_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.edit"), "#" %>
+        <%= link_to t(".actions_box.links.edit"), WasteCarriersEngine::Engine.routes.url_helpers.new_edit_form_path(resource.reg_identifier) %>
       </li>
     <% end %>
 
-    <% if display_view_confirmation_letter_link_for?(resource) %>
+    <% if display_certificate_link_for?(resource) %>
       <li>
-        <%= link_to t(".actions_box.links.view_confirmation_letter"), "#" %>
+        <%= link_to t(".actions_box.links.certificate"), registration_certificate_path(resource.reg_identifier) %>
       </li>
     <% end %>
 

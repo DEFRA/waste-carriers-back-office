@@ -67,7 +67,7 @@ en:
             renew: "Renew"
             transfer: "Transfer to another account"
             edit: "Edit registration"
-            view_confirmation_letter: "View certificate"
+            certificate: "View certificate"
             order_copy_cards: "Order registration cards"
             payment_details: "Payment details"
             process_payment: "Process payment"

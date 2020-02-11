@@ -21,6 +21,7 @@ env:
     - WCRS_WORLDPAY_MOTO_PASSWORD=
     - WCRS_WORLDPAY_ECOM_USERNAME=
     - WCRS_WORLDPAY_ECOM_PASSWORD=
+    - WCRS_USE_XVFB_FOR_WICKEDPDF=true
 
 language: ruby
 rvm: 2.4.2
@@ -35,6 +36,9 @@ services:
   - mongodb
 before_install:
   - export TZ=UTC
+  - sudo apt-get install xvfb -y
+  - sudo apt-get install ttf-liberation -y
+  - sudo apt-get install wkhtmltopdf -y
   - gem install -v 1.17.2 bundler --no-rdoc --no-ri
 
 before_script:

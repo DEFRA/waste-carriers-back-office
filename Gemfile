@@ -3,9 +3,6 @@
 source "https://rubygems.org"
 ruby "2.4.2"
 
-# Use Airbrake for error reporting to Errbit
-# Version 6 and above cause errors with Errbit, so use 5.8.1 for now
-gem "airbrake", "5.8.1"
 # Use CoffeeScript for .coffee assets and views
 gem "coffee-rails", "~> 4.1.0"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -49,6 +46,8 @@ gem "kaminari-mongoid", "~> 1.0"
 
 # Use Whenever to manage cron tasks
 gem "whenever", "~> 0.10.0"
+
+gem "wicked_pdf"
 
 # Use the Defra Ruby Aws gem for loading files to AWS buckets
 gem "defra_ruby_aws", "~> 0.2.0"

@@ -35,29 +35,29 @@ class Ability
     can :renew, :all
     can :view_certificate, WasteCarriersEngine::Registration
     can :order_copy_cards, WasteCarriersEngine::Registration
-
-    can :record_cash_payment, :all
-    can :record_cheque_payment, :all
-    can :record_postal_order_payment, :all
+    can :edit, WasteCarriersEngine::Registration
 
     can :review_convictions, :all
 
     can :revert_to_payment_summary, :all
 
     can :transfer_registration, WasteCarriersEngine::Registration
-
-    can :write_off_small, WasteCarriersEngine::FinanceDetails do |finance_details|
-      finance_details.zero_difference_balance < write_off_agency_user_cap
-    end
   end
 
   def permissions_for_agency_user_with_refund
     permissions_for_agency_user
 
     can :view_revoked_reasons, :all
-    can :refund, :all
     can :cease, WasteCarriersEngine::Registration
     can :revoke, WasteCarriersEngine::Registration
+
+    can :refund, :all
+    can :record_cash_payment, :all
+    can :record_cheque_payment, :all
+    can :record_postal_order_payment, :all
+    can :write_off_small, WasteCarriersEngine::FinanceDetails do |finance_details|
+      finance_details.zero_difference_balance <= write_off_agency_user_cap
+    end
   end
 
   def permissions_for_finance_user
@@ -84,6 +84,8 @@ class Ability
   end
 
   def permissions_for_finance_super_user
+    permissions_for_finance_admin_user
+
     can :manage_back_office_users, User
     can :charge_adjust, :all
 

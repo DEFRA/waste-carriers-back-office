@@ -158,7 +158,7 @@
                     <% end %>
                   <% if display_transfer_link_for?(result) %>
                     <li>
-                      <%= link_to transfer_link_for(result) do %>
+                      <%= link_to new_registration_registration_transfer_path(result.reg_identifier) do %>
                         <%= t(".results.actions.transfer.link_text") %>
                         <span class="visually-hidden">
                           <%= t(".results.actions.transfer.visually_hidden_text",

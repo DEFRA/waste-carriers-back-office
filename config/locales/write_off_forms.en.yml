@@ -15,4 +15,4 @@ en:
           attributes:
             comment:
               blank: "Enter a comment or note"
-              too_long: "Comment or note must be 250 characters or fewer"
+              too_long: "Comment or note must be %{count} characters or fewer"

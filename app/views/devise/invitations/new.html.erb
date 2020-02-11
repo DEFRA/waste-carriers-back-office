@@ -7,6 +7,8 @@
                  url: invitation_path(resource_name),
                  html: { method: :post } do |f| %>
 
+      <%= render("waste_carriers_engine/shared/errors", object: resource) %>
+
       <h1 class="heading-large">
         <%= t(".heading") %>
       </h1>
@@ -14,8 +16,6 @@
       <p><%= t(".paragraph_1") %></p>
       <p><%= t(".paragraph_2") %></p>
       <p><%= t(".paragraph_3") %></p>
-
-      <%= render("waste_carriers_engine/shared/errors", object: resource) %>
 
       <% resource.class.invite_key_fields.each do |field| %>
         <fieldset id="<%= field %>">
