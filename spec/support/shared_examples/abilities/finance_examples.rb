@@ -10,6 +10,24 @@ RSpec.shared_examples "finance examples" do
     should be_able_to(:view_certificate, WasteCarriersEngine::Registration)
   end
 
+  context ":revert" do
+    context "when the payment is a bank transfer" do
+      let(:payment) { build(:payment, :bank_transfer) }
+
+      it "should be able to revert the payment" do
+        should be_able_to(:revert, payment)
+      end
+    end
+
+    context "when the payment is another type" do
+      let(:payment) { build(:payment) }
+
+      it "should not be able to revert the payment" do
+        should_not be_able_to(:revert, payment)
+      end
+    end
+  end
+
   # Everything else is off-limits.
 
   it "should not be able to update a transient registration" do

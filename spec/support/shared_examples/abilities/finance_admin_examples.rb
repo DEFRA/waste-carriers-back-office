@@ -11,7 +11,31 @@ RSpec.shared_examples "finance_admin examples" do
     should be_able_to(:view_certificate, WasteCarriersEngine::Registration)
   end
 
-  # finance_admin and finance_super users should not be able to do this:
+  context ":revert" do
+    context "when the payment is a worldpay" do
+      let(:payment) { build(:payment, :worldpay) }
+
+      it "should be able to revert the payment" do
+        should be_able_to(:revert, payment)
+      end
+    end
+
+    context "when the payment is a worldpay_missed" do
+      let(:payment) { build(:payment, :worldpay_missed) }
+
+      it "should be able to revert the payment" do
+        should be_able_to(:revert, payment)
+      end
+    end
+
+    context "when the payment is another type" do
+      let(:payment) { build(:payment) }
+
+      it "should not be able to revert the payment" do
+        should_not be_able_to(:revert, payment)
+      end
+    end
+  end
 
   it "should not be able to update a transient registration" do
     should_not be_able_to(:update, WasteCarriersEngine::RenewingRegistration)
