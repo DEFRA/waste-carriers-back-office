@@ -27,6 +27,12 @@ Rails.application.routes.draw do
                         only: %i[index new create],
                         param: :order_key
 
+              resources :reversal_forms,
+                        only: %i[index new create],
+                        path: "reversals",
+                        path_names: { new: ":order_key/new" },
+                        param: :order_key
+
               resources :payments,
                         only: %i[new create]
 
