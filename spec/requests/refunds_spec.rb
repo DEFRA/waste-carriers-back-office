@@ -63,13 +63,13 @@ RSpec.describe "Refunds", type: :request do
       let(:payment) { renewing_registration.finance_details.payments.first }
 
       before(:each) do
+        renewing_registration.finance_details.orders.first.order_code = payment.order_key
+        renewing_registration.save
+
         sign_in(user)
       end
 
       it "creates a refund payment, redirects to the finance details page and returns a 302 status" do
-        payment.payment_type = WasteCarriersEngine::Payment::CASH
-        payment.save
-
         expected_payments_count = renewing_registration.finance_details.payments.count + 1
 
         post resource_refunds_path(renewing_registration._id), order_key: payment.order_key
