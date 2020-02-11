@@ -11,27 +11,23 @@ FactoryBot.define do
     end
 
     trait :cheque do
-      payment_type { "CHEQUE" }
+      payment_type { WasteCarriersEngine::Payment::CHEQUE }
     end
 
     trait :cash do
-      payment_type { "CASH" }
+      payment_type { WasteCarriersEngine::Payment::CASH }
     end
 
     trait :postal_order do
-      payment_type { "POSTALORDER" }
-    end
-
-    trait :bank_transfer do
-      payment_type { "BANKTRANSFER" }
+      payment_type { WasteCarriersEngine::Payment::POSTALORDER }
     end
 
     trait :worldpay do
-      payment_type { "WORLDPAY" }
+      payment_type { WasteCarriersEngine::Payment::WORLDPAY }
     end
 
     trait :worldpay_missed do
-      payment_type { "WORLDPAY_MISSED" }
+      payment_type { WasteCarriersEngine::Payment::WORLDPAY_MISSED }
     end
   end
 end

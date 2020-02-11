@@ -51,9 +51,9 @@ module ActionLinksHelper
   end
 
   def display_revert_link?
-    return false unless current_user
+    roles_with_revert_ability = %w[agency_with_refund agency_super finance_admin finance finance_super]
 
-    %w[agency_with_refund agency_super finance_admin finance finance_super].include?(current_user.role)
+    roles_with_revert_ability.include?(current_user.role)
   end
 
   def display_finance_details_link_for?(resource)
