@@ -15,20 +15,20 @@ RSpec.shared_examples "finance examples" do
     should be_able_to(:view_certificate, WasteCarriersEngine::Registration)
   end
 
-  context ":revert" do
+  context ":reverse" do
     context "when the payment is a bank transfer" do
       let(:payment) { build(:payment, :bank_transfer) }
 
-      it "should be able to revert the payment" do
-        should be_able_to(:revert, payment)
+      it "should be able to reverse the payment" do
+        should be_able_to(:reverse, payment)
       end
     end
 
     context "when the payment is another type" do
       let(:payment) { build(:payment) }
 
-      it "should not be able to revert the payment" do
-        should_not be_able_to(:revert, payment)
+      it "should not be able to reverse the payment" do
+        should_not be_able_to(:reverse, payment)
       end
     end
   end

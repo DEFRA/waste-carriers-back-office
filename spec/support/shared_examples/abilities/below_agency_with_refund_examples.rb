@@ -5,36 +5,36 @@ RSpec.shared_examples "below agency_with_refund examples" do
     should_not be_able_to(:view_revoked_reasons, WasteCarriersEngine::RenewingRegistration)
   end
 
-  context ":revert" do
+  context ":reverse" do
     context "when the payment is a cash payment" do
       let(:payment) { build(:payment, :cash) }
 
-      it "should not be able to revert the payment" do
-        should_not be_able_to(:revert, payment)
+      it "should not be able to reverse the payment" do
+        should_not be_able_to(:reverse, payment)
       end
     end
 
     context "when the payment is a cheque payment" do
       let(:payment) { build(:payment, :cheque) }
 
-      it "should not be able to revert the payment" do
-        should_not be_able_to(:revert, payment)
+      it "should not be able to reverse the payment" do
+        should_not be_able_to(:reverse, payment)
       end
     end
 
     context "when the payment is a postal order" do
       let(:payment) { build(:payment, :postal_order) }
 
-      it "should not be able to revert the payment" do
-        should_not be_able_to(:revert, payment)
+      it "should not be able to reverse the payment" do
+        should_not be_able_to(:reverse, payment)
       end
     end
 
     context "when the payment is another type" do
       let(:payment) { build(:payment) }
 
-      it "should not be able to revert the payment" do
-        should_not be_able_to(:revert, payment)
+      it "should not be able to reverse the payment" do
+        should_not be_able_to(:reverse, payment)
       end
     end
   end

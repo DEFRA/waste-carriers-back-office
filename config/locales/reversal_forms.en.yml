@@ -1,7 +1,7 @@
 en:
   reversal_forms:
     flash_messages:
-      successful: "£%{amount} reverted successfully"
+      successful: "£%{amount} reversed successfully"
     index:
       title: "Reverse a payment"
       heading: "Which payment do you want to reverse?"

@@ -49,7 +49,7 @@
               <%= display_pence_as_pounds_and_cents(payment.amount) %>
             </td>
             <td>
-              <% if payment.revertible? %>
+              <% if payment.reversible? %>
                 <%= link_to new_resource_reversal_form_path(resource_id: @resource._id, order_key: payment.order_key) do %>
                   <%= t(".reverse_payment") %>
                   <span class="visually-hidden">

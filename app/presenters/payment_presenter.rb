@@ -11,8 +11,8 @@ class PaymentPresenter < WasteCarriersEngine::BasePresenter
     refunded_payment.present?
   end
 
-  def already_reverted?
-    reverted_payment.present?
+  def already_reversed?
+    reversed_payment.present?
   end
 
   def refunded_message
@@ -24,16 +24,16 @@ class PaymentPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def no_action_message
-    if already_reverted?
+    if already_reversed?
       I18n.t(".reversal_forms.index.already_reverted")
     else
       I18n.t(".reversal_forms.index.not_applicable")
     end
   end
 
-  def revertible?
-    return false unless @view.current_user.can?(:revert, __getobj__)
-    return false if already_reverted?
+  def reversible?
+    return false unless @view.current_user.can?(:reverse, __getobj__)
+    return false if already_reversed?
 
     true
   end
@@ -44,7 +44,7 @@ class PaymentPresenter < WasteCarriersEngine::BasePresenter
     @_refunded_payment ||= finance_details.payments.where(order_key: "#{order_key}_REFUNDED").first
   end
 
-  def reverted_payment
-    @_reverted_payment ||= finance_details.payments.where(order_key: "#{order_key}_REVERSAL").first
+  def reversed_payment
+    @_reversed_payment ||= finance_details.payments.where(order_key: "#{order_key}_REVERSAL").first
   end
 end

@@ -4,7 +4,7 @@
       <%= link_to t(".enter_payment"), new_resource_payment_path(registration._id), class: "button wcr-finance-button" %>
     <% end %>
 
-    <% if display_revert_link? %>
+    <% if display_reverse_link? %>
       <%= link_to t(".reverse_payment"), resource_reversal_forms_path(registration._id), class: "button wcr-finance-button" %>
     <% end %>
 

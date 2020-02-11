@@ -61,7 +61,7 @@ class Ability
       finance_details.zero_difference_balance <= write_off_agency_user_cap
     end
 
-    can :revert, WasteCarriersEngine::Payment do |payment|
+    can :reverse, WasteCarriersEngine::Payment do |payment|
       payment.cash? || payment.postal_order? || payment.cheque?
     end
   end
@@ -70,7 +70,7 @@ class Ability
     can :view_certificate, WasteCarriersEngine::Registration
     can :record_bank_transfer_payment, :all
 
-    can :revert, WasteCarriersEngine::Payment, &:bank_transfer?
+    can :reverse, WasteCarriersEngine::Payment, &:bank_transfer?
   end
 
   def permissions_for_finance_admin_user
@@ -79,7 +79,7 @@ class Ability
     can :view_certificate, WasteCarriersEngine::Registration
     can :record_worldpay_missed_payment, :all
 
-    can :revert, WasteCarriersEngine::Payment do |payment|
+    can :reverse, WasteCarriersEngine::Payment do |payment|
       payment.worldpay? || payment.worldpay_missed?
     end
   end

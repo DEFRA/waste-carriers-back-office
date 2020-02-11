@@ -137,7 +137,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
-  describe "#display_revert_link?" do
+  describe "#display_reverse_link?" do
     let(:current_user) { double(:current_user, role: role) }
 
     before do
@@ -148,7 +148,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:role) { "agency_with_refund" }
 
       it "returns true" do
-        expect(helper.display_revert_link?).to be_truthy
+        expect(helper.display_reverse_link?).to be_truthy
       end
     end
 
@@ -156,15 +156,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:role) { "foo" }
 
       it "returns false" do
-        expect(helper.display_revert_link?).to be_falsey
-      end
-    end
-
-    context "when there is no current user" do
-      let(:current_user) { nil }
-
-      it "returns false" do
-        expect(helper.display_revert_link?).to be_falsey
+        expect(helper.display_reverse_link?).to be_falsey
       end
     end
   end

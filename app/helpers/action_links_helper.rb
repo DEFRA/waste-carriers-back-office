@@ -50,10 +50,10 @@ module ActionLinksHelper
     can?(:refund, resource)
   end
 
-  def display_revert_link?
-    roles_with_revert_ability = %w[agency_with_refund agency_super finance_admin finance finance_super]
+  def display_reverse_link?
+    roles_with_reverse_ability = %w[agency_with_refund agency_super finance_admin finance finance_super]
 
-    roles_with_revert_ability.include?(current_user.role)
+    roles_with_reverse_ability.include?(current_user.role)
   end
 
   def display_finance_details_link_for?(resource)

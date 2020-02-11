@@ -49,6 +49,6 @@ class ReversalFormsController < ResourceFormsController
   end
 
   def authorize_user
-    authorize! :revert, payment
+    authorize! :reverse, payment
   end
 end

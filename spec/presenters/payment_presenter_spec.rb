@@ -53,42 +53,42 @@ RSpec.describe PaymentPresenter do
     end
   end
 
-  describe "#already_reverted?" do
+  describe "#already_reversed?" do
     before do
       scope = double(:scope)
 
       expect(finance_details).to receive(:payments).and_return(scope)
-      expect(scope).to receive(:where).with(order_key: "123_REVERSAL").and_return([reverted_payment])
+      expect(scope).to receive(:where).with(order_key: "123_REVERSAL").and_return([reversed_payment])
     end
 
     context "if a reversal payment exist for that order key" do
-      let(:reverted_payment) { double(:reverted_payment) }
+      let(:reversed_payment) { double(:reversed_payment) }
 
       it "returns true" do
-        expect(subject).to be_already_reverted
+        expect(subject).to be_already_reversed
       end
     end
 
     context "if a reversal payment do not exist for that order key" do
-      let(:reverted_payment) {}
+      let(:reversed_payment) {}
 
       it "returns false" do
-        expect(subject).to_not be_already_reverted
+        expect(subject).to_not be_already_reversed
       end
     end
   end
 
   describe "#no_action_message" do
-    let(:reverted_payment) { double(:reverted_payment) }
+    let(:reversed_payment) { double(:reversed_payment) }
 
     before do
-      allow(subject).to receive(:already_reverted?).and_return(already_reverted)
+      allow(subject).to receive(:already_reversed?).and_return(already_reversed)
     end
 
-    context "when the payment was already reverted" do
-      let(:already_reverted) { true }
+    context "when the payment was already reversed" do
+      let(:already_reversed) { true }
 
-      it "returns an already reverted message" do
+      it "returns an already reversed message" do
         result = double(:result)
 
         expect(I18n).to receive(:t).with(".reversal_forms.index.already_reversed").and_return(result)
@@ -96,10 +96,10 @@ RSpec.describe PaymentPresenter do
       end
     end
 
-    context "when the payment was not reverted" do
-      let(:already_reverted) { false }
+    context "when the payment was not reversed" do
+      let(:already_reversed) { false }
 
-      it "returns an already reverted message" do
+      it "returns an already reversed message" do
         result = double(:result)
 
         expect(I18n).to receive(:t).with(".reversal_forms.index.not_applicable").and_return(result)
@@ -108,42 +108,42 @@ RSpec.describe PaymentPresenter do
     end
   end
 
-  describe "#revertible?" do
+  describe "#reversible?" do
     let(:user) { double(:user) }
     let(:view) { double(:view, current_user: user) }
 
     before do
-      allow(user).to receive(:can?).with(:revert, payment).and_return(can)
+      allow(user).to receive(:can?).with(:reverse, payment).and_return(can)
     end
 
-    context "when current user cannot revert the object" do
+    context "when current user cannot reverse the object" do
       let(:can) { false }
 
       it "returns false" do
-        expect(subject).to_not be_revertible
+        expect(subject).to_not be_reversible
       end
     end
 
-    context "when current user can revert the object" do
+    context "when current user can reverse the object" do
       let(:can) { true }
 
       before do
-        allow(subject).to receive(:already_reverted?).and_return(already_reverted)
+        allow(subject).to receive(:already_reversed?).and_return(already_reversed)
       end
 
-      context "when the payment is already reverted" do
-        let(:already_reverted) { true }
+      context "when the payment is already reversed" do
+        let(:already_reversed) { true }
 
         it "returns false" do
-          expect(subject).to_not be_revertible
+          expect(subject).to_not be_reversible
         end
       end
 
-      context "when the payment has not been reverted yet" do
-        let(:already_reverted) { false }
+      context "when the payment has not been reversed yet" do
+        let(:already_reversed) { false }
 
         it "returns true" do
-          expect(subject).to be_revertible
+          expect(subject).to be_reversible
         end
       end
     end
