@@ -2,7 +2,7 @@
 
 class PositiveChargeAdjustForm < WasteCarriersEngine::BaseForm
   include CanHaveChargeAdjustAttributes
-  include CanConvertStringToCents
+  include CanConvertStringToPence
 
   def submit(params)
     # Assign the params for validation
@@ -12,6 +12,6 @@ class PositiveChargeAdjustForm < WasteCarriersEngine::BaseForm
 
     return false unless valid?
 
-    self.amount = string_to_cents(amount)
+    self.amount = string_to_pence(amount)
   end
 end

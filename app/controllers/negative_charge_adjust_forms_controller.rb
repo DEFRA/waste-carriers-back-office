@@ -29,6 +29,6 @@ class NegativeChargeAdjustFormsController < ResourceFormsController
   end
 
   def authorize_user
-    raise CanCan::AccessDenied unless can?(:charge_adjust, @resource)
+    authorize! :charge_adjust, @resource
   end
 end

@@ -16,12 +16,6 @@ class ProcessChargeAdjustService < WasteCarriersEngine::BaseService
   attr_reader :form, :user
 
   def build_order
-    order_item = WasteCarriersEngine::OrderItem.new_charge_adjust_item
-
-    order_item.amount = form.amount
-    order_item.description = form.description
-    order_item.reference = form.reference
-
     order = WasteCarriersEngine::Order.new_order_for(user)
 
     order.description = form.description
@@ -29,8 +23,18 @@ class ProcessChargeAdjustService < WasteCarriersEngine::BaseService
     order.payment_method = "UNKNOWN"
     order.merchant_id = "n/a"
 
-    order.order_items = [order_item]
+    order.order_items = [build_order_item]
 
     order
+  end
+
+  def build_order_item
+    order_item = WasteCarriersEngine::OrderItem.new_charge_adjust_item
+
+    order_item.amount = form.amount
+    order_item.description = form.description
+    order_item.reference = form.reference
+
+    order_item
   end
 end
