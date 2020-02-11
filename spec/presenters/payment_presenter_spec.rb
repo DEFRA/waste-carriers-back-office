@@ -61,7 +61,7 @@ RSpec.describe PaymentPresenter do
       expect(scope).to receive(:where).with(order_key: "123_REVERSAL").and_return([reverted_payment])
     end
 
-    context "if a rerversal payment exist for that order key" do
+    context "if a reversal payment exist for that order key" do
       let(:reverted_payment) { double(:reverted_payment) }
 
       it "returns true" do
@@ -69,7 +69,7 @@ RSpec.describe PaymentPresenter do
       end
     end
 
-    context "if a rerversal payment do not exist for that order key" do
+    context "if a reversal payment do not exist for that order key" do
       let(:reverted_payment) {}
 
       it "returns false" do
@@ -102,7 +102,7 @@ RSpec.describe PaymentPresenter do
       it "returns an already reverted message" do
         result = double(:result)
 
-        expect(I18n).to receive(:t).with(".reversal_forms.index.not_aplicable").and_return(result)
+        expect(I18n).to receive(:t).with(".reversal_forms.index.not_applicable").and_return(result)
         expect(subject.no_action_message).to eq(result)
       end
     end

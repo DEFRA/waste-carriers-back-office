@@ -12,7 +12,7 @@ en:
       action: "Action"
       reverse_payment: "Reverse payment"
       reverse_payment_alt: "Reverse payment from %{date} by %{method} for %{amount}"
-      not_aplicable: "n/a"
+      not_applicable: "n/a"
       already_reversed: "Already reversed"
     new:
       title: "Reverse a payment"
