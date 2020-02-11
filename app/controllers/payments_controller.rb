@@ -3,6 +3,7 @@
 class PaymentsController < ApplicationController
   include CanFetchResource
 
+  prepend_before_action :authorize_user
   prepend_before_action :authenticate_user!
   before_action :define_payment_types
 
@@ -41,5 +42,9 @@ class PaymentsController < ApplicationController
       "new_resource_#{payment_type}_payment_form_path",
       @resource._id
     )
+  end
+
+  def authorize_user
+    authorize! :view_payments, WasteCarriersEngine::Registration
   end
 end
