@@ -25,6 +25,10 @@ RSpec.shared_examples "agency_with_refund examples" do
     should be_able_to(:record_postal_order_payment, WasteCarriersEngine::RenewingRegistration)
   end
 
+  it "should be able to view payments" do
+    should be_able_to(:view_payments, WasteCarriersEngine::RenewingRegistration)
+  end
+
   context ":reverse" do
     context "when the payment is a cash payment" do
       let(:payment) { build(:payment, :cash) }

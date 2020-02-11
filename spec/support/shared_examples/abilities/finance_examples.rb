@@ -11,6 +11,10 @@ RSpec.shared_examples "finance examples" do
     should_not be_able_to(:charge_adjust, WasteCarriersEngine::Registration)
   end
 
+  it "should be able to view payments" do
+    should be_able_to(:view_payments, WasteCarriersEngine::RenewingRegistration)
+  end
+
   it "should be able to view the certificate" do
     should be_able_to(:view_certificate, WasteCarriersEngine::Registration)
   end
