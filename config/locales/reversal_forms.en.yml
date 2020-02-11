@@ -1,0 +1,31 @@
+en:
+  reversal_forms:
+    flash_messages:
+      successful: "£%{amount} reverted successfully"
+    index:
+      title: "Reverse a payment"
+      heading: "Which payment do you want to reverse?"
+      date: "Date"
+      type: "Type"
+      reference: "Reference"
+      amount: "Amount"
+      action: "Action"
+      reverse_payment: "Reverse payment"
+      reverse_payment_alt: "Reverse payment from %{date} by %{method} for %{amount}"
+      not_aplicable: "n/a"
+      already_reversed: "Already reversed"
+    new:
+      title: "Reverse a payment"
+      heading: "Reverse a payment for %{reg_identifier}"
+      reverse_payment: "Reverse payment of £%{amount}"
+      reason:
+        label: "Reason"
+      confirm: "Reverse payment"
+  activemodel:
+    errors:
+      models:
+        reversal_form:
+          attributes:
+            reason:
+              blank: "Enter a reason"
+              too_long: "Reason must be %{count} characters or fewer"

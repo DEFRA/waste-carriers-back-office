@@ -1,0 +1,40 @@
+<div class="grid-row">
+  <div class="column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: resource_refunds_path(@resource._id)) %>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <%= render("waste_carriers_engine/shared/errors", object: @reversal_form) %>
+
+    <h1 class="heading-large">
+      <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
+    </h1>
+
+    <div class="form-group">
+      <%= render "shared/company_details_panel", registration: @resource %>
+    </div>
+
+    <h2 class="heading-medium strong">
+      <%= t(".reverse_payment", amount: display_pence_as_pounds_and_cents(@payment.amount)) %>
+    </h2>
+
+    <%= form_for(@reversal_form, url: resource_reversal_forms_path(@resource._id, order_key: params[:order_key])) do |f| %>
+      <div class="form-group <%= "form-group-error" if @reversal_form.errors[:reason].any? %>">
+        <fieldset id="reason">
+          <% if @reversal_form.errors[:reason].any? %>
+            <span class="error-message"><%= @reversal_form.errors[:reason].join(", ") %></span>
+          <% end %>
+
+          <%= f.label :reason, t(".reason.label"), class: "form-label" %>
+          <%= f.text_area :reason, class: "form-control" %>
+        </fieldset>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit t(".confirm"), class: "button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

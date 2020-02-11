@@ -1,0 +1,72 @@
+<div class="grid-row">
+  <div class="column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: resource_finance_details_path(@resource._id)) %>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large">
+      <%= t(".heading") %>
+    </h1>
+
+    <%= render "shared/company_details_panel", registration: @resource %>
+
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <%= t(".date") %>
+          </th>
+          <th>
+            <%= t(".type") %>
+          </th>
+          <th>
+            <%= t(".reference") %>
+          </th>
+          <th class="numeric">
+            <%= t(".amount") %>
+          </th>
+          <th>
+            <%= t(".action") %>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @payments.each do |payment| %>
+          <tr>
+            <td>
+              <%= payment.date_received.to_formatted_s(:day_month_year_time_slashes) %>
+            </td>
+            <td>
+              <%= t("shared.payment_type.#{payment.payment_type}") %>
+            </td>
+            <td>
+              <%= payment.order_key %>/<%= payment.registration_reference %>
+            </td>
+            <td class="numeric">
+              <%= display_pence_as_pounds_and_cents(payment.amount) %>
+            </td>
+            <td>
+              <% if payment.revertible? %>
+                <%= link_to new_resource_reversal_form_path(resource_id: @resource._id, order_key: payment.order_key) do %>
+                  <%= t(".reverse_payment") %>
+                  <span class="visually-hidden">
+                    <%= t(".reverse_payment_alt",
+                          date: payment.date_received.to_formatted_s(:day_month_year_time_slashes),
+                          method: t("shared.payment_type.#{payment.payment_type}"),
+                          amount: display_pence_as_pounds_and_cents(payment.amount)) %>
+                  </span>
+                <% end %>
+              <% else %>
+                <%= payment.no_action_message %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
