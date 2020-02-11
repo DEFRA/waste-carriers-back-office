@@ -26,7 +26,7 @@ RSpec.describe ProcessReversalService do
       expect(finance_details).to receive(:update_balance)
       expect(finance_details).to receive(:save!)
 
-      described_class.run({ finance_details: finance_details, payment: payment, user: user, reason: reason })
+      described_class.run(finance_details: finance_details, payment: payment, user: user, reason: reason)
     end
   end
 end

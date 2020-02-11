@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
+
 class Ability
   include CanCan::Ability
 
@@ -59,22 +61,16 @@ class Ability
       finance_details.zero_difference_balance <= write_off_agency_user_cap
     end
 
-    # rubocop:disable Style/SymbolProc
     can :revert, WasteCarriersEngine::Payment do |payment|
       payment.cash? || payment.postal_order? || payment.cheque?
     end
-    # rubocop:enable Style/SymbolProc
   end
 
   def permissions_for_finance_user
     can :view_certificate, WasteCarriersEngine::Registration
     can :record_bank_transfer_payment, :all
 
-    # rubocop:disable Style/SymbolProc
-    can :revert, WasteCarriersEngine::Payment do |payment|
-      payment.bank_transfer?
-    end
-    # rubocop:enable Style/SymbolProc
+    can :revert, WasteCarriersEngine::Payment, &:bank_transfer?
   end
 
   def permissions_for_finance_admin_user
@@ -83,11 +79,9 @@ class Ability
     can :view_certificate, WasteCarriersEngine::Registration
     can :record_worldpay_missed_payment, :all
 
-    # rubocop:disable Style/SymbolProc
     can :revert, WasteCarriersEngine::Payment do |payment|
       payment.worldpay? || payment.worldpay_missed?
     end
-    # rubocop:enable Style/SymbolProc
   end
 
   def permissions_for_agency_super_user
@@ -154,3 +148,4 @@ class Ability
     @_write_off_agency_user_cap ||= WasteCarriersBackOffice::Application.config.write_off_agency_user_cap.to_i
   end
 end
+# rubocop:enable Metrics/ClassLength
