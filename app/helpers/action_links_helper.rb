@@ -50,6 +50,12 @@ module ActionLinksHelper
     can?(:refund, resource)
   end
 
+  def display_revert_link?
+    return false unless current_user
+
+    %w[agency_with_refund agency_super finance_admin finance finance_super].include?(current_user.role)
+  end
+
   def display_finance_details_link_for?(resource)
     # TODO: Temporary - for release only. See: https://eaflood.atlassian.net/browse/RUBY-846
     return false

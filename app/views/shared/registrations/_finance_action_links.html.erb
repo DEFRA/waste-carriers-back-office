@@ -1,11 +1,12 @@
 <div class="grid-row">
   <div class="column-full">
-
     <% if display_payment_link_for?(registration) %>
       <%= link_to t(".enter_payment"), new_resource_payment_path(registration._id), class: "button wcr-finance-button" %>
     <% end %>
 
-    <%= link_to t(".reverse_payment"), "#TODO", class: "button wcr-finance-button" %>
+    <% if display_revert_link? %>
+      <%= link_to t(".reverse_payment"), resource_reversal_forms_path(registration._id), class: "button wcr-finance-button" %>
+    <% end %>
 
     <% if display_write_off_large_link_for?(registration.finance_details) %>
       <%= link_to t(".write_off_l"), new_resource_write_off_form_path(registration._id), class: "button wcr-finance-button" %>
