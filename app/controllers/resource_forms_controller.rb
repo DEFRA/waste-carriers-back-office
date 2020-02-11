@@ -6,7 +6,7 @@ class ResourceFormsController < ApplicationController
   include CanFetchResource
 
   prepend_before_action :authenticate_user!
-  before_action :authorize_if_required
+  before_action :authorize_if_required, only: %i[new create]
 
   def new(form_class, form)
     set_up_form(form_class, form)
