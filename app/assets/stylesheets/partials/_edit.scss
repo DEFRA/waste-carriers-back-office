@@ -1,0 +1,32 @@
+.edit_linker {
+  display: inline-block;
+  padding-left: 0.5em;
+  padding-top: 0.45em;
+}
+
+.edit_table {
+  caption {
+    .heading-medium {
+      margin-bottom: .1em;
+    }
+
+    .float-right {
+      float: right;
+    }
+  }
+
+  .label_column {
+    width: 10em;
+    vertical-align: top;
+  }
+
+  .change_link_column {
+    width: 8em;
+    text-align: right;
+    vertical-align: top;
+  }
+
+  .people_list {
+    margin: 0;
+  }
+}
