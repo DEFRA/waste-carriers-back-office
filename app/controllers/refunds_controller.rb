@@ -43,7 +43,7 @@ class RefundsController < ApplicationController
   private
 
   def fetch_payment
-    @payment = @resource.finance_details.payments.refundable.find_by(order_key: params[:order_key])
+    @payment = @resource.finance_details.payments.refundable.where(order_key: params[:order_key]).first
   end
 
   def authorise_user!
