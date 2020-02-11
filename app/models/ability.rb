@@ -78,6 +78,7 @@ class Ability
   end
 
   def permissions_for_finance_admin_user
+    can :charge_adjust, :all
     can :write_off_large, WasteCarriersEngine::FinanceDetails
     can :view_certificate, WasteCarriersEngine::Registration
     can :record_worldpay_missed_payment, :all
@@ -104,6 +105,8 @@ class Ability
     permissions_for_finance_admin_user
 
     can :manage_back_office_users, User
+    can :charge_adjust, :all
+
     # rubocop:disable Style/SymbolProc
     can :modify_user, User do |user|
       user.in_finance_group?

@@ -346,30 +346,33 @@ RSpec.describe ActionLinksHelper, type: :helper do
     context "when the resource is a registration" do
       let(:resource) { build(:registration) }
 
-      it "returns false" do
-        expect(helper.display_edit_link_for?(resource)).to eq(false)
+      before do
+        expect(helper).to receive(:can?).with(:edit, WasteCarriersEngine::Registration).and_return(can)
       end
 
-      # TODO: re-implement when internal route exists https://eaflood.atlassian.net/browse/RUBY-786
-      # before do
-      #   expect(helper).to receive(:can?).with(:update, WasteCarriersEngine::Registration).and_return(can)
-      # end
+      context "when the user has permission for editing" do
+        let(:can) { true }
 
-      # context "when the user has permission for revoking" do
-      #   let(:can) { true }
+        before do
+          expect(resource).to receive(:active?).and_return(active)
+        end
 
-      #   it "returns true" do
-      #     expect(helper.display_edit_link_for?(resource)).to be_truthy
-      #   end
-      # end
+        context "when the resource is active" do
+          let(:active) { true }
 
-      # context "when the user has no permission for revoking" do
-      #   let(:can) { false }
+          it "returns true" do
+            expect(helper.display_edit_link_for?(resource)).to be_truthy
+          end
+        end
 
-      #   it "returns false" do
-      #     expect(helper.display_edit_link_for?(resource)).to be_falsey
-      #   end
-      # end
+        context "when the resource is not active" do
+          let(:active) { false }
+
+          it "returns false" do
+            expect(helper.display_edit_link_for?(resource)).to be_falsey
+          end
+        end
+      end
     end
 
     context "when the resource is a transient registration" do

@@ -6,6 +6,11 @@ RSpec.shared_examples "finance examples" do
     should be_able_to(:record_bank_transfer_payment, WasteCarriersEngine::RenewingRegistration)
   end
 
+  it "should not be able to charge adjust a resource" do
+    should_not be_able_to(:charge_adjust, WasteCarriersEngine::RenewingRegistration)
+    should_not be_able_to(:charge_adjust, WasteCarriersEngine::Registration)
+  end
+
   it "should be able to view the certificate" do
     should be_able_to(:view_certificate, WasteCarriersEngine::Registration)
   end

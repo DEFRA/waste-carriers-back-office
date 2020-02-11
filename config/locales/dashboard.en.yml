@@ -45,7 +45,7 @@ en:
             link_text: "Conviction details"
             visually_hidden_text: "for %{name}"
           details:
-            link_text: "Details"
+            link_text: "Registration details"
             visually_hidden_text: "for %{name}"
           renew:
             link_text: "Renew"

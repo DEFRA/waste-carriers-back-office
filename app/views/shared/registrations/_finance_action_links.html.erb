@@ -16,7 +16,9 @@
       <%= link_to t(".write_off_s"), new_resource_write_off_form_path(registration._id), class: "button wcr-finance-button" %>
     <% end %>
 
-    <%= link_to t(".adjust_charge"), "#TODO", class: "button wcr-finance-button" %>
+    <% if can?(:charge_adjust, registration) %>
+      <%= link_to t(".adjust_charge"), new_resource_charge_adjust_start_form_path(registration._id), class: "button wcr-finance-button" %>
+    <% end %>
 
     <% if display_refund_link_for?(registration.finance_details) %>
       <%= link_to t(".refund"), resource_refunds_path(registration._id), class: "button wcr-finance-button" %>
