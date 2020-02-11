@@ -25,7 +25,7 @@ class PaymentPresenter < WasteCarriersEngine::BasePresenter
 
   def no_action_message
     if already_reversed?
-      I18n.t(".reversal_forms.index.already_reverted")
+      I18n.t(".reversal_forms.index.already_reversed")
     else
       I18n.t(".reversal_forms.index.not_applicable")
     end
