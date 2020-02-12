@@ -22,7 +22,11 @@ class WriteOffFormsController < ApplicationController
         amount: display_pence_as_pounds_and_cents(amount_to_write_off)
       )
 
-      redirect_to resource_finance_details_path(@resource._id)
+      if renew_if_possible
+        redirect_to resource_finance_details_path(@resource.registration._id)
+      else
+        redirect_to resource_finance_details_path(@resource._id)
+      end
     else
       render :new
     end

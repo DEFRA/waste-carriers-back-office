@@ -75,8 +75,11 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
       end
 
       it "redirects to the transient_registration page" do
+        registration = transient_registration.registration
+
         post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-        expect(response).to redirect_to(resource_finance_details_path(transient_registration._id))
+
+        expect(response).to redirect_to(resource_finance_details_path(registration._id))
       end
 
       it "creates a new payment" do
@@ -100,7 +103,9 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
 
           it "renews the registration" do
             expected_expiry_date = registration.expires_on.to_date + 3.years
+
             post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
+
             actual_expiry_date = registration.reload.expires_on.to_date
 
             expect(actual_expiry_date).to eq(expected_expiry_date)
@@ -136,7 +141,9 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
 
           it "renews the registration" do
             expected_expiry_date = registration.expires_on.to_date + 3.years
+
             post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
+
             actual_expiry_date = registration.reload.expires_on.to_date
 
             expect(actual_expiry_date).to eq(expected_expiry_date)

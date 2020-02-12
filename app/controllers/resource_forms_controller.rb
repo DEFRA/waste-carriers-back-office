@@ -31,7 +31,8 @@ class ResourceFormsController < ApplicationController
 
   def submit_form(form, params)
     if form.submit(params)
-      redirect_to resource_finance_details_path(@resource._id)
+      redirect_after_successful_submit
+
       true
     else
       render :new
@@ -41,5 +42,10 @@ class ResourceFormsController < ApplicationController
 
   def authorize_if_required
     send(:authorize_user) if defined?(:authorize_user)
+  end
+
+  def redirect_after_successful_submit
+    # Default behaviour. Inheriting class to overrite when necessary.
+    redirect_to resource_finance_details_path(@resource._id)
   end
 end

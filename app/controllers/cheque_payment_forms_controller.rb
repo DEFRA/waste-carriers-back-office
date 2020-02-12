@@ -2,17 +2,16 @@
 
 class ChequePaymentFormsController < ResourceFormsController
   include CanRenewIfPossible
+  include CanRedirectFormAfterRenew
 
   def new
-    super(ChequePaymentForm,
-          "cheque_payment_form")
+    super(ChequePaymentForm, "cheque_payment_form")
   end
 
   def create
     params[:cheque_payment_form][:updated_by_user] = current_user.email
 
-    return unless super(ChequePaymentForm,
-                        "cheque_payment_form")
+    super(ChequePaymentForm, "cheque_payment_form")
   end
 
   private

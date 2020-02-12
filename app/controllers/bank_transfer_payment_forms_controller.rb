@@ -2,17 +2,16 @@
 
 class BankTransferPaymentFormsController < ResourceFormsController
   include CanRenewIfPossible
+  include CanRedirectFormAfterRenew
 
   def new
-    super(BankTransferPaymentForm,
-          "bank_transfer_payment_form")
+    super(BankTransferPaymentForm, "bank_transfer_payment_form")
   end
 
   def create
     params[:bank_transfer_payment_form][:updated_by_user] = current_user.email
 
-    return unless super(BankTransferPaymentForm,
-                        "bank_transfer_payment_form")
+    super(BankTransferPaymentForm, "bank_transfer_payment_form")
   end
 
   private

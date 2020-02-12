@@ -95,7 +95,7 @@ RSpec.describe "WriteOffForms", type: :request do
           expect(registration.finance_details.payments.count).to be > before_request_payments_count
           expect(registration.finance_details.balance).to eq(0)
           expect(response).to have_http_status(302)
-          expect(response).to redirect_to(resource_finance_details_path(renewing_registration._id))
+          expect(response).to redirect_to(resource_finance_details_path(registration._id))
         end
       end
 

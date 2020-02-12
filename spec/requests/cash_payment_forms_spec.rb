@@ -83,7 +83,7 @@ RSpec.describe "CashPaymentForms", type: :request do
 
         transient_registration.reload
 
-        expect(response).to redirect_to(resource_finance_details_path(transient_registration._id))
+        expect(response).to redirect_to(resource_finance_details_path(transient_registration.registration._id))
         expect(transient_registration.finance_details.payments.count).to eq(expected_payments_count)
         expect(transient_registration.finance_details.payments.first.updated_by_user).to eq(user.email)
       end
