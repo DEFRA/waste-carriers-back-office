@@ -22,7 +22,7 @@
 
     <%= form_for(@write_off_form, url: resource_write_off_form_path(@resource._id)) do |f| %>
       <div class="form-group <%= "form-group-error" if @write_off_form.errors[:comment].any? %>">
-        <fieldset id="write_off">
+        <fieldset id="comment">
           <legend class="visuallyhidden">
             <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
           </legend>
