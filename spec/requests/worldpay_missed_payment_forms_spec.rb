@@ -72,7 +72,7 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
         sign_in(user)
       end
 
-      it "redirects to the transient_registration page, creates a new payment and assigns the correct updated_by_user to the payment" do
+      it "redirects to the transient_registration's finance details page, creates a new payment and assigns the correct updated_by_user to the payment" do
         old_payments_count = transient_registration.finance_details.payments.count
 
         post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
@@ -83,7 +83,7 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
       end
 
       context "when the resource is a registration" do
-        it "redirects to the transient_registration page, creates a new payment and assigns the correct updated_by_user to the payment" do
+        it "redirects to the registration's finance details page, creates a new payment and assigns the correct updated_by_user to the payment" do
           old_payments_count = registration.finance_details.payments.count
 
           post "/bo/resources/#{registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
