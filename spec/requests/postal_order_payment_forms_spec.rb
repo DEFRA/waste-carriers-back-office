@@ -74,7 +74,7 @@ RSpec.describe "PostalOrderPaymentForms", type: :request do
         sign_in(user)
       end
 
-      it "redirects to the transient_registration page" do
+      it "redirects to the registration finance page" do
         registration = transient_registration.registration
 
         post "/bo/resources/#{transient_registration._id}/payments/postal-order", postal_order_payment_form: params
