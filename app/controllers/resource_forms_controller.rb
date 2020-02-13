@@ -4,6 +4,10 @@
 # workflow state or performing additional validations.
 class ResourceFormsController < ApplicationController
   include CanFetchResource
+  include CanRenewIfPossible
+
+  extend ActiveModel::Callbacks
+  define_model_callbacks :renew
 
   prepend_before_action :authenticate_user!
   before_action :authorize_if_required, only: %i[new create]
@@ -31,7 +35,9 @@ class ResourceFormsController < ApplicationController
 
   def submit_form(form, params)
     if form.submit(params)
-      redirect_after_successful_submit
+      run_callbacks :renew do
+        renew_if_possible_and_redirect
+      end
 
       true
     else
@@ -44,8 +50,11 @@ class ResourceFormsController < ApplicationController
     send(:authorize_user) if defined?(:authorize_user)
   end
 
-  def redirect_after_successful_submit
-    # Default behaviour. Inheriting class to overrite when necessary.
-    redirect_to resource_finance_details_path(@resource._id)
+  def renew_if_possible_and_redirect
+    if renew_if_possible
+      redirect_to resource_finance_details_path(@resource.registration._id)
+    else
+      redirect_to resource_finance_details_path(@resource._id)
+    end
   end
 end

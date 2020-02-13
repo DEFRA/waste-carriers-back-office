@@ -13,7 +13,7 @@ RSpec.describe "Payments", type: :request do
       end
 
       it "renders the new template and returns a 200 response" do
-        get "/bo/resources/#{transient_registration._id}/payments/new"
+        get "/bo/resources/#{transient_registration._id}/payments"
 
         expect(response).to render_template(:new)
         expect(response).to have_http_status(200)
@@ -23,7 +23,7 @@ RSpec.describe "Payments", type: :request do
         let(:registration) { create(:registration) }
 
         it "renders the new template and returns a 200 response" do
-          get "/bo/resources/#{registration._id}/payments/new"
+          get "/bo/resources/#{registration._id}/payments"
 
           expect(response).to render_template(:new)
           expect(response).to have_http_status(200)

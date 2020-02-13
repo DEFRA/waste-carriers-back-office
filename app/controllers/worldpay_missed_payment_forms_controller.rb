@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class WorldpayMissedPaymentFormsController < ResourceFormsController
-  include CanRenewIfPossible
+  before_renew :change_state_if_possible
 
   def new
     super(WorldpayMissedPaymentForm, "worldpay_missed_payment_form")
@@ -29,16 +29,6 @@ class WorldpayMissedPaymentFormsController < ResourceFormsController
 
   def authorize_user
     authorize! :record_worldpay_missed_payment, @resource
-  end
-
-  def redirect_after_successful_submit
-    change_state_if_possible
-
-    if renew_if_possible
-      redirect_to resource_finance_details_path(@resource.registration._id)
-    else
-      redirect_to resource_finance_details_path(@resource._id)
-    end
   end
 
   def change_state_if_possible

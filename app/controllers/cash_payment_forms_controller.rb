@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class CashPaymentFormsController < ResourceFormsController
-  include CanRenewIfPossible
-  include CanRedirectFormAfterRenew
-
   def new
     super(CashPaymentForm, "cash_payment_form")
   end

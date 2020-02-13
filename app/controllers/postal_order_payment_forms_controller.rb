@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class PostalOrderPaymentFormsController < ResourceFormsController
-  include CanRenewIfPossible
-  include CanRedirectFormAfterRenew
-
   def new
     super(PostalOrderPaymentForm, "postal_order_payment_form")
   end

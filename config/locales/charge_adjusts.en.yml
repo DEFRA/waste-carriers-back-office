@@ -1,5 +1,5 @@
 en:
-  charge_adjust_start_forms:
+  charge_adjusts:
     new:
       title: "Make a charge adjustment"
       heading: "Make a charge adjustment for %{reg_identifier}"
@@ -11,10 +11,3 @@ en:
           label: "Negative charge adjustment"
           hint: "Charge reduction, credits the registration"
       confirm: "Continue"
-  activemodel:
-    errors:
-      models:
-        charge_adjust_start_form:
-          attributes:
-            charge_type:
-              blank: "Select positive or negative charge"

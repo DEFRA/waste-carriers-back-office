@@ -6,8 +6,6 @@
 
 <div class="grid-row">
   <div class="column-two-thirds">
-    <%= render("waste_carriers_engine/shared/errors", object: @charge_adjust_start_form) %>
-
     <h1 class="heading-large">
       <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
     </h1>
@@ -16,16 +14,12 @@
       <%= render "shared/company_details_panel", registration: @resource %>
     </div>
 
-    <%= form_for(@charge_adjust_start_form, url: resource_charge_adjust_start_form_path(@resource._id)) do |f| %>
-      <div class="form-group <%= "form-group-error" if @charge_adjust_start_form.errors[:charge_type].any? %>">
+    <%= form_for(:charge_adjust_form, url: resource_charge_adjust_path(@resource._id)) do |f| %>
+      <div class="form-group">
         <fieldset id="charge-adjust">
           <legend class="visuallyhidden">
             <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
           </legend>
-
-          <% if @charge_adjust_start_form.errors[:charge_type].any? %>
-            <span class="error-message"><%= @charge_adjust_start_form.errors[:charge_type].join(", ") %></span>
-          <% end %>
 
           <div class="multiple-choice">
             <%= f.radio_button :charge_type, :positive %>

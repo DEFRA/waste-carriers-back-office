@@ -9,39 +9,29 @@ class ReversalFormsController < ResourceFormsController
   end
 
   def new
-    super(ReversalForm,
-          "reversal_form")
+    super(ReversalForm, "reversal_form")
   end
 
   def create
-    super(ReversalForm,
-          "reversal_form")
+    return unless super(ReversalForm, "reversal_form")
+
+    ProcessReversalService.run(
+      finance_details: @resource.finance_details,
+      payment: @payment,
+      user: current_user,
+      reason: @reversal_form.reason
+    )
+
+    flash[:success] = I18n.t(
+      "reversal_forms.flash_messages.successful",
+      amount: display_pence_as_pounds_and_cents(@payment.amount)
+    )
   end
 
   private
 
   def reversal_form_params
     params.fetch(:reversal_form, {}).permit(:reason)
-  end
-
-  def submit_form(form, params)
-    if form.submit(params)
-      ProcessReversalService.run(
-        finance_details: @resource.finance_details,
-        payment: @payment,
-        user: current_user,
-        reason: form.reason
-      )
-
-      flash[:success] = I18n.t(
-        "reversal_forms.flash_messages.successful",
-        amount: display_pence_as_pounds_and_cents(@payment.amount)
-      )
-
-      redirect_to resource_finance_details_path(@resource._id)
-    else
-      render :new, order_key: params[:order_key]
-    end
   end
 
   def payment

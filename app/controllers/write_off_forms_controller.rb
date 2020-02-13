@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Refactor to inherit from ResourceFormController
 class WriteOffFormsController < ApplicationController
   include CanFetchResource
   include FinanceDetailsHelper
