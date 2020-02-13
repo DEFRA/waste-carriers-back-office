@@ -17,7 +17,9 @@ en:
             overseas: "Business owner details"
             partnership: "Partners details"
             soleTrader: "Business owner details"
-            publicBody: "Public body"
+            publicBody: "Chief executive details"
+            charity: "Main people details"
+            authority: "Chief executive details"
       contact_and_business_details_panels:
         contact_information:
           heading: "Contact details"
