@@ -1,6 +1,4 @@
 <%= form_for(form, url: path) do |f| %>
-  <%= render("waste_carriers_engine/shared/errors", object: form) %>
-
   <p>
     <%= t(".current_balance", balance: display_pence_as_pounds(resource.finance_details.balance)) %>
   </p>

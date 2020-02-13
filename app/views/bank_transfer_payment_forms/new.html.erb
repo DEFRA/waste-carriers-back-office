@@ -2,6 +2,8 @@
   <div class="column-two-thirds">
     <%= render("waste_carriers_engine/shared/back", back_path: resource_finance_details_path(@resource._id)) %>
 
+    <%= render("waste_carriers_engine/shared/errors", object: @bank_transfer_payment_form) %>
+
     <h1 class="heading-large">
       <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
     </h1>
