@@ -4,6 +4,8 @@ class ReversalFormsController < ResourceFormsController
   include FinanceDetailsHelper
 
   def index
+    authorize! :view_payments, @resource
+
     payments = @resource.finance_details.payments.reversible
     @payments = ::PaymentPresenter.create_from_collection(payments, view_context)
   end

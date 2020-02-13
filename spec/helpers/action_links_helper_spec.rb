@@ -137,30 +137,6 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
-  describe "#display_reverse_link?" do
-    let(:current_user) { double(:current_user, role: role) }
-
-    before do
-      allow(helper).to receive(:current_user).and_return(current_user)
-    end
-
-    context "when the current user is in the allowed group of roles" do
-      let(:role) { "agency_with_refund" }
-
-      it "returns true" do
-        expect(helper.display_reverse_link?).to be_truthy
-      end
-    end
-
-    context "when the current user is not in the allowed group of roles" do
-      let(:role) { "foo" }
-
-      it "returns false" do
-        expect(helper.display_reverse_link?).to be_falsey
-      end
-    end
-  end
-
   describe "#display_refund_link_for?" do
     let(:resource) { build(:finance_details, balance: balance) }
 

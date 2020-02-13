@@ -41,19 +41,13 @@ module ActionLinksHelper
     # TODO: Temporary - for release only. See: https://eaflood.atlassian.net/browse/RUBY-846
     return false if a_registration?(resource)
 
-    resource.upper_tier?
+    resource.upper_tier? && can?(:view_payments, resource)
   end
 
   def display_refund_link_for?(resource)
     return false if resource.balance >= 0
 
     can?(:refund, resource)
-  end
-
-  def display_reverse_link?
-    roles_with_reverse_ability = %w[agency_with_refund agency_super finance_admin finance finance_super]
-
-    roles_with_reverse_ability.include?(current_user.role)
   end
 
   def display_finance_details_link_for?(resource)

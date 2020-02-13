@@ -57,6 +57,8 @@ class Ability
     can :record_cash_payment, :all
     can :record_cheque_payment, :all
     can :record_postal_order_payment, :all
+    can :view_payments, :all
+
     can :write_off_small, WasteCarriersEngine::FinanceDetails do |finance_details|
       finance_details.zero_difference_balance <= write_off_agency_user_cap
     end
@@ -70,6 +72,7 @@ class Ability
     can :view_certificate, WasteCarriersEngine::Registration
     can :record_bank_transfer_payment, :all
 
+    can :view_payments, :all
     can :reverse, WasteCarriersEngine::Payment, &:bank_transfer?
   end
 
@@ -78,6 +81,7 @@ class Ability
     can :write_off_large, WasteCarriersEngine::FinanceDetails
     can :view_certificate, WasteCarriersEngine::Registration
     can :record_worldpay_missed_payment, :all
+    can :view_payments, :all
 
     can :reverse, WasteCarriersEngine::Payment do |payment|
       payment.worldpay? || payment.worldpay_missed?

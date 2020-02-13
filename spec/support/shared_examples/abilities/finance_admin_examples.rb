@@ -11,6 +11,10 @@ RSpec.shared_examples "finance_admin examples" do
     should be_able_to(:view_certificate, WasteCarriersEngine::Registration)
   end
 
+  it "should be able to view payments" do
+    should be_able_to(:view_payments, WasteCarriersEngine::RenewingRegistration)
+  end
+
   context ":reverse" do
     context "when the payment is a worldpay" do
       let(:payment) { build(:payment, :worldpay) }

@@ -39,6 +39,10 @@ RSpec.shared_examples "below agency_with_refund examples" do
     end
   end
 
+  it "should not be able to view payments" do
+    should_not be_able_to(:view_payments, WasteCarriersEngine::RenewingRegistration)
+  end
+
   it "should not be able to refund a payment" do
     should_not be_able_to(:refund, WasteCarriersEngine::Registration)
   end
