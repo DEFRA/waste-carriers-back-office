@@ -6,9 +6,7 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
   let(:transient_registration) do
     create(:renewing_registration, :has_finance_details, :does_not_require_conviction_check)
   end
-  let(:registration) do
-    WasteCarriersEngine::Registration.where(reg_identifier: transient_registration.reg_identifier).first
-  end
+  let(:registration) { transient_registration.registration }
 
   describe "GET /bo/resources/:_id/payments/worldpay-missed" do
     context "when a valid user is signed in" do
@@ -74,20 +72,26 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
         sign_in(user)
       end
 
-      it "redirects to the transient_registration page" do
-        post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-        expect(response).to redirect_to(resource_finance_details_path(transient_registration._id))
-      end
-
-      it "creates a new payment" do
+      it "redirects to the transient_registration page, creates a new payment and assigns the correct updated_by_user to the payment" do
         old_payments_count = transient_registration.finance_details.payments.count
+
         post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
+
+        expect(response).to redirect_to(resource_finance_details_path(transient_registration._id))
         expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count + 1)
+        expect(transient_registration.reload.finance_details.payments.first.updated_by_user).to eq(user.email)
       end
 
-      it "assigns the correct updated_by_user to the payment" do
-        post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-        expect(transient_registration.reload.finance_details.payments.first.updated_by_user).to eq(user.email)
+      context "when the resource is a registration" do
+        it "redirects to the transient_registration page, creates a new payment and assigns the correct updated_by_user to the payment" do
+          old_payments_count = registration.finance_details.payments.count
+
+          post "/bo/resources/#{registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
+
+          expect(response).to redirect_to(resource_finance_details_path(registration._id))
+          expect(registration.reload.finance_details.payments.count).to eq(old_payments_count + 1)
+          expect(registration.reload.finance_details.payments.last.updated_by_user).to eq(user.email)
+        end
       end
 
       context "when the transient_registration was in renewal_received" do

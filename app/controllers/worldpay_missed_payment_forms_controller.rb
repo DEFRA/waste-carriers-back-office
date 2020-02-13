@@ -36,6 +36,8 @@ class WorldpayMissedPaymentFormsController < ResourceFormsController
   end
 
   def change_state_if_possible
+    return unless @resource.is_a?(WasteCarriersEngine::TransientRegistration)
+
     @resource.next! if @resource.workflow_state == "worldpay_form"
   end
 end
