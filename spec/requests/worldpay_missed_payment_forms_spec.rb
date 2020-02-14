@@ -77,9 +77,9 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
         old_payments_count = registration.finance_details.payments.count
 
         post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-        
+
         registration.reload
-        
+
         expect(response).to redirect_to(resource_finance_details_path(registration._id))
         expect(registration.finance_details.payments.count).to be > old_payments_count
         expect(registration.finance_details.payments.last.updated_by_user).to eq(user.email)
