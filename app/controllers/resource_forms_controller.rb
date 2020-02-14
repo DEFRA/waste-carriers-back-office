@@ -5,6 +5,7 @@
 class ResourceFormsController < ApplicationController
   include CanFetchResource
   include CanRenewIfPossible
+  include CanCompleteIfPossible
 
   extend ActiveModel::Callbacks
   define_model_callbacks :renew
@@ -54,6 +55,8 @@ class ResourceFormsController < ApplicationController
     if renew_if_possible
       redirect_to resource_finance_details_path(@resource.registration._id)
     else
+      complete_if_possible
+
       redirect_to resource_finance_details_path(@resource._id)
     end
   end

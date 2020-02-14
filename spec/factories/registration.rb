@@ -28,6 +28,10 @@ FactoryBot.define do
       metaData { build(:metaData, :pending) }
     end
 
+    trait :has_unpaid_order do
+      finance_details { build(:finance_details, :has_unpaid_order) }
+    end
+
     trait :active do
       metaData { build(:metaData, :active) }
     end
