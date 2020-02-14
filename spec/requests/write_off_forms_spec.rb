@@ -82,7 +82,7 @@ RSpec.describe "WriteOffForms", type: :request do
           }
         end
 
-        it "generates a new payment, renew the registration, updates the registration balance, returns a 302 status and redirects to the finance details page" do
+        it "generates a new payment, renews the registration, updates the registration balance, returns a 302 status and redirects to the finance details page" do
           registration = renewing_registration.registration
           before_request_payments_count = registration.finance_details.payments.count
 
@@ -101,7 +101,7 @@ RSpec.describe "WriteOffForms", type: :request do
         context "when the resource is a registration" do
           let(:registration) { create(:registration, :overpaid) }
 
-          it "generates a new payment, rupdates the registration balance, returns a 302 status and redirects to the registration finance details page" do
+          it "generates a new payment, updates the registration balance, returns a 302 status and redirects to the registration finance details page" do
             before_request_payments_count = registration.finance_details.payments.count
 
             post resource_write_off_form_path(registration._id), params
