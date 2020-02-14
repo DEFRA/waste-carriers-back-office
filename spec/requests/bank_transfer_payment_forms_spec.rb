@@ -81,6 +81,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
           expect(response).to redirect_to(resource_finance_details_path(registration._id))
           expect(registration.finance_details.payments.count).to be > old_payments_count
           expect(registration.finance_details.payments.last.updated_by_user).to eq(user.email)
+          expect(actual_expiry_date).to eq(expected_expiry_date)
         end
 
         context "when the resource is a registration" do

@@ -6,7 +6,7 @@ RSpec.describe "CashPaymentForms", type: :request do
   let(:transient_registration) do
     create(:renewing_registration, :has_finance_details, :does_not_require_conviction_check)
   end
-  let(:registration) do { transient_registration.registration }
+  let(:registration) { transient_registration.registration }
 
   describe "GET /bo/resources/:_id/payments/cash" do
     context "when a valid user is signed in" do
