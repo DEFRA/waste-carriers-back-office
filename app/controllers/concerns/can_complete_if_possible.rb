@@ -7,7 +7,7 @@ module CanCompleteIfPossible
     private
 
     def complete_if_possible
-      return false unless @resource.is_a?(WasteCarriersEngine::Registration)
+      return false unless can_complete?
 
       WasteCarriersEngine::RegistrationCompletionService.run(registration: @resource)
 
@@ -17,6 +17,10 @@ module CanCompleteIfPossible
       Rails.logger.error e
 
       false
+    end
+
+    def can_complete?
+      @resource.is_a?(WasteCarriersEngine::Registration)
     end
   end
 end
