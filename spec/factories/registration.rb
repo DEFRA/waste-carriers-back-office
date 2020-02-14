@@ -20,6 +20,10 @@ FactoryBot.define do
 
     metaData { build(:metaData) }
 
+    trait :overpaid do
+      finance_details { build(:finance_details, :has_overpaid_order_and_payment) }
+    end
+
     trait :pending do
       metaData { build(:metaData, :pending) }
     end
