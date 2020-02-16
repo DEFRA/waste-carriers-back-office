@@ -8,7 +8,7 @@ class ChargeAdjustForm
   validates :charge_type, presence: true
 
   # This is here so that we can take advantage of our FormController interfaces
-  def initialize(_resource); end;
+  def initialize(_resource); end
 
   def submit(params)
     # Assign the params for validation
