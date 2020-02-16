@@ -1,18 +1,14 @@
 # frozen_string_literal: true
 
 class CashPaymentFormsController < ResourceFormsController
-  include CanRenewIfPossible
-
   def new
-    super(CashPaymentForm,
-          "cash_payment_form")
+    super(CashPaymentForm, "cash_payment_form")
   end
 
   def create
     params[:cash_payment_form][:updated_by_user] = current_user.email
 
-    return unless super(CashPaymentForm,
-                        "cash_payment_form")
+    super(CashPaymentForm, "cash_payment_form")
   end
 
   private

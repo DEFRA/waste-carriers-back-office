@@ -34,7 +34,8 @@ Rails.application.routes.draw do
                         param: :order_key
 
               resources :payments,
-                        only: %i[new create]
+                        only: %i[new create],
+                        path_names: { new: "" }
 
               resources :cash_payment_forms,
                         only: %i[new create],
@@ -69,9 +70,9 @@ Rails.application.routes.draw do
                        only: %i[new create],
                        path: "write-off"
 
-              resource :charge_adjust_start_form,
+              resource :charge_adjust,
                        only: %i[new create],
-                       path: "payments/charge-adjust",
+                       path: "payments/charge-adjusts",
                        path_names: { new: "" }
 
               resource :negative_charge_adjust_form,

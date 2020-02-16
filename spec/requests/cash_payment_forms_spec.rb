@@ -6,9 +6,7 @@ RSpec.describe "CashPaymentForms", type: :request do
   let(:transient_registration) do
     create(:renewing_registration, :has_finance_details, :does_not_require_conviction_check)
   end
-  let(:registration) do
-    WasteCarriersEngine::Registration.where(reg_identifier: transient_registration.reg_identifier).first
-  end
+  let(:registration) { transient_registration.registration }
 
   describe "GET /bo/resources/:_id/payments/cash" do
     context "when a valid user is signed in" do
@@ -83,7 +81,7 @@ RSpec.describe "CashPaymentForms", type: :request do
 
         transient_registration.reload
 
-        expect(response).to redirect_to(resource_finance_details_path(transient_registration._id))
+        expect(response).to redirect_to(resource_finance_details_path(transient_registration.registration._id))
         expect(transient_registration.finance_details.payments.count).to eq(expected_payments_count)
         expect(transient_registration.finance_details.payments.first.updated_by_user).to eq(user.email)
       end

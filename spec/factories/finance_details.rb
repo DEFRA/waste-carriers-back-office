@@ -17,6 +17,12 @@ FactoryBot.define do
       after(:build, :create, &:update_balance)
     end
 
+    trait :has_unpaid_order do
+      orders { [build(:order, :has_required_data)] }
+
+      after(:build, :create, &:update_balance)
+    end
+
     trait :has_overpaid_order_and_payment do
       orders { [build(:order, :has_required_data)] }
       payments do

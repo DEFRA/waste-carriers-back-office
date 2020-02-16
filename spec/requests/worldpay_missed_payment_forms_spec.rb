@@ -6,9 +6,7 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
   let(:transient_registration) do
     create(:renewing_registration, :has_finance_details, :does_not_require_conviction_check)
   end
-  let(:registration) do
-    WasteCarriersEngine::Registration.where(reg_identifier: transient_registration.reg_identifier).first
-  end
+  let(:registration) { transient_registration.registration }
 
   describe "GET /bo/resources/:_id/payments/worldpay-missed" do
     context "when a valid user is signed in" do
@@ -63,103 +61,54 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
       }
     end
 
-    before do
-      # Block renewal completion so we can check the values of the transient_registration after submission
-      allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_return(nil)
-    end
-
     context "when a valid user is signed in" do
       let(:user) { create(:user, :finance_admin) }
+
       before(:each) do
         sign_in(user)
       end
 
-      it "redirects to the transient_registration page" do
+      it "renews the registration, redirects to the registration finance page, creates a new payment and assigns the correct updated_by_user to the payment" do
+        old_payments_count = registration.finance_details.payments.count
+        expected_expiry_date = registration.expires_on.to_date + 3.years
+
         post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-        expect(response).to redirect_to(resource_finance_details_path(transient_registration._id))
+
+        registration.reload
+        actual_expiry_date = registration.expires_on.to_date
+
+        expect(actual_expiry_date).to eq(expected_expiry_date)
+        expect(response).to redirect_to(resource_finance_details_path(registration._id))
+        expect(registration.finance_details.payments.count).to be > old_payments_count
+        expect(registration.finance_details.payments.last.updated_by_user).to eq(user.email)
       end
 
-      it "creates a new payment" do
-        old_payments_count = transient_registration.finance_details.payments.count
-        post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-        expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count + 1)
-      end
+      context "when the resource is a registration" do
+        it "redirects to the registration's finance details page, creates a new payment and assigns the correct updated_by_user to the payment" do
+          old_payments_count = registration.finance_details.payments.count
 
-      it "assigns the correct updated_by_user to the payment" do
-        post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-        expect(transient_registration.reload.finance_details.payments.first.updated_by_user).to eq(user.email)
-      end
+          post "/bo/resources/#{registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
 
-      context "when the transient_registration was in renewal_received" do
-        context "when there is no pending conviction check" do
-          before do
-            transient_registration.conviction_sign_offs = [build(:conviction_sign_off, :confirmed)]
-            # Disable the stubbing as we want to test the full behaviour this time
-            allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
-          end
+          registration.reload
 
-          it "renews the registration" do
-            expected_expiry_date = registration.expires_on.to_date + 3.years
-            post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-            actual_expiry_date = registration.reload.expires_on.to_date
-
-            expect(actual_expiry_date).to eq(expected_expiry_date)
-          end
-        end
-
-        context "when there is a pending conviction check" do
-          before do
-            transient_registration.conviction_sign_offs = [build(:conviction_sign_off)]
-            # Disable the stubbing as we want to test the full behaviour this time
-            allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
-          end
-
-          it "does not renew the registration" do
-            old_renewal_date = registration.expires_on
-            post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-            expect(registration.reload.expires_on).to eq(old_renewal_date)
-          end
+          expect(response).to redirect_to(resource_finance_details_path(registration._id))
+          expect(registration.finance_details.payments.count).to eq(old_payments_count + 1)
+          expect(registration.finance_details.payments.last.updated_by_user).to eq(user.email)
         end
       end
 
-      context "when the transient_registration was in worldpay_form" do
+      context "when there is a pending conviction check" do
         before do
-          transient_registration.update_attributes(workflow_state: "worldpay_form")
+          transient_registration.conviction_sign_offs = [build(:conviction_sign_off)]
         end
 
-        context "when there is no pending conviction check" do
-          before do
-            transient_registration.conviction_sign_offs = [build(:conviction_sign_off, :confirmed)]
-            # Disable the stubbing as we want to test the full behaviour this time
-            allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
-          end
+        it "does not renew the registration and redirects to the transient registration's finance details page" do
+          old_renewal_date = registration.expires_on
 
-          it "renews the registration" do
-            expected_expiry_date = registration.expires_on.to_date + 3.years
-            post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-            actual_expiry_date = registration.reload.expires_on.to_date
+          post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
 
-            expect(actual_expiry_date).to eq(expected_expiry_date)
-          end
-        end
-
-        context "when there is a pending conviction check" do
-          before do
-            transient_registration.conviction_sign_offs = [build(:conviction_sign_off)]
-            # Disable the stubbing as we want to test the full behaviour this time
-            allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
-          end
-
-          it "changes the workflow_state to renewal_received" do
-            post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-            expect(transient_registration.reload.workflow_state).to eq("renewal_received_form")
-          end
-
-          it "does not renew the registration" do
-            old_renewal_date = registration.expires_on
-            post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-            expect(registration.reload.expires_on).to eq(old_renewal_date)
-          end
+          expect(registration.reload.expires_on).to eq(old_renewal_date)
+          expect(response).to redirect_to(resource_finance_details_path(transient_registration._id))
         end
       end
 
@@ -170,14 +119,12 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
           }
         end
 
-        it "renders the new template" do
-          post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-          expect(response).to render_template(:new)
-        end
-
-        it "does not create a new payment" do
+        it "renders the new template and does not create a new payment" do
           old_payments_count = transient_registration.finance_details.payments.count
+
           post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
+
+          expect(response).to render_template(:new)
           expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count)
         end
       end
@@ -189,14 +136,12 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
         sign_in(user)
       end
 
-      it "redirects to the permissions error page" do
-        post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
-        expect(response).to redirect_to("/bo/pages/permission")
-      end
-
-      it "does not create a new payment" do
+      it "redirects to the permissions error page and does not create a new payment" do
         old_payments_count = transient_registration.finance_details.payments.count
+
         post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
+
+        expect(response).to redirect_to("/bo/pages/permission")
         expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count)
       end
     end
