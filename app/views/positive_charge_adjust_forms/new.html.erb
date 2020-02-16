@@ -16,7 +16,7 @@
       <%= render "shared/company_details_panel", registration: @resource %>
     </div>
 
-    <%= form_for(@positive_charge_adjust_form, url: resource_positive_charge_adjust_form_path(@resource._id)) do |f| %>
+    <%= form_for(@positive_charge_adjust_form, url: resource_positive_charge_adjust_form_path(@resource._id), html: { novalidate: true }) do |f| %>
       <div class="form-group <%= "form-group-error" if @positive_charge_adjust_form.errors[:amount].any? %>">
         <fieldset id="amount">
           <% if @positive_charge_adjust_form.errors[:amount].any? %>
@@ -27,7 +27,7 @@
             <%= t(".fields.amount.label") %>
             <span class="form-hint"><%= t(".fields.amount.hint") %></span>
           <% end %>
-          <%= f.text_field :amount, class: "form-control" %>
+          <%= f.number_field :amount, class: "form-control", step: "0.01" %>
         </fieldset>
       </div>
 
