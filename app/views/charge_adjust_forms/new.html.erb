@@ -14,7 +14,7 @@
       <%= render "shared/company_details_panel", registration: @resource %>
     </div>
 
-    <%= form_for(:charge_adjust_form, url: resource_charge_adjust_path(@resource._id)) do |f| %>
+    <%= form_for(:charge_adjust_form, url: resource_charge_adjust_form_path(@resource._id)) do |f| %>
       <div class="form-group">
         <fieldset id="charge-adjust">
           <legend class="visuallyhidden">

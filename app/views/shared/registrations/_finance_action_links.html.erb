@@ -17,7 +17,7 @@
     <% end %>
 
     <% if can?(:charge_adjust, registration) %>
-      <%= link_to t(".adjust_charge"), new_resource_charge_adjust_path(registration._id), class: "button wcr-finance-button" %>
+      <%= link_to t(".adjust_charge"), new_resource_charge_adjust_form_path(registration._id), class: "button wcr-finance-button" %>
     <% end %>
 
     <% if display_refund_link_for?(registration.finance_details) %>

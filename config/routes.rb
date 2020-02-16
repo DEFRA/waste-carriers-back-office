@@ -70,7 +70,7 @@ Rails.application.routes.draw do
                        only: %i[new create],
                        path: "write-off"
 
-              resource :charge_adjust,
+              resource :charge_adjust_form,
                        only: %i[new create],
                        path: "payments/charge-adjusts",
                        path_names: { new: "" }
