@@ -11,5 +11,3 @@ en:
         worldpay_missed: "Missed WorldPay payment"
       no_permission: " – your account can't add this type of payment"
       submit_button: "Add payment details"
-    messages:
-      success: "£%{amount} payment entered successfully"

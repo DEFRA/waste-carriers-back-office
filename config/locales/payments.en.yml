@@ -1,0 +1,4 @@
+en:
+  payments:
+    messages:
+      success: "£%{amount} payment entered successfully"
