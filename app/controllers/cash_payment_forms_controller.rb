@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CashPaymentFormsController < ResourceFormsController
+  include FinanceDetailsHelper
+
   def new
     super(CashPaymentForm, "cash_payment_form")
   end
@@ -8,7 +10,12 @@ class CashPaymentFormsController < ResourceFormsController
   def create
     params[:cash_payment_form][:updated_by_user] = current_user.email
 
-    super(CashPaymentForm, "cash_payment_form")
+    return unless super(CashPaymentForm, "cash_payment_form")
+
+    flash[:success] = I18n.t(
+      "payments.messages.success",
+      amount: display_pence_as_pounds_and_cents(@cash_payment_form.amount)
+    )
   end
 
   private

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class WorldpayMissedPaymentFormsController < ResourceFormsController
+  include FinanceDetailsHelper
+
   before_renew :change_state_if_possible
 
   def new
@@ -10,7 +12,12 @@ class WorldpayMissedPaymentFormsController < ResourceFormsController
   def create
     params[:worldpay_missed_payment_form][:updated_by_user] = current_user.email
 
-    super(WorldpayMissedPaymentForm, "worldpay_missed_payment_form")
+    return unless super(WorldpayMissedPaymentForm, "worldpay_missed_payment_form")
+
+    flash[:success] = I18n.t(
+      "payments.messages.success",
+      amount: display_pence_as_pounds_and_cents(@worldpay_missed_payment_form.amount)
+    )
   end
 
   private

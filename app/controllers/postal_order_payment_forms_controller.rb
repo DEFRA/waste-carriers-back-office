@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PostalOrderPaymentFormsController < ResourceFormsController
+  include FinanceDetailsHelper
+
   def new
     super(PostalOrderPaymentForm, "postal_order_payment_form")
   end
@@ -8,7 +10,12 @@ class PostalOrderPaymentFormsController < ResourceFormsController
   def create
     params[:postal_order_payment_form][:updated_by_user] = current_user.email
 
-    super(PostalOrderPaymentForm, "postal_order_payment_form")
+    return unless super(PostalOrderPaymentForm, "postal_order_payment_form")
+
+    flash[:success] = I18n.t(
+      "payments.messages.success",
+      amount: display_pence_as_pounds_and_cents(@postal_order_payment_form.amount)
+    )
   end
 
   private
