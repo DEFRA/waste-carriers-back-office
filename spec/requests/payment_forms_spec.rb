@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Payments", type: :request do
+RSpec.describe "PaymentForms", type: :request do
   let(:transient_registration) { create(:renewing_registration) }
 
   describe "GET /bo/resources/:_id/payments" do

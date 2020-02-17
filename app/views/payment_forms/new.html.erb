@@ -2,7 +2,7 @@
   <div class="column-two-thirds">
     <%= render("waste_carriers_engine/shared/back", back_path: resource_finance_details_path(@resource._id)) %>
 
-    <%= form_for(:payment_form, url: resource_payments_path(@resource._id)) do |f| %>
+    <%= form_for(:payment_form, url: resource_payment_forms_path(@resource._id)) do |f| %>
       <h1 class="heading-large">
         <%= t(".heading") %>
       </h1>

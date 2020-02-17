@@ -1,5 +1,5 @@
 en:
-  charge_adjusts:
+  charge_adjust_forms:
     new:
       title: "Make a charge adjustment"
       heading: "Make a charge adjustment for %{reg_identifier}"

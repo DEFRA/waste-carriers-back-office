@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PaymentsController < ApplicationController
+class PaymentFormsController < ApplicationController
   include CanFetchResource
 
   prepend_before_action :authorize_user
