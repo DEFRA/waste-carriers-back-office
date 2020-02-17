@@ -11,3 +11,10 @@ en:
           label: "Negative charge adjustment"
           hint: "Charge reduction, credits the registration"
       confirm: "Continue"
+  activemodel:
+    errors:
+      models:
+        charge_adjust_form:
+          attributes:
+            charge_type:
+              blank: "Select positive or negative charge"
