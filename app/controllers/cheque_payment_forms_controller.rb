@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ChequePaymentFormsController < ResourceFormsController
-  include FinanceDetailsHelper
-
   def new
     super(ChequePaymentForm, "cheque_payment_form")
   end
@@ -14,7 +12,7 @@ class ChequePaymentFormsController < ResourceFormsController
 
     flash[:success] = I18n.t(
       "payments.messages.success",
-      amount: display_pence_as_pounds_and_cents(@cheque_payment_form.amount)
+      amount: @cheque_payment_form.amount
     )
   end
 

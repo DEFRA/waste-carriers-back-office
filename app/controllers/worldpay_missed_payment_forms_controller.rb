@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class WorldpayMissedPaymentFormsController < ResourceFormsController
-  include FinanceDetailsHelper
-
   before_renew :change_state_if_possible
 
   def new
@@ -16,7 +14,7 @@ class WorldpayMissedPaymentFormsController < ResourceFormsController
 
     flash[:success] = I18n.t(
       "payments.messages.success",
-      amount: display_pence_as_pounds_and_cents(@worldpay_missed_payment_form.amount)
+      amount: @worldpay_missed_payment_form.amount
     )
   end
 

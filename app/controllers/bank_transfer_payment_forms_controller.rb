@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class BankTransferPaymentFormsController < ResourceFormsController
-  include FinanceDetailsHelper
-
   def new
     super(BankTransferPaymentForm, "bank_transfer_payment_form")
   end
@@ -14,7 +12,7 @@ class BankTransferPaymentFormsController < ResourceFormsController
 
     flash[:success] = I18n.t(
       "payments.messages.success",
-      amount: display_pence_as_pounds_and_cents(@bank_transfer_payment_form.amount)
+      amount: @bank_transfer_payment_form.amount
     )
   end
 
