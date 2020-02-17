@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-RSpec.describe PaymentForm, type: :model do
-  let(:payment_form) { build(:payment_form) }
+RSpec.describe BasePaymentForm, type: :model do
+  let(:payment_form) { build(:base_payment_form) }
   let(:transient_registration) do
     WasteCarriersEngine::RenewingRegistration.where(reg_identifier: payment_form.reg_identifier).first
   end
