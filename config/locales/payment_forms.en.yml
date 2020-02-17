@@ -11,3 +11,10 @@ en:
         worldpay_missed: "Missed WorldPay payment"
       no_permission: " – your account can't add this type of payment"
       submit_button: "Add payment details"
+  activemodel:
+    errors:
+      models:
+        payment_form:
+          attributes:
+            payment_type:
+              blank: "Select a payment type"
