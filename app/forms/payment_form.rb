@@ -28,6 +28,8 @@ class PaymentForm < WasteCarriersEngine::BaseForm
     params[:date_received] = set_date_received
     params[:payment_type] = payment_type_value
 
+    return false unless valid?
+
     build_payment(params)
     update_finance_details
 

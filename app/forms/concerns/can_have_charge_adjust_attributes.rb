@@ -6,8 +6,7 @@ module CanHaveChargeAdjustAttributes
   included do
     attr_accessor :amount, :reference, :description
 
-    # Format: 102.30 - At least a digit, can have a dot and up to two digits after it.
-    validates :amount, presence: true, format: { with: /\A\d+\.?\d?\d?\z/ }
+    validates :amount, presence: true, numericality: { greater_than: 0 }
     validates :reference, presence: true
     validates :description, presence: true, length: { maximum: 500 }
   end

@@ -21,7 +21,8 @@ en:
           attributes:
             amount:
               blank: "Enter amount"
-              invalid: "Amount is invalid"
+              not_a_number: "Amount is invalid"
+              greater_than: "You must enter a positive number"
             description:
               blank: "Enter a reason"
               too_long: "Description must be %{count} characters or fewer"

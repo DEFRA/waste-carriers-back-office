@@ -4,8 +4,9 @@ require "rails_helper"
 
 RSpec.describe "ChequePaymentForms", type: :request do
   let(:transient_registration) do
-    create(:renewing_registration, :has_finance_details, :does_not_require_conviction_check)
+    create(:renewing_registration, :does_not_require_conviction_check)
   end
+
   let(:registration) do
     WasteCarriersEngine::Registration.where(reg_identifier: transient_registration.reg_identifier).first
   end
@@ -54,7 +55,7 @@ RSpec.describe "ChequePaymentForms", type: :request do
   describe "POST /bo/transient-registrations/:reg_identifier/payments/cheque" do
     let(:params) do
       {
-        amount: transient_registration.finance_details.balance,
+        amount: "102.00",
         comment: "foo",
         registration_reference: "foo",
         date_received_day: "1",
@@ -74,23 +75,15 @@ RSpec.describe "ChequePaymentForms", type: :request do
         sign_in(user)
       end
 
-      it "redirects to the registration finance page" do
+      it "redirects to the registration finance page, creates a new payment and assigns the correct user to it" do
         registration = transient_registration.registration
+        old_payments_count = transient_registration.finance_details.payments.count
 
         post "/bo/resources/#{transient_registration._id}/payments/cheque", cheque_payment_form: params
 
         expect(response).to redirect_to(resource_finance_details_path(registration._id))
-      end
-
-      it "creates a new payment" do
-        old_payments_count = transient_registration.finance_details.payments.count
-        post "/bo/resources/#{transient_registration._id}/payments/cheque", cheque_payment_form: params
         expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count + 1)
-      end
-
-      it "assigns the correct updated_by_user to the payment" do
-        post "/bo/resources/#{transient_registration._id}/payments/cheque", cheque_payment_form: params
-        expect(transient_registration.reload.finance_details.payments.first.updated_by_user).to eq(user.email)
+        expect(transient_registration.reload.finance_details.payments.last.updated_by_user).to eq(user.email)
       end
 
       context "when there is no pending conviction check" do
