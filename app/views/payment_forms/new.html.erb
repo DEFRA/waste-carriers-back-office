@@ -2,16 +2,22 @@
   <div class="column-two-thirds">
     <%= render("waste_carriers_engine/shared/back", back_path: resource_finance_details_path(@resource._id)) %>
 
-    <%= form_for(:payment_form, url: resource_payment_forms_path(@resource._id)) do |f| %>
+    <%= render("waste_carriers_engine/shared/errors", object: @payment_form) %>
+
+    <%= form_for(@payment_form, url: resource_payment_forms_path(@resource._id)) do |f| %>
       <h1 class="heading-large">
         <%= t(".heading") %>
       </h1>
 
-      <div class="form-group">
+      <div class="form-group <%= "form-group-error" if @payment_form.errors[:payment_type].any? %>">
         <fieldset id="payment_type">
           <legend class="visuallyhidden">
             <%= t(".heading") %>
           </legend>
+
+          <% if @payment_form.errors[:payment_type].any? %>
+            <span class="error-message"><%= @payment_form.errors[:payment_type].join(", ") %></span>
+          <% end %>
 
           <% @payment_types.each do |type| %>
             <div class="multiple-choice">
