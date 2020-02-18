@@ -11,7 +11,7 @@ en:
             amount:
               blank: "You must enter an amount"
               not_a_number: "You must enter a valid number"
-              greater_than_or_equal_to: "You must enter a number greater or equal to 0.01"
+              greater_than_or_equal_to: "You must enter a number greater than or equal to 0.01"
             comment:
               too_long: "Your comment must not be longer than 250 characters"
             date_received:

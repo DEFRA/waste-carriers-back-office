@@ -22,10 +22,9 @@ en:
             amount:
               blank: "Enter amount"
               not_a_number: "Amount is invalid"
-              greater_than_or_equal_to: "You must enter a number greater or equal to 0.01"
+              greater_than_or_equal_to: "You must enter a number greater than or equal to 0.01"
             description:
               blank: "Enter a reason"
               too_long: "Description must be %{count} characters or fewer"
             reference:
               blank: "Enter the tansaction reference"
-
