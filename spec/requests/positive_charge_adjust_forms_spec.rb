@@ -90,7 +90,6 @@ RSpec.describe "PositiveChargeAdjustForms", type: :request do
           end
 
           it "generates a new order and redirects to the registration finance details page with a 302" do
-            expected_orders_count = renewing_registration.finance_details.orders.count + 1
             registration = renewing_registration.registration
             previous_orders_count = registration.finance_details.orders.count
 
