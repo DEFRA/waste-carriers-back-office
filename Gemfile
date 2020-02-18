@@ -52,6 +52,10 @@ gem "wicked_pdf"
 # Use the Defra Ruby Aws gem for loading files to AWS buckets
 gem "defra_ruby_aws", "~> 0.2.0"
 
+gem "defra_ruby_validators",
+    git: "https://github.com/DEFRA/defra-ruby-validators",
+    branch: "date-validator"
+
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",

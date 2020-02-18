@@ -93,16 +93,40 @@ RSpec.describe BasePaymentForm, type: :model do
       let(:invalid_params) { {} }
       let(:payment_type) { "FOO" }
 
-      it "should not submit" do
-        expect(payment_form.submit(invalid_params, payment_type)).to eq(false)
-      end
-
-      it "should not create a new payment" do
+      it "should not submit and should not create a new payment" do
         payment_count = transient_registration.finance_details.payments.count
-        payment_form.submit(invalid_params, payment_type)
+
+        expect(payment_form.submit(invalid_params, payment_type)).to eq(false)
+
         new_payment_count = transient_registration.reload.finance_details.payments.count
 
         expect(new_payment_count).to eq(payment_count)
+      end
+
+      context "when the date inserted is in the future" do
+        let(:date) { 1.day.from_now }
+        let(:params) do
+          {
+            amount: payment_form.amount,
+            comment: payment_form.comment,
+            updated_by_user: payment_form.updated_by_user,
+            registration_reference: payment_form.registration_reference,
+            date_received_day: date.day,
+            date_received_month: date.month,
+            date_received_year: date.year
+          }
+        end
+        let(:payment_type) { "FOO" }
+
+        it "should not submit and should not create a new payment" do
+          payment_count = transient_registration.finance_details.payments.count
+
+          expect(payment_form.submit(params, payment_type)).to eq(false)
+
+          new_payment_count = transient_registration.reload.finance_details.payments.count
+
+          expect(new_payment_count).to eq(payment_count)
+        end
       end
     end
   end
