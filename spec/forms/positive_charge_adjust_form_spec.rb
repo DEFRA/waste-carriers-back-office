@@ -15,6 +15,10 @@ RSpec.describe PositiveChargeAdjustForm, type: :model do
         }
       end
 
+      before do
+        allow(ProcessChargeAdjustService).to receive(:run)
+      end
+
       it "returns true" do
         expect(subject.submit(params)).to be_truthy
       end

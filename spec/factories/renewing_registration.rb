@@ -29,7 +29,7 @@ FactoryBot.define do
 
     trait :pending_payment do
       workflow_state { "renewal_received_form" }
-      finance_details { build(:finance_details, :positive_balance) }
+      finance_details { build(:finance_details, :has_unpaid_order) }
     end
 
     trait :no_pending_payment do

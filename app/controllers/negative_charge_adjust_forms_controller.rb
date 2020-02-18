@@ -8,13 +8,7 @@ class NegativeChargeAdjustFormsController < ResourceFormsController
   end
 
   def create
-    return unless super(NegativeChargeAdjustForm, "negative_charge_adjust_form")
-
-    ProcessChargeAdjustService.run(
-      finance_details: @resource.finance_details,
-      form: @negative_charge_adjust_form,
-      user: current_user
-    )
+    return unless super(NegativeChargeAdjustForm, "negative_charge_adjust_form", current_user)
 
     flash[:success] = I18n.t(
       "negative_charge_adjust_forms.messages.success",

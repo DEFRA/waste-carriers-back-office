@@ -17,10 +17,14 @@ class ResourceFormsController < ApplicationController
     set_up_form(form_class, form)
   end
 
-  def create(form_class, form)
+  def create(form_class, form, current_user=nil)
     return false unless set_up_form(form_class, form)
 
     params = send("#{form}_params")
+
+    if current_user
+      params[:current_user] = current_user
+    end
 
     # Submit the form by getting the instance variable we just set
     submit_form(instance_variable_get("@#{form}"), params)

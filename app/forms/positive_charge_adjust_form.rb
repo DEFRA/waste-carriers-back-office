@@ -13,5 +13,13 @@ class PositiveChargeAdjustForm < WasteCarriersEngine::BaseForm
     return false unless valid?
 
     self.amount = string_to_pence(amount)
+
+    ProcessChargeAdjustService.run(
+      finance_details: transient_registration.finance_details,
+      form: self,
+      user: params[:current_user]
+    )
+
+    true
   end
 end

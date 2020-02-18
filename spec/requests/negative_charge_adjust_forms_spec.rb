@@ -76,6 +76,33 @@ RSpec.describe "NegativeChargeAdjustForms", type: :request do
           expect(response).to redirect_to(resource_finance_details_path(renewing_registration._id))
           expect(renewing_registration.finance_details.orders.count).to eq(expected_orders_count)
         end
+
+        context "when the charge adjust clears the resource balance and the resource is in a renewable status" do
+          let(:renewing_registration) { create(:renewing_registration, :pending_payment) }
+          let(:params) do
+            {
+              negative_charge_adjust_form: {
+                amount: (renewing_registration.finance_details.balance.to_f / 100).to_s,
+                reference: "Reference",
+                description: "Description"
+              }
+            }
+          end
+
+          it "generates a new order and redirects to the registration finance details page with a 302" do
+            expected_orders_count = renewing_registration.finance_details.orders.count + 1
+            registration = renewing_registration.registration
+            previous_orders_count = registration.finance_details.orders.count
+
+            post resource_negative_charge_adjust_form_path(renewing_registration._id), params
+
+            registration.reload
+
+            expect(response).to have_http_status(302)
+            expect(response).to redirect_to(resource_finance_details_path(registration._id))
+            expect(registration.finance_details.orders.count).to be > previous_orders_count
+          end
+        end
       end
 
       context "when the request data are not valid" do
