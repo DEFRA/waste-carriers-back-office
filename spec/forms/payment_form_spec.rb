@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe PaymentForm do
   describe "#submit" do
     context "when params are valid" do
-      let(:params) { { payment_type: "foo" } }
+      let(:params) { { payment_type: "cash" } }
 
       it "returns true" do
         expect(subject.submit(params)).to be_truthy
@@ -13,6 +13,14 @@ RSpec.describe PaymentForm do
     end
 
     context "when params are invalid" do
+      let(:params) { { payment_type: "foo" } }
+
+      it "returns true" do
+        expect(subject.submit(params)).to be_falsey
+      end
+    end
+
+    context "when params are blank" do
       it "returns false" do
         expect(subject.submit({})).to be_falsey
       end

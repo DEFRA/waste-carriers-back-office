@@ -19,7 +19,7 @@
             <span class="error-message"><%= @payment_form.errors[:payment_type].join(", ") %></span>
           <% end %>
 
-          <% @payment_types.each do |type| %>
+          <% PaymentForm::PAYMENT_TYPES.each do |type| %>
             <div class="multiple-choice">
               <%= f.radio_button :payment_type,
                                  type,

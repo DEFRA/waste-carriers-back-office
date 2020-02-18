@@ -17,4 +17,4 @@ en:
         payment_form:
           attributes:
             payment_type:
-              blank: "Select a payment type"
+              inclusion: "Select a payment type"

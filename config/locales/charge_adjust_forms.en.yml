@@ -17,4 +17,4 @@ en:
         charge_adjust_form:
           attributes:
             charge_type:
-              blank: "Select positive or negative charge"
+              inclusion: "Select positive or negative charge"

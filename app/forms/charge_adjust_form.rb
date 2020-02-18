@@ -5,7 +5,7 @@ class ChargeAdjustForm
 
   attr_accessor :charge_type
 
-  validates :charge_type, presence: true
+  validates :charge_type, inclusion: { in: %w[positive negative] }
 
   def submit(params)
     self.charge_type = params[:charge_type]

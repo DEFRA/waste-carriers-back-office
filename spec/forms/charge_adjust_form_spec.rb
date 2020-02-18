@@ -12,6 +12,14 @@ RSpec.describe ChargeAdjustForm do
       end
     end
 
+    context "when parameters are invalid" do
+      let(:params) { { charge_type: "foo" } }
+
+      it "returns true" do
+        expect(subject.submit(params)).to be_falsey
+      end
+    end
+
     context "when parameters are empty" do
       it "returns false" do
         expect(subject.submit({})).to be_falsey

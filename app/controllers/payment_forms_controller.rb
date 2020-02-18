@@ -5,13 +5,12 @@ class PaymentFormsController < ApplicationController
 
   prepend_before_action :authorize_user
   prepend_before_action :authenticate_user!
-  before_action :define_payment_types
   before_action :fetch_form
 
   def new; end
 
   def create
-    if @payment_form.submit(payment_form_params) && valid_payment_type?
+    if @payment_form.submit(payment_form_params)
       redirect_to payment_path
     else
       render :new
@@ -20,24 +19,8 @@ class PaymentFormsController < ApplicationController
 
   private
 
-  def define_payment_types
-    @payment_types = payment_types
-  end
-
   def payment_form_params
     params.fetch(:payment_form, {}).permit(:payment_type)
-  end
-
-  def payment_types
-    %w[cash
-       cheque
-       postal_order
-       bank_transfer
-       worldpay_missed]
-  end
-
-  def valid_payment_type?
-    payment_types.include?(@payment_form.payment_type)
   end
 
   def payment_path
