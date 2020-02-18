@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PaymentForm < WasteCarriersEngine::BaseForm
+class BasePaymentForm < WasteCarriersEngine::BaseForm
   attr_accessor :amount, :comment, :date_received, :date_received_day, :date_received_month, :date_received_year,
                 :order_key, :payment_type, :registration_reference, :updated_by_user,
                 :finance_details, :order, :payment

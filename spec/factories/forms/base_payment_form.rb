@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :payment_form do
+  factory :base_payment_form do
     amount { 100 }
     comment { "foo" }
     updated_by_user { build(:user).email }
