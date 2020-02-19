@@ -3,19 +3,17 @@
     <%= t(".current_balance", balance: display_pence_as_pounds(resource.finance_details.balance)) %>
   </p>
 
-  <div class="form-group <%= "form-group-error" if form.errors[:amount].any? %>">
-    <fieldset id="amount">
-      <% if form.errors[:amount].any? %>
-        <span class="error-message"><%= form.errors[:amount].join(", ") %></span>
-      <% end %>
+  <div class="form-group <%= "form-group-error" if form.errors[:amount].any? %>" id="amount">
+    <% if form.errors[:amount].any? %>
+      <span class="error-message"><%= form.errors[:amount].join(", ") %></span>
+    <% end %>
 
-      <%= f.label :amount, class: "form-label" do %>
-        <%= t(".labels.amount") %>
-        <span class="form-hint"><%= t(".labels.amount_hint") %></span>
-      <% end %>
+    <%= f.label :amount, class: "form-label" do %>
+      <%= t(".labels.amount") %>
+      <span class="form-hint"><%= t(".labels.amount_hint") %></span>
+    <% end %>
 
-      <%= f.number_field :amount, class: "form-control", step: "0.01" %>
-    </fieldset>
+    <%= f.number_field :amount, class: "form-control", step: "0.01" %>
   </div>
 
   <div class="form-group <%= "form-group-error" if form.errors[:date_received].any? %>">
@@ -29,43 +27,39 @@
         <span class="form-hint"><%= t(".labels.date_received_hint") %></span>
       </legend>
 
-      <fieldset id="date_received_day" class="inline-date">
+      <div id="date_received_day" class="inline-date">
         <%= f.label :date_received_day, t(".labels.date_received_day"), class: "form-label" %>
         <%= f.number_field :date_received_day, value: form.date_received_day, class: "form-control" %>
-      </fieldset>
+      </div>
 
-      <fieldset id="date_received_month" class="inline-date">
+      <div id="date_received_month" class="inline-date">
         <%= f.label :date_received_month, t(".labels.date_received_month"), class: "form-label" %>
         <%= f.number_field :date_received_month, value: form.date_received_month, class: "form-control" %>
-      </fieldset>
+      </div>
 
-      <fieldset id="date_received_year" class="inline-date">
+      <div id="date_received_year" class="inline-date">
         <%= f.label :date_received_year, t(".labels.date_received_year"), class: "form-label" %>
         <%= f.number_field :date_received_year, value: form.date_received_year, class: "form-control" %>
-      </fieldset>
+      </div>
     </fieldset>
   </div>
 
-  <div class="form-group <%= "form-group-error" if form.errors[:registration_reference].any? %>">
-    <fieldset id="registration_reference">
-      <% if form.errors[:registration_reference].any? %>
-        <span class="error-message"><%= form.errors[:registration_reference].join(", ") %></span>
-      <% end %>
+  <div class="form-group <%= "form-group-error" if form.errors[:registration_reference].any? %>" id="registration_reference">
+    <% if form.errors[:registration_reference].any? %>
+      <span class="error-message"><%= form.errors[:registration_reference].join(", ") %></span>
+    <% end %>
 
-      <%= f.label :registration_reference, t(".labels.registration_reference"), class: "form-label" %>
-      <%= f.text_field :registration_reference, class: "form-control" %>
-    </fieldset>
+    <%= f.label :registration_reference, t(".labels.registration_reference"), class: "form-label" %>
+    <%= f.text_field :registration_reference, class: "form-control" %>
   </div>
 
   <div class="form-group <%= "form-group-error" if form.errors[:comment].any? %>">
-    <fieldset id="comment">
-      <% if form.errors[:comment].any? %>
-        <span class="error-message"><%= form.errors[:comment].join(", ") %></span>
-      <% end %>
+    <% if form.errors[:comment].any? %>
+      <span class="error-message"><%= form.errors[:comment].join(", ") %></span>
+    <% end %>
 
-      <%= f.label :comment, t(".labels.comment"), class: "form-label" %>
-      <%= f.text_area :comment, class: "form-control" %>
-    </fieldset>
+    <%= f.label :comment, t(".labels.comment"), class: "form-label" %>
+    <%= f.text_area :comment, class: "form-control" %>
   </div>
 
   <div class="form-group">

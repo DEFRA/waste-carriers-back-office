@@ -21,15 +21,13 @@
     </h2>
 
     <%= form_for(@reversal_form, url: resource_reversal_forms_path(@resource._id, order_key: params[:order_key])) do |f| %>
-      <div class="form-group <%= "form-group-error" if @reversal_form.errors[:reason].any? %>">
-        <fieldset id="reason">
-          <% if @reversal_form.errors[:reason].any? %>
-            <span class="error-message"><%= @reversal_form.errors[:reason].join(", ") %></span>
-          <% end %>
+      <div class="form-group <%= "form-group-error" if @reversal_form.errors[:reason].any? %>" id="reason">
+        <% if @reversal_form.errors[:reason].any? %>
+          <span class="error-message"><%= @reversal_form.errors[:reason].join(", ") %></span>
+        <% end %>
 
-          <%= f.label :reason, t(".reason.label"), class: "form-label" %>
-          <%= f.text_area :reason, class: "form-control" %>
-        </fieldset>
+        <%= f.label :reason, t(".reason.label"), class: "form-label" %>
+        <%= f.text_area :reason, class: "form-control" %>
       </div>
 
       <div class="form-group">
