@@ -15,12 +15,6 @@ class NegativeChargeAdjustForm < WasteCarriersEngine::BaseForm
     # Negative amount as this is a negative charge adjust
     self.amount = string_to_pence(amount) * -1
 
-    ProcessChargeAdjustService.run(
-      finance_details: transient_registration.finance_details,
-      form: self,
-      user: params[:current_user]
-    )
-
     true
   end
 end

@@ -8,7 +8,7 @@ class ResourceFormsController < ApplicationController
   include CanCompleteIfPossible
 
   extend ActiveModel::Callbacks
-  define_model_callbacks :renew
+  define_model_callbacks :renew_or_complete
 
   prepend_before_action :authenticate_user!
   before_action :authorize_if_required, only: %i[new create]
@@ -17,12 +17,10 @@ class ResourceFormsController < ApplicationController
     set_up_form(form_class, form)
   end
 
-  def create(form_class, form, current_user = nil)
+  def create(form_class, form)
     return false unless set_up_form(form_class, form)
 
     params = send("#{form}_params")
-
-    params[:current_user] = current_user if current_user
 
     # Submit the form by getting the instance variable we just set
     submit_form(instance_variable_get("@#{form}"), params)
@@ -38,8 +36,8 @@ class ResourceFormsController < ApplicationController
 
   def submit_form(form, params)
     if form.submit(params)
-      run_callbacks :renew do
-        renew_if_possible_and_redirect
+      run_callbacks :renew_or_complete do
+        renew_or_complete_if_possible_and_redirect
       end
 
       true
@@ -53,7 +51,7 @@ class ResourceFormsController < ApplicationController
     send(:authorize_user) if defined?(:authorize_user)
   end
 
-  def renew_if_possible_and_redirect
+  def renew_or_complete_if_possible_and_redirect
     if renew_if_possible
       redirect_to resource_finance_details_path(@resource.registration._id)
     else

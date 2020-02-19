@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class WorldpayMissedPaymentFormsController < ResourceFormsController
-  before_renew :change_state_if_possible
+  before_renew_or_complete :change_state_if_possible
 
   def new
     super(WorldpayMissedPaymentForm, "worldpay_missed_payment_form")
