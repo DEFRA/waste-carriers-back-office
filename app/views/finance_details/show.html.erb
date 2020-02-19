@@ -17,7 +17,7 @@
     <%= render "shared/company_details_panel", registration: @resource %>
 
     <% if @resource.pending_payment? %>
-      <%= render "shared/registrations/pending_payment_panel", resource: @resource %>
+      <%= render "shared/registrations/pending_payment_panel", resource: @resource, hide_payment_link: true %>
     <% end %>
   </div>
 </div>
