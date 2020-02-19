@@ -6,4 +6,12 @@ module FinanceDetailsHelper
 
     format("%<pounds>.2f", pounds: pounds)
   end
+
+  def details_path_for(resource)
+    if resource.is_a?(WasteCarriersEngine::RenewingRegistration)
+      renewing_registration_path(resource.reg_identifier)
+    else
+      registration_path(resource.reg_identifier)
+    end
+  end
 end
