@@ -5,7 +5,7 @@ class BasePaymentForm < WasteCarriersEngine::BaseForm
                 :order_key, :payment_type, :registration_reference, :updated_by_user,
                 :finance_details, :order, :payment
 
-  validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0.01 }
+  validates :amount, numericality: { greater_than_or_equal_to: 0.01 }
   validates :comment, length: { maximum: 250 }
   validates :date_received, presence: true
   validates :registration_reference, presence: true
