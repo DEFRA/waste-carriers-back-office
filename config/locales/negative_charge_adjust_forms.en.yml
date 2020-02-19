@@ -17,7 +17,7 @@ en:
   activemodel:
     errors:
       models:
-        positive_charge_adjust_form:
+        negative_charge_adjust_form:
           attributes:
             amount:
               not_a_number: "You must enter a valid number"
