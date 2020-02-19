@@ -26,4 +26,4 @@ en:
               blank: "Enter a reason"
               too_long: "Description must be %{count} characters or fewer"
             reference:
-              blank: "Enter the tansaction reference"
+              blank: "Enter the transaction reference"
