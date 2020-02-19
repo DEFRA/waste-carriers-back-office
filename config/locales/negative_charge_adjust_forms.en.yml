@@ -1,7 +1,7 @@
 en:
   negative_charge_adjust_forms:
     messages:
-      success: "%{amount} charge adjust completed succesfully"
+      success: "£%{amount} charge adjust completed successfully"
     new:
       title: "Negative charge adjustment (credit)"
       heading: "Negative charge adjustment (credit) for %{reg_identifier}"

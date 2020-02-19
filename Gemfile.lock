@@ -1,18 +1,6 @@
 GIT
-  remote: https://github.com/DEFRA/defra-ruby-validators
-  revision: 77ef293b32b726da12991327b63561be740a6e16
-  branch: date-validator
-  specs:
-    defra_ruby_validators (2.2.0)
-      activemodel
-      os_map_ref
-      phonelib
-      rest-client (~> 2.0)
-      validates_email_format_of
-
-GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 1215c9f98f66e01edcac51f22b97b0f28167b3dd
+  revision: fa3d16bec11dcdbdd9231951b5c4d1b379aeae37
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -119,7 +107,7 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.6)
-    database_cleaner (1.8.2)
+    database_cleaner (1.8.3)
     debug_inspector (0.0.3)
     defra_ruby_alert (1.0.0)
       airbrake (~> 5.8.1)
@@ -130,6 +118,12 @@ GEM
       rails (~> 4.2.11.1)
     defra_ruby_style (0.1.4)
       rubocop (~> 0.79)
+    defra_ruby_validators (2.3.0)
+      activemodel
+      os_map_ref
+      phonelib
+      rest-client (~> 2.0)
+      validates_email_format_of
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -403,7 +397,6 @@ DEPENDENCIES
   defra_ruby_aws (~> 0.2.0)
   defra_ruby_mocks (~> 1.2)
   defra_ruby_style
-  defra_ruby_validators!
   devise (>= 4.4.3)
   devise_invitable (~> 1.7.0)
   dotenv-rails
