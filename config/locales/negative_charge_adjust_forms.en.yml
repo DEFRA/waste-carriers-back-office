@@ -20,8 +20,7 @@ en:
         positive_charge_adjust_form:
           attributes:
             amount:
-              blank: "Enter amount"
-              not_a_number: "Amount is invalid"
+              not_a_number: "You must enter a valid number"
               greater_than_or_equal_to: "You must enter a number greater than or equal to 0.01"
             description:
               blank: "Enter a reason"
