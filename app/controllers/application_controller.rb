@@ -57,10 +57,10 @@ class ApplicationController < ActionController::Base
   private
 
   def skip_auth_on_this_controller?
-    # Don't authorize and authenticate pages from HighVoltage or Devise
+    # Don't authorize and authenticate pages from HighVoltage, Devise, or DefraRubyEmail
     # Normally we'd use a skip_before_action, but these controllers are in gems
     controller = params[:controller]
-    controller.include?("pages") || controller.include?("devise")
+    controller.include?("pages") || controller.include?("devise") || controller.include?("last-email")
   end
 
   def current_user_cannot_use_back_office?
