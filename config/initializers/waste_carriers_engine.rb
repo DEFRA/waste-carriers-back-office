@@ -13,6 +13,9 @@ WasteCarriersEngine.configure do |configuration|
     configuration.companies_house_host = ENV["WCRS_MOCK_FO_COMPANIES_HOUSE_URL"]
   end
 
+  # Last email cache config
+  configuration.use_last_email_cache = ENV["WCRS_USE_LAST_EMAIL_CACHE"] || "false"
+
   # Configure airbrake, which is done via the engine using defra_ruby_alert
   configuration.airbrake_enabled = ENV["WCRS_USE_AIRBRAKE"]
   configuration.airbrake_host = ENV["WCRS_AIRBRAKE_URL"]
