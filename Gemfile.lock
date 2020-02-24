@@ -386,7 +386,7 @@ GEM
       chronic (>= 0.6.3)
     whenever-test (1.0.1)
       whenever
-    wicked_pdf (1.4.0)
+    wicked_pdf (2.0.1)
       activesupport
 
 PLATFORMS
