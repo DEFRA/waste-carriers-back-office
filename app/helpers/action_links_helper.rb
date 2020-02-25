@@ -38,7 +38,9 @@ module ActionLinksHelper
   end
 
   def display_payment_link_for?(resource)
-    resource.upper_tier? && can?(:view_payments, resource)
+    return can_view_payments?(resource) unless a_transient_registration?(resource)
+
+    resource.renewal_application_submitted? && can_view_payments?(resource)
   end
 
   def display_refund_link_for?(resource)
@@ -116,5 +118,9 @@ module ActionLinksHelper
     return false if resource.refused?
 
     true
+  end
+
+  def can_view_payments?(resource)
+    resource.upper_tier? && can?(:view_payments, resource)
   end
 end

@@ -237,25 +237,54 @@ RSpec.describe ActionLinksHelper, type: :helper do
 
   describe "#display_payment_link_for?" do
     let(:resource) { double(:resource) }
+    let(:upper_tier) { true }
 
     before do
       allow(resource).to receive(:upper_tier?).and_return(upper_tier)
       allow(helper).to receive(:can?).with(:view_payments, resource).and_return(true)
     end
 
-    context "when the resource is an upper tier" do
-      let(:upper_tier) { true }
+    context "when the resource is a renewing registration" do
+      context "when the resource is submitted" do
+        let(:resource) { build(:renewing_registration, :submitted) }
 
-      it "returns true" do
-        expect(helper.display_payment_link_for?(resource)).to be_truthy
+        context "when the resource is an upper tier" do
+          it "returns true" do
+            expect(helper.display_payment_link_for?(resource)).to be_truthy
+          end
+        end
+
+        context "when the resource is not an upper tier" do
+          let(:upper_tier) { false }
+
+          it "returns false" do
+            expect(helper.display_payment_link_for?(resource)).to be_falsey
+          end
+        end
+      end
+
+      context "when the resource is not yet submitted" do
+        let(:resource) { build(:renewing_registration) }
+
+        it "returns false" do
+          expect(helper.display_payment_link_for?(resource)).to be_falsey
+        end
       end
     end
 
-    context "when the resource is not an upper tier" do
-      let(:upper_tier) { false }
+    context "when the resource is not a renewing registration" do
+      context "when the resource is an upper tier" do
+        it "returns true" do
+          expect(helper.display_payment_link_for?(resource)).to be_truthy
+        end
+      end
 
-      it "returns false" do
-        expect(helper.display_payment_link_for?(resource)).to be_falsey
+      context "when the resource is not an upper tier" do
+        let(:upper_tier) { false }
+
+        it "returns false" do
+          expect(helper.display_payment_link_for?(resource)).to be_falsey
+        end
       end
     end
   end
