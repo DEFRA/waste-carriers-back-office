@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 12d28b26d2a59b28f1c327636771a524b0884a08
+  revision: e23969f37ce53d8aaee460945d52d6f3468d4b04
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -87,7 +87,7 @@ GEM
     bcrypt (3.1.13)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    bson (4.7.1)
+    bson (4.8.0)
     builder (3.2.4)
     byebug (11.1.1)
     cancancan (1.17.0)
