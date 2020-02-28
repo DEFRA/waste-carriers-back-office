@@ -154,9 +154,9 @@ RSpec.describe BasePaymentForm, type: :model do
   end
 
   describe "#comment" do
-    context "when it is more than 250 characters" do
+    context "when it is more than 500 characters" do
       before do
-        payment_form.comment = "Q2HK0PM50AZ8QWEQL6ZVR7A2SLL5QBQ9T6ZQQ7SU793YOSLABX4SAWMM3OE1LGH8Z6MJK92GEP3F9WR89IY7OUQN1PTU9NHFHSUHA1L6ELJI749QH9UXAKVD9CCGX344692OISGGLMAT4VLDAHOEST6N3KD5093AE9C2RHZD12TUPW0FHRR7JJSQRZM3XJ1FCQQJX9UXG7HW258Y71RDUQQ2UNOX4G1IO5J0JE3GQHH46ENQDT4JX89TSJGT"
+        payment_form.comment = "Test " * 101
       end
 
       it "is not valid" do
