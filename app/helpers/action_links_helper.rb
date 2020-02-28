@@ -62,7 +62,6 @@ module ActionLinksHelper
   end
 
   def display_edit_link_for?(resource)
-    return false unless WasteCarriersEngine::FeatureToggle.active?(:edit_registration)
     return false unless display_registration_links?(resource)
     return false unless can?(:edit, WasteCarriersEngine::Registration)
 
