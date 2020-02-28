@@ -6,7 +6,7 @@ class BasePaymentForm < WasteCarriersEngine::BaseForm
                 :finance_details, :order, :payment
 
   validates :amount, numericality: { greater_than_or_equal_to: 0.01 }
-  validates :comment, length: { maximum: 250 }
+  validates :comment, length: { maximum: 500 }
   validates :date_received, presence: true, "defra_ruby/validators/past_date": true
   validates :registration_reference, presence: true
 

@@ -43,7 +43,14 @@
           <span class="error-message"><%= @positive_charge_adjust_form.errors[:description].join(", ") %></span>
         <% end %>
 
-        <%= f.label :description, t(".fields.description.label"), class: "form-label" %>
+        <%= f.label :description, class: "form-label" do %>
+          <%= t(".fields.description.label") %>
+
+          <span class="form-hint">
+            <%= t(".fields.description.hint") %>
+          </span>
+        <% end %>
+
         <%= f.text_area :description, class: "form-control" %>
       </div>
 

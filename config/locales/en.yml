@@ -27,8 +27,9 @@ en:
         date_received_day: "Day"
         date_received_month: "Month"
         date_received_year: "Year"
-        registration_reference: "Reference"
-        comment: "Comment"
+        registration_reference: "Transaction reference"
+        comment: "Reason"
+        comment_hint: "Maximum 500 characters"
       renewal_message: "This application will automatically be completed once it is fully paid for and there are no pending conviction checks."
       submit_button: "Add this payment"
     person_table_rows:

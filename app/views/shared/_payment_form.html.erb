@@ -58,7 +58,14 @@
       <span class="error-message"><%= form.errors[:comment].join(", ") %></span>
     <% end %>
 
-    <%= f.label :comment, t(".labels.comment"), class: "form-label" %>
+    <%= f.label :comment, class: "form-label" do %>
+      <%= t(".labels.comment") %>
+
+      <span class="form-hint">
+        <%= t(".labels.comment_hint") %>
+      </span>
+    <% end %>
+
     <%= f.text_area :comment, class: "form-control" %>
   </div>
 

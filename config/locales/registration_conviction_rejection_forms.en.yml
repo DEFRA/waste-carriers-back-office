@@ -3,7 +3,9 @@ en:
     new:
       title: "Reject a registration with possible convictions"
       heading: "Reject a registration with possible convictions: %{reg_identifier}"
-      revoked_reason_label: "Reason for rejection"
+      revoked_reason:
+        label: "Reason for rejection"
+        hint: "Maximum 500 characters"
       warning: "Once rejected, this registration cannot be completed."
       reject_button: "Reject this renewal"
   activemodel:

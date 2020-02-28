@@ -19,7 +19,14 @@
           <span class="error-message"><%= @conviction_rejection_form.errors[:revoked_reason].join(", ") %></span>
           <% end %>
 
-          <%= f.label :revoked_reason, t(".revoked_reason_label"), class: "form-label" %>
+          <%= f.label :revoked_reason, class: "form-label" do %>
+            <%= t(".revoked_reason.label") %>
+
+            <span class="form-hint">
+              <%= t(".revoked_reason.hint") %>
+            </span>
+          <% end %>
+
           <%= f.text_area :revoked_reason, class: "form-control" %>
         </fieldset>
       </div>

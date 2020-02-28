@@ -6,7 +6,9 @@ en:
       title: "Write off a difference"
       heading: "Write off a difference for %{reg_identifier}"
       write_off: "Write off £%{amount}"
-      reason: "Reason"
+      reason:
+        label: "Reason"
+        hint: "Maximum 500 characters"
       confirm: "Write off"
   activemodel:
     errors:

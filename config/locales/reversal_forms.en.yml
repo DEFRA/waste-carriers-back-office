@@ -20,6 +20,7 @@ en:
       reverse_payment: "Reverse payment of £%{amount}"
       reason:
         label: "Reason"
+        hint: "Maximum 500 characters"
       confirm: "Reverse payment"
   activemodel:
     errors:

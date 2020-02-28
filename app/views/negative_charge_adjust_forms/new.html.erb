@@ -34,7 +34,8 @@
           <span class="error-message"><%= @negative_charge_adjust_form.errors[:reference].join(", ") %></span>
         <% end %>
 
-        <%= f.label :reference, t(".fields.reference.label"), class: "form-label" %>
+        <%= f.label :reference, t(".fields.reference.label"), class: "form-label"%>
+
         <%= f.text_field :reference, class: "form-control" %>
       </div>
 
@@ -43,7 +44,14 @@
           <span class="error-message"><%= @negative_charge_adjust_form.errors[:description].join(", ") %></span>
         <% end %>
 
-        <%= f.label :description, t(".fields.description.label"), class: "form-label" %>
+        <%= f.label :description, class: "form-label" do %>
+          <%= t(".fields.description.label") %>
+
+          <span class="form-hint">
+            <%= t(".fields.description.hint") %>
+          </span>
+        <% end %>
+
         <%= f.text_area :description, class: "form-control" %>
       </div>
 

@@ -13,6 +13,7 @@ en:
           label: "Transaction reference"
         description:
           label: "Reason"
+          hint: "Maximum 500 characters"
       confirm: "Continue"
   activemodel:
     errors:

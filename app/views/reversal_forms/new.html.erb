@@ -26,7 +26,14 @@
           <span class="error-message"><%= @reversal_form.errors[:reason].join(", ") %></span>
         <% end %>
 
-        <%= f.label :reason, t(".reason.label"), class: "form-label" %>
+        <%= f.label :reason, class: "form-label" do %>
+          <%= t(".reason.label") %>
+
+          <span class="form-hint">
+            <%= t(".reason.hint") %>
+          </span>
+        <% end %>
+
         <%= f.text_area :reason, class: "form-control" %>
       </div>
 
