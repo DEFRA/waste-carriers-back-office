@@ -9,6 +9,8 @@
         <%= t(".heading") %>
       </h1>
 
+      <%= render "shared/company_details_panel", registration: @resource %>
+
       <div class="form-group <%= "form-group-error" if @payment_form.errors[:payment_type].any? %>">
         <fieldset id="payment_type">
           <legend class="visuallyhidden">
