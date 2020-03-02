@@ -498,30 +498,66 @@ RSpec.describe ActionLinksHelper, type: :helper do
   end
 
   describe "#display_finance_details_link_for?" do
+    let(:resource) { double(:resource) }
     let(:upper_tier) { true }
     let(:finance_details) { double(:finance_details) }
-    let(:resource) { double(:registration, finance_details: finance_details, upper_tier?: upper_tier) }
 
-    context "when the resource is an upper tier" do
-      context "when the resource has finance details" do
-        it "returns true" do
-          expect(helper.display_finance_details_link_for?(resource)).to be_truthy
+    before do
+      allow(resource).to receive(:upper_tier?).and_return(upper_tier)
+      allow(resource).to receive(:finance_details).and_return(finance_details)
+    end
+
+    context "when the resource is a renewing registration" do
+      context "when the resource is submitted" do
+        let(:resource) { build(:renewing_registration, :submitted) }
+
+        context "when the resource is an upper tier" do
+          it "returns true" do
+            expect(helper.display_finance_details_link_for?(resource)).to be_truthy
+          end
+        end
+
+        context "when the resource is not an upper tier" do
+          let(:upper_tier) { false }
+
+          it "returns false" do
+            expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+          end
         end
       end
 
-      context "when the resource has no finance details" do
-        let(:finance_details) { nil }
+      context "when the resource is not yet submitted" do
+        let(:resource) { build(:renewing_registration) }
+
         it "returns false" do
           expect(helper.display_finance_details_link_for?(resource)).to be_falsey
         end
       end
     end
 
-    context "when the resource is not an upper tier" do
-      let(:upper_tier) { false }
+    context "when the resource is not a renewing registration" do
+      context "when the resource is an upper tier" do
+        context "when the resource has finance details" do
+          it "returns true" do
+            expect(helper.display_finance_details_link_for?(resource)).to be_truthy
+          end
+        end
 
-      it "returns false" do
-        expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+        context "when the resource has no finance details" do
+          let(:finance_details) { nil }
+
+          it "returns false" do
+            expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+          end
+        end
+      end
+
+      context "when the resource is not an upper tier" do
+        let(:upper_tier) { false }
+
+        it "returns false" do
+          expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+        end
       end
     end
   end

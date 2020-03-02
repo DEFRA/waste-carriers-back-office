@@ -50,7 +50,10 @@ module ActionLinksHelper
   end
 
   def display_finance_details_link_for?(resource)
-    resource.upper_tier? && resource.finance_details.present?
+    return false unless resource.upper_tier? && resource.finance_details.present?
+    return true unless a_transient_registration?(resource)
+
+    resource.renewal_application_submitted?
   end
 
   def display_cease_or_revoke_link_for?(resource)
