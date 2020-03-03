@@ -112,17 +112,6 @@
                       <% end %>
                     </li>
                   <% end %>
-                  <% if display_cease_or_revoke_link_for?(result) %>
-                    <li>
-                      <%= link_to WasteCarriersEngine::Engine.routes.url_helpers.new_cease_or_revoke_form_path(result.reg_identifier) do %>
-                        <%= t(".results.actions.cease_or_revoke.link_text") %>
-                        <span class="visually-hidden">
-                          <%= t(".results.actions.cease_or_revoke.visually_hidden_text",
-                                name: result.company_name) %>
-                        </span>
-                      <% end %>
-                    </li>
-                  <% end %>
                   <% if display_resume_link_for?(result) %>
                     <li>
                       <%= link_to resume_link_for(result) do %>
