@@ -1,6 +1,11 @@
 <div class="grid-row">
-  <div class="column-two-thirds">
+  <div class="column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: new_registration_registration_transfer_path(@registration.reg_identifier)) %>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
 
     <h1 class="heading-large">
       <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
@@ -21,5 +26,5 @@
     <div class="form-group">
       <%= link_to t(".button"), registration_path(@registration.reg_identifier), class: "button" %>
     </div>
-  </end>
-</end>
+  </div>
+</div>
