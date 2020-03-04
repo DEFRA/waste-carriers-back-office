@@ -17,3 +17,4 @@ en:
               already_signed_off: "Convictions for this renewal have already been approved or rejected"
             revoked_reason:
               blank: "You must enter a reason for this decision"
+              too_long: "Reason must be %{count} characters or fewer"

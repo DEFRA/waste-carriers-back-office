@@ -15,7 +15,7 @@ class ConvictionReasonForm < WasteCarriersEngine::BaseForm
     super(attributes)
   end
 
-  validates :revoked_reason, presence: true
+  validates :revoked_reason, presence: true, length: { maximum: 500 }
   validate :convictions_not_already_signed_off?
 
   private
