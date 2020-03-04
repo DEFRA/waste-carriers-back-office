@@ -45,6 +45,6 @@ class WorldpayEscapesController < ApplicationController
   end
 
   def continue_renewal_path
-    WasteCarriersEngine::Engine.routes.url_helpers.new_payment_summary_form_path(@transient_registration.reg_identifier)
+    WasteCarriersEngine::Engine.routes.url_helpers.new_payment_summary_form_path(@transient_registration.token)
   end
 end

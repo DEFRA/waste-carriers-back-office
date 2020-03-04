@@ -22,7 +22,8 @@ RSpec.describe "WorldpayEscapes", type: :request do
 
         it "redirects to the payment_summary_form" do
           get "/bo/transient-registrations/#{reg_identifier}/revert-to-payment-summary"
-          expect(response).to redirect_to WasteCarriersEngine::Engine.routes.url_helpers.new_payment_summary_form_path(reg_identifier)
+
+          expect(response).to redirect_to WasteCarriersEngine::Engine.routes.url_helpers.new_payment_summary_form_path(transient_registration.token)
         end
 
         it "updates the workflow_state" do
