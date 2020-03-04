@@ -38,7 +38,7 @@
                 <p>
                   <%= t(".status.messages.worldpay.paragraph_2.missed_payment") %>
                 </p>
-                <%= link_to t(".status.actions.missed_worldpay_payment_button"), new_transient_registration_worldpay_missed_payment_form_path(@transient_registration.reg_identifier), class: 'button' %>
+                <%= link_to t(".status.actions.missed_worldpay_payment_button"), new_resource_worldpay_missed_payment_form_path(@transient_registration.reg_identifier), class: 'button' %>
               <% end %>
             <% else %>
               <p>
