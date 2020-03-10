@@ -1,7 +1,12 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
+<<<<<<< HEAD
   revision: 49d4d99884a5260929bed95c391cfb33cecc71bb
   branch: master
+=======
+  revision: 2cc9e9c8860ffc6d45f364fee120fe72d9c32980
+  branch: hide-start-new-reg-behind-feature-toggle
+>>>>>>> Switch to branch version of engine
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)
