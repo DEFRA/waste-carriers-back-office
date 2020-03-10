@@ -86,7 +86,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
 
   describe "/bo/convictions" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency_with_refund) }
       before(:each) do
         sign_in(user)
       end
@@ -113,6 +113,18 @@ RSpec.describe "ConvictionsDashboards", type: :request do
       end
     end
 
+    context "when a non-agency user is signed in" do
+      let(:user) { create(:user, :finance) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "redirects to the permissions error page" do
+        get "/bo/convictions"
+        expect(response).to redirect_to("/bo/pages/permission")
+      end
+    end
+
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
         get "/bo/convictions"
@@ -123,7 +135,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
 
   describe "/bo/convictions/in-progress" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency_with_refund) }
       before(:each) do
         sign_in(user)
       end
@@ -150,6 +162,18 @@ RSpec.describe "ConvictionsDashboards", type: :request do
       end
     end
 
+    context "when a non-agency user is signed in" do
+      let(:user) { create(:user, :finance) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "redirects to the permissions error page" do
+        get "/bo/convictions/in-progress"
+        expect(response).to redirect_to("/bo/pages/permission")
+      end
+    end
+
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
         get "/bo/convictions/in-progress"
@@ -160,7 +184,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
 
   describe "/bo/convictions/approved" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency_with_refund) }
       before(:each) do
         sign_in(user)
       end
@@ -188,6 +212,18 @@ RSpec.describe "ConvictionsDashboards", type: :request do
       end
     end
 
+    context "when a non-agency user is signed in" do
+      let(:user) { create(:user, :finance) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "redirects to the permissions error page" do
+        get "/bo/convictions/approved"
+        expect(response).to redirect_to("/bo/pages/permission")
+      end
+    end
+
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
         get "/bo/convictions/approved"
@@ -198,7 +234,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
 
   describe "/bo/convictions/rejected" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency_with_refund) }
       before(:each) do
         sign_in(user)
       end
@@ -222,6 +258,18 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         expect(response.body).to_not include(link_to_possible_matches_registration)
         expect(response.body).to_not include(link_to_new_from_frontend_registration)
         expect(response.body).to_not include(link_to_possible_matches_renewal)
+      end
+    end
+
+    context "when a non-agency user is signed in" do
+      let(:user) { create(:user, :finance) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "redirects to the permissions error page" do
+        get "/bo/convictions/rejected"
+        expect(response).to redirect_to("/bo/pages/permission")
       end
     end
 

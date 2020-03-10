@@ -2,6 +2,7 @@
 
 class ConvictionsDashboardsController < ApplicationController
   before_action :authenticate_user!
+  before_action :authorize_action
 
   def index
     ordered_and_paged(list_of_possible_matches)
@@ -20,6 +21,10 @@ class ConvictionsDashboardsController < ApplicationController
   end
 
   private
+
+  def authorize_action
+    authorize! :review_convictions, nil
+  end
 
   def list_of_possible_matches
     WasteCarriersEngine::RenewingRegistration.submitted.convictions_possible_match +
