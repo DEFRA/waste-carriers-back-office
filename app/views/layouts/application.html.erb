@@ -19,10 +19,12 @@
                 <%= link_to t("layouts.application.menu.dashboard"),
                             main_app.bo_path %>
               </li>
-              <li>
-                <%= link_to t("layouts.application.menu.convictions"),
-                            main_app.convictions_path %>
-              </li>
+              <% if can?(:review_convictions, current_user) %>
+                <li>
+                  <%= link_to t("layouts.application.menu.convictions"),
+                              main_app.convictions_path %>
+                </li>
+              <% end %>
               <% if can?(:manage_back_office_users, current_user) %>
                 <li>
                   <%= link_to t("layouts.application.menu.users"),
