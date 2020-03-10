@@ -80,7 +80,7 @@ module WasteCarriersBackOffice
 
     # Fees
     config.renewal_charge = ENV["WCRS_RENEWAL_CHARGE"].to_i
-    config.new_registration_charge = (ENV["WCRS_NEW_REGISTRATION_CHARGE"] || 15400).to_i
+    config.new_registration_charge = (ENV["WCRS_NEW_REGISTRATION_CHARGE"] || 15_400).to_i
     config.type_change_charge = ENV["WCRS_TYPE_CHANGE_CHARGE"].to_i
     config.card_charge = ENV["WCRS_CARD_CHARGE"].to_i
 
