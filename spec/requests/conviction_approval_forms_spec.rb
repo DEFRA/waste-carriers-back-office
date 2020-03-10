@@ -15,18 +15,11 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
         sign_in(user)
       end
 
-      it "renders the new template" do
+      it "renders the new template, returns a 200 response, and includes the reg identifier" do
         get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve"
+
         expect(response).to render_template(:new)
-      end
-
-      it "returns a 200 response" do
-        get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve"
         expect(response).to have_http_status(200)
-      end
-
-      it "includes the reg identifier" do
-        get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve"
         expect(response.body).to include(transient_registration.reg_identifier)
       end
     end
@@ -62,33 +55,15 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
         }
       end
 
-      it "redirects to the convictions page" do
+      it "redirects to the convictions page and updates the revoked_reason, workflow_state, and 'confirmed_' attributes" do
         post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+
         expect(response).to redirect_to(convictions_path)
-      end
 
-      it "updates the revoked_reason" do
-        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
         expect(transient_registration.reload.metaData.revoked_reason).to eq(params[:revoked_reason])
-      end
-
-      it "updates the conviction_sign_off's confirmed" do
-        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
         expect(transient_registration.reload.conviction_sign_offs.first.confirmed).to eq("yes")
-      end
-
-      it "updates the conviction_sign_off's confirmed_at" do
-        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
         expect(transient_registration.reload.conviction_sign_offs.first.confirmed_at).to be_a(DateTime)
-      end
-
-      it "updates the conviction_sign_off's confirmed_by" do
-        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
         expect(transient_registration.reload.conviction_sign_offs.first.confirmed_by).to eq(user.email)
-      end
-
-      it "updates the conviction_sign_off's workflow_state" do
-        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
         expect(transient_registration.reload.conviction_sign_offs.first.workflow_state).to eq("approved")
       end
 
@@ -141,18 +116,11 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
           }
         end
 
-        it "renders the new template" do
+        it "renders the new template, does not update the revoked_reason, and does not update the conviction_sign_off" do
           post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+
           expect(response).to render_template(:new)
-        end
-
-        it "does not update the revoked_reason" do
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
           expect(transient_registration.reload.metaData.revoked_reason).to_not eq(params[:revoked_reason])
-        end
-
-        it "does not update the conviction_sign_off" do
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
           expect(transient_registration.reload.conviction_sign_offs.first.confirmed).to eq("no")
         end
       end
@@ -170,18 +138,11 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
         }
       end
 
-      it "redirects to the permissions error page" do
+      it "redirects to the permissions error page, does not update the revoked_reason, and does not update the conviction_sign_off" do
         post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+
         expect(response).to redirect_to("/bo/pages/permission")
-      end
-
-      it "does not update the revoked_reason" do
-        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
         expect(transient_registration.reload.metaData.revoked_reason).to_not eq(params[:revoked_reason])
-      end
-
-      it "does not update the conviction_sign_off" do
-        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
         expect(transient_registration.reload.conviction_sign_offs.first.confirmed).to eq("no")
       end
     end
