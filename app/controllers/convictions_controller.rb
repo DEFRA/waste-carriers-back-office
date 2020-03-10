@@ -2,6 +2,7 @@
 
 class ConvictionsController < ApplicationController
   before_action :authenticate_user!
+  before_action :authorize_action
 
   def index
     find_resource(params)
@@ -15,6 +16,10 @@ class ConvictionsController < ApplicationController
   end
 
   private
+
+  def authorize_action
+    authorize! :review_convictions, nil
+  end
 
   def find_resource(params)
     if params[:registration_reg_identifier].present?

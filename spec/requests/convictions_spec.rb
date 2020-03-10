@@ -8,7 +8,7 @@ RSpec.describe "Convictions", type: :request do
 
   describe "/bo/registrations/:reg_identifier/convictions" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency_with_refund) }
       before(:each) do
         sign_in(user)
       end
@@ -28,11 +28,23 @@ RSpec.describe "Convictions", type: :request do
         expect(response.body).to include(registration.reg_identifier)
       end
     end
+
+    context "when a non-agency user is signed in" do
+      let(:user) { create(:user, :finance) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "redirects to the permissions error page" do
+        get "/bo/registrations/#{registration.reg_identifier}/convictions"
+        expect(response).to redirect_to("/bo/pages/permission")
+      end
+    end
   end
 
   describe "/bo/transient-registrations/:reg_identifier/convictions" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency_with_refund) }
       before(:each) do
         sign_in(user)
       end
@@ -52,11 +64,23 @@ RSpec.describe "Convictions", type: :request do
         expect(response.body).to include(transient_registration.reg_identifier)
       end
     end
+
+    context "when a non-agency user is signed in" do
+      let(:user) { create(:user, :finance) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "redirects to the permissions error page" do
+        get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions"
+        expect(response).to redirect_to("/bo/pages/permission")
+      end
+    end
   end
 
   describe "/bo/registrations/:registration_reg_identifier/convictions/begin-checks" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency_with_refund) }
       before(:each) do
         sign_in(user)
       end
@@ -71,11 +95,23 @@ RSpec.describe "Convictions", type: :request do
         expect(response).to redirect_to(convictions_path)
       end
     end
+
+    context "when a non-agency user is signed in" do
+      let(:user) { create(:user, :finance) }
+      before(:each) do
+        sign_in(user)
+      end
+
+      it "redirects to the permissions error page" do
+        get "/bo/registrations/#{registration.reg_identifier}/convictions/begin-checks"
+        expect(response).to redirect_to("/bo/pages/permission")
+      end
+    end
   end
 
   describe "/bo/transient-registrations/:transient_registration_reg_identifier/convictions/begin-checks" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :agency_with_refund) }
       before(:each) do
         sign_in(user)
       end
@@ -89,6 +125,18 @@ RSpec.describe "Convictions", type: :request do
         get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/begin-checks"
         expect(response).to redirect_to(convictions_path)
       end
+    end
+  end
+
+  context "when a non-agency user is signed in" do
+    let(:user) { create(:user, :finance) }
+    before(:each) do
+      sign_in(user)
+    end
+
+    it "redirects to the permissions error page" do
+      get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/begin-checks"
+      expect(response).to redirect_to("/bo/pages/permission")
     end
   end
 end
