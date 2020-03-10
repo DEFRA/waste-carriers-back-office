@@ -91,18 +91,11 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         sign_in(user)
       end
 
-      it "renders the index template" do
+      it "renders the index template, returns a 200 response, and links to the correct registrations and renewals" do
         get "/bo/convictions"
+
         expect(response).to render_template(:index)
-      end
-
-      it "returns a 200 response" do
-        get "/bo/convictions"
         expect(response).to have_http_status(200)
-      end
-
-      it "links to the correct registrations and renewals" do
-        get "/bo/convictions"
 
         expect(response.body).to include(link_to_possible_matches_registration)
         expect(response.body).to include(link_to_new_from_frontend_registration)
@@ -140,18 +133,11 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         sign_in(user)
       end
 
-      it "renders the possible_matches template" do
+      it "renders the possible_matches template, returns a 200 response, and links to the correct registrations and renewals" do
         get "/bo/convictions/in-progress"
+
         expect(response).to render_template(:checks_in_progress)
-      end
-
-      it "returns a 200 response" do
-        get "/bo/convictions/in-progress"
         expect(response).to have_http_status(200)
-      end
-
-      it "links to the correct registrations and renewals" do
-        get "/bo/convictions/in-progress"
 
         expect(response.body).to include(link_to_checks_in_progress_registration)
         expect(response.body).to include(link_to_checks_in_progress_renewal)
@@ -189,18 +175,11 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         sign_in(user)
       end
 
-      it "renders the possible_matches template" do
+      it "renders the possible_matches template, returns a 200 response, and links to the correct registrations and renewals" do
         get "/bo/convictions/approved"
+
         expect(response).to render_template(:approved)
-      end
-
-      it "returns a 200 response" do
-        get "/bo/convictions/approved"
         expect(response).to have_http_status(200)
-      end
-
-      it "links to the correct registrations and renewals" do
-        get "/bo/convictions/approved"
 
         expect(response.body).to include(link_to_pending_approved_registration)
         expect(response.body).to include(link_to_approved_renewal)
@@ -239,18 +218,11 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         sign_in(user)
       end
 
-      it "renders the possible_matches template" do
+      it "renders the possible_matches template, returns a 200 response, and links to the correct registrations and renewals" do
         get "/bo/convictions/rejected"
+
         expect(response).to render_template(:rejected)
-      end
-
-      it "returns a 200 response" do
-        get "/bo/convictions/rejected"
         expect(response).to have_http_status(200)
-      end
-
-      it "links to the correct registrations and renewals" do
-        get "/bo/convictions/rejected"
 
         expect(response.body).to include(link_to_rejected_renewal)
 
