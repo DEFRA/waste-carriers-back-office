@@ -1,3 +1,5 @@
 ---
 edit_registration:
   active: <%= ENV["FEATURE_TOGGLE_EDIT_REGISTRATION"] %>
+new_registration:
+  active: <%= ENV["FEATURE_TOGGLE_NEW_REGISTRATION"] %>
