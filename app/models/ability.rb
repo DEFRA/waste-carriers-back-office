@@ -39,8 +39,6 @@ class Ability
     can :order_copy_cards, WasteCarriersEngine::Registration
     can :edit, WasteCarriersEngine::Registration if WasteCarriersEngine::FeatureToggle.active?(:edit_registration)
 
-    can :review_convictions, :all
-
     can :revert_to_payment_summary, :all
 
     can :transfer_registration, WasteCarriersEngine::Registration
@@ -58,6 +56,8 @@ class Ability
     can :record_cheque_payment, :all
     can :record_postal_order_payment, :all
     can :view_payments, :all
+
+    can :review_convictions, :all
 
     can :write_off_small, WasteCarriersEngine::FinanceDetails do |finance_details|
       finance_details.zero_difference_balance <= write_off_agency_user_cap

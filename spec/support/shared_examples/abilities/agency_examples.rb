@@ -24,10 +24,6 @@ RSpec.shared_examples "agency examples" do
     should be_able_to(:edit, WasteCarriersEngine::Registration)
   end
 
-  it "should be able to review convictions" do
-    should be_able_to(:review_convictions, WasteCarriersEngine::RenewingRegistration)
-  end
-
   it "should not be able to write off large" do
     should_not be_able_to(:write_off_large, WasteCarriersEngine::FinanceDetails)
   end
