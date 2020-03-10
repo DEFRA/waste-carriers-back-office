@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 1e75fce8eab2f1d98435f0f13b1f6a5594b9af84
+  revision: 7cf8f8f87ee9d6072fcd1d1c43edc80d6ae8d33c
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -13,6 +13,7 @@ GIT
       jbuilder (~> 2.0)
       jquery-rails
       mongoid (~> 5.2.0)
+      mongoid-locker
       nokogiri
       rails (~> 4.2.11)
       rest-client (~> 2.0)
@@ -219,13 +220,15 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
-    mongo (2.11.3)
+    mongo (2.11.4)
       bson (>= 4.4.2, < 5.0.0)
     mongoid (5.2.1)
       activemodel (~> 4.0)
       mongo (>= 2.4.1, < 3.0.0)
       origin (~> 2.3)
       tzinfo (>= 0.3.37)
+    mongoid-locker (2.0.0)
+      mongoid (>= 5.0, < 8)
     multi_json (1.14.1)
     multipart-post (2.1.1)
     netrc (0.11.0)
