@@ -82,6 +82,19 @@ RSpec.describe "WriteOffForms", type: :request do
           }
         end
 
+        context "when the resource is a registration" do
+          let(:registration) { create(:registration, :has_unpaid_order, :pending) }
+
+          it "activates the registration" do
+            post resource_write_off_form_path(registration._id), params
+
+            registration.reload
+
+            expect(registration.finance_details.balance).to eq(0)
+            expect(registration).to be_active
+          end
+        end
+
         it "generates a new payment, renews the registration, updates the registration balance, returns a 302 status and redirects to the finance details page" do
           registration = renewing_registration.registration
           before_request_payments_count = registration.finance_details.payments.count

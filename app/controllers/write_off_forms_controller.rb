@@ -5,6 +5,7 @@ class WriteOffFormsController < ApplicationController
   include CanFetchResource
   include FinanceDetailsHelper
   include CanRenewIfPossible
+  include CanCompleteIfPossible
 
   prepend_before_action :authenticate_user!
 
@@ -26,6 +27,8 @@ class WriteOffFormsController < ApplicationController
       if renew_if_possible
         redirect_to resource_finance_details_path(@resource.registration._id)
       else
+        complete_if_possible
+
         redirect_to resource_finance_details_path(@resource._id)
       end
     else
