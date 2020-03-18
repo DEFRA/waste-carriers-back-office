@@ -15,16 +15,10 @@ RSpec.describe WriteOffForm do
     context "when the object is valid" do
       let(:valid) { true }
 
-      it "runs the write off service" do
+      it "returns true" do
         comment = double(:comment)
 
-        expect(ProcessWriteOffService).to receive(:run).with(
-          finance_details: renewing_registration.finance_details,
-          user: user,
-          comment: comment
-        )
-
-        expect(subject.submit({ comment: comment }, user)).to eq(true)
+        expect(subject.submit({ comment: comment })).to eq(true)
       end
     end
 
@@ -32,7 +26,7 @@ RSpec.describe WriteOffForm do
       let(:valid) { false }
 
       it "returns false" do
-        expect(subject.submit({}, user)).to eq(false)
+        expect(subject.submit({})).to eq(false)
       end
     end
   end
