@@ -18,7 +18,7 @@ RSpec.describe WriteOffForm do
       it "returns true" do
         comment = double(:comment)
 
-        expect(subject.submit({ comment: comment })).to eq(true)
+        expect(subject.submit(comment: comment)).to eq(true)
       end
     end
 
