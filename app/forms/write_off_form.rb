@@ -5,18 +5,10 @@ class WriteOffForm < WasteCarriersEngine::BaseForm
 
   validates :comment, presence: true, length: { maximum: 500 }
 
-  def submit(params, user)
+  def submit(params)
     # Assign the params for validation
     self.comment = params[:comment]
 
-    return false unless valid?
-
-    ProcessWriteOffService.run(
-      finance_details: transient_registration.finance_details,
-      user: user,
-      comment: comment
-    )
-
-    true
+    valid?
   end
 end

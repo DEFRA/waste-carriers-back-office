@@ -17,7 +17,7 @@
     </div>
 
     <h2 class="heading-medium strong">
-      <%= t(".write_off", amount: display_pence_as_pounds_and_cents(@finance_details.zero_difference_balance)) %>
+      <%= t(".write_off", amount: display_pence_as_pounds_and_cents(@resource.finance_details.zero_difference_balance)) %>
     </h2>
 
     <%= form_for(@write_off_form, url: resource_write_off_form_path(@resource._id)) do |f| %>
