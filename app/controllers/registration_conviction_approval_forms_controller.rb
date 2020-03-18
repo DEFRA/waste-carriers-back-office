@@ -49,6 +49,6 @@ class RegistrationConvictionApprovalFormsController < ApplicationController
   def renew_if_possible
     return if @registration.unpaid_balance?
 
-    WasteCarriersEngine::RegistrationCompletionService.run(registration: @registration)
+    WasteCarriersEngine::RegistrationActivationService.run(registration: @registration)
   end
 end

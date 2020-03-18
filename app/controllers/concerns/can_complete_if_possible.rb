@@ -9,7 +9,7 @@ module CanCompleteIfPossible
     def complete_if_possible
       return false unless can_complete?
 
-      WasteCarriersEngine::RegistrationCompletionService.run(registration: @resource)
+      WasteCarriersEngine::RegistrationActivationService.run(registration: @resource)
 
       true
     rescue StandardError => e
