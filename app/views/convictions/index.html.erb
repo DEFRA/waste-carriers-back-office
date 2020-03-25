@@ -54,13 +54,13 @@
       <p>
         <%= t(".unmatched_people.paragraph") %>
       </p>
-      <% @resource.relevant_people_without_matches.each do |person| %>
-        <table>
-          <tbody>
+      <table>
+        <tbody>
+          <% @resource.relevant_people_without_matches.each do |person| %>
             <%= render("shared/person_table_rows", person: person) %>
-          </tbody>
-        </table>
-      <% end %>
+          <% end %>
+        </tbody>
+      </table>
     <% end %>
 
     <% if @resource.approved_or_revoked? %>
