@@ -28,7 +28,7 @@
       <% resource.latest_order.order_items.each do |item| %>
         <tr>
           <th>
-            <%= item.description %>
+            <%= item.description.capitalize %>
           </th>
           <td>
             £<%= display_pence_as_pounds(item.amount) %>
