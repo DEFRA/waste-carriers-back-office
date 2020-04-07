@@ -5,6 +5,12 @@ Rails.application.routes.draw do
 
   root to: "application#redirect_root_to_dashboard"
 
+  scope "/bo" do
+    namespace :api, defaults: { format: :json } do
+      resources :registrations, :renewals, only: :show
+    end
+  end
+
   devise_for :users,
              controllers: { invitations: "user_invitations", sessions: "sessions" },
              path: "/bo/users",
