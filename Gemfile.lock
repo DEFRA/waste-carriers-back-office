@@ -154,10 +154,10 @@ GEM
       railties (>= 4.2.0)
     faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
-    faraday-http-cache (2.0.0)
+    faraday-http-cache (2.1.0)
       faraday (~> 0.8)
     ffi (1.9.25)
-    github_changelog_generator (1.15.1)
+    github_changelog_generator (1.15.2)
       activesupport
       faraday-http-cache
       multi_json
