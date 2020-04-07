@@ -16,7 +16,9 @@ RSpec.describe "Assisted Digital Forms", type: :request do
       it "returns a json containing registration info" do
         get "/bo/api/renewals/#{renewal.reg_identifier}"
 
-        expect(JSON.parse(response.body)).to eq({ "_id" => renewal.id.to_s, "token" => renewal.token })
+        expected_json = { "_id" => renewal.id.to_s, "token" => renewal.token }.to_json
+
+        expect(response.body).to eq(expected_json)
       end
     end
 
@@ -24,7 +26,9 @@ RSpec.describe "Assisted Digital Forms", type: :request do
       it "returns a json containing an error" do
         get "/bo/api/renewals/#{renewal.reg_identifier}"
 
-        expect(JSON.parse(response.body)).to eq({ "error" => "You need to sign in before continuing." })
+        expected_json = { "error" => "You need to sign in before continuing." }.to_json
+
+        expect(response.body).to eq(expected_json)
       end
     end
   end
