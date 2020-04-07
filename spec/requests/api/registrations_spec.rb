@@ -5,6 +5,10 @@ require "rails_helper"
 RSpec.describe "Registrations API", type: :request do
   let(:registration) { create(:registration) }
 
+  before do
+    allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:api).and_return(true)
+  end
+
   describe "GET /bo/api/registrations/:reg_identifier" do
     context "when a user is signed in" do
       let(:user) { create(:user, :finance) }

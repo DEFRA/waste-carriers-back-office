@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   root to: "application#redirect_root_to_dashboard"
 
   scope "/bo" do
-    namespace :api, defaults: { format: :json } do
+    namespace(
+      :api,
+      defaults: { format: :json },
+      constraints: ->(_request) { WasteCarriersEngine::FeatureToggle.active?(:api) }
+    ) do
       resources :registrations, :renewals, only: :show
     end
   end
