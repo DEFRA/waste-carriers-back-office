@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Assisted Digital Forms", type: :request do
+RSpec.describe "Registrations API", type: :request do
   let(:registration) { create(:registration) }
 
   describe "GET /bo/api/registrations/:reg_identifier" do

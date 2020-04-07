@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Assisted Digital Forms", type: :request do
+RSpec.describe "Renewals API", type: :request do
   let(:renewal) { create(:renewing_registration) }
 
   describe "GET /bo/api/renewals/:reg_identifier" do
