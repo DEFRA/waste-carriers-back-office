@@ -18,9 +18,6 @@ RSpec.shared_examples "agency examples" do
   end
 
   it "should be able to edit a registration" do
-    # TODO: Remove once edit is no longer behind a feature toggle
-    allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:edit_registration).and_return(true)
-
     should be_able_to(:edit, WasteCarriersEngine::Registration)
   end
 
