@@ -22,7 +22,7 @@ gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
 
 # bundle exec rake doc:rails generates the API under doc/api.
-gem "sdoc", "~> 0.4.0", group: :doc
+gem "sdoc", "~> 1.1.0", group: :doc
 
 # Use CanCanCan for user roles and permissions
 # Version 2.0 doesn't support Mongoid, so we're locked to an earlier one
@@ -117,8 +117,8 @@ group :test do
   gem "database_cleaner"
   gem "factory_bot_rails"
   # Generates a test coverage report on every `bundle exec rspec` call. We use
-  # the output to feed CodeClimate's stats and analysis
-  gem "simplecov", "~> 0.17.1", require: false
+  # the output to feed SonarCloud's stats and analysis
+  gem "simplecov", require: false
 
   # Allow automated testing of the whenever schedule
   gem "whenever-test", "~> 1.0"
