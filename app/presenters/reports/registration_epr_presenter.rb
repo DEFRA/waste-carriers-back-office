@@ -18,8 +18,11 @@ module Reports
 
     def expires_on
       return if lower_tier?
+      return unless super.present?
 
-      super&.to_formatted_s(:year_month_day_hyphens)
+      return (super + Rails.configuration.grace_window.days).to_formatted_s(:year_month_day_hyphens) if expired?
+
+      super.to_formatted_s(:year_month_day_hyphens)
     end
 
     def company_no

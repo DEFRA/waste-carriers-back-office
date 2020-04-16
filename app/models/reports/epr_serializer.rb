@@ -27,7 +27,10 @@ module Reports
     private
 
     def scope
-      ::WasteCarriersEngine::Registration.active
+      # TODO: rollback code to use this after COVID emergency release
+      # ::WasteCarriersEngine::Registration.active
+
+      ::WasteCarriersEngine::Registration.active_and_expired.in_grace_window
     end
 
     def parse_object(registration)

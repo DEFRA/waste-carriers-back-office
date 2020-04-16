@@ -52,11 +52,28 @@ module Reports
 
       context "when the registration is not a lower tier" do
         let(:lower_tier) { false }
+        let(:expired) { false }
+
+        before do
+          expect(registration).to receive(:expired?).and_return(expired)
+        end
 
         it "returns the object expires_on formatted" do
-          expect(registration).to receive(:expires_on).and_return(Time.new(2015, 1, 1))
+          allow(registration).to receive(:expires_on).and_return(Time.new(2015, 1, 1))
 
           expect(subject.expires_on).to eq("2015-01-01")
+        end
+
+        context "when the registration is expired" do
+          let(:expired) { true }
+
+          it "returns the object expires_on formatted plus grace window days" do
+            allow(Rails.configuration).to receive(:grace_window).and_return(3)
+
+            allow(registration).to receive(:expires_on).and_return(Time.new(2015, 1, 1))
+
+            expect(subject.expires_on).to eq("2015-01-04")
+          end
         end
       end
     end
