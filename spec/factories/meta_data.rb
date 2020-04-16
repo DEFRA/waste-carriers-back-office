@@ -11,6 +11,10 @@ FactoryBot.define do
       status { :ACTIVE }
     end
 
+    trait :expired do
+      status { :EXPIRED }
+    end
+
     trait :pending do
       date_activated { nil }
       status { :PENDING }

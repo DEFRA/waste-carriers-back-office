@@ -39,6 +39,10 @@ FactoryBot.define do
       metaData { build(:metaData, :active) }
     end
 
+    trait :expired do
+      metaData { build(:metaData, :expired) }
+    end
+
     trait :has_orders_and_payments do
       finance_details { build(:finance_details, :has_paid_order_and_payment) }
     end
