@@ -8,6 +8,6 @@ class FirstRenewalReminderService < RenewalReminderServiceBase
   end
 
   def expires_in_days
-    WasteCarriersEngine.configuration.first_renewal_email_reminder_days.to_i
+    Rails.configuration.first_renewal_email_reminder_days.to_i
   end
 end
