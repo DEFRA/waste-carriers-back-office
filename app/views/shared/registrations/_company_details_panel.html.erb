@@ -13,6 +13,8 @@
       <%= resource.display_expiry_text %>
       <br>
     <% end %>
-    <%= t(".labels.account", email: resource.account_email) %>
+    <% if resource.account_email.present? %>
+      <%= t(".labels.account", email: resource.account_email) %>
+    <% end %>
   </p>
 </div>
