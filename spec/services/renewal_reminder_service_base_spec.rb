@@ -21,7 +21,8 @@ RSpec.describe RenewalReminderServiceBase do
         expires_on: 3.days.from_now,
         contact_email: "nccc-carrierbroker@environment-agency.gov.uk"
       )
-      empty_contact_email = create(:registration, expires_on: 3.days.from_now, contact_email: nil)
+      empty_contact_email = create(:registration, expires_on: 3.days.from_now, contact_email: "")
+      nil_contact_email = create(:registration, expires_on: 3.days.from_now, contact_email: nil)
 
       expect_any_instance_of(TestRegistrationTransferService).to receive(:send_email).with(expiring)
 
@@ -29,6 +30,7 @@ RSpec.describe RenewalReminderServiceBase do
       expect_any_instance_of(TestRegistrationTransferService).to_not receive(:send_email).with(expiring_too_soon)
       expect_any_instance_of(TestRegistrationTransferService).to_not receive(:send_email).with(ad_contact_email)
       expect_any_instance_of(TestRegistrationTransferService).to_not receive(:send_email).with(empty_contact_email)
+      expect_any_instance_of(TestRegistrationTransferService).to_not receive(:send_email).with(nil_contact_email)
 
       TestRegistrationTransferService.run
     end
