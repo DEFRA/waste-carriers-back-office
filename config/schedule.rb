@@ -22,6 +22,12 @@ every :day, at: (ENV["EXPORT_SERVICE_EPR_EXPORT_TIME"] || "21:05"), roles: [:db]
   rake "reports:export:epr"
 end
 
+# This is the first renewal email reminder job. For each registration expiring
+# in 28 days time, it will generate and send the first email reminder
+every :day, at: (ENV["FIRST_RENEWAL_EMAIL_REMINDER_DAILY_RUN_TIME"] || "02:05"), roles: [:db] do
+  rake "email:renew_reminder:first:send"
+end
+
 # This is the BOXI export job. When run this will generate a zip file of CSV's,
 # each of which contains the data from the WCR database table e.g. registrations
 # to registrations.csv, addresses to addresses.csv. This is then uploaded to AWS
