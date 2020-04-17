@@ -34,5 +34,18 @@ RSpec.describe RenewalReminderServiceBase do
 
       TestRegistrationTransferService.run
     end
+
+    context "when an error occurs" do
+      it "logs it in rails and send it to Airbrake" do
+        create(:registration, expires_on: 3.days.from_now)
+
+        expect_any_instance_of(TestRegistrationTransferService).to receive(:send_email).and_raise("error")
+
+        expect(Airbrake).to receive(:notify)
+        expect(Rails.logger).to receive(:error)
+
+        TestRegistrationTransferService.run
+      end
+    end
   end
 end
