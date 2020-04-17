@@ -21,10 +21,13 @@ class RenewalReminderServiceBase < ::WasteCarriersEngine::BaseService
   def expiring_registrations
     WasteCarriersEngine::Registration
       .active
-      .where(expires_on: {
-        :$lte => expires_in_days.days.from_now.end_of_day,
-        :$gte => expires_in_days.days.from_now.beginning_of_day
-      })
+      .where(
+        expires_on:
+        {
+          :$lte => expires_in_days.days.from_now.end_of_day,
+          :$gte => expires_in_days.days.from_now.beginning_of_day
+        }
+      )
       .not_in(contact_email: ["nccc-carrierbroker@environment-agency.gov.uk", nil, ""])
   end
 
