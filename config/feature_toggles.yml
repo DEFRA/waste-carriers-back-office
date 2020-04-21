@@ -3,3 +3,5 @@ new_registration:
   active: <%= ENV["FEATURE_TOGGLE_NEW_REGISTRATION"] %>
 api:
   active: <%= ENV["FEATURE_TOGGLE_API"] %>
+email_reminders:
+  active: <%= ENV["FEATURE_TOGGLE_EMAIL_REMINDERS"] %>
