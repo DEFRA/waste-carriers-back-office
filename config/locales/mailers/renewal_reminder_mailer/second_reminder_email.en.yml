@@ -1,0 +1,29 @@
+en:
+  renewal_reminder_mailer:
+    second_reminder_email:
+      subject: "Final reminder: your waste carrier registration expires on %{date}, renew online now"
+      dear: "Dear %{name}"
+      header: "Renew your waste carrier registration by %{date}."
+      paragraph_1: "It is an offence to operate as a carrier, broker or dealer of waste without a valid registration."
+      subheading_1: "How to renew online"
+      list:
+        heading: "Sign in using:"
+        items:
+          - "your registration number: %{reg_identifier}"
+          - "the email you registered with: %{account_email}"
+          - "your password for the waste carriers service"
+      paragraph_2: "You can reset your password if you need to."
+      renew_link:
+        text: "Renew online: "
+        value: "www.gov.uk/renew-waste-carrier"
+      paragraph_5: "If you have already renewed your registration, please ignore this email."
+      subheading_2: "Cost to renew"
+      paragraph_3: "It’s £105 to renew."
+      paragraph_4: "It’s £154 if you don’t renew on time, or certain details about your business have changed."
+      subheading_3: "Contact us"
+      contacts:
+        text: "Call us on 03708 506 506 (Monday to Friday, 8am to 6pm) or email"
+        email: "nccc-carrierbroker@environment-agency.gov.uk"
+      signed:
+        - "Yours sincerely"
+        - "Waste Carrier Team"

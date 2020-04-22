@@ -21,7 +21,7 @@ namespace :email do
       task send: :environment do
         return unless WasteCarriersEngine::FeatureToggle.active?(:email_reminders)
 
-        # TODO
+        SecondRenewalReminderService.run
       end
     end
   end
