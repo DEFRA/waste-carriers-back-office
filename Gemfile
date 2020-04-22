@@ -118,7 +118,7 @@ group :test do
   gem "factory_bot_rails"
   # Generates a test coverage report on every `bundle exec rspec` call. We use
   # the output to feed SonarCloud's stats and analysis
-  gem "simplecov", require: false
+  gem "simplecov", "~> 0.17.1", require: false
 
   # Allow automated testing of the whenever schedule
   gem "whenever-test", "~> 1.0"
