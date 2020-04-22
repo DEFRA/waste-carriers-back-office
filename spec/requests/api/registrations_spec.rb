@@ -10,30 +10,25 @@ RSpec.describe "Registrations API", type: :request do
   end
 
   describe "GET /bo/api/registrations/:reg_identifier" do
-    context "when a user is signed in" do
-      let(:user) { create(:user, :finance) }
+    it "returns a json containing registration info" do
+      get "/bo/api/registrations/#{registration.reg_identifier}"
 
-      before(:each) do
-        sign_in(user)
-      end
+      expected_json = { "_id" => registration.id.to_s }.to_json
 
-      it "returns a json containing registration info" do
-        get "/bo/api/registrations/#{registration.reg_identifier}"
-
-        expected_json = { "_id" => registration.id.to_s }.to_json
-
-        expect(response.body).to eq(expected_json)
-      end
+      expect(response.body).to eq(expected_json)
     end
+  end
 
-    context "when no user is signed in" do
-      it "returns a json containing an error" do
-        get "/bo/api/registrations/#{registration.reg_identifier}"
+  describe "POST /bo/api/registrations" do
+    let(:data) { File.read("#{Rails.root}/spec/support/fixtures/registration_seed.json") }
 
-        expected_json = { "error" => "You need to sign in before continuing." }.to_json
+    it "generates a new registration and returns a json containing its info" do
+      expected_registrations_count = WasteCarriersEngine::Registration.count + 1
 
-        expect(response.body).to eq(expected_json)
-      end
+      post "/bo/api/registrations", data, format: :json
+
+      expect(response.code).to eq("200")
+      expect(WasteCarriersEngine::Registration.count).to eq(expected_registrations_count)
     end
   end
 end

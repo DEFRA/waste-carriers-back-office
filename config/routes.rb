@@ -11,7 +11,8 @@ Rails.application.routes.draw do
       defaults: { format: :json },
       constraints: ->(_request) { WasteCarriersEngine::FeatureToggle.active?(:api) }
     ) do
-      resources :registrations, :renewals, only: :show
+      resources :registrations, only: %i[show create]
+      resources :renewals, only: :show
     end
   end
 
