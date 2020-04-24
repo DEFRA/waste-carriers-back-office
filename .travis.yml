@@ -54,6 +54,6 @@ before_script:
   - mongo waste-carriers-users-test --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
 
 script:
-  - bundle exec rubocop --format=json --out=rubocop-result.json
+  - bundle exec rubocop --format progress --format json --out rubocop-result.json
   - bundle exec rspec
   - sonar-scanner
