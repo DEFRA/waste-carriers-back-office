@@ -22,12 +22,18 @@ RSpec.describe "Registrations API", type: :request do
   describe "POST /bo/api/registrations" do
     let(:data) { File.read("#{Rails.root}/spec/support/fixtures/registration_seed.json") }
 
-    it "generates a new registration and returns a json containing its info" do
+    it "generates a new registration, set an expire date and returns a json containing its info" do
+      allow(Rails.configuration).to receive(:expires_after).and_return(1)
       expected_registrations_count = WasteCarriersEngine::Registration.count + 1
 
       post "/bo/api/registrations", data, format: :json
 
-      expect(response.code).to eq("200")
+      response_info = JSON.parse(response.body)
+      expect(response_info).to have_key("reg_identifier")
+
+      registration = WasteCarriersEngine::Registration.find_by reg_identifier: response_info["reg_identifier"]
+
+      expect(registration.expires_on.to_date).to eq(1.year.from_now.to_date)
       expect(WasteCarriersEngine::Registration.count).to eq(expected_registrations_count)
     end
   end

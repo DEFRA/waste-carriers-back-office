@@ -12,6 +12,7 @@ module Api
 
     def seed_registration
       @seed["reg_identifier"] = reg_identifier
+      @seed["expires_on"] = Rails.configuration.expires_after.years.from_now
 
       WasteCarriersEngine::Registration.find_or_create_by(@seed.except("_id"))
     end
