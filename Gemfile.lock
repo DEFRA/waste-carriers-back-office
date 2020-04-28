@@ -1,11 +1,12 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: a26d99cc60eec8008ed14c13780a92e3ac5c29e4
+  revision: dc04bd5e9965f7550ddea24ed1650e548a54e8de
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)
       countries
+      defra_ruby_address
       defra_ruby_alert (~> 1.0.0)
       defra_ruby_email
       defra_ruby_validators
@@ -111,6 +112,8 @@ GEM
     crass (1.0.6)
     database_cleaner (1.8.4)
     debug_inspector (0.0.3)
+    defra_ruby_address (0.1.0)
+      rest-client (~> 2.0)
     defra_ruby_alert (1.0.0)
       airbrake (~> 5.8.1)
     defra_ruby_aws (0.2.0)
