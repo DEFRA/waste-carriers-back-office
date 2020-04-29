@@ -28,7 +28,7 @@ class RenewalReminderServiceBase < ::WasteCarriersEngine::BaseService
           :$gte => expires_in_days.days.from_now.beginning_of_day
         }
       )
-      .not_in(contact_email: ["nccc-carrierbroker@environment-agency.gov.uk", nil, ""])
+      .not_in(contact_email: [WasteCarriersEngine.configuration.assisted_digital_email, nil, ""])
   end
 
   def expires_in_days
