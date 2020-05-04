@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FirstRenewalReminderService < RenewalReminderServiceBase
+class SecondRenewalReminderService < RenewalReminderServiceBase
   private
 
   def send_email(registration)
