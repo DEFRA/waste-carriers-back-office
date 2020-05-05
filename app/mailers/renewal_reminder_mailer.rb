@@ -33,7 +33,7 @@ class RenewalReminderMailer < ActionMailer::Base
   def generate_magic_link(registration)
     return unless WasteCarriersEngine::FeatureToggle.active?(:renew_via_magic_link)
 
-    registration.generate_magic_link!
+    registration.generate_renew_token!
   end
 
   def collect_addresses(registration)
