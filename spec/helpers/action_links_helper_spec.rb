@@ -198,7 +198,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       end
 
       context "when the resource has been submitted" do
-        before { resource.workflow_state = "renewal_received_form" }
+        before { resource.workflow_state = "renewal_received_pending_payment_form" }
 
         it "returns false" do
           expect(helper.display_resume_link_for?(resource)).to eq(false)

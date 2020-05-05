@@ -67,7 +67,7 @@ RSpec.describe "WriteOffForms", type: :request do
   describe "POST /bo/resource/:_id/write-off" do
     context "when a finance admin user is signed in" do
       let(:user) { create(:user, :finance_admin) }
-      let(:renewing_registration) { create(:renewing_registration, :overpaid, workflow_state: :renewal_received_form) }
+      let(:renewing_registration) { create(:renewing_registration, :overpaid, workflow_state: :renewal_received_pending_payment_form) }
 
       before(:each) do
         sign_in(user)

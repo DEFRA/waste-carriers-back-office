@@ -7,7 +7,7 @@ FactoryBot.define do
     initialize_with do
       new(create(:renewing_registration,
                  :requires_conviction_check,
-                 workflow_state: "renewal_received_form"))
+                 workflow_state: "renewal_received_pending_conviction_form"))
     end
   end
 end

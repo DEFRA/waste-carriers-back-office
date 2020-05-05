@@ -17,7 +17,7 @@ FactoryBot.define do
     end
 
     trait :submitted do
-      workflow_state { "renewal_received_form" }
+      workflow_state { "renewal_received_pending_payment_form" }
     end
 
     trait :ready_to_renew do

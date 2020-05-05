@@ -16,7 +16,7 @@ FactoryBot.define do
     initialize_with do
       new(create(:renewing_registration,
                  :has_finance_details,
-                 workflow_state: "renewal_received_form"))
+                 workflow_state: "renewal_received_pending_payment_form"))
     end
   end
 end

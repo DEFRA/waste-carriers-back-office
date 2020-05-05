@@ -78,7 +78,7 @@ RSpec.describe "PositiveChargeAdjustForms", type: :request do
         end
 
         context "when the charge adjust clears the resource balance and the resource is in a renewable status" do
-          let(:renewing_registration) { create(:renewing_registration, :overpaid, workflow_state: "renewal_received_form") }
+          let(:renewing_registration) { create(:renewing_registration, :overpaid, workflow_state: "renewal_received_pending_payment_form") }
           let(:params) do
             {
               positive_charge_adjust_form: {

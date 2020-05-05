@@ -98,7 +98,7 @@ RSpec.describe StatusTagService do
       end
 
       context "when the renewal is submitted" do
-        before { resource.workflow_state = "renewal_received_form" }
+        before { resource.workflow_state = "renewal_received_pending_payment_form" }
 
         it "does not include a status in the response" do
           expect(service).to_not include(:active)
@@ -112,7 +112,7 @@ RSpec.describe StatusTagService do
     end
 
     context "when the renewal is submitted" do
-      before { resource.workflow_state = "renewal_received_form" }
+      before { resource.workflow_state = "renewal_received_pending_payment_form" }
 
       context "when there is a pending conviction check" do
         before { allow(resource).to receive(:pending_manual_conviction_check?).and_return(true) }
