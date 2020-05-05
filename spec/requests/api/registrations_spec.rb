@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Registrations API", type: :request do
-  let(:registration) { create(:registration) }
+  let(:registration) { create(:registration, renew_token: "renew_token") }
 
   before do
     allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:api).and_return(true)
@@ -13,7 +13,7 @@ RSpec.describe "Registrations API", type: :request do
     it "returns a json containing registration info" do
       get "/bo/api/registrations/#{registration.reg_identifier}"
 
-      expected_json = { "_id" => registration.id.to_s }.to_json
+      expected_json = { "_id" => registration.id.to_s, renew_token: "renew_token" }.to_json
 
       expect(response.body).to eq(expected_json)
     end

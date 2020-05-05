@@ -4,6 +4,8 @@ class RenewalReminderMailer < ActionMailer::Base
   helper "waste_carriers_engine/mailer"
 
   def first_reminder_email(registration)
+    generate_magic_link(registration)
+
     @registration = registration
 
     mail(
@@ -14,6 +16,8 @@ class RenewalReminderMailer < ActionMailer::Base
   end
 
   def second_reminder_email(registration)
+    generate_magic_link(registration) unless registration.renew_token.present?
+
     @registration = registration
     date = registration.expires_on.to_formatted_s(:day_month_year)
 
@@ -25,6 +29,12 @@ class RenewalReminderMailer < ActionMailer::Base
   end
 
   private
+
+  def generate_magic_link(registration)
+    return unless WasteCarriersEngine::FeatureToggle.active?(:renew_via_magic_link)
+
+    registration.generate_magic_link!
+  end
 
   def collect_addresses(registration)
     [registration.contact_email, registration.account_email].compact.uniq

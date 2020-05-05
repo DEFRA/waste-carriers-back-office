@@ -5,7 +5,7 @@ module Api
     def show
       registration = WasteCarriersEngine::Registration.find_by(reg_identifier: params[:id])
 
-      render json: { _id: registration.id.to_s }
+      render json: { _id: registration.id.to_s, renew_token: registration.renew_token }
     end
 
     def create
