@@ -15,7 +15,7 @@ en:
       paragraph_2: "You can reset your password if you need to."
       renew_link:
         text: "Renew online: "
-        value: "https://www.gov.uk/renew-waste-carrier"
+        value: "www.gov.uk/renew-waste-carrier"
       subheading_2: "Cost to renew"
       paragraph_3: "If none of your business details have changed, and you renew by %{date}, you’ll pay a lower fee of £105. Payment must clear by the renewal date."
       paragraph_4: "If you do not renew on time, or certain details about your business have changed (for example, changing from a sole trader to a limited company) you’ll be charged the full fee of £154."
