@@ -2,6 +2,9 @@
   <div class="column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: bo_path) %>
 
+    <%= render("shared/success", message: flash[:success]) if flash[:success].present? %>
+    <%= render("shared/message", message: flash[:message]) if flash[:message].present? %>
+
     <div class="grid-row">
       <div class="column-two-thirds">
 

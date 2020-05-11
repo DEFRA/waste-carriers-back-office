@@ -85,6 +85,13 @@ module ActionLinksHelper
     resource.active? && resource.upper_tier?
   end
 
+  def display_cancel_link_for?(resource)
+    return false unless can?(:cancel, WasteCarriersEngine::Registration)
+    return false unless display_registration_links?(resource)
+
+    resource.pending?
+  end
+
   def display_renew_link_for?(resource)
     return false unless display_registration_links?(resource)
     return false unless can?(:renew, WasteCarriersEngine::Registration)

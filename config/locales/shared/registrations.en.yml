@@ -70,6 +70,7 @@ en:
             transfer: "Transfer to another account"
             edit: "Edit registration"
             certificate: "View certificate"
+            cancel: "Cancel registration"
             order_copy_cards: "Order registration cards"
             payment_details: "Payment details"
             process_payment: "Process payment"

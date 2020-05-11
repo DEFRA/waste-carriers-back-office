@@ -1,0 +1,9 @@
+en:
+  cancels:
+    messages:
+      success: "%{reg_identifier} in progress registration has been cancelled"
+    new:
+      title: "Confirm cancel"
+      heading: "Confirm cancel for in progress registration %{reg_identifier}"
+      confirm: "Confirm cancel"
+      cancel: "Keep this registration"

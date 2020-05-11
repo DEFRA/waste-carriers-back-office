@@ -50,6 +50,7 @@ class Ability
     can :view_revoked_reasons, :all
     can :cease, WasteCarriersEngine::Registration
     can :revoke, WasteCarriersEngine::Registration
+    can :cancel, :all
 
     can :refund, :all
     can :record_cash_payment, :all

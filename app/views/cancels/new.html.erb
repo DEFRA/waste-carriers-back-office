@@ -1,0 +1,27 @@
+<div class="grid-row">
+  <div class="column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: details_path_for(@resource)) %>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <h1 class="heading-large">
+      <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
+    </h1>
+
+    <div class="form-group">
+      <%= render "shared/company_details_panel", registration: @resource %>
+    </div>
+
+    <%= form_tag(url: resource_cancels_path(@resource._id)) do |f| %>
+      <div class="form-group">
+        <%= submit_tag t(".confirm"), class: "button" %>
+
+        <div class="form-button-link">
+          <%= link_to(t(".cancel"), details_path_for(@resource)) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

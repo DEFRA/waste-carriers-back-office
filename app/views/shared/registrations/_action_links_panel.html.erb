@@ -55,5 +55,13 @@
         <%= link_to t(".actions_box.links.revoke"), WasteCarriersEngine::Engine.routes.url_helpers.new_cease_or_revoke_form_path(resource.reg_identifier) %>
       </li>
     <% end %>
+
+    <li class="separated" />
+
+    <% if display_cancel_link_for?(resource) %>
+      <li>
+        <%= link_to t(".actions_box.links.cancel"), new_resource_cancel_path(resource._id) %>
+      </li>
+    <% end %>
   </ul>
 </div>
