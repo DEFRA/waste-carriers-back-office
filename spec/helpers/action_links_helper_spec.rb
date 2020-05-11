@@ -339,6 +339,56 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
+  describe "#display_cancel_link_for?" do
+    context "when the resource is a registration" do
+      let(:resource) { build(:registration) }
+
+      before do
+        allow(helper).to receive(:can?).and_return(can)
+      end
+
+      context "when the user has permission for cancelling" do
+        let(:can) { true }
+
+        before do
+          expect(resource).to receive(:pending?).and_return(pending)
+        end
+
+        context "when the resource is pending" do
+          let(:pending) { true }
+
+          it "returns true" do
+            expect(helper.display_cancel_link_for?(resource)).to be_truthy
+          end
+        end
+
+        context "when the resource is not pending" do
+          let(:pending) { false }
+
+          it "returns false" do
+            expect(helper.display_cancel_link_for?(resource)).to be_falsey
+          end
+        end
+      end
+
+      context "when the user has no permission for cancelling" do
+        let(:can) { false }
+
+        it "returns false" do
+          expect(helper.display_cancel_link_for?(resource)).to be_falsey
+        end
+      end
+    end
+
+    context "when the resource is a transient registration" do
+      let(:resource) { build(:renewing_registration) }
+
+      it "returns false" do
+        expect(helper.display_cancel_link_for?(resource)).to be_falsey
+      end
+    end
+  end
+
   describe "#display_edit_link_for?" do
     context "when the resource is a registration" do
       let(:resource) { build(:registration) }

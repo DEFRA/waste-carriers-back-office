@@ -86,8 +86,8 @@ module ActionLinksHelper
   end
 
   def display_cancel_link_for?(resource)
-    return false unless can?(:cancel, WasteCarriersEngine::Registration)
     return false unless display_registration_links?(resource)
+    return false unless can?(:cancel, WasteCarriersEngine::Registration)
 
     resource.pending?
   end
