@@ -10,7 +10,7 @@ namespace :fix do
     renewals.each do |renewal|
       updated_state = if renewal.pending_worldpay_payment?
                         "renewal_received_pending_worldpay_payment_form"
-                      elsif renewal.pending_payment?
+                      elsif renewal.unpaid_balance?
                         "renewal_received_pending_payment_form"
                       else
                         "renewal_received_pending_conviction_form"
