@@ -39,6 +39,10 @@ RSpec.shared_examples "below agency_with_refund examples" do
     end
   end
 
+  it "should not be able to cancel a resource" do
+    should_not be_able_to(:cancel, WasteCarriersEngine::Registration)
+  end
+
   it "should not be able to view payments" do
     should_not be_able_to(:view_payments, WasteCarriersEngine::RenewingRegistration)
   end

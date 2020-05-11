@@ -61,7 +61,7 @@ RSpec.describe "Cancels", type: :request do
 
         expect(registration).to be_inactive
         expect(response).to have_http_status(302)
-        expect(response).to redirect_to(registration_detail_path(registration._id))
+        expect(response).to redirect_to(registration_path(registration.reg_identifier))
       end
     end
   end

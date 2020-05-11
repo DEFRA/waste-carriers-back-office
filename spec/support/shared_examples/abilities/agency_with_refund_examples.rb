@@ -21,6 +21,10 @@ RSpec.shared_examples "agency_with_refund examples" do
     should be_able_to(:record_cheque_payment, WasteCarriersEngine::RenewingRegistration)
   end
 
+  it "should be able to cancel a resource" do
+    should be_able_to(:cancel, WasteCarriersEngine::Registration)
+  end
+
   it "should be able to record a postal order payment" do
     should be_able_to(:record_postal_order_payment, WasteCarriersEngine::RenewingRegistration)
   end

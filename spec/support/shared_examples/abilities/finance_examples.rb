@@ -39,6 +39,10 @@ RSpec.shared_examples "finance examples" do
 
   # Everything else is off-limits.
 
+  it "should not be able to cancel a resource" do
+    should_not be_able_to(:cancel, WasteCarriersEngine::Registration)
+  end
+
   it "should not be able to update a transient registration" do
     should_not be_able_to(:update, WasteCarriersEngine::RenewingRegistration)
   end
