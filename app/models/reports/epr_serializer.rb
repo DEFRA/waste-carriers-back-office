@@ -27,7 +27,7 @@ module Reports
     private
 
     def scope
-      ::WasteCarriersEngine::Registration.active_and_expired.in_grace_window
+      ::WasteCarriersEngine::Registration.active_and_expired.lower_tier_or_in_grace_window
     end
 
     def parse_object(registration)
