@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: c0ef74a77559130b713ead6dc272bb806ed078fb
+  revision: 575748f347da87028bf71a65eaf0c32c4a09fb99
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -219,7 +219,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2020.0425)
+    mime-types-data (3.2020.0512)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
