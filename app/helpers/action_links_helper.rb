@@ -10,11 +10,11 @@ module ActionLinksHelper
   end
 
   def resume_link_for(resource)
-    ad_privacy_policy_path(resource.reg_identifier)
+    ad_privacy_policy_path(reg_identifier: resource.reg_identifier)
   end
 
   def renew_link_for(resource)
-    ad_privacy_policy_path(resource.reg_identifier)
+    ad_privacy_policy_path(reg_identifier: resource.reg_identifier)
   end
 
   def display_details_link_for?(resource)
