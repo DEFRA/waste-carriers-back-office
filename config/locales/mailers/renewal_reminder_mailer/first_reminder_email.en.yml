@@ -1,28 +1,12 @@
 en:
   renewal_reminder_mailer:
     first_reminder_email:
-      subject: Your waste carrier registration expires soon, renew online now
+      subject: Renew waste carrier registration %{reg_identifier}
       dear: "Dear %{name}"
-      header: "You must renew your waste carrier registration by %{date}."
-      paragraph_1: "It is an offence to operate as a carrier, broker or dealer of waste without a valid registration."
-      subheading_1: "How to renew online"
-      list:
-        heading: "You’ll need to sign in using:"
-        items:
-          - "your registration number: %{reg_identifier}"
-          - "the email you registered with: %{account_email}"
-          - "your password for the waste carriers service"
-      paragraph_2: "You can reset your password if you need to."
-      renew_link:
-        text: "Renew online: "
-        value: "www.gov.uk/renew-waste-carrier"
-      subheading_2: "Cost to renew"
-      paragraph_3: "If none of your business details have changed, and you renew by %{date}, you’ll pay a lower fee of £105. Payment must clear by the renewal date."
-      paragraph_4: "If you do not renew on time, or certain details about your business have changed (for example, changing from a sole trader to a limited company) you’ll be charged the full fee of £154."
-      subheading_3: "Contact us"
-      contacts:
-        text: "Call us on 03708 506 506 (Monday to Friday, 8am to 6pm) or email"
-        email: "nccc-carrierbroker@environment-agency.gov.uk"
-      signed:
-        - "Yours sincerely"
-        - "Waste Carrier Team"
+      header: "Renew your waste carrier registration by %{date}."
+      paragraph_1: "It costs £105 and lasts for 3 years."
+      paragraph_2_html: "You can renew online in a few minutes at: <a href=%{renew_link}>%{renew_link}</a>"
+      paragraph_3: "Licence number: %{reg_identifier}"
+      paragraph_4: "If you no longer need a licence, you can ignore these reminders. You cannot transport, buy, sell or dispose of waste without a licence."
+      contacts_html: "Environment Agency<br>Telephone 03708 506 506, Monday to Friday (8am to 6pm)<br><a href=\"mailto:nccc-carrierbroker@environment-agency.gov.uk\">nccc-carrierbroker@environment-agency.gov.uk</a>"
+      paragraph_5: "This is an automated email, please do not reply."

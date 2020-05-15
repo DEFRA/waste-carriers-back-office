@@ -59,52 +59,24 @@
               <%= t(".paragraph_1") %>
             </p>
 
-            <h2>
-              <%= t(".subheading_1") %>
-            </h2>
-
-            <p style="font-size: 19px; line-height: 1.315789474; margin: 15px 0 15px 0;">
-              <%= t(".list.heading") %>
-            </p>
-
-            <ul style="font-size: 19px; line-height: 1.315789474;">
-              <% t(".list.items", reg_identifier: @registration.reg_identifier, account_email: @registration.account_email).each do |item| %>
-                <li><%= item %></li>
-              <% end %>
-            </ul>
-
-            <p style="font-size: 19px; line-height: 1.315789474; margin: 15px 0 15px 0;">
-              <%= t(".paragraph_2") %>
-            </p>
-
             <p style="font-size: 19px; line-height: 1.315789474; margin: 15px 0 15px 0; font-weight: bold">
-              <%= t(".renew_link.text") %> <a href="https://<%= t(".renew_link.value") %>"><%= t(".renew_link.value") %></a>
+              <%= t(".paragraph_2_html", renew_link: @renew_link) %>
             </p>
 
-            <h2>
-              <%= t(".subheading_2") %>
-            </h2>
-
             <p style="font-size: 19px; line-height: 1.315789474; margin: 15px 0 15px 0;">
-              <%= t(".paragraph_3", date: @registration.expires_on.to_formatted_s(:day_month_year)) %>
+              <%= t(".paragraph_3", reg_identifier: @registration.reg_identifier) %>
             </p>
 
             <p style="font-size: 19px; line-height: 1.315789474; margin: 15px 0 15px 0;">
               <%= t(".paragraph_4") %>
             </p>
 
-            <h2>
-              <%= t(".subheading_3") %>
-            </h2>
-
             <p style="font-size: 19px; line-height: 1.315789474; margin: 15px 0 15px 0;">
-              <%= t(".contacts.text") %> <a href="mailto:<%= t(".contacts.email") %>"><%= t(".contacts.email") %></a>.
+              <%= t(".contacts_html") %>
             </p>
 
-            <p style="font-size: 19px; line-height: 1.315789474; margin: 30px 0 15px 0;">
-              <% t(".signed").each do |signed| %>
-                <%= signed %> <br/>
-              <% end %>
+            <p style="font-size: 19px; line-height: 1.315789474; margin: 15px 0 15px 0;">
+              <%= t(".paragraph_5") %>
             </p>
           </td>
           <td width="25%">&nbsp;</td>

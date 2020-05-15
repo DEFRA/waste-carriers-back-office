@@ -6,29 +6,40 @@ class RenewalReminderMailer < ActionMailer::Base
   def first_reminder_email(registration)
     generate_magic_link(registration)
 
-    @registration = registration
-
-    mail(
-      to: collect_addresses(registration),
-      from: "#{Rails.configuration.email_service_name} <#{Rails.configuration.email_service_email}>",
-      subject: I18n.t(".renewal_reminder_mailer.first_reminder_email.subject")
-    )
+    reminder_email(registration)
   end
 
   def second_reminder_email(registration)
     generate_magic_link(registration) unless registration.renew_token.present?
 
+    reminder_email(registration)
+  end
+
+  private
+
+  def reminder_email(registration)
     @registration = registration
-    date = registration.expires_on.to_formatted_s(:day_month_year)
+    subject = I18n.t(
+      ".renewal_reminder_mailer.first_reminder_email.subject",
+      reg_identifier: registration.reg_identifier
+    )
+    @renew_link = generate_renew_link(registration)
 
     mail(
       to: collect_addresses(registration),
       from: "#{Rails.configuration.email_service_name} <#{Rails.configuration.email_service_email}>",
-      subject: I18n.t(".renewal_reminder_mailer.second_reminder_email.subject", date: date)
+      subject: subject,
+      template_name: :first_reminder_email
     )
   end
 
-  private
+  def generate_renew_link(registration)
+    [
+      Rails.configuration.wcrs_renewals_url,
+      "/fo/renew/",
+      registration.renew_token
+    ].join
+  end
 
   def generate_magic_link(registration)
     return unless WasteCarriersEngine::FeatureToggle.active?(:renew_via_magic_link)
