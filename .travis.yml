@@ -43,7 +43,7 @@ services:
 
 before_install:
   - export TZ=UTC
-  - gem install -v 1.17.3 bundler --no-rdoc --no-ri
+  - gem install -v 1.17.3 bundler
   - sudo apt-get install xvfb -y
   - sudo apt-get install ttf-liberation -y
   - sudo apt-get install wkhtmltopdf -y
