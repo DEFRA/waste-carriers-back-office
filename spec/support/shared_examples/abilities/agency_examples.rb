@@ -7,6 +7,10 @@ RSpec.shared_examples "agency examples" do
     should be_able_to(:update, WasteCarriersEngine::RenewingRegistration)
   end
 
+  it "should be able to create a registration" do
+    should be_able_to(:create, WasteCarriersEngine::Registration)
+  end
+
   it "should not be able to charge adjust a resource" do
     should_not be_able_to(:charge_adjust, WasteCarriersEngine::RenewingRegistration)
     should_not be_able_to(:charge_adjust, WasteCarriersEngine::Registration)

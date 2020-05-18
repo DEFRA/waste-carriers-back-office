@@ -34,6 +34,7 @@ class Ability
   def permissions_for_agency_user
     # This covers everything mounted in the engine and used for the assisted digital journey, including WorldPay
     can :update, WasteCarriersEngine::RenewingRegistration
+    can :create, WasteCarriersEngine::Registration
     can :renew, :all
     can :view_certificate, WasteCarriersEngine::Registration
     can :order_copy_cards, WasteCarriersEngine::Registration
