@@ -10,6 +10,15 @@
 
         <hr>
 
+        <h2 class="heading-medium"><%= t(".conviction_heading") %></h2>
+        <div>
+          <p>
+            <%= @transient_registration.display_convictions_check_message %>
+          </p>
+        </div>
+
+        <hr>
+
         <% if @transient_registration.main_people.any? %>
           <%= render "shared/registrations/main_people_details", resource: @transient_registration %>
         <% end %>
