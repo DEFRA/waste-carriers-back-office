@@ -65,7 +65,7 @@ RSpec.describe StatusTagService do
     end
   end
 
-  context "when the resource is a transient_registration" do
+  context "when the resource is a renewing_registration" do
     let(:resource) { create(:renewing_registration) }
 
     context "when the metadata status is revoked" do
@@ -160,6 +160,36 @@ RSpec.describe StatusTagService do
         it "does not include :stuck in the response" do
           expect(service).to_not include(:stuck)
         end
+      end
+    end
+  end
+
+  context "when the resource is a new_registration" do
+    let(:resource) { create(:new_registration) }
+
+    context "when the metadata status is revoked" do
+      before { resource.metaData.status = "REVOKED" }
+
+      it "includes :revoked in the response" do
+        expect(service).to include(:revoked)
+      end
+    end
+
+    context "when the metadata status is refused" do
+      before { resource.metaData.status = "REFUSED" }
+
+      it "includes :refused in the response" do
+        expect(service).to include(:refused)
+      end
+    end
+
+    context "when the metadata status is not revoked or refused" do
+      let(:status) { %w[ACTIVE EXPIRED PENDING].sample }
+
+      before { resource.metaData.status = status }
+
+      it "includes :in_progress in the response" do
+        expect(service).to include(:in_progress)
       end
     end
   end

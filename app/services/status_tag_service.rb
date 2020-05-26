@@ -31,6 +31,7 @@ class StatusTagService < ::WasteCarriersEngine::BaseService
   end
 
   def transient_reg_metadata_status
+    return :in_progress if transient_new?
     return :in_progress unless @resource.renewal_application_submitted?
   end
 
@@ -55,7 +56,7 @@ class StatusTagService < ::WasteCarriersEngine::BaseService
   # Stuck
 
   def stuck
-    :stuck if transient? && @resource.stuck?
+    :stuck if transient_renewal? && @resource.stuck?
   end
 
   # Helper methods
@@ -64,8 +65,16 @@ class StatusTagService < ::WasteCarriersEngine::BaseService
     @_transient ||= @resource.is_a?(WasteCarriersEngine::TransientRegistration)
   end
 
+  def transient_renewal?
+    @_transient_renewal ||= @resource.is_a?(WasteCarriersEngine::RenewingRegistration)
+  end
+
+  def transient_new?
+    @_transient_new ||= @resource.is_a?(WasteCarriersEngine::NewRegistration)
+  end
+
   def submitted_renewal?
-    @_submitted_renewal ||= transient? && @resource.renewal_application_submitted?
+    @_submitted_renewal ||= transient_renewal? && @resource.renewal_application_submitted?
   end
 
   def registration_or_submitted_renewal?
