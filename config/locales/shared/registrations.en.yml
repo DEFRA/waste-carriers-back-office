@@ -63,7 +63,10 @@ en:
         no_company_details_available: "This registration application is still in progress, so there are no company details yet."
       action_links_panel:
         actions_box:
-          heading: "Actions for %{reg_identifier}"
+          heading:
+            without_company_name_or_reg_identifier: "Actions"
+            with_reg_identifier: "Actions for %{reg_identifier}"
+            with_company_name: "Actions for %{company_name}"
           links:
             continue_button: "Continue as assisted digital"
             renew: "Renew"

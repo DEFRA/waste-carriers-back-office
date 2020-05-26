@@ -2,7 +2,9 @@ en:
   new_registrations:
     show:
       title: "New registration details"
-      heading: "New registration [TODO]"
+      heading:
+        without_company_name: "New registration"
+        with_company_name: "New registration for %{company_name}"
       filler: "–"
       status:
         headings:

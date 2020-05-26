@@ -95,6 +95,17 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     end
   end
 
+  def display_action_links_heading
+    text_path = ".shared.registrations.action_links_panel.actions_box.heading"
+    if reg_identifier.present?
+      I18n.t("#{text_path}.with_reg_identifier", reg_identifier: reg_identifier)
+    elsif company_name.present?
+      I18n.t("#{text_path}.with_company_name", company_name: company_name)
+    else
+      I18n.t("#{text_path}.without_company_name_or_reg_identifier")
+    end
+  end
+
   private
 
   def displayable_tier
