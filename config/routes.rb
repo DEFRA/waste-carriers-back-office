@@ -102,6 +102,11 @@ Rails.application.routes.draw do
                        path_names: { new: "" }
             end
 
+  resources :new_registrations,
+            only: :show,
+            param: :token,
+            path: "/bo/new-registrations"
+
   resources :renewing_registrations,
             only: :show,
             param: :reg_identifier,

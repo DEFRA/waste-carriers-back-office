@@ -1,0 +1,16 @@
+<div class="grid-row">
+  <div class="column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: bo_path) %>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h1 class="heading-large">
+          <%= t(".heading") %>
+        </h1>
+      </div>
+      <div class="column-one-third">
+        <%= render "shared/registrations/action_links_panel", resource: @transient_registration %>
+      </div>
+    </div>
+  </div>
+</div>
