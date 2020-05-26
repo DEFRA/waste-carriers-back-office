@@ -28,6 +28,7 @@ en:
             phone_number: "Contact phone"
             contact_email: "Contact email"
             contact_address: "Contact address"
+          no_contact_information_available: "This registration application is still in progress, so there are no contact details yet."
         business_information:
           heading: "Business information"
           labels:
@@ -36,6 +37,7 @@ en:
             company_no: "Company number: %{number}"
             location: "Place of business: %{location}"
             registered_address: "Registered address:"
+          no_business_information_available: "This registration application is still in progress, so there are no business details yet."
       pending_payment_panel:
         status:
           headings:

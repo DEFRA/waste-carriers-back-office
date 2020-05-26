@@ -10,6 +10,24 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     false
   end
 
+  def display_contact_information_panel?
+    return true if first_name.present?
+    return true if phone_number.present?
+    return true if contact_email.present?
+    return true if contact_address.present?
+
+    false
+  end
+
+  def display_business_information_panel?
+    return true if company_name.present?
+    return true if company_no.present?
+    return true if registered_address.present?
+    return true if location.present?
+
+    false
+  end
+
   def display_tier_and_registration_type
     [displayable_tier, displayable_business_type].compact.join(" - ")
   end
