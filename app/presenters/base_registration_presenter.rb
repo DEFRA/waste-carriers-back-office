@@ -2,30 +2,24 @@
 
 class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   def display_company_details_panel?
-    return true if company_name.present?
-    return true if display_tier_and_registration_type.present?
-    return true if display_expiry_text.present?
-    return true if account_email.present?
-
-    false
+    company_name.present? ||
+      display_tier_and_registration_type.present? ||
+      display_expiry_text.present? ||
+      account_email.present?
   end
 
   def display_contact_information_panel?
-    return true if first_name.present?
-    return true if phone_number.present?
-    return true if contact_email.present?
-    return true if contact_address.present?
-
-    false
+    first_name.present? ||
+      phone_number.present? ||
+      contact_email.present? ||
+      contact_address.present?
   end
 
   def display_business_information_panel?
-    return true if company_name.present?
-    return true if company_no.present?
-    return true if registered_address.present?
-    return true if location.present?
-
-    false
+    company_name.present? ||
+      company_no.present? ||
+      registered_address.present? ||
+      location.present?
   end
 
   def display_tier_and_registration_type
