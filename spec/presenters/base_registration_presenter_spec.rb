@@ -304,13 +304,21 @@ RSpec.describe BaseRegistrationPresenter do
   describe "#display_expiry_text" do
     let(:upper_tier) { false }
     let(:expired) { false }
+    let(:expires_on) { nil }
     let(:registration) do
       double(
         :registration,
         expired?: expired,
         upper_tier?: upper_tier,
+        expires_on: expires_on,
         display_expiry_date: "1 January 2020"
       )
+    end
+
+    context "when the registration has no expiry date" do
+      it "returns nil" do
+        expect(subject.display_expiry_text).to eq(nil)
+      end
     end
 
     context "when the registration is not upper tier" do
@@ -319,7 +327,8 @@ RSpec.describe BaseRegistrationPresenter do
       end
     end
 
-    context "when the registration is upper tier" do
+    context "when the registration has an expiry date and is upper tier" do
+      let(:expires_on) { Date.new(2020, 1, 1) }
       let(:upper_tier) { true }
 
       context "when it is not expired" do

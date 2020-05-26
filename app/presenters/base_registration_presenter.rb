@@ -86,6 +86,7 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def display_expiry_text
+    return unless expires_on.present?
     return unless upper_tier?
 
     if expired?
