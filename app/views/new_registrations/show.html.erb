@@ -8,6 +8,22 @@
           <%= t(".heading") %>
         </h1>
 
+        <div class="panel">
+          <h2 class="heading-medium">
+            <%= t(".status.headings.in_progress") %>
+          </h2>
+
+          <% if @transient_registration.workflow_state == "worldpay_form" %>
+            <p>
+              <%= t(".status.messages.worldpay.paragraph_1") %>
+            </p>
+          <% else %>
+            <p>
+              <%= @transient_registration.display_current_workflow_state %>
+            </p>
+          <% end %>
+        </div>
+
         <%= render "shared/registrations/company_details_panel", resource: @transient_registration %>
 
         <%= render "shared/registrations/contact_and_business_details_panels", resource: @transient_registration %>

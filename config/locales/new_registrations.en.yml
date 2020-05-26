@@ -9,6 +9,8 @@ en:
           in_progress: "Application in progress"
         messages:
           in_progress: "The current form is"
+          worldpay:
+            paragraph_1: "The user is currently attempting to pay by WorldPay."
       conviction_heading: "Convictions"
       conviction_link: "Conviction details"
       conviction_information:
