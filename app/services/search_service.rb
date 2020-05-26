@@ -20,7 +20,9 @@ class SearchService < ::WasteCarriersEngine::BaseService
   end
 
   def search_results
-    @_search_results ||= matching_resources.sort_by(&:reg_identifier)
+    @_search_results ||= matching_resources.sort_by do |resource|
+      resource.reg_identifier || ""
+    end
   end
 
   def matching_resources

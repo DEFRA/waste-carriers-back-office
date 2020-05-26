@@ -25,6 +25,18 @@ RSpec.describe SearchService do
     end
     let(:matching_registration) { WasteCarriersEngine::Registration.where(reg_identifier: matching_renewal.reg_identifier).first }
 
+    context "when there are results in different collections" do
+      let(:term) { "search for me" }
+
+      it "returns aggregated results from the different collections" do
+        matching_renewal = create(:renewing_registration, company_name: term)
+        matching_new_registration = create(:new_registration, company_name: term)
+
+        expect(service[:results]).to include(matching_renewal)
+        expect(service[:results]).to include(matching_new_registration)
+      end
+    end
+
     context "when there is a match on a reg_identifier" do
       let(:term) { matching_renewal.reg_identifier }
 
