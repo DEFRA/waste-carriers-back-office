@@ -7,6 +7,12 @@
         <h1 class="heading-large">
           <%= t(".heading") %>
         </h1>
+
+        <hr>
+
+        <% if @transient_registration.main_people.any? %>
+          <%= render "shared/registrations/main_people_details", resource: @transient_registration %>
+        <% end %>
       </div>
       <div class="column-one-third">
         <%= render "shared/registrations/action_links_panel", resource: @transient_registration %>
