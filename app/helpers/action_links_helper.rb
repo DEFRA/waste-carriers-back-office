@@ -20,10 +20,6 @@ module ActionLinksHelper
     ad_privacy_policy_path(reg_identifier: resource.reg_identifier)
   end
 
-  def display_details_link_for?(resource)
-    a_new_registration?(resource) || a_renewing_registration?(resource) || a_registration?(resource)
-  end
-
   def display_write_off_small_link_for?(resource)
     can?(:write_off_small, resource) && resource.balance != 0
   end

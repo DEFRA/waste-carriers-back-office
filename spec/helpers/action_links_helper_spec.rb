@@ -119,40 +119,6 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
-  describe "#display_details_link_for?" do
-    context "when the resource is a Registration" do
-      let(:resource) { build(:registration) }
-
-      it "returns true" do
-        expect(helper.display_details_link_for?(resource)).to eq(true)
-      end
-    end
-
-    context "when the resource is a RenewingRegistration" do
-      let(:resource) { build(:renewing_registration) }
-
-      it "returns true" do
-        expect(helper.display_details_link_for?(resource)).to eq(true)
-      end
-    end
-
-    context "when the resource is a NewRegistration" do
-      let(:resource) { build(:new_registration) }
-
-      it "returns true" do
-        expect(helper.display_details_link_for?(resource)).to eq(true)
-      end
-    end
-
-    context "when the resource is not a Registration, a RenewingRegistration or a NewRegistration" do
-      let(:resource) { double(:resource) }
-
-      it "returns false" do
-        expect(helper.display_details_link_for?(resource)).to eq(false)
-      end
-    end
-  end
-
   describe "#display_refund_link_for?" do
     let(:resource) { build(:finance_details, balance: balance) }
 
