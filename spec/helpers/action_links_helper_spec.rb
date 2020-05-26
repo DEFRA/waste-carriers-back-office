@@ -4,6 +4,14 @@ require "rails_helper"
 
 RSpec.describe ActionLinksHelper, type: :helper do
   describe "details_link_for" do
+    context "when the resource is a new registration" do
+      let(:resource) { build(:new_registration, token: "foo") }
+
+      it "returns the new registration path" do
+        expect(helper.details_link_for(resource)).to eq(new_registration_path(resource.token))
+      end
+    end
+
     context "when the resource is a renewing registration" do
       let(:resource) { build(:renewing_registration) }
 
@@ -120,19 +128,27 @@ RSpec.describe ActionLinksHelper, type: :helper do
       end
     end
 
-    context "when the resource is not a Registration or a RenewingRegistration" do
-      let(:resource) { double(:resource) }
-
-      it "returns false" do
-        expect(helper.display_details_link_for?(resource)).to eq(false)
-      end
-    end
-
     context "when the resource is a RenewingRegistration" do
       let(:resource) { build(:renewing_registration) }
 
       it "returns true" do
         expect(helper.display_details_link_for?(resource)).to eq(true)
+      end
+    end
+
+    context "when the resource is a NewRegistration" do
+      let(:resource) { build(:new_registration) }
+
+      it "returns true" do
+        expect(helper.display_details_link_for?(resource)).to eq(true)
+      end
+    end
+
+    context "when the resource is not a Registration, a RenewingRegistration or a NewRegistration" do
+      let(:resource) { double(:resource) }
+
+      it "returns false" do
+        expect(helper.display_details_link_for?(resource)).to eq(false)
       end
     end
   end
