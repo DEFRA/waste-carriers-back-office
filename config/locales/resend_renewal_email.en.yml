@@ -1,0 +1,5 @@
+en:
+  resend_renewal_email:
+    messages:
+      success: Renewal email sent to %{email}
+      failure: We could not send an email to %{email}

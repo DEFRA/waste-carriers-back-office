@@ -65,6 +65,7 @@ en:
         actions_box:
           heading: "Actions for %{reg_identifier}"
           links:
+            resend_renewal_email: "Resend renewal email"
             continue_button: "Continue as assisted digital"
             renew: "Renew"
             transfer: "Transfer to another account"

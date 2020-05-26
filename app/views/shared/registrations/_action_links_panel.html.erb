@@ -14,6 +14,9 @@
       <li>
         <%= link_to t(".actions_box.links.renew"), renew_link_for(resource) %>
       </li>
+      <li>
+        <%= link_to t(".actions_box.links.resend_renewal_email"), resend_renewal_email_path(reg_identifier: resource.reg_identifier) %>
+      </li>
     <% end %>
 
     <% if display_transfer_link_for?(resource) %>

@@ -14,6 +14,10 @@ Rails.application.routes.draw do
       resources :registrations, only: %i[show create]
       resources :renewals, only: :show
     end
+
+    get "/resend-renewal-email/:reg_identifier",
+      to: "resend_renewal_email#new",
+      as: "resend_renewal_email"
   end
 
   devise_for :users,
