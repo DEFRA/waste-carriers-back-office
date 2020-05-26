@@ -18,17 +18,6 @@ en:
           business_conviction_search_result: "Matching convictions found for company?"
           people_conviction_search_result: "Matching convictions found for people?"
       attributes:
-        business_type:
-          soleTrader: "Individual or sole trader"
-          limitedCompany: "Limited company"
-          partnership: "Partnership"
-          limitedLiabilityPartnership: "Limited liability partnership"
-          localAuthority: "Local authority or public body"
-          charity: "Charity or trust"
-          authority: "Local authority"
-          publicBody: "Public body"
-          other: "Other"
-          overseas: "Overseas"
         declaration:
           "1": "Yes"
         key_people:

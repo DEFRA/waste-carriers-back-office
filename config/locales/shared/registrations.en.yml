@@ -51,9 +51,6 @@ en:
           messages:
             pending_convictions_check: "A convictions check is required before this registration can be approved."
       company_details_panel:
-        tier:
-          upper: Upper tier
-          lower: Lower tier
         labels:
           account: "Account: %{email}"
         attributes:
@@ -61,6 +58,7 @@ en:
             carrier_dealer: "Carrier and dealer"
             broker_dealer: "Broker and dealer"
             carrier_broker_dealer: "Carrier, broker and dealer"
+        no_company_details_available: "This registration application is still in progress, so there are no company details yet."
       action_links_panel:
         actions_box:
           heading: "Actions for %{reg_identifier}"
@@ -104,12 +102,26 @@ en:
       show:
         filler: "–"
       attributes:
+        business_type:
+          soleTrader: "Individual or sole trader"
+          limitedCompany: "Limited company"
+          partnership: "Partnership"
+          limitedLiabilityPartnership: "Limited liability partnership"
+          localAuthority: "Local authority or public body"
+          charity: "Charity or trust"
+          authority: "Local authority"
+          publicBody: "Public body"
+          other: "Other"
+          overseas: "Overseas"
         location:
           england: "England"
           wales: "Wales"
           scotland: "Scotland"
           northern_ireland: "Northern Ireland"
           overseas: "Not in the United Kingdom"
+        tier:
+          upper: Upper tier
+          lower: Lower tier
       business_information:
         labels:
           location: "Place of business: %{location}"

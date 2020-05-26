@@ -8,6 +8,8 @@
           <%= t(".heading") %>
         </h1>
 
+        <%= render "shared/registrations/company_details_panel", resource: @transient_registration %>
+
         <%= render "shared/registrations/contact_and_business_details_panels", resource: @transient_registration %>
 
         <hr>

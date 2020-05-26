@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
+  def display_company_details_panel?
+    return true if company_name.present?
+    return true if display_tier_and_registration_type.present?
+    return true if display_expiry_text.present?
+    return true if account_email.present?
+
+    false
+  end
+
+  def display_tier_and_registration_type
+    [displayable_tier, displayable_business_type].compact.join(" - ")
+  end
+
   def displayable_location
     location = show_translation_or_filler(:location)
 
@@ -65,6 +78,18 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   end
 
   private
+
+  def displayable_tier
+    return unless tier.present?
+
+    I18n.t(".shared.registrations.attributes.tier.#{tier.downcase}")
+  end
+
+  def displayable_business_type
+    return unless business_type.present?
+
+    I18n.t(".shared.registrations.attributes.business_type.#{business_type}")
+  end
 
   def show_translation_or_filler(attribute)
     if send(attribute).present?
