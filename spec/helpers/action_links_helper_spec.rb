@@ -100,7 +100,15 @@ RSpec.describe ActionLinksHelper, type: :helper do
   end
 
   describe "resume_link_for" do
-    context "when the resource is a transient_registration" do
+    context "when the resource is a new_registration" do
+      let(:resource) { build(:new_registration) }
+
+      it "returns the correct path" do
+        expect(helper.resume_link_for(resource)).to eq(ad_privacy_policy_path(token: resource.token))
+      end
+    end
+
+    context "when the resource is a renewing_registration" do
       let(:resource) { build(:renewing_registration) }
 
       it "returns the correct path" do
@@ -160,6 +168,14 @@ RSpec.describe ActionLinksHelper, type: :helper do
   end
 
   describe "#display_resume_link_for?" do
+    context "when the resource is a NewRegistration" do
+      let(:resource) { build(:new_registration) }
+
+      it "returns true" do
+        expect(helper.display_resume_link_for?(resource)).to eq(true)
+      end
+    end
+
     context "when the resource is not a RenewingRegistration" do
       let(:resource) { build(:registration) }
 
@@ -537,6 +553,14 @@ RSpec.describe ActionLinksHelper, type: :helper do
     before do
       allow(resource).to receive(:upper_tier?).and_return(upper_tier)
       allow(resource).to receive(:finance_details).and_return(finance_details)
+    end
+
+    context "when the resource is a new registration" do
+      let(:resource) { build(:new_registration) }
+
+      it "returns false" do
+        expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+      end
     end
 
     context "when the resource is a renewing registration" do

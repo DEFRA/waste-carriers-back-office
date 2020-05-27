@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ModuleLength
 module ActionLinksHelper
   def details_link_for(resource)
     if a_new_registration?(resource)
@@ -140,3 +141,4 @@ module ActionLinksHelper
     resource.upper_tier? && can?(:view_payments, resource)
   end
 end
+# rubocop:enable Metrics/ModuleLength
