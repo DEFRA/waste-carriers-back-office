@@ -23,7 +23,7 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def display_tier_and_registration_type
-    [displayable_tier, displayable_business_type].compact.join(" - ")
+    [displayable_tier, displayable_registration_type].compact.join(" - ")
   end
 
   def displayable_location
@@ -109,10 +109,10 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     I18n.t(".shared.registrations.attributes.tier.#{tier.downcase}")
   end
 
-  def displayable_business_type
-    return unless business_type.present?
+  def displayable_registration_type
+    return unless registration_type.present?
 
-    I18n.t(".shared.registrations.attributes.business_type.#{business_type}")
+    I18n.t(".shared.registrations.company_details_panel.attributes.registration_type.#{registration_type}")
   end
 
   def show_translation_or_filler(attribute)
