@@ -12,6 +12,8 @@ module ActionLinksHelper
   end
 
   def resume_link_for(resource)
+    return ad_privacy_policy_path(token: resource.token) if a_new_registration?(resource)
+
     ad_privacy_policy_path(reg_identifier: resource.reg_identifier)
   end
 
@@ -28,6 +30,7 @@ module ActionLinksHelper
   end
 
   def display_resume_link_for?(resource)
+    return true if a_new_registration?(resource)
     return false unless display_renewing_registration_links?(resource)
     return false if resource.renewal_application_submitted?
     return false if resource.workflow_state == "worldpay_form"
@@ -48,6 +51,7 @@ module ActionLinksHelper
   end
 
   def display_finance_details_link_for?(resource)
+    return false if a_new_registration?(resource)
     return false unless resource.upper_tier? && resource.finance_details.present?
     return true unless a_renewing_registration?(resource)
 
