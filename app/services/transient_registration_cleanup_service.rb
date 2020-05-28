@@ -11,7 +11,7 @@ class TransientRegistrationCleanupService < ::WasteCarriersEngine::BaseService
   # renewals which have already been submitted
   def transient_registrations_to_remove
     WasteCarriersEngine::TransientRegistration.where(
-      "metaData.lastModified" => { "$lt" => oldest_possible_date },
+      "created_at" => { "$lt" => oldest_possible_date },
       "workflow_state" => { "$nin" => WasteCarriersEngine::RenewingRegistration::SUBMITTED_STATES }
     )
   end

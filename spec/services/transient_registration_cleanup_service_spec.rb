@@ -7,9 +7,9 @@ RSpec.describe TransientRegistrationCleanupService do
     let(:transient_registration) { create(:new_registration) }
     let(:token) { transient_registration.token }
 
-    context "when a transient_registration has not been modified in more than 30 days" do
+    context "when a transient_registration was created more than 30 days ago" do
       before do
-        transient_registration.metaData.update_attributes!(last_modified: Time.now - 31.days)
+        transient_registration.update_attributes!(created_at: Time.now - 31.days)
       end
 
       it "deletes it" do
@@ -25,7 +25,7 @@ RSpec.describe TransientRegistrationCleanupService do
       end
     end
 
-    context "when a transient_registration has been modified in the last 30 days" do
+    context "when a transient_registration was created within the last 30 days" do
       it "does not delete it" do
         expect { described_class.run }.to_not change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1)
       end
