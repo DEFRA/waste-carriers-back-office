@@ -115,6 +115,9 @@ module WasteCarriersBackOffice
     # Digital or assisted digital metaData.route value
     config.metadata_route = "ASSISTED_DIGITAL"
 
+    # Database cleanup
+    config.max_transient_registration_age_days = ENV["MAX_TRANSIENT_REGISTRATION_AGE_DAYS"] || 30
+
     # Version info
     config.application_version = "0.0.1"
     config.application_name = "waste-carriers-back-office"
