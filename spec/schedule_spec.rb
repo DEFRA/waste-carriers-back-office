@@ -15,7 +15,7 @@ RSpec.describe "Whenever schedule" do
 
   it "makes sure 'rake' statements exist" do
     rake_jobs = schedule.jobs[:rake]
-    expect(rake_jobs.count).to eq(5)
+    expect(rake_jobs.count).to eq(6)
   end
 
   it "picks up the EPR export run frequency and time" do
@@ -51,5 +51,12 @@ RSpec.describe "Whenever schedule" do
 
     expect(job_details[:every][0]).to eq(:day)
     expect(job_details[:every][1][:at]).to eq("20:00")
+  end
+
+  it "takes the transient registration cleanup execution time from the appropriate ENV variable" do
+    job_details = schedule.jobs[:rake].find { |h| h[:task] == "cleanup:transient_registrations" }
+
+    expect(job_details[:every][0]).to eq(:day)
+    expect(job_details[:every][1][:at]).to eq("00:35")
   end
 end
