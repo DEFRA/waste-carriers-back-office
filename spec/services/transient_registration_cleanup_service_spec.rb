@@ -15,6 +15,14 @@ RSpec.describe TransientRegistrationCleanupService do
       it "deletes it" do
         expect { described_class.run }.to change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1).to(0)
       end
+
+      context "when the transient_registration is a submitted renewal" do
+        let(:transient_registration) { create(:renewing_registration, workflow_state: "renewal_received_pending_payment_form") }
+
+        it "does not delete it" do
+          expect { described_class.run }.to_not change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1)
+        end
+      end
     end
 
     context "when a transient_registration has been modified in the last 30 days" do

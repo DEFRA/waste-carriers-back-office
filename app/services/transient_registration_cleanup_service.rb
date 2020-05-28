@@ -7,9 +7,13 @@ class TransientRegistrationCleanupService < ::WasteCarriersEngine::BaseService
 
   private
 
-  # TransientRegistrations where the last_modified date is earlier than the oldest possible date
+  # Remove any transient_registrations older than the cutoff, unless they are
+  # renewals which have already been submitted
   def transient_registrations_to_remove
-    WasteCarriersEngine::TransientRegistration.where("metaData.lastModified" => { "$lt" => oldest_possible_date })
+    WasteCarriersEngine::TransientRegistration.where(
+      "metaData.lastModified" => { "$lt" => oldest_possible_date },
+      "workflow_state" => { "$nin" => WasteCarriersEngine::RenewingRegistration::SUBMITTED_STATES }
+    )
   end
 
   def oldest_possible_date
