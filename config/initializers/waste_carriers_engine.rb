@@ -13,6 +13,9 @@ WasteCarriersEngine.configure do |configuration|
     configuration.companies_house_host = ENV["WCRS_MOCK_FO_COMPANIES_HOUSE_URL"]
   end
 
+  # Link to dashboard from user journeys
+  configuration.link_from_journeys_to_dashboards = true
+
   # Last email cache config
   configuration.use_last_email_cache = ENV["WCRS_USE_LAST_EMAIL_CACHE"] || "false"
 
