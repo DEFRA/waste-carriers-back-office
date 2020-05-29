@@ -27,7 +27,7 @@ class ConvictionsDashboardsController < ApplicationController
   end
 
   def list_of_possible_matches
-    WasteCarriersEngine::RenewingRegistration.submitted.convictions_possible_match +
+    WasteCarriersEngine::RenewingRegistration.submitted.convictions_possible_match.not_cancelled +
       WasteCarriersEngine::Registration.convictions_possible_match +
       WasteCarriersEngine::Registration.convictions_new_without_status
   end

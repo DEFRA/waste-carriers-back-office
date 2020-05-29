@@ -11,6 +11,10 @@ FactoryBot.define do
       status { :ACTIVE }
     end
 
+    trait :cancelled do
+      status { :INACTIVE }
+    end
+
     trait :expired do
       status { :EXPIRED }
     end

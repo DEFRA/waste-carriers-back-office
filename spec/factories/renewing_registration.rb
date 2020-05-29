@@ -12,6 +12,10 @@ FactoryBot.define do
     # Create a new registration when initializing
     initialize_with { new(reg_identifier: create(:registration, :expires_soon).reg_identifier) }
 
+    trait :cancelled do
+      metaData { build(:metaData, :cancelled) }
+    end
+
     trait :overpaid do
       finance_details { build(:finance_details, :has_overpaid_order_and_payment) }
     end
