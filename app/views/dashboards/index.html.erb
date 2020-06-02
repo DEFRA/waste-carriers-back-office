@@ -76,7 +76,9 @@
           <% @results.each do |result| %>
             <tr>
               <td>
-                <%= result.reg_identifier %>
+                <% unless result.is_a?(WasteCarriersEngine::NewRegistration) %>
+                  <%= result.reg_identifier %>
+                <% end %>
               </td>
               <td>
                 <%= result.company_name %>

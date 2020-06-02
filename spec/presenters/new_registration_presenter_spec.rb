@@ -41,4 +41,30 @@ RSpec.describe NewRegistrationPresenter do
       expect(result).to eq('The current form is "a_workflow_state"')
     end
   end
+
+  describe "#display_action_links_heading" do
+    let(:company_name) { nil }
+    let(:new_registration) do
+      double(:new_registration,
+             company_name: company_name)
+    end
+
+    context "when there is a company_name" do
+      let(:company_name) { "Foo" }
+
+      it "returns a heading with the name" do
+        result = subject.display_action_links_heading
+
+        expect(result).to eq("Actions for Foo")
+      end
+    end
+
+    context "when there is no company_name" do
+      it "returns a heading without a name" do
+        result = subject.display_action_links_heading
+
+        expect(result).to eq("Actions")
+      end
+    end
+  end
 end

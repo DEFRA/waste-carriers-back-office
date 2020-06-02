@@ -352,40 +352,16 @@ RSpec.describe BaseRegistrationPresenter do
   end
 
   describe "#display_action_links_heading" do
-    let(:reg_identifier) { nil }
-    let(:company_name) { nil }
+    let(:reg_identifier) { "CBDU1234" }
     let(:registration) do
       double(:registration,
-             reg_identifier: reg_identifier,
-             company_name: company_name)
+             reg_identifier: reg_identifier)
     end
 
-    context "when there is a reg_identifier" do
-      let(:reg_identifier) { "CBDU1234" }
+    it "returns a heading with the reg_identifier" do
+      result = subject.display_action_links_heading
 
-      it "returns a heading with the name" do
-        result = subject.display_action_links_heading
-
-        expect(result).to eq("Actions for CBDU1234")
-      end
-    end
-
-    context "when there is a company_name" do
-      let(:company_name) { "Foo" }
-
-      it "returns a heading with the name" do
-        result = subject.display_action_links_heading
-
-        expect(result).to eq("Actions for Foo")
-      end
-    end
-
-    context "when there is no company_name or reg_identifier" do
-      it "returns a heading without a name or reg_identifier" do
-        result = subject.display_action_links_heading
-
-        expect(result).to eq("Actions")
-      end
+      expect(result).to eq("Actions for CBDU1234")
     end
   end
 end
