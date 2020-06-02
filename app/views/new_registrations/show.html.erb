@@ -21,6 +21,9 @@
             <p>
               <%= @transient_registration.display_current_workflow_state %>
             </p>
+            <% if display_resume_link_for?(@transient_registration) %>
+              <%= link_to t(".status.actions.continue_button"), resume_link_for(@transient_registration), class: 'button' %>
+            <% end %>
           <% end %>
         </div>
 

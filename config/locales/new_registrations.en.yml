@@ -13,6 +13,8 @@ en:
           in_progress: "The current form is"
           worldpay:
             paragraph_1: "The user is currently attempting to pay by WorldPay."
+        actions:
+          continue_button: "Continue as assisted digital"
       conviction_heading: "Convictions"
       conviction_link: "Conviction details"
       conviction_information:
