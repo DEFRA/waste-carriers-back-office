@@ -31,12 +31,13 @@ module ActionLinksHelper
   end
 
   def display_resume_link_for?(resource)
-    return true if a_new_registration?(resource)
-    return false unless display_renewing_registration_links?(resource)
-    return false if resource.renewal_application_submitted?
-    return false if resource.workflow_state == "worldpay_form"
-
-    can?(:renew, resource)
+    if a_new_registration?(resource)
+      display_resume_link_for_new_registration?
+    elsif a_renewing_registration?(resource)
+      display_resume_link_for_renewal?(resource)
+    else
+      false
+    end
   end
 
   def display_payment_link_for?(resource)
@@ -139,6 +140,18 @@ module ActionLinksHelper
 
   def can_view_payments?(resource)
     resource.upper_tier? && can?(:view_payments, resource)
+  end
+
+  def display_resume_link_for_new_registration?
+    can?(:create, WasteCarriersEngine::Registration)
+  end
+
+  def display_resume_link_for_renewal?(resource)
+    return false unless display_renewing_registration_links?(resource)
+    return false if resource.renewal_application_submitted?
+    return false if resource.workflow_state == "worldpay_form"
+
+    can?(:renew, resource)
   end
 end
 # rubocop:enable Metrics/ModuleLength

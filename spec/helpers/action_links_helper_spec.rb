@@ -171,16 +171,20 @@ RSpec.describe ActionLinksHelper, type: :helper do
     context "when the resource is a NewRegistration" do
       let(:resource) { build(:new_registration) }
 
-      it "returns true" do
-        expect(helper.display_resume_link_for?(resource)).to eq(true)
+      context "when the user does not have permission" do
+        before { allow(helper).to receive(:can?).and_return(false) }
+
+        it "returns false" do
+          expect(helper.display_resume_link_for?(resource)).to eq(false)
+        end
       end
-    end
 
-    context "when the resource is not a RenewingRegistration" do
-      let(:resource) { build(:registration) }
+      context "when the user has permission" do
+        before { allow(helper).to receive(:can?).and_return(true) }
 
-      it "returns false" do
-        expect(helper.display_resume_link_for?(resource)).to eq(false)
+        it "returns true" do
+          expect(helper.display_resume_link_for?(resource)).to eq(true)
+        end
       end
     end
 
@@ -229,6 +233,14 @@ RSpec.describe ActionLinksHelper, type: :helper do
             expect(helper.display_resume_link_for?(resource)).to eq(true)
           end
         end
+      end
+    end
+
+    context "when the resource is not a NewRegistration or a RenewingRegistration" do
+      let(:resource) { build(:registration) }
+
+      it "returns false" do
+        expect(helper.display_resume_link_for?(resource)).to eq(false)
       end
     end
   end
