@@ -120,7 +120,7 @@ GEM
       aws-sdk-s3
     defra_ruby_email (0.2.0)
       rails (~> 4.2.11.1)
-    defra_ruby_mocks (1.4.0)
+    defra_ruby_mocks (1.4.1)
       nokogiri
       rails (~> 4.2.11.1)
       sprockets (~> 3.7.2)
