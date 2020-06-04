@@ -23,6 +23,10 @@ FactoryBot.define do
 
     metaData { build(:metaData) }
 
+    trait :cancelled do
+      metaData { build(:metaData, :cancelled) }
+    end
+
     trait :overpaid do
       finance_details { build(:finance_details, :has_overpaid_order_and_payment) }
     end

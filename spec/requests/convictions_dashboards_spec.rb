@@ -60,12 +60,12 @@ RSpec.describe "ConvictionsDashboards", type: :request do
     transient_registration_convictions_path(renewal.reg_identifier)
   end
 
-  let!(:link_to_checks_cancelled_renewal) do
-    renewal = create(:renewing_registration, :requires_conviction_check, :cancelled)
-    # Make sure it's one of the 'oldest' renewals so would be top of the list
-    renewal.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+  let!(:link_to_checks_cancelled_registration) do
+    registration = create(:registration, :requires_conviction_check, :cancelled)
+    # Make sure it's one of the 'oldest' registrations so would be top of the list
+    registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
 
-    transient_registration_convictions_path(renewal.reg_identifier)
+    transient_registration_convictions_path(registration.reg_identifier)
   end
 
   let!(:link_to_checks_in_progress_renewal) do
@@ -111,7 +111,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
 
         expect(response.body).to_not include(link_to_checks_in_progress_registration)
         expect(response.body).to_not include(link_to_checks_in_progress_renewal)
-        expect(response.body).to_not include(link_to_checks_cancelled_renewal)
+        expect(response.body).to_not include(link_to_checks_cancelled_registration)
       end
     end
 
