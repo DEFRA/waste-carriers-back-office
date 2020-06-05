@@ -102,6 +102,11 @@ Rails.application.routes.draw do
                        only: %i[new create],
                        path: "payments/charge-adjust/positive",
                        path_names: { new: "" }
+
+              resources :worldpay_escapes,
+                       only: :new,
+                       path: "revert-to-payment-summary",
+                       path_names: { new: "" }
             end
 
   resources :new_registrations,
@@ -160,11 +165,6 @@ Rails.application.routes.draw do
               resources :conviction_rejection_forms,
                         only: %i[new create],
                         path: "convictions/reject",
-                        path_names: { new: "" }
-
-              resources :worldpay_escapes,
-                        only: :new,
-                        path: "revert-to-payment-summary",
                         path_names: { new: "" }
             end
 
