@@ -1,50 +1,55 @@
 # frozen_string_literal: true
 
 class WorldpayEscapesController < ApplicationController
+  include CanFetchResource
+
+  prepend_before_action :authenticate_user!
+  before_action :authorize, only: %i[new]
+
   def new
-    return unless set_up_valid_transient_registration?
-
-    authorize
-
     if correct_workflow_state?
       change_state_to_payment_summary
       log_worldpay_escape
-      redirect_to continue_renewal_path
+      redirect_to continue_journey_path
     else
-      redirect_to renewing_registration_path(@transient_registration.reg_identifier)
+      redirect_to details_page_path
     end
   end
 
   private
 
-  def set_up_valid_transient_registration?
-    reg_identifier = params[:transient_registration_reg_identifier]
-    @transient_registration = WasteCarriersEngine::RenewingRegistration.where(reg_identifier: reg_identifier)
-                                                                       .first
-  end
-
   def authorize
-    authorize! :revert_to_payment_summary, @transient_registration
+    authorize! :revert_to_payment_summary, @resource
   end
 
   def correct_workflow_state?
-    @transient_registration.workflow_state == "worldpay_form"
+    @resource.workflow_state == "worldpay_form"
   end
 
   def change_state_to_payment_summary
-    @transient_registration.update_attributes(workflow_state: "payment_summary_form")
+    @resource.update_attributes(workflow_state: "payment_summary_form")
   end
 
   def log_worldpay_escape
     params = {
       user: current_user.email,
-      registration: @transient_registration.reg_identifier
+      class: @resource.class.name,
+      reg_identifier: @resource.reg_identifier,
+      token: @resource.token
     }
-    Rails.logger.debug("#{params[:email]} sent #{params[:registration]} back to payment summary")
+    Rails.logger.debug("#{params[:email]} sent #{params[:name]} #{params[:registration]} back to payment summary")
     Airbrake.notify("Sent back to payment summary", params)
   end
 
-  def continue_renewal_path
-    WasteCarriersEngine::Engine.routes.url_helpers.new_payment_summary_form_path(@transient_registration.token)
+  def continue_journey_path
+    WasteCarriersEngine::Engine.routes.url_helpers.new_payment_summary_form_path(@resource.token)
+  end
+
+  def details_page_path
+    if @resource.is_a?(WasteCarriersEngine::RenewingRegistration)
+      renewing_registration_path(@resource.reg_identifier)
+    else
+      new_registration_path(@resource.token)
+    end
   end
 end

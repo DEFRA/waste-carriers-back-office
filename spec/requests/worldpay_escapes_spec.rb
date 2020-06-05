@@ -4,30 +4,30 @@ require "rails_helper"
 
 RSpec.describe "WorldpayEscapes", type: :request do
   let(:transient_registration) { create(:renewing_registration) }
-  let(:reg_identifier) { transient_registration.reg_identifier }
+  let(:_id) { transient_registration._id }
 
-  describe "GET /bo/transient-registrations/:reg_identifier/revert-to-payment-summary" do
+  describe "GET /bo/resources/:_id/revert-to-payment-summary" do
     let(:user) { create(:user) }
     before(:each) do
       sign_in(user)
     end
 
-    context "when the workflow_state is worldpay_form" do
-      before do
-        transient_registration.update_attributes(workflow_state: "worldpay_form")
-      end
+    context "when the user has the correct role" do
+      let(:user) { create(:user, :agency) }
 
-      context "when the user has the correct role" do
-        let(:user) { create(:user, :agency) }
+      context "when the workflow_state is worldpay_form" do
+        before do
+          transient_registration.update_attributes(workflow_state: "worldpay_form")
+        end
 
         it "redirects to the payment_summary_form" do
-          get "/bo/transient-registrations/#{reg_identifier}/revert-to-payment-summary"
+          get "/bo/resources/#{_id}/revert-to-payment-summary"
 
           expect(response).to redirect_to WasteCarriersEngine::Engine.routes.url_helpers.new_payment_summary_form_path(transient_registration.token)
         end
 
         it "updates the workflow_state" do
-          get "/bo/transient-registrations/#{reg_identifier}/revert-to-payment-summary"
+          get "/bo/resources/#{_id}/revert-to-payment-summary"
           expect(transient_registration.reload.workflow_state).to eq("payment_summary_form")
         end
       end
@@ -37,9 +37,22 @@ RSpec.describe "WorldpayEscapes", type: :request do
           transient_registration.update_attributes(workflow_state: "renewal_start_form")
         end
 
-        it "renders the transient_registration page" do
-          get "/bo/transient-registrations/#{reg_identifier}/revert-to-payment-summary"
-          expect(response).to redirect_to renewing_registration_path(reg_identifier)
+        context "when the resource is a renewal" do
+          it "renders the renewing registration details page" do
+            get "/bo/resources/#{_id}/revert-to-payment-summary"
+
+            expect(response).to redirect_to renewing_registration_path(transient_registration.reg_identifier)
+          end
+        end
+
+        context "when the resource is a new registration" do
+          let(:transient_registration) { create(:new_registration) }
+
+          it "renders the new registration details page" do
+            get "/bo/resources/#{_id}/revert-to-payment-summary"
+
+            expect(response).to redirect_to new_registration_path(transient_registration.token)
+          end
         end
       end
     end
@@ -48,7 +61,7 @@ RSpec.describe "WorldpayEscapes", type: :request do
       let(:user) { create(:user, :finance) }
 
       it "renders the permissions error page" do
-        get "/bo/transient-registrations/#{reg_identifier}/revert-to-payment-summary"
+        get "/bo/resources/#{_id}/revert-to-payment-summary"
         expect(response).to redirect_to "/bo/pages/permission"
       end
     end
