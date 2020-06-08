@@ -85,6 +85,11 @@ Rails.application.routes.draw do
                         path: "revert-to-payment-summary",
                         path_names: { new: "" }
 
+              resources :worldpay_missed_payment_new_registrations,
+                        only: :new,
+                        path: "missed-worldpay-payment-new-registration",
+                        path_names: { new: "" }
+
               resource :finance_details,
                        only: :show,
                        path: "finance-details"
