@@ -19,8 +19,7 @@ RSpec.describe RenewalReminderMailer, type: :mailer do
 
       expect(registration).to receive(:generate_renew_token!)
       expect(mail.subject).to include("Renew waste carrier registration")
-      expect(mail.to).to eq([registration.contact_email])
-      expect(mail.to).to eq([registration.account_email])
+      expect(mail.to).to eq(registration.contact_email)
       expect(mail.body.encoded).to include(registration.reg_identifier)
     end
   end
@@ -37,8 +36,7 @@ RSpec.describe RenewalReminderMailer, type: :mailer do
 
       expect(registration).to receive(:generate_renew_token!)
       expect(mail.subject).to include("Renew waste carrier registration")
-      expect(mail.to).to eq([registration.contact_email])
-      expect(mail.to).to eq([registration.account_email])
+      expect(mail.to).to eq(registration.contact_email)
       expect(mail.body.encoded).to include(registration.reg_identifier)
     end
   end

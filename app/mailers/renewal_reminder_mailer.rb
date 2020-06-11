@@ -26,7 +26,7 @@ class RenewalReminderMailer < ActionMailer::Base
     @renew_link = generate_renew_link(registration)
 
     mail(
-      to: collect_addresses(registration),
+      to: registration.contact_email,
       from: "#{Rails.configuration.email_service_name} <#{Rails.configuration.email_service_email}>",
       subject: subject,
       template_name: :first_reminder_email
@@ -45,9 +45,5 @@ class RenewalReminderMailer < ActionMailer::Base
     return unless WasteCarriersEngine::FeatureToggle.active?(:renew_via_magic_link)
 
     registration.generate_renew_token!
-  end
-
-  def collect_addresses(registration)
-    [registration.contact_email, registration.account_email].compact.uniq
   end
 end
