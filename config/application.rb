@@ -109,8 +109,8 @@ module WasteCarriersBackOffice
     config.email_service_name = "Waste Carriers Registration Service"
     config.email_service_email = ENV["WCRS_EMAIL_SERVICE_EMAIL"]
     config.email_test_address = ENV["WCRS_EMAIL_TEST_ADDRESS"]
-    config.first_renewal_email_reminder_days = ENV["FIRST_RENEWAL_EMAIL_REMINDER_DAYS"] || 28
-    config.second_renewal_email_reminder_days = ENV["SECOND_RENEWAL_EMAIL_REMINDER_DAYS"] || 7
+    config.first_renewal_email_reminder_days = ENV["FIRST_RENEWAL_EMAIL_REMINDER_DAYS"] || 42
+    config.second_renewal_email_reminder_days = ENV["SECOND_RENEWAL_EMAIL_REMINDER_DAYS"] || 28
 
     # Digital or assisted digital metaData.route value
     config.metadata_route = "ASSISTED_DIGITAL"
