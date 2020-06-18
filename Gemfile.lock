@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/defra-ruby-mocks
-  revision: 3cbbb35bf0aa8b7799dafa239109338a188e5d6f
+  revision: 028986a51d518c65946487c68ed1201eb97001f6
   branch: rails-upgrade
   specs:
     defra_ruby_mocks (1.5.0)
@@ -455,7 +455,7 @@ DEPENDENCIES
   mongoid
   passenger (~> 5.0, >= 5.0.30)
   pry-byebug
-  rails (~> 6.0.3)
+  rails (>= 6.0.3)
   rails-controller-testing
   rspec-rails
   rubyzip
