@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 35af4c3f68d73b1a8e046b805d25aeda19ca9ce9
+  revision: 873069912efe66f8de808e3d81d36dd7512202b8
   branch: master
   specs:
     waste_carriers_engine (0.0.1)
@@ -14,7 +14,7 @@ GIT
       jbuilder (~> 2.0)
       jquery-rails
       mongoid (~> 5.2.0)
-      mongoid-locker
+      mongoid-locker (= 2.0.0)
       nokogiri
       rails (~> 4.2.11)
       rest-client (~> 2.0)
@@ -230,7 +230,7 @@ GEM
       mongo (>= 2.4.1, < 3.0.0)
       origin (~> 2.3)
       tzinfo (>= 0.3.37)
-    mongoid-locker (2.0.1)
+    mongoid-locker (2.0.0)
       mongoid (>= 5.0, < 8)
     multi_json (1.14.1)
     multipart-post (2.1.1)
