@@ -44,6 +44,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/resources/#{transient_registration._id}/payments/bank-transfer"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -73,7 +74,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
           old_payments_count = registration.finance_details.payments.count
           expected_expiry_date = registration.expires_on.to_date + 3.years
 
-          post "/bo/resources/#{transient_registration._id}/payments/bank-transfer", bank_transfer_payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments/bank-transfer", params: { bank_transfer_payment_form: params }
 
           registration.reload
           actual_expiry_date = registration.expires_on.to_date
@@ -100,7 +101,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
           it "completes the registration, redirects to the registration finance page and creates a new payment" do
             old_payments_count = registration.finance_details.payments.count
 
-            post "/bo/resources/#{registration._id}/payments/bank-transfer", bank_transfer_payment_form: params
+            post "/bo/resources/#{registration._id}/payments/bank-transfer", params: { bank_transfer_payment_form: params }
 
             registration.reload
 
@@ -121,7 +122,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
         it "does not renews the registration" do
           old_renewal_date = registration.expires_on
 
-          post "/bo/resources/#{transient_registration._id}/payments/bank-transfer", bank_transfer_payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments/bank-transfer", params: { bank_transfer_payment_form: params }
 
           expect(registration.reload.expires_on).to eq(old_renewal_date)
         end
@@ -140,7 +141,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
           end
 
           it "does not completes the registration" do
-            post "/bo/resources/#{transient_registration._id}/payments/bank-transfer", bank_transfer_payment_form: params
+            post "/bo/resources/#{transient_registration._id}/payments/bank-transfer", params: { bank_transfer_payment_form: params }
 
             registration.reload
 
@@ -156,14 +157,12 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
           }
         end
 
-        it "renders the new template" do
-          post "/bo/resources/#{transient_registration._id}/payments/bank-transfer", bank_transfer_payment_form: params
-          expect(response).to render_template(:new)
-        end
-
-        it "does not create a new payment" do
+        it "renders the new template and does not create a new payment" do
           old_payments_count = transient_registration.finance_details.payments.count
-          post "/bo/resources/#{transient_registration._id}/payments/bank-transfer", bank_transfer_payment_form: params
+
+          post "/bo/resources/#{transient_registration._id}/payments/bank-transfer", params: { bank_transfer_payment_form: params }
+
+          expect(response).to render_template(:new)
           expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count)
         end
       end
@@ -175,14 +174,12 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
         sign_in(user)
       end
 
-      it "redirects to the permissions error page" do
-        post "/bo/resources/#{transient_registration._id}/payments/bank-transfer", bank_transfer_payment_form: params
-        expect(response).to redirect_to("/bo/pages/permission")
-      end
-
-      it "does not create a new payment" do
+      it "redirects to the permissions error page and does not create a new payment" do
         old_payments_count = transient_registration.finance_details.payments.count
-        post "/bo/resources/#{transient_registration._id}/payments/bank-transfer", bank_transfer_payment_form: params
+
+        post "/bo/resources/#{transient_registration._id}/payments/bank-transfer", params: { bank_transfer_payment_form: params }
+
+        expect(response).to redirect_to("/bo/pages/permission")
         expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count)
       end
     end

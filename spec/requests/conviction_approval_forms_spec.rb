@@ -32,6 +32,7 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -56,7 +57,7 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
       end
 
       it "redirects to the convictions page and updates the revoked_reason, workflow_state, and 'confirmed_' attributes" do
-        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
 
         expect(response).to redirect_to(convictions_path)
 
@@ -76,7 +77,9 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
 
         it "renews the registration" do
           expected_expiry_date = registration.expires_on.to_date + 3.years
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
+
           actual_expiry_date = registration.reload.expires_on.to_date
 
           expect(actual_expiry_date).to eq(expected_expiry_date)
@@ -89,7 +92,7 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
 
           it "rescues the error" do
             expect do
-              post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+              post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
             end.to_not raise_error
           end
         end
@@ -104,7 +107,9 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
 
         it "does not renews the registration" do
           old_renewal_date = registration.expires_on
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
+
           expect(registration.reload.expires_on).to eq(old_renewal_date)
         end
       end
@@ -117,7 +122,7 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
         end
 
         it "renders the new template, does not update the revoked_reason, and does not update the conviction_sign_off" do
-          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+          post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
 
           expect(response).to render_template(:new)
           expect(transient_registration.reload.metaData.revoked_reason).to_not eq(params[:revoked_reason])
@@ -139,7 +144,7 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
       end
 
       it "redirects to the permissions error page, does not update the revoked_reason, and does not update the conviction_sign_off" do
-        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+        post "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
 
         expect(response).to redirect_to("/bo/pages/permission")
         expect(transient_registration.reload.metaData.revoked_reason).to_not eq(params[:revoked_reason])

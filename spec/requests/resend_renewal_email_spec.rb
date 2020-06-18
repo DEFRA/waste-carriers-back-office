@@ -12,7 +12,7 @@ RSpec.describe "ResendRenewalEmail", type: :request do
       before { sign_in(user) }
 
       it "redirects to permission page" do
-        get request_path, {}, "HTTP_REFERER" => "/"
+        get request_path, headers: { "HTTP_REFERER" => "/" }
 
         expect(response).to redirect_to("/bo/pages/permission")
       end
@@ -25,7 +25,7 @@ RSpec.describe "ResendRenewalEmail", type: :request do
       it "sends an email and redirects to the previous page" do
         expected_count = ActionMailer::Base.deliveries.count + 1
 
-        get request_path, {}, "HTTP_REFERER" => "/"
+        get request_path, headers: { "HTTP_REFERER" => "/" }
 
         expect(ActionMailer::Base.deliveries.count).to eq(expected_count)
         expect(response).to redirect_to("/")
@@ -39,7 +39,7 @@ RSpec.describe "ResendRenewalEmail", type: :request do
         it "does not sends an email and redirects to the previous page" do
           expected_count = ActionMailer::Base.deliveries.count
 
-          get request_path, {}, "HTTP_REFERER" => "/"
+          get request_path, headers: { "HTTP_REFERER" => "/" }
 
           expect(ActionMailer::Base.deliveries.count).to eq(expected_count)
           expect(response).to redirect_to("/")

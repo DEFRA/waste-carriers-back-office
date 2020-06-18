@@ -46,6 +46,7 @@ RSpec.describe "PostalOrderPaymentForms", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/resources/#{transient_registration._id}/payments/postal-order"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -74,22 +75,14 @@ RSpec.describe "PostalOrderPaymentForms", type: :request do
         sign_in(user)
       end
 
-      it "redirects to the registration finance page" do
+      it "redirects to the registration finance page, creates a new payment and assigns the correct updated_by_user to the payment" do
         registration = transient_registration.registration
+        old_payments_count = transient_registration.finance_details.payments.count
 
-        post "/bo/resources/#{transient_registration._id}/payments/postal-order", postal_order_payment_form: params
+        post "/bo/resources/#{transient_registration._id}/payments/postal-order", params: { postal_order_payment_form: params }
 
         expect(response).to redirect_to(resource_finance_details_path(registration._id))
-      end
-
-      it "creates a new payment" do
-        old_payments_count = transient_registration.finance_details.payments.count
-        post "/bo/resources/#{transient_registration._id}/payments/postal-order", postal_order_payment_form: params
         expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count + 1)
-      end
-
-      it "assigns the correct updated_by_user to the payment" do
-        post "/bo/resources/#{transient_registration._id}/payments/postal-order", postal_order_payment_form: params
         expect(transient_registration.reload.finance_details.payments.first.updated_by_user).to eq(user.email)
       end
 
@@ -102,7 +95,9 @@ RSpec.describe "PostalOrderPaymentForms", type: :request do
 
         it "renews the registration" do
           expected_expiry_date = registration.expires_on.to_date + 3.years
-          post "/bo/resources/#{transient_registration._id}/payments/postal-order", postal_order_payment_form: params
+
+          post "/bo/resources/#{transient_registration._id}/payments/postal-order", params: { postal_order_payment_form: params }
+
           actual_expiry_date = registration.reload.expires_on.to_date
 
           expect(actual_expiry_date).to eq(expected_expiry_date)
@@ -118,7 +113,9 @@ RSpec.describe "PostalOrderPaymentForms", type: :request do
 
         it "does not renews the registration" do
           old_renewal_date = registration.expires_on
-          post "/bo/resources/#{transient_registration._id}/payments/postal-order", postal_order_payment_form: params
+
+          post "/bo/resources/#{transient_registration._id}/payments/postal-order", params: { postal_order_payment_form: params }
+
           expect(registration.reload.expires_on).to eq(old_renewal_date)
         end
       end
@@ -130,14 +127,11 @@ RSpec.describe "PostalOrderPaymentForms", type: :request do
           }
         end
 
-        it "renders the new template" do
-          post "/bo/resources/#{transient_registration._id}/payments/postal-order", postal_order_payment_form: params
-          expect(response).to render_template(:new)
-        end
-
-        it "does not create a new payment" do
+        it "renders the new template and does not create a new payment" do
           old_payments_count = transient_registration.finance_details.payments.count
-          post "/bo/resources/#{transient_registration._id}/payments/postal-order", postal_order_payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments/postal-order", params: { postal_order_payment_form: params }
+
+          expect(response).to render_template(:new)
           expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count)
         end
       end
@@ -149,14 +143,11 @@ RSpec.describe "PostalOrderPaymentForms", type: :request do
         sign_in(user)
       end
 
-      it "redirects to the permissions error page" do
-        post "/bo/resources/#{transient_registration._id}/payments/postal-order", postal_order_payment_form: params
-        expect(response).to redirect_to("/bo/pages/permission")
-      end
-
-      it "does not create a new payment" do
+      it "redirects to the permissions error page and does not create a new payment" do
         old_payments_count = transient_registration.finance_details.payments.count
-        post "/bo/resources/#{transient_registration._id}/payments/postal-order", postal_order_payment_form: params
+        post "/bo/resources/#{transient_registration._id}/payments/postal-order", params: { postal_order_payment_form: params }
+
+        expect(response).to redirect_to("/bo/pages/permission")
         expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count)
       end
     end

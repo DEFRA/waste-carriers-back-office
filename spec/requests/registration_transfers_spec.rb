@@ -13,18 +13,11 @@ RSpec.describe "RegistrationTransfers", type: :request do
         sign_in(user)
       end
 
-      it "renders the new template" do
+      it "renders the new template, includes the registration info on the page and returns a 200 response" do
         get "/bo/registrations/#{registration.reg_identifier}/transfer/"
+
         expect(response).to render_template(:new)
-      end
-
-      it "includes the registration info on the page" do
-        get "/bo/registrations/#{registration.reg_identifier}/transfer/"
         expect(response.body).to include("Transfer registration #{registration.reg_identifier}")
-      end
-
-      it "returns a 200 response" do
-        get "/bo/registrations/#{registration.reg_identifier}/transfer/"
         expect(response).to have_http_status(200)
       end
     end
@@ -37,6 +30,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/registrations/#{registration.reg_identifier}/transfer/"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -44,6 +38,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
         get "/bo/registrations/#{registration.reg_identifier}/transfer/"
+
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -64,13 +59,10 @@ RSpec.describe "RegistrationTransfers", type: :request do
       end
 
       context "when the params are valid" do
-        it "redirects to the success page" do
-          post "/bo/registrations/#{registration.reg_identifier}/transfer/", registration_transfer_form: params
-          expect(response).to redirect_to("/bo/registrations/#{registration.reg_identifier}/transfer/success")
-        end
+        it "redirects to the success page and changes the account_email" do
+          post "/bo/registrations/#{registration.reg_identifier}/transfer/", params: { registration_transfer_form: params }
 
-        it "changes the account_email" do
-          post "/bo/registrations/#{registration.reg_identifier}/transfer/", registration_transfer_form: params
+          expect(response).to redirect_to("/bo/registrations/#{registration.reg_identifier}/transfer/success")
           expect(registration.reload.account_email).to eq(params[:email])
         end
       end
@@ -83,14 +75,11 @@ RSpec.describe "RegistrationTransfers", type: :request do
           }
         end
 
-        it "renders the new template" do
-          post "/bo/registrations/#{registration.reg_identifier}/transfer/", registration_transfer_form: params
-          expect(response).to render_template(:new)
-        end
-
-        it "does not change the account_email" do
+        it "renders the new template and does not change the account_email" do
           old_email = registration.account_email
-          post "/bo/registrations/#{registration.reg_identifier}/transfer/", registration_transfer_form: params
+          post "/bo/registrations/#{registration.reg_identifier}/transfer/", params: { registration_transfer_form: params }
+
+          expect(response).to render_template(:new)
           expect(registration.reload.account_email).to eq(old_email)
         end
       end
@@ -103,14 +92,16 @@ RSpec.describe "RegistrationTransfers", type: :request do
       end
 
       it "redirects to the permissions error page" do
-        post "/bo/registrations/#{registration.reg_identifier}/transfer/", registration_transfer_form: params
+        post "/bo/registrations/#{registration.reg_identifier}/transfer/", params: { registration_transfer_form: params }
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
 
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
-        post "/bo/registrations/#{registration.reg_identifier}/transfer/", registration_transfer_form: params
+        post "/bo/registrations/#{registration.reg_identifier}/transfer/", params: { registration_transfer_form: params }
+
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -128,18 +119,11 @@ RSpec.describe "RegistrationTransfers", type: :request do
         sign_in(user)
       end
 
-      it "renders the success template" do
+      it "renders the success template, includes the registration info on the page and returns a 200 response" do
         get "/bo/registrations/#{registration.reg_identifier}/transfer/success"
+
         expect(response).to render_template(:success)
-      end
-
-      it "includes the registration info on the page" do
-        get "/bo/registrations/#{registration.reg_identifier}/transfer/success"
         expect(response.body).to include("Registration #{registration.reg_identifier} has been transferred")
-      end
-
-      it "returns a 200 response" do
-        get "/bo/registrations/#{registration.reg_identifier}/transfer/success"
         expect(response).to have_http_status(200)
       end
     end
@@ -152,6 +136,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/registrations/#{registration.reg_identifier}/transfer/success"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -159,6 +144,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
         get "/bo/registrations/#{registration.reg_identifier}/transfer/success"
+
         expect(response).to redirect_to(new_user_session_path)
       end
     end

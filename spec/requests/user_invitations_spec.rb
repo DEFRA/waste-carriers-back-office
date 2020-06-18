@@ -12,6 +12,7 @@ RSpec.describe "User Invitations", type: :request do
 
       it "renders the new template" do
         get "/bo/users/invitation/new"
+
         expect(response).to render_template(:new)
       end
     end
@@ -24,6 +25,7 @@ RSpec.describe "User Invitations", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/users/invitation/new"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -42,35 +44,25 @@ RSpec.describe "User Invitations", type: :request do
         sign_in(user)
       end
 
-      it "redirects to the users path" do
-        post "/bo/users/invitation", params
-        expect(response).to redirect_to(users_path)
-      end
-
-      it "creates a new user" do
+      it "redirects to the users path, creates a new user and assigns the correct role to the user" do
         old_user_count = User.count
 
-        post "/bo/users/invitation", params
-        expect(User.count).to eq(old_user_count + 1)
-      end
+        post "/bo/users/invitation", params: params
 
-      it "assigns the correct role to the user" do
-        post "/bo/users/invitation", params
+        expect(response).to redirect_to(users_path)
+        expect(User.count).to eq(old_user_count + 1)
         expect(User.find_by(email: email).role).to eq(role)
       end
 
       context "when the current user does not have permission to select this role" do
         let(:role) { :finance }
 
-        it "does not create a new user" do
+        it "does not create a new user and renders the new template" do
           old_user_count = User.count
 
-          post "/bo/users/invitation", params
-          expect(User.count).to eq(old_user_count)
-        end
+          post "/bo/users/invitation", params: params
 
-        it "renders the new template" do
-          post "/bo/users/invitation", params
+          expect(User.count).to eq(old_user_count)
           expect(response).to render_template(:new)
         end
       end
@@ -83,7 +75,8 @@ RSpec.describe "User Invitations", type: :request do
       end
 
       it "redirects to the permissions error page" do
-        post "/bo/users/invitation", params
+        post "/bo/users/invitation", params: params
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -108,7 +101,8 @@ RSpec.describe "User Invitations", type: :request do
 
     context "when the user accepts an invitation and sets a valid password" do
       it "redirects to the back office dashboard path" do
-        put "/bo/users/invitation", params
+        put "/bo/users/invitation", params: params
+
         expect(response).to redirect_to(bo_path)
       end
     end

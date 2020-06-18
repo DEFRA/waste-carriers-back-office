@@ -15,7 +15,7 @@ class ResendRenewalEmailController < ApplicationController
       flash[:message] = I18n.t("resend_renewal_email.messages.failure", email: registration.contact_email)
     end
 
-    redirect_to :back
+    redirect_back(fallback_location: "/")
   end
 
   private

@@ -17,18 +17,11 @@ RSpec.describe "Sessions", type: :request do
       context "when valid user details are submitted" do
         let(:user) { create(:user) }
 
-        it "signs the user in" do
-          post user_session_path, user: { email: user.email, password: user.password }
+        it "signs the user in, returns a 302 response and redirects to /bo" do
+          post user_session_path, params: { user: { email: user.email, password: user.password } }
+
           expect(controller.current_user).to eq(user)
-        end
-
-        it "returns a 302 response" do
-          post user_session_path, user: { email: user.email, password: user.password }
           expect(response).to have_http_status(302)
-        end
-
-        it "redirects to /bo" do
-          post user_session_path, user: { email: user.email, password: user.password }
           expect(response).to redirect_to(bo_path)
         end
       end
@@ -43,24 +36,14 @@ RSpec.describe "Sessions", type: :request do
         sign_in(user)
       end
 
-      it "signs the user out" do
-        get destroy_user_session_path
-        expect(controller.current_user).to be_nil
-      end
-
-      it "returns a 302 response" do
-        get destroy_user_session_path
-        expect(response).to have_http_status(302)
-      end
-
-      it "redirects to the /bo path" do
-        get destroy_user_session_path
-        expect(response).to redirect_to(new_user_session_path)
-      end
-
-      it "updates the session_token" do
+      it "signs the user out, returns a 302 response, redirects to the /bo path and updates the session_token" do
         old_session_token = user.session_token
+
         get destroy_user_session_path
+
+        expect(controller.current_user).to be_nil
+        expect(response).to have_http_status(302)
+        expect(response).to redirect_to(new_user_session_path)
         expect(user.reload.session_token).to_not eq(old_session_token)
       end
 
@@ -69,6 +52,7 @@ RSpec.describe "Sessions", type: :request do
 
         it "signs the user out" do
           get destroy_user_session_path
+
           expect(controller.current_user).to be_nil
         end
       end

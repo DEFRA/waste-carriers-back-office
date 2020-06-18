@@ -80,10 +80,11 @@ RSpec.describe "ReversalForms", type: :request do
             }
           }
         end
+
         it "creates a reversal payment, redirects to the finance details page and returns a 302 status" do
           expected_payments_count = renewing_registration.finance_details.payments.count + 1
 
-          post resource_reversal_forms_path(renewing_registration._id, order_key: payment.order_key), params
+          post resource_reversal_forms_path(renewing_registration._id, order_key: payment.order_key), params: params
 
           renewing_registration.reload
           expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
@@ -97,7 +98,7 @@ RSpec.describe "ReversalForms", type: :request do
         it "does not create a reversal payment, renders the new template and returns a 200 status code" do
           expected_payments_count = renewing_registration.finance_details.payments.count
 
-          post resource_reversal_forms_path(renewing_registration._id, order_key: payment.order_key), {}
+          post resource_reversal_forms_path(renewing_registration._id, order_key: payment.order_key), params: {}
 
           renewing_registration.reload
           expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)

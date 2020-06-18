@@ -12,13 +12,10 @@ RSpec.describe "NewRegistrations", type: :request do
         sign_in(user)
       end
 
-      it "renders the index template" do
+      it "renders the index template and returns a 200 response" do
         get "/bo/new-registrations/#{transient_registration.token}"
-        expect(response).to render_template(:show)
-      end
 
-      it "returns a 200 response" do
-        get "/bo/new-registrations/#{transient_registration.token}"
+        expect(response).to render_template(:show)
         expect(response).to have_http_status(200)
       end
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  class RenewalsController < ApplicationController
+  class RenewalsController < ::ApplicationController
     before_action :authenticate_user!
 
     def show

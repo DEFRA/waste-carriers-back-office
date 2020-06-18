@@ -72,7 +72,7 @@ RSpec.describe "Refunds", type: :request do
       it "creates a refund payment, redirects to the finance details page and returns a 302 status" do
         expected_payments_count = renewing_registration.finance_details.payments.count + 1
 
-        post resource_refunds_path(renewing_registration._id), order_key: payment.order_key
+        post resource_refunds_path(renewing_registration._id), params: { order_key: payment.order_key }
 
         renewing_registration.reload
         expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
@@ -104,7 +104,7 @@ RSpec.describe "Refunds", type: :request do
 
           expected_payments_count = renewing_registration.finance_details.payments.count + 1
 
-          post resource_refunds_path(renewing_registration._id), order_key: payment.order_key
+          post resource_refunds_path(renewing_registration._id), params: { order_key: payment.order_key }
 
           renewing_registration.reload
           expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
@@ -124,7 +124,7 @@ RSpec.describe "Refunds", type: :request do
 
             expected_payments_count = renewing_registration.finance_details.payments.count
 
-            post resource_refunds_path(renewing_registration._id), order_key: payment.order_key
+            post resource_refunds_path(renewing_registration._id), params: { order_key: payment.order_key }
 
             renewing_registration.reload
             expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
@@ -138,7 +138,7 @@ RSpec.describe "Refunds", type: :request do
 
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
-        post resource_refunds_path("foo"), order_key: "bar"
+        post resource_refunds_path("foo"), params: { order_key: "bar" }
 
         expect(response).to redirect_to(new_user_session_path)
       end
@@ -148,7 +148,7 @@ RSpec.describe "Refunds", type: :request do
       it "redirects to the permissions page" do
         sign_in(create(:user))
 
-        post resource_refunds_path("foo"), order_key: "bar"
+        post resource_refunds_path("foo"), params: { order_key: "bar" }
 
         expect(response).to redirect_to("/bo/pages/permission")
       end

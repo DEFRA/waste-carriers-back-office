@@ -14,6 +14,7 @@ RSpec.describe "Assisted Digital Forms", type: :request do
 
       it "renders the new template" do
         get "/bo/#{registration.reg_identifier}/renew"
+
         expect(response).to render_template(:new)
       end
     end
@@ -26,6 +27,7 @@ RSpec.describe "Assisted Digital Forms", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/#{registration.reg_identifier}/renew"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -40,7 +42,9 @@ RSpec.describe "Assisted Digital Forms", type: :request do
 
       it "creates a new transient registration" do
         expected_tr_count = WasteCarriersEngine::RenewingRegistration.count + 1
+
         post "/bo/#{registration.reg_identifier}/renew"
+
         updated_tr_count = WasteCarriersEngine::RenewingRegistration.count
 
         expect(expected_tr_count).to eq(updated_tr_count)
@@ -49,20 +53,19 @@ RSpec.describe "Assisted Digital Forms", type: :request do
 
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
+
       before(:each) do
         sign_in(user)
       end
 
-      it "does not create a new transient registration" do
+      it "does not create a new transient registration and redirects to the permissions error page" do
         expected_tr_count = WasteCarriersEngine::RenewingRegistration.count
+
         post "/bo/#{registration.reg_identifier}/renew"
+
         updated_tr_count = WasteCarriersEngine::RenewingRegistration.count
 
         expect(expected_tr_count).to eq(updated_tr_count)
-      end
-
-      it "redirects to the permissions error page" do
-        post "/bo/#{registration.reg_identifier}/renew"
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end

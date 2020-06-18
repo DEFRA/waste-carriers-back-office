@@ -19,6 +19,7 @@ RSpec.describe "User Activations", type: :request do
         context "when the user to be activated is inactive" do
           it "renders the new template" do
             get "/bo/users/#{inactive_user.id}/activate"
+
             expect(response).to render_template(:new)
           end
         end
@@ -26,6 +27,7 @@ RSpec.describe "User Activations", type: :request do
         context "when the user to be activated is already active" do
           it "redirects to the user list" do
             get "/bo/users/#{active_user.id}/activate"
+
             expect(response).to redirect_to(users_path)
           end
         end
@@ -36,6 +38,7 @@ RSpec.describe "User Activations", type: :request do
 
         it "redirects to a permission error" do
           get "/bo/users/#{inactive_user.id}/activate"
+
           expect(response).to redirect_to("/bo/pages/permission")
         end
       end
@@ -51,13 +54,10 @@ RSpec.describe "User Activations", type: :request do
 
       context "when the current user has permission to activate the user" do
         context "when the user to be activated is inactive" do
-          it "redirects to the user list" do
+          it "redirects to the user list and activates the user" do
             post "/bo/users/#{inactive_user.id}/activate"
-            expect(response).to redirect_to(users_path)
-          end
 
-          it "activates the user" do
-            post "/bo/users/#{inactive_user.id}/activate"
+            expect(response).to redirect_to(users_path)
             expect(inactive_user.reload.active?).to eq(true)
           end
         end
@@ -65,6 +65,7 @@ RSpec.describe "User Activations", type: :request do
         context "when the user to be activated is already active" do
           it "redirects to the user list" do
             post "/bo/users/#{active_user.id}/activate"
+
             expect(response).to redirect_to(users_path)
           end
         end
@@ -75,6 +76,7 @@ RSpec.describe "User Activations", type: :request do
 
         it "redirects to a permission error" do
           post "/bo/users/#{inactive_user.id}/activate"
+
           expect(response).to redirect_to("/bo/pages/permission")
         end
       end

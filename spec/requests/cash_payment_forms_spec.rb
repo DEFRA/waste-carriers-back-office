@@ -77,7 +77,7 @@ RSpec.describe "CashPaymentForms", type: :request do
       it "redirects to the transient_registration page, creates a new payment and assigns the correct updated_by_user to the payment" do
         expected_payments_count = transient_registration.finance_details.payments.count + 1
 
-        post "/bo/resources/#{transient_registration._id}/payments/cash", cash_payment_form: params
+        post "/bo/resources/#{transient_registration._id}/payments/cash", params: { cash_payment_form: params }
 
         transient_registration.reload
 
@@ -96,7 +96,7 @@ RSpec.describe "CashPaymentForms", type: :request do
         it "renews the registration" do
           expected_expiry_date = registration.expires_on.to_date + 3.years
 
-          post "/bo/resources/#{transient_registration._id}/payments/cash", cash_payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments/cash", params: { cash_payment_form: params }
 
           actual_expiry_date = registration.reload.expires_on.to_date
 
@@ -114,7 +114,7 @@ RSpec.describe "CashPaymentForms", type: :request do
         it "does not renews the registration" do
           old_renewal_date = registration.expires_on
 
-          post "/bo/resources/#{transient_registration._id}/payments/cash", cash_payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments/cash", params: { cash_payment_form: params }
 
           expect(registration.reload.expires_on).to eq(old_renewal_date)
         end
@@ -130,7 +130,7 @@ RSpec.describe "CashPaymentForms", type: :request do
         it "renders the new template and does not create a new payment" do
           expected_payments_count = transient_registration.finance_details.payments.count
 
-          post "/bo/resources/#{transient_registration._id}/payments/cash", cash_payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments/cash", params: { cash_payment_form: params }
 
           expect(response).to render_template(:new)
           expect(transient_registration.reload.finance_details.payments.count).to eq(expected_payments_count)
@@ -147,7 +147,7 @@ RSpec.describe "CashPaymentForms", type: :request do
       it "redirects to the permissions error page and does not create a new payment" do
         expected_payments_count = transient_registration.finance_details.payments.count
 
-        post "/bo/resources/#{transient_registration._id}/payments/cash", cash_payment_form: params
+        post "/bo/resources/#{transient_registration._id}/payments/cash", params: { cash_payment_form: params }
 
         expect(response).to redirect_to("/bo/pages/permission")
         expect(transient_registration.reload.finance_details.payments.count).to eq(expected_payments_count)

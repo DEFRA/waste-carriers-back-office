@@ -86,7 +86,7 @@ RSpec.describe "WriteOffForms", type: :request do
           let(:registration) { create(:registration, :has_unpaid_order, :pending) }
 
           it "activates the registration" do
-            post resource_write_off_form_path(registration._id), params
+            post resource_write_off_form_path(registration._id), params: params
 
             registration.reload
 
@@ -99,7 +99,7 @@ RSpec.describe "WriteOffForms", type: :request do
           registration = renewing_registration.registration
           before_request_payments_count = registration.finance_details.payments.count
 
-          post resource_write_off_form_path(renewing_registration._id), params
+          post resource_write_off_form_path(renewing_registration._id), params: params
 
           transient_registrations_count = WasteCarriersEngine::RenewingRegistration.where(reg_identifier: renewing_registration.reg_identifier).count
           registration.reload
@@ -117,7 +117,7 @@ RSpec.describe "WriteOffForms", type: :request do
           it "generates a new payment, updates the registration balance, returns a 302 status and redirects to the registration finance details page" do
             before_request_payments_count = registration.finance_details.payments.count
 
-            post resource_write_off_form_path(registration._id), params
+            post resource_write_off_form_path(registration._id), params: params
 
             registration.reload
 
@@ -131,7 +131,7 @@ RSpec.describe "WriteOffForms", type: :request do
 
       context "when the request data are not valid" do
         it "returns a 200 status and renders the :new template" do
-          post resource_write_off_form_path(renewing_registration._id), {}
+          post resource_write_off_form_path(renewing_registration._id), params: {}
 
           expect(response).to have_http_status(200)
           expect(response).to render_template(:new)

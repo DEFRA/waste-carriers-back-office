@@ -68,7 +68,7 @@ RSpec.describe "NegativeChargeAdjustForms", type: :request do
         it "generates a new order and redirects to the finance details page with a 302" do
           expected_orders_count = renewing_registration.finance_details.orders.count + 1
 
-          post resource_negative_charge_adjust_form_path(renewing_registration._id), params
+          post resource_negative_charge_adjust_form_path(renewing_registration._id), params: params
 
           renewing_registration.reload
 
@@ -93,7 +93,7 @@ RSpec.describe "NegativeChargeAdjustForms", type: :request do
             registration = renewing_registration.registration
             previous_orders_count = registration.finance_details.orders.count
 
-            post resource_negative_charge_adjust_form_path(renewing_registration._id), params
+            post resource_negative_charge_adjust_form_path(renewing_registration._id), params: params
 
             registration.reload
 
@@ -106,7 +106,7 @@ RSpec.describe "NegativeChargeAdjustForms", type: :request do
 
       context "when the request data are not valid" do
         it "returns a 200 status and renders the :new template" do
-          post resource_negative_charge_adjust_form_path(renewing_registration._id), {}
+          post resource_negative_charge_adjust_form_path(renewing_registration._id), params: {}
 
           expect(response).to have_http_status(200)
           expect(response).to render_template(:new)

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  class RegistrationsController < ApplicationController
+  class RegistrationsController < ::ApplicationController
     def show
       registration = WasteCarriersEngine::Registration.find_by(reg_identifier: params[:id])
 

@@ -30,6 +30,7 @@ RSpec.describe "Convictions", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/registrations/#{registration.reg_identifier}/convictions"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -37,6 +38,7 @@ RSpec.describe "Convictions", type: :request do
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
         get "/bo/registrations/#{registration.reg_identifier}/convictions"
+
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -66,6 +68,7 @@ RSpec.describe "Convictions", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -73,6 +76,7 @@ RSpec.describe "Convictions", type: :request do
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
         get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions"
+
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -101,6 +105,7 @@ RSpec.describe "Convictions", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/registrations/#{registration.reg_identifier}/convictions/begin-checks"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -108,6 +113,7 @@ RSpec.describe "Convictions", type: :request do
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
         get "/bo/registrations/#{registration.reg_identifier}/convictions/begin-checks"
+
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -137,6 +143,7 @@ RSpec.describe "Convictions", type: :request do
 
     it "redirects to the permissions error page" do
       get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/begin-checks"
+
       expect(response).to redirect_to("/bo/pages/permission")
     end
   end
@@ -144,6 +151,7 @@ RSpec.describe "Convictions", type: :request do
   context "when a user is not signed in" do
     it "redirects to the sign-in page" do
       get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions/begin-checks"
+
       expect(response).to redirect_to(new_user_session_path)
     end
   end

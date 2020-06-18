@@ -52,7 +52,7 @@ RSpec.describe "PaymentForms", type: :request do
         end
 
         it "redirects to the cash payment form" do
-          post "/bo/resources/#{transient_registration._id}/payments", payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments", params: { payment_form: params }
 
           expect(response).to redirect_to(new_resource_cash_payment_form_path(transient_registration._id))
         end
@@ -64,7 +64,7 @@ RSpec.describe "PaymentForms", type: :request do
         end
 
         it "redirects to the cheque payment form" do
-          post "/bo/resources/#{transient_registration._id}/payments", payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments", params: { payment_form: params }
 
           expect(response).to redirect_to(new_resource_cheque_payment_form_path(transient_registration._id))
         end
@@ -76,7 +76,7 @@ RSpec.describe "PaymentForms", type: :request do
         end
 
         it "redirects to the postal order payment form" do
-          post "/bo/resources/#{transient_registration._id}/payments", payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments", params: { payment_form: params }
 
           expect(response).to redirect_to(new_resource_postal_order_payment_form_path(transient_registration._id))
         end
@@ -88,7 +88,7 @@ RSpec.describe "PaymentForms", type: :request do
         end
 
         it "redirects to the bank transfer payment form" do
-          post "/bo/resources/#{transient_registration._id}/payments", payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments", params: { payment_form: params }
 
           expect(response).to redirect_to(new_resource_bank_transfer_payment_form_path(transient_registration._id))
         end
@@ -100,7 +100,7 @@ RSpec.describe "PaymentForms", type: :request do
         end
 
         it "redirects to the worldpay_missed payment form" do
-          post "/bo/resources/#{transient_registration._id}/payments", payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments", params: { payment_form: params }
 
           expect(response).to redirect_to(new_resource_worldpay_missed_payment_form_path(transient_registration._id))
         end
@@ -112,7 +112,7 @@ RSpec.describe "PaymentForms", type: :request do
         end
 
         it "renders the new template" do
-          post "/bo/resources/#{transient_registration._id}/payments", payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments", params: { payment_form: params }
 
           expect(response).to render_template(:new)
         end

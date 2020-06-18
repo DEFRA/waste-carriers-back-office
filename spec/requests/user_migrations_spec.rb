@@ -10,13 +10,10 @@ RSpec.describe "UserMigrations", type: :request do
         sign_in(user)
       end
 
-      it "renders the new template" do
+      it "renders the new template and returns a 200 response" do
         get "/bo/users/migrate"
-        expect(response).to render_template(:new)
-      end
 
-      it "returns a 200 response" do
-        get "/bo/users/migrate"
+        expect(response).to render_template(:new)
         expect(response).to have_http_status(200)
       end
     end
@@ -29,6 +26,7 @@ RSpec.describe "UserMigrations", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/users/migrate"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -41,15 +39,13 @@ RSpec.describe "UserMigrations", type: :request do
         sign_in(user)
       end
 
-      it "copies unmigrated backend users" do
+      it "copies unmigrated backend users and edirects to the results page" do
         agency_email = create(:agency_user).email
         matching_users_before_migration = User.where(email: agency_email).count
-        post "/bo/users/migrate"
-        expect(User.where(email: agency_email).count).to eq(matching_users_before_migration + 1)
-      end
 
-      it "redirects to the results page" do
         post "/bo/users/migrate"
+
+        expect(User.where(email: agency_email).count).to eq(matching_users_before_migration + 1)
         # We use include here so we don't have to check the details of the params
         expect(response.location).to include(user_migration_results_path)
       end
@@ -61,15 +57,13 @@ RSpec.describe "UserMigrations", type: :request do
         sign_in(user)
       end
 
-      it "does not copy unmigrated backend users" do
+      it "does not copy unmigrated backend users and redirects to the permissions error page" do
         create(:agency_user)
         number_of_back_office_users = User.count
-        post "/bo/users/migrate"
-        expect(User.count).to eq(number_of_back_office_users)
-      end
 
-      it "redirects to the permissions error page" do
         post "/bo/users/migrate"
+
+        expect(User.count).to eq(number_of_back_office_users)
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -82,13 +76,10 @@ RSpec.describe "UserMigrations", type: :request do
         sign_in(user)
       end
 
-      it "renders the new template" do
+      it "renders the new template and returns a 200 response" do
         get "/bo/users/migrate/results"
-        expect(response).to render_template(:results)
-      end
 
-      it "returns a 200 response" do
-        get "/bo/users/migrate/results"
+        expect(response).to render_template(:results)
         expect(response).to have_http_status(200)
       end
 
@@ -101,18 +92,11 @@ RSpec.describe "UserMigrations", type: :request do
           { migration_results: migration_results }
         end
 
-        it "displays an overview of results" do
-          get "/bo/users/migrate/results", params
+        it "displays an overview of results and displays the emails and roles on the page" do
+          get "/bo/users/migrate/results", params: params
+
           expect(response.body).to include("1 user was added to the back office")
-        end
-
-        it "displays the emails on the page" do
-          get "/bo/users/migrate/results", params
           expect(response.body).to include("bar@example.com")
-        end
-
-        it "displays the roles on the page" do
-          get "/bo/users/migrate/results", params
           expect(response.body).to include("agency with refund")
         end
       end
@@ -120,6 +104,7 @@ RSpec.describe "UserMigrations", type: :request do
       context "when there no are results" do
         it "displays an error" do
           get "/bo/users/migrate/results"
+
           expect(response.body).to include("No results")
         end
       end
@@ -133,6 +118,7 @@ RSpec.describe "UserMigrations", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/users/migrate/results"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end

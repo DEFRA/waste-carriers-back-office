@@ -2,7 +2,7 @@
 
 module Api
   class LoadSeededDataService < ::WasteCarriersEngine::BaseService
-    def run(seed)
+    def run(**seed)
       @seed = seed
 
       seed_registration

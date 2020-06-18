@@ -25,8 +25,9 @@ RSpec.describe "Registrations API", type: :request do
     it "generates a new registration, set an expire date and returns a json containing its info" do
       allow(Rails.configuration).to receive(:expires_after).and_return(1)
       expected_registrations_count = WasteCarriersEngine::Registration.count + 1
+      headers = { "CONTENT_TYPE" => "application/json" }
 
-      post "/bo/api/registrations", data, format: :json
+      post "/bo/api/registrations", params: data, headers: headers
 
       response_info = JSON.parse(response.body)
       expect(response_info).to have_key("reg_identifier")

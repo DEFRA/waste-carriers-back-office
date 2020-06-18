@@ -44,6 +44,7 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/resources/#{transient_registration._id}/payments/worldpay-missed"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -72,7 +73,7 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
         old_payments_count = registration.finance_details.payments.count
         expected_expiry_date = registration.expires_on.to_date + 3.years
 
-        post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
+        post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", params: { worldpay_missed_payment_form: params }
 
         registration.reload
         actual_expiry_date = registration.expires_on.to_date
@@ -87,7 +88,7 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
         it "redirects to the registration's finance details page, creates a new payment and assigns the correct updated_by_user to the payment" do
           old_payments_count = registration.finance_details.payments.count
 
-          post "/bo/resources/#{registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
+          post "/bo/resources/#{registration._id}/payments/worldpay-missed", params: { worldpay_missed_payment_form: params }
 
           registration.reload
 
@@ -105,7 +106,7 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
         it "does not renew the registration and redirects to the transient registration's finance details page" do
           old_renewal_date = registration.expires_on
 
-          post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", params: { worldpay_missed_payment_form: params }
 
           expect(registration.reload.expires_on).to eq(old_renewal_date)
           expect(response).to redirect_to(resource_finance_details_path(transient_registration._id))
@@ -122,7 +123,7 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
         it "renders the new template and does not create a new payment" do
           old_payments_count = transient_registration.finance_details.payments.count
 
-          post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
+          post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", params: { worldpay_missed_payment_form: params }
 
           expect(response).to render_template(:new)
           expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count)
@@ -139,7 +140,7 @@ RSpec.describe "WorldpayMissedPaymentForms", type: :request do
       it "redirects to the permissions error page and does not create a new payment" do
         old_payments_count = transient_registration.finance_details.payments.count
 
-        post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", worldpay_missed_payment_form: params
+        post "/bo/resources/#{transient_registration._id}/payments/worldpay-missed", params: { worldpay_missed_payment_form: params }
 
         expect(response).to redirect_to("/bo/pages/permission")
         expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count)

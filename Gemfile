@@ -1,19 +1,15 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-ruby "2.4.2"
+ruby "2.7.1"
 
-# Use CoffeeScript for .coffee assets and views
-gem "coffee-rails", "~> 4.1.0"
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 2.0"
 # Use jquery as the JavaScript library
 gem "jquery-rails"
 # Use MongoDB as the database, and mongoid as our ORM for it. This version of
 # mongoid supports MongoDb 3.6
-gem "mongoid", "~> 5.2.0"
+gem "mongoid"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
-gem "rails", "~> 4.2.11"
+gem "rails", "~> 6.0.3"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -55,7 +51,7 @@ gem "defra_ruby_aws", "~> 0.2.0"
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",
-    branch: "master"
+    branch: "rails-upgrade"
 
 # Use the defra ruby mocks engine to add support for mocking external services
 # in live environment. Essentially with this gem added and enabled the app
@@ -65,7 +61,9 @@ gem "waste_carriers_engine",
 # With the environment properly configured, when any app in an environment needs
 # to call Companies House, instead it will call this app which will mock the end
 # point and return the response expected.
-gem "defra_ruby_mocks", "~> 1.2"
+gem "defra_ruby_mocks",
+    git: "https://github.com/DEFRA/defra-ruby-mocks",
+    branch: "rails-upgrade"
 
 # Allows us to automatically generate the change log from the tags, issues,
 # labels and pull requests on GitHub. Added as a dependency so all dev's have
@@ -103,19 +101,21 @@ group :development, :test do
   # and test
   gem "dotenv-rails"
   # Project uses RSpec as its test framework
-  gem "rspec-rails", "~> 3.6"
+  gem "rspec-rails"
 end
 
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem "web-console", "~> 2.0"
+  gem "web-console"
 end
 
 group :test do
   gem "database_cleaner"
   gem "factory_bot_rails"
+  gem "rails-controller-testing"
+
   # Generates a test coverage report on every `bundle exec rspec` call. We use
   # the output to feed SonarCloud's stats and analysis
   gem "simplecov", "~> 0.17.1", require: false

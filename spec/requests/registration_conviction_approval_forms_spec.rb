@@ -29,6 +29,7 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
 
       it "redirects to the permissions error page" do
         get "/bo/registrations/#{registration.reg_identifier}/convictions/approve"
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end
@@ -48,7 +49,7 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
       end
 
       it "redirects to the convictions page and updates the revoked_reason, workflow_state, and 'confirmed_' attributes" do
-        post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+        post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
 
         expect(response).to redirect_to(convictions_path)
 
@@ -61,7 +62,8 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
 
       context "when there is no pending payment" do
         it "activates the registration" do
-          post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+          post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
+
           expect(registration.reload).to be_active
         end
       end
@@ -70,7 +72,8 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
         let(:registration) { create(:registration, :requires_conviction_check, :pending_payment) }
 
         it "does not activate the registration" do
-          post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+          post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
+
           expect(registration.reload).to be_pending
         end
       end
@@ -84,7 +87,7 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
         end
 
         it "renders the new template, does not update the revoked_reason, and does not update the conviction_sign_off" do
-          post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+          post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
 
           expect(response).to render_template(:new)
           expect(registration.reload.metaData.revoked_reason).to_not eq(params[:revoked_reason])
@@ -106,7 +109,7 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
       end
 
       it "redirects to the permissions error page, does not update the revoked_reason, does not update the conviction_sign_off" do
-        post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", conviction_approval_form: params
+        post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
 
         expect(response).to redirect_to("/bo/pages/permission")
         expect(registration.reload.metaData.revoked_reason).to_not eq(params[:revoked_reason])

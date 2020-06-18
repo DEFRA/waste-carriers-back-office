@@ -53,7 +53,7 @@ Apex Limited,,11111111,ABC,99999999
       end
 
       it "redirects to the results page and displays a flash message" do
-        post "/bo/import-convictions", params
+        post "/bo/import-convictions", params: params
 
         expect(response).to redirect_to("/bo")
         expect(request.flash[:success]).to eq("Convictions data has been updated successfully. 3 records in database.")
@@ -63,7 +63,7 @@ Apex Limited,,11111111,ABC,99999999
         let(:params) { { data: "foo" } }
 
         it "redirects to the :new template and displays an error message" do
-          post "/bo/import-convictions", params
+          post "/bo/import-convictions", params: params
 
           expect(response).to render_template(:new)
           expect(request.flash[:error]).to eq("Error occurred while importing data: Invalid headers")
@@ -78,7 +78,8 @@ Apex Limited,,11111111,ABC,99999999
       end
 
       it "redirects to the permissions error page" do
-        post "/bo/import-convictions", params
+        post "/bo/import-convictions", params: params
+
         expect(response).to redirect_to("/bo/pages/permission")
       end
     end

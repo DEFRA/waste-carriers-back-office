@@ -65,7 +65,7 @@ RSpec.describe "ChargeAdjustForms", type: :request do
           end
 
           it "redirects to the positive charge adjust page with a 302" do
-            post resource_charge_adjust_form_path(renewing_registration._id), params
+            post resource_charge_adjust_form_path(renewing_registration._id), params: params
 
             expect(response).to have_http_status(302)
             expect(response).to redirect_to(resource_positive_charge_adjust_form_path(renewing_registration._id))
@@ -82,7 +82,7 @@ RSpec.describe "ChargeAdjustForms", type: :request do
           end
 
           it "redirects to the negative charge adjust page with a 302" do
-            post resource_charge_adjust_form_path(renewing_registration._id), params
+            post resource_charge_adjust_form_path(renewing_registration._id), params: params
 
             expect(response).to have_http_status(302)
             expect(response).to redirect_to(resource_negative_charge_adjust_form_path(renewing_registration._id))
@@ -92,7 +92,7 @@ RSpec.describe "ChargeAdjustForms", type: :request do
 
       context "when the request data are not valid" do
         it "returns a 200 status and renders the :new template" do
-          post resource_charge_adjust_form_path(renewing_registration._id), {}
+          post resource_charge_adjust_form_path(renewing_registration._id), params: {}
 
           expect(response).to have_http_status(200)
           expect(response).to render_template(:new)

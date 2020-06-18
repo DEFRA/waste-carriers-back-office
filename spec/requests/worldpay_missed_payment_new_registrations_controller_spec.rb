@@ -53,6 +53,7 @@ RSpec.describe "WorldpayMissedPaymentNewRegistrations", type: :request do
 
       it "renders the permissions error page" do
         get "/bo/resources/#{_id}/missed-worldpay-payment-new-registration"
+
         expect(response).to redirect_to "/bo/pages/permission"
       end
     end

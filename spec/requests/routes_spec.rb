@@ -8,13 +8,10 @@ RSpec.describe "Root", type: :request do
       sign_in(create(:user))
     end
 
-    it "redirects to /bo" do
+    it "redirects to /bo and returns a 302 response" do
       get "/"
-      expect(response).to redirect_to(bo_path)
-    end
 
-    it "returns a 302 (redirect) response" do
-      get "/"
+      expect(response).to redirect_to(bo_path)
       expect(response).to have_http_status(302)
     end
   end
@@ -23,13 +20,10 @@ RSpec.describe "Root", type: :request do
     context "when the user is not signed in" do
       let(:registration) { create(:registration, reg_identifier: "CBDU12345") }
 
-      it "returns a 200 response" do
+      it "returns a 200 response and redirects the user to the sign in page" do
         get "/bo/CBDU12345/renew"
-        expect(response).to have_http_status(302)
-      end
 
-      it "redirects the user to the sign in page" do
-        get "/bo/CBDU12345/renew"
+        expect(response).to have_http_status(302)
         expect(response).to redirect_to(new_user_session_path)
       end
 
@@ -39,7 +33,8 @@ RSpec.describe "Root", type: :request do
         renew_path = "/bo/#{reg_identifier}/renew"
 
         get renew_path
-        post user_session_path, user: { email: user.email, password: user.password }
+        post user_session_path, params: { user: { email: user.email, password: user.password } }
+
         expect(response).to redirect_to(renew_path)
       end
     end
@@ -55,13 +50,10 @@ RSpec.describe "Root", type: :request do
         sign_in(user)
       end
 
-      it "returns a 200 response" do
+      it "returns a 200 response and redirects the user to the renewal start page" do
         get "/bo/#{registration.reg_identifier}/renew"
-        expect(response).to have_http_status(200)
-      end
 
-      it "redirects the user to the renewal start page" do
-        get "/bo/#{registration.reg_identifier}/renew"
+        expect(response).to have_http_status(200)
         expect(response.body).to include("You are about to renew your registration")
       end
     end
@@ -76,6 +68,7 @@ RSpec.describe "Root", type: :request do
 
       it "returns a 302 (redirect) response" do
         get "/bo/#{registration.reg_identifier}/renew"
+
         expect(response).to have_http_status(302)
       end
     end

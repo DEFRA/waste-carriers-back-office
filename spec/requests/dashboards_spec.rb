@@ -10,13 +10,10 @@ RSpec.describe "Dashboards", type: :request do
         sign_in(user)
       end
 
-      it "renders the index template" do
+      it "renders the index template and returns a 200 response" do
         get "/bo"
-        expect(response).to render_template(:index)
-      end
 
-      it "returns a 200 response" do
-        get "/bo"
+        expect(response).to render_template(:index)
         expect(response).to have_http_status(200)
       end
 
@@ -26,14 +23,16 @@ RSpec.describe "Dashboards", type: :request do
             last_modified_renewal = create(:renewing_registration)
             link_to_renewal = renewing_registration_path(last_modified_renewal.reg_identifier)
 
-            get "/bo", term: last_modified_renewal.reg_identifier
+            get "/bo", params: { term: last_modified_renewal.reg_identifier }
+
             expect(response.body).to include(link_to_renewal)
           end
         end
 
         context "when there are no matches" do
           it "says there are no results" do
-            get "/bo", term: "foobarbaz"
+            get "/bo", params: { term: "foobarbaz" }
+
             expect(response.body).to include("No results")
           end
         end
@@ -45,6 +44,7 @@ RSpec.describe "Dashboards", type: :request do
 
       it "redirects to the deactivated page" do
         get "/bo"
+
         expect(response).to redirect_to("/bo/pages/deactivated")
       end
     end
@@ -52,6 +52,7 @@ RSpec.describe "Dashboards", type: :request do
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
         get "/bo"
+
         expect(response).to redirect_to(new_user_session_path)
       end
     end

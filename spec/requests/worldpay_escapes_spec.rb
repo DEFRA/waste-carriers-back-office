@@ -20,14 +20,10 @@ RSpec.describe "WorldpayEscapes", type: :request do
           transient_registration.update_attributes(workflow_state: "worldpay_form")
         end
 
-        it "redirects to the payment_summary_form" do
+        it "redirects to the payment_summary_form and updates the workflow_state" do
           get "/bo/resources/#{_id}/revert-to-payment-summary"
 
           expect(response).to redirect_to WasteCarriersEngine::Engine.routes.url_helpers.new_payment_summary_form_path(transient_registration.token)
-        end
-
-        it "updates the workflow_state" do
-          get "/bo/resources/#{_id}/revert-to-payment-summary"
           expect(transient_registration.reload.workflow_state).to eq("payment_summary_form")
         end
       end
@@ -62,6 +58,7 @@ RSpec.describe "WorldpayEscapes", type: :request do
 
       it "renders the permissions error page" do
         get "/bo/resources/#{_id}/revert-to-payment-summary"
+
         expect(response).to redirect_to "/bo/pages/permission"
       end
     end

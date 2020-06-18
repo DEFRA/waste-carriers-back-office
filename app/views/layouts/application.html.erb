@@ -1,6 +1,5 @@
 <% content_for(:head) do %>
   <%= stylesheet_link_tag "application", media: "all" %>
-  <!--[if IE 8]><%= stylesheet_link_tag "ie8" %><![endif]-->
   <%= csrf_meta_tags %>
 <% end %>
 
@@ -54,4 +53,4 @@
   </main>
 <% end %>
 
-<%= render file: "layouts/govuk_template" %>
+<%= render template: "layouts/govuk_template" %>
