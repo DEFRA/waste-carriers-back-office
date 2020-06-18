@@ -29,7 +29,6 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-
   # Sending e-mails is required for user management and registration e-mails
   config.action_mailer.default_url_options = { host: config.wcrs_back_office_url, protocol: "https" }
 
