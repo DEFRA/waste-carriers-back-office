@@ -6,7 +6,7 @@ module Api
   RSpec.describe LoadSeededDataService do
     describe ".run" do
       it "creates a new registration after assigning a new reg_identifier" do
-        seed = {"tier" => "UPPER"}
+        seed = { "tier" => "UPPER" }
 
         registration = double(:registration)
 
