@@ -6,7 +6,8 @@ module Api
   RSpec.describe LoadSeededDataService do
     describe ".run" do
       it "creates a new registration after assigning a new reg_identifier" do
-        seed = {}
+        seed = {"tier" => "UPPER"}
+
         registration = double(:registration)
 
         expect(WasteCarriersEngine::Registration).to receive(:find_or_create_by).and_return(registration)
