@@ -43,7 +43,6 @@ RSpec.describe "Registrations API", type: :request do
 
       it "generates a new registration with a CBDL number" do
         allow(Rails.configuration).to receive(:expires_after).and_return(1)
-        expected_registrations_count = WasteCarriersEngine::Registration.count + 1
 
         post "/bo/api/registrations", data, format: :json
 
