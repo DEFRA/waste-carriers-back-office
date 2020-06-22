@@ -12,9 +12,9 @@ module Api
 
     def seed_registration
       @seed["reg_identifier"] = reg_identifier
-      @seed["expires_on"] = Rails.configuration.expires_after.years.from_now
+      @seed["expires_on"] = Rails.configuration.expires_after.years.from_now unless @seed["custom_expire"]
 
-      WasteCarriersEngine::Registration.find_or_create_by(@seed.except("_id"))
+      WasteCarriersEngine::Registration.find_or_create_by(@seed.except(*%w[_id custom_expire]))
     end
 
     def reg_identifier
@@ -22,7 +22,7 @@ module Api
     end
 
     def generate_reg_identifier
-      tier_identifier = @seed["tier"] == "lower" ? "L" : "U"
+      tier_identifier = @seed["tier"].downcase == "lower" ? "L" : "U"
       unique_identifier = ::WasteCarriersEngine::GenerateRegIdentifierService.run.to_s
 
       "CBD#{tier_identifier}#{unique_identifier}"

@@ -1,0 +1,157 @@
+{
+    "tier" : "UPPER",
+    "registrationType" : "carrier_dealer",
+    "businessType" : "limitedCompany",
+    "otherBusinesses" : "no",
+    "constructionWaste" : "yes",
+    "companyName" : "UT Company limited",
+    "firstName" : "Bob",
+    "lastName" : "Carolgees",
+    "phoneNumber" : "012345678",
+    "contactEmail" : "user@example.com",
+    "accountEmail" : "user@example.com",
+    "declaredConvictions" : "no",
+    "declaration" : "1",
+    "metaData" : {
+        "dateRegistered" : "2018-05-14T10:38:17.311Z",
+        "anotherString" : "userDetailAddedAtRegistration",
+        "lastModified" : "2018-05-14T10:38:22.692Z",
+        "dateActivated" : "2018-05-14T10:38:22.692Z",
+        "status" : "ACTIVE",
+        "route" : "DIGITAL",
+        "distance" : "n/a"
+    },
+    "financeDetails" : {
+        "orders" : [
+            {
+                "orderId" : "1526294297",
+                "orderItems" : [
+                    {
+                        "amount" : 15400,
+                        "currency" : "GBP",
+                        "description" : "Initial Registration",
+                        "reference" : "",
+                        "type" : "NEW"
+                    },
+                    {
+                        "amount" : 1000,
+                        "currency" : "GBP",
+                        "description" : "2x Copy cards",
+                        "reference" : "",
+                        "type" : "COPY_CARDS"
+                    }
+                ],
+                "orderCode" : "1526294297",
+                "paymentMethod" : "ONLINE",
+                "merchantId" : "EASERRSIMECOM",
+                "totalAmount" : 16400,
+                "currency" : "GBP",
+                "dateCreated" : "2018-05-14T10:38:18.000Z",
+                "worldPayStatus" : "AUTHORISED",
+                "dateLastUpdated" : "2018-05-14T10:38:22.826Z",
+                "updatedByUser" : "user@example.com",
+                "description" : "New Waste Carrier Registration: CBDU4 for UT Company limited, Plus 2 copy cards"
+            }
+        ],
+        "payments" : [
+            {
+                "orderKey" : "1526294297",
+                "amount" : 16400,
+                "currency" : "GBP",
+                "mac_code" : "fa5f24ee0cb5cb6bc739fc7834ad074b",
+                "dateReceived" : "2018-05-14T10:38:22.675Z",
+                "dateEntered" : "2018-05-14T10:38:22.679Z",
+                "registrationReference" : "Worldpay",
+                "worldPayPaymentStatus" : "AUTHORISED",
+                "updatedByUser" : "user@example.com",
+                "comment" : "Paid via Worldpay",
+                "paymentType" : "WORLDPAY"
+            }
+        ],
+        "balance" : 0
+    },
+    "reg_uuid" : "MEhGfN-GH-2tPVdeqZmbQA",
+    "company_no" : "00445790",
+    "addresses" : [
+        {
+            "uprn" : "200000567267",
+            "addressType" : "REGISTERED",
+            "addressMode" : "address-results",
+            "houseNumber" : "ENVIRONMENT AGENCY",
+            "addressLine1" : "BOW BRIDGE CLOSE",
+            "townCity" : "ROTHERHAM",
+            "postcode" : "BS1 5AH",
+            "country" : "",
+            "dependentLocality" : "",
+            "dependentThoroughfare" : "",
+            "administrativeArea" : "ROTHERHAM",
+            "localAuthorityUpdateDate" : "",
+            "royalMailUpdateDate" : "",
+            "easting" : "442265",
+            "northing" : "391948",
+            "location" : {
+                "lat" : 53.410015,
+                "lon" : -1.339531
+            }
+        },
+        {
+            "addressType" : "POSTAL",
+            "houseNumber" : "ENVIRONMENT AGENCY",
+            "addressLine1" : "BOW BRIDGE CLOSE",
+            "addressLine2" : "",
+            "addressLine3" : "",
+            "addressLine4" : "",
+            "townCity" : "ROTHERHAM",
+            "postcode" : "BS1 5AH",
+            "country" : "",
+            "firstName" : "Bob",
+            "lastName" : "Carolgees"
+        }
+    ],
+    "key_people" : [
+        {
+            "position" : "Director",
+            "first_name" : "Rigoberto",
+            "last_name" : "Mohr",
+            "dob" : "1984-05-01T00:00:00.000Z",
+            "person_type" : "KEY",
+            "conviction_search_result" : {
+                "match_result" : "NO",
+                "searched_at" : "2018-05-14T10:37:54.908Z",
+                "confirmed" : "no"
+            }
+        },
+        {
+            "position" : "Director",
+            "first_name" : "Rosalia",
+            "last_name" : "Mitchell",
+            "dob" : "1984-05-01T00:00:00.000Z",
+            "person_type" : "KEY",
+            "conviction_search_result" : {
+                "match_result" : "NO",
+                "searched_at" : "2018-05-14T10:37:56.303Z",
+                "confirmed" : "no"
+            }
+        },
+        {
+            "position" : "Director",
+            "first_name" : "Haleigh",
+            "last_name" : "Hickle",
+            "dob" : "1984-05-01T00:00:00.000Z",
+            "person_type" : "KEY",
+            "conviction_search_result" : {
+                "match_result" : "NO",
+                "searched_at" : "2018-05-14T10:37:57.529Z",
+                "confirmed" : "no"
+            }
+        }
+    ],
+    "copy_cards" : "2",
+    "custom_expire" : "true",
+    "expires_on" : "2021-05-14T10:38:22.692Z",
+    "conviction_search_result" : {
+        "match_result" : "NO",
+        "searched_at" : "2018-05-14T10:37:50.372Z",
+        "confirmed" : "no"
+    }
+}
