@@ -51,7 +51,7 @@ RSpec.describe "Registrations API", type: :request do
       end
     end
 
-    context "when the custom expire is set" do
+    context "when `expires_on` is set" do
       let(:data) { File.read("#{Rails.root}/spec/support/fixtures/expire_set_registration_seed.json") }
 
       it "generates a new registration without overriding the expires_on date value" do
