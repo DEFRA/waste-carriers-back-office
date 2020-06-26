@@ -4,6 +4,10 @@ require "rails_helper"
 
 RSpec.describe TransientRegistrationCleanupService do
   describe ".run" do
+    before do
+      allow(Rails.configuration).to receive(:max_transient_registration_age_days).and_return("30")
+    end
+
     let(:transient_registration) { create(:new_registration) }
     let(:token) { transient_registration.token }
 

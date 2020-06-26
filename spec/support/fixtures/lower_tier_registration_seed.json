@@ -1,5 +1,5 @@
 {
-    "tier" : "UPPER",
+    "tier" : "LOWER",
     "registrationType" : "carrier_dealer",
     "businessType" : "limitedCompany",
     "otherBusinesses" : "no",
@@ -147,6 +147,7 @@
         }
     ],
     "copy_cards" : "2",
+    "expires_on" : "2021-05-14T10:38:22.692Z",
     "conviction_search_result" : {
         "match_result" : "NO",
         "searched_at" : "2018-05-14T10:37:50.372Z",

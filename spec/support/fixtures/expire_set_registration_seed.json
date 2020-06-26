@@ -12,6 +12,7 @@
     "accountEmail" : "user@example.com",
     "declaredConvictions" : "no",
     "declaration" : "1",
+    "expires_on" : "2021-05-14T10:38:22.692Z",
     "metaData" : {
         "dateRegistered" : "2018-05-14T10:38:17.311Z",
         "anotherString" : "userDetailAddedAtRegistration",
