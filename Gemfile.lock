@@ -92,7 +92,7 @@ GEM
     aws-eventstream (1.1.0)
     aws-healthcheck (1.0.1)
       rails (>= 3.0)
-   aws-partitions (1.335.0)
+    aws-partitions (1.335.0)
     aws-sdk-core (3.102.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
@@ -128,7 +128,7 @@ GEM
       rest-client (~> 2.0)
     defra_ruby_alert (2.0.0)
       airbrake
-    defra_ruby_aws (0.2.0)
+    defra_ruby_aws (0.3.0)
       aws-sdk-s3
     defra_ruby_email (1.0.0)
       rails (~> 6.0.3.1)
@@ -433,7 +433,7 @@ DEPENDENCIES
   aws-healthcheck
   cancancan (~> 1.10)
   database_cleaner
-  defra_ruby_aws (~> 0.2.0)
+  defra_ruby_aws (~> 0.3.0)
   defra_ruby_mocks
   defra_ruby_style
   devise (>= 4.4.3)
