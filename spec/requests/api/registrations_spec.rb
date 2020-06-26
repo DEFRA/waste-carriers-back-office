@@ -44,8 +44,9 @@ RSpec.describe "Registrations API", type: :request do
 
       it "generates a new registration with a CBDL number" do
         allow(Rails.configuration).to receive(:expires_after).and_return(1)
+        headers = { "CONTENT_TYPE" => "application/json" }
 
-        post "/bo/api/registrations", data, format: :json
+        post "/bo/api/registrations", params: data, headers: headers
 
         response_info = JSON.parse(response.body)
         expect(response_info["reg_identifier"]).to start_with("CBDL")
@@ -57,8 +58,9 @@ RSpec.describe "Registrations API", type: :request do
 
       it "generates a new registration without overriding the expires_on date value" do
         expected_registrations_count = WasteCarriersEngine::Registration.count + 1
+        headers = { "CONTENT_TYPE" => "application/json" }
 
-        post "/bo/api/registrations", data, format: :json
+        post "/bo/api/registrations", params: data, headers: headers
 
         response_info = JSON.parse(response.body)
         registration = WasteCarriersEngine::Registration.find_by reg_identifier: response_info["reg_identifier"]
