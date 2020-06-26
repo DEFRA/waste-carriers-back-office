@@ -51,7 +51,7 @@ gem "defra_ruby_aws", "~> 0.2.0"
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",
-    branch: "rails-upgrade"
+    branch: "master"
 
 # Use the defra ruby mocks engine to add support for mocking external services
 # in live environment. Essentially with this gem added and enabled the app
@@ -61,9 +61,7 @@ gem "waste_carriers_engine",
 # With the environment properly configured, when any app in an environment needs
 # to call Companies House, instead it will call this app which will mock the end
 # point and return the response expected.
-gem "defra_ruby_mocks",
-    git: "https://github.com/DEFRA/defra-ruby-mocks",
-    branch: "rails-upgrade"
+gem "defra_ruby_mocks"
 
 # Allows us to automatically generate the change log from the tags, issues,
 # labels and pull requests on GitHub. Added as a dependency so all dev's have
