@@ -2,6 +2,7 @@
 
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
+  mount DefraRubyFeatures::Engine => "/bo/features"
 
   root to: "application#redirect_root_to_dashboard"
 

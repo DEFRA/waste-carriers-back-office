@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/DEFRA/defra-ruby-features
+  revision: 4d94a5c259067b6e706dbda673d1e035ccd119cf
+  branch: main
+  specs:
+    defra-ruby-features (0.1.0)
+      rails (~> 6.0.3, >= 6.0.3.2)
+
+GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
   revision: 1f748a1deb3678bbc645c6fe814a8afd470cc9fc
   branch: main
@@ -92,7 +100,7 @@ GEM
     aws-eventstream (1.1.0)
     aws-healthcheck (1.0.1)
       rails (>= 3.0)
-    aws-partitions (1.335.0)
+    aws-partitions (1.336.0)
     aws-sdk-core (3.102.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
@@ -101,7 +109,7 @@ GEM
     aws-sdk-kms (1.35.0)
       aws-sdk-core (~> 3, >= 3.99.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.71.1)
+    aws-sdk-s3 (1.72.0)
       aws-sdk-core (~> 3, >= 3.102.1)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
@@ -433,6 +441,7 @@ DEPENDENCIES
   aws-healthcheck
   cancancan (~> 1.10)
   database_cleaner
+  defra-ruby-features!
   defra_ruby_aws (~> 0.3.0)
   defra_ruby_mocks
   defra_ruby_style
