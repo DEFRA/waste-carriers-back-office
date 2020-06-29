@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "defra_ruby_features"
 
 DefraRubyFeatures.configure do |configuration|
