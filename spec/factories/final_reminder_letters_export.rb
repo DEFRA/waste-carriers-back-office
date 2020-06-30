@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :final_reminder_letters_export, class: FinalReminderLettersExport do
-    created_on { Date.today }
+    expires_on { 90.days.from_now }
     number_of_letters { 0 }
 
     trait :printed do

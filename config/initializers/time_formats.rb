@@ -12,3 +12,5 @@ Time::DATE_FORMATS[:day_month_year] = "%d %B %Y"
 Time::DATE_FORMATS[:year_month_day_hyphens] = "%Y-%m-%d"
 # For example: 2019-11-19T00:00Z
 Time::DATE_FORMATS[:calendar_date_and_local_time] = "%FT%H:%MZ"
+# For example: 20191119
+Date::DATE_FORMATS[:plain_year_month_day] = "%Y%m%d"

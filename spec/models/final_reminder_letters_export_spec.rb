@@ -6,8 +6,8 @@ RSpec.describe FinalReminderLettersExport, type: :model do
   subject(:final_reminder_letters_export) { create(:final_reminder_letters_export) }
 
   describe "Validations" do
-    it "validates uniqueness of created_on" do
-      invalid_record = build(:final_reminder_letters_export, created_on: final_reminder_letters_export.created_on)
+    it "validates uniqueness of expires_on" do
+      invalid_record = build(:final_reminder_letters_export, expires_on: final_reminder_letters_export.expires_on)
 
       expect(invalid_record).to_not be_valid
     end

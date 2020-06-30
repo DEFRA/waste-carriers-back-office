@@ -4,7 +4,12 @@ namespace :letters do
   namespace :export do
     desc "Generate a bulk export PDF file of final renewal reminder letters"
     task final_reminders: :environment do
-      expires_on = WasteCarriersBackOffice::Application.config.final_reminder_letters_exports_expires_in.to_i.days.from_now
+      expires_on = WasteCarriersBackOffice::Application
+        .config
+        .final_reminder_letters_exports_expires_in
+        .to_i
+        .days
+        .from_now
 
       FinalReminderLettersExport.find_or_create_by(
         expires_on: expires_on

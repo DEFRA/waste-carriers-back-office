@@ -50,7 +50,6 @@ every :day, at: (ENV["EXPORT_SERVICE_FINAL_REMINDER_LETTERS_TIME"] || "00:45"), 
   rake "letters:export:final_reminders"
 end
 
-
 # This is the registration exemptions expiry job which will collect all active upper tier
 # registrations that have an expiry date in the past and will set their state to `EXPIRED`s
 every :day, at: (ENV["EXPIRE_REGISTRATION_EXEMPTION_RUN_TIME"] || "20:00"), roles: [:db] do

@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>WEX bulk non-AD final reminder letters</title>
+  <meta name="description" content="Waste Exemptions confirmation letter">
+  <meta name="author" content="Environment Agency">
+  <%= wicked_pdf_stylesheet_link_tag("letters") %>
+</head>
+
+<body>
+  <% presenters.each_with_index do |presenter, index| %>
+    <!-- We don't want the bulk to fail if a single render fails -->
+    <%=
+      begin
+        render "final_reminder_letters/final_reminder_letter_content", presenter: presenter
+      rescue StandardError => e
+        Airbrake.notify e, registration_reference: presenter.reference
+        Rails.logger.error "Generate AD bulk letters render error for #{presenter.reference}:\n#{e}"
+        ""
+      end
+    %>
+  <% end %>
+</body>
+</html>

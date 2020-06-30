@@ -2,7 +2,7 @@
 
 class FinalReminderLettersExportCleanerService < ::WasteCarriersEngine::BaseService
   def run(older_than)
-    a = FinalReminderLettersExport
+    FinalReminderLettersExport
       .not_deleted
       .where(
         created_at:

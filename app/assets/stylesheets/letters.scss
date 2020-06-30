@@ -1,0 +1,140 @@
+/*
+ * CSS styles for Waste Exemptions printable letters.
+ *
+ * The C5 envelopes used by NCCC as of Sep 2016:
+ *   - Envelope size C5 is:  238 x 162mm
+ *   - Window size is: 100 x 40mm
+ *   - Window position:
+ *      - 64mm up from bottom
+ *      - 25mm from left edge (allow 27 for 2mm gap to left edge if paper moves all way
+ *        over in envelope
+ *
+ * IMPORTANT: seems like letter slips down in envelope. As postcode most important, decided
+ * to move address up 10mm.
+ */
+
+/* Set printer margins - works on IE11 but not all other browsers */
+
+@page {
+  margin: 1cm 1cm;
+}
+@media print {
+  .wel_warning {
+    display: none;
+  }
+}
+
+/*
+  Handle box-sizing while better addressing child elements:
+  http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+
+  From testing with the CSS this seems to prevent a grey line appearing on the
+  2nd page when there is just one exemption on the first page.
+*/
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: sans-serif, Arial, Helvetica;
+  font-size: 12pt;
+  line-height: 16pt;
+}
+
+/* General typography */
+body {
+  margin: 0cm 1.0cm 0cm 1.7cm;
+}
+h1 {
+  font-weight: bold;
+  font-size: 18pt;
+  margin-top: 1.5cm;
+  margin-bottom: 8pt;
+}
+h2 {
+  font-weight: bold;
+  font-size: 16pt;
+  margin-top: 20px;
+  margin-bottom: 4pt;
+  page-break-after: avoid;
+}
+
+#page_wrapper {
+  margin: 0;
+  margin-bottom: 20mm;
+  page-break-after: always;
+}
+
+p {
+  margin-bottom: 2pt;
+}
+p.sign_off {
+  margin-top: 20px;
+}
+
+/* Exemption table */
+table {
+  border: 1px solid #CCCCCC;
+  border-collapse: collapse;
+  width: 100%;
+}
+table td {
+  padding: 6px;
+  border: 1px solid #CCCCCC;
+}
+td.wel_exemption {
+  width: 70%;
+}
+td.wel_ex_date {
+  width: 30%;
+}
+
+/* lists */
+ul {
+  margin: 0 0 12pt 0.9em;
+}
+
+/* Logo - over to right */
+.wel_logo {
+  float: right;
+}
+
+/* Position for letter date */
+.wel_date {
+  height: 2.0cm;                 /* to help calculate address position */
+  border: 1px solid #FFFFFF;   /* hack to force correct height in IE */
+}
+.wel_date p {
+  margin-top: 1.0cm;
+}
+
+/* Position for address panel */
+.wel_address {
+  margin-top: 2.2cm;     /* printer margin + date height + this margin = 5.0cm window down from top plus 2mm leeway */
+  width: 10cm;           /* C5 envelope label size */
+  min-height: 4.0cm;     /* C5 envelope label size to stop rest of letter apearing */
+}
+.wel_address p {
+  font-size: 12pt;
+  line-height: 14pt;
+}
+
+/* Warning for instructions - does not print */
+.wel_warning {
+  border: 5px solid red;
+  color: red;
+  padding: 20px;
+  font-size: 14pt;
+  margin: 1em 0;
+  font-size: 14pt;
+}
+
+.wel_section {
+  page-break-inside: avoid;
+}

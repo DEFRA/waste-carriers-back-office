@@ -12,11 +12,11 @@ class FinalReminderLettersExport
 
   store_in collection: "final_reminder_letters_exports"
 
-  validates :created_on, uniqueness: true
+  validates :expires_on, uniqueness: true
 
   scope :not_deleted, -> { where.not(status: DELETED) }
 
-  field :created_on, type: Date
+  field :expires_on, type: Date
   field :file_name, type: String
   field :number_of_letters, type: Integer
   field :printed_by, type: String
@@ -68,6 +68,6 @@ class FinalReminderLettersExport
   end
 
   def bucket_name
-    WasteCarriersBackOffice::Application.config.final_reminder_letters_export_bucket_name
+    WasteCarriersBackOffice::Application.config.letters_export_bucket_name
   end
 end

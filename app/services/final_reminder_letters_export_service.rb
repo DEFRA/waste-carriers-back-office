@@ -10,7 +10,7 @@ class FinalReminderLettersExportService < ::WasteCarriersEngine::BaseService
 
     if registrations.any?
       File.open(file_path, "w:ASCII-8BIT") do |file|
-        file.write(ConfirmationLettersBulkPdfService.run(registrations))
+        file.write(FinalReminderLettersBulkPdfService.run(registrations))
       end
 
       load_file_to_aws_bucket
@@ -34,7 +34,7 @@ class FinalReminderLettersExportService < ::WasteCarriersEngine::BaseService
 
   def file_name
     @_file_name ||= lambda do
-      date = @final_reminder_letters_export.created_on.to_formatted_s(:plain_year_month_day)
+      date = @final_reminder_letters_export.expires_on.to_formatted_s(:plain_year_month_day)
 
       "final_reminder_letters_#{date}.pdf"
     end.call
@@ -42,18 +42,18 @@ class FinalReminderLettersExportService < ::WasteCarriersEngine::BaseService
 
   def registrations
     @_registrations ||= lambda do
-      from = @final_reminder_letters_export.created_on.beginning_of_day
-      to = @final_reminder_letters_export.created_on.end_of_day
+      from = @final_reminder_letters_export.expires_on.beginning_of_day
+      to = @final_reminder_letters_export.expires_on.end_of_day
 
       WasteCarriersEngine::Registration
-        .order(:reg_identifier)
+        .order_by(reg_identifier: "ASC")
         .not_in(contact_email: [WasteCarriersEngine.configuration.assisted_digital_email, nil, ""])
-        .where(created_at: from..to)
+        .where(expires_on: { :$lte => to, :$gte => from })
     end.call
   end
 
   def bucket_name
-    WasteCarriersBackOffice::Application.config.final_reminder_letters_export_bucket_name
+    WasteCarriersBackOffice::Application.config.letters_export_bucket_name
   end
 
   def record_content_created

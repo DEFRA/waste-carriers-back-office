@@ -61,6 +61,7 @@ module WasteCarriersBackOffice
     config.epr_export_filename = ENV["EPR_DAILY_REPORT_FILE_NAME"] || "waste_carriers_epr_daily_full"
     config.boxi_exports_bucket_name = ENV["AWS_BOXI_EXPORT_BUCKET"]
     config.boxi_exports_filename = ENV["BOXI_EXPORTS_FILENAME"] || "waste_carriers_boxi_daily_full"
+    config.letters_export_bucket_name = ENV["AWS_LETTERS_EXPORT_BUCKET"]
 
     # Companies House config
     config.companies_house_host = ENV["WCRS_COMPANIES_HOUSE_URL"] || "https://api.companieshouse.gov.uk/company/"
@@ -113,7 +114,6 @@ module WasteCarriersBackOffice
     config.second_renewal_email_reminder_days = ENV["SECOND_RENEWAL_EMAIL_REMINDER_DAYS"] || 28
 
     # Letters exports
-    config.final_reminder_letters_export_bucket_name = ENV["FINAL_REMINDER_LETTERS_EXPORT_BUCKET_NAME"]
     config.final_reminder_letters_exports_expires_in = ENV["FINAL_REMINDER_LETTERS_EXPORTS_EXPIRES_IN"] || 14
     config.final_reminder_letters_delete_records_in = ENV["FINAL_REMINDER_LETTERS_DELETE_RECORDS_IN"] || 7
 
