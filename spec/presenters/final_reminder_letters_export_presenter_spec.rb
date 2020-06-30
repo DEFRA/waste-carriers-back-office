@@ -44,9 +44,9 @@ RSpec.describe FinalReminderLettersExportPresenter do
     end
   end
 
-  describe "#created_date" do
+  describe "#expires_on_date" do
     it "returns a parsed date string" do
-      expect(presenter.created_date).to be_a(String)
+      expect(presenter.expires_on_date).to be_a(String)
     end
   end
 

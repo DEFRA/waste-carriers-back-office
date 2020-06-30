@@ -7,8 +7,8 @@ class FinalReminderLettersExportPresenter < ::WasteCarriersEngine::BasePresenter
     succeded? && number_of_letters&.positive?
   end
 
-  def created_date
-    @_created_date ||= created_on.to_formatted_s(:abbr_week_day_month)
+  def expires_on_date
+    @_expires_on_date ||= expires_on.to_formatted_s(:abbr_week_day_month)
   end
 
   def letters_label

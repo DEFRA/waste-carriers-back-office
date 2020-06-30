@@ -9,7 +9,7 @@
     <table class="govuk-table letters">
       <thead>
         <tr>
-          <th scope="col"><%= t(".table.heading.created_date") %></th>
+          <th scope="col"><%= t(".table.heading.expires_on_date") %></th>
           <th scope="col"><%= t(".table.heading.number_of_letters") %></th>
           <th scope="col"><%= t(".table.heading.printed") %></th>
         </tr>
@@ -20,9 +20,9 @@
           <tr>
             <td>
               <% if presenter.downloadable? %>
-                <%= link_to presenter.created_date, presenter.presigned_aws_url, { target: :blank } %>
+                <%= link_to presenter.expires_on_date, presenter.presigned_aws_url, { target: :blank } %>
               <% else %>
-                <%= presenter.created_date %>
+                <%= presenter.expires_on_date %>
               <% end %>
             </td>
             <td>
@@ -45,7 +45,7 @@
                   <%= button_tag(type: 'submit', class: "button-link") do %>
                     <%= t(".labels.submit") %>
                     <span class="visually-hidden">
-                      <%= t(".labels.create_date_for", created_date: presenter.created_date) %>
+                      <%= t(".labels.expires_on_date_for", expires_on_date: presenter.expires_on_date) %>
                     </span>
                   <% end %>
                 <% end %>

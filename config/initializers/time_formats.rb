@@ -14,3 +14,5 @@ Time::DATE_FORMATS[:year_month_day_hyphens] = "%Y-%m-%d"
 Time::DATE_FORMATS[:calendar_date_and_local_time] = "%FT%H:%MZ"
 # For example: 20191119
 Date::DATE_FORMATS[:plain_year_month_day] = "%Y%m%d"
+# For example: Mon 02 Dec
+Date::DATE_FORMATS[:abbr_week_day_month] = "%a %-d %b"

@@ -4,7 +4,7 @@ en:
       heading: "Final renewal reminder letters - Non AD"
       table:
         heading:
-          created_date: "Created date"
+          expires_on_date: "Expires on date"
           number_of_letters: "Number of letters"
           printed: "Printed"
         letters_label: "letter"
@@ -14,4 +14,4 @@ en:
         no_registrations: "No registrations"
         failed: "Letter generation failed - contact support"
         printed: "%{printed_by}, %{printed_on}"
-        create_date_for: "for %{created_date}"
+        expires_on_date_for: "for %{expires_on_date}"
