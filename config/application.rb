@@ -112,6 +112,11 @@ module WasteCarriersBackOffice
     config.first_renewal_email_reminder_days = ENV["FIRST_RENEWAL_EMAIL_REMINDER_DAYS"] || 42
     config.second_renewal_email_reminder_days = ENV["SECOND_RENEWAL_EMAIL_REMINDER_DAYS"] || 28
 
+    # Letters exports
+    config.final_reminder_letters_export_bucket_name = ENV["FINAL_REMINDER_LETTERS_EXPORT_BUCKET_NAME"]
+    config.final_reminder_letters_exports_expires_in = ENV["FINAL_REMINDER_LETTERS_EXPORTS_EXPIRES_IN"] || 14
+    config.final_reminder_letters_delete_records_in = ENV["FINAL_REMINDER_LETTERS_DELETE_RECORDS_IN"] || 7
+
     # Digital or assisted digital metaData.route value
     config.metadata_route = "ASSISTED_DIGITAL"
 

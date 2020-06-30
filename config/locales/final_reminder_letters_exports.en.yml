@@ -1,0 +1,17 @@
+en:
+  final_reminder_letters_exports:
+    index:
+      heading: "Final renewal reminder letters - Non AD"
+      table:
+        heading:
+          created_date: "Created date"
+          number_of_letters: "Number of letters"
+          printed: "Printed"
+        letters_label: "letter"
+      labels:
+        submit: "Mark as printed"
+        none_to_print: "None to print"
+        no_registrations: "No registrations"
+        failed: "Letter generation failed - contact support"
+        printed: "%{printed_by}, %{printed_on}"
+        create_date_for: "for %{created_date}"
