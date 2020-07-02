@@ -51,7 +51,7 @@ gem "defra_ruby_aws", "~> 0.3.0"
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",
-    branch: "master"
+    branch: "main"
 
 # Use the defra ruby mocks engine to add support for mocking external services
 # in live environment. Essentially with this gem added and enabled the app
