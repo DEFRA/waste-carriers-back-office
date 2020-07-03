@@ -5,6 +5,10 @@ RSpec.shared_examples "developer examples" do
     should be_able_to(:import_conviction_data, :all)
   end
 
+  it "should be able to toggle features" do
+    should be_able_to(:manage, WasteCarriersEngine::FeatureToggle)
+  end
+
   it "should not be able to charge adjust a resource" do
     should_not be_able_to(:charge_adjust, WasteCarriersEngine::RenewingRegistration)
     should_not be_able_to(:charge_adjust, WasteCarriersEngine::Registration)
