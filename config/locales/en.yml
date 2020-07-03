@@ -9,6 +9,7 @@ en:
         convictions: "Conviction checks"
         users: "Manage users"
         conviction_imports: "Import conviction data"
+        feature_toggles: "Toggle features"
   shared:
     conviction_search_result:
       match_result: "Match result"
