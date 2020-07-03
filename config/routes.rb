@@ -222,7 +222,7 @@ Rails.application.routes.draw do
 
   mount DefraRubyMocks::Engine => "/bo/mocks"
 
-  mount DefraRubyFeatures::Engine => "/bo/features"
+  mount DefraRubyFeatures::Engine => "/bo/features", as: "features_engine"
 
   mount WasteCarriersEngine::Engine => "/bo", as: "basic_app_engine"
 end
