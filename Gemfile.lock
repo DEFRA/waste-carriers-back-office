@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/defra-ruby-features
-  revision: 4d94a5c259067b6e706dbda673d1e035ccd119cf
-  branch: main
+  revision: 9c7d17dcb271cd3ff65a88a22afcfd10423e6aae
+  branch: remove-base-application-record
   specs:
     defra-ruby-features (0.1.0)
       rails (~> 6.0.3, >= 6.0.3.2)

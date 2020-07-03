@@ -57,7 +57,7 @@ gem "waste_carriers_engine",
 # manage feature toggle (create / update / delete) from the back-office.
 gem "defra-ruby-features",
     git: "https://github.com/DEFRA/defra-ruby-features",
-    branch: "main"
+    branch: "remove-base-application-record"
 
 # Use the defra ruby mocks engine to add support for mocking external services
 # in live environment. Essentially with this gem added and enabled the app
