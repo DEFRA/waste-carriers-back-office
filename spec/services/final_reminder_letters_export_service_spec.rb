@@ -24,7 +24,7 @@ RSpec.describe FinalReminderLettersExportService do
         described_class.run(final_reminder_letters_export)
 
         expect(final_reminder_letters_export.number_of_letters).to eq(3)
-        expect(final_reminder_letters_export).to be_succeded
+        expect(final_reminder_letters_export).to be_succeeded
       end
 
       context "when one registration is in an invalid state and a PDF cannot be generated for it" do
@@ -37,7 +37,7 @@ RSpec.describe FinalReminderLettersExportService do
           described_class.run(final_reminder_letters_export)
 
           expect(final_reminder_letters_export.number_of_letters).to eq(4)
-          expect(final_reminder_letters_export).to be_succeded
+          expect(final_reminder_letters_export).to be_succeeded
         end
       end
     end

@@ -4,7 +4,7 @@ class FinalReminderLettersExportPresenter < ::WasteCarriersEngine::BasePresenter
   include ActionView::Helpers::TextHelper
 
   def downloadable?
-    succeded? && number_of_letters&.positive?
+    succeeded? && number_of_letters&.positive?
   end
 
   def expires_on_date

@@ -11,8 +11,8 @@ RSpec.describe FinalReminderLettersExportPresenter do
       final_reminder_letters_export.status = status
     end
 
-    context "when the export succeded" do
-      let(:status) { :succeded }
+    context "when the export succeeded" do
+      let(:status) { :succeeded }
 
       before do
         final_reminder_letters_export.number_of_letters = number_of_letters
@@ -85,8 +85,8 @@ RSpec.describe FinalReminderLettersExportPresenter do
       end
     end
 
-    context "when the export succeded" do
-      let(:status) { :succeded }
+    context "when the export succeeded" do
+      let(:status) { :succeeded }
 
       context "when the export has been printed" do
         context "when the email is in the format name_surname" do

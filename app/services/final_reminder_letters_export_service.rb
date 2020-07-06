@@ -61,7 +61,7 @@ class FinalReminderLettersExportService < ::WasteCarriersEngine::BaseService
     @final_reminder_letters_export.file_name = file_name
 
     @final_reminder_letters_export.save!
-    @final_reminder_letters_export.succeded!
+    @final_reminder_letters_export.succeeded!
   end
 
   def record_content_errored

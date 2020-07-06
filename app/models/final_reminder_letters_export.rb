@@ -5,7 +5,7 @@ class FinalReminderLettersExport
   include Mongoid::Timestamps
 
   STATES = [
-    SUCCEDED = "succeded",
+    SUCCEEDED = "succeeded",
     FAILED = "failed",
     DELETED = "deleted"
   ].freeze
@@ -21,7 +21,7 @@ class FinalReminderLettersExport
   field :number_of_letters, type: Integer
   field :printed_by, type: String
   field :printed_on, type: Date
-  field :status, type: String, default: SUCCEDED
+  field :status, type: String, default: SUCCEEDED
 
   def export!
     FinalReminderLettersExportService.run(self)
@@ -45,12 +45,12 @@ class FinalReminderLettersExport
     status == DELETED
   end
 
-  def succeded?
-    status == SUCCEDED
+  def succeeded?
+    status == SUCCEEDED
   end
 
-  def succeded!
-    update(status: SUCCEDED)
+  def succeeded!
+    update(status: SUCCEEDED)
   end
 
   def failed?
