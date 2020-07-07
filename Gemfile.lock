@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 344bdb7297679f77c6ba665f6237032c9a13ed86
+  revision: 1cf393909e5d8de68953929a917c618437c1a877
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -147,7 +147,7 @@ GEM
       sprockets (~> 3.7.2)
     defra_ruby_style (0.2.2)
       rubocop (~> 0.82)
-    defra_ruby_validators (2.3.1)
+    defra_ruby_validators (2.4.1)
       activemodel
       os_map_ref
       phonelib
@@ -271,7 +271,7 @@ GEM
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.6.43)
+    phonelib (0.6.44)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
