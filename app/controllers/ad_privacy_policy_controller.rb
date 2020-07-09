@@ -9,8 +9,6 @@ class AdPrivacyPolicyController < ApplicationController
     @presenter = AdPrivacyPolicyPresenter.new(data_model, view_context)
   end
 
-  private
-
   # We want to make use of our WasteCarriersEngine::BasePresenter because of the
   # complexity in determining where to go when the continue button is clicked.
   # But we don't have a 'model' which is what our BasePresenter expects. So we
