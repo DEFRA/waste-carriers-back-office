@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/defra-ruby-features
-  revision: 01d45f5caad159033c9885a9a7a04e6df4dae63e
+  revision: 2442a62a4ed4be87a1b418b4e1299ab488dab0ac
   branch: main
   specs:
     defra-ruby-features (0.1.0)
@@ -423,7 +423,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    websocket-driver (0.7.2)
+    websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     whenever (0.10.0)
