@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 1cf393909e5d8de68953929a917c618437c1a877
+  revision: 63b8003a70ac27e39797fff38fb94f8af832dc91
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -423,7 +423,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    websocket-driver (0.7.2)
+    websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     whenever (0.10.0)
