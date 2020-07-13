@@ -23,7 +23,7 @@ WasteCarriersEngine.configure do |configuration|
   configuration.airbrake_enabled = ENV["WCRS_USE_AIRBRAKE"]
   configuration.airbrake_host = ENV["WCRS_AIRBRAKE_URL"]
   configuration.airbrake_project_key = ENV["WCRS_BACKOFFICE_AIRBRAKE_PROJECT_KEY"]
-  configuration.airbrake_blacklist = [/password/i, /authorization/i]
+  configuration.airbrake_blocklist = [/password/i, /authorization/i]
 
   configuration.address_host = ENV["ADDRESSBASE_URL"] || "http://localhost:8005"
 end
