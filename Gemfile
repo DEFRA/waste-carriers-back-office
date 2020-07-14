@@ -55,9 +55,7 @@ gem "waste_carriers_engine",
 
 # Use the Defra Ruby Features gem to allow users with the correct permissions to
 # manage feature toggle (create / update / delete) from the back-office.
-gem "defra-ruby-features",
-    git: "https://github.com/DEFRA/defra-ruby-features",
-    branch: "main"
+gem "defra_ruby_features", "~> 0.1"
 
 # Use the defra ruby mocks engine to add support for mocking external services
 # in live environment. Essentially with this gem added and enabled the app
