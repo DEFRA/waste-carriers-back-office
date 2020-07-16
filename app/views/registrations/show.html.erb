@@ -51,7 +51,7 @@
           <%= render "shared/registrations/main_people_details", resource: @registration %>
         <% end %>
 
-        <% if @registration.receipt_email.present? && !@registration.receipt_email.empty? %>
+        <% if @registration.receipt_email.present? %>
           <%= render "shared/registrations/receipt_email_panel", resource: @registration %>
         <% end %>
       </div>
