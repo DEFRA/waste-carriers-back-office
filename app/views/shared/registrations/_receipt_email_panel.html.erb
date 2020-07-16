@@ -1,6 +1,15 @@
 <h2 class="heading-medium">
     <%= t(".heading") %>
 </h2>
-<p>
-  <%= resource.receipt_email %>
-</p>
+<table>
+  <tbody>
+    <tr>
+      <th>
+        <%= t(".labels.email") %>
+      </th>
+      <td>
+        <%= resource.receipt_email %>
+      </td>
+    </tr>
+  </tbody>
+</table>

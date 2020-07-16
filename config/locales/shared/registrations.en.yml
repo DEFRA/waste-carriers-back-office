@@ -93,7 +93,9 @@ en:
           revoked: "Revoked"
         reason: "Reason:"
       receipt_email_panel:
-        heading: Payment confirmation email
+        heading: Card payment confirmation
+        labels:
+          email: "Email address"
       finance_details:
         finance_information:
           lower_tier_message: "Lower tier registration - charges are not applicable."
