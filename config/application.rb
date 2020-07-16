@@ -89,7 +89,12 @@ module WasteCarriersBackOffice
     # Times
     config.renewal_window = ENV["WCRS_REGISTRATION_RENEWAL_WINDOW"].to_i
     config.expires_after = ENV["WCRS_REGISTRATION_EXPIRES_AFTER"].to_i
-    config.grace_window = ENV["WCRS_REGISTRATION_GRACE_WINDOW"].to_i
+    config.grace_window = if ENV["BO_CAN_ALWAYS_RENEW_EXPIRED"].to_s.downcase == "true"
+                            # Can renew for as long as a renewed registration would be active
+                            ENV["WCRS_REGISTRATION_EXPIRES_AFTER"].to_i * 365
+                          else
+                            ENV["WCRS_REGISTRATION_GRACE_WINDOW"].to_i
+                          end
 
     # Worldpay
     config.worldpay_url = if ENV["WCRS_MOCK_ENABLED"].to_s.downcase == "true"
