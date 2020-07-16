@@ -50,6 +50,10 @@
         <% if @registration.main_people.any? %>
           <%= render "shared/registrations/main_people_details", resource: @registration %>
         <% end %>
+
+        <% if @registration.receipt_email.present? && !@registration.receipt_email.empty? %>
+          <%= render "shared/registrations/receipt_email_panel", resource: @registration %>
+        <% end %>
       </div>
 
       <div class="column-one-third">
