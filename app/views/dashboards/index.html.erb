@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <% if can?(:create, WasteCarriersEngine::Registration) %>
+  <% if can?(:create, WasteCarriersEngine::Registration) && WasteCarriersEngine::FeatureToggle.active?(:new_registration) %>
     <div class="column-one-third">
       <div class="wcr-actions">
         <h2 class="heading-small">
