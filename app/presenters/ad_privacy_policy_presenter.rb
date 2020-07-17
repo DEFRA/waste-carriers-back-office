@@ -6,7 +6,7 @@ class AdPrivacyPolicyPresenter < WasteCarriersEngine::BasePresenter
     return renewal_path if reg_identifier.present?
     return resume_path if transient_registration.present?
 
-    new_registration_path
+    WasteCarriersEngine::Engine.routes.url_helpers.new_start_form_path
   end
 
   private
@@ -28,13 +28,5 @@ class AdPrivacyPolicyPresenter < WasteCarriersEngine::BasePresenter
       "new_#{transient_registration.workflow_state}_path".to_sym,
       token: transient_registration.token
     )
-  end
-
-  def new_registration_path
-    if WasteCarriersEngine::FeatureToggle.active?(:new_registration)
-      WasteCarriersEngine::Engine.routes.url_helpers.new_start_form_path
-    else
-      File.join(Rails.configuration.wcrs_backend_url, "registrations/start")
-    end
   end
 end

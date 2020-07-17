@@ -28,24 +28,8 @@ RSpec.describe AdPrivacyPolicyPresenter do
     end
 
     context "when neither 'reg_identifier' nor 'token' are present" do
-      before(:each) do
-        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:new_registration) { feature_enabled }
-      end
-
-      context "and the 'new_registration' feature is enabled" do
-        let(:feature_enabled) { true }
-
-        it "returns a new registration start form path to the back-office" do
-          expect(subject.destination_path).to eq("/bo/start")
-        end
-      end
-
-      context "and the 'new_registration' feature is not enabled" do
-        let(:feature_enabled) { false }
-
-        it "returns a new registration start form path to the backend" do
-          expect(subject.destination_path).to eq("http://localhost:3000/registrations/start")
-        end
+      it "returns a new registration start form path to the back-office" do
+        expect(subject.destination_path).to eq("/bo/start")
       end
     end
   end
