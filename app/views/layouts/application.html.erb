@@ -1,5 +1,6 @@
 <% content_for(:head) do %>
   <%= stylesheet_link_tag "application", media: "all" %>
+  <%= yield :page_scripts %>
   <%= csrf_meta_tags %>
 <% end %>
 
@@ -34,6 +35,12 @@
                 <li>
                   <%= link_to t("layouts.application.menu.conviction_imports"),
                               main_app.conviction_imports_path %>
+                </li>
+              <% end %>
+              <% if can?(:manage, WasteCarriersEngine::FeatureToggle, current_user) %>
+                <li>
+                  <%= link_to t("layouts.application.menu.feature_toggles"),
+                              features_engine.feature_toggles_path %>
                 </li>
               <% end %>
             </ul>

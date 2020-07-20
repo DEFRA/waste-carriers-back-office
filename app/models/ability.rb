@@ -119,6 +119,7 @@ class Ability
   def permissions_for_developer_user
     permissions_for_agency_user
 
+    can :manage, WasteCarriersEngine::FeatureToggle
     can :import_conviction_data, :all
   end
 
