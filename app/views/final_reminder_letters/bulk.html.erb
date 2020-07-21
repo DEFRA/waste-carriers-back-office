@@ -17,8 +17,8 @@
       begin
         render "final_reminder_letters/final_reminder_letter_content", presenter: presenter
       rescue StandardError => e
-        Airbrake.notify e, registration_reference: presenter.reference
-        Rails.logger.error "Generate AD bulk letters render error for #{presenter.reference}:\n#{e}"
+        Airbrake.notify e, registration_reg_identifier: presenter.reg_identifier
+        Rails.logger.error "Generate AD bulk letters render error for #{presenter.reg_identifier}:\n#{e}"
         ""
       end
     %>

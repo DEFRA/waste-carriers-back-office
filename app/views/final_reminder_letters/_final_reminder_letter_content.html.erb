@@ -1,3 +1,61 @@
 <div id="page_wrapper">
-  <!-- TODO: Implement when design exists -->
-</div>
+  <div id="logo">
+    <%= image_tag wicked_pdf_asset_base64("logo_ea.png"), width: "332px" %>
+  </div>
+
+  <div id="section">
+    <div id="address_window">
+      <p>
+        <% presenter.contact_address_lines.each do |line| %>
+          <%= line %><br>
+        <% end %>
+      </p>
+    </div>
+
+    <div id="date">
+      <p>
+        <%= presenter.date_of_letter %>
+      </p>
+    </div>
+  </div>
+
+  <div id="letter_body">
+
+    <div id="salutation">
+      <p>
+        <%= t(".section_1.salutation", name: presenter.contact_full_name) %>
+      </p>
+    </div>
+
+    <h1><%= t(".section_1.paragraph_1", reg_identifier: presenter.reg_identifier, expires_on: presenter.expiry_date) %></h1>
+
+    <p><%= t(".section_1.paragraph_2", cost: presenter.renewal_cost) %></p>
+
+    <div id="call_to_action">
+      <p>
+        <span class="bold_text"><%= t(".section_2.subheading") %></span>
+      </p>
+
+      <ol>
+        <li><%= t(".section_2.instructions.line_1", email: presenter.contact_email, date: presenter.renewal_email_date) %></li>
+        <li><%= t(".section_2.instructions.line_2") %></li>
+        <li><%= t(".section_2.instructions.line_3") %></li>
+      </ol>
+    </div>
+
+    <p><%= t(".section_3.paragraph_3", cost: presenter.new_reg_cost) %></p>
+    <p><%= t(".section_3.paragraph_4") %></p>
+    <p><%= t(".section_3.paragraph_5") %></p>
+    <p><%= presenter.renewal_url %></p>
+
+    <p>
+      <%= t(".section_4.paragraph_6") %>
+      <br>
+      <%= t(".section_4.paragraph_7") %>
+    </p>
+
+    <p><%= t(".section_5.phone") %></p>
+    <p><%= t(".section_5.website") %></p>
+
+  </div><!-- // END letter_body -->
+</div><!-- // END wrapper -->
