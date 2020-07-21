@@ -12,13 +12,13 @@ RSpec.describe FinalReminderLettersExportService do
       create_list(:registration, 3, expires_on: final_reminder_letters_export.expires_on)
     end
 
-    context "when there are new registrations from AD users" do
+    context "when there are digital registrations that are due for renewal reminders" do
       before do
         expect(DefraRuby::Aws).to receive(:get_bucket).and_return(bucket)
         expect(bucket).to receive(:load).and_return(result)
       end
 
-      it "load a file to a AWS bucket and record the content created" do
+      it "loads a file to a AWS bucket and records the content created" do
         expect(Airbrake).to_not receive(:notify)
 
         described_class.run(final_reminder_letters_export)
@@ -28,9 +28,9 @@ RSpec.describe FinalReminderLettersExportService do
       end
 
       context "when one registration is in an invalid state and a PDF cannot be generated for it" do
-        pending "raises an error on Airbrake but continues generation for the other letters" do
-          # TODO: Implement this when the template exists
-          create(:registration, addresses: [], expires_on: final_reminder_letters_export.expires_on)
+        it "raises an error on Airbrake but continues generation for the other letters" do
+          registration = create(:registration, expires_on: final_reminder_letters_export.expires_on)
+          registration.contact_address.delete
 
           expect(Airbrake).to receive(:notify)
 
