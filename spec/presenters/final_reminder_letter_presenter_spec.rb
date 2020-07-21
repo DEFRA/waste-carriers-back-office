@@ -113,7 +113,7 @@ RSpec.describe FinalReminderLetterPresenter do
 
   describe "#renewal_url" do
     let(:token) { "tokengoeshere" }
-    let(:registration) { double(:registration, renew_token: token) }  
+    let(:registration) { double(:registration, renew_token: token) }
 
     it "returns a correctly formatted URL" do
       expected_url = "wastecarriersregistration.service.gov.uk/fo/renew/tokengoeshere"
