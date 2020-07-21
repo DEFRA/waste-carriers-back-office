@@ -33,9 +33,7 @@ class FinalReminderLettersBulkPdfService < ::WasteCarriersEngine::BaseService
 
   def presenters
     @registrations.map do |registration|
-      # TODO: When template exists
-      # FinalReminderLetterPresenter.new(registration)
-      registration
+      FinalReminderLetterPresenter.new(registration)
     end
   end
 end
