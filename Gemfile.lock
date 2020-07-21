@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 0bffdbc8c11ed5ab30ebf6162280638b39c4dce6
-  branch: expiry-refactor
+  revision: 1eb289d1503a4ff11a1086a8a74d3541b86885c8
+  branch: main
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)
