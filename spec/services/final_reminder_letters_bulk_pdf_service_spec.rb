@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe FinalReminderLettersBulkPdfService do
   describe ".run" do
-    let(:registrations) { create_list(:registration, 2) }
+    let(:registrations) { create_list(:registration, 2, :expires_soon) }
     let(:result) { double(:result) }
 
     it "returns a PDF string" do
