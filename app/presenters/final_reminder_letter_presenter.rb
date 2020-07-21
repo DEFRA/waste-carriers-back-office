@@ -4,6 +4,10 @@ class MissingAddressError < StandardError; end
 class FinalReminderLetterPresenter < WasteCarriersEngine::BasePresenter
   include WasteCarriersEngine::ApplicationHelper
 
+  def display_covid_warning?
+    WasteCarriersEngine::FeatureToggle.active?(:display_covid_warning_in_letters)
+  end
+
   def contact_address_lines
     address_lines = displayable_address(contact_address)
 

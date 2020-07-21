@@ -44,14 +44,16 @@
     </div>
 
     <p><%= t(".section_3.paragraph_3", cost: presenter.new_reg_cost) %></p>
+    <% if presenter.display_covid_warning? %>
+      <p><%= t(".section_3.covid_warning") %></p>
+    <% end %>
     <p><%= t(".section_3.paragraph_4") %></p>
-    <p><%= t(".section_3.paragraph_5") %></p>
     <p><%= presenter.renewal_url %></p>
 
     <p>
-      <%= t(".section_4.paragraph_6") %>
+      <%= t(".section_4.paragraph_5") %>
       <br>
-      <%= t(".section_4.paragraph_7") %>
+      <%= t(".section_4.paragraph_6") %>
     </p>
 
     <p><%= t(".section_5.phone") %></p>

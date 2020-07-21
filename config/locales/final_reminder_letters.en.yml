@@ -13,11 +13,11 @@ en:
           line_3: "Pay for your renewal"
       section_3:
         paragraph_3: "If you do not renew in time you’ll need to create a new registration, which will instead cost £%{cost}."
-        paragraph_4: "Our call centre is running at limited capacity due to COVID-19. To avoid long hold times, and to help our teams, please renew online."
-        paragraph_5: "If you’re unable to find the renewal email begin your online renewal by using this unique link:"
+        covid_warning: "Our call centre is running at limited capacity due to COVID-19. To avoid long hold times, and to help our teams, please renew online."
+        paragraph_4: "If you’re unable to find the renewal email begin your online renewal by using this unique link:"
       section_4:
-        paragraph_6: "Yours sincerely"
-        paragraph_7: "Waste carrier renewal team"
+        paragraph_5: "Yours sincerely"
+        paragraph_6: "Waste carrier renewal team"
       section_5:
         phone: "Tel: 03708 506 506"
         website: "Website: www.gov.uk/environment-agency"

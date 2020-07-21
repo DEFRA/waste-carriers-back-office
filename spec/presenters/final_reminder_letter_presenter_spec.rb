@@ -7,6 +7,24 @@ RSpec.describe FinalReminderLetterPresenter do
   let(:view_context) { double(:view_context) }
   subject { described_class.new(registration, view_context) }
 
+  describe "#display_covid_warning?" do
+    context "when the feature toggle is active" do
+      before { expect(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:display_covid_warning_in_letters).and_return(true) }
+
+      it "is true" do
+        expect(subject.display_covid_warning?).to eq(true)
+      end
+    end
+
+    context "when the feature toggle is not active" do
+      before { expect(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:display_covid_warning_in_letters).and_return(false) }
+
+      it "is false" do
+        expect(subject.display_covid_warning?).to eq(false)
+      end
+    end
+  end
+
   describe "#contact_address_lines" do
     let(:company_name) { "company name" }
     let(:contact_address) { double(:address) }
