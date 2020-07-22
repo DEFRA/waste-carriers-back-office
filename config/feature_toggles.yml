@@ -7,3 +7,5 @@ email_reminders:
   active: <%= ENV["FEATURE_TOGGLE_EMAIL_REMINDERS"] %>
 renew_via_magic_link:
   active: <%= ENV["RENEW_VIA_MAGIC_LINK"] %>
+use_extended_grace_window:
+  active: <%= ENV["USE_EXTENDED_GRACE_WINDOW"] %>
