@@ -54,6 +54,10 @@
         <% if @registration.receipt_email.present? %>
           <%= render "shared/registrations/receipt_email_panel", resource: @registration %>
         <% end %>
+
+        <% if WasteCarriersEngine::FeatureToggle.active?(:display_renewal_link) && renewal_link_for(@registration) %>
+          <%= render "shared/registrations/renewal_link_panel", resource: @registration %>
+        <% end %>
       </div>
 
       <div class="column-one-third">

@@ -96,6 +96,8 @@ en:
         heading: Card payment confirmation
         labels:
           email: "Email address"
+      renewal_link_panel:
+        heading: Renewal link
       finance_details:
         finance_information:
           lower_tier_message: "Lower tier registration - charges are not applicable."
