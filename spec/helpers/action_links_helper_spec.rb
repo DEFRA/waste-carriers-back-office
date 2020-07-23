@@ -127,6 +127,34 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
+  describe "renewal_link_for" do
+    context "when the resource is a new registration" do
+      let(:resource) { build(:new_registration, token: "foo") }
+
+      it "returns an empty string" do
+        expect(helper.renewal_link_for(resource)).to eq("")
+      end
+    end
+
+    context "when the resource is a renewing registration" do
+      let(:resource) { build(:renewing_registration) }
+
+      it "returns an empty string" do
+        expect(helper.renewal_link_for(resource)).to eq("")
+      end
+    end
+
+    context "when the resource is a registration" do
+      let(:resource) { build(:registration, renew_token: renew_token) }
+      let(:renew_token) { "footoken" }
+
+      it "returns the registration path" do
+        expect(helper.renewal_link_for(resource))
+          .to eq("#{Rails.configuration.wcrs_renewals_url}/fo/renew/#{renew_token}")
+      end
+    end
+  end
+
   describe "#display_refund_link_for?" do
     let(:resource) { build(:finance_details, balance: balance) }
 

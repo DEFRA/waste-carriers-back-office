@@ -22,6 +22,16 @@ module ActionLinksHelper
     ad_privacy_policy_path(reg_identifier: resource.reg_identifier)
   end
 
+  def renewal_link_for(resource)
+    return "" unless a_registration?(resource)
+
+    [
+      Rails.configuration.wcrs_renewals_url,
+      "/fo/renew/",
+      resource.renew_token
+    ].join
+  end
+
   def display_write_off_small_link_for?(resource)
     can?(:write_off_small, resource) && resource.balance != 0
   end
