@@ -4,6 +4,7 @@ class MissingAddressError < StandardError; end
 
 class FinalReminderLetterPresenter < WasteCarriersEngine::BasePresenter
   include WasteCarriersEngine::ApplicationHelper
+  include ActionView::Helpers::NumberHelper
 
   def display_covid_warning?
     WasteCarriersEngine::FeatureToggle.active?(:display_covid_warning_in_letters)
@@ -30,11 +31,11 @@ class FinalReminderLetterPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def renewal_cost
-    Rails.configuration.renewal_charge
+    display_pence_as_pounds(Rails.configuration.renewal_charge)
   end
 
   def new_reg_cost
-    Rails.configuration.new_registration_charge
+    display_pence_as_pounds(Rails.configuration.new_registration_charge)
   end
 
   def renewal_email_date

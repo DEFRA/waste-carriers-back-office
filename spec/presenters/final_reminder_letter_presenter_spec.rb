@@ -81,20 +81,26 @@ RSpec.describe FinalReminderLetterPresenter do
   end
 
   describe "#renewal_cost" do
-    let(:renewal_cost) { 105 }
+    let(:renewal_cost) { 10500 }
 
     it "returns the correct cost" do
+      expected_cost = "105"
+
       expect(Rails.configuration).to receive(:renewal_charge).and_return(renewal_cost)
-      expect(subject.renewal_cost).to eq(renewal_cost)
+      expect_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(renewal_cost).and_return(expected_cost)
+      expect(subject.renewal_cost).to eq(expected_cost)
     end
   end
 
   describe "#new_reg_cost" do
-    let(:new_reg_cost) { 105 }
+    let(:new_reg_cost) { 15400 }
 
     it "returns the correct cost" do
+      expected_cost = "154"
+
       expect(Rails.configuration).to receive(:new_registration_charge).and_return(new_reg_cost)
-      expect(subject.new_reg_cost).to eq(new_reg_cost)
+      expect_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(new_reg_cost).and_return(expected_cost)
+      expect(subject.new_reg_cost).to eq(expected_cost)
     end
   end
 
