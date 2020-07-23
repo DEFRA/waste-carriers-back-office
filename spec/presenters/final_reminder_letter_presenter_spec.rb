@@ -49,7 +49,7 @@ RSpec.describe FinalReminderLetterPresenter do
 
   describe "#date_of_letter" do
     it "returns a date object for today" do
-      expect(subject.date_of_letter).to eq(Time.now.to_date.to_formatted_s(:day_month_year))
+      expect(subject.date_of_letter).to eq(Time.now.to_formatted_s(:day_month_year))
     end
   end
 
