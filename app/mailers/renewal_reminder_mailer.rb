@@ -4,14 +4,10 @@ class RenewalReminderMailer < ActionMailer::Base
   helper "waste_carriers_engine/mailer"
 
   def first_reminder_email(registration)
-    generate_magic_link(registration)
-
     reminder_email(registration)
   end
 
   def second_reminder_email(registration)
-    generate_magic_link(registration) unless registration.renew_token.present?
-
     reminder_email(registration)
   end
 
@@ -39,11 +35,5 @@ class RenewalReminderMailer < ActionMailer::Base
       "/fo/renew/",
       registration.renew_token
     ].join
-  end
-
-  def generate_magic_link(registration)
-    return unless WasteCarriersEngine::FeatureToggle.active?(:renew_via_magic_link)
-
-    registration.generate_renew_token!
   end
 end

@@ -17,7 +17,7 @@ RSpec.describe RenewalReminderMailer, type: :mailer do
     it "sends a first reminder email" do
       mail = described_class.first_reminder_email(registration)
 
-      expect(registration).to receive(:generate_renew_token!)
+      expect(registration).to receive(:renew_token)
       expect(mail.subject).to include("Renew waste carrier registration")
       expect(mail.to).to eq([registration.contact_email])
       expect(mail.body.encoded).to include(registration.reg_identifier)
@@ -34,7 +34,7 @@ RSpec.describe RenewalReminderMailer, type: :mailer do
     it "sends a second reminder email" do
       mail = described_class.second_reminder_email(registration)
 
-      expect(registration).to receive(:generate_renew_token!)
+      expect(registration).to receive(:renew_token)
       expect(mail.subject).to include("Renew waste carrier registration")
       expect(mail.to).to eq([registration.contact_email])
       expect(mail.body.encoded).to include(registration.reg_identifier)
