@@ -23,7 +23,8 @@ module ActionLinksHelper
   end
 
   def renewal_link_for(resource)
-    return "" unless a_registration?(resource)
+    return nil unless a_registration?(resource)
+    return nil unless resource.renew_token.present?
 
     [
       Rails.configuration.wcrs_renewals_url,

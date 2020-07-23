@@ -131,26 +131,36 @@ RSpec.describe ActionLinksHelper, type: :helper do
     context "when the resource is a new registration" do
       let(:resource) { build(:new_registration, token: "foo") }
 
-      it "returns an empty string" do
-        expect(helper.renewal_link_for(resource)).to eq("")
+      it "returns an nil" do
+        expect(helper.renewal_link_for(resource)).to be_nil
       end
     end
 
     context "when the resource is a renewing registration" do
       let(:resource) { build(:renewing_registration) }
 
-      it "returns an empty string" do
-        expect(helper.renewal_link_for(resource)).to eq("")
+      it "returns nil" do
+        expect(helper.renewal_link_for(resource)).to be_nil
       end
     end
 
     context "when the resource is a registration" do
-      let(:resource) { build(:registration, renew_token: renew_token) }
-      let(:renew_token) { "footoken" }
+      context "and has a renewal_token" do
+        let(:resource) { build(:registration, renew_token: renew_token) }
+        let(:renew_token) { "footoken" }
 
-      it "returns the registration path" do
-        expect(helper.renewal_link_for(resource))
-          .to eq("#{Rails.configuration.wcrs_renewals_url}/fo/renew/#{renew_token}")
+        it "returns the registration path" do
+          expect(helper.renewal_link_for(resource))
+            .to eq("#{Rails.configuration.wcrs_renewals_url}/fo/renew/#{renew_token}")
+        end
+      end
+
+      context "but doesn't have a renewal token" do
+        let(:resource) { build(:registration) }
+
+        it "returns nil" do
+          expect(helper.renewal_link_for(resource)).to be_nil
+        end
       end
     end
   end
