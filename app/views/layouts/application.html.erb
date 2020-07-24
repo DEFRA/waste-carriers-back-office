@@ -31,7 +31,7 @@
                               main_app.users_path %>
                 </li>
               <% end %>
-              <% if can?(:manage, FinalReminderLettersExport) %>
+              <% if WasteCarriersEngine::FeatureToggle.active?(:renewal_reminders) && can?(:manage, FinalReminderLettersExport) %>
                 <li>
                   <%= link_to t("layouts.application.menu.letters"),
                               main_app.letters_path %>
