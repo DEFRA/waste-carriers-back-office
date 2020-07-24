@@ -1,0 +1,9 @@
+en:
+  ad_reminder_letters_exports:
+    index:
+      heading: "AD renewal reminder letters"
+      table:
+        heading:
+          expires_on_date: "Expires on date"
+          number_of_letters: "Number of letters"
+          printed: "Printed"

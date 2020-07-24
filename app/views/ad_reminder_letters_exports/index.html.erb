@@ -1,0 +1,59 @@
+<div class="grid-row">
+  <div class="column-two-thirds">
+    <%= render("waste_carriers_engine/shared/back", back_path: letters_path) %>
+
+    <h1 class="heading-large" id="table-description">
+      <%= t(".heading") %>
+    </h1>
+
+    <table class="govuk-table letters" aria-describedby="table-description">
+      <thead>
+        <tr>
+          <th scope="col"><%= t(".table.heading.expires_on_date") %></th>
+          <th scope="col"><%= t(".table.heading.number_of_letters") %></th>
+          <th scope="col"><%= t(".table.heading.printed") %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @ad_reminder_letters_exports_presenters.each do |presenter| %>
+          <tr>
+            <td>
+              <% if presenter.downloadable? %>
+                <%= link_to presenter.expires_on_date, presenter.presigned_aws_url, { target: :blank } %>
+              <% else %>
+                <%= presenter.expires_on_date %>
+              <% end %>
+            </td>
+            <td>
+              <% if presenter.failed? %>
+                <strong class="bold-small"><%= t(".labels.failed") %></strong>
+              <% else %>
+                <%= presenter.letters_label %>
+              <% end %>
+            </td>
+            <td>
+              <% if presenter.print_label.present? %>
+                <span class="green-label">
+                  <%= presenter.print_label %>
+                </span>
+              <% elsif presenter.downloadable? %>
+                <%= form_for presenter do |f| %>
+                  <%= f.hidden_field :printed_by, value: current_user.email %>
+                  <%= f.hidden_field :printed_on, value: Date.today %>
+
+                  <%= button_tag(type: 'submit', class: "button-link") do %>
+                    <%= t(".labels.submit") %>
+                    <span class="visually-hidden">
+                      <%= t(".labels.expires_on_date_for", expires_on_date: presenter.expires_on_date) %>
+                    </span>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
