@@ -24,9 +24,8 @@ module ActionLinksHelper
 
   def display_renewal_link_for?(resource)
     return false unless WasteCarriersEngine::FeatureToggle.active?(:display_renewal_link)
-    return false unless can?(:renew, WasteCarriersEngine::Registration)
 
-    resource.can_start_renewal?
+    display_renew_link_for?(resource)
   end
 
   def renewal_link_for(resource)
