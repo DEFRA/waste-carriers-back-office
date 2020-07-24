@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
     # Letters
     get "/letters", to: "letters#index", as: :letters
+    resources :ad_reminder_letters_exports, only: %i[index update], path: "/ad-reminder-letters-exports"
     resources :final_reminder_letters_exports, only: %i[index update], path: "/final-reminder-letters-exports"
   end
 

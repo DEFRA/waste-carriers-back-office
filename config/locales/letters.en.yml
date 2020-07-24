@@ -3,4 +3,5 @@ en:
     index:
       heading: "Download letters"
       links:
-        final_reminder_letters_exports: "Final reminder letters exports"
+        ad_reminder_letters_exports: "Assisted Digital renewal reminder letters"
+        final_reminder_letters_exports: "Digital renewal reminder letters"
