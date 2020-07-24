@@ -7,3 +7,5 @@ renewal_reminders:
   active: <%= ENV["FEATURE_TOGGLE_RENEWAL_REMINDERS"] %>
 use_extended_grace_window:
   active: <%= ENV["USE_EXTENDED_GRACE_WINDOW"] %>
+display_covid_warning_in_letters:
+  active: <%= ENV["FEATURE_TOGGLE_DISPLAY_COVID_WARNING"] %>
