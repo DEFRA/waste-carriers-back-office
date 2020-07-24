@@ -3,9 +3,7 @@ new_registration:
   active: <%= ENV["FEATURE_TOGGLE_NEW_REGISTRATION"] %>
 api:
   active: <%= ENV["FEATURE_TOGGLE_API"] %>
-email_reminders:
-  active: <%= ENV["FEATURE_TOGGLE_EMAIL_REMINDERS"] %>
-renew_via_magic_link:
-  active: <%= ENV["RENEW_VIA_MAGIC_LINK"] %>
+renewal_reminders:
+  active: <%= ENV["FEATURE_TOGGLE_RENEWAL_REMINDERS"] %>
 use_extended_grace_window:
   active: <%= ENV["USE_EXTENDED_GRACE_WINDOW"] %>
