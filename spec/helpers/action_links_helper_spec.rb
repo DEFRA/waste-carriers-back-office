@@ -128,22 +128,36 @@ RSpec.describe ActionLinksHelper, type: :helper do
   end
 
   describe "#display_renewal_link_for?" do
-    context "when the resource is not a Registration" do
-      let(:resource) { build(:renewing_registration) }
+    let(:resource) { build(:registration) }
 
-      it "returns false" do
-        expect(helper.display_renewal_link_for?(resource)).to eq(false)
+    context "and the 'renew_via_magic_link' feature toggle is enabled" do
+      before do
+        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:renew_via_magic_link).and_return(true)
       end
-    end
 
-    context "when the resource is a Registration" do
-      let(:resource) { build(:registration) }
+      context "but the 'display_renewal_link' feature toggle is not enabled" do
+        before do
+          allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:display_renewal_link).and_return(false)
+        end
+
+        it "returns false" do
+          expect(helper.display_renewal_link_for?(resource)).to eq(false)
+        end
+      end
 
       context "and the 'display_renewal_link' feature toggle is enabled" do
         before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).and_return(true) }
 
         context "and the user does not have permission" do
           before { allow(helper).to receive(:can?).and_return(false) }
+
+          it "returns false" do
+            expect(helper.display_renewal_link_for?(resource)).to eq(false)
+          end
+        end
+
+        context "but the resource is not a Registration" do
+          let(:resource) { build(:renewing_registration) }
 
           it "returns false" do
             expect(helper.display_renewal_link_for?(resource)).to eq(false)
@@ -170,13 +184,13 @@ RSpec.describe ActionLinksHelper, type: :helper do
           end
         end
       end
+    end
 
-      context "when the 'display_renewal_link' feature toggle is not enabled" do
-        before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).and_return(false) }
+    context "when the 'renew_via_magic_link' feature toggle is not enabled" do
+      before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).and_return(false) }
 
-        it "returns false" do
-          expect(helper.display_renewal_link_for?(resource)).to eq(false)
-        end
+      it "returns false" do
+        expect(helper.display_renewal_link_for?(resource)).to eq(false)
       end
     end
   end
