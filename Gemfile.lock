@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: e92f470c3768a6b714c64e3ada21594e97770391
-  branch: generate-renewal-token-on-request
+  revision: 3c3a6cb5b2eb61503ff3a2a9850281ab68f843a0
+  branch: main
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)
