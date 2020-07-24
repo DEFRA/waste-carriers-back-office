@@ -23,8 +23,7 @@ module ActionLinksHelper
   end
 
   def display_renewal_link_for?(resource)
-    return false unless WasteCarriersEngine::FeatureToggle.active?(:renew_via_magic_link)
-    return false unless WasteCarriersEngine::FeatureToggle.active?(:display_renewal_link)
+    return false unless WasteCarriersEngine::FeatureToggle.active?(:renewal_reminders)
 
     display_renew_link_for?(resource)
   end
