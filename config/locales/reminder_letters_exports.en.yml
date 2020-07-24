@@ -4,9 +4,6 @@ en:
       table:
         letters_label: "letter"
       labels:
-        submit: "Mark as printed"
         none_to_print: "None to print"
         no_registrations: "No registrations"
-        failed: "Letter generation failed - contact support"
         printed: "%{printed_by}, %{printed_on}"
-        expires_on_date_for: "for %{expires_on_date}"
