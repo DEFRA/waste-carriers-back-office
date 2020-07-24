@@ -118,6 +118,8 @@ module WasteCarriersBackOffice
     # Letters exports
     config.final_reminder_letters_exports_expires_in = ENV["FINAL_REMINDER_LETTERS_EXPORTS_EXPIRES_IN"] || 14
     config.final_reminder_letters_delete_records_in = ENV["FINAL_REMINDER_LETTERS_DELETE_RECORDS_IN"] || 7
+    config.ad_reminder_letters_exports_expires_in = ENV["AD_REMINDER_LETTERS_EXPORTS_EXPIRES_IN"] || 35
+    config.ad_reminder_letters_delete_records_in = ENV["AD_REMINDER_LETTERS_DELETE_RECORDS_IN"] || 7
 
     # Digital or assisted digital metaData.route value
     config.metadata_route = "ASSISTED_DIGITAL"
