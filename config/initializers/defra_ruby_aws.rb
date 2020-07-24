@@ -2,6 +2,7 @@
 
 require "defra_ruby/aws"
 
+# rubocop:disable Metrics/BlockLength
 DefraRuby::Aws.configure do |c|
   epr_bucket = {
     name: ENV["AWS_DAILY_EXPORT_BUCKET"],
@@ -34,3 +35,4 @@ DefraRuby::Aws.configure do |c|
 
   c.buckets = [boxy_bucket, epr_bucket, letters_export_bucket]
 end
+# rubocop:enable Metrics/BlockLength
