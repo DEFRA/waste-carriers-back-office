@@ -32,7 +32,9 @@ RSpec.describe AdReminderLettersExportService do
 
       context "when one registration is in an invalid state and a PDF cannot be generated for it" do
         it "raises an error on Airbrake but continues generation for the other letters" do
-          registration = create(:registration, expires_on: ad_reminder_letters_export.expires_on)
+          registration = create(:registration,
+                                contact_email: WasteCarriersEngine.configuration.assisted_digital_email,
+                                expires_on: ad_reminder_letters_export.expires_on)
           registration.contact_address.delete
 
           expect(Airbrake).to receive(:notify)
