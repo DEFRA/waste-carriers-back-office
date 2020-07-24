@@ -1,0 +1,69 @@
+<div id="page_wrapper">
+  <div id="logo">
+    <%= image_tag wicked_pdf_asset_base64("logo_ea.png"), width: "332px", alt: "Environment Agency logo" %>
+  </div>
+
+  <div id="section">
+    <div id="address_window">
+      <p>
+        <% presenter.contact_address_lines.each do |line| %>
+          <%= line %><br>
+        <% end %>
+      </p>
+    </div>
+
+    <div id="date">
+      <p>
+        <%= presenter.date_of_letter %>
+      </p>
+    </div>
+  </div>
+
+  <div id="letter_body">
+
+    <div id="salutation">
+      <p>
+        <%= t(".section_1.salutation", name: presenter.contact_full_name) %>
+      </p>
+    </div>
+
+    <h1><%= t(".section_1.paragraph_1", reg_identifier: presenter.reg_identifier, expires_on: presenter.expiry_date, cost: presenter.renewal_cost) %></h1>
+
+    <div id="call_to_action">
+      <p>
+        <span class="bold_text"><%= t(".section_2.subheading") %></span>
+        <%= t(".section_2.subheading_2") %>
+      </p>
+
+      <ol>
+        <li>
+          <%= t(".section_2.instructions.line_1") %>
+          <br>
+          <%= presenter.renewal_url %>
+        </li>
+        <li><%= t(".section_2.instructions.line_2") %></li>
+        <li><%= t(".section_2.instructions.line_3") %></li>
+      </ol>
+    </div>
+
+    <p class="new_section"><%= t(".section_3.paragraph_2") %></p>
+
+    <p><%= t(".section_3.paragraph_3", cost: presenter.new_reg_cost) %></p>
+
+    <% if presenter.display_covid_warning? %>
+      <p><%= t(".section_3.covid_warning") %></p>
+    <% end %>
+
+    <p class="new_section>
+      <span class="bold_text"><%= t(".section_4.subheading") %></span>
+    </p>
+
+    <p><%= t(".section_4.paragraph_4", reg_identifier: presenter.reg_identifier) %></p>
+
+    <p>
+      <%= t(".section_5.paragraph_5") %>
+      <br>
+      <%= t(".section_5.paragraph_6") %>
+    </p>
+  </div><!-- // END letter_body -->
+</div><!-- // END wrapper -->
