@@ -7,7 +7,6 @@ class FinalReminderLetterPresenter < WasteCarriersEngine::BasePresenter
   include ActionView::Helpers::NumberHelper
 
   def display_covid_warning?
-    return true
     WasteCarriersEngine::FeatureToggle.active?(:display_covid_warning_in_letters)
   end
 
