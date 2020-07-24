@@ -13,7 +13,7 @@
       <li>
         <%= link_to t(".actions_box.links.renew"), renew_link_for(resource) %>
       </li>
-      <% if WasteCarriersEngine::FeatureToggle.active?(:email_reminders) %>
+      <% if WasteCarriersEngine::FeatureToggle.active?(:renewal_reminders) %>
         <li>
           <%= link_to t(".actions_box.links.resend_renewal_email"), resend_renewal_email_path(reg_identifier: resource.reg_identifier) %>
         </li>
