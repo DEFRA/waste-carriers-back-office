@@ -3,10 +3,6 @@
 require "rails_helper"
 
 RSpec.describe RenewalReminderMailer, type: :mailer do
-  before do
-    allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:renew_via_magic_link).and_return(true)
-  end
-
   describe ".first_reminder_email" do
     let(:registration) { create(:registration, expires_on: 3.days.from_now) }
 
