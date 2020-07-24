@@ -51,7 +51,7 @@ gem "defra_ruby_aws", "~> 0.3.0"
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",
-    branch: "generate-renewal-token-on-request"
+    branch: "main"
 
 # Use the Defra Ruby Features gem to allow users with the correct permissions to
 # manage feature toggle (create / update / delete) from the back-office.
