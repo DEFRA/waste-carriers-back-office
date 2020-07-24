@@ -2,11 +2,11 @@
   <div class="column-two-thirds">
     <%= render("waste_carriers_engine/shared/back", back_path: letters_path) %>
 
-    <h1 class="heading-large">
+    <h1 class="heading-large" id="table-description">
       <%= t(".heading") %>
     </h1>
 
-    <table class="govuk-table letters">
+    <table class="govuk-table letters" aria-describedby="table-description">
       <thead>
         <tr>
           <th scope="col"><%= t(".table.heading.expires_on_date") %></th>
@@ -57,4 +57,3 @@
     </table>
   </div>
 </div>
-
