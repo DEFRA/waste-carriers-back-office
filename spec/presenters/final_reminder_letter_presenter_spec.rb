@@ -81,7 +81,7 @@ RSpec.describe FinalReminderLetterPresenter do
   end
 
   describe "#renewal_cost" do
-    let(:renewal_cost) { 10500 }
+    let(:renewal_cost) { 10_500 }
 
     it "returns the correct cost" do
       expected_cost = "105"
@@ -93,7 +93,7 @@ RSpec.describe FinalReminderLetterPresenter do
   end
 
   describe "#new_reg_cost" do
-    let(:new_reg_cost) { 15400 }
+    let(:new_reg_cost) { 15_400 }
 
     it "returns the correct cost" do
       expected_cost = "154"
