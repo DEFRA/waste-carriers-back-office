@@ -23,7 +23,7 @@ class FinalReminderLettersExportsController < ApplicationController
 
   def final_reminder_letters_exports_presenters
     FinalReminderLettersExport.not_deleted.map do |final_reminder_letters_export|
-      FinalReminderLettersExportPresenter.new(final_reminder_letters_export)
+      ReminderLettersExportPresenter.new(final_reminder_letters_export)
     end
   end
 end

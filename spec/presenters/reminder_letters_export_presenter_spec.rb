@@ -2,20 +2,20 @@
 
 require "rails_helper"
 
-RSpec.describe FinalReminderLettersExportPresenter do
-  let(:final_reminder_letters_export) { build(:final_reminder_letters_export) }
-  subject(:presenter) { described_class.new(final_reminder_letters_export) }
+RSpec.describe ReminderLettersExportPresenter do
+  let(:reminder_letters_export) { build(:final_reminder_letters_export) }
+  subject(:presenter) { described_class.new(reminder_letters_export) }
 
   describe "#downloadable?" do
     before do
-      final_reminder_letters_export.status = status
+      reminder_letters_export.status = status
     end
 
     context "when the export succeeded" do
       let(:status) { :succeeded }
 
       before do
-        final_reminder_letters_export.number_of_letters = number_of_letters
+        reminder_letters_export.number_of_letters = number_of_letters
       end
 
       context "when the number of letters is more than zero" do
@@ -52,7 +52,7 @@ RSpec.describe FinalReminderLettersExportPresenter do
 
   describe "#letters_label" do
     before do
-      final_reminder_letters_export.number_of_letters = number_of_letters
+      reminder_letters_export.number_of_letters = number_of_letters
     end
 
     context "When the number of letters is positive" do
@@ -74,7 +74,7 @@ RSpec.describe FinalReminderLettersExportPresenter do
 
   describe "#print_label" do
     before do
-      final_reminder_letters_export.status = status
+      reminder_letters_export.status = status
     end
 
     context "when the export failed" do
@@ -91,8 +91,8 @@ RSpec.describe FinalReminderLettersExportPresenter do
       context "when the export has been printed" do
         context "when the email is in the format name_surname" do
           it "returns a label with the name of the person that printed it" do
-            final_reminder_letters_export.printed_by = "katherine_johnson@nasa.org.uk"
-            final_reminder_letters_export.printed_on = Date.today
+            reminder_letters_export.printed_by = "katherine_johnson@nasa.org.uk"
+            reminder_letters_export.printed_on = Date.today
 
             expect(presenter.print_label).to include("Katherine Johnson")
           end
@@ -100,8 +100,8 @@ RSpec.describe FinalReminderLettersExportPresenter do
 
         context "when the email is in the format name.surname" do
           it "returns a label with the name of the person that printed it" do
-            final_reminder_letters_export.printed_by = "katherine.johnson@nasa.org.uk"
-            final_reminder_letters_export.printed_on = Date.today
+            reminder_letters_export.printed_by = "katherine.johnson@nasa.org.uk"
+            reminder_letters_export.printed_on = Date.today
 
             expect(presenter.print_label).to include("Katherine Johnson")
           end
@@ -109,16 +109,16 @@ RSpec.describe FinalReminderLettersExportPresenter do
 
         context "when the email is in any other format" do
           it "returns a label with the email of the person that printed it" do
-            final_reminder_letters_export.printed_by = "katherine-johnson@nasa.org.uk"
-            final_reminder_letters_export.printed_on = Date.today
+            reminder_letters_export.printed_by = "katherine-johnson@nasa.org.uk"
+            reminder_letters_export.printed_on = Date.today
 
             expect(presenter.print_label).to include("katherine-johnson@nasa.org.uk")
           end
         end
 
         it "returns a label with the printed status" do
-          final_reminder_letters_export.printed_by = "katherine.johnson@nasa.org.uk"
-          final_reminder_letters_export.printed_on = Date.today
+          reminder_letters_export.printed_by = "katherine.johnson@nasa.org.uk"
+          reminder_letters_export.printed_on = Date.today
 
           expect(presenter.print_label).to include("Katherine Johnson")
         end
@@ -133,7 +133,7 @@ RSpec.describe FinalReminderLettersExportPresenter do
 
         context "when the number of letters is positive" do
           it "returns nil" do
-            final_reminder_letters_export.number_of_letters = 4
+            reminder_letters_export.number_of_letters = 4
             expect(presenter.print_label).to be_nil
           end
         end

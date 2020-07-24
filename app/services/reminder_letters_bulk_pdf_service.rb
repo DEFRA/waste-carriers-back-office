@@ -33,7 +33,7 @@ class ReminderLettersBulkPdfService < ::WasteCarriersEngine::BaseService
 
   def presenters
     @registrations.map do |registration|
-      presenter.new(registration)
+      ReminderLetterPresenter.new(registration)
     end
   end
 
@@ -44,10 +44,6 @@ class ReminderLettersBulkPdfService < ::WasteCarriersEngine::BaseService
   end
 
   def template
-    raise NotImplementedError
-  end
-
-  def presenter
     raise NotImplementedError
   end
 end

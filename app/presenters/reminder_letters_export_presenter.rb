@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FinalReminderLettersExportPresenter < ::WasteCarriersEngine::BasePresenter
+class ReminderLettersExportPresenter < ::WasteCarriersEngine::BasePresenter
   include ActionView::Helpers::TextHelper
 
   def downloadable?
@@ -13,9 +13,9 @@ class FinalReminderLettersExportPresenter < ::WasteCarriersEngine::BasePresenter
 
   def letters_label
     if number_of_letters.positive?
-      pluralize(number_of_letters, I18n.t("final_reminder_letters_exports.index.table.letters_label"))
+      pluralize(number_of_letters, I18n.t("reminder_letters_exports.index.table.letters_label"))
     else
-      I18n.t("final_reminder_letters_exports.index.labels.no_registrations")
+      I18n.t("reminder_letters_exports.index.labels.no_registrations")
     end
   end
 
@@ -30,7 +30,7 @@ class FinalReminderLettersExportPresenter < ::WasteCarriersEngine::BasePresenter
 
   def printed_label
     I18n.t(
-      "final_reminder_letters_exports.index.labels.printed",
+      "reminder_letters_exports.index.labels.printed",
       printed_by: printed_by_label,
       printed_on: printed_on.to_formatted_s(:abbr_week_day_month)
     )
@@ -41,6 +41,6 @@ class FinalReminderLettersExportPresenter < ::WasteCarriersEngine::BasePresenter
   end
 
   def none_to_print_label
-    I18n.t("final_reminder_letters_exports.index.labels.none_to_print")
+    I18n.t("reminder_letters_exports.index.labels.none_to_print")
   end
 end

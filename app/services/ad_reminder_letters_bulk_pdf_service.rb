@@ -11,8 +11,4 @@ class AdReminderLettersBulkPdfService < ReminderLettersBulkPdfService
   def template
     "ad_reminder_letters/bulk"
   end
-
-  def presenter
-    AdReminderLetterPresenter
-  end
 end

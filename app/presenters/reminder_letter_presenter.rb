@@ -2,7 +2,7 @@
 
 class MissingAddressError < StandardError; end
 
-class FinalReminderLetterPresenter < WasteCarriersEngine::BasePresenter
+class ReminderLetterPresenter < WasteCarriersEngine::BasePresenter
   include WasteCarriersEngine::ApplicationHelper
   include ActionView::Helpers::NumberHelper
 
