@@ -1,6 +1,6 @@
 en:
-  final_reminder_letters:
-    final_reminder_letter_content:
+  digital_reminder_letters:
+    digital_reminder_letter_content:
       section_1:
         salutation: "Dear %{name}"
         paragraph_1: "You must renew your waste carrier registration %{reg_identifier} by %{expires_on}"

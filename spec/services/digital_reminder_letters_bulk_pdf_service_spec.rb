@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe FinalReminderLettersBulkPdfService do
+RSpec.describe DigitalReminderLettersBulkPdfService do
   describe ".run" do
     let(:registrations) { create_list(:registration, 2, :expires_soon) }
     let(:result) { double(:result) }

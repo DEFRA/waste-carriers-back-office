@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-class FinalReminderLettersExportService < ReminderLettersExportService
+class DigitalReminderLettersExportService < ReminderLettersExportService
 
   private
 
   def bulk_pdf_service
-    FinalReminderLettersBulkPdfService
+    DigitalReminderLettersBulkPdfService
   end
 
   def error_label
-    "final digital reminder"
+    "digital reminder"
   end
 
   def file_name

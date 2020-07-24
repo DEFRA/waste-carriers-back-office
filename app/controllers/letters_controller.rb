@@ -2,6 +2,6 @@
 
 class LettersController < ApplicationController
   def index
-    authorize! :manage, FinalReminderLettersExport
+    authorize! :manage, ReminderLettersExport
   end
 end

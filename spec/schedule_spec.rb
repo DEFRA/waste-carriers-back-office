@@ -25,8 +25,8 @@ RSpec.describe "Whenever schedule" do
     expect(job_details[:every][1][:at]).to eq("21:05")
   end
 
-  it "picks up the final reminder letters export run frequency and time" do
-    job_details = schedule.jobs[:rake].find { |h| h[:task] == "letters:export:final_reminders" }
+  it "picks up the digital reminder letters export run frequency and time" do
+    job_details = schedule.jobs[:rake].find { |h| h[:task] == "letters:export:digital_reminders" }
 
     expect(job_details[:every][0]).to eq(:day)
     expect(job_details[:every][1][:at]).to eq("00:45")

@@ -43,11 +43,11 @@ every :day, at: (ENV["EXPORT_SERVICE_BOXI_EXPORT_TIME"] || "22:00"), roles: [:db
   rake "reports:export:boxi"
 end
 
-# This is the final reminder letters export job. When run it will generate a single
-# PDF containing final reminder letters for all non-AD registrations expiring
+# This is the reminder letters export job. When run it will generate a single
+# PDF containing reminder letters for all non-AD registrations expiring
 # in X days time
-every :day, at: (ENV["EXPORT_SERVICE_FINAL_REMINDER_LETTERS_TIME"] || "00:45"), roles: [:db] do
-  rake "letters:export:final_reminders"
+every :day, at: (ENV["EXPORT_SERVICE_DIGITAL_REMINDER_LETTERS_TIME"] || "00:45"), roles: [:db] do
+  rake "letters:export:digital_reminders"
 end
 
 # This is the AD reminder letters export job. When run it will generate a single

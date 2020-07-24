@@ -1,7 +1,7 @@
 en:
-  final_reminder_letters_exports:
+  digital_reminder_letters_exports:
     index:
-      heading: "Final renewal reminder letters - Non AD"
+      heading: "Renewal reminder letters - Non AD"
       table:
         heading:
           expires_on_date: "Expires on date"

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe ReminderLettersExportPresenter do
-  let(:reminder_letters_export) { build(:final_reminder_letters_export) }
+  let(:reminder_letters_export) { build(:digital_reminder_letters_export) }
   subject(:presenter) { described_class.new(reminder_letters_export) }
 
   describe "#downloadable?" do

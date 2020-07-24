@@ -4,4 +4,4 @@ en:
       heading: "Download letters"
       links:
         ad_reminder_letters_exports: "Assisted Digital renewal reminder letters"
-        final_reminder_letters_exports: "Digital renewal reminder letters"
+        digital_reminder_letters_exports: "Digital renewal reminder letters"
