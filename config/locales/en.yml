@@ -7,6 +7,7 @@ en:
       menu:
         dashboard: "Registrations search"
         convictions: "Conviction checks"
+        letters: "Download letters"
         users: "Manage users"
         conviction_imports: "Import conviction data"
         feature_toggles: "Toggle features"
