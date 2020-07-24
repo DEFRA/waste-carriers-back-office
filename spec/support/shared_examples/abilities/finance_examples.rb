@@ -64,6 +64,10 @@ RSpec.shared_examples "finance examples" do
     should_not be_able_to(:renew, WasteCarriersEngine::Registration)
   end
 
+  it "should not be able to manage reminder letter exports" do
+    should_not be_able_to(:manage, ReminderLettersExport)
+  end
+
   it "should not be able to record a cash payment" do
     should_not be_able_to(:record_cash_payment, WasteCarriersEngine::RenewingRegistration)
   end

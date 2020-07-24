@@ -2,7 +2,7 @@
 
 class FinalReminderLettersExportsController < ApplicationController
   def index
-    authorize! :manage, FinalReminderLettersExport
+    authorize! :manage, ReminderLettersExport
 
     @final_reminder_letters_exports_presenters = final_reminder_letters_exports_presenters
   end

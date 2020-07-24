@@ -21,6 +21,10 @@ RSpec.shared_examples "agency examples" do
     should be_able_to(:renew, WasteCarriersEngine::Registration)
   end
 
+  it "should be able to manage reminder letter exports" do
+    should be_able_to(:manage, ReminderLettersExport)
+  end
+
   it "should be able to edit a registration" do
     should be_able_to(:edit, WasteCarriersEngine::Registration)
   end

@@ -36,7 +36,7 @@ class Ability
     can :update, WasteCarriersEngine::RenewingRegistration
     can :create, WasteCarriersEngine::Registration
     can :renew, :all
-    can :manage, FinalReminderLettersExport
+    can :manage, ReminderLettersExport
     can :view_certificate, WasteCarriersEngine::Registration
     can :order_copy_cards, WasteCarriersEngine::Registration
     can :edit, WasteCarriersEngine::Registration
@@ -72,7 +72,6 @@ class Ability
   end
 
   def permissions_for_finance_user
-    can :manage, FinalReminderLettersExport
     can :view_certificate, WasteCarriersEngine::Registration
     can :record_bank_transfer_payment, :all
 
