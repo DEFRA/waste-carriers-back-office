@@ -32,11 +32,7 @@ module ActionLinksHelper
     return nil unless a_registration?(resource)
     return nil unless resource.renew_token.present?
 
-    [
-      Rails.configuration.wcrs_renewals_url,
-      "/fo/renew/",
-      resource.renew_token
-    ].join
+    RenewalMagicLinkService.run(token: resource.renew_token)
   end
 
   def display_write_off_small_link_for?(resource)

@@ -19,7 +19,7 @@ class RenewalReminderMailer < ActionMailer::Base
       ".renewal_reminder_mailer.first_reminder_email.subject",
       reg_identifier: registration.reg_identifier
     )
-    @renew_link = generate_renew_link(registration)
+    @renew_link = RenewalMagicLinkService.run(token: registration.renew_token)
 
     mail(
       to: registration.contact_email,
@@ -27,13 +27,5 @@ class RenewalReminderMailer < ActionMailer::Base
       subject: subject,
       template_name: :first_reminder_email
     )
-  end
-
-  def generate_renew_link(registration)
-    [
-      Rails.configuration.wcrs_renewals_url,
-      "/fo/renew/",
-      registration.renew_token
-    ].join
   end
 end
