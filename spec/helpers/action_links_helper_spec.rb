@@ -127,7 +127,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
-  describe "#display_renewal_link_for?" do
+  describe "#display_renewal_magic_link_for?" do
     let(:resource) { build(:registration) }
 
     context "when the 'renewal_reminders' feature toggle is enabled" do
@@ -139,7 +139,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:resource) { build(:renewing_registration) }
 
         it "returns false" do
-          expect(helper.display_renewal_link_for?(resource)).to eq(false)
+          expect(helper.display_renewal_magic_link_for?(resource)).to eq(false)
         end
       end
 
@@ -147,7 +147,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         before { allow(helper).to receive(:can?).and_return(false) }
 
         it "returns false" do
-          expect(helper.display_renewal_link_for?(resource)).to eq(false)
+          expect(helper.display_renewal_magic_link_for?(resource)).to eq(false)
         end
       end
 
@@ -158,7 +158,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           before { allow(resource).to receive(:can_start_renewal?).and_return(false) }
 
           it "returns false" do
-            expect(helper.display_renewal_link_for?(resource)).to eq(false)
+            expect(helper.display_renewal_magic_link_for?(resource)).to eq(false)
           end
         end
 
@@ -166,7 +166,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           before { allow(resource).to receive(:can_start_renewal?).and_return(true) }
 
           it "returns true" do
-            expect(helper.display_renewal_link_for?(resource)).to eq(true)
+            expect(helper.display_renewal_magic_link_for?(resource)).to eq(true)
           end
         end
       end
@@ -178,17 +178,17 @@ RSpec.describe ActionLinksHelper, type: :helper do
       end
 
       it "returns false" do
-        expect(helper.display_renewal_link_for?(resource)).to eq(false)
+        expect(helper.display_renewal_magic_link_for?(resource)).to eq(false)
       end
     end
   end
 
-  describe "renewal_link_for" do
+  describe "#renewal_magic_link_for" do
     context "when the resource is a new registration" do
       let(:resource) { build(:new_registration, token: "foo") }
 
       it "returns an nil" do
-        expect(helper.renewal_link_for(resource)).to be_nil
+        expect(helper.renewal_magic_link_for(resource)).to be_nil
       end
     end
 
@@ -196,7 +196,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:renewing_registration) }
 
       it "returns nil" do
-        expect(helper.renewal_link_for(resource)).to be_nil
+        expect(helper.renewal_magic_link_for(resource)).to be_nil
       end
     end
 
@@ -206,7 +206,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:renew_token) { "footoken" }
 
         it "returns the registration path" do
-          expect(helper.renewal_link_for(resource))
+          expect(helper.renewal_magic_link_for(resource))
             .to eq("#{Rails.configuration.wcrs_renewals_url}/fo/renew/#{renew_token}")
         end
       end
@@ -215,7 +215,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:resource) { build(:registration) }
 
         it "returns nil" do
-          expect(helper.renewal_link_for(resource)).to be_nil
+          expect(helper.renewal_magic_link_for(resource)).to be_nil
         end
       end
     end

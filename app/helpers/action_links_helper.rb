@@ -22,13 +22,13 @@ module ActionLinksHelper
     ad_privacy_policy_path(reg_identifier: resource.reg_identifier)
   end
 
-  def display_renewal_link_for?(resource)
+  def display_renewal_magic_link_for?(resource)
     return false unless WasteCarriersEngine::FeatureToggle.active?(:renewal_reminders)
 
     display_renew_link_for?(resource)
   end
 
-  def renewal_link_for(resource)
+  def renewal_magic_link_for(resource)
     return nil unless a_registration?(resource)
     return nil unless resource.renew_token.present?
 
