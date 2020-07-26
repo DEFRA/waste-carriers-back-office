@@ -41,7 +41,7 @@ gem "kaminari", "~> 1.1"
 gem "kaminari-mongoid", "~> 1.0"
 
 # Use Whenever to manage cron tasks
-gem "whenever", "~> 0.10.0"
+gem "whenever", "~> 1.0"
 
 gem "wicked_pdf"
 
