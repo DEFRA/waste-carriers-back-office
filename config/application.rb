@@ -33,6 +33,7 @@ module WasteCarriersBackOffice
     # config.i18n.default_locale = :de
 
     config.autoload_paths << "#{config.root}/app/forms/concerns"
+    config.autoload_paths << "#{config.root}/app/lib"
 
     # Enable the asset pipeline
     config.assets.enabled = true
