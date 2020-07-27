@@ -1,0 +1,3 @@
+<%= render("shared/message", message: flash[:message]) if flash[:message].present? %>
+<%= render("shared/success", message: flash[:success]) if flash[:success].present? %>
+<%= render("shared/error", message: flash[:error], details: flash[:error_details]) if flash[:error].present? %>

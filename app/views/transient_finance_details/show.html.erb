@@ -6,8 +6,7 @@
       <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
     </h1>
 
-    <%= render("shared/message", message: flash[:message]) if flash[:message].present? %>
-    <%= render("shared/error", error: flash[:error], details: flash[:error_details]) if flash[:error].present? %>
+    <%= render("shared/flash_messages") %>
   </div>
 </div>
 
