@@ -14,8 +14,8 @@ class ResendRenewalEmailController < ApplicationController
       )
     rescue Exceptions::MissingContactEmailError
       handle_missing_contact_email
-    rescue StandardError => error
-      handle_resend_errored(error)
+    rescue StandardError => e
+      handle_resend_errored(e)
     end
 
     redirect_back(fallback_location: "/")
