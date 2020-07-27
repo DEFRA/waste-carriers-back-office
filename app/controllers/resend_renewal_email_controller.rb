@@ -14,6 +14,8 @@ class ResendRenewalEmailController < ApplicationController
       )
     rescue Exceptions::MissingContactEmailError
       handle_missing_contact_email
+    rescue Exceptions::AssistedDigitalContactEmailError
+      handle_assisted_digital_contact_email
     rescue StandardError => e
       handle_resend_errored(e)
     end
@@ -38,6 +40,20 @@ class ResendRenewalEmailController < ApplicationController
   def handle_missing_contact_email
     message = I18n.t("resend_renewal_email.messages.missing.heading")
     description = I18n.t("resend_renewal_email.messages.missing.details")
+
+    flash_error(message, description)
+  end
+
+  # If the registration has a contact_email that matches the configured assisted
+  # digital one we know RenewalReminderMailer will throw a
+  # AssistedDigitalContactEmailError. This isn't something we want to record. So
+  # we don't worry about Airbrake or adding anything to the log.
+  def handle_assisted_digital_contact_email
+    message = I18n.t("resend_renewal_email.messages.assisted.heading")
+    description = I18n.t(
+      "resend_renewal_email.messages.assisted.details",
+      email: WasteCarriersEngine.configuration.assisted_digital_email
+    )
 
     flash_error(message, description)
   end

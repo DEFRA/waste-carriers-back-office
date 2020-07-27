@@ -35,6 +35,24 @@ RSpec.describe "ResendRenewalEmail", type: :request do
           expect(response).to redirect_to("/")
           expect(request.flash[:success]).to eq("Renewal email sent to #{email}")
         end
+
+        context "but it matches the assisted digital email" do
+          before do
+            allow(WasteCarriersEngine.configuration).to receive(:assisted_digital_email).and_return(email)
+          end
+
+          let(:email) { "nccc@example.com" }
+
+          it "does not send an email, redirects to the previous page and displays a flash 'error' message" do
+            expected_count = ActionMailer::Base.deliveries.count
+
+            get request_path, headers: { "HTTP_REFERER" => "/" }
+
+            expect(ActionMailer::Base.deliveries.count).to eq(expected_count)
+            expect(response).to redirect_to("/")
+            expect(request.flash[:error]).to eq("Sorry, there has been a problem re-sending the renewal email.")
+          end
+        end
       end
 
       context "and the registration has no contact email" do
