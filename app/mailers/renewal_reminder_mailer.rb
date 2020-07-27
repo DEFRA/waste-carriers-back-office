@@ -14,6 +14,8 @@ class RenewalReminderMailer < ActionMailer::Base
   private
 
   def reminder_email(registration)
+    raise Exceptions::MissingContactEmailError, registration.reg_identifier unless registration.contact_email.present?
+
     @registration = registration
     subject = I18n.t(
       ".renewal_reminder_mailer.first_reminder_email.subject",
