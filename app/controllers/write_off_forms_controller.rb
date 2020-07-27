@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class WriteOffFormsController < ResourceFormsController
+  include CanSetFlashMessages
   include FinanceDetailsHelper
 
   before_renew_or_complete :process_write_off
@@ -16,9 +17,8 @@ class WriteOffFormsController < ResourceFormsController
 
     return unless super(WriteOffForm, "write_off_form")
 
-    flash[:success] = I18n.t(
-      "write_off_forms.flash_messages.successful",
-      amount: display_pence_as_pounds_and_cents(amount_to_write_off)
+    flash_success(
+      I18n.t("write_off_forms.flash_messages.successful", amount: display_pence_as_pounds_and_cents(amount_to_write_off))
     )
   end
 

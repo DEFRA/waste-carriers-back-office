@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BankTransferPaymentFormsController < ResourceFormsController
+  include CanSetFlashMessages
+
   def new
     super(BankTransferPaymentForm, "bank_transfer_payment_form")
   end
@@ -10,9 +12,8 @@ class BankTransferPaymentFormsController < ResourceFormsController
 
     return unless super(BankTransferPaymentForm, "bank_transfer_payment_form")
 
-    flash[:success] = I18n.t(
-      "payments.messages.success",
-      amount: @bank_transfer_payment_form.amount
+    flash_success(
+      I18n.t("payments.messages.success", amount: @bank_transfer_payment_form.amount)
     )
   end
 

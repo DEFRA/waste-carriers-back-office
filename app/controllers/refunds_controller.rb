@@ -2,6 +2,7 @@
 
 class RefundsController < ApplicationController
   include CanFetchResource
+  include CanSetFlashMessages
   include FinanceDetailsHelper
 
   prepend_before_action :authorise_user!
@@ -29,9 +30,8 @@ class RefundsController < ApplicationController
     )
 
     if response
-      flash[:success] = I18n.t(
-        "refunds.flash_messages.successful",
-        amount: display_pence_as_pounds_and_cents(amount_to_refund)
+      flash_success(
+        I18n.t("refunds.flash_messages.successful", amount: display_pence_as_pounds_and_cents(amount_to_refund))
       )
     else
       flash[:error] = I18n.t("refunds.flash_messages.error")

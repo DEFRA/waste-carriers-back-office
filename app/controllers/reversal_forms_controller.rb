@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ReversalFormsController < ResourceFormsController
+  include CanSetFlashMessages
   include FinanceDetailsHelper
 
   def index
@@ -24,9 +25,8 @@ class ReversalFormsController < ResourceFormsController
       reason: @reversal_form.reason
     )
 
-    flash[:success] = I18n.t(
-      "reversal_forms.flash_messages.successful",
-      amount: display_pence_as_pounds_and_cents(@payment.amount)
+    flash_success(
+      I18n.t("reversal_forms.flash_messages.successful", amount: display_pence_as_pounds_and_cents(@payment.amount))
     )
   end
 

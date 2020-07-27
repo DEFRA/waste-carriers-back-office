@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PositiveChargeAdjustFormsController < ResourceFormsController
+  include CanSetFlashMessages
   include FinanceDetailsHelper
 
   before_renew_or_complete :process_charge_adjust
@@ -12,9 +13,11 @@ class PositiveChargeAdjustFormsController < ResourceFormsController
   def create
     return unless super(PositiveChargeAdjustForm, "positive_charge_adjust_form")
 
-    flash[:success] = I18n.t(
-      "positive_charge_adjust_forms.messages.success",
-      amount: display_pence_as_pounds_and_cents(@positive_charge_adjust_form.amount)
+    flash_success(
+      I18n.t(
+        "positive_charge_adjust_forms.messages.success",
+        amount: display_pence_as_pounds_and_cents(@positive_charge_adjust_form.amount)
+      )
     )
   end
 

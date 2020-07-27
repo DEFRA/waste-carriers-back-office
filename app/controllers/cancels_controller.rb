@@ -2,6 +2,7 @@
 
 class CancelsController < ApplicationController
   include CanFetchResource
+  include CanSetFlashMessages
   include FinanceDetailsHelper
 
   prepend_before_action :authenticate_user!
@@ -13,9 +14,8 @@ class CancelsController < ApplicationController
     @resource.metaData.cancel
     @resource.save!
 
-    flash[:success] = I18n.t(
-      "cancels.messages.success",
-      reg_identifier: @resource.reg_identifier
+    flash_success(
+      I18n.t("cancels.messages.success", reg_identifier: @resource.reg_identifier)
     )
 
     redirect_to details_path_for(@resource)

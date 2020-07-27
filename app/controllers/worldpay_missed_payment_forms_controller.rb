@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class WorldpayMissedPaymentFormsController < ResourceFormsController
+  include CanSetFlashMessages
+
   before_renew_or_complete :change_state_if_possible
 
   def new
@@ -12,9 +14,8 @@ class WorldpayMissedPaymentFormsController < ResourceFormsController
 
     return unless super(WorldpayMissedPaymentForm, "worldpay_missed_payment_form")
 
-    flash[:success] = I18n.t(
-      "payments.messages.success",
-      amount: @worldpay_missed_payment_form.amount
+    flash_success(
+      I18n.t("payments.messages.success", amount: @worldpay_missed_payment_form.amount)
     )
   end
 

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PostalOrderPaymentFormsController < ResourceFormsController
+  include CanSetFlashMessages
+
   def new
     super(PostalOrderPaymentForm, "postal_order_payment_form")
   end
@@ -10,9 +12,8 @@ class PostalOrderPaymentFormsController < ResourceFormsController
 
     return unless super(PostalOrderPaymentForm, "postal_order_payment_form")
 
-    flash[:success] = I18n.t(
-      "payments.messages.success",
-      amount: @postal_order_payment_form.amount
+    flash_success(
+      I18n.t("payments.messages.success", amount: @postal_order_payment_form.amount)
     )
   end
 

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CashPaymentFormsController < ResourceFormsController
+  include CanSetFlashMessages
+
   def new
     super(CashPaymentForm, "cash_payment_form")
   end
@@ -10,9 +12,8 @@ class CashPaymentFormsController < ResourceFormsController
 
     return unless super(CashPaymentForm, "cash_payment_form")
 
-    flash[:success] = I18n.t(
-      "payments.messages.success",
-      amount: @cash_payment_form.amount
+    flash_success(
+      I18n.t("payments.messages.success", amount: @cash_payment_form.amount)
     )
   end
 
