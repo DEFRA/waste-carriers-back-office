@@ -45,7 +45,7 @@ RSpec.describe RenewalReminderMailer, type: :mailer do
       it "throws an error" do
         instance = RenewalReminderMailer.new
 
-        expect { instance.first_reminder_email(registration) }.to raise_error(Exceptions::MissingContactEmailError)
+        expect { instance.second_reminder_email(registration) }.to raise_error(Exceptions::MissingContactEmailError)
       end
     end
 

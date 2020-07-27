@@ -41,8 +41,6 @@ RSpec.describe "ResendRenewalEmail", type: :request do
         let(:email) { nil }
 
         it "does not send an email, redirects to the previous page and displays a flash 'error' message" do
-          # expect(RenewalReminderMailer).to receive(:second_reminder_email).and_raise(Exceptions::MissingContactEmailError)
-
           expected_count = ActionMailer::Base.deliveries.count
 
           get request_path, headers: { "HTTP_REFERER" => "/" }
