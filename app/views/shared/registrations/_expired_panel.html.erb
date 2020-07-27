@@ -2,14 +2,13 @@
   <h2 class="heading-medium">
     <%= t(".heading", date: resource.display_expiry_date) %>
   </h2>
-  <% if resource.can_start_renewal? %>
+  <% if display_renew_link_for?(resource) %>
     <%= link_to t(".links.renew"),
                 WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier),
                 class: 'button' %>
-  <!-- TODO: restore when internal route exists https://eaflood.atlassian.net/browse/RUBY-786 -->
-  <%# else %>
-    <%#= link_to t(".links.new_registration"),
-                "#{Rails.configuration.wcrs_backend_url}/registrations/start",
+  <% elsif can?(:create, WasteCarriersEngine::Registration) && WasteCarriersEngine::FeatureToggle.active?(:new_registration) %>
+    <%= link_to t(".links.new_registration"),
+                ad_privacy_policy_path,
                 class: 'button' %>
   <% end %>
 </div>
