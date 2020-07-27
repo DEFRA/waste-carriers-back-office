@@ -812,6 +812,16 @@ RSpec.describe ActionLinksHelper, type: :helper do
   describe "#display_resend_renewal_reminder_link_for?" do
     let(:resource) { build(:registration) }
 
+    context "when the 'renewal_reminders' feature toggle is not enabled" do
+      before do
+        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:renewal_reminders).and_return(false)
+      end
+
+      it "returns false" do
+        expect(helper.display_resend_renewal_reminder_link_for?(resource)).to eq(false)
+      end
+    end
+
     context "when the 'renewal_reminders' feature toggle is enabled" do
       before do
         allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:renewal_reminders).and_return(true)
@@ -851,16 +861,6 @@ RSpec.describe ActionLinksHelper, type: :helper do
             expect(helper.display_resend_renewal_reminder_link_for?(resource)).to eq(true)
           end
         end
-      end
-    end
-
-    context "when the 'renewal_reminders' feature toggle is not enabled" do
-      before do
-        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:renewal_reminders).and_return(false)
-      end
-
-      it "returns false" do
-        expect(helper.display_resend_renewal_reminder_link_for?(resource)).to eq(false)
       end
     end
   end

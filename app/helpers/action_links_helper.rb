@@ -124,8 +124,10 @@ module ActionLinksHelper
 
   def display_resend_renewal_reminder_link_for?(resource)
     return false unless WasteCarriersEngine::FeatureToggle.active?(:renewal_reminders)
-
-    display_renew_link_for?(resource)
+    return false unless display_registration_links?(resource)
+    return false unless can?(:renew, WasteCarriersEngine::Registration)
+    
+    resource.can_start_renewal?
   end
 
   private
