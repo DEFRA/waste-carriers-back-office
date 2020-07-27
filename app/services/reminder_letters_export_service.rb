@@ -9,7 +9,6 @@ class ReminderLettersExportService < ::WasteCarriersEngine::BaseService
     @reminder_letters_export = reminder_letters_export
 
     if registrations.any?
-      puts "DEBUG: registrations method returned #{registrations.count} matches"
       File.open(file_path, "w:ASCII-8BIT") do |file|
         file.write(bulk_pdf_service.run(registrations))
       end
@@ -40,8 +39,6 @@ class ReminderLettersExportService < ::WasteCarriersEngine::BaseService
   def record_content_created
     @reminder_letters_export.number_of_letters = registrations.count
     @reminder_letters_export.file_name = file_name
-
-    puts "DEBUG: @reminder_letters_export: #{@reminder_letters_export.to_json}"
 
     @reminder_letters_export.save!
     @reminder_letters_export.succeeded!
