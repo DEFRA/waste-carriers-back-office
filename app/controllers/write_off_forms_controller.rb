@@ -18,7 +18,10 @@ class WriteOffFormsController < ResourceFormsController
     return unless super(WriteOffForm, "write_off_form")
 
     flash_success(
-      I18n.t("write_off_forms.flash_messages.successful", amount: display_pence_as_pounds_and_cents(amount_to_write_off))
+      I18n.t(
+        "write_off_forms.flash_messages.successful",
+        amount: display_pence_as_pounds_and_cents(amount_to_write_off)
+      )
     )
   end
 
