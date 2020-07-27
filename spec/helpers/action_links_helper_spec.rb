@@ -808,4 +808,60 @@ RSpec.describe ActionLinksHelper, type: :helper do
       end
     end
   end
+
+  describe "#display_resend_renewal_reminder_link_for?" do
+    let(:resource) { build(:registration) }
+
+    context "when the 'renewal_reminders' feature toggle is enabled" do
+      before do
+        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:renewal_reminders).and_return(true)
+      end
+
+      context "but the resource is not a Registration" do
+        let(:resource) { build(:renewing_registration) }
+
+        it "returns false" do
+          expect(helper.display_resend_renewal_reminder_link_for?(resource)).to eq(false)
+        end
+      end
+
+      context "and the user does not have permission" do
+        before { allow(helper).to receive(:can?).and_return(false) }
+
+        it "returns false" do
+          expect(helper.display_resend_renewal_reminder_link_for?(resource)).to eq(false)
+        end
+      end
+
+      context "and the user has permission" do
+        before { allow(helper).to receive(:can?).and_return(true) }
+
+        context "and the resource cannot begin a renewal" do
+          before { allow(resource).to receive(:can_start_renewal?).and_return(false) }
+
+          it "returns false" do
+            expect(helper.display_resend_renewal_reminder_link_for?(resource)).to eq(false)
+          end
+        end
+
+        context "and the resource can begin a renewal" do
+          before { allow(resource).to receive(:can_start_renewal?).and_return(true) }
+
+          it "returns true" do
+            expect(helper.display_resend_renewal_reminder_link_for?(resource)).to eq(true)
+          end
+        end
+      end
+    end
+
+    context "when the 'renewal_reminders' feature toggle is not enabled" do
+      before do
+        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:renewal_reminders).and_return(false)
+      end
+
+      it "returns false" do
+        expect(helper.display_resend_renewal_reminder_link_for?(resource)).to eq(false)
+      end
+    end
+  end
 end

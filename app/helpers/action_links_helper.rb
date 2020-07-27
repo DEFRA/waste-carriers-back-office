@@ -122,6 +122,12 @@ module ActionLinksHelper
     can?(:transfer_registration, WasteCarriersEngine::Registration)
   end
 
+  def display_resend_renewal_reminder_link_for?(resource)
+    return false unless WasteCarriersEngine::FeatureToggle.active?(:renewal_reminders)
+
+    display_renew_link_for?(resource)
+  end
+
   private
 
   def display_renewing_registration_links?(resource)
