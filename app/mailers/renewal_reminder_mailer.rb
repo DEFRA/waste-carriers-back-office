@@ -14,7 +14,7 @@ class RenewalReminderMailer < ActionMailer::Base
   private
 
   def reminder_email(registration)
-    raise Exceptions::MissingContactEmailError, registration.reg_identifier unless registration.contact_email.present?
+    validate_contact_email(registration)
 
     @registration = registration
     subject = I18n.t(
@@ -29,5 +29,15 @@ class RenewalReminderMailer < ActionMailer::Base
       subject: subject,
       template_name: :first_reminder_email
     )
+  end
+
+  private
+
+  def validate_contact_email(registration)
+    raise Exceptions::MissingContactEmailError, registration.reg_identifier unless registration.contact_email.present?
+
+    assisted_digital_match = registration.contact_email == WasteCarriersEngine.configuration.assisted_digital_email
+
+    raise Exceptions::AssistedDigitalContactEmailError, registration.reg_identifier if assisted_digital_match
   end
 end

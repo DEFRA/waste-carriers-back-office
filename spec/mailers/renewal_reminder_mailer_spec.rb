@@ -21,15 +21,31 @@ RSpec.describe RenewalReminderMailer, type: :mailer do
     end
 
     context "when the registration's contact email is present" do
-      let(:contact_email) { "foo@example.com" }
+      context "and it is valid" do
+        let(:contact_email) { "foo@example.com" }
 
-      it "sends a first reminder email" do
-        mail = described_class.first_reminder_email(registration)
+        it "sends the first reminder email" do
+          mail = described_class.first_reminder_email(registration)
 
-        expect(registration).to receive(:renew_token)
-        expect(mail.subject).to include("Renew waste carrier registration")
-        expect(mail.to).to eq([registration.contact_email])
-        expect(mail.body.encoded).to include(registration.reg_identifier)
+          expect(registration).to receive(:renew_token)
+          expect(mail.subject).to include("Renew waste carrier registration")
+          expect(mail.to).to eq([registration.contact_email])
+          expect(mail.body.encoded).to include(registration.reg_identifier)
+        end
+      end
+
+      context "but it matches the assisted digital email" do
+        before do
+          allow(WasteCarriersEngine.configuration).to receive(:assisted_digital_email).and_return(contact_email)
+        end
+
+        let(:contact_email) { "nccc@example.com" }
+
+        it "throws an error" do
+          instance = RenewalReminderMailer.new
+
+          expect { instance.first_reminder_email(registration) }.to raise_error(Exceptions::AssistedDigitalContactEmailError)
+        end
       end
     end
   end
@@ -52,15 +68,31 @@ RSpec.describe RenewalReminderMailer, type: :mailer do
     end
 
     context "when the registration's contact email is present" do
-      let(:contact_email) { "foo@example.com" }
+      context "and it is valid" do
+        let(:contact_email) { "foo@example.com" }
 
-      it "sends a second reminder email" do
-        mail = described_class.second_reminder_email(registration)
+        it "sends the second reminder email" do
+          mail = described_class.second_reminder_email(registration)
 
-        expect(registration).to receive(:renew_token)
-        expect(mail.subject).to include("Renew waste carrier registration")
-        expect(mail.to).to eq([registration.contact_email])
-        expect(mail.body.encoded).to include(registration.reg_identifier)
+          expect(registration).to receive(:renew_token)
+          expect(mail.subject).to include("Renew waste carrier registration")
+          expect(mail.to).to eq([registration.contact_email])
+          expect(mail.body.encoded).to include(registration.reg_identifier)
+        end
+      end
+
+      context "but it matches the assisted digital email" do
+        before do
+          allow(WasteCarriersEngine.configuration).to receive(:assisted_digital_email).and_return(contact_email)
+        end
+
+        let(:contact_email) { "nccc@example.com" }
+
+        it "throws an error" do
+          instance = RenewalReminderMailer.new
+
+          expect { instance.second_reminder_email(registration) }.to raise_error(Exceptions::AssistedDigitalContactEmailError)
+        end
       end
     end
   end
