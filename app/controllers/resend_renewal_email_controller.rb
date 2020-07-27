@@ -16,7 +16,9 @@ class ResendRenewalEmailController < ApplicationController
       Airbrake.notify e, registration: registration.reg_identifier
       Rails.logger.error "Failed to send renewal email for registration #{registration.reg_identifier}"
 
-      flash[:message] = I18n.t("resend_renewal_email.messages.failure", email: registration.contact_email)
+      flash_message(
+        I18n.t("resend_renewal_email.messages.failure", email: registration.contact_email)
+      )
     end
 
     redirect_back(fallback_location: "/")
