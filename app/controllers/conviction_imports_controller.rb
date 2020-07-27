@@ -39,9 +39,8 @@ class ConvictionImportsController < ApplicationController
   end
 
   def add_error_flash_message(error)
-    flash[:error] = I18n.t(
-      "conviction_imports.flash_messages.error",
-      error: error
+    flash_error(
+      I18n.t("conviction_imports.flash_messages.error", error: error), nil
     )
   end
 end

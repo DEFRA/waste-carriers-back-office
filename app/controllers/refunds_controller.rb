@@ -34,7 +34,9 @@ class RefundsController < ApplicationController
         I18n.t("refunds.flash_messages.successful", amount: display_pence_as_pounds_and_cents(amount_to_refund))
       )
     else
-      flash[:error] = I18n.t("refunds.flash_messages.error")
+      flash_error(
+        I18n.t("refunds.flash_messages.error"), nil
+      )
     end
 
     redirect_to resource_finance_details_path(@resource._id)
