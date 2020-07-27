@@ -8,6 +8,10 @@ RSpec.describe AdReminderLettersExportService do
     let(:result) { double(:result, successful?: true) }
     let(:ad_reminder_letters_export) { create(:ad_reminder_letters_export) }
 
+    before :all do
+      puts "DEBUG: In #{self.class.description}"
+    end
+
     before do
       create_list(:registration,
                   3,

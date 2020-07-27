@@ -21,6 +21,10 @@ class AdReminderLettersExportService < ReminderLettersExportService
   end
 
   def registrations
+    puts "DEBUG: in registrations method"
+    puts "DEBUG: @reminder_letters_export.expires_on: #{@reminder_letters_export.expires_on}"
+    puts "DEBUG: number of regs #{WasteCarriersEngine::Registration.count}"
+    puts "DEBUG: reg expiry dates #{WasteCarriersEngine::Registration.last.expires_on}"
     @_registrations ||= lambda do
       from = @reminder_letters_export.expires_on.beginning_of_day
       to = @reminder_letters_export.expires_on.end_of_day
