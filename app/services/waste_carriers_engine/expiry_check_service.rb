@@ -19,6 +19,10 @@ module WasteCarriersEngine
       current_day_is_within_grace_window?(last_day_of_grace_window)
     end
 
+    def in_standard_expiry_grace_window?
+      current_day_is_within_grace_window?(last_day_of_standard_grace_window)
+    end
+
     private
 
     def last_day_of_extended_grace_window

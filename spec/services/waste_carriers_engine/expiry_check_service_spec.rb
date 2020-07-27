@@ -125,5 +125,64 @@ module WasteCarriersEngine
         end
       end
     end
+
+    describe "#in_standard_expiry_grace_window?" do
+      # You have to use let! to ensure it is not lazy-evaluated. If it is
+      # it will be called inside the Timecop.freeze methods listed below
+      # which means Date.today will evaluate to the date Timecop is freezing.
+      # This leads to false positives for some tests, and a fail for the outside
+      # renewal window.
+      let!(:registration) { build(:registration, expires_on: Date.today) }
+      subject { ExpiryCheckService.new(registration) }
+
+      context "when the grace window is 3 days" do
+        before { allow(Rails.configuration).to receive(:grace_window).and_return(3) }
+
+        context "and the current date is within the window" do
+          it "returns true" do
+            Timecop.freeze((Date.today + 3.days) - 1.day) do
+              expect(subject.in_standard_expiry_grace_window?).to eq(true)
+            end
+          end
+        end
+
+        context "and the current date is outside the window" do
+          it "returns false" do
+            Timecop.freeze(Date.today + 3.days) do
+              expect(subject.in_standard_expiry_grace_window?).to eq(false)
+            end
+          end
+        end
+
+        context "when the registration was created in BST and expires in GMT" do
+          subject { ExpiryCheckService.new(bst_registration) }
+
+          it "should not be within the grace window for an extra day due to the time difference" do
+            # Skip ahead to the start of the day a reg should expire, plus the
+            # grace window
+            Timecop.freeze(Time.find_zone("London").local(2020, 3, 31, 0, 1)) do
+              # GMT is now in effect (not BST)
+              # UK local time & UTC are both 00:01 on 28 March 2020
+              expect(subject.in_standard_expiry_grace_window?).to eq(false)
+            end
+          end
+        end
+
+        context "when the registration was created in GMT and expires in BST" do
+          subject { ExpiryCheckService.new(gmt_registration) }
+
+          it "should not be within the grace window for an extra day due to the time difference" do
+            # Skip ahead to the start of the day a reg should expire, plus the
+            # grace window
+            Timecop.freeze(Time.find_zone("London").local(2018, 10, 30, 0, 1)) do
+              # BST is now in effect (not GMT)
+              # UK local time is 00:01 on 27 October 2018
+              # UTC time is 23:01 on 26 October 2018
+              expect(subject.in_standard_expiry_grace_window?).to eq(false)
+            end
+          end
+        end
+      end
+    end
   end
 end
