@@ -58,5 +58,5 @@ before_script:
 
 script:
   - bundle exec rubocop --format progress --format json --out rubocop-result.json
-  - bundle exec rspec
+  - bundle exec rspec --seed 13731
   - sonar-scanner
