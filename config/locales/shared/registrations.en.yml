@@ -96,7 +96,7 @@ en:
         heading: Card payment confirmation
         labels:
           email: "Email address"
-      renewal_link_panel:
+      renewal_magic_link_panel:
         heading: Renewal link
       finance_details:
         finance_information:
