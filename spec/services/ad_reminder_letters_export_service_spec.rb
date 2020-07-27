@@ -4,14 +4,17 @@ require "rails_helper"
 
 RSpec.describe AdReminderLettersExportService do
   describe ".run" do
+    let(:ad_email) { "ad@wcr.gov.uk" }
     let(:bucket) { double(:bucket) }
     let(:result) { double(:result, successful?: true) }
     let(:ad_reminder_letters_export) { create(:ad_reminder_letters_export) }
 
     before do
+      allow(WasteCarriersEngine.configuration).to receive(:assisted_digital_email).and_return(ad_email)
+
       create_list(:registration,
                   3,
-                  contact_email: WasteCarriersEngine.configuration.assisted_digital_email,
+                  contact_email: ad_email,
                   expires_on: ad_reminder_letters_export.expires_on)
     end
 
@@ -33,7 +36,7 @@ RSpec.describe AdReminderLettersExportService do
       context "when one registration is in an invalid state and a PDF cannot be generated for it" do
         it "raises an error on Airbrake but continues generation for the other letters" do
           registration = create(:registration,
-                                contact_email: WasteCarriersEngine.configuration.assisted_digital_email,
+                                contact_email: ad_email,
                                 expires_on: ad_reminder_letters_export.expires_on)
           registration.contact_address.delete
 
