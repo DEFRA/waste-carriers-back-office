@@ -2,8 +2,12 @@
 
 FactoryBot.define do
   factory :renewing_registration, class: WasteCarriersEngine::RenewingRegistration do
+    contact_email { "whatever@example.com" }
+    first_name { "Jane" }
+    last_name { "Doe" }
     location { "england" }
     temp_cards { 1 }
+    phone_number { "03708 506506" }
 
     addresses { [build(:address, :registered), build(:address, :contact)] }
 
