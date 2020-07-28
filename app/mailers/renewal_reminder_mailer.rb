@@ -31,8 +31,6 @@ class RenewalReminderMailer < ActionMailer::Base
     )
   end
 
-  private
-
   def validate_contact_email(registration)
     raise Exceptions::MissingContactEmailError, registration.reg_identifier unless registration.contact_email.present?
 
