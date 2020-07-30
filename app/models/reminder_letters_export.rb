@@ -10,8 +10,6 @@ class ReminderLettersExport
     DELETED = "deleted"
   ].freeze
 
-  validates :expires_on, uniqueness: true
-
   store_in collection: "reminder_letters_exports"
 
   scope :not_deleted, -> { where.not(status: DELETED) }
