@@ -780,7 +780,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       end
 
       context "and the user does not have permission" do
-        before { allow(helper).to receive(:can?).and_return(false) }
+        before { expect(helper).to receive(:can?).with(:renew, WasteCarriersEngine::Registration).and_return(false) }
 
         it "returns false" do
           expect(helper.display_ways_to_share_magic_link_for?(resource)).to eq(false)
@@ -788,18 +788,18 @@ RSpec.describe ActionLinksHelper, type: :helper do
       end
 
       context "and the user has permission" do
-        before { allow(helper).to receive(:can?).and_return(true) }
+        before { expect(helper).to receive(:can?).with(:renew, WasteCarriersEngine::Registration).and_return(true) }
 
-        context "and the resource cannot begin a renewal" do
-          before { allow(resource).to receive(:can_start_renewal?).and_return(false) }
+        context "and the resource cannot begin a renewal in the front office" do
+          before { expect(resource).to receive(:can_start_front_office_renewal?).and_return(false) }
 
           it "returns false" do
             expect(helper.display_ways_to_share_magic_link_for?(resource)).to eq(false)
           end
         end
 
-        context "and the resource can begin a renewal" do
-          before { allow(resource).to receive(:can_start_renewal?).and_return(true) }
+        context "and the resource can begin a renewal in the front office" do
+          before { expect(resource).to receive(:can_start_front_office_renewal?).and_return(true) }
 
           it "returns true" do
             expect(helper.display_ways_to_share_magic_link_for?(resource)).to eq(true)

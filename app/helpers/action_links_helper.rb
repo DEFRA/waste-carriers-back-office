@@ -120,8 +120,8 @@ module ActionLinksHelper
     return false unless WasteCarriersEngine::FeatureToggle.active?(:renewal_reminders)
     return false unless display_registration_links?(resource)
     return false unless can?(:renew, WasteCarriersEngine::Registration)
-    
-    resource.can_start_renewal?
+
+    resource.can_start_front_office_renewal?
   end
 
   private
