@@ -11,6 +11,16 @@ RSpec.describe AdReminderLettersExport, type: :model do
 
       expect(invalid_record).to_not be_valid
     end
+
+    context "when there is a digital export with the same date" do
+      let(:digital_reminder_letters_export) { create(:digital_reminder_letters_export) }
+
+      it "is valid" do
+        valid_record = build(:ad_reminder_letters_export, expires_on: digital_reminder_letters_export.expires_on)
+
+        expect(valid_record).to be_valid
+      end
+    end
   end
 
   describe "#export!" do
