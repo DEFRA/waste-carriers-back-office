@@ -50,4 +50,8 @@ class ReminderLetterPresenter < WasteCarriersEngine::BasePresenter
      "/fo/renew/",
      renew_token].join
   end
+
+  def from_email
+    Rails.configuration.email_service_email
+  end
 end

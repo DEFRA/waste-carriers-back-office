@@ -37,7 +37,10 @@
       </p>
 
       <ol>
-        <li><%= t(".section_2.instructions.line_1", email: presenter.contact_email, date: presenter.renewal_email_date) %></li>
+        <li><%= t(".section_2.instructions.line_1",
+                email: presenter.contact_email,
+                date: presenter.renewal_email_date,
+                from_email: presenter.from_email) %></li>
         <li><%= t(".section_2.instructions.line_2") %></li>
         <li><%= t(".section_2.instructions.line_3") %></li>
       </ol>

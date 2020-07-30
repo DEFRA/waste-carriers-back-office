@@ -128,4 +128,13 @@ RSpec.describe ReminderLetterPresenter do
       expect(subject.renewal_url).to eq(expected_url)
     end
   end
+
+  describe "#from_email" do
+    let(:email_service_email) { "email_service_email@wcr.gov.uk" }
+
+    it "returns the email_service_email from the config" do
+      expect(Rails.configuration).to receive(:email_service_email).and_return(email_service_email)
+      expect(subject.from_email).to eq(email_service_email)
+    end
+  end
 end
