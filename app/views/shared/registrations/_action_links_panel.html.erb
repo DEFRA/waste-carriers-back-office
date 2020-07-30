@@ -15,7 +15,7 @@
       </li>
     <% end %>
 
-    <% if display_resend_renewal_email_link_for?(resource) %>
+    <% if display_ways_to_share_magic_link_for?(resource) %>
       <li>
         <%= link_to t(".actions_box.links.resend_renewal_email"), resend_renewal_email_path(reg_identifier: resource.reg_identifier) %>
       </li>

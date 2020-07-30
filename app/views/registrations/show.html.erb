@@ -55,7 +55,7 @@
           <%= render "shared/registrations/receipt_email_panel", resource: @registration %>
         <% end %>
 
-        <% if display_renewal_magic_link_for?(@registration) %>
+        <% if display_ways_to_share_magic_link_for?(@registration) %>
           <%= render "shared/registrations/renewal_magic_link_panel", resource: @registration %>
         <% end %>
       </div>
