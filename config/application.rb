@@ -117,10 +117,10 @@ module WasteCarriersBackOffice
     config.second_renewal_email_reminder_days = ENV["SECOND_RENEWAL_EMAIL_REMINDER_DAYS"] || 28
 
     # Letters exports
-    config.digital_reminder_letters_exports_expires_in = ENV["DIGITAL_REMINDER_LETTERS_EXPORTS_EXPIRES_IN"] || 14
-    config.digital_reminder_letters_delete_records_in = ENV["DIGITAL_REMINDER_LETTERS_DELETE_RECORDS_IN"] || 7
+    config.digital_reminder_letters_exports_expires_in = ENV["DIGITAL_REMINDER_LETTERS_EXPORTS_EXPIRES_IN"] || 21
+    config.digital_reminder_letters_delete_records_in = ENV["DIGITAL_REMINDER_LETTERS_DELETE_RECORDS_IN"] || 28
     config.ad_reminder_letters_exports_expires_in = ENV["AD_REMINDER_LETTERS_EXPORTS_EXPIRES_IN"] || 35
-    config.ad_reminder_letters_delete_records_in = ENV["AD_REMINDER_LETTERS_DELETE_RECORDS_IN"] || 7
+    config.ad_reminder_letters_delete_records_in = ENV["AD_REMINDER_LETTERS_DELETE_RECORDS_IN"] || 28
 
     # Digital or assisted digital metaData.route value
     config.metadata_route = "ASSISTED_DIGITAL"
