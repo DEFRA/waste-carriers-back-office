@@ -21,6 +21,7 @@ class RenewalReminderServiceBase < ::WasteCarriersEngine::BaseService
   def expiring_registrations
     WasteCarriersEngine::Registration
       .active
+      .upper_tier
       .where(
         expires_on:
         {
