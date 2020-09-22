@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 6b13dd639ad2050bbd64e86774eb61700eed3130
-  branch: main
+  revision: ce7d14489f01060accfefd42d65ea951cda1b860
+  branch: feature/grace-window-rules
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 4.12)
