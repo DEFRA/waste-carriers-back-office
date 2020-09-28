@@ -91,7 +91,11 @@ module WasteCarriersBackOffice
     # Times
     config.renewal_window = ENV["WCRS_REGISTRATION_RENEWAL_WINDOW"].to_i
     config.expires_after = ENV["WCRS_REGISTRATION_EXPIRES_AFTER"].to_i
+    config.covid_grace_window = ENV["WCRS_REGISTRATION_COVID_GRACE_WINDOW"].to_i
     config.grace_window = ENV["WCRS_REGISTRATION_GRACE_WINDOW"].to_i
+    config.end_of_covid_extension = Date.new(ENV["WCRS_END_OF_COVID_EXTENSION_YEAR"].to_i,
+                                             ENV["WCRS_END_OF_COVID_EXTENSION_MONTH"].to_i,
+                                             ENV["WCRS_END_OF_COVID_EXTENSION_DAY"].to_i)
 
     # Worldpay
     config.worldpay_url = if ENV["WCRS_MOCK_ENABLED"].to_s.downcase == "true"
