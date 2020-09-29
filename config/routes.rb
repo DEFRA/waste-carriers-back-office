@@ -225,6 +225,12 @@ Rails.application.routes.draw do
             path: "/bo/import-convictions",
             path_names: { new: "" }
 
+  # Redirect old Devise routes
+  # rubocop:disable Style/FormatStringToken
+  get "/agency_users(*all)" => redirect("/bo/users%{all}")
+  get "/admins(*all)" => redirect("/bo/users%{all}")
+  # rubocop:enable Style/FormatStringToken
+
   mount DefraRubyMocks::Engine => "/bo/mocks"
 
   mount DefraRubyFeatures::Engine => "/bo/features", as: "features_engine"

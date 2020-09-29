@@ -73,4 +73,44 @@ RSpec.describe "Root", type: :request do
       end
     end
   end
+
+  describe "GET /agency_users" do
+    context "when the user goes to an old Devise sign-in URL" do
+      it "returns a 301 and loads the new Devise URL" do
+        get "/agency_users/sign_in"
+
+        expect(response).to have_http_status(301)
+        expect(response).to redirect_to("/bo/users/sign_in")
+      end
+    end
+
+    context "when the user goes to an old Devise password URL" do
+      it "returns a 301 and loads the new Devise URL" do
+        get "/agency_users/password/edit"
+
+        expect(response).to have_http_status(301)
+        expect(response).to redirect_to("/bo/users/password/edit")
+      end
+    end
+  end
+
+  describe "GET /admins" do
+    context "when the user goes to an old Devise sign-in URL" do
+      it "returns a 301 and loads the new Devise URL" do
+        get "/admins/sign_in"
+
+        expect(response).to have_http_status(301)
+        expect(response).to redirect_to("/bo/users/sign_in")
+      end
+    end
+
+    context "when the user goes to an old Devise password URL" do
+      it "returns a 301 and loads the new Devise URL" do
+        get "/admins/password/edit"
+
+        expect(response).to have_http_status(301)
+        expect(response).to redirect_to("/bo/users/password/edit")
+      end
+    end
+  end
 end
