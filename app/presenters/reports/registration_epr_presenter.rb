@@ -47,8 +47,8 @@ module Reports
       original_expires_on < end_of_covid_extension
     end
 
-    def extended_covid_expiry_date(expires_on)
-      (expires_on + Rails.configuration.grace_window.days).to_formatted_s(:year_month_day_hyphens)
+    def extended_covid_expiry_date(original_expires_on)
+      (original_expires_on + Rails.configuration.grace_window.days).to_formatted_s(:year_month_day_hyphens)
     end
   end
 end
