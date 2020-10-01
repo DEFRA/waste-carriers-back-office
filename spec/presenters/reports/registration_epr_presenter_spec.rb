@@ -58,8 +58,8 @@ module Reports
             expect(Rails.configuration).to receive(:end_of_covid_extension).and_return(Date.new(2020, 10, 1))
           end
 
-          it "returns the object expires_on formatted plus grace window days" do
-            allow(Rails.configuration).to receive(:grace_window).and_return(3)
+          it "returns the object expires_on formatted plus COVID grace window days" do
+            allow(Rails.configuration).to receive(:covid_grace_window).and_return(3)
 
             allow(registration).to receive(:expires_on).and_return(Time.new(2015, 1, 1))
 
