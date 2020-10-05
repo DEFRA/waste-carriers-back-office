@@ -15,7 +15,7 @@ module Reports
 
         expect(result).to include("\"Registration number\",\"Organisation name\",\"UPRN\",\"Building\",\"Address line 1\",\"Address line 2\",\"Address line 3\",\"Address line 4\",\"Town\",\"Postcode\",\"Country\",\"Easting\",\"Northing\",\"Applicant type\",\"Registration tier\",\"Registration type\",\"Registration date\",\"Expiry date\",\"Company number\"")
         expect(result).to include(active.reg_identifier)
-        expect(result).to include(expired.reg_identifier)
+        expect(result).to_not include(expired.reg_identifier)
       end
     end
   end
