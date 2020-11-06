@@ -409,7 +409,7 @@ GEM
       i18n
     warden (1.2.9)
       rack (>= 2.0.9)
-    web-console (4.0.4)
+    web-console (4.1.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
@@ -427,7 +427,7 @@ GEM
       whenever
     wicked_pdf (2.1.0)
       activesupport
-    zeitwerk (2.4.0)
+    zeitwerk (2.4.1)
 
 PLATFORMS
   ruby
