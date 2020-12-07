@@ -46,7 +46,7 @@ gem "whenever", "~> 1.0"
 gem "wicked_pdf"
 
 # Use the Defra Ruby Aws gem for loading files to AWS buckets
-gem "defra_ruby_aws", "~> 0.3.0"
+gem "defra_ruby_aws", "~> 0.4"
 
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",

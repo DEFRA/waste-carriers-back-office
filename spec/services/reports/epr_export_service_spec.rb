@@ -5,55 +5,36 @@ require "rails_helper"
 module Reports
   RSpec.describe EprExportService do
     describe ".run" do
-      it "creates a csv file and load it to AWS" do
-        epr_serializer = double(:epr_serializer)
-        epr_report = double(:epr_report)
-        result = double(:result, successful?: true)
-        file = double(:file)
-        bucket = double(:bucket)
+      context "when the AWS request succeeds" do
+        it "generates a CSV file containing all active registrations and uploads it to AWS" do
+          create_list(:registration, 2)
+          file_name = "waste_carriers_epr_daily_full"
 
-        expect(epr_serializer).to receive(:to_csv).and_return(epr_report)
-        expect(EprSerializer).to receive(:new).and_return(epr_serializer)
+          stub_request(:put, %r{https://.*\.s3\.eu-west-1\.amazonaws\.com/EPR/#{file_name}\.csv.*})
 
-        expect(File).to receive(:open).and_yield(file)
-        expect(file).to receive(:write).with(epr_report)
+          # Expect no error gets notified
+          expect(Airbrake).to_not receive(:notify)
 
-        expect(DefraRuby::Aws).to receive(:get_bucket).and_return(bucket)
-        expect(File).to receive(:new).and_return(file)
-        expect(File).to receive(:exist?).and_return(true)
-        expect(bucket).to receive(:load).with(file).and_return(result)
-
-        expect(File).to receive(:unlink)
-
-        described_class.run
+          EprExportService.run
+        end
       end
-    end
 
-    context "if the load to AWS fails 3 times" do
-      it "logs an error" do
-        epr_serializer = double(:epr_serializer)
-        epr_report = double(:epr_report)
-        result = double(:result, successful?: false)
-        file = double(:file)
-        bucket = double(:bucket)
+      context "when the request fails" do
+        it "fails gracefully and reports the error" do
+          create(:registration)
 
-        expect(epr_serializer).to receive(:to_csv).and_return(epr_report)
-        expect(EprSerializer).to receive(:new).and_return(epr_serializer)
+          file_name = "waste_carriers_epr_daily_full"
 
-        expect(File).to receive(:open).and_yield(file)
-        expect(file).to receive(:write).with(epr_report)
+          stub_request(
+            :put,
+            %r{https://.*\.s3\.eu-west-1\.amazonaws\.com/EPR/#{file_name}\.csv.*}
+          ).to_return(status: 403)
 
-        expect(DefraRuby::Aws).to receive(:get_bucket).and_return(bucket)
-        expect(File).to receive(:new).and_return(file).exactly(3).times
-        expect(File).to receive(:exist?).and_return(true)
-        expect(bucket).to receive(:load).with(file).and_return(result).exactly(3).times
+          # Expect an error to get notified
+          expect(Airbrake).to receive(:notify).once
 
-        expect(result).to receive(:error)
-        expect(Airbrake).to receive(:notify)
-        expect(Rails.logger).to receive(:error)
-        expect(File).to receive(:unlink)
-
-        described_class.run
+          EprExportService.run
+        end
       end
     end
   end
