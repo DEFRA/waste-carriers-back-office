@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: b9399629eb3ba020c2c9b273c3a640b9f4044acd
+  revision: 25e2b70ff4de6d8d446a84f8d4e2cb3793f4b56a
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -86,7 +86,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     airbrake (11.0.1)
       airbrake-ruby (~> 5.1)
-    airbrake-ruby (5.1.0)
+    airbrake-ruby (5.2.0)
       rbtree3 (~> 0.5)
     ast (2.4.1)
     aws-eventstream (1.1.0)
@@ -166,7 +166,7 @@ GEM
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
       railties (>= 3.2)
-    erubi (1.9.0)
+    erubi (1.10.0)
     execjs (2.7.0)
     factory_bot (6.1.0)
       activesupport (>= 5.0.0)
@@ -229,7 +229,7 @@ GEM
     kaminari-mongoid (1.0.1)
       kaminari-core (~> 1.0)
       mongoid
-    loofah (2.7.0)
+    loofah (2.8.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
