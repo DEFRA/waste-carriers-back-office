@@ -1,0 +1,87 @@
+name: CI
+
+on: push
+
+jobs:
+  build:
+    # You must use a Linux environment when using service containers or container jobs
+    runs-on: ubuntu-latest
+    env:
+      WCRS_REGISTRATION_EXPIRES_AFTER: 3
+      WCRS_REGISTRATION_RENEWAL_WINDOW: 3
+      WCRS_REGISTRATION_GRACE_WINDOW: 5
+      WCRS_REGISTRATION_COVID_GRACE_WINDOW: 180
+      WCRS_END_OF_COVID_EXTENSION_YEAR: 2020
+      WCRS_END_OF_COVID_EXTENSION_MONTH: 10
+      WCRS_END_OF_COVID_EXTENSION_DAY: 1
+      WCRS_RENEWAL_CHARGE: 10500
+      WCRS_TYPE_CHANGE_CHARGE: 4000
+      WCRS_CARD_CHARGE: 500
+      AWS_DAILY_EXPORT_ACCESS_KEY_ID: 1234
+      AWS_DAILY_EXPORT_SECRET_ACCESS_KEY: 1234
+      AWS_DAILY_EXPORT_BUCKET: 1234
+      AWS_BOXI_EXPORT_ACCESS_KEY_ID: 5678
+      AWS_BOXI_EXPORT_SECRET_ACCESS_KEY: 5678
+      AWS_BOXI_EXPORT_BUCKET: 5678
+      AWS_LETTERS_EXPORT_ACCESS_KEY_ID: 9012
+      AWS_LETTERS_EXPORT_SECRET_ACCESS_KEY: 9012
+      AWS_LETTERS_EXPORT_BUCKET: 9012
+      # Just used to make the tests pass
+      WCRS_WORLDPAY_MOTO_USERNAME: foo
+      WCRS_WORLDPAY_MOTO_PASSWORD: foo
+      WCRS_WORLDPAY_MOTO_MERCHANTCODE: abc
+      WCRS_WORLDPAY_MOTO_MACSECRET: def
+      WCRS_WORLDPAY_ECOM_USERNAME: foo
+      WCRS_WORLDPAY_ECOM_PASSWORD: foo
+      WCRS_USE_XVFB_FOR_WICKEDPDF: true
+
+    # Service containers to run with `runner-job`
+    services:
+      mongodb:
+        image: mongo
+        ports:
+        - 27017:27017
+
+    steps:
+      # Downloads a copy of the code in your repository before running CI tests
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of sonarcloud analysis
+
+      # We don't have to specify the ruby version, or grab it from .ruby-verion. This action supports reading the
+      # version from .ruby-version itself
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      # Install various other dependencies
+      - name: Install dependencies
+        run: |
+          sudo apt-get install xvfb -y
+          sudo apt-get install wkhtmltopdf -y
+
+      - name: Set up databases
+        run: |
+          mongo waste-carriers-test --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
+          mongo waste-carriers-users-test --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
+      # Run linting first. No point running the tests if there is a linting issue
+      - name: Run lint check
+        run: |
+          bundle exec rubocop --format progress --format json --out rubocop-result.json
+      # This includes an extra run step. The sonarcloud analysis will be run in a docker container with the current
+      # folder mounted as `/github/workspace`. The problem is when the .resultset.json file is generated it will
+      # reference the code in the current folder. So to enable sonarcloud to matchup code coverage with the files we use
+      # sed to update the references in .resultset.json
+      # https://community.sonarsource.com/t/code-coverage-doesnt-work-with-github-action/16747/6
+      - name: Run unit tests
+        run: |
+          bundle exec rails test
+          bundle exec rspec
+          sed -i 's/\/home\/runner\/work\/waste-carriers-back-office\/waste-carriers-back-office\//\/github\/workspace\//g' coverage/.resultset.json
+      - name: Analyze with SonarCloud
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This is provided automatically by GitHub
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # This needs to be set in your repo; settings -> secrets
