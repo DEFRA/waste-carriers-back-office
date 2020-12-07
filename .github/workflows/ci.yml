@@ -62,10 +62,10 @@ jobs:
           sudo apt-get install xvfb -y
           sudo apt-get install wkhtmltopdf -y
 
-      - name: Database migrations
+      - name: Set up databases
         run: |
-          RAILS_ENV=test bundle exec rake db:create --trace --trace
-          RAILS_ENV=test bundle exec rake db:schema:load --trace --trace
+          mongo waste-carriers-test --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
+          mongo waste-carriers-users-test --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
       # Run linting first. No point running the tests if there is a linting issue
       - name: Run lint check
         run: |
