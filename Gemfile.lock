@@ -92,20 +92,20 @@ GEM
     aws-eventstream (1.1.0)
     aws-healthcheck (2.0.0)
       railties (>= 3.0)
-    aws-partitions (1.341.0)
-    aws-sdk-core (3.103.0)
+    aws-partitions (1.402.0)
+    aws-sdk-core (3.110.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.36.0)
-      aws-sdk-core (~> 3, >= 3.99.0)
+    aws-sdk-kms (1.39.0)
+      aws-sdk-core (~> 3, >= 3.109.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.74.0)
-      aws-sdk-core (~> 3, >= 3.102.1)
+    aws-sdk-s3 (1.86.0)
+      aws-sdk-core (~> 3, >= 3.109.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
-    aws-sigv4 (1.2.1)
+    aws-sigv4 (1.2.2)
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.16)
     bindex (0.8.1)
@@ -127,7 +127,7 @@ GEM
       rest-client (~> 2.0)
     defra_ruby_alert (2.1.1)
       airbrake
-    defra_ruby_aws (0.3.1)
+    defra_ruby_aws (0.4.1)
       aws-sdk-s3
     defra_ruby_email (1.1.0)
       notifications-ruby-client
@@ -440,7 +440,7 @@ DEPENDENCIES
   aws-healthcheck
   cancancan (~> 1.10)
   database_cleaner
-  defra_ruby_aws (~> 0.3.0)
+  defra_ruby_aws (~> 0.4)
   defra_ruby_features (~> 0.1)
   defra_ruby_mocks
   defra_ruby_style
