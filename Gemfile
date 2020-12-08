@@ -7,7 +7,7 @@ ruby "2.7.1"
 gem "jquery-rails"
 # Use MongoDB as the database, and mongoid as our ORM for it. This version of
 # mongoid supports MongoDb 3.6
-gem "mongoid"
+gem "mongoid", "~> 7.1.5"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
 gem "rails", ">= 6.0.3"
 # Use SCSS for stylesheets
