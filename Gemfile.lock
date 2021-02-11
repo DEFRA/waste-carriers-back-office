@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: ecee402e83eaf66e8c63fb9e3a7ca49252e1551f
+  revision: 272620c146166df4a1f4773b0f157188a3ba87da
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -109,7 +109,7 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bson (4.11.1)
+    bson (4.12.0)
     builder (3.2.4)
     byebug (11.1.3)
     cancancan (1.17.0)
