@@ -123,7 +123,10 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    database_cleaner (1.8.5)
+    database_cleaner-core (2.0.1)
+    database_cleaner-mongoid (2.0.1)
+      database_cleaner-core (~> 2.0.0)
+      mongoid
     defra_ruby_address (0.1.0)
       rest-client (~> 2.0)
     defra_ruby_alert (2.1.1)
@@ -442,7 +445,7 @@ PLATFORMS
 DEPENDENCIES
   aws-healthcheck
   cancancan (~> 1.10)
-  database_cleaner
+  database_cleaner-mongoid
   defra_ruby_aws (~> 0.4)
   defra_ruby_features (~> 0.1)
   defra_ruby_mocks
