@@ -5,7 +5,7 @@ on: push
 jobs:
   build:
     # You must use a Linux environment when using service containers or container jobs
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     env:
       WCRS_REGISTRATION_EXPIRES_AFTER: 3
       WCRS_REGISTRATION_RENEWAL_WINDOW: 3
@@ -49,6 +49,12 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of sonarcloud analysis
 
+      # Install various other dependencies
+      - name: Install dependencies
+        run: |
+          sudo apt-get install xvfb -y
+          sudo apt-get install wkhtmltopdf -y
+
       # We don't have to specify the ruby version, or grab it from .ruby-verion. This action supports reading the
       # version from .ruby-version itself
       - name: Install Ruby
@@ -56,20 +62,16 @@ jobs:
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
-      # Install various other dependencies
-      - name: Install dependencies
-        run: |
-          sudo apt-get install xvfb -y
-          sudo apt-get install wkhtmltopdf -y
-
       - name: Set up databases
         run: |
           mongo waste-carriers-test --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
           mongo waste-carriers-users-test --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
+
       # Run linting first. No point running the tests if there is a linting issue
       - name: Run lint check
         run: |
           bundle exec rubocop --format progress --format json --out rubocop-result.json
+
       # This includes an extra run step. The sonarcloud analysis will be run in a docker container with the current
       # folder mounted as `/github/workspace`. The problem is when the .resultset.json file is generated it will
       # reference the code in the current folder. So to enable sonarcloud to matchup code coverage with the files we use
@@ -80,6 +82,7 @@ jobs:
           bundle exec rails test
           bundle exec rspec
           sed -i 's/\/home\/runner\/work\/waste-carriers-back-office\/waste-carriers-back-office\//\/github\/workspace\//g' coverage/.resultset.json
+
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
