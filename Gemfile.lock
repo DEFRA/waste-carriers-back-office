@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: e2aa07397ae033979a65526299470c58ef5240aa
+  revision: 3cf16e4f16b92d1c659b2b0c085e162acec84eda
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -16,6 +16,7 @@ GIT
       mongoid
       mongoid-locker (= 2.0.0)
       nokogiri
+      notifications-ruby-client
       rails (>= 6.0.3)
       rest-client (~> 2.0)
       turbolinks
