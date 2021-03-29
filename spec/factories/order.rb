@@ -4,8 +4,8 @@ FactoryBot.define do
   factory :order, class: WasteCarriersEngine::Order do
     trait :has_required_data do
       order_items do
-        [WasteCarriersEngine::OrderItem.new_renewal_item,
-         WasteCarriersEngine::OrderItem.new_copy_cards_item(1)]
+        [build(:order_item, :renewal_item),
+         build(:order_item, :copy_cards_item)]
       end
       payment_method { "card" }
       total_amount { order_items.sum { |item| item[:amount] } }
