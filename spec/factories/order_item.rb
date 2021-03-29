@@ -5,7 +5,7 @@ FactoryBot.define do
     currency { "GBP" }
 
     trait :renewal_item do
-      amount { 10500 }
+      amount { 10_500 }
       description { "renewal of registration" }
       type { "RENEW" }
       quantity { 1 }
