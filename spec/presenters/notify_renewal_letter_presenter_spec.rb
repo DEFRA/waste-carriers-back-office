@@ -1,0 +1,57 @@
+# frozen_string_literal: true
+
+require "rails_helper"
+
+RSpec.describe NotifyRenewalLetterPresenter do
+  let(:registration) { create(:registration) }
+  subject { described_class.new(registration) }
+
+  describe "#contact_name" do
+    it "returns the correct value" do
+      expect(subject.contact_name).to eq("#{registration.first_name} #{registration.last_name}")
+    end
+  end
+
+  describe "#expiry_date" do
+    it "returns the correct value" do
+      expect(registration).to receive(:expires_on).and_return(Time.new(2020, 1, 1))
+      expect(subject.expiry_date).to eq("1 January 2020")
+    end
+  end
+
+  describe "#registration_cost" do
+    let(:cost) { 15_400 }
+
+    it "returns the correct cost" do
+      expected_cost = "£154"
+
+      expect(Rails.configuration).to receive(:new_registration_charge).and_return(cost)
+      expect_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(cost).and_return(expected_cost)
+      expect(subject.registration_cost).to eq(expected_cost)
+    end
+  end
+
+  describe "#renewal_cost" do
+    let(:cost) { 10_500 }
+
+    it "returns the correct cost" do
+      expected_cost = "£105"
+
+      expect(Rails.configuration).to receive(:renewal_charge).and_return(cost)
+      expect_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(cost).and_return(expected_cost)
+      expect(subject.renewal_cost).to eq(expected_cost)
+    end
+  end
+
+  describe "#renewal_url" do
+    let(:token) { "tokengoeshere" }
+    let(:registration) { double(:registration, renew_token: token) }
+
+    it "returns a correctly formatted URL" do
+      expected_url = "wastecarriersregistration.service.gov.uk/fo/renew/tokengoeshere"
+
+      expect(Rails.configuration).to receive(:wcrs_renewals_url).and_return("https://wastecarriersregistration.service.gov.uk")
+      expect(subject.renewal_url).to eq(expected_url)
+    end
+  end
+end
