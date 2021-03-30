@@ -21,7 +21,7 @@ namespace :notify do
     task ad_renewal_letter: :environment do
       registration = WasteCarriersEngine::Registration.last
 
-      NotifyRenewalLetterService.run(registration: registration)
+      NotifyAdRenewalLetterService.run(registration: registration)
     end
   end
 end
