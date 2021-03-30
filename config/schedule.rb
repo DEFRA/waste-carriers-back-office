@@ -56,6 +56,12 @@ every :day, at: (ENV["EXPORT_SERVICE_AD_REMINDER_LETTERS_TIME"] || "00:55"), rol
   rake "letters:export:ad_reminders"
 end
 
+# This is the Notify AD renewal letters job. When run it will send out Notify
+# renewal letters for all AD registrations expiring in 35 days' time
+every :day, at: (ENV["NOTIFY_AD_RENEWAL_LETTERS_TIME"] || "02:35"), roles: [:db] do
+  rake "notify:letters:ad_renewals"
+end
+
 # This is the registration exemptions expiry job which will collect all active upper tier
 # registrations that have an expiry date in the past and will set their state to `EXPIRED`s
 every :day, at: (ENV["EXPIRE_REGISTRATION_EXEMPTION_RUN_TIME"] || "20:00"), roles: [:db] do
