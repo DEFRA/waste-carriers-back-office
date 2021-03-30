@@ -40,10 +40,10 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :rake) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :deletion
   end
 
   config.after(type: :rake) do
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.clean_with(:deletion)
   end
 end
