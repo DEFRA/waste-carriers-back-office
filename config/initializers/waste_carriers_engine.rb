@@ -27,6 +27,9 @@ WasteCarriersEngine.configure do |configuration|
 
   configuration.address_host = ENV["ADDRESSBASE_URL"] || "http://localhost:8005"
 
+  # Notify config
+  configuration.notify_api_key = ENV["NOTIFY_API_KEY"]
+
   # By telling the engine it is hosted in the back-office it can make decisions
   # about any changes in behaviour needed. For example, the payment confirmation
   # email from Worldpay is only applicable to users in the front-office. This is

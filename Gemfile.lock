@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 3cf16e4f16b92d1c659b2b0c085e162acec84eda
+  revision: 4da3e18b53dc074ad8f2293aa536c55e4f048629
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -451,6 +451,7 @@ GEM
     useragent (0.16.10)
     validates_email_format_of (1.6.3)
       i18n
+    vcr (6.0.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.1.0)
@@ -509,6 +510,7 @@ DEPENDENCIES
   timecop
   turbolinks
   uglifier (>= 1.3.0)
+  vcr
   waste_carriers_engine!
   web-console
   webmock (~> 3.4)

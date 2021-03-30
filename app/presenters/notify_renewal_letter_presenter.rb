@@ -2,6 +2,7 @@
 
 class NotifyRenewalLetterPresenter < WasteCarriersEngine::BasePresenter
   include WasteCarriersEngine::ApplicationHelper
+  include ActionView::Helpers::NumberHelper
 
   MAX_SITE_DESCRIPTION_LENGTH = 200
 

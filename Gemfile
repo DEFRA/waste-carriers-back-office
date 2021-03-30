@@ -126,6 +126,7 @@ group :test do
   # Allow automated testing of the whenever schedule
   gem "whenever-test", "~> 1.0"
 
-  # Stubbing HTTP requests
+  # Mocking HTTP requests
+  gem "vcr"
   gem "webmock", "~> 3.4"
 end
