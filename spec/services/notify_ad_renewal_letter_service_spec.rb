@@ -2,15 +2,15 @@
 
 require "rails_helper"
 
-RSpec.describe NotifyRenewalLetterService do
+RSpec.describe NotifyAdRenewalLetterService do
   describe "run" do
     let(:registration) { create(:registration, :expires_soon) }
     let(:service) do
-      NotifyRenewalLetterService.run(registration: registration)
+      NotifyAdRenewalLetterService.run(registration: registration)
     end
 
     it "sends a letter" do
-      VCR.use_cassette("notify_renewal_letter") do
+      VCR.use_cassette("notify_ad_renewal_letter") do
         # Make sure it's a real postcode for Notify validation purposes
         allow_any_instance_of(WasteCarriersEngine::Address).to receive(:postcode).and_return("BS1 1AA")
 

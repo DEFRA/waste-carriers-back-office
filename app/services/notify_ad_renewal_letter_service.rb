@@ -2,7 +2,7 @@
 
 require "notifications/client"
 
-class NotifyRenewalLetterService < ::WasteCarriersEngine::BaseService
+class NotifyAdRenewalLetterService < ::WasteCarriersEngine::BaseService
   # So we can use displayable_address()
   include ::WasteCarriersEngine::ApplicationHelper
 
