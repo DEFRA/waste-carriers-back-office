@@ -23,6 +23,11 @@ FactoryBot.define do
 
     metaData { build(:metaData) }
 
+    trait :ad_registration do
+      account_email { ENV["WCRS_ASSISTED_DIGITAL_EMAIL"] }
+      contact_email { ENV["WCRS_ASSISTED_DIGITAL_EMAIL"] }
+    end
+
     trait :cancelled do
       metaData { build(:metaData, :cancelled) }
     end
@@ -54,6 +59,11 @@ FactoryBot.define do
     trait :expires_soon do
       metaData { build(:metaData, :active) }
       expires_on { 2.months.from_now }
+    end
+
+    trait :expires_tomorrow do
+      metaData { build(:metaData, :active) }
+      expires_on { 1.day.from_now }
     end
 
     trait :pending_payment do
