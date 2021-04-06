@@ -211,15 +211,6 @@ Rails.application.routes.draw do
                         path_names: { new: "" }
             end
 
-  resources :user_migrations,
-            only: %i[new create],
-            path: "/bo/users/migrate",
-            path_names: { new: "" }
-
-  get "/bo/users/migrate/results",
-      to: "user_migrations#results",
-      as: :user_migration_results
-
   resources :conviction_imports,
             only: %i[new create],
             path: "/bo/import-convictions",
