@@ -5,7 +5,11 @@ namespace :notify do
   namespace :letters do
     desc "Send AD renewal letters"
     task ad_renewals: :environment do
-      expires_on = WasteCarriersBackOffice::Application.config.ad_reminder_letters_exports_expires_in.to_i.days.from_now
+      expires_on = WasteCarriersBackOffice::Application.config
+                                                       .ad_reminder_letters_exports_expires_in
+                                                       .to_i
+                                                       .days
+                                                       .from_now
 
       registrations = NotifyBulkAdRenewalLettersService.run(expires_on)
 
@@ -18,7 +22,11 @@ namespace :notify do
 
     desc "Send digital renewal letters"
     task digital_renewals: :environment do
-      expires_on = WasteCarriersBackOffice::Application.config.digital_reminder_letters_exports_expires_in.to_i.days.from_now
+      expires_on = WasteCarriersBackOffice::Application.config
+                                                       .digital_reminder_letters_exports_expires_in
+                                                       .to_i
+                                                       .days
+                                                       .from_now
 
       registrations = NotifyBulkDigitalRenewalLettersService.run(expires_on)
 
