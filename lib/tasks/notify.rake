@@ -14,6 +14,19 @@ namespace :notify do
         Rails.logger.info "No matching registrations for Notify AD renewal letters"
       end
     end
+
+    desc "Send digital renewal letters"
+    task digital_renewals: :environment do
+      expires_on = WasteCarriersBackOffice::Application.config.digital_reminder_letters_exports_expires_in.to_i.days.from_now
+
+      registrations = NotifyBulkDigitalRenewalLettersService.run(expires_on)
+
+      if registrations.any?
+        Rails.logger.info "Notify digital renewal letters sent for #{registrations.map(&:reg_identifier).join(', ')}"
+      else
+        Rails.logger.info "No matching registrations for Notify digital renewal letters"
+      end
+    end
   end
 
   namespace :test do
