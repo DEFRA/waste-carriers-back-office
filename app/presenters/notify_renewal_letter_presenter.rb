@@ -27,4 +27,9 @@ class NotifyRenewalLetterPresenter < WasteCarriersEngine::BasePresenter
      "/fo/renew/",
      renew_token].join
   end
+
+  def renewal_email_date
+    first_reminder_days = Rails.configuration.first_renewal_email_reminder_days.to_i
+    (expires_on - first_reminder_days.days).to_date
+  end
 end

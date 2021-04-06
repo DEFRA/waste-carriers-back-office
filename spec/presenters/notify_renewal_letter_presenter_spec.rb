@@ -54,4 +54,17 @@ RSpec.describe NotifyRenewalLetterPresenter do
       expect(subject.renewal_url).to eq(expected_url)
     end
   end
+
+  describe "#renewal_email_date" do
+    let(:first_renewal_email_reminder_days) { 30 }
+    let(:expires_on) { Time.now }
+    let(:registration) { double(:registration, expires_on: expires_on) }
+
+    it "returns a date object" do
+      expected_date = first_renewal_email_reminder_days.days.ago.to_date
+
+      expect(Rails.configuration).to receive(:first_renewal_email_reminder_days).and_return(first_renewal_email_reminder_days)
+      expect(subject.renewal_email_date).to eq(expected_date)
+    end
+  end
 end
