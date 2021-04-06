@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 namespace :notify do
   namespace :letters do
     desc "Send AD renewal letters"
@@ -30,11 +31,19 @@ namespace :notify do
   end
 
   namespace :test do
-    desc "Send a test renewal letter to the newest registration in the DB"
+    desc "Send a test AD renewal letter to the newest registration in the DB"
     task ad_renewal_letter: :environment do
       registration = WasteCarriersEngine::Registration.last
 
       NotifyAdRenewalLetterService.run(registration: registration)
     end
+
+    desc "Send a test digital renewal letter to the newest registration in the DB"
+    task digital_renewal_letter: :environment do
+      registration = WasteCarriersEngine::Registration.last
+
+      NotifyDigitalRenewalLetterService.run(registration: registration)
+    end
   end
 end
+# rubocop:enable Metrics/BlockLength
