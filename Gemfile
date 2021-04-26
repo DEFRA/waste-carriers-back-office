@@ -21,7 +21,6 @@ gem "uglifier", ">= 1.3.0"
 gem "sdoc", "~> 1.1.0", group: :doc
 
 # Use CanCanCan for user roles and permissions
-# Version 2.0 doesn't support Mongoid, so we're locked to an earlier one
 gem "cancancan", "~> 3.2.1"
 
 # Use Devise for user authentication
