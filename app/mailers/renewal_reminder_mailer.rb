@@ -3,9 +3,7 @@
 class RenewalReminderMailer < ActionMailer::Base
   helper "waste_carriers_engine/mailer"
 
-  def first_reminder_email(registration)
-    reminder_email(registration)
-  end
+  # The first reminder email has migrated to the RenewalReminderEmailService
 
   def second_reminder_email(registration)
     reminder_email(registration)
