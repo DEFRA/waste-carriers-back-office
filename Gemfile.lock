@@ -131,7 +131,7 @@ GEM
     bson (4.12.0)
     builder (3.2.4)
     byebug (11.1.3)
-    cancancan (1.17.0)
+    cancancan (3.2.1)
     chronic (0.10.2)
     coderay (1.1.3)
     concurrent-ruby (1.1.8)
@@ -479,7 +479,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-healthcheck
-  cancancan (~> 1.10)
+  cancancan (~> 3.2.1)
   database_cleaner-mongoid
   defra_ruby_aws (~> 0.4)
   defra_ruby_features (~> 0.1)
