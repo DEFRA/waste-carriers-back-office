@@ -7,7 +7,7 @@ class ResendRenewalEmailController < ApplicationController
 
   def new
     begin
-      RenewalReminderMailer.second_reminder_email(registration).deliver_now
+      Notify::RenewalReminderEmailService.run(registration: registration)
 
       flash_success(
         I18n.t("resend_renewal_email.messages.success", email: registration.contact_email)
