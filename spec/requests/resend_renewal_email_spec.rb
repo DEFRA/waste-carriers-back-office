@@ -27,11 +27,10 @@ RSpec.describe "ResendRenewalEmail", type: :request do
         let(:email) { "simone@example.com" }
 
         it "sends an email, redirects to the previous page and displays a flash 'success' message" do
-          expected_count = ActionMailer::Base.deliveries.count + 1
+          VCR.use_cassette("notify_resend_renew_email_when_registration_has_contact_email") do
+            get request_path, headers: { "HTTP_REFERER" => "/" }
+          end
 
-          get request_path, headers: { "HTTP_REFERER" => "/" }
-
-          expect(ActionMailer::Base.deliveries.count).to eq(expected_count)
           expect(response).to redirect_to("/")
           expect(request.flash[:success]).to eq("Renewal email sent to #{email}")
         end
@@ -44,11 +43,8 @@ RSpec.describe "ResendRenewalEmail", type: :request do
           let(:email) { "nccc@example.com" }
 
           it "does not send an email, redirects to the previous page and displays a flash 'error' message" do
-            expected_count = ActionMailer::Base.deliveries.count
-
             get request_path, headers: { "HTTP_REFERER" => "/" }
 
-            expect(ActionMailer::Base.deliveries.count).to eq(expected_count)
             expect(response).to redirect_to("/")
             expect(request.flash[:error]).to eq("Sorry, there has been a problem re-sending the renewal email.")
           end
@@ -59,11 +55,8 @@ RSpec.describe "ResendRenewalEmail", type: :request do
         let(:email) { nil }
 
         it "does not send an email, redirects to the previous page and displays a flash 'error' message" do
-          expected_count = ActionMailer::Base.deliveries.count
-
           get request_path, headers: { "HTTP_REFERER" => "/" }
 
-          expect(ActionMailer::Base.deliveries.count).to eq(expected_count)
           expect(response).to redirect_to("/")
           expect(request.flash[:error]).to eq("Sorry, there has been a problem re-sending the renewal email.")
         end
@@ -71,17 +64,14 @@ RSpec.describe "ResendRenewalEmail", type: :request do
 
       context "when an error happens", disable_bullet: true do
         before do
-          allow(RenewalReminderMailer).to receive(:second_reminder_email).and_raise(StandardError)
+          allow(Notify::RenewalReminderEmailService).to receive(:run).and_raise(StandardError)
         end
 
         let(:email) { "oops@example.com" }
 
         it "does not send an email, redirects to the previous page and displays a flash 'error' message" do
-          expected_count = ActionMailer::Base.deliveries.count
-
           get request_path, headers: { "HTTP_REFERER" => "/" }
 
-          expect(ActionMailer::Base.deliveries.count).to eq(expected_count)
           expect(response).to redirect_to("/")
           expect(request.flash[:error]).to eq("We could not send an email to #{email}")
         end
