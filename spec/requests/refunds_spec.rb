@@ -100,7 +100,7 @@ RSpec.describe "Refunds", type: :request do
             </paymentService>
           XML
 
-          stub_request(:get, "https://secure-test.worldpay.com/jsp/merchant/xml/paymentService.jsp").to_return(body: worldpay_valid_response)
+          stub_request(:get, Rails.configuration.worldpay_url).to_return(body: worldpay_valid_response)
 
           expected_payments_count = renewing_registration.finance_details.payments.count + 1
 
@@ -120,7 +120,7 @@ RSpec.describe "Refunds", type: :request do
 
             worldpay_response = ""
 
-            stub_request(:get, "https://secure-test.worldpay.com/jsp/merchant/xml/paymentService.jsp").to_return(body: worldpay_response)
+            stub_request(:get, Rails.configuration.worldpay_url).to_return(body: worldpay_response)
 
             expected_payments_count = renewing_registration.finance_details.payments.count
 
