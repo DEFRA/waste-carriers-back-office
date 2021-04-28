@@ -14,7 +14,13 @@ Rails.application.routes.draw do
       resources :renewals, only: :show
     end
 
-    get "/resend-renewal-email/:reg_identifier", to: "resend_renewal_email#new", as: "resend_renewal_email"
+    get "/resend-confirmation-email/:reg_identifier",
+        to: "resend_confirmation_email#new",
+        as: "resend_confirmation_email"
+
+    get "/resend-renewal-email/:reg_identifier",
+        to: "resend_renewal_email#new",
+        as: "resend_renewal_email"
 
     # Letters
     get "/letters", to: "letters#index", as: :letters

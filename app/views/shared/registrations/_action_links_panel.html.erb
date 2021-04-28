@@ -41,6 +41,12 @@
       </li>
     <% end %>
 
+    <% if display_resend_confirmation_email_link_for?(resource) %>
+      <li>
+        <%= link_to t(".actions_box.links.resend_confirmation_email"), resend_confirmation_email_path(reg_identifier: resource.reg_identifier) %>
+      </li>
+    <% end %>
+
     <li class="separated" />
 
     <% if display_order_copy_cards_link_for?(resource) %>

@@ -89,6 +89,13 @@ module ActionLinksHelper
     resource.active?
   end
 
+  def display_resend_confirmation_email_link_for?(resource)
+    return false unless display_registration_links?(resource)
+    return false unless can?(:resend_confirmation_email, WasteCarriersEngine::Registration)
+
+    resource.active?
+  end
+
   def display_order_copy_cards_link_for?(resource)
     return false unless display_registration_links?(resource)
     return false unless can?(:order_copy_cards, WasteCarriersEngine::Registration)

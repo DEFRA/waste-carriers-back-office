@@ -68,6 +68,7 @@ en:
             with_reg_identifier: "Actions for %{reg_identifier}"
             with_company_name: "Actions for %{company_name}"
           links:
+            resend_confirmation_email: "Resend confirmation email"
             resend_renewal_email: "Resend renewal email"
             continue_button: "Continue as assisted digital"
             renew: "Renew"

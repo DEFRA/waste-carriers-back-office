@@ -530,6 +530,59 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
+  describe "#display_resend_confirmation_email_link_for?" do
+    context "when the resource is a registration" do
+      let(:resource) { build(:registration) }
+
+      before do
+        expect(helper)
+          .to receive(:can?)
+          .with(:resend_confirmation_email, WasteCarriersEngine::Registration)
+          .and_return(can)
+      end
+
+      context "when the user has permission to view the certificate" do
+        let(:can) { true }
+
+        before do
+          expect(resource).to receive(:active?).and_return(active)
+        end
+
+        context "when the resource is active" do
+          let(:active) { true }
+
+          it "returns true" do
+            expect(helper.display_resend_confirmation_email_link_for?(resource)).to be_truthy
+          end
+        end
+
+        context "when the resource is not active" do
+          let(:active) { false }
+
+          it "returns false" do
+            expect(helper.display_resend_confirmation_email_link_for?(resource)).to be_falsey
+          end
+        end
+      end
+
+      context "when the user has no permission to view the certificate" do
+        let(:can) { false }
+
+        it "returns false" do
+          expect(helper.display_resend_confirmation_email_link_for?(resource)).to be_falsey
+        end
+      end
+    end
+
+    context "when the resource is a transient registration" do
+      let(:resource) { build(:renewing_registration) }
+
+      it "returns false" do
+        expect(helper.display_certificate_link_for?(resource)).to be_falsey
+      end
+    end
+  end
+
   describe "#display_order_copy_cards_link_for?" do
     context "when the resource is a registration" do
       let(:resource) { build(:registration) }

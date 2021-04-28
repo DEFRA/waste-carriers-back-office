@@ -38,6 +38,7 @@ class Ability
     can :renew, :all
     can :manage, ReminderLettersExport
     can :view_certificate, WasteCarriersEngine::Registration
+    can :resend_confirmation_email, WasteCarriersEngine::Registration
     can :order_copy_cards, WasteCarriersEngine::Registration
     can :edit, WasteCarriersEngine::Registration
 
