@@ -8,9 +8,6 @@ class ResendRenewalEmailController < ApplicationController
 
   def new
     begin
-      # The RenewalReminderEmailService will also validate the contact email
-      # but we are invoking it here to be consistent with behaviour in
-      # the ResendConfirmationEmailController
       validate_contact_email(registration)
 
       Notify::RenewalReminderEmailService.run(registration: registration)
