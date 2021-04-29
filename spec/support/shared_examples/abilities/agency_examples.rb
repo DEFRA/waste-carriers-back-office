@@ -41,6 +41,10 @@ RSpec.shared_examples "agency examples" do
     should be_able_to(:revert_to_payment_summary, WasteCarriersEngine::RenewingRegistration)
   end
 
+  it "should be able to resend a confirmation email" do
+    should be_able_to(:resend_confirmation_email, WasteCarriersEngine::Registration)
+  end
+
   # All agency users should NOT be able to do this:
 
   it "should not be able to modify finance users" do
