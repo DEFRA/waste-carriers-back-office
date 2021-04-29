@@ -6,6 +6,8 @@ module CanResendEmail
   private
 
   def validate_contact_email(registration)
+    # checks that the email is present and not the same as the AD email
+    # can raise: MissingContactEmailError or AssistedDigitalContactEmailError
     ContactEmailValidatorService.run(registration)
   end
 
