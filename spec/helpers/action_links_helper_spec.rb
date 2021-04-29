@@ -541,7 +541,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           .and_return(can)
       end
 
-      context "when the user has permission to view the certificate" do
+      context "when the user has permission to resend the confirmation email" do
         let(:can) { true }
 
         before do
@@ -565,7 +565,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         end
       end
 
-      context "when the user has no permission to view the certificate" do
+      context "when the user has no permission to resend the confirmation email" do
         let(:can) { false }
 
         it "returns false" do
