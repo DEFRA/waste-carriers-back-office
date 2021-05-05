@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe NotifyBulkDigitalRenewalLettersService do
+RSpec.describe Notify::BulkDigitalRenewalLettersService do
   describe ".run" do
     let(:registrations) { create_list(:registration, 2, :expires_soon) }
     let(:ad_registration) { create(:registration, :ad_registration, :expires_soon) }
@@ -11,24 +11,24 @@ RSpec.describe NotifyBulkDigitalRenewalLettersService do
 
     let(:expires_on) { registrations.first.expires_on }
 
-    it "sends the relevant registrations to the NotifyDigitalRenewalLetterService" do
+    it "sends the relevant registrations to the Notify::DigitalRenewalLetterService" do
       expect(Airbrake).to_not receive(:notify)
 
-      expect(NotifyDigitalRenewalLetterService).to receive(:run).with(registration: registrations[0])
-      expect(NotifyDigitalRenewalLetterService).to receive(:run).with(registration: registrations[1])
+      expect(Notify::DigitalRenewalLetterService).to receive(:run).with(registration: registrations[0])
+      expect(Notify::DigitalRenewalLetterService).to receive(:run).with(registration: registrations[1])
 
-      expect(NotifyDigitalRenewalLetterService).to_not receive(:run).with(registration: ad_registration)
-      expect(NotifyDigitalRenewalLetterService).to_not receive(:run).with(registration: non_matching_date_registration)
-      expect(NotifyDigitalRenewalLetterService).to_not receive(:run).with(registration: inactive_registration)
+      expect(Notify::DigitalRenewalLetterService).to_not receive(:run).with(registration: ad_registration)
+      expect(Notify::DigitalRenewalLetterService).to_not receive(:run).with(registration: non_matching_date_registration)
+      expect(Notify::DigitalRenewalLetterService).to_not receive(:run).with(registration: inactive_registration)
 
       described_class.run(expires_on)
     end
 
     context "when an error happens" do
       it "notifies Airbrake without failing the whole job" do
-        expect(NotifyDigitalRenewalLetterService).to receive(:run).with(registration: registrations[0]).and_raise("An error")
+        expect(Notify::DigitalRenewalLetterService).to receive(:run).with(registration: registrations[0]).and_raise("An error")
         expect(Airbrake).to receive(:notify).once
-        expect(NotifyDigitalRenewalLetterService).to receive(:run).with(registration: registrations[1])
+        expect(Notify::DigitalRenewalLetterService).to receive(:run).with(registration: registrations[1])
 
         expect { described_class.run(expires_on) }.to_not raise_error
       end
