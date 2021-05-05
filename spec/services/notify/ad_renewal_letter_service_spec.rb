@@ -2,11 +2,11 @@
 
 require "rails_helper"
 
-RSpec.describe NotifyAdRenewalLetterService do
+RSpec.describe Notify::AdRenewalLetterService do
   describe "run" do
     let(:registration) { create(:registration, :expires_soon) }
     let(:service) do
-      NotifyAdRenewalLetterService.run(registration: registration)
+      Notify::AdRenewalLetterService.run(registration: registration)
     end
 
     it "sends a letter" do

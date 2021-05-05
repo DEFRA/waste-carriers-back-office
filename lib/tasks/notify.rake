@@ -11,7 +11,7 @@ namespace :notify do
                                                        .days
                                                        .from_now
 
-      registrations = NotifyBulkAdRenewalLettersService.run(expires_on)
+      registrations = Notify::BulkAdRenewalLettersService.run(expires_on)
 
       if registrations.any?
         Rails.logger.info "Notify AD renewal letters sent for #{registrations.map(&:reg_identifier).join(', ')}"
@@ -28,7 +28,7 @@ namespace :notify do
                                                        .days
                                                        .from_now
 
-      registrations = NotifyBulkDigitalRenewalLettersService.run(expires_on)
+      registrations = Notify::BulkDigitalRenewalLettersService.run(expires_on)
 
       if registrations.any?
         Rails.logger.info "Notify digital renewal letters sent for #{registrations.map(&:reg_identifier).join(', ')}"
@@ -43,14 +43,14 @@ namespace :notify do
     task ad_renewal_letter: :environment do
       registration = WasteCarriersEngine::Registration.last
 
-      NotifyAdRenewalLetterService.run(registration: registration)
+      Notify::AdRenewalLetterService.run(registration: registration)
     end
 
     desc "Send a test digital renewal letter to the newest registration in the DB"
     task digital_renewal_letter: :environment do
       registration = WasteCarriersEngine::Registration.last
 
-      NotifyDigitalRenewalLetterService.run(registration: registration)
+      Notify::DigitalRenewalLetterService.run(registration: registration)
     end
   end
 end
