@@ -7,7 +7,7 @@ module Notify
     include CanFormatAddress
 
     def run(registration:)
-      @registration = NotifyRenewalLetterPresenter.new(registration)
+      @registration = NotifyLetterPresenter.new(registration)
 
       client = Notifications::Client.new(WasteCarriersEngine.configuration.notify_api_key)
 
