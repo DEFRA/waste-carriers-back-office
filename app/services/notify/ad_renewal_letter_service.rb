@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Notify
-  class AdRenewalLetterService < RenewalLetterService
+  class AdRenewalLetterService < BaseLetterService
     private
 
     def template

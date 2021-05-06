@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Notify
-  class DigitalRenewalLetterService < RenewalLetterService
+  class DigitalRenewalLetterService < BaseLetterService
     private
 
     def template

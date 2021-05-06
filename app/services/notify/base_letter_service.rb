@@ -3,7 +3,7 @@
 require "notifications/client"
 
 module Notify
-  class RenewalLetterService < ::WasteCarriersEngine::BaseService
+  class BaseLetterService < ::WasteCarriersEngine::BaseService
     include CanFormatAddress
 
     def run(registration:)
