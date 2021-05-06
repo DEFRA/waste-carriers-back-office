@@ -359,7 +359,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rbtree3 (0.6.0)
-    rdoc (6.2.1)
+    rdoc (6.3.1)
     regexp_parser (1.7.1)
     responders (3.0.1)
       actionpack (>= 5.0)
