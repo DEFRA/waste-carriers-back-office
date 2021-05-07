@@ -18,7 +18,7 @@ RSpec.describe DashboardsHelper, type: :helper do
 
     context "when the address is present" do
       it "returns the correct value" do
-        expect(helper.inline_registered_address(result)).to eq("42, Foo Gardens, Baz City, FA1 1KE")
+        expect(helper.inline_registered_address(result)).to eq("42, Foo Gardens, Baz City, BS1 1AA")
       end
     end
   end

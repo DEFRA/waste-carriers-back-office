@@ -41,10 +41,6 @@ module Notify
             .to receive(:send_letter)
             .with(expected_notify_options)
             .and_call_original
-
-          allow_any_instance_of(WasteCarriersEngine::Address)
-            .to receive(:postcode)
-            .and_return("BS1 1AA")
         end
 
         it "sends a letter" do
