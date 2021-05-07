@@ -49,7 +49,9 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
       end
 
       it "redirects to the convictions page and updates the revoked_reason, workflow_state, and 'confirmed_' attributes" do
-        post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
+        VCR.use_cassette("registration_conviction_approval_sends_notify_letter") do
+          post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
+        end
 
         expect(response).to redirect_to(convictions_path)
 
@@ -61,10 +63,27 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
       end
 
       context "when there is no pending payment" do
-        it "activates the registration" do
+        subject do
           post "/bo/registrations/#{registration.reg_identifier}/convictions/approve", params: { conviction_approval_form: params }
+        end
+
+        it "activates the registration and sends a letter" do
+          VCR.use_cassette("registration_conviction_approval_sends_notify_letter") do
+            subject
+          end
 
           expect(registration.reload).to be_active
+        end
+
+        context "when the notify service fails" do
+          before do
+            allow(Notify::UpperTierAdConfirmationLetterService).to receive(:run).and_raise(StandardError)
+          end
+
+          it "still activates the registration" do
+            subject
+            expect(registration.reload).to be_active
+          end
         end
       end
 

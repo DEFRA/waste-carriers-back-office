@@ -10,6 +10,7 @@ module CanCompleteIfPossible
       return false unless can_complete?
 
       WasteCarriersEngine::RegistrationActivationService.run(registration: @resource)
+      Notify::UpperTierAdConfirmationLetterService.run(registration: @resource)
 
       true
     rescue StandardError => e

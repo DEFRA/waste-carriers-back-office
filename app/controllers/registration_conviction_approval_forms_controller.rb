@@ -50,5 +50,9 @@ class RegistrationConvictionApprovalFormsController < ApplicationController
     return if @registration.unpaid_balance?
 
     WasteCarriersEngine::RegistrationActivationService.run(registration: @registration)
+    Notify::UpperTierAdConfirmationLetterService.run(registration: @registration)
+  rescue StandardError => e
+    Airbrake.notify(e, reg_identifier: @registration.reg_identifier)
+    Rails.logger.error e
   end
 end
