@@ -16,7 +16,7 @@ module CanFormatAddress
 
     address_values.each_with_index do |value, index|
       line_number = index + 1
-      address_hash["address_line_#{line_number}"] = value
+      address_hash["address_line_#{line_number}".to_sym] = value
     end
 
     address_hash
