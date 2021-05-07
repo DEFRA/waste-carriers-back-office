@@ -1,0 +1,82 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notifications.service.gov.uk/v2/notifications/letter
+    body:
+      encoding: UTF-8
+      string: '{"template_id":"92817aa7-6289-4837-a033-96d287644cb3","personalisation":{"contact_name":"Jane
+        Doe","registration_type":"carrier, broker and dealer","reg_identifier":"CBDU1","company_name":"WasteCo","registered_address":"42,
+        Foo Gardens, Baz City, BS1 1AA","phone_number":"03708 506506","date_registered":"
+        7 May 2021","expiry_date":"7 May 2022","address_line_1":"Jane Doe","address_line_2":"42","address_line_3":"Foo
+        Gardens","address_line_4":"Baz City","address_line_5":"BS1 1AA"}}'
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/5.3.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic <API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 07 May 2021 09:34:02 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains
+      X-B3-Spanid:
+      - 8d5fc425e3eefcdb
+      X-B3-Traceid:
+      - 8d5fc425e3eefcdb
+      X-Vcap-Request-Id:
+      - 3d2de57d-3540-45bb-7a32-b3477eb2c16a
+      Content-Length:
+      - '2268'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"content":{"body":"Dear Jane Doe\r\nYou are now registered as an upper
+        tier waste carrier, broker and dealer. \r\nYour registration number is CBDU1.\r\n\r\n#As
+        an upper tier waste carrier, broker and dealer:\r\n*you need to renew your
+        registration every 3 years\r\n*you\u2019ll need to pay a registration charge
+        each time you renew\r\n*if we cannot reach you, you\u2019ll have to pay more
+        for a new registration\r\n\r\n#There are some simple rules you must follow:\r\n*if
+        you give your waste to another person or business you must check they are
+        properly authorised to accept it, for example as a permitted site or a registered
+        waste carrier\r\n*make sure the correct documentation is completed for each
+        transfer of waste and that it correctly describes the waste\r\n*make sure
+        any waste is safely handled and stored\r\n*minimise the environmental impact
+        of waste by prioritising waste prevention, reuse, recycling and recovery over
+        disposal\r\n\r\nThe Environment Agency certify that the following information
+        is entered in the register which they maintain under regulation 28 of the
+        Waste (England and Wales) Regulations 2011.\r\n#Carrier details\r\nName of
+        registered carrier - WasteCo\r\nRegistered as -  An upper tier waste carrier,
+        broker and dealer\r\nRegistered address - 42, Foo Gardens, Baz City, BS1 1AA\r\nTelephone
+        number - 03708 506506\r\nDate of registration -  7 May 2021\r\nExpiry date
+        of registration - 7 May 2022\r\n\r\n#Updating your details\r\nIf any of the
+        details you\u2019ve given us change, you must update them within 28 days by
+        contacting the Environment Agency.\r\nIf you have enquiries please email nccc-carrierbroker@environment-agency.gov.uk
+        or contact the Environment Agency helpline: 03708 506506\r\n\r\nYours sincerely\r\nWaste
+        carrier renewal team","subject":"You are now registered as an upper tier waste
+        carrier, broker and dealer"},"id":"6007bfad-6e64-4e50-b981-e6c52334040f","reference":null,"scheduled_for":null,"template":{"id":"92817aa7-6289-4837-a033-96d287644cb3","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/92817aa7-6289-4837-a033-96d287644cb3","version":6},"uri":"https://api.notifications.service.gov.uk/v2/notifications/6007bfad-6e64-4e50-b981-e6c52334040f"}
+
+'
+  recorded_at: Fri, 07 May 2021 09:34:02 GMT
+recorded_with: VCR 6.0.0
