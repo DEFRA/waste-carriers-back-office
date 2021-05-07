@@ -3,7 +3,7 @@
 require "rails_helper"
 
 module Notify
-  RSpec.describe UpperTierRegistrationLetterService do
+  RSpec.describe UpperTierAdConfirmationLetterService do
     let(:template_id) { "92817aa7-6289-4837-a033-96d287644cb3" }
     let(:registration) { create(:registration, :active, expires_on: 1.year.from_now) }
 
@@ -30,7 +30,7 @@ module Notify
       end
 
       subject do
-        VCR.use_cassette("notify_upper_tier_registration_letter") do
+        VCR.use_cassette("notify_upper_tier_ad_confirmation_letter") do
           described_class.run(registration: registration)
         end
       end

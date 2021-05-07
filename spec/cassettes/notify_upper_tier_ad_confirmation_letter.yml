@@ -6,7 +6,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"template_id":"92817aa7-6289-4837-a033-96d287644cb3","personalisation":{"contact_name":"Jane
-        Doe","registration_type":"carrier, broker and dealer","reg_identifier":"CBDU1","company_name":"WasteCo","registered_address":"42,
+        Doe","registration_type":"carrier, broker and dealer","reg_identifier":"CBDU2","company_name":"WasteCo","registered_address":"42,
         Foo Gardens, Baz City, BS1 1AA","phone_number":"03708 506506","date_registered":"
         7 May 2021","expiry_date":"7 May 2022","address_line_1":"Jane Doe","address_line_2":"42","address_line_3":"Foo
         Gardens","address_line_4":"Baz City","address_line_5":"BS1 1AA"}}'
@@ -35,17 +35,17 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 07 May 2021 09:34:02 GMT
+      - Fri, 07 May 2021 10:07:56 GMT
       Server:
       - nginx
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains
       X-B3-Spanid:
-      - 8d5fc425e3eefcdb
+      - 1e8f50ed19507f37
       X-B3-Traceid:
-      - 8d5fc425e3eefcdb
+      - 1e8f50ed19507f37
       X-Vcap-Request-Id:
-      - 3d2de57d-3540-45bb-7a32-b3477eb2c16a
+      - 46e231e8-5667-41f2-4fc7-e58ad9efb3bf
       Content-Length:
       - '2268'
       Connection:
@@ -53,7 +53,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"content":{"body":"Dear Jane Doe\r\nYou are now registered as an upper
-        tier waste carrier, broker and dealer. \r\nYour registration number is CBDU1.\r\n\r\n#As
+        tier waste carrier, broker and dealer. \r\nYour registration number is CBDU2.\r\n\r\n#As
         an upper tier waste carrier, broker and dealer:\r\n*you need to renew your
         registration every 3 years\r\n*you\u2019ll need to pay a registration charge
         each time you renew\r\n*if we cannot reach you, you\u2019ll have to pay more
@@ -75,8 +75,8 @@ http_interactions:
         contacting the Environment Agency.\r\nIf you have enquiries please email nccc-carrierbroker@environment-agency.gov.uk
         or contact the Environment Agency helpline: 03708 506506\r\n\r\nYours sincerely\r\nWaste
         carrier renewal team","subject":"You are now registered as an upper tier waste
-        carrier, broker and dealer"},"id":"6007bfad-6e64-4e50-b981-e6c52334040f","reference":null,"scheduled_for":null,"template":{"id":"92817aa7-6289-4837-a033-96d287644cb3","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/92817aa7-6289-4837-a033-96d287644cb3","version":6},"uri":"https://api.notifications.service.gov.uk/v2/notifications/6007bfad-6e64-4e50-b981-e6c52334040f"}
+        carrier, broker and dealer"},"id":"bb42d68c-4c36-43ef-b87d-cf87e83b773d","reference":null,"scheduled_for":null,"template":{"id":"92817aa7-6289-4837-a033-96d287644cb3","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/92817aa7-6289-4837-a033-96d287644cb3","version":6},"uri":"https://api.notifications.service.gov.uk/v2/notifications/bb42d68c-4c36-43ef-b87d-cf87e83b773d"}
 
 '
-  recorded_at: Fri, 07 May 2021 09:34:02 GMT
+  recorded_at: Fri, 07 May 2021 10:07:56 GMT
 recorded_with: VCR 6.0.0

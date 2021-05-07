@@ -3,7 +3,7 @@
 require "notifications/client"
 
 module Notify
-  class UpperTierRegistrationLetterService < BaseLetterService
+  class UpperTierAdConfirmationLetterService < BaseLetterService
     private
 
     def template
