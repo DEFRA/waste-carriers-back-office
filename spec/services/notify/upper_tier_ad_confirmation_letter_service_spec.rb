@@ -35,8 +35,10 @@ module Notify
         end
       end
 
-      context "in general" do
+      context "with an AD email_address" do
         before do
+          registration.contact_email = WasteCarriersEngine.configuration.assisted_digital_email
+
           expect_any_instance_of(Notifications::Client)
             .to receive(:send_letter)
             .with(expected_notify_options)
@@ -49,6 +51,14 @@ module Notify
           expect(subject.content["subject"]).to eq(
             "You are now registered as an upper tier waste carrier, broker and dealer"
           )
+        end
+      end
+
+      context "with an invalid email_address" do
+        before { registration.contact_email = "foo@example.com" }
+
+        it "raises an AssistedDigitalLetterError" do
+          expect { subject }.to raise_error(Exceptions::AssistedDigitalLetterError)
         end
       end
     end
