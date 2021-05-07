@@ -3,7 +3,7 @@
 require "notifications/client"
 
 module Notify
-  class UpperTierAdConfirmationLetterService < BaseLetterService
+  class AdConfirmationLetterService < BaseLetterService
     def run(registration:)
       unless registration.contact_email == WasteCarriersEngine.configuration.assisted_digital_email
         raise Exceptions::AssistedDigitalLetterError, registration.reg_identifier

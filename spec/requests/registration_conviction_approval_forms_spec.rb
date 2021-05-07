@@ -77,7 +77,7 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
 
         context "when the notify service fails" do
           before do
-            allow(Notify::UpperTierAdConfirmationLetterService).to receive(:run).and_raise(StandardError)
+            allow(Notify::AdConfirmationLetterService).to receive(:run).and_raise(StandardError)
           end
 
           it "still activates the registration" do
