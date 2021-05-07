@@ -24,7 +24,7 @@ module Notify
     end
 
     def registration_type
-      I18n.t("notify.letters.registration_type.upper.#{@registration.registration_type}")
+      I18n.t("waste_carriers_engine.registration_type.upper.#{@registration.registration_type}")
     end
 
     def registered_address_string

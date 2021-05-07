@@ -1,8 +1,0 @@
-en:
-  notify:
-    letters:
-      registration_type:
-        upper:
-          carrier_dealer: "carrier and dealer"
-          broker_dealer: "broker and dealer"
-          carrier_broker_dealer: "carrier, broker and dealer"
