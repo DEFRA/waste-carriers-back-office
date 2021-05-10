@@ -9,6 +9,8 @@ module Notify
         raise Exceptions::AssistedDigitalLetterError, registration.reg_identifier
       end
 
+      return unless registration.upper_tier?
+
       super
     end
 

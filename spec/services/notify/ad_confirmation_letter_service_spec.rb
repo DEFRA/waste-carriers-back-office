@@ -65,6 +65,10 @@ module Notify
           end
         end
       end
+
+      context "lower tier" do
+        it "eventually sends lower tier confirmation letters (#1409)"
+      end
     end
   end
 end
