@@ -10,7 +10,7 @@ class ResendConfirmationEmailController < ApplicationController
     begin
       validate_contact_email(registration)
 
-      WasteCarriersEngine::Notify::RegistrationActivatedEmailService.run(registration: registration)
+      WasteCarriersEngine::Notify::RegistrationConfirmationEmailService.run(registration: registration)
 
       flash_success(
         I18n.t("resend_confirmation_email.messages.success", email: registration.contact_email)

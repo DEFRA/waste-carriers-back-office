@@ -64,7 +64,7 @@ RSpec.describe "ResendConfirmationEmail", type: :request do
 
       context "when an error happens", disable_bullet: true do
         before do
-          allow(WasteCarriersEngine::Notify::RegistrationActivatedEmailService)
+          allow(WasteCarriersEngine::Notify::RegistrationConfirmationEmailService)
             .to receive(:run)
             .and_raise(StandardError)
         end
