@@ -31,12 +31,6 @@
                               main_app.users_path %>
                 </li>
               <% end %>
-              <% if WasteCarriersEngine::FeatureToggle.active?(:renewal_reminders) && can?(:manage, ReminderLettersExport) %>
-                <li>
-                  <%= link_to t("layouts.application.menu.letters"),
-                              main_app.letters_path %>
-                </li>
-              <% end %>
               <% if can?(:import_conviction_data, current_user) %>
                 <li>
                   <%= link_to t("layouts.application.menu.conviction_imports"),

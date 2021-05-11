@@ -21,11 +21,6 @@ Rails.application.routes.draw do
     get "/resend-renewal-email/:reg_identifier",
         to: "resend_renewal_email#new",
         as: "resend_renewal_email"
-
-    # Letters
-    get "/letters", to: "letters#index", as: :letters
-    resources :ad_reminder_letters_exports, only: %i[index update], path: "/ad-reminder-letters-exports"
-    resources :digital_reminder_letters_exports, only: %i[index update], path: "/digital-reminder-letters-exports"
   end
 
   devise_for :users,
