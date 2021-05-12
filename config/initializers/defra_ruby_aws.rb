@@ -24,15 +24,6 @@ DefraRuby::Aws.configure do |c|
     encrypt_with_kms: ENV["AWS_BOXI_ENCRYPT_WITH_KMS"]
   }
 
-  letters_export_bucket = {
-    name: ENV["AWS_LETTERS_EXPORT_BUCKET"],
-    region: ENV["AWS_REGION"],
-    credentials: {
-      access_key_id: ENV["AWS_LETTERS_EXPORT_ACCESS_KEY_ID"],
-      secret_access_key: ENV["AWS_LETTERS_EXPORT_SECRET_ACCESS_KEY"]
-    }
-  }
-
-  c.buckets = [boxy_bucket, epr_bucket, letters_export_bucket]
+  c.buckets = [boxy_bucket, epr_bucket]
 end
 # rubocop:enable Metrics/BlockLength
