@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: b407cd43e3c91ae02c33aec86ab91a2a4e3ce210
+  revision: 322e175ad430274e1c7f71537dd045b6a6c1aa40
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -85,7 +85,7 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    airbrake (11.0.1)
+    airbrake (11.0.2)
       airbrake-ruby (~> 5.1)
     airbrake-ruby (5.2.0)
       rbtree3 (~> 0.5)
