@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notifications.service.gov.uk/v2/notifications/email
+    body:
+      encoding: UTF-8
+      string: '{"email_address":"whatever@example.com","template_id":"d2819465-fca5-462f-bc10-bf557b4c3247","personalisation":{"reg_identifier":"CBDU16","account_email":"whatever@example.com","company_name":"WasteCo","sign_in_link":"http://localhost:3002/fo/users/sign_in"}}'
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/5.3.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic <API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 17 May 2021 11:00:03 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains
+      X-B3-Spanid:
+      - 3d2c0ae741eff74a
+      X-B3-Traceid:
+      - 3d2c0ae741eff74a
+      X-Vcap-Request-Id:
+      - 32d6b6f6-19bc-49bd-5674-6b027220e04d
+      Content-Length:
+      - '1027'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"content":{"body":"#A waste carriers registration has been transferred
+        to your account CBDU16\r\n\r\nYou can now manage the registration for WasteCo.\r\n\r\nUse
+        this email address whatever@example.com to sign in. \r\n\r\nSign in to access
+        this registration by following this link:\r\nhttp://localhost:3002/fo/users/sign_in\r\n\r\n*
+        If you have enquiries please contact the Environment Agency helpline: 03708
+        506506\r\n* This is an automated email, please do not reply","from_email":"waste.carriers.registration.service@notifications.service.gov.uk","subject":"The
+        waste carriers registration CBDU16 has been transferred to you"},"id":"b6357391-28d0-4d9e-8402-e64e3cd79c91","reference":null,"scheduled_for":null,"template":{"id":"d2819465-fca5-462f-bc10-bf557b4c3247","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/d2819465-fca5-462f-bc10-bf557b4c3247","version":3},"uri":"https://api.notifications.service.gov.uk/v2/notifications/b6357391-28d0-4d9e-8402-e64e3cd79c91"}
+
+'
+  recorded_at: Mon, 17 May 2021 11:00:03 GMT
+recorded_with: VCR 6.0.0
