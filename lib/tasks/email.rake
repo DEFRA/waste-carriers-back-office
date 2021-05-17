@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 namespace :email do
-  desc "Send a test email to confirm confirm setup is correct"
-  task test: :environment do
-    puts TestMailer.test_email.deliver_now
-  end
-
   namespace :renew_reminder do
     namespace :first do
       desc "Send first email reminder to all registrations expiring in X days (default is 28)"
