@@ -61,7 +61,8 @@ class RegistrationTransferService < ::WasteCarriersEngine::BaseService
   end
 
   def send_new_account_confirmation_email(token)
-    RegistrationTransferMailer.transfer_to_new_account_email(@registration, token).deliver_now
+    Notify::RegistrationTransferWithInviteEmailService
+      .run(registration: @registration, token: token)
   rescue StandardError => e
     log_email_error(e)
   end
