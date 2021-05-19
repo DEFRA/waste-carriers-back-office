@@ -13,11 +13,9 @@
     </h1>
 
     <div class="form-group">
-      <p><%= @registration.paragraph_1_message %></p>
-      <p><%= t(".paragraph_2", reg_identifier: @registration.reg_identifier) %></p>
-      <p><%= t(".paragraph_3", email: @registration.account_email) %></p>
-      <p><%= t(".paragraph_4", email: @registration.account_email) %></p>
-
+      <% @registration.new_registration_transfer_message_lines.each do |message_line| %>
+        <p><%= message_line %></p>
+      <% end %>
       <table>
         <caption class="heading-medium">
           <%= t(".registration_info.heading") %>
