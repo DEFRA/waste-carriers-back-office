@@ -15,7 +15,7 @@ en:
           reg_identifier: "Registration number"
           company_name: "Company name"
         values:
-          n_a: "n/a"
+          not_applicable: "n/a"
       subheading_1: "Transfer the registration"
       email_label: "Email address"
       confirm_email_label: "Confirm email address"

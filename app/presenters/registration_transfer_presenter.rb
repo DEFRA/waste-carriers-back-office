@@ -17,6 +17,6 @@ class RegistrationTransferPresenter < WasteCarriersEngine::BasePresenter
 
   def account_email_message
     @registration.account_email.presence ||
-      I18n.t(".registration_transfers.new.registration_info.values.n_a")
+      I18n.t(".registration_transfers.new.registration_info.values.not_applicable")
   end
 end
