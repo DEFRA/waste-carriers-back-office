@@ -40,7 +40,10 @@ class RegistrationTransfersController < ApplicationController
   end
 
   def find_registration(reg_identifier)
-    @registration = WasteCarriersEngine::Registration.where(reg_identifier: reg_identifier).first
+    @registration =
+      RegistrationTransferPresenter.new(
+        WasteCarriersEngine::Registration.where(reg_identifier: reg_identifier).first
+      )
   end
 
   def authorize_action

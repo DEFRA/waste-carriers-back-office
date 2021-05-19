@@ -13,7 +13,7 @@
     </h1>
 
     <div class="form-group">
-      <p><%= t(".paragraph_1", email: @registration.account_email) %></p>
+      <p><%= @registration.paragraph_1_message %></p>
       <p><%= t(".paragraph_2", reg_identifier: @registration.reg_identifier) %></p>
       <p><%= t(".paragraph_3", email: @registration.account_email) %></p>
       <p><%= t(".paragraph_4", email: @registration.account_email) %></p>
@@ -28,7 +28,7 @@
               <%= t(".registration_info.labels.account_email") %>
             </td>
             <td>
-              <%= @registration.account_email %>
+              <%= @registration.account_email_message %>
             </td>
           </tr>
           <tr>

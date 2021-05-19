@@ -43,7 +43,7 @@ class Ability
 
     can :revert_to_payment_summary, :all
 
-    can :transfer_registration, WasteCarriersEngine::Registration
+    can :transfer_registration, [WasteCarriersEngine::Registration, RegistrationTransferPresenter]
   end
 
   def permissions_for_agency_user_with_refund
