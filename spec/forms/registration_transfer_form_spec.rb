@@ -82,42 +82,16 @@ RSpec.describe RegistrationTransferForm, type: :model do
 
   describe "#confirm_email" do
     context "when it doesn't match the email" do
+      let(:original_account_email) { registration_transfer_form.registration.account_email }
+
       before { registration_transfer_form.confirm_email = "no_matchy@example.com" }
 
       it "is not valid" do
         expect(registration_transfer_form).to_not be_valid
       end
-    end
-  end
 
-  describe "#registration_transferred_successfully?" do
-    context "when the RegistrationTransferService returns :success_existing_user" do
-      before do
-        allow(RegistrationTransferService).to receive(:run).and_return(:success_existing_user)
-      end
-
-      it "is valid" do
-        expect(registration_transfer_form).to be_valid
-      end
-    end
-
-    context "when the RegistrationTransferService returns :success_new_user" do
-      before do
-        allow(RegistrationTransferService).to receive(:run).and_return(:success_new_user)
-      end
-
-      it "is valid" do
-        expect(registration_transfer_form).to be_valid
-      end
-    end
-
-    context "when the RegistrationTransferService returns :no_matching_user" do
-      before do
-        allow(RegistrationTransferService).to receive(:run).and_return(:no_matching_user)
-      end
-
-      it "is not valid" do
-        expect(registration_transfer_form).to_not be_valid
+      it "does not update the account_email" do
+        expect(registration_transfer_form.registration.account_email).to eq(original_account_email)
       end
     end
   end

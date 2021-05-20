@@ -67,11 +67,27 @@ RSpec.describe "RegistrationTransfers", type: :request do
         end
       end
 
-      context "when the params are invalid" do
+      context "when the email addresses are blank" do
         let(:params) do
           {
             email: nil,
             confirm_email: nil
+          }
+        end
+
+        it "renders the new template and does not change the account_email" do
+          old_email = registration.account_email
+          post "/bo/registrations/#{registration.reg_identifier}/transfer/", params: { registration_transfer_form: params }
+
+          expect(response).to render_template(:new)
+          expect(registration.reload.account_email).to eq(old_email)
+        end
+      end
+      context "when the email addresses do not match" do
+        let(:params) do
+          {
+            email: "alice@example.com",
+            confirm_email: "bob@example.com"
           }
         end
 
