@@ -4,6 +4,7 @@ en:
       title: "Transfer a registration to a different user account"
       heading: "Transfer registration %{reg_identifier} to a different user account"
       paragraph_1: "This registration currently belongs to %{email}."
+      paragraph_1_no_account_email: "This registration currently does not have an account associated with it."
       paragraph_2: "If you know that a different user should own %{reg_identifier}, you can transfer it to a different account."
       paragraph_3: "Once the registration is transferred, %{email} will no longer be able to view or manage it."
       paragraph_4: "Any other registrations owned by %{email} will not be affected."
@@ -13,6 +14,8 @@ en:
           account_email: "Current user account"
           reg_identifier: "Registration number"
           company_name: "Company name"
+        values:
+          not_applicable: "n/a"
       subheading_1: "Transfer the registration"
       email_label: "Email address"
       confirm_email_label: "Confirm email address"
