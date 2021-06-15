@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: c762a186f5bfc15cf048df71cee036dd6f589dd0
+  revision: b6d79fe1e31ab20d4f1d171b9e651ecfccc459a0
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -137,10 +137,9 @@ GEM
     concurrent-ruby (1.1.9)
     console (1.12.0)
       fiber-local
-    countries (3.1.0)
-      i18n_data (~> 0.11.0)
+    countries (4.0.0)
+      i18n_data (~> 0.13.0)
       sixarm_ruby_unaccent (~> 1.1)
-      unicode_utils (~> 1.4)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -242,7 +241,7 @@ GEM
       domain_name (~> 0.5)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
-    i18n_data (0.11.0)
+    i18n_data (0.13.0)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
@@ -307,7 +306,7 @@ GEM
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.6.50)
+    phonelib (0.6.51)
     protocol-hpack (1.4.2)
     protocol-http (0.22.2)
     protocol-http1 (0.14.1)
@@ -453,7 +452,6 @@ GEM
       unf_ext
     unf_ext (0.0.7.7)
     unicode-display_width (1.7.0)
-    unicode_utils (1.4.0)
     useragent (0.16.10)
     validates_email_format_of (1.6.3)
       i18n
@@ -469,7 +467,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    websocket-driver (0.7.4)
+    websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     whenever (1.0.0)
