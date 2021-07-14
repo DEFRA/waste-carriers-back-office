@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: b6d79fe1e31ab20d4f1d171b9e651ecfccc459a0
+  revision: f89e8d591c376cdf7b10a641233e8a0b2f0cf127
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -87,7 +87,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     airbrake (11.0.3)
       airbrake-ruby (~> 5.1)
-    airbrake-ruby (5.2.0)
+    airbrake-ruby (5.2.1)
       rbtree3 (~> 0.5)
     ast (2.4.1)
     async (1.29.0)
@@ -275,7 +275,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2021.0225)
+    mime-types-data (3.2021.0704)
     mini_mime (1.1.0)
     mini_portile2 (2.5.3)
     minitest (5.14.4)
@@ -356,7 +356,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
     rainbow (3.0.0)
-    rake (13.0.3)
+    rake (13.0.6)
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
