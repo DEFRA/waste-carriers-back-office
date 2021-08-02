@@ -23,6 +23,8 @@ gem "sdoc", "~> 1.1.0", group: :doc
 # Use CanCanCan for user roles and permissions
 gem "cancancan", "~> 3.2.1"
 
+gem "defra_ruby_template"
+
 # Use Devise for user authentication
 gem "devise", ">= 4.4.3"
 gem "devise_invitable", "~> 1.7.0"
@@ -32,9 +34,8 @@ gem "rubyzip"
 
 gem "secure_headers", "~> 5.0"
 
-# GOV.UK styling
-gem "govuk_elements_rails", "~> 3.1"
-gem "govuk_template", "~> 0.23"
+# Design system form builder
+gem "govuk_design_system_formbuilder"
 
 gem "kaminari", "~> 1.1"
 gem "kaminari-mongoid", "~> 1.0"

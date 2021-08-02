@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: e9896384bbdeff57760ea688bce5339344bba254
+  revision: f0389dd45961fdc19b2f8521784db64ecb5b8d8a
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -147,6 +147,7 @@ GEM
     database_cleaner-mongoid (2.0.1)
       database_cleaner-core (~> 2.0.0)
       mongoid
+    deep_merge (1.2.1)
     defra_ruby_address (0.1.0)
       rest-client (~> 2.0)
     defra_ruby_alert (2.1.1)
@@ -167,6 +168,7 @@ GEM
       sprockets (~> 3.7.2)
     defra_ruby_style (0.2.2)
       rubocop (~> 0.82)
+    defra_ruby_template (3.13.0)
     defra_ruby_validators (2.4.1)
       activemodel
       os_map_ref
@@ -223,17 +225,13 @@ GEM
       octokit (~> 4.6)
       rainbow (>= 2.2.1)
       rake (>= 10.0)
-    globalid (0.4.2)
-      activesupport (>= 4.2.0)
-    govuk_elements_rails (3.1.3)
-      govuk_frontend_toolkit (>= 6.0.2)
-      rails (>= 4.1.0)
-      sass (>= 3.2.0)
-    govuk_frontend_toolkit (9.0.0)
-      railties (>= 3.1.0)
-      sass (>= 3.2.0)
-    govuk_template (0.26.0)
-      rails (>= 3.1)
+    globalid (0.5.2)
+      activesupport (>= 5.0)
+    govuk_design_system_formbuilder (2.7.2)
+      actionview (>= 6.0)
+      activemodel (>= 6.0)
+      activesupport (>= 6.0)
+      deep_merge (~> 1.2.1)
     hashdiff (1.0.1)
     high_voltage (3.1.2)
     http-accept (1.7.0)
@@ -266,7 +264,7 @@ GEM
     kaminari-mongoid (1.0.1)
       kaminari-core (~> 1.0)
       mongoid
-    loofah (2.10.0)
+    loofah (2.11.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -306,7 +304,7 @@ GEM
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.6.51)
+    phonelib (0.6.52)
     protocol-hpack (1.4.2)
     protocol-http (0.22.2)
     protocol-http1 (0.14.1)
@@ -489,13 +487,13 @@ DEPENDENCIES
   defra_ruby_features (~> 0.1)
   defra_ruby_mocks
   defra_ruby_style
+  defra_ruby_template
   devise (>= 4.4.3)
   devise_invitable (~> 1.7.0)
   dotenv-rails
   factory_bot_rails
   github_changelog_generator
-  govuk_elements_rails (~> 3.1)
-  govuk_template (~> 0.23)
+  govuk_design_system_formbuilder
   jquery-rails
   kaminari (~> 1.1)
   kaminari-mongoid (~> 1.0)

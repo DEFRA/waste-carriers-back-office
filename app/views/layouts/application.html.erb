@@ -6,58 +6,57 @@
 
 <% content_for :page_title, title %>
 
-<% content_for :header_class, "with-proposition" %>
-<% content_for :proposition_header do %>
-  <div class="header-proposition">
-    <div class="content">
-      <% if user_signed_in? %>
-        <%= link_to t(:global_proposition_header), main_app.bo_path, id: "proposition-name" %>
-        <a role="button" href="#proposition-links" class="js-header-toggle menu" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</a>
-          <nav id="proposition-menu">
-            <ul id="proposition-links" aria-label="Top Level Navigation">
-              <li>
-                <%= link_to t("layouts.application.menu.dashboard"),
-                            main_app.bo_path %>
-              </li>
-              <% if can?(:review_convictions, current_user) %>
-                <li>
-                  <%= link_to t("layouts.application.menu.convictions"),
-                              main_app.convictions_path %>
-                </li>
-              <% end %>
-              <% if can?(:manage_back_office_users, current_user) %>
-                <li>
-                  <%= link_to t("layouts.application.menu.users"),
-                              main_app.users_path %>
-                </li>
-              <% end %>
-              <% if can?(:import_conviction_data, current_user) %>
-                <li>
-                  <%= link_to t("layouts.application.menu.conviction_imports"),
-                              main_app.conviction_imports_path %>
-                </li>
-              <% end %>
-              <% if can?(:manage, WasteCarriersEngine::FeatureToggle, current_user) %>
-                <li>
-                  <%= link_to t("layouts.application.menu.feature_toggles"),
-                              features_engine.feature_toggles_path %>
-                </li>
-              <% end %>
-            </ul>
-          </nav>
-      <% else %>
-        <nav id="proposition-menu">
-          <%= link_to t(:global_proposition_header), main_app.bo_path, id: "proposition-name" %>
-        </nav>
-      <% end %>
-    </div>
-  </div>
+<% content_for :header_content do %>
+
+  <%= link_to t(:global_proposition_header),
+      main_app.bo_path,
+      class: "govuk-header__link govuk-header__link--service-name",
+      id: "proposition-name" %>
+
+  <% if user_signed_in? %>
+    <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide navigation menu">Menu</button>
+    <nav id="proposition-menu">
+      <ul id="proposition-links" class="govuk-header__navigation" aria-label="Top Level Navigation">
+        <li class="govuk-header__navigation-item">
+          <%= link_to t("layouts.application.menu.dashboard"),
+              main_app.bo_path,
+              class: "govuk-header__link" %>
+        </li>
+
+        <% if can?(:review_convictions, current_user) %>
+          <li class="govuk-header__navigation-item">
+            <%= link_to t("layouts.application.menu.convictions"),
+                main_app.convictions_path,
+                class: "govuk-header__link"  %>
+          </li>
+        <% end %>
+
+        <% if can?(:manage_back_office_users, current_user) %>
+          <li class="govuk-header__navigation-item">
+            <%= link_to t("layouts.application.menu.users"),
+                main_app.users_path,
+                class: "govuk-header__link"  %>
+          </li>
+        <% end %>
+
+        <% if can?(:import_conviction_data, current_user) %>
+          <li class="govuk-header__navigation-item">
+            <%= link_to t("layouts.application.menu.conviction_imports"),
+                main_app.conviction_imports_path,
+                class: "govuk-header__link"  %>
+          </li>
+        <% end %>
+
+        <% if can?(:manage, WasteCarriersEngine::FeatureToggle, current_user) %>
+          <li class="govuk-header__navigation-item">
+            <%= link_to t("layouts.application.menu.feature_toggles"),
+                features_engine.feature_toggles_path,
+                class: "govuk-header__link"  %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  <% end %>
 <% end %>
 
-<% content_for(:content) do %>
-  <main id="content" role="main">
-    <%= yield %>
-  </main>
-<% end %>
-
-<%= render template: "layouts/govuk_template" %>
+<%= render template: "layouts/defra_ruby_template" %>
