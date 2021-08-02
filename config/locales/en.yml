@@ -11,6 +11,9 @@ en:
         users: "Manage users"
         conviction_imports: "Import conviction data"
         feature_toggles: "Toggle features"
+      user_info:
+        signed_in_user: "Signed in as %{email}."
+        sign_out_link: "Sign out"
   shared:
     conviction_search_result:
       match_result: "Match result"

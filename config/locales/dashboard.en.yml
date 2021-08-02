@@ -2,9 +2,6 @@ en:
   dashboards:
     index:
       title: "Waste carriers registrations"
-      user_info:
-        signed_in_user: "Signed in as %{email}."
-        sign_out_link: "Sign out"
       heading: "Waste carriers registrations"
       actions:
         subheading: "Actions"
