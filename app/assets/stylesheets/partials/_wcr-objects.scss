@@ -1,0 +1,22 @@
+.wcr-actions {
+  background-color: #f8f8f8;
+  padding: 10px;
+
+  &--push-down {
+    margin-top: 45px;
+  }
+
+  li {
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.separated {
+      margin-top: 20px;
+    }
+  }
+
+  h2:first-child, h3:first-child {
+    margin-top: 0;
+  }
+}

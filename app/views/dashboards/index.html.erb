@@ -11,41 +11,41 @@
   <% end %>
 <% end %>
 
-<div class="grid-row">
-  <div class="column-full">
-    <h1 class="heading-large">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-l">
       <%= t(".heading") %>
     </h1>
   </div>
 </div>
 
-<div class="grid-row">
-  <div class="column-full">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
     <%= render("shared/flash_messages") %>
   </div>
 </div>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <div class="form-group">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-form-group">
       <%= form_tag("/bo", method: :get) do %>
-        <%= label_tag :term, class: "form-label" do %>
+        <%= label_tag :term, class: "govuk-label" do %>
           <%= t(".search.label") %>
-          <span class="form-hint"><%= t(".search.hint") %></span>
+          <span class="govuk-hint"><%= t(".search.hint") %></span>
         <% end %>
-        <%= text_field_tag :term, @term, class: "form-control", type: "search" %>
-        <%= submit_tag t(".search.submit"), class: "button" %>
+        <%= text_field_tag :term, @term, class: "govuk-input govuk-!-width-one-half", type: "search" %>
+        <%= submit_tag t(".search.submit"), class: "govuk-button" %>
       <% end %>
     </div>
   </div>
 
   <% if can?(:create, WasteCarriersEngine::Registration) && WasteCarriersEngine::FeatureToggle.active?(:new_registration) %>
-    <div class="column-one-third">
+    <div class="govuk-grid-column-one-third">
       <div class="wcr-actions">
-        <h2 class="heading-small">
+        <h2 class="govuk-heading-s">
           <%= t(".actions.subheading") %>
         </h2>
-        <ul>
+        <ul class="govuk-list">
           <li>
             <%= link_to t(".actions.new_registration"), ad_privacy_policy_path %>
           </li>
@@ -56,32 +56,30 @@
 </div>
 
 <% if @results.any? %>
-  <div class="grid-row">
-    <div class="column-full">
-      <table class="dashboard_results">
-        <caption>
-          <h2 class="heading-medium">
-            <%= t(".results.caption", count: @result_count) %>
-          </h2>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-table__caption--m">
+          <%= t(".results.caption", count: @result_count) %>
         </caption>
-        <thead>
-          <tr>
-            <th><%= t(".results.th.reg_identifier") %></th>
-            <th><%= t(".results.th.business") %></th>
-            <th><%= t(".results.th.status") %></th>
-            <th><%= t(".results.th.dates") %></th>
-            <th><%= t(".results.th.actions") %></th>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header"><%= t(".results.th.reg_identifier") %></th>
+            <th scope="col" class="govuk-table__header"><%= t(".results.th.business") %></th>
+            <th scope="col" class="govuk-table__header"><%= t(".results.th.status") %></th>
+            <th scope="col" class="govuk-table__header"><%= t(".results.th.dates") %></th>
+            <th scope="col" class="govuk-table__header"><%= t(".results.th.actions") %></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="govuk-table__body">
           <% @results.each do |result| %>
-            <tr>
-              <td>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
                 <% unless result.is_a?(WasteCarriersEngine::NewRegistration) %>
                   <%= result.reg_identifier %>
                 <% end %>
               </td>
-              <td>
+              <td class="govuk-table__cell">
                 <%= result.company_name %>
                 <% if result.registered_address.present? %>
                   <p class="address font-xsmall">
@@ -89,26 +87,26 @@
                   </p>
                 <% end %>
               </td>
-              <td>
+              <td class="govuk-table__cell">
                 <% if result_type(result).present? %>
                   <%= t(".results.classes.#{result_type(result)}") %><br>
                 <% end %>
 
                 <% status_tags(result).each do |tag| %>
-                  <span class="status-tag status-tag--<%= tag %>">
+                  <span class="govuk-tag govuk-tag--<%= tag %>">
                     <%= t(".results.statuses.#{tag}") %>
                   </span>
                 <% end %>
               </td>
-              <td>
+              <td class="govuk-table__cell">
                 <%= result_date(result) %>
               </td>
-              <td>
-                <ul>
+              <td class="govuk-table__cell">
+                <ul class="govuk-list govuk-list--spaced">
                   <li>
                     <%= link_to details_link_for(result) do %>
                       <%= t(".results.actions.details.link_text") %>
-                      <span class="visually-hidden">
+                      <span class="govuk-visually-hidden">
                         <%= t(".results.actions.details.visually_hidden_text",
                               name: result.company_name) %>
                       </span>
@@ -118,7 +116,7 @@
                     <li>
                       <%= link_to resume_link_for(result) do %>
                         <%= t(".results.actions.resume.link_text") %>
-                        <span class="visually-hidden">
+                        <span class="govuk-visually-hidden">
                           <%= t(".results.actions.resume.visually_hidden_text",
                                 name: result.company_name) %>
                         </span>
@@ -129,7 +127,7 @@
                     <li>
                       <%= link_to resource_finance_details_path(result._id) do %>
                         <%= t(".results.actions.payment.link_text") %>
-                        <span class="visually-hidden">
+                        <span class="govuk-visually-hidden">
                           <%= t(".results.actions.payment.visually_hidden_text",
                                 name: result.company_name) %>
                         </span>
@@ -140,7 +138,7 @@
                     <li>
                       <%= link_to renew_link_for(result) do %>
                         <%= t(".results.actions.renew.link_text") %>
-                        <span class="visually-hidden">
+                        <span class="govuk-visually-hidden">
                           <%= t(".results.actions.renew.visually_hidden_text",
                                 name: result.company_name) %>
                         </span>
@@ -156,8 +154,8 @@
     </div>
   </div>
 
-  <div class="grid-row">
-    <div class="column-full">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full govuk-body">
       <nav role="navigation" class="pagination" aria-label="Pagination">
         <div class="pagination__summary">
           <%= page_entries_info @results, entry_name: "item" %>
@@ -171,9 +169,9 @@
 
 <hr>
 
-<div class="grid-row">
-  <div class="column-full">
-    <p><%= t(".results.no_results") %></p>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <p class="govuk-body"><%= t(".results.no_results") %></p>
   </div>
 </div>
 

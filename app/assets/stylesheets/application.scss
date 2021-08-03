@@ -1,4 +1,6 @@
 @import "defra_ruby_template";
+@import "partials/pagination";
+@import "partials/wcr-objects";
 
 // Signed-in info banner
 #user-status {
