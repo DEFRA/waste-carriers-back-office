@@ -1,8 +1,8 @@
-<div class="wcr-actions wcr-actions--push-down">
-  <h2 class="heading-medium">
+<div class="wcr-actions">
+  <h2 class="govuk-heading-m">
     <%= resource.display_action_links_heading %>
   </h2>
-  <ul>
+  <ul class="govuk-list govuk-list--spaced">
     <% if display_resume_link_for?(resource) %>
       <li>
         <%= link_to t(".actions_box.links.continue_button"), resume_link_for(resource) %>
@@ -27,8 +27,6 @@
       </li>
     <% end %>
 
-    <li class="separated" />
-
     <% if display_edit_link_for?(resource) %>
       <li>
         <%= link_to t(".actions_box.links.edit"), WasteCarriersEngine::Engine.routes.url_helpers.new_edit_form_path(resource.reg_identifier) %>
@@ -47,8 +45,6 @@
       </li>
     <% end %>
 
-    <li class="separated" />
-
     <% if display_order_copy_cards_link_for?(resource) %>
       <li>
         <%= link_to t(".actions_box.links.order_copy_cards"), basic_app_engine.new_copy_cards_form_path(resource.reg_identifier) %>
@@ -66,8 +62,6 @@
         <%= link_to t(".actions_box.links.revoke"), WasteCarriersEngine::Engine.routes.url_helpers.new_cease_or_revoke_form_path(resource.reg_identifier) %>
       </li>
     <% end %>
-
-    <li class="separated" />
 
     <% if display_cancel_link_for?(resource) %>
       <li>

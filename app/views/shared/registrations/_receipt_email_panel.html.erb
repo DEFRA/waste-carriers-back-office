@@ -1,13 +1,13 @@
-<h2 class="heading-medium">
+<h2 class="govuk-heading-m">
     <%= t(".heading") %>
 </h2>
-<table>
-  <tbody>
-    <tr>
-      <th>
+<table class="govuk-table">
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">
         <%= t(".labels.email") %>
       </th>
-      <td>
+      <td class="govuk-table__cell">
         <%= resource.receipt_email %>
       </td>
     </tr>

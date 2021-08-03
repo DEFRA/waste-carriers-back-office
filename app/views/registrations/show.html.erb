@@ -1,13 +1,13 @@
-<div class="grid-row">
-  <div class="column-full">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: bo_path) %>
 
     <%= render("shared/flash_messages") %>
 
-    <div class="grid-row">
-      <div class="column-two-thirds">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
 
-        <h1 class="heading-large">
+        <h1 class="govuk-heading-l">
           <%= t(".heading", reg_identifier: @registration.reg_identifier) %>
         </h1>
 
@@ -29,21 +29,21 @@
           <%= render "shared/registrations/expired_panel", resource: @registration %>
         <% end %>
 
+        <hr/>
         <%= render "shared/registrations/company_details_panel", resource: @registration %>
-
+        <hr/>
         <%= render "shared/registrations/contact_and_business_details_panels", resource: @registration %>
 
         <hr/>
 
-        <h2 class="heading-medium"><%= t(".conviction_heading") %></h2>
+        <h2 class="govuk-heading-m"><%= t(".conviction_heading") %></h2>
         <div>
-          <p>
+          <p class="govuk-body">
             <%= @registration.display_convictions_check_message %>
           </p>
         </div>
 
-        <hr>
-
+        <hr/>
         <%= render "shared/registrations/finance_details", resource: @registration %>
 
         <% if @registration.main_people.any? %>
@@ -59,7 +59,7 @@
         <% end %>
       </div>
 
-      <div class="column-one-third">
+      <div class="govuk-grid-column-one-third">
         <%= render "shared/registrations/action_links_panel", resource: @registration %>
       </div>
     </div>

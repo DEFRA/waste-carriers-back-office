@@ -1,21 +1,21 @@
-<div class="grid-row">
-  <div class="column-one-half wcr-side-info-box">
-    <h2 class="heading-medium">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+    <h2 class="govuk-heading-m">
       <%= t(".contact_information.heading") %>
     </h2>
     <% if resource.display_contact_information_panel? %>
-      <p>
+      <p class="govuk-body">
         <%= resource.first_name %> <%= resource.last_name %>
       </p>
-      <p>
+      <p class="govuk-body">
         <%= resource.phone_number %>
       </p>
-      <p class="wcr-truncate-ellipsis">
+      <p class="govuk-body">
         <a href="mailto:<%= resource.contact_email %>" target="_top">
           <%= resource.contact_email %>
         </a>
       </p>
-      <p>
+      <p class="govuk-body">
         <% if resource.contact_address.present? %>
           <% displayable_address(resource.contact_address).each do |line| %>
             <%= line %><br>
@@ -23,36 +23,36 @@
         <% end %>
       </p>
     <% else %>
-      <p><%= t(".contact_information.no_contact_information_available") %></p>
+      <p class="govuk-body"><%= t(".contact_information.no_contact_information_available") %></p>
     <% end %>
   </div>
-  <div class="column-one-half wcr-side-info-box">
-    <h2 class="heading-medium">
+  <div class="govuk-grid-column-one-half">
+    <h2 class="govuk-heading-m">
       <%= t(".business_information.heading") %>
     </h2>
     <% if resource.display_business_information_panel? %>
-      <p>
+      <p class="govuk-body">
         <%= resource.company_name %>
       </p>
       <% if resource.company_no.present? %>
-        <p>
+        <p class="govuk-body">
           <%= t(".business_information.labels.company_no", number: resource.company_no) %>
         </p>
       <% end %>
 
       <% if resource.registered_address.present? %>
-        <p>
+        <p class="govuk-body">
           <%= t(".business_information.labels.registered_address") %> <br>
           <% displayable_address(resource.registered_address).each do |line| %>
             <%= line %><br>
           <% end %>
         </p>
       <% end %>
-      <p>
+      <p class="govuk-body">
         <%= resource.displayable_location %>
       </p>
     <% else %>
-      <p><%= t(".business_information.no_business_information_available") %></p>
+      <p class="govuk-body"><%= t(".business_information.no_business_information_available") %></p>
     <% end %>
   </div>
 </div>

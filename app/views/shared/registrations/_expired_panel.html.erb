@@ -1,14 +1,14 @@
-<div class="panel panel-border-wide">
-  <h2 class="heading-medium">
+<div class="govuk-inset-text">
+  <h2 class="govuk-heading-m">
     <%= t(".heading", date: resource.display_expiry_date) %>
   </h2>
   <% if display_renew_link_for?(resource) %>
     <%= link_to t(".links.renew"),
                 WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(resource.reg_identifier),
-                class: 'button' %>
+                class: 'govuk-button' %>
   <% elsif can?(:create, WasteCarriersEngine::Registration) && WasteCarriersEngine::FeatureToggle.active?(:new_registration) %>
     <%= link_to t(".links.new_registration"),
                 ad_privacy_policy_path,
-                class: 'button' %>
+                class: 'govuk-button' %>
   <% end %>
 </div>

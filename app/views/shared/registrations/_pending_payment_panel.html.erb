@@ -1,12 +1,12 @@
-<div class="panel">
-  <h2 class="heading-medium">
+<div class="govuk-inset-text">
+  <h2 class="govuk-heading-m">
     <%= t(".status.headings.pending_payment") %>
   </h2>
-  <p>
+  <p class="govuk-body">
     <%= t(".status.messages.pending_payment", total: display_pence_as_pounds(resource.finance_details.balance)) %>
   </p>
 
   <% if display_payment_link_for?(resource) && !local_assigns[:hide_payment_link] %>
-    <%= link_to t(".status.actions.payment_button"), new_resource_payment_form_path(resource._id), class: 'button' %>
+    <%= link_to t(".status.actions.payment_button"), new_resource_payment_form_path(resource._id), class: 'govuk-button' %>
   <% end %>
 </div>

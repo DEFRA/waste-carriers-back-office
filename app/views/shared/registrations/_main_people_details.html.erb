@@ -1,33 +1,32 @@
-<h2 class="heading-medium">
-  <%= t(".person_information.heading.#{resource.business_type}") %>
-</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>
+<table class="govuk-table">
+  <caption class="govuk-table__caption govuk-table__caption--m">
+    <%= t(".person_information.heading.#{resource.business_type}") %>
+  </caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">
         <%= t(".person_information.name") %>
       </th>
-      <th>
+      <th scope="col" class="govuk-table__header">
         <%= t(".person_information.dob") %>
       </th>
-      <th>
+       <th scope="col" class="govuk-table__header">
         <%= t(".person_information.convictions") %>
       </th>
     </tr>
   </thead>
   <tbody>
     <% resource.main_people.each do |person| %>
-      <tr>
-        <td>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
           <%= person.first_name %> <%= person.last_name %>
         </td>
-        <td>
+        <td class="govuk-table__cell">
           <%= person.dob.to_date %>
         </td>
-        <td>
+        <td class="govuk-table__cell">
           <% if person.conviction_check_required? %>
-            <div class="bold-small">
+            <div class="govuk-body-s">
               <%= t(".person_information.has_convictions.#{person.conviction_search_result.match_result}") %>
             </div>
           <% else %>

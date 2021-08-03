@@ -1,27 +1,25 @@
-<div class="panel wcr-panel wcr-panel-border-all">
-  <% if resource.display_company_details_panel? %>
-    <% if resource.company_name.present? %>
-      <h2 class="heading-medium">
-        <%= resource.company_name %>
-      </h2>
-    <% end %>
-    <% if resource.display_tier_and_registration_type.present? %>
-      <p class="lede">
-        <%= resource.display_tier_and_registration_type %>
-      </p>
-    <% end %>
-    <% if resource.display_expiry_text.present? || resource.account_email.present? %>
-      <p>
-        <% if resource.display_expiry_text.present? %>
-          <%= resource.display_expiry_text %>
-          <br>
-        <% end %>
-        <% if resource.account_email.present? %>
-          <%= t(".labels.account", email: resource.account_email) %>
-        <% end %>
-      </p>
-    <% end %>
-  <% else %>
-    <%= t(".no_company_details_available") %>
+<% if resource.display_company_details_panel? %>
+  <% if resource.company_name.present? %>
+    <h2 class="govuk-heading-m">
+      <%= resource.company_name %>
+    </h2>
   <% end %>
-</div>
+  <% if resource.display_tier_and_registration_type.present? %>
+    <p class="govuk-body">
+      <%= resource.display_tier_and_registration_type %>
+    </p>
+  <% end %>
+  <% if resource.display_expiry_text.present? || resource.account_email.present? %>
+    <p class="govuk-body">
+      <% if resource.display_expiry_text.present? %>
+        <%= resource.display_expiry_text %>
+        <br>
+      <% end %>
+      <% if resource.account_email.present? %>
+        <%= t(".labels.account", email: resource.account_email) %>
+      <% end %>
+    </p>
+  <% end %>
+<% else %>
+  <%= t(".no_company_details_available") %>
+<% end %>

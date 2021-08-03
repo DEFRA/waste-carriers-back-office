@@ -1,57 +1,52 @@
-<h2 class="heading-medium">
-  <% if resource.unpaid_balance? %>
-    <%= t(".finance_information.heading_with_amount_owed", amount: display_pence_as_pounds(resource.finance_details.balance)) %>
-  <% elsif resource.show_no_finance_details_data? %>
-    <%= t(".finance_information.balance.no_data") %>
-  <% else %>
-    <%= t(".finance_information.heading") %>
-  <% end %>
-</h2>
-
 <% if resource.lower_tier? %>
-  <p>
+  <p class="govuk-body">
     <%= t(".finance_information.lower_tier_message") %>
   </p>
 <% end %>
 
 <% if resource.show_order_details? %>
-  <table>
-    <tbody>
-      <tr>
-        <th>
+  <table class="govuk-table">
+    <caption class="govuk-table__caption govuk-table__caption--m">
+      <% if resource.unpaid_balance? %>
+        <%= t(".finance_information.heading_with_amount_owed", amount: display_pence_as_pounds(resource.finance_details.balance)) %>
+      <% elsif resource.show_no_finance_details_data? %>
+        <%= t(".finance_information.balance.no_data") %>
+      <% else %>
+        <%= t(".finance_information.heading") %>
+      <% end %>
+    </caption>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">
           <%= t(".order_information.labels.payment_method") %>
         </th>
-        <td>
+        <td class="govuk-table__cell govuk-table__cell--numeric">
           <%= resource.latest_order.payment_method.titleize %>
         </td>
       </tr>
       <% resource.latest_order.order_items.each do |item| %>
-        <tr>
-          <th>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header">
             <%= item.description.capitalize %>
           </th>
-          <td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">
             £<%= display_pence_as_pounds(item.amount) %>
           </td>
         </tr>
       <% end %>
-      <tr>
-        <th>
-          <strong class="bold-small">
-            <%= t(".order_information.labels.total_amount") %>
-          </strong>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">
+          <%= t(".order_information.labels.total_amount") %>
         </th>
-        <td>
-          <strong class="bold-small">
-            £<%= display_pence_as_pounds(resource.latest_order.total_amount) %>
-          </strong>
+        <td class="govuk-table__header govuk-table__header--numeric">
+          £<%= display_pence_as_pounds(resource.latest_order.total_amount) %>
         </td>
       </tr>
-      <tr>
-        <th>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__cell">
           <%= t(".order_information.labels.order_code") %>
         </th>
-        <td>
+        <td class="govuk-table__cell govuk-table__cell--numeric">
           <%= resource.latest_order.order_code %>
         </td>
       </tr>
