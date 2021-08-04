@@ -1,26 +1,26 @@
-<tr>
-  <td>
+<tr class="govuk-table__row">
+  <th scope="row" class="govuk-table__header">
     <%= t(".name") %>
-  </td>
-  <td>
+  </th>
+  <td class="govuk-table__cell">
     <%= person.first_name %> <%= person.last_name %>
   </td>
 </tr>
 <% if person.position.present? %>
 <tr>
-  <td>
+  <th scope="row" class="govuk-table__header">
     <%= t(".position") %>
-  </td>
-  <td>
+  </th>
+  <td class="govuk-table__cell">
       <%= person.position %>
   </td>
 </tr>
 <% end %>
 <tr>
-  <td>
+  <th scope="row" class="govuk-table__header">
     <%= t(".dob") %>
-  </td>
-  <td>
+  </th>
+  <td class="govuk-table__cell">
     <%= person.dob.to_date %>
   </td>
 </tr>

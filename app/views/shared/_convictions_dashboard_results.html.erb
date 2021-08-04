@@ -1,31 +1,31 @@
 <% if @results.present? %>
-  <div class="grid-row">
-    <div class="column-full">
-      <table>
-        <thead>
-          <tr>
-            <th><%= t(".results.th.reg_identifier") %></th>
-            <th><%= t(".results.th.company_name") %></th>
-            <th><%= t(".results.th.last_modified") %></th>
-            <th><%= t(".results.th.actions") %></th>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header"><%= t(".results.th.reg_identifier") %></th>
+            <th scope="col" class="govuk-table__header"><%= t(".results.th.company_name") %></th>
+            <th scope="col" class="govuk-table__header"><%= t(".results.th.last_modified") %></th>
+            <th scope="col" class="govuk-table__header"><%= t(".results.th.actions") %></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="govuk-table__body">
           <% @results.each do |result| %>
-            <tr>
-              <td>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
                 <%= result.reg_identifier %>
               </td>
-              <td>
+              <td class="govuk-table__cell">
                 <%= result.company_name %>
               </td>
-              <td>
+              <td class="govuk-table__cell">
                 <%= result.metaData.last_modified.in_time_zone("London").strftime("%H:%M %d/%m/%Y") %>
               </td>
-              <td>
+              <td class="govuk-table__cell">
                 <%= link_to details_path(result) do %>
                   <%= t(".results.details_link.text") %>
-                  <span class="visually-hidden">
+                  <span class="govuk-visually-hidden">
                     <%= t(".results.details_link.visually_hidden_text",
                           name: result.company_name) %>
                   </span>
@@ -38,10 +38,10 @@
     </div>
   </div>
 
-  <div class="grid-row">
-    <div class="column-full">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
       <nav role="navigation" class="pagination" aria-label="Pagination">
-        <div class="pagination__summary">
+        <div class="pagination__summary govuk-body">
           <%= page_entries_info @results, entry_name: "item" %>
         </div>
         <%= paginate @results %>
@@ -49,5 +49,5 @@
     </div>
   </div>
 <% else %>
-  <p><%= t(".no_results") %></p>
+  <p class="govuk-body"><%= t(".no_results") %></p>
 <% end %>

@@ -1,42 +1,42 @@
-<div class="grid-row">
-  <div class="column-two-thirds">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
     <%= render("waste_carriers_engine/shared/back", back_path: convictions_path) %>
 
-    <h1 class="heading-large">
+    <h1 class="govuk-heading-l">
       <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
     </h1>
 
-    <div class="panel">
+    <div class="govuk-inset-text">
       <%= @resource.conviction_status_message %>
     </div>
 
-    <h2 class="heading-medium">
+    <h2 class="govuk-heading-m">
       <%= t(".declared_convictions.heading") %>
     </h2>
-    <p>
+    <p class="govuk-body">
       <%= @resource.declared_convictions_message %>
     </p>
 
-    <h2 class="heading-medium">
+    <h2 class="govuk-heading-m">
       <%= t(".business_convictions.heading") %>
     </h2>
-    <p>
+    <p class="govuk-body">
       <%= @resource.business_convictions_message %>
     </p>
     <% if @resource.display_business_convictions? %>
       <%= render("shared/conviction_search_result", conviction_search_result: @resource.conviction_search_result, person: nil) %>
     <% end %>
 
-    <h2 class="heading-medium">
+    <h2 class="govuk-heading-m">
       <%= t(".people_convictions.heading") %>
     </h2>
-    <p>
+    <p class="govuk-body">
       <%= @resource.people_convictions_message %>
     </p>
 
     <% if @resource.display_people_convictions? %>
       <% @resource.people_with_matches.each do |person| %>
-        <h3 class="heading-small">
+        <h3 class="govuk-heading-s">
           <% if person.person_type == "KEY" %>
             <%= t(".people_convictions.person_heading.#{@resource.business_type}") %>
           <% else %>
@@ -48,14 +48,14 @@
     <% end %>
 
     <% if @resource.relevant_people_without_matches.present? %>
-      <h2 class="heading-medium">
+      <h2 class="govuk-heading-m">
         <%= t(".unmatched_people.heading") %>
       </h2>
-      <p>
+      <p class="govuk-body">
         <%= t(".unmatched_people.paragraph") %>
       </p>
-      <table>
-        <tbody>
+      <table class="govuk-table">
+        <tbody class="govuk-table__body">
           <% @resource.relevant_people_without_matches.each do |person| %>
             <%= render("shared/person_table_rows", person: person) %>
           <% end %>
@@ -65,7 +65,7 @@
 
     <% if @resource.approved_or_revoked? %>
     <table>
-      <caption class="heading-medium">
+      <caption class="govuk-heading-m">
         <%= t(".conviction_sign_off.heading") %>
       </caption>
       <tbody>
@@ -114,35 +114,37 @@
     <% end %>
 
     <% if @resource.display_actions? %>
-      <h2 class="heading-medium">
+      <h2 class="govuk-heading-m">
         <%= t(".approve_or_reject.heading") %>
       </h2>
       <% if can? :review_convictions, @resource %>
-        <p>
+        <p class="govuk-body">
           <%= t(".approve_or_reject.paragraph_1") %>
         </p>
-        <p>
+        <p class="govuk-body">
           <%= t(".approve_or_reject.paragraph_2") %>
         </p>
         <% if @resource.sign_off.may_approve? %>
           <%= link_to t(".approve_or_reject.buttons.approve"),
                       @resource.approve_path,
-                      class: "button" %>
+                      class: "govuk-button" %>
         <% end %>
 
         <% if @resource.sign_off.may_begin_checks? %>
           <%= link_to t(".approve_or_reject.buttons.begin_checks"),
                       @resource.begin_checks_path,
-                      class: "button-alert" %>
+                      class: "govuk-button" %>
         <% end %>
 
         <% if @resource.sign_off.may_reject? %>
         <%= link_to t(".approve_or_reject.buttons.reject"),
                     @resource.reject_path,
-                    class: "button-warning" %>
+                    class: "govuk-button  govuk-button--warning" %>
         <% end %>
       <% else %>
-        <%= t(".approve_or_reject.no_permission") %>
+        <p class="govuk-body">
+          <%= t(".approve_or_reject.no_permission") %>
+        </p>
       <% end %>
     <% end %>
   </div>
