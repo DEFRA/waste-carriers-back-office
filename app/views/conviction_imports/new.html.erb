@@ -1,41 +1,38 @@
-<div class="grid-row">
-  <div class="column-two-thirds">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
     <%= render("waste_carriers_engine/shared/back", back_path: bo_path) %>
 
-    <h1 class="heading-large">
+    <h1 class="govuk-heading-l">
       <%= t(".heading") %>
     </h1>
 
-    <p><%= t(".paragraph_1") %></p>
+    <p class="govuk-body"><%= t(".paragraph_1") %></p>
 
     <%= render("shared/flash_messages") %>
 
     <%= form_tag(conviction_imports_path) do %>
-      <div class="form-group">
-        <label class="form-label" for="data">
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s" for="data">
           <%= t(".textarea_label") %>
-          <span class="form-hint">
+          <p class="govuk-hint">
             <%= t(".textarea_hint_1") %>
             <br>
             <%= t(".textarea_hint_2") %>
-          </span>
+          </p>
         </label>
-        <%= text_area_tag :data, nil, rows: 10, class: "form-control form-control-3-4" %>
+        <%= text_area_tag :data, nil, rows: 10, class: "govuk-textarea" %>
       </div>
 
-      <div class="form-group">
-        <div class="notice">
-          <i class="icon icon-important">
-            <span class="visually-hidden">Warning</span>
-          </i>
-          <strong class="bold-small">
-            <%= t(".warning") %>
-          </strong>
-        </div>
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-warning-text__assistive">Warning</span>
+          <%= t(".warning") %>
+        </strong>
       </div>
 
-      <div class="form-group">
-        <%= submit_tag t(".button"), class: "button" %>
+      <div class="govuk-form-group">
+        <%= submit_tag t(".button"), class: "govuk-button" %>
       </div>
     <% end %>
   </div>
