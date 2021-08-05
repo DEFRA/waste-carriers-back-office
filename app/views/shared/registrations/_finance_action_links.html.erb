@@ -1,27 +1,27 @@
-<div class="grid-row">
-  <div class="column-full">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
     <% if display_payment_link_for?(registration) %>
-      <%= link_to t(".enter_payment"), new_resource_payment_form_path(registration._id), class: "button wcr-finance-button" %>
+      <%= link_to t(".enter_payment"), new_resource_payment_form_path(registration._id), class: "govuk-button" %>
     <% end %>
 
     <% if can?(:view_payments, registration) %>
-      <%= link_to t(".reverse_payment"), resource_reversal_forms_path(registration._id), class: "button wcr-finance-button" %>
+      <%= link_to t(".reverse_payment"), resource_reversal_forms_path(registration._id), class: "govuk-button" %>
     <% end %>
 
     <% if display_write_off_large_link_for?(registration.finance_details) %>
-      <%= link_to t(".write_off_l"), new_resource_write_off_form_path(registration._id), class: "button wcr-finance-button" %>
+      <%= link_to t(".write_off_l"), new_resource_write_off_form_path(registration._id), class: "govuk-button" %>
     <% end %>
 
     <% if display_write_off_small_link_for?(registration.finance_details) %>
-      <%= link_to t(".write_off_s"), new_resource_write_off_form_path(registration._id), class: "button wcr-finance-button" %>
+      <%= link_to t(".write_off_s"), new_resource_write_off_form_path(registration._id), class: "govuk-button" %>
     <% end %>
 
     <% if can?(:charge_adjust, registration) %>
-      <%= link_to t(".adjust_charge"), new_resource_charge_adjust_form_path(registration._id), class: "button wcr-finance-button" %>
+      <%= link_to t(".adjust_charge"), new_resource_charge_adjust_form_path(registration._id), class: "govuk-button" %>
     <% end %>
 
     <% if display_refund_link_for?(registration.finance_details) %>
-      <%= link_to t(".refund"), resource_refunds_path(registration._id), class: "button wcr-finance-button" %>
+      <%= link_to t(".refund"), resource_refunds_path(registration._id), class: "govuk-button" %>
     <% end %>
   </div>
 </div>
