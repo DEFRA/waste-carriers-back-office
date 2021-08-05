@@ -1,58 +1,60 @@
-<div class="grid-row">
-  <div class="column-full">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: resource_finance_details_path(@resource._id)) %>
   </div>
 </div>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
     <%= render("waste_carriers_engine/shared/errors", object: @charge_adjust_form) %>
 
-    <h1 class="heading-large">
+    <h1 class="govuk-heading-l">
       <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
     </h1>
 
-    <div class="form-group">
+    <div class="govuk-form-group">
       <%= render "shared/company_details_panel", registration: @resource %>
     </div>
 
     <%= form_for(@charge_adjust_form, url: resource_charge_adjust_form_path(@resource._id)) do |f| %>
-      <div class="form-group <%= "form-group-error" if @charge_adjust_form.errors[:charge_type].any? %>" id="charge_type">
-        <fieldset id="charge-adjust">
-          <legend class="visuallyhidden">
+      <div class="govuk-form-group <%= "govuk-form-group--error" if @charge_adjust_form.errors[:charge_type].any? %>" id="charge_type">
+        <fieldset class="govuk-fieldset" id="charge-adjust">
+          <legend class="govuk-visually-hidden">
             <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
           </legend>
 
           <% if @charge_adjust_form.errors[:charge_type].any? %>
-            <span class="error-message"><%= @charge_adjust_form.errors[:charge_type].join(", ") %></span>
+            <span class="govuk-error-message"><%= @charge_adjust_form.errors[:charge_type].join(", ") %></span>
           <% end %>
 
-          <div class="multiple-choice">
-            <%= f.radio_button :charge_type, :positive %>
-            <%= f.label :charge_type, value: :positive do %>
-              <%= t(".options.positive.label") %>
+          <div class="govuk-radios">
+            <div class="govuk-radios__item">
+              <%= f.radio_button :charge_type, :positive, class: "govuk-radios__input" %>
+              <%= f.label :charge_type, value: :positive, class: "govuk-label govuk-radios__label" do %>
+                <%= t(".options.positive.label") %>
 
-              <span class="form-hint">
-                <%= t(".options.positive.hint") %>
-              </span>
-            <% end %>
-          </div>
+                <span class="govuk-hint">
+                  <%= t(".options.positive.hint") %>
+                </span>
+              <% end %>
+            </div>
 
-          <div class="multiple-choice">
-            <%= f.radio_button :charge_type, :negative %>
-            <%= f.label :charge_type, value: :negative do %>
-              <%= t(".options.negative.label") %>
+            <div class="govuk-radios__item">
+              <%= f.radio_button :charge_type, :negative, class: "govuk-radios__input" %>
+              <%= f.label :charge_type, value: :negative, class: "govuk-label govuk-radios__label" do %>
+                <%= t(".options.negative.label") %>
 
-              <span class="form-hint">
-                <%= t(".options.negative.hint") %>
-              </span>
-            <% end %>
+                <span class="govuk-hint">
+                  <%= t(".options.negative.hint") %>
+                </span>
+              <% end %>
+            </div>
           </div>
         </fieldset>
       </div>
 
-      <div class="form-group">
-        <%= f.submit t(".confirm"), class: "button" %>
+      <div class="govuk-form-group">
+        <%= f.submit t(".confirm"), class: "govuk-button" %>
       </div>
     <% end %>
   </div>
