@@ -1,61 +1,61 @@
-<div class="grid-row">
-  <div class="column-two-thirds">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
     <%= render("waste_carriers_engine/shared/back", back_path: "/bo") %>
 
-    <h1 class="heading-large">
+    <h1 class="govuk-heading-l">
       <%= t(".heading") %>
     </h1>
-    <div class="panel panel-border-wide">
-      <p>
+    <div class="govuk-inset-text">
+      <p class="govuk-body">
         <%= t(".sub_heading") %>
       </p>
     </div>
-    <p>
+    <p class="govuk-body">
       <%= t(".first_paragraph", link_to_privacy_policy: link_to_privacy_policy).html_safe %>
     </p>
-    <p>
+    <p class="govuk-body">
       <%= t(".second_paragraph") %>
     </p>
-    <p>
+    <p class="govuk-body">
       <%= t(".third_paragraph") %>
     </p>
-    <p>
+    <p class="govuk-body">
       <%= t(".fourth_paragraph") %>
     </p>
 
-    <details>
-      <summary>
-        <span class="summary"><%= t(".privacy_policy_text.summary") %></span>
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text"><%= t(".privacy_policy_text.summary") %></span>
       </summary>
-      <div class="panel panel-border-narrow">
+      <div class="govuk-details__text">
         <% 1.upto(14).each do |paragraph_index| %>
-          <p>
+          <p class="govuk-body">
             <%= t(".privacy_policy_text.paragraph_#{paragraph_index}") %>
           </p>
         <% end %>
       </div>
     </details>
 
-    <details>
-      <summary>
-        <span class="summary"><%= t(".contact_details_dpo.summary") %></span>
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text"><%= t(".contact_details_dpo.summary") %></span>
       </summary>
-      <div class="panel panel-border-narrow">
-        <p><%= t(".contact_details_dpo.address_html") %></p>
-        <p><%= t(".contact_details_dpo.email") %></p>
+      <div class="govuk-details__text">
+        <p class="govuk-body"><%= t(".contact_details_dpo.address_html") %></p>
+        <p class="govuk-body"><%= t(".contact_details_dpo.email") %></p>
       </div>
     </details>
 
-    <details>
-      <summary>
-        <span class="summary"><%= t(".contact_details_ico.summary") %></span>
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text"><%= t(".contact_details_ico.summary") %></span>
       </summary>
-      <div class="panel panel-border-narrow">
-        <p><%= t(".contact_details_ico.website") %></p>
+      <div class="govuk-details__text">
+        <p class="govuk-body"><%= t(".contact_details_ico.website") %></p>
       </div>
     </details>
 
-    <p><%= link_to "Continue", @presenter.destination_path, class: "button" %></p>
-    <p><%= t(".last_updated") %></p>
+    <p><%= link_to "Continue", @presenter.destination_path, class: "govuk-button" %></p>
+    <p class="govuk-body"><%= t(".last_updated") %></p>
   </div>
 </div>
