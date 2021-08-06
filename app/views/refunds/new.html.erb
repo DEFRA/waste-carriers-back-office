@@ -1,51 +1,49 @@
-<div class="grid-row">
-  <div class="column-full">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: resource_refunds_path(@resource._id)) %>
 
-    <h1 class="heading-large">
+    <h1 class="govuk-heading-l">
       <%= t(".heading") %>
     </h1>
   </div>
 </div>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
     <%= render "shared/company_details_panel", registration: @resource %>
 
-    <div class="form-group">
-      <table>
-        <tbody>
-          <tr>
-            <td>
+    <div class="govuk-form-group">
+      <table class="govuk-table">
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">
               <%= t(".transaction_to_refund") %>
-            </td>
-            <td class="numeric">
+            </th>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
               £<%= display_pence_as_pounds_and_cents(@payment.amount) %>
             </td>
           </tr>
-          <tr>
-            <td>
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">
               <%= t(".total_amount_paid") %>
-            </td>
-            <td class="numeric">
+            </th>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
               £<%= display_pence_as_pounds_and_cents(@presenter.total_amount_paid) %>
             </td>
           </tr>
-          <tr>
-            <td>
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">
               <%= t(".total_amount_due") %>
-            </td>
-            <td class="numeric">
+            </th>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
               £<%= display_pence_as_pounds_and_cents(@presenter.total_amount_due) %>
             </td>
           </tr>
-          <tr>
-            <td>
-              <strong class="bold">
-                <%= t(".balance_to_refund") %>
-              </strong>
-            </td>
-            <td class="numeric">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">
+              <%= t(".balance_to_refund") %>
+            </th>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
               <strong class="bold">
                 £<%= display_pence_as_pounds_and_cents(@presenter.balance_to_refund) %>
               </strong>
@@ -55,7 +53,7 @@
       </table>
     </div>
     <div class="form-group">
-      <p>
+      <p class="govuk-body">
         <strong>
           <%= t(".order_code", order_code: @payment.order_key) %>
         </strong>
@@ -65,8 +63,8 @@
     <%= form_tag(resource_refunds_path(@resource._id)) do %>
       <%= hidden_field_tag :order_key, @payment.order_key %>
 
-      <div class="form-group">
-        <%= submit_tag t(".confirm"), class: "button" %>
+      <div class="govuk-form-group">
+        <%= submit_tag t(".confirm"), class: "govuk-button" %>
       </div>
     <% end %>
   </div>
