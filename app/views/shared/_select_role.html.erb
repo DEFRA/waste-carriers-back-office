@@ -1,18 +1,20 @@
-<div class="form-group <%= "form-group-error" if resource.errors[:role].any? %>">
-  <fieldset id="role">
-    <legend>
+<div class="govuk-form-group <%= "govuk-form-group--error" if resource.errors[:role].any? %>">
+  <fieldset id="role" class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
       <%= t(".roles.legend") %>
     </legend>
 
-    <% if resource.errors[:role].any? %>
-      <span class="error-message"><%= resource.errors[:role].join(", ") %></span>
-    <% end %>
+    <div class="govuk-radios">
+      <% if resource.errors[:role].any? %>
+        <span class="govuk-error-message"><%= resource.errors[:role].join(", ") %></span>
+      <% end %>
 
-    <% current_user_group_roles(current_user).each do |role| %>
-      <div class="multiple-choice">
-        <%= f.radio_button :role, role %>
-        <%= f.label :role, t(".roles.options.#{role}"), value: role %>
-      </div>
-    <% end %>
+      <% current_user_group_roles(current_user).each do |role| %>
+        <div class="govuk-radios__item">
+          <%= f.radio_button :role, role, class: "govuk-radios__input" %>
+          <%= f.label :role, t(".roles.options.#{role}"), value: role, class: "govuk-label govuk-radios__label" %>
+        </div>
+      <% end %>
+    </div>
   </fieldset>
 </div>
