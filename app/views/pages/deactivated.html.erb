@@ -1,7 +1,7 @@
 <% content_for :title, t(".title")  %>
 
-<div class="text">
-  <h1 class="heading-large"><%= t(".heading") %></h1>
-  <p><%= t(".text") %></p>
-  <p><%= link_to t(".sign_out_link"), main_app.destroy_user_session_path %></p>
+<div class="govuk-text">
+  <h1 class="govuk-heading-l"><%= t(".heading") %></h1>
+  <p class="govuk-body"><%= t(".text") %></p>
+  <p class="govuk-body"><%= link_to t(".sign_out_link"), main_app.destroy_user_session_path %></p>
 </div>
