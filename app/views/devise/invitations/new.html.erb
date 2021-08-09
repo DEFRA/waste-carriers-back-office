@@ -1,5 +1,5 @@
-<div class="grid-row">
-  <div class="column-full">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full govuk-body">
     <%= render("waste_carriers_engine/shared/back", back_path: users_path) %>
 
     <%= form_for resource,
@@ -9,7 +9,7 @@
 
       <%= render("waste_carriers_engine/shared/errors", object: resource) %>
 
-      <h1 class="heading-large">
+      <h1 class="govuk-heading-l">
         <%= t(".heading") %>
       </h1>
 
@@ -18,22 +18,20 @@
       <p><%= t(".paragraph_3") %></p>
 
       <% resource.class.invite_key_fields.each do |field| %>
-        <fieldset id="<%= field %>">
-          <% if resource.errors[field].any? %>
-            <span class="error-message"><%= resource.errors[field].join(", ") %></span>
-          <% end %>
+        <% if resource.errors[field].any? %>
+          <span class="govuk-error-message"><%= resource.errors[field].join(", ") %></span>
+        <% end %>
 
-          <div class="form-group <%= "form-group-error" if resource.errors[field].any? %>">
-            <%= f.label field, t(".#{field}_label"), class: "form-label" %>
-            <%= f.text_field field, class: "form-control" %>
-          </div>
-        </fieldset>
+        <div class="govuk-form-group <%= "govuk-form-group--error" if resource.errors[field].any? %>">
+          <%= f.label field, t(".#{field}_label"), class: "govuk-label" %>
+          <%= f.text_field field, class: "govuk-input govuk-!-width-one-half", spellcheck: "false" %>
+        </div>
       <% end %>
 
       <%= render("shared/select_role", resource: resource, f: f) %>
 
-      <div class="form-group">
-        <%= f.submit t(".submit_button"), class: "button" %>
+      <div class="govuk-form-group">
+        <%= f.submit t(".submit_button"), class: "govuk-button" %>
       </div>
     <% end %>
   </div>
