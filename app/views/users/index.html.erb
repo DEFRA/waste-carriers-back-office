@@ -1,99 +1,91 @@
-<div class="grid-row">
-  <div class="column-full">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: bo_path) %>
 
-    <h1 class="heading-large">
+    <h1 class="govuk-heading-l">
       <%= t(".heading") %>
     </h1>
+
+    <p class="govuk-body"><%= link_to t(".options.invite_link"), new_user_invitation_path %></p>
   </div>
 </div>
 
-<div class="grid-row">
-  <div class="column-full">
-    <p><%= link_to t(".options.invite_link"), new_user_invitation_path %></p>
-  </div>
-</div>
-
-  <% if @users.present? %>
-    <div class="grid-row">
-      <div class="column-full">
-        <table>
-          <thead>
-            <tr>
-              <th><%= t(".user_list.th.email") %></th>
-              <th><%= t(".user_list.th.role") %></th>
-              <th><%= t(".user_list.th.status") %></th>
-              <th><%= t(".user_list.th.actions") %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @users.each do |user| %>
-              <tr>
-                <td>
-                  <%= user.email %>
-                </td>
-                <td>
-                  <%= t(".user_list.roles.#{user.role}") %>
-                </td>
-                <td>
-                  <% if user.deactivated? %>
-                    <%= t(".user_list.statuses.deactivated") %>
-                  <% elsif user.invitation_token.present? %>
-                    <%= t(".user_list.statuses.invited") %>
-                  <% else %>
-                    <%= t(".user_list.statuses.active") %>
-                  <% end %>
-                </td>
-                <td>
-                  <% if display_user_actions?(user, current_user) %>
-                    <ul>
-                      <li>
-                        <%= link_to user_roles_path(user.id) do %>
-                          <%= t(".user_list.actions.change_role.link_text") %>
-                          <span class="visually-hidden">
-                           <%= t(".user_list.actions.change_role.visually_hidden_text",
-                                 email: user.email) %>
-                         </span>
-                       <% end %>
-                      </li>
-                      <li>
-                        <% if user.active? %>
-                          <%= link_to user_deactivations_path(user.id) do %>
-                            <%= t(".user_list.actions.deactivate.link_text") %>
-                            <span class="visually-hidden">
-                              <%= t(".user_list.actions.deactivate.visually_hidden_text",
-                                    email: user.email) %>
-                            </span>
-                          <% end %>
-                        <% else %>
-                          <%= link_to user_activations_path(user.id) do %>
-                            <%= t(".user_list.actions.activate.link_text") %>
-                            <span class="visually-hidden">
-                              <%= t(".user_list.actions.activate.visually_hidden_text",
-                                    email: user.email) %>
-                            </span>
-                          <% end %>
+<% if @users.present? %>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full govuk-body">
+      <table class="govuk-table" aria-label="<%= t(".heading") %>">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col"><%= t(".user_list.th.email") %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".user_list.th.role") %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".user_list.th.status") %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".user_list.th.actions") %></th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <% @users.each do |user| %>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <%= user.email %>
+              </td>
+              <td class="govuk-table__cell">
+                <%= t(".user_list.roles.#{user.role}") %>
+              </td>
+              <td class="govuk-table__cell">
+                <% if user.deactivated? %>
+                  <%= t(".user_list.statuses.deactivated") %>
+                <% elsif user.invitation_token.present? %>
+                  <%= t(".user_list.statuses.invited") %>
+                <% else %>
+                  <%= t(".user_list.statuses.active") %>
+                <% end %>
+              </td>
+              <td class="govuk-table__cell">
+                <% if display_user_actions?(user, current_user) %>
+                  <ul class="govuk-list">
+                    <li>
+                      <%= link_to user_roles_path(user.id) do %>
+                        <%= t(".user_list.actions.change_role.link_text") %>
+                        <span class="govuk-visually-hidden">
+                         <%= t(".user_list.actions.change_role.visually_hidden_text",
+                               email: user.email) %>
+                       </span>
+                     <% end %>
+                    </li>
+                    <li>
+                      <% if user.active? %>
+                        <%= link_to user_deactivations_path(user.id) do %>
+                          <%= t(".user_list.actions.deactivate.link_text") %>
+                          <span class="govuk-visually-hidden">
+                            <%= t(".user_list.actions.deactivate.visually_hidden_text",
+                                  email: user.email) %>
+                          </span>
                         <% end %>
-                      </li>
-                    </ul>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
+                      <% else %>
+                        <%= link_to user_activations_path(user.id) do %>
+                          <%= t(".user_list.actions.activate.link_text") %>
+                          <span class="govuk-visually-hidden">
+                            <%= t(".user_list.actions.activate.visually_hidden_text",
+                                  email: user.email) %>
+                          </span>
+                        <% end %>
+                      <% end %>
+                    </li>
+                  </ul>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-    <div class="grid-row">
-      <div class="column-full">
-        <nav role="navigation" class="pagination" aria-label="Pagination">
-          <div class="pagination__summary">
-            <%= page_entries_info @users, entry_name: "item" %>
-          </div>
-          <%= paginate @users %>
-        </nav>
-      </div>
+      <nav role="navigation" class="pagination" aria-label="Pagination">
+        <div class="pagination__summary">
+          <%= page_entries_info @users, entry_name: "item" %>
+        </div>
+        <%= paginate @users %>
+      </nav>
+
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>

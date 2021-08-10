@@ -1,21 +1,21 @@
-<div class="grid-row">
-  <div class="column-full">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: users_path) %>
 
-    <h1 class="heading-large">
+    <h1 class="govuk-heading-l">
       <%= t(".heading") %>
     </h1>
   </div>
 </div>
 
-<div class="grid-row">
-  <div class="column-full">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full govuk-body">
     <p><%= t(".paragraph_1") %></p>
     <p><%= @user.email %></p>
     <p><%= t(".paragraph_2") %></p>
 
     <%= button_to t(".button"),
               user_activations_path(@user.id),
-              class: "button" %>
+              class: "govuk-button" %>
   </div>
 </div>

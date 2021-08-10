@@ -1,5 +1,5 @@
-<div class="grid-row">
-  <div class="column-full">
+<div class="govuk-grid-row">
+  <div class=cgovuk-grid-column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: users_path) %>
     <%= form_for @user,
                  url: user_roles_path(@user),
@@ -7,16 +7,16 @@
 
       <%= render("waste_carriers_engine/shared/errors", object: @user) %>
 
-      <h1 class="heading-large">
+      <h1 class="govuk-heading-l">
         <%= t(".heading") %>
       </h1>
 
-      <p><%= t(".paragraph_1.#{@old_role}", email: @user.email) %></p>
+      <p class="govuk-body"><%= t(".paragraph_1.#{@old_role}", email: @user.email) %></p>
 
       <%= render("shared/select_role", resource: @user, f: f) %>
 
-      <div class="form-group">
-        <%= f.submit t(".submit_button"), class: "button" %>
+      <div class="govuk-form-group">
+        <%= f.submit t(".submit_button"), class: "govuk-button" %>
       </div>
     <% end %>
   </div>
