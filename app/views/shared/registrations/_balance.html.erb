@@ -1,23 +1,23 @@
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h2 class="heading-medium">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-m">
       <%= t(".heading") %>
     </h2>
 
-    <table>
-      <thead>
-        <tr>
-          <th>
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header">
             <%= t(".status") %>
           </th>
-          <th class="numeric">
+          <th class="govuk-table__header govuk-table__header--numeric">
             <%= t(".amount") %>
           </th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
             <% case %>
             <% when finance_details.balance > 0 %>
               <%= t(".needs_payment") %>
@@ -27,7 +27,7 @@
               <%= t(".paid_in_full") %>
             <% end %>
           </td>
-          <td class="numeric">
+          <td class="govuk-table__cell govuk-table__cell--numeric">
             <%= display_pence_as_pounds_and_cents(finance_details.balance) %>
           </td>
         </tr>

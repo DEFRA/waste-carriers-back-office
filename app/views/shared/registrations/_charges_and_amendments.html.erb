@@ -1,34 +1,34 @@
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h2 class="heading-medium">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-m">
       <%= t(".heading") %>
     </h2>
 
-    <table>
-      <thead>
-        <tr>
-          <th>
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col">
             <%= t(".date") %>
           </th>
-          <th>
+          <th class="govuk-table__header" scope="col">
             <%= t(".charge") %>
           </th>
-          <th class="numeric">
+          <th class="govuk-table__header govuk-table__header--numeric" scope="col">
             <%= t(".amount") %>
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="govuk-table__body">
         <% @finance_details.orders.each do |order| %>
           <% order.order_items.each do |order_item| %>
-            <tr>
-              <td>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
                 <%= order.date_created.to_formatted_s(:day_month_year_time_slashes) %>
               </td>
-              <td>
+              <td class="govuk-table__cell">
                 <%= order_item.description.capitalize %>
               </td>
-              <td class="numeric">
+              <td class="govuk-table__cell govuk-table__cell--numeric">
                 <%= display_pence_as_pounds_and_cents(order_item.amount) %>
               </td>
             </tr>
