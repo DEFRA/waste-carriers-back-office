@@ -36,7 +36,7 @@ en:
             business_type: "Business type"
             company_no: "Company number: %{number}"
             location: "Place of business: %{location}"
-            registered_address: "Registered address:"
+            registered_address_html: "<span class=\"govuk-!-font-weight-bold\">Registered address</span>:"
           no_business_information_available: "This registration application is still in progress, so there are no business details yet."
       pending_payment_panel:
         status:
@@ -54,7 +54,7 @@ en:
             pending_convictions_check: "A convictions check is required before this registration can be approved."
       company_details_panel:
         labels:
-          account: "Account: %{email}"
+          account_html: "<span class=\"govuk-!-font-weight-bold\">Account</span>: %{email}"
         attributes:
           registration_type:
             carrier_dealer: "Carrier and dealer"
@@ -86,8 +86,8 @@ en:
           renew: "Renew"
           new_registration: "Start new registration"
       labels:
-        expires: "Expires: %{formatted_date}"
-        expired: "Expired: %{formatted_date}"
+        expires_html: "<span class=\"govuk-!-font-weight-bold\">Expires</span>: %{formatted_date}"
+        expired_html: "<span class=\"govuk-!-font-weight-bold\">Expired</span>: %{formatted_date}"
       ceased_revoked_panel:
         heading:
           ceased: "Ceased"
@@ -137,7 +137,7 @@ en:
           lower: Lower tier
       business_information:
         labels:
-          location: "Place of business: %{location}"
+          location_html: "<span class=\"govuk-!-font-weight-bold\">Place of business</span>: %{location}"
       filler: "–"
       conviction_search_text:
         "true": "This registration has matching or declared convictions."

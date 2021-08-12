@@ -16,7 +16,7 @@
         <br>
       <% end %>
       <% if resource.account_email.present? %>
-        <%= t(".labels.account", email: resource.account_email) %>
+        <%= t(".labels.account_html", email: resource.account_email).html_safe %>
       <% end %>
     </p>
   <% end %>

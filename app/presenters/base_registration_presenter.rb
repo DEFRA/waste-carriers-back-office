@@ -29,7 +29,7 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   def displayable_location
     location = show_translation_or_filler(:location)
 
-    I18n.t(".shared.registrations.business_information.labels.location", location: location)
+    I18n.t(".shared.registrations.business_information.labels.location_html", location: location).html_safe
   end
 
   def display_convictions_check_message
@@ -84,9 +84,9 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     return unless upper_tier?
 
     if expired?
-      I18n.t(".shared.registrations.labels.expired", formatted_date: display_expiry_date)
+      I18n.t(".shared.registrations.labels.expired_html", formatted_date: display_expiry_date).html_safe
     else
-      I18n.t(".shared.registrations.labels.expires", formatted_date: display_expiry_date)
+      I18n.t(".shared.registrations.labels.expires_html", formatted_date: display_expiry_date).html_safe
     end
   end
 

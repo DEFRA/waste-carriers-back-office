@@ -198,7 +198,9 @@ RSpec.describe BaseRegistrationPresenter do
       let(:location) { nil }
 
       it "displays a placeholder" do
-        expect(subject.displayable_location).to eq("Place of business: –")
+        expect(subject.displayable_location).to eq(
+          "<span class=\"govuk-!-font-weight-bold\">Place of business</span>: –"
+        )
       end
     end
 
@@ -206,7 +208,9 @@ RSpec.describe BaseRegistrationPresenter do
       let(:location) { "england" }
 
       it "displays the location value" do
-        expect(subject.displayable_location).to eq("Place of business: England")
+        expect(subject.displayable_location).to eq(
+          "<span class=\"govuk-!-font-weight-bold\">Place of business</span>: England"
+        )
       end
     end
   end
@@ -333,7 +337,7 @@ RSpec.describe BaseRegistrationPresenter do
 
       context "when it is not expired" do
         it "displays the 'expires' message" do
-          message = "Expires: 1 January 2020"
+          message = "<span class=\"govuk-!-font-weight-bold\">Expires</span>: 1 January 2020"
 
           expect(subject.display_expiry_text).to eq(message)
         end
@@ -343,7 +347,7 @@ RSpec.describe BaseRegistrationPresenter do
         let(:expired) { true }
 
         it "displays the 'expired' message" do
-          message = "Expired: 1 January 2020"
+          message = "<span class=\"govuk-!-font-weight-bold\">Expired</span>: 1 January 2020"
 
           expect(subject.display_expiry_text).to eq(message)
         end

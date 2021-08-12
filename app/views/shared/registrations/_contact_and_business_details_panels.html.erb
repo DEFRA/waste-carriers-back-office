@@ -42,7 +42,7 @@
 
       <% if resource.registered_address.present? %>
         <p class="govuk-body">
-          <%= t(".business_information.labels.registered_address") %> <br>
+          <%= t(".business_information.labels.registered_address_html").html_safe %> <br>
           <% displayable_address(resource.registered_address).each do |line| %>
             <%= line %><br>
           <% end %>
