@@ -6,6 +6,7 @@ en:
       revoked_reason:
         label: "Reason for approval"
         hint: "Maximum 500 characters"
+      warning_label: "Warning"
       warning: "If there is no unpaid balance, approving this conviction check will automatically complete the registration."
       approve_button: "Approve this renewal"
   activemodel:

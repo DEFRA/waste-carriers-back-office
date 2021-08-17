@@ -64,16 +64,16 @@
     <% end %>
 
     <% if @resource.approved_or_revoked? %>
-    <table>
+    <table class="govuk-table">
       <caption class="govuk-heading-m">
         <%= t(".conviction_sign_off.heading") %>
       </caption>
-      <tbody>
-        <tr>
-          <td>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">
             <%= t(".conviction_sign_off.labels.status") %>
-          </td>
-          <td>
+          </th>
+          <td class="govuk-table__cell">
             <% if @resource.conviction_check_approved? %>
               <%= t(".conviction_sign_off.labels.status_values.approved") %>
             <% elsif @resource.revoked? %>
@@ -81,30 +81,30 @@
             <% end %>
           </td>
         </tr>
-        <tr>
-          <td>
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">
             <%= t(".conviction_sign_off.labels.revoked_reason") %>
-          </td>
-          <td>
+          </th>
+          <td class="govuk-table__cell">
             <%= @resource.metaData.revoked_reason %>
           </td>
         </tr>
         <% if @resource.sign_off.confirmed_by.present? %>
-        <tr>
-          <td>
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">
             <%= t(".conviction_sign_off.labels.confirmed_by") %>
-          </td>
-          <td>
+          </th>
+          <td class="govuk-table__cell">
             <%= @resource.sign_off.confirmed_by %>
           </td>
         </tr>
         <% end %>
         <% if @resource.sign_off.confirmed_at.present? %>
-        <tr>
-          <td>
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="row">
             <%= t(".conviction_sign_off.labels.confirmed_at") %>
-          </td>
-          <td>
+          </th>
+          <td class="govuk-table__cell">
             <%= @resource.sign_off.confirmed_at.in_time_zone("London").to_formatted_s(:weekday_day_month_year_at_time) %>
           </td>
         </tr>

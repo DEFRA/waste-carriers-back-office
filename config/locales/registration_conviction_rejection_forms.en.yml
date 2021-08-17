@@ -6,6 +6,7 @@ en:
       revoked_reason:
         label: "Reason for rejection"
         hint: "Maximum 500 characters"
+      warning_label: "Warning"
       warning: "Once rejected, this registration cannot be completed."
       reject_button: "Reject this renewal"
   activemodel:

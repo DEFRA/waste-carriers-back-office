@@ -8,6 +8,7 @@ en:
         hint: "Maximum 500 characters"
       rejection_message: "Once rejected, this renewal cannot be completed."
       reject_button: "Reject this renewal"
+      warning: "Warning"
   activemodel:
     errors:
       models:

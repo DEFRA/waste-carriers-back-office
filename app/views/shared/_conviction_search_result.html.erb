@@ -1,53 +1,53 @@
-<table>
-  <tbody>
+<table class="govuk-table">
+  <tbody class="govuk-table__body">
     <% if person.present? %>
       <%= render("shared/person_table_rows", person: person) %>
     <% end %>
-    <tr>
-      <td>
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header" scope="row">
         <%= t(".match_result") %>
-      </td>
-      <td>
+      </th>
+      <td class="govuk-table__cell">
         <%= conviction_search_result.match_result.titleize %>
       </td>
     </tr>
-    <tr>
-      <td>
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header" scope="row">
         <%= t(".matching_system") %>
-      </td>
-      <td>
+      </th>
+      <td class="govuk-table__cell">
         <%= conviction_search_result.matching_system %>
       </td>
     </tr>
-    <tr>
-      <td>
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header" scope="row">
         <%= t(".reference") %>
-      </td>
-      <td>
+      </th>
+      <td class="govuk-table__cell">
         <%= conviction_search_result.reference %>
       </td>
     </tr>
-    <tr>
-      <td>
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header" scope="row">
         <%= t(".matched_name") %>
-      </td>
-      <td>
+      </th>
+      <td class="govuk-table__cell">
         <%= conviction_search_result.matched_name %>
       </td>
     </tr>
-    <tr>
-      <td>
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header" scope="row">
         <%= t(".searched_at") %>
-      </td>
-      <td>
+      </th>
+      <td class="govuk-table__cell">
         <%= conviction_search_result.searched_at.in_time_zone("London").to_formatted_s(:weekday_day_month_year_at_time) %>
       </td>
     </tr>
-    <tr>
-      <td>
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header" scope="row">
         <%= t(".confirmed") %>
-      </td>
-      <td>
+      </th>
+      <td class="govuk-table__cell">
         <%= conviction_search_result.confirmed.titleize %>
       </td>
     </tr>
