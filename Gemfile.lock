@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 2bfb1e2c3837123414df6bff8577c541f84ff63d
+  revision: f13ec153172833cc0c2b8b02f7b73175b29c0ca8
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -352,7 +352,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.3.0)
+    rails-html-sanitizer (1.4.1)
       loofah (~> 2.3)
     railties (6.0.3.7)
       actionpack (= 6.0.3.7)
