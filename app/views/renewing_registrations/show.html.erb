@@ -1,10 +1,10 @@
-<div class="grid-row">
-  <div class="column-full">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: bo_path) %>
 
-    <div class="grid-row">
-      <div class="column-two-thirds">
-        <h1 class="heading-large">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
           <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
         </h1>
 
@@ -19,33 +19,33 @@
             <%= render "shared/registrations/pending_payment_panel", resource: @transient_registration %>
           <% end %>
         <% else %>
-          <div class="panel">
-            <h2 class="heading-medium">
+          <div class="govuk-inset-text">
+            <h2 class="govuk-heading-m">
               <%= t(".status.headings.in_progress") %>
             </h2>
 
             <% if @transient_registration.workflow_state == "worldpay_form" %>
-              <p>
+              <p class="govuk-body">
                 <%= t(".status.messages.worldpay.paragraph_1") %>
               </p>
 
               <% if can? :revert_to_payment_summary, @transient_registration %>
-                <p>
+                <p class="govuk-body">
                   <%= t(".status.messages.worldpay.paragraph_2.revert") %>
                 </p>
                 <%= link_to t(".status.actions.revert_to_payment_summary_button"), new_resource_worldpay_escape_path(@transient_registration._id), class: 'button' %>
               <% elsif can? :record_worldpay_missed_payment, @transient_registration %>
-                <p>
+                <p class="govuk-body">
                   <%= t(".status.messages.worldpay.paragraph_2.missed_payment") %>
                 </p>
                 <%= link_to t(".status.actions.missed_worldpay_payment_button"), new_resource_worldpay_missed_payment_form_path(@transient_registration._id), class: 'button' %>
               <% end %>
             <% else %>
-              <p>
+              <p class="govuk-body">
                 <%= @transient_registration.display_current_workflow_state %>
               </p>
               <% if can? :renew, @transient_registration %>
-                <%= link_to t(".status.actions.continue_button"), resume_link_for(@transient_registration), class: 'button' %>
+                <%= link_to t(".status.actions.continue_button"), resume_link_for(@transient_registration), class: 'govuk-button' %>
               <% end %>
             <% end %>
           </div>
@@ -61,12 +61,10 @@
 
         <hr/>
 
-        <h2 class="heading-medium"><%= t(".conviction_heading") %></h2>
-        <div>
-          <p>
-            <%= @transient_registration.display_convictions_check_message %>
-          </p>
-        </div>
+        <h2 class="govuk-heading-m"><%= t(".conviction_heading") %></h2>
+        <p class="govuk-body">
+          <%= @transient_registration.display_convictions_check_message %>
+        </p>
 
         <hr>
 
@@ -76,7 +74,7 @@
           <%= render "shared/registrations/main_people_details", resource: @transient_registration %>
         <% end %>
       </div>
-      <div class="column-one-third">
+      <div class="govuk-grid-column-one-third">
         <%= render "shared/registrations/action_links_panel", resource: @transient_registration %>
       </div>
     </div>

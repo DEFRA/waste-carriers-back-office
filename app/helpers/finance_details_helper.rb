@@ -8,10 +8,12 @@ module FinanceDetailsHelper
   end
 
   def details_path_for(resource)
+    reg_identifier = resource.reg_identifier
+
     if resource.is_a?(WasteCarriersEngine::RenewingRegistration)
-      renewing_registration_path(resource.reg_identifier)
+      renewing_registration_path(reg_identifier)
     else
-      registration_path(resource.reg_identifier)
+      registration_path(reg_identifier)
     end
   end
 end

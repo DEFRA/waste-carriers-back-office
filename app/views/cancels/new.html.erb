@@ -1,26 +1,24 @@
-<div class="grid-row">
-  <div class="column-full">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: details_path_for(@resource)) %>
   </div>
 </div>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <h1 class="heading-large">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">
       <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
     </h1>
 
-    <div class="form-group">
+    <div class="govuk-form-group">
       <%= render "shared/company_details_panel", registration: @resource %>
     </div>
 
     <%= form_tag(url: resource_cancels_path(@resource._id)) do |f| %>
-      <div class="form-group">
-        <%= submit_tag t(".confirm"), class: "button" %>
+      <div class="govuk-form-group">
+        <%= submit_tag t(".confirm"), class: "govuk-button" %>
 
-        <div class="form-button-link">
-          <%= link_to(t(".cancel"), details_path_for(@resource)) %>
-        </div>
+        <%= link_to t(".cancel"), details_path_for(@resource), class: "govuk-button govuk-button--secondary" %>
       </div>
     <% end %>
   </div>
