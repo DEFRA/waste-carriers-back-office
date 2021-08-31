@@ -18,7 +18,11 @@
       <div class="govuk-form-group">
         <%= submit_tag t(".confirm"), class: "govuk-button" %>
 
-        <%= link_to t(".cancel"), details_path_for(@resource), class: "govuk-button govuk-button--secondary" %>
+        <% if @resource.is_a?(WasteCarriersEngine::RenewingRegistration) %>
+          <%= link_to(t(".cancel"), renewing_registration_path(@resource.reg_identifier), class: "govuk-button govuk-button--secondary") %>
+        <% else %>
+          <%= link_to(t(".cancel"), registration_path(@resource.reg_identifier), class: "govuk-button govuk-button--secondary") %>
+        <% end %>
       </div>
     <% end %>
   </div>
