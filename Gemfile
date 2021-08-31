@@ -9,7 +9,7 @@ gem "jquery-rails"
 # mongoid supports MongoDb 3.6
 gem "mongoid", "~> 7.3"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
-gem "rails", ">= 6.0.3.7"
+gem "rails", ">= 6.1.4"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -26,8 +26,8 @@ gem "cancancan", "~> 3.2.1"
 gem "defra_ruby_template"
 
 # Use Devise for user authentication
-gem "devise", ">= 4.4.3"
-gem "devise_invitable", "~> 1.7.0"
+gem "devise", ">= 4.8"
+gem "devise_invitable", "~> 2.0"
 
 # Manage, create and open zip files https://github.com/rubyzip/rubyzip
 gem "rubyzip"
