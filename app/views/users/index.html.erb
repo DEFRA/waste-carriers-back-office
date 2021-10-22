@@ -7,6 +7,14 @@
     </h1>
 
     <p class="govuk-body"><%= link_to t(".options.invite_link"), new_user_invitation_path %></p>
+
+    <p class="govuk-body">
+      <% if @show_all_users %>
+        <%= link_to t(".options.show_enabled_users_only"), users_path %>
+      <% else %>
+        <%= link_to t(".options.show_all_users"), all_users_path %>
+      <% end %>
+    </p>
   </div>
 </div>
 

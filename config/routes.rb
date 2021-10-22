@@ -193,6 +193,10 @@ Rails.application.routes.draw do
   resources :users,
             only: [],
             path: "/bo/users" do
+              collection do
+                get :all
+              end
+
               resources :user_activations,
                         as: :activations,
                         only: %i[new create],
