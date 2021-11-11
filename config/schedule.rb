@@ -66,3 +66,9 @@ end
 every :day, at: (ENV["CLEANUP_TRANSIENT_REGISTRATIONS_RUN_TIME"] || "00:35"), roles: [:db] do
   rake "cleanup:transient_registrations"
 end
+
+# This is job that removes all deletable registrations to support our data
+# retention policy
+every :day, at: (ENV["REMOVE_DELETABLE_REGISTRATIONS_RUN_TIME"] || "21:00"), roles: [:db] do
+  rake "remove_deletable_registrations:run"
+end
