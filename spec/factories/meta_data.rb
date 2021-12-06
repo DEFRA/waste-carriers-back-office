@@ -15,6 +15,10 @@ FactoryBot.define do
       status { :INACTIVE }
     end
 
+    trait :ceased do
+      status { :INACTIVE }
+    end
+
     trait :expired do
       status { :EXPIRED }
     end
@@ -22,6 +26,10 @@ FactoryBot.define do
     trait :pending do
       date_activated { nil }
       status { :PENDING }
+    end
+
+    trait :revoked do
+      status { :REVOKED }
     end
   end
 end

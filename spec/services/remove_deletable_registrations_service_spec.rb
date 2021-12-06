@@ -3,21 +3,30 @@
 require "rails_helper"
 
 RSpec.describe RemoveDeletableRegistrationsService do
-  let!(:expired_8_years_ago) { create(:registration, :expired, expires_on: 8.years.ago) }
-  let!(:expired_7_years_ago) { create(:registration, :expired, expires_on: 7.years.ago) }
-  let!(:expired_6_years_ago) { create(:registration, :expired, expires_on: 6.years.ago) }
-  let!(:not_expired) { create(:registration) }
+  let!(:ceased_8_years_ago) { Timecop.freeze(8.years.ago) { create(:registration, :ceased) } }
+  let!(:expired_8_years_ago) { Timecop.freeze(8.years.ago) { create(:registration, :expired) } }
+  let!(:revoked_8_years_ago) { Timecop.freeze(8.years.ago) { create(:registration, :revoked) } }
+  let!(:ceased) { create(:registration, :ceased) }
+  let!(:expired) { create(:registration, :expired) }
+  let!(:revoked) { create(:registration, :revoked) }
 
   describe ".run" do
-    it "removes the expired registrations" do
+    it "removes registrations expired/revoked/ceased > 7 years ago" do
       expect(WasteCarriersEngine::Registration.all).to eq(
-        [expired_8_years_ago, expired_7_years_ago, expired_6_years_ago, not_expired]
+        [
+          ceased_8_years_ago,
+          expired_8_years_ago,
+          revoked_8_years_ago,
+          ceased,
+          expired,
+          revoked
+        ]
       )
 
       described_class.run
 
       expect(WasteCarriersEngine::Registration.all).to eq(
-        [expired_6_years_ago, not_expired]
+        [ceased, expired, revoked]
       )
     end
   end
