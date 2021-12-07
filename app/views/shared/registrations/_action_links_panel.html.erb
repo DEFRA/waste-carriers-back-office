@@ -2,6 +2,9 @@
   <h2 class="govuk-heading-m">
     <%= resource.display_action_links_heading %>
   </h2>
+  <div id="registration-last-modified" class="govuk-visually-hidden">
+    <%= resource.display_last_modifed %>
+  </div>
   <ul class="govuk-list govuk-list--spaced">
     <% if display_resume_link_for?(resource) %>
       <li>

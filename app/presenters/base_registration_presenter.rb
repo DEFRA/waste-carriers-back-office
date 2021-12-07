@@ -95,6 +95,10 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
            reg_identifier: reg_identifier)
   end
 
+  def display_last_modifed
+    metaData.last_modified.to_datetime
+  end
+
   private
 
   def displayable_tier
