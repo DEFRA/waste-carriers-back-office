@@ -29,5 +29,24 @@ RSpec.describe RemoveDeletableRegistrationsService do
         [ceased, expired, revoked]
       )
     end
+
+    it "removes registrations expired/revoked/ceased > 10 years ago" do
+      allow(Rails.configuration)
+        .to receive(:data_retention_years)
+        .and_return("10")
+
+      described_class.run
+
+      expect(WasteCarriersEngine::Registration.all).to eq(
+        [
+          ceased_8_years_ago,
+          expired_8_years_ago,
+          revoked_8_years_ago,
+          ceased,
+          expired,
+          revoked
+        ]
+      )
+    end
   end
 end

@@ -65,6 +65,9 @@ module WasteCarriersBackOffice
     config.boxi_exports_bucket_name = ENV["AWS_BOXI_EXPORT_BUCKET"]
     config.boxi_exports_filename = ENV["BOXI_EXPORTS_FILENAME"] || "waste_carriers_boxi_daily_full"
 
+    # Data retention
+    config.data_retention_years = ENV["DATA_RETENTION_YEARS"] || 7
+
     # Companies House config
     config.companies_house_host = ENV["WCRS_COMPANIES_HOUSE_URL"] || "https://api.companieshouse.gov.uk/company/"
     config.companies_house_api_key = ENV["WCRS_COMPANIES_HOUSE_API_KEY"]

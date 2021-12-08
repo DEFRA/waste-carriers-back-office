@@ -22,12 +22,16 @@ class RemoveDeletableRegistrationsService < ::WasteCarriersEngine::BaseService
   def deletable_registrations
     WasteCarriersEngine::Registration
       .where("metaData.status" => { '$in': %w[EXPIRED INACTIVE REVOKED] })
-      .where("metaData.lastModified" => { :$lte => 7.years.ago.end_of_day })
+      .where("metaData.lastModified" => { :$lte => cutoff_date })
   end
 
   def remove_registration(registration)
     registration.destroy
     log "Removed registration: #{registration.reg_identifier}"
+  end
+
+  def cutoff_date
+    Rails.configuration.data_retention_years.to_i.years.ago.end_of_day
   end
 
   def log(msg)
