@@ -3,7 +3,6 @@
 ![Build Status](https://github.com/DEFRA/waste-carriers-back-office/workflows/CI/badge.svg?branch=main)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_waste-carriers-back-office&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=DEFRA_waste-carriers-back-office)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_waste-carriers-back-office&metric=coverage)](https://sonarcloud.io/dashboard?id=DEFRA_waste-carriers-back-office)
-[![security](https://hakiri.io/github/DEFRA/waste-carriers-back-office/main.svg)](https://hakiri.io/github/DEFRA/waste-carriers-back-office/main)
 [![Licence](https://img.shields.io/badge/Licence-OGLv3-blue.svg)](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3)
 
 The 'Register or renew as a waste carrier' service allows businesses, who deal with waste and have to register according to the regulations, to register online. Once registered, businesses can sign in again to edit their registrations if needed.
