@@ -132,7 +132,7 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bson (4.12.1)
+    bson (4.13.0)
     builder (3.2.4)
     byebug (11.1.3)
     cancancan (3.2.2)
@@ -273,7 +273,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
-    kaminari-mongoid (1.0.1)
+    kaminari-mongoid (1.0.2)
       kaminari-core (~> 1.0)
       mongoid
     loofah (2.3.0)
@@ -487,7 +487,7 @@ GEM
       whenever
     wicked_pdf (2.1.0)
       activesupport
-    zeitwerk (2.5.1)
+    zeitwerk (2.5.2)
 
 PLATFORMS
   ruby
