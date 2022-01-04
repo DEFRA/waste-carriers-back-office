@@ -40,10 +40,6 @@ gem "govuk_design_system_formbuilder"
 gem "kaminari", "~> 1.1"
 gem "kaminari-mongoid", "~> 1.0"
 
-# Dependabot keeps trying to bump loofah for a version 2.13, which has
-# a security vulnerability: CVE-2018-8048
-gem "loofah", "~> 2.2"
-
 # Use Whenever to manage cron tasks
 gem "whenever", "~> 1.0"
 
