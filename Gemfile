@@ -65,7 +65,9 @@ gem "defra_ruby_features", "~> 0.1"
 # With the environment properly configured, when any app in an environment needs
 # to call Companies House, instead it will call this app which will mock the end
 # point and return the response expected.
-gem "defra_ruby_mocks"
+gem "defra_ruby_mocks",
+    git: "https://github.com/DEFRA/defra-ruby-mocks",
+    branch: "feature/companies-house"
 
 # Allows us to automatically generate the change log from the tags, issues,
 # labels and pull requests on GitHub. Added as a dependency so all dev's have
