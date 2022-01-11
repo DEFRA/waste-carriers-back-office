@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 4ed6c05d56d3a89367359275e4c03993b59c1a62
+  revision: 2d8d99402cc4a865a05f05db471afa8946899bf8
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -9,7 +9,7 @@ GIT
       defra_ruby_address
       defra_ruby_alert (~> 2.1)
       defra_ruby_email
-      defra_ruby_validators
+      defra_ruby_validators (>= 2.5.0)
       high_voltage (~> 3.0)
       jbuilder (~> 2.0)
       jquery-rails
@@ -91,7 +91,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     airbrake (12.0.0)
       airbrake-ruby (~> 6.0)
-    airbrake-ruby (6.0.1)
+    airbrake-ruby (6.0.2)
       rbtree3 (~> 0.5)
     ast (2.4.1)
     async (1.30.1)
@@ -141,7 +141,7 @@ GEM
     concurrent-ruby (1.1.9)
     console (1.13.1)
       fiber-local
-    countries (4.1.3)
+    countries (4.2.1)
       i18n_data (~> 0.15.0)
       sixarm_ruby_unaccent (~> 1.1)
     crack (0.4.5)
@@ -173,7 +173,7 @@ GEM
     defra_ruby_style (0.2.2)
       rubocop (~> 0.82)
     defra_ruby_template (3.13.0)
-    defra_ruby_validators (2.4.1)
+    defra_ruby_validators (2.5.0)
       activemodel
       os_map_ref
       phonelib
@@ -285,7 +285,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2021.1115)
+    mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     mini_portile2 (2.7.1)
     minitest (5.15.0)
@@ -317,7 +317,7 @@ GEM
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.6.54)
+    phonelib (0.6.55)
     protocol-hpack (1.4.2)
     protocol-http (0.22.5)
     protocol-http1 (0.14.1)
@@ -371,7 +371,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rbtree3 (0.6.0)
+    rbtree3 (0.7.0)
     rdoc (6.3.1)
     regexp_parser (1.7.1)
     responders (3.0.1)
