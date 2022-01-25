@@ -57,11 +57,34 @@
         <% if display_ways_to_share_magic_link_for?(@registration) %>
           <%= render "shared/registrations/renewal_magic_link_panel", resource: @registration %>
         <% end %>
+
+        <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+              <%= t(".meta_data") %>
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+            <dl class="govuk-summary-list">
+              <% @registration.metaData.attributes.each do |key, value| %>
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    <%= key %>
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    <%= value %>
+                  </dd>
+                </div>
+              <% end %>
+            </dl>
+          </div>
+        </details>
       </div>
 
       <div class="govuk-grid-column-one-third">
         <%= render "shared/registrations/action_links_panel", resource: @registration %>
       </div>
+
     </div>
   </div>
 </div>

@@ -34,6 +34,7 @@ en:
         heading: "Registration cards (copy cards)"
         labels:
           temp_cards: "Number of cards ordered"
+      meta_data: "Meta data"
       attributes:
         declaration:
           "1": "Yes"
