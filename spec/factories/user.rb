@@ -41,5 +41,9 @@ FactoryBot.define do
     trait :developer do
       role { "developer" }
     end
+
+    trait :import_conviction_data do
+      role { "import_conviction_data" }
+    end
   end
 end

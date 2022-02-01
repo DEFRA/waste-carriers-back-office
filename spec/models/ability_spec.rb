@@ -20,6 +20,7 @@ RSpec.describe Ability, type: :model do
     include_examples "agency examples"
 
     include_examples "non-developer examples"
+    include_examples "non-import_conviction_data examples"
 
     include_examples "active and inactive examples"
   end
@@ -32,6 +33,7 @@ RSpec.describe Ability, type: :model do
     include_examples "agency examples"
 
     include_examples "non-developer examples"
+    include_examples "non-import_conviction_data examples"
 
     include_examples "active and inactive examples"
   end
@@ -44,6 +46,7 @@ RSpec.describe Ability, type: :model do
     include_examples "agency examples"
 
     include_examples "non-developer examples"
+    include_examples "non-import_conviction_data examples"
 
     include_examples "active and inactive examples"
   end
@@ -56,6 +59,20 @@ RSpec.describe Ability, type: :model do
     include_examples "agency examples"
 
     include_examples "developer examples"
+    include_examples "import_conviction_data examples"
+
+    include_examples "active and inactive examples"
+  end
+
+  context "when the user role is import_conviction_data" do
+    let(:role) { "import_conviction_data" }
+
+    include_examples "below agency_super examples"
+    include_examples "below agency_with_refund examples"
+    include_examples "agency examples"
+
+    include_examples "non-developer examples"
+    include_examples "import_conviction_data examples"
 
     include_examples "active and inactive examples"
   end
@@ -69,6 +86,7 @@ RSpec.describe Ability, type: :model do
     include_examples "finance_admin examples"
 
     include_examples "non-developer examples"
+    include_examples "non-import_conviction_data examples"
 
     include_examples "active and inactive examples"
   end
@@ -80,6 +98,7 @@ RSpec.describe Ability, type: :model do
     include_examples "finance_admin examples"
 
     include_examples "non-developer examples"
+    include_examples "non-import_conviction_data examples"
 
     include_examples "active and inactive examples"
   end
@@ -90,6 +109,7 @@ RSpec.describe Ability, type: :model do
     include_examples "finance examples"
 
     include_examples "non-developer examples"
+    include_examples "non-import_conviction_data examples"
 
     include_examples "active and inactive examples"
   end
