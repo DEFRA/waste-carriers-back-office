@@ -42,6 +42,7 @@ class User
   # Roles
 
   AGENCY_ROLES = %w[agency
+                    import_conviction_data
                     agency_with_refund
                     agency_super
                     developer].freeze

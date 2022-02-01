@@ -21,6 +21,7 @@ class Ability
     permissions_for_agency_user_with_refund if agency_user_with_refund?(user)
     permissions_for_agency_super_user if agency_super_user?(user)
     permissions_for_developer_user if developer?(user)
+    permissions_for_import_conviction_data_user if import_conviction_data?(user)
   end
 
   def assign_finance_user_permissions(user)
@@ -122,6 +123,12 @@ class Ability
     can :import_conviction_data, :all
   end
 
+  def permissions_for_import_conviction_data_user
+    permissions_for_agency_user
+
+    can :import_conviction_data, :all
+  end
+
   # Checks to see if role matches
 
   def agency_user?(user)
@@ -150,6 +157,10 @@ class Ability
 
   def developer?(user)
     user.role == "developer"
+  end
+
+  def import_conviction_data?(user)
+    user.role == "import_conviction_data"
   end
 
   def write_off_agency_user_cap
