@@ -1,0 +1,57 @@
+# frozen_string_literal: true
+
+require_relative "../concerns/can_load_file_to_aws"
+
+module Reports
+  class CardOrdersExportService < ::WasteCarriersEngine::BaseService
+    include CanLoadFileToAws
+
+    def initialize(start_time, end_time)
+      @start_time = start_time
+      @end_time = end_time
+      super()
+    end
+
+    def run
+      populate_temp_file
+
+      options = { s3_directory: "CARD_ORDERS" }
+
+      load_file_to_aws_bucket(options)
+
+      mark_order_items_exported
+    rescue StandardError => e
+      Airbrake.notify e, file_name: file_name
+      Rails.logger.error "Generate card orders export csv error for #{file_name}:\n#{e}"
+    ensure
+      File.unlink(file_path) if File.exist?(file_path)
+    end
+
+    private
+
+    def populate_temp_file
+      File.open(file_path, "w+") { |file| file.write(card_orders_export) }
+    end
+
+    def file_path
+      Rails.root.join("tmp/#{file_name}.csv")
+    end
+
+    def file_name
+      "#{WasteCarriersBackOffice::Application.config.card_orders_export_filename}_#{Date.today.strftime('%Y-%m-%d')}"
+    end
+
+    def card_orders_export
+      @serializer = CardOrdersExportSerializer.new(@start_time, @end_time)
+      @serializer.to_csv
+    end
+
+    def bucket_name
+      WasteCarriersBackOffice::Application.config.weekly_exports_bucket_name
+    end
+
+    def mark_order_items_exported
+      @serializer.mark_exported
+    end
+  end
+end

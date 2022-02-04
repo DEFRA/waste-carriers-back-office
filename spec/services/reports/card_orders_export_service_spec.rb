@@ -1,0 +1,55 @@
+# frozen_string_literal: true
+
+require "rails_helper"
+
+module Reports
+  RSpec.describe CardOrdersExportService do
+    describe ".run" do
+      let(:file_name) { "waste_carriers_card_orders_weekly_#{Date.today.strftime('%Y-%m-%d')}" }
+      let(:aws_file_pattern) { %r{https://.*\.s3\.eu-west-1\.amazonaws\.com/CARD_ORDERS/#{file_name}\.csv.*} }
+      let(:end_time) { DateTime.now + 1.hour }
+      let(:start_time) { end_time - 7.days }
+      aws_stub = nil
+
+      before do
+        registrations = create_list(:registration, 2, :has_orders_and_payments)
+        create(:order_item_log, type: "COPY_CARD", registration_id: registrations[0].id, quantity: 3)
+        create(:order_item_log, type: "COPY_CARD", registration_id: registrations[1].id, quantity: 1)
+        aws_stub = stub_request(:put, aws_file_pattern)
+      end
+
+      context "when the AWS request succeeds" do
+
+        it "executes a put request to AWS" do
+          described_class.new(start_time, end_time).run
+
+          assert_requested aws_stub
+        end
+
+        it "updates the status of the exported order_item_logs" do
+          expect { described_class.new(start_time, end_time).run }
+            .to change { WasteCarriersEngine::OrderItemLog.where(exported: true).count }
+            .from(0).to(2)
+        end
+
+        it "does not report an error" do
+          expect(Airbrake).to_not receive(:notify)
+
+          described_class.new(start_time, end_time).run
+        end
+      end
+
+      context "when the request fails" do
+
+        it "fails gracefully and reports the error" do
+          stub_request(:put, aws_file_pattern).to_return(status: 403)
+
+          # Expect an error to get notified
+          expect(Airbrake).to receive(:notify).once
+
+          described_class.new(start_time, end_time).run
+        end
+      end
+    end
+  end
+end
