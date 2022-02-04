@@ -72,3 +72,8 @@ end
 every :day, at: (ENV["REMOVE_DELETABLE_REGISTRATIONS_RUN_TIME"] || "21:00"), roles: [:db] do
   rake "remove_deletable_registrations:run"
 end
+
+# This job exports copy card order details for the previous week, ending at midnight on Monday.
+every :tuesday, at: (ENV["EXPORT_COPY_CARD_ORDERS_RUN_TIME"] || "02:15"), roles: [:db] do
+  rake "reports:export:weekly_copy_card_orders"
+end
