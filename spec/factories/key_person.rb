@@ -3,6 +3,8 @@
 FactoryBot.define do
   factory :key_person, class: WasteCarriersEngine::KeyPerson do
     dob { Date.new(2000, 1, 1) }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
 
     trait :main do
       person_type { "KEY" }

@@ -11,5 +11,15 @@ FactoryBot.define do
       total_amount { order_items.sum { |item| item[:amount] } }
       date_created { Time.now }
     end
+
+    trait :has_copy_cards_item do
+      date_created { Time.now }
+
+      order_items do
+        [WasteCarriersEngine::OrderItem.new_copy_cards_item(1)]
+      end
+      total_amount { order_items.sum { |item| item[:amount] } }
+    end
+
   end
 end
