@@ -203,6 +203,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
     faraday (1.7.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -505,6 +507,7 @@ DEPENDENCIES
   devise_invitable (~> 2.0)
   dotenv-rails
   factory_bot_rails
+  faker
   github_changelog_generator
   govuk_design_system_formbuilder
   jquery-rails
@@ -534,7 +537,7 @@ DEPENDENCIES
   wicked_pdf
 
 RUBY VERSION
-   ruby 2.7.1p83
+   ruby 2.7.5p203
 
 BUNDLED WITH
    2.1.4

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-ruby "2.7.1"
+ruby "2.7.5"
 
 # Use jquery as the JavaScript library
 gem "jquery-rails"
@@ -116,6 +116,7 @@ end
 group :test do
   gem "database_cleaner-mongoid"
   gem "factory_bot_rails"
+  gem "faker"
   gem "rails-controller-testing"
   gem "timecop"
 
