@@ -2,6 +2,7 @@
 
 require "defra_ruby/aws"
 
+# rubocop:disable Metrics/BlockLength
 DefraRuby::Aws.configure do |c|
   epr_bucket = {
     name: ENV["AWS_DAILY_EXPORT_BUCKET"],
@@ -23,5 +24,16 @@ DefraRuby::Aws.configure do |c|
     encrypt_with_kms: ENV["AWS_BOXI_ENCRYPT_WITH_KMS"]
   }
 
-  c.buckets = [boxy_bucket, epr_bucket]
+  weekly_exports_bucket = {
+    name: ENV["AWS_WEEKLY_EXPORT_BUCKET"],
+    region: ENV["AWS_REGION"],
+    credentials: {
+      access_key_id: ENV["AWS_WEEKLY_EXPORT_ACCESS_KEY_ID"],
+      secret_access_key: ENV["AWS_WEEKLY_EXPORT_SECRET_ACCESS_KEY"]
+    },
+    encrypt_with_kms: ENV["AWS_WEEKLY_ENCRYPT_WITH_KMS"]
+  }
+
+  c.buckets = [boxy_bucket, epr_bucket, weekly_exports_bucket]
 end
+# rubocop:enable Metrics/BlockLength
