@@ -21,13 +21,13 @@ module Reports
       context "when the AWS request succeeds" do
 
         it "executes a put request to AWS" do
-          described_class.new(start_time, end_time).run
+          described_class.new.run(start_time: start_time, end_time: end_time)
 
           assert_requested aws_stub
         end
 
         it "updates the status of the exported order_item_logs" do
-          expect { described_class.new(start_time, end_time).run }
+          expect { described_class.new.run(start_time: start_time, end_time: end_time) }
             .to change { WasteCarriersEngine::OrderItemLog.where(exported: true).count }
             .from(0).to(2)
         end
@@ -35,7 +35,7 @@ module Reports
         it "does not report an error" do
           expect(Airbrake).to_not receive(:notify)
 
-          described_class.new(start_time, end_time).run
+          described_class.new.run(start_time: start_time, end_time: end_time)
         end
       end
 
@@ -47,7 +47,7 @@ module Reports
           # Expect an error to get notified
           expect(Airbrake).to receive(:notify).once
 
-          described_class.new(start_time, end_time).run
+          described_class.new.run(start_time: start_time, end_time: end_time)
         end
       end
     end
