@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-ruby "2.7.5"
+ruby "2.7.1"
 
 # Use jquery as the JavaScript library
 gem "jquery-rails"
