@@ -29,10 +29,6 @@ RSpec.describe "Export copy card orders task", type: :rake do
         subject.invoke
       end
     end
-
-    it "runs without error" do
-      expect { subject.invoke }.not_to raise_error
-    end
   end
 
   describe "reports:export:weekly_copy_card_orders" do
