@@ -6,13 +6,10 @@ module Reports
   class CardOrdersExportService < ::WasteCarriersEngine::BaseService
     include CanLoadFileToAws
 
-    def initialize(start_time, end_time)
+    def run(start_time:, end_time:)
       @start_time = start_time
       @end_time = end_time
-      super()
-    end
 
-    def run
       populate_temp_file
 
       options = { s3_directory: "CARD_ORDERS" }
