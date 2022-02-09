@@ -16,7 +16,7 @@ module Reports
 
       load_file_to_aws_bucket(options)
 
-      mark_order_items_exported
+      log_export
     rescue StandardError => e
       Airbrake.notify e, file_name: file_name
       Rails.logger.error "Generate card orders export csv error for #{file_name}:\n#{e}"
@@ -45,6 +45,11 @@ module Reports
 
     def bucket_name
       WasteCarriersBackOffice::Application.config.weekly_exports_bucket_name
+    end
+
+    def log_export
+      CardOrdersExportLog.new(@start_time, @end_time, file_name, Time.now).save!
+      mark_order_items_exported
     end
 
     def mark_order_items_exported

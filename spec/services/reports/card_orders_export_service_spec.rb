@@ -20,16 +20,26 @@ module Reports
 
       context "when the AWS request succeeds" do
 
-        it "executes a put request to AWS" do
-          described_class.new.run(start_time: start_time, end_time: end_time)
+        subject { described_class.new.run(start_time: start_time, end_time: end_time) }
 
+        it "executes a put request to AWS" do
+          subject
           assert_requested aws_stub
         end
 
         it "updates the status of the exported order_item_logs" do
-          expect { described_class.new.run(start_time: start_time, end_time: end_time) }
+          expect { subject }
             .to change { WasteCarriersEngine::OrderItemLog.where(exported: true).count }
             .from(0).to(2)
+        end
+
+        it "creates a CardOrdersExportLog with the correct attributes" do
+          expect { subject }.to change { CardOrdersExportLog.count }.from(0).to(1)
+          export_log = CardOrdersExportLog.first
+          expect(export_log.start_time.to_i).to eq start_time.to_i
+          expect(export_log.end_time.to_i).to eq end_time.to_i
+          expect(export_log.exported_at).to be_within(1.second).of(DateTime.now)
+          expect(export_log.export_filename).to eq file_name
         end
 
         it "does not report an error" do
