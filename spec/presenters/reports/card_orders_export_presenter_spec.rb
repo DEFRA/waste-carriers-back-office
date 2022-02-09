@@ -53,8 +53,8 @@ module Reports
     before { registration.addresses = addresses }
 
     describe "#reg_identifier" do
-      it "returns the registration id" do
-        expect(subject.reg_identifier).to eq order_item_log.registration_id
+      it "returns the registration identifier" do
+        expect(subject.reg_identifier).to eq registration.reg_identifier
       end
     end
 

@@ -23,7 +23,7 @@ class CardOrdersExportPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def reg_identifier
-    @order_item_log.registration_id
+    @registration.reg_identifier
   end
 
   def date_of_issue

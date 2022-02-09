@@ -50,8 +50,8 @@ module Reports
       end
 
       it "includes one row per item ordered for the previously un-exported items" do
-        expect(subject.scan(order_item_log_1.registration_id).size).to eq 2
-        expect(subject.scan(order_item_log_2.registration_id).size).to eq 5
+        expect(subject.scan(registration_1.reg_identifier).size).to eq 2
+        expect(subject.scan(registration_2.reg_identifier).size).to eq 5
       end
 
       it "excludes non-copy-card order items" do
