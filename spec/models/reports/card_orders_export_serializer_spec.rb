@@ -7,8 +7,8 @@ module Reports
 
     let(:registration_1) { create(:registration, :has_orders_and_payments) }
     let(:registration_2) { create(:registration, :has_orders_and_payments) }
-    let!(:order_item_log_1) { create(:order_item_log, type: "COPY_CARD", registration_id: registration_1.id, quantity: 2) }
-    let!(:order_item_log_2) { create(:order_item_log, type: "COPY_CARD", registration_id: registration_2.id, quantity: 5) }
+    let!(:order_item_log_1) { create(:order_item_log, type: "COPY_CARDS", registration_id: registration_1.id, quantity: 2) }
+    let!(:order_item_log_2) { create(:order_item_log, type: "COPY_CARDS", registration_id: registration_2.id, quantity: 5) }
 
     let(:end_time) { DateTime.now + 3.days }
     let(:start_time) { end_time - 1.week }

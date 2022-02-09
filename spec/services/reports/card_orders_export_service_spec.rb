@@ -13,8 +13,8 @@ module Reports
 
       before do
         registrations = create_list(:registration, 2, :has_orders_and_payments)
-        create(:order_item_log, type: "COPY_CARD", registration_id: registrations[0].id, quantity: 3)
-        create(:order_item_log, type: "COPY_CARD", registration_id: registrations[1].id, quantity: 1)
+        create(:order_item_log, type: "COPY_CARDS", registration_id: registrations[0].id, quantity: 3)
+        create(:order_item_log, type: "COPY_CARDS", registration_id: registrations[1].id, quantity: 1)
         aws_stub = stub_request(:put, aws_file_pattern)
       end
 
