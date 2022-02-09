@@ -2,8 +2,10 @@
 
 module AdPrivacyPolicyHelper
   def link_to_privacy_policy
-    path = File.join(Rails.configuration.wcrs_renewals_url, "/fo/pages/privacy")
-
-    link_to(t(".privacy_policy"), path, target: "_blank")
+    link_to(
+      t(".privacy_policy_link_text"),
+      URI.join(Rails.configuration.wcrs_renewals_url, "/fo/pages/privacy").to_s,
+      target: "_blank"
+    )
   end
 end

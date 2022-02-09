@@ -11,7 +11,7 @@
       </p>
     </div>
     <p class="govuk-body">
-      <%= t(".first_paragraph", link_to_privacy_policy: link_to_privacy_policy).html_safe %>
+      <%= t(".first_paragraph") %>
     </p>
     <p class="govuk-body">
       <%= t(".second_paragraph") %>
@@ -22,19 +22,9 @@
     <p class="govuk-body">
       <%= t(".fourth_paragraph") %>
     </p>
-
-    <details class="govuk-details">
-      <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text"><%= t(".privacy_policy_text.summary") %></span>
-      </summary>
-      <div class="govuk-details__text">
-        <% 1.upto(14).each do |paragraph_index| %>
-          <p class="govuk-body">
-            <%= t(".privacy_policy_text.paragraph_#{paragraph_index}") %>
-          </p>
-        <% end %>
-      </div>
-    </details>
+    <p class="govuk-body">
+      <%= link_to_privacy_policy %>
+    </p>
 
     <details class="govuk-details">
       <summary class="govuk-details__summary">
