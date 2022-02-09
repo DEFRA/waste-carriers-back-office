@@ -27,7 +27,7 @@ class CardOrdersExportPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def date_of_issue
-    @order_item_log.activated_at
+    @order_item_log.activated_at.strftime("%-m/%-d/%y")
   end
 
   def carrier_name
@@ -55,11 +55,11 @@ class CardOrdersExportPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def registration_date
-    @registration.metaData.dateRegistered
+    @registration.metaData.dateRegistered.present? ? @registration.metaData.dateRegistered.strftime("%-m/%-d/%y") : ""
   end
 
   def expires_on
-    @registration.expires_on
+    @registration.expires_on.present? ? @registration.expires_on.strftime("%-m/%-d/%y") : ""
   end
 
   def contact_phone_number

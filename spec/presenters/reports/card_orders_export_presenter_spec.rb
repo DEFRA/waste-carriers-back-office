@@ -46,7 +46,13 @@ module Reports
 
     let(:business_type) { "limitedCompany" }
     let(:company_name) { Faker::Company.name }
-    let(:registration) { create(:registration, :has_orders_and_payments, business_type: business_type, company_name: company_name) }
+    let(:registration) do
+      create(:registration,
+             :has_orders_and_payments,
+             business_type: business_type,
+             company_name: company_name,
+             expires_on: DateTime.now.next_year(3))
+    end
     let(:order) { registration.finance_details.orders[0] }
     let(:order_item_log) { create(:order_item_log, registration_id: registration.id, order_id: order.id) }
 
@@ -60,7 +66,7 @@ module Reports
 
     describe "#date_of_issue" do
       it "returns the date of the registration activation which activated the card order" do
-        expect(subject.date_of_issue).to eq order_item_log.activated_at
+        expect(subject.date_of_issue).to eq order_item_log.activated_at.strftime("%-m/%-d/%y")
       end
     end
 
@@ -96,8 +102,8 @@ module Reports
       it "returns the relevant registration attributes" do
         expect(subject.company_name).to eq registration.company_name
         expect(subject.registration_type).to eq registration.registration_type
-        expect(subject.registration_date.to_i).to eq registration.metaData.dateRegistered.to_i
-        expect(subject.expires_on).to eq registration.expires_on
+        expect(subject.registration_date).to eq registration.metaData.dateRegistered.strftime("%-m/%-d/%y")
+        expect(subject.expires_on).to eq registration.expires_on.strftime("%-m/%-d/%y")
         expect(subject.contact_phone_number).to eq registration.phone_number
       end
     end
