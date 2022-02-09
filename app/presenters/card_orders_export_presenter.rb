@@ -10,11 +10,13 @@ class CardOrdersExportPresenter < WasteCarriersEngine::BasePresenter
     # so prepare them once for lookup on initialiation
     @registered_address = present_address(
       @registration.addresses.select { |a| a.addressType == "REGISTERED" }[0],
-      "registered"
+      "registered",
+      @registration.company_name
     )
     @contact_address = present_address(
       @registration.addresses.select { |a| a.addressType == "POSTAL" }[0],
-      "contact"
+      "contact",
+      @registration.company_name
     )
 
     super(model)
@@ -74,17 +76,17 @@ class CardOrdersExportPresenter < WasteCarriersEngine::BasePresenter
   end
 
   # Map an address from WCR database form to the presentation form.
-  def present_address(address, prefix)
+  def present_address(address, prefix, company_name)
     return "" unless address
 
     # These fields if present are to map to lines 1-5 in the output,
     # with any blanks between lines removed.
     address_values = [address.houseNumber,
-                      address.addressLine1,
+                      # Skip address line 1 if it matches the carrier name.
+                      address.addressLine1 == company_name ? "" : address.addressLine1,
                       address.addressLine2,
                       address.addressLine3,
                       address.addressLine4].reject(&:blank?)
-
     address_hash = {}
 
     address_values.each_with_index do |value, index|
