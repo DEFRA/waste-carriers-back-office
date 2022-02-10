@@ -2,6 +2,8 @@
 
 class CardOrdersExportPresenter < WasteCarriersEngine::BasePresenter
 
+  DATE_FORMAT = "%-m/%-d/%y"
+
   def initialize(model)
     @order_item_log = model
     @registration = WasteCarriersEngine::Registration.find(model.registration_id)
@@ -27,7 +29,7 @@ class CardOrdersExportPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def date_of_issue
-    @order_item_log.activated_at.strftime("%-m/%-d/%y")
+    @order_item_log.activated_at.strftime(DATE_FORMAT)
   end
 
   def carrier_name
@@ -55,11 +57,11 @@ class CardOrdersExportPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def registration_date
-    @registration.metaData.dateRegistered.present? ? @registration.metaData.dateRegistered.strftime("%-m/%-d/%y") : ""
+    @registration.metaData.dateRegistered.present? ? @registration.metaData.dateRegistered.strftime(DATE_FORMAT) : ""
   end
 
   def expires_on
-    @registration.expires_on.present? ? @registration.expires_on.strftime("%-m/%-d/%y") : ""
+    @registration.expires_on.present? ? @registration.expires_on.strftime(DATE_FORMAT) : ""
   end
 
   def contact_phone_number
