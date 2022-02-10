@@ -56,7 +56,7 @@ module Reports
     end
 
     def parse_object(order_item_log)
-      presenter = CardOrdersExportPresenter.new(order_item_log)
+      presenter = Reports::CardOrderPresenter.new(order_item_log)
       ATTRIBUTES.map do |key, _value|
         presenter.public_send(key)
       end

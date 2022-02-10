@@ -3,7 +3,7 @@
 require "rails_helper"
 
 module Reports
-  RSpec.describe CardOrdersExportPresenter do
+  RSpec.describe CardOrderPresenter do
     subject { described_class.new(order_item_log) }
 
     # Allow this to be overridden to test company name on line 1
