@@ -1,0 +1,49 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: "/bo") %>
+
+    <h1 class="govuk-heading-l">
+      <%= t(".heading") %>
+    </h1>
+    <% if @exports.last.present? %>
+      <h2>The latest file was created at <%= @exports.last.exported_at %></h2>
+    <% end %>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col">
+            <%= t(".file_name") %>
+          </th>
+          <th class="govuk-table__header" scope="col">
+            <%= t(".first_downloaded_by") %>
+          </th>
+          <th class="govuk-table__header" scope="col">
+            <%= t(".first_downloaded_at") %>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody class="govuk-table__body">
+        <% @exports.sort_by { |e| e.exported_at }.reverse.each do |export| %>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <%= link_to export.export_filename, card_order_export_path(export) %>
+            </td>
+            <td class="govuk-table__cell">
+              <%= export.first_downloaded_by %>
+            </td>
+            <td class="govuk-table__cell">
+              <%= export.first_downloaded_at %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
