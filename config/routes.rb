@@ -159,6 +159,10 @@ Rails.application.routes.draw do
               get "certificate", to: "certificates#show", as: :certificate
             end
 
+  resources :card_order_exports,
+            only: %i[show index],
+            path: "/bo/card-order-exports"
+
   resources :transient_registrations,
             only: [],
             param: :reg_identifier,
