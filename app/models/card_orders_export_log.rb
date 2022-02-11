@@ -20,7 +20,7 @@ class CardOrdersExportLog
   end
 
   def download_link
-    bucket.presigned_url(export_filename)
+    bucket.presigned_url("CARD_ORDERS/#{export_filename}")
   end
 
   def visit_download_link(user)
