@@ -3,7 +3,7 @@
 module Reports
   class CardOrderPresenter < WasteCarriersEngine::BasePresenter
 
-    DATE_FORMAT = "%-m/%-d/%y"
+    DATE_FORMAT = "%d/%m/%Y"
 
     def initialize(model)
       @order_item_log = model

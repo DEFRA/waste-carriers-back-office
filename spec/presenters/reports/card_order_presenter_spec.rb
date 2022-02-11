@@ -6,6 +6,8 @@ module Reports
   RSpec.describe CardOrderPresenter do
     subject { described_class.new(order_item_log) }
 
+    export_date_format = "%d/%m/%Y".freeze
+
     # Allow this to be overridden to test company name on line 1
     let(:reg_address_line_1) { Faker::Address.street_name }
 
@@ -66,7 +68,7 @@ module Reports
 
     describe "#date_of_issue" do
       it "returns the date of the registration activation which activated the card order" do
-        expect(subject.date_of_issue).to eq order_item_log.activated_at.strftime("%-m/%-d/%y")
+        expect(subject.date_of_issue).to eq order_item_log.activated_at.strftime(export_date_format)
       end
     end
 
@@ -102,8 +104,8 @@ module Reports
       it "returns the relevant registration attributes" do
         expect(subject.company_name).to eq registration.company_name
         expect(subject.registration_type).to eq registration.registration_type
-        expect(subject.registration_date).to eq registration.metaData.dateRegistered.strftime("%-m/%-d/%y")
-        expect(subject.expires_on).to eq registration.expires_on.strftime("%-m/%-d/%y")
+        expect(subject.registration_date).to eq registration.metaData.dateRegistered.strftime(export_date_format)
+        expect(subject.expires_on).to eq registration.expires_on.strftime(export_date_format)
         expect(subject.contact_phone_number).to eq registration.phone_number
       end
     end
