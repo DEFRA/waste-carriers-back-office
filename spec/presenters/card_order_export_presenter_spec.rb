@@ -9,7 +9,7 @@ RSpec.describe CardOrderExportPresenter do
   describe "#exported_at" do
     it "presents the export time in the correct format" do
       expect(subject.exported_at).to eq card_orders_export_log.exported_at.strftime("%Y-%m-%d %H:%M")
-      expect(subject.exported_at).to match /\d{4}-\d{2}-\d{2} \d{2}:\d{2}/
+      expect(subject.exported_at).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}/)
     end
   end
 
@@ -45,7 +45,7 @@ RSpec.describe CardOrderExportPresenter do
 
       it "returns the link visit time in the correct format" do
         expect(subject.first_downloaded_at).to eq card_orders_export_log.first_visited_at.strftime("%Y-%m-%d %H:%M")
-        expect(subject.first_downloaded_at).to match /\d{4}-\d{2}-\d{2} \d{2}:\d{2}/
+        expect(subject.first_downloaded_at).to match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}/)
       end
     end
   end
