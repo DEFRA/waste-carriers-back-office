@@ -5,8 +5,8 @@ require "rails_helper"
 module Reports
   RSpec.describe CardOrdersExportService do
     describe ".run" do
-      let(:file_name) { "card_orders_#{Date.today.strftime('%Y-%m-%d')}" }
-      let(:aws_file_pattern) { %r{https://.*\.s3\.eu-west-1\.amazonaws\.com/CARD_ORDERS/#{file_name}\.csv.*} }
+      let(:file_name) { "card_orders_#{Date.today.strftime('%Y-%m-%d')}.csv" }
+      let(:aws_file_pattern) { %r{https://.*\.s3\.eu-west-1\.amazonaws\.com/CARD_ORDERS/#{file_name}.*} }
       let(:end_time) { DateTime.now + 1.hour }
       let(:start_time) { end_time - 7.days }
       aws_stub = nil
