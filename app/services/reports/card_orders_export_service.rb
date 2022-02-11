@@ -35,7 +35,8 @@ module Reports
     end
 
     def file_name
-      "#{WasteCarriersBackOffice::Application.config.card_orders_export_filename}_#{Date.today.strftime('%Y-%m-%d')}.csv"
+      "#{WasteCarriersBackOffice::Application.config.card_orders_export_filename}"\
+      "_#{Date.today.strftime('%Y-%m-%d')}.csv"
     end
 
     def card_orders_export
