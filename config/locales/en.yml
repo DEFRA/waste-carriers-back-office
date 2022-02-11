@@ -11,6 +11,7 @@ en:
         users: "Manage users"
         conviction_imports: "Import conviction data"
         feature_toggles: "Toggle features"
+        card_order_exports: "Copy card orders"
       user_info:
         signed_in_user: "Signed in as %{email}."
         sign_out_link: "Sign out"

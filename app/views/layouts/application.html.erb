@@ -54,7 +54,14 @@
                 class: "govuk-header__link"  %>
           </li>
         <% end %>
-      </ul>
+
+        <% if can?(:view_card_order_exports, current_user) %>
+          <li class="govuk-header__navigation-item">
+            <%= link_to t("layouts.application.menu.card_order_exports"),
+                main_app.card_order_exports_path,
+                class: "govuk-header__link"  %>
+          </li>
+        <% end %>      </ul>
     </nav>
   <% end %>
 <% end %>
