@@ -6,7 +6,7 @@ module Reports
   RSpec.describe CardOrderPresenter do
     subject { described_class.new(order_item_log) }
 
-    export_date_format = "%d/%m/%Y".freeze
+    export_date_format = "%d/%m/%Y"
 
     # Allow this to be overridden to test company name on line 1
     let(:reg_address_line_1) { Faker::Address.street_name }
