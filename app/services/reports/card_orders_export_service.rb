@@ -31,11 +31,11 @@ module Reports
     end
 
     def file_path
-      Rails.root.join("tmp/#{file_name}.csv")
+      Rails.root.join("tmp/#{file_name}")
     end
 
     def file_name
-      "#{WasteCarriersBackOffice::Application.config.card_orders_export_filename}_#{Date.today.strftime('%Y-%m-%d')}"
+      "#{WasteCarriersBackOffice::Application.config.card_orders_export_filename}_#{Date.today.strftime('%Y-%m-%d')}.csv"
     end
 
     def card_orders_export
