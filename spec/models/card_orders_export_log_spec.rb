@@ -30,7 +30,7 @@ RSpec.describe CardOrdersExportLog, type: :model do
 
     context "first visit" do
       it "records the first visit user" do
-        expect { subject.visit_download_link(user) }.to change { subject.first_visited_by }.from(nil).to(user.id)
+        expect { subject.visit_download_link(user) }.to change { subject.first_visited_by }.from(nil).to(user.email)
       end
       it "records the time of the first visit" do
         expect { subject.visit_download_link(user) }.to change { subject.first_visited_at }.from(nil)
@@ -44,7 +44,7 @@ RSpec.describe CardOrdersExportLog, type: :model do
       before { subject.visit_download_link(first_user) }
 
       it "does not update the first visit user" do
-        expect { subject.visit_download_link(user) }.not_to change { subject.first_visited_by }.from(first_user.id)
+        expect { subject.visit_download_link(user) }.not_to change { subject.first_visited_by }.from(first_user.email)
       end
       it "does not update the time of the first visit" do
         expect { subject.visit_download_link(user) }.not_to change { subject.first_visited_at }
