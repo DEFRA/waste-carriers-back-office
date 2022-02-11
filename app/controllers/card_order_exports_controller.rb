@@ -13,7 +13,7 @@ class CardOrderExportsController < ApplicationController
     export_log.first_visited_at = Time.now
     export_log.first_visited_by = current_user.email
     export_log.save!
-    redirect_to export_log.download_link
+    redirect_to export_log.download_link, allow_other_host: true
   end
 
   private
