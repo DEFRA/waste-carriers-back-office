@@ -26,7 +26,7 @@ class CardOrdersExportLog
   def visit_download_link(user)
     return if first_visited_by || first_visited_at
 
-    self.first_visited_by = user.id
+    self.first_visited_by = user.email
     self.first_visited_at = DateTime.now
     save!
   end
