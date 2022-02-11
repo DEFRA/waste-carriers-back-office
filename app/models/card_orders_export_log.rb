@@ -19,6 +19,10 @@ class CardOrdersExportLog
     self.exported_at = exported_at
   end
 
+  def download_link
+    bucket.presigned_url(export_filename)
+  end
+
   def visit_download_link(user)
     return if first_visited_by || first_visited_at
 
@@ -26,4 +30,15 @@ class CardOrdersExportLog
     self.first_visited_at = DateTime.now
     save!
   end
+
+  private
+
+  def bucket
+    DefraRuby::Aws.get_bucket(bucket_name)
+  end
+
+  def bucket_name
+    WasteCarriersBackOffice::Application.config.weekly_exports_bucket_name
+  end
+
 end

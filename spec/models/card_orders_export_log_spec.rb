@@ -52,4 +52,13 @@ RSpec.describe CardOrdersExportLog, type: :model do
     end
   end
 
+  describe "#download_link" do
+    it "includes the designated AWS S3 bucket name" do
+      expect(subject.download_link).to include WasteCarriersBackOffice::Application.config.weekly_exports_bucket_name
+    end
+
+    it "includes the export file name" do
+      expect(subject.download_link).to include subject.export_filename
+    end
+  end
 end
