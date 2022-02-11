@@ -20,9 +20,13 @@ RSpec.describe "Export copy card orders task", type: :rake do
       end
 
       it "uses the correct start and end times" do
-        # The end time should be 00:00:00 on the most recent Monday, which may be the current day.
-        # The report queries for orders with activation date less than the end time.
-        expected_end_time = (Date.today.prev_occurring(:sunday) + 1.day).midnight
+        # The report runs from Tuesday 00:00:00 (inclusive) to Tuesday 00:00:00 (non-inclusive).
+        # The end day should be the day after the most recent Monday, excluding today (if Monday).
+        # Examples:
+        #   Run time Monday 21st at 2:30    => Report range: Tuesday  7th at 00:00:00 <= T < Tuesday 15th at 00:00:00
+        #   Run time Tuesday 22nd at 2:30   => Report range: Tuesday 15th at 00:00:00 <= T < Tuesday 22nd at 00:00:00
+        #   Run time Wednesday 23rd at 2:30 => Report range: Tuesday 15th at 00:00:00 <= T < Tuesday 22nd at 00:00:00
+        expected_end_time = (Date.today.prev_occurring(:monday) + 1.day).midnight
         expected_start_time = expected_end_time - 1.week
         expect(Reports::CardOrdersExportService).to receive(:run)
           .with(start_time: expected_start_time, end_time: expected_end_time)
@@ -31,12 +35,34 @@ RSpec.describe "Export copy card orders task", type: :rake do
     end
   end
 
-  describe "reports:export:weekly_copy_card_orders" do
+  describe "reports:export:weekly_copy_card_orders excluding Monday" do
     first_run_date = Faker::Date.in_date_period
-    # check all weekdays
+    # check all weekdays and skip Monday
     (0..6).each do |n|
       run_date = first_run_date + n.days
+      next if Date::DAYNAMES[run_date.wday] == "Monday"
+
       it_behaves_like "runs the report", run_date.noon
+    end
+  end
+
+  # The logic of this spec is the same as the shared example but it is
+  # broken out explicitly here for clarity as Monday is an edge case.
+  describe "reports:export:weekly_copy_card_orders on Monday" do
+    let(:run_date) { Faker::Date.in_date_period.prev_occurring(:monday) }
+    let(:expected_end_time) { run_date.prev_occurring(:tuesday).midnight }
+    let(:expected_start_time) { expected_end_time - 1.week }
+
+    around do |example|
+      Timecop.freeze(run_date.noon) do
+        example.run
+      end
+    end
+
+    it "runs the report up to the end of the previous Monday" do
+      expect(Reports::CardOrdersExportService).to receive(:run)
+        .with(start_time: expected_start_time, end_time: expected_end_time)
+      subject.invoke
     end
   end
 end

@@ -7,7 +7,7 @@ namespace :reports do
 
       # Run the report for one week up to end of day on the most recent Sunday
       # So the end time is 00:00:00 on the Monday after that Sunday
-      end_date = (Date.today.prev_occurring(:sunday) + 1.day).midnight
+      end_date = (Date.today.prev_occurring(:monday) + 1.day).midnight
       start_date = end_date - 1.week
       Reports::CardOrdersExportService.run(
         start_time: start_date.midnight,
