@@ -60,8 +60,8 @@ class Ability
     can :record_cheque_payment, :all
     can :record_postal_order_payment, :all
     can :view_payments, :all
-
     can :review_convictions, :all
+    can :view_card_order_exports, :all
 
     can :write_off_small, WasteCarriersEngine::FinanceDetails do |finance_details|
       finance_details.zero_difference_balance <= write_off_agency_user_cap
@@ -118,6 +118,7 @@ class Ability
 
   def permissions_for_developer_user
     permissions_for_agency_user
+    can :view_card_order_exports, :all
 
     can :manage, WasteCarriersEngine::FeatureToggle
     can :import_conviction_data, :all
