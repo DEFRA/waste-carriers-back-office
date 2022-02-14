@@ -3,6 +3,7 @@ en:
     index:
       title: "Card order export history"
       heading: "Copy Card Orders Weekly Exports"
+      caption: "Copy Card Orders Weekly Exports"
       file_name: "Export File"
       exported_at: "Exported"
       first_downloaded_by: "Downloaded By"
