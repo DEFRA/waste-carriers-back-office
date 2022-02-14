@@ -46,7 +46,6 @@ module Reports
 
     def scope
       @order_item_logs = WasteCarriersEngine::OrderItemLog.where(
-        exported: false,
         type: "COPY_CARDS",
         activated_at: { "$gte": @start_time, "$lt": @end_time }
       )

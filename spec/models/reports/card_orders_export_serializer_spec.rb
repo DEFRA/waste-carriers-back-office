@@ -49,9 +49,20 @@ module Reports
         expect(subject).to include(expected_columns.map { |title| "\"#{title}\"" }.join(","))
       end
 
-      it "includes one row per item ordered for the previously un-exported items" do
+      it "includes one row per item ordered" do
         expect(subject.scan(registration_1.reg_identifier).size).to eq 2
         expect(subject.scan(registration_2.reg_identifier).size).to eq 5
+      end
+
+      # This is to ensure the export includes previously exported
+      # items if run manually in addition to at the scheduled time.
+      it "includes the same ist of order items when run multiple times" do
+        serializer = described_class.new(start_time, end_time)
+        serializer.to_csv
+        serializer.mark_exported
+        export2 = described_class.new(start_time, end_time).to_csv
+        expect(export2.scan(registration_1.reg_identifier).size).to eq 2
+        expect(export2.scan(registration_2.reg_identifier).size).to eq 5
       end
 
       it "excludes non-copy-card order items" do
