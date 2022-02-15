@@ -2,8 +2,7 @@ en:
   card_order_exports:
     index:
       title: "Card order export history"
-      heading: "Copy Card Orders Weekly Exports"
-      caption: "Copy Card Orders Weekly Exports"
+      heading: "Copy card orders weekly exports"
       file_name: "Export File"
       exported_at: "Exported"
       first_downloaded_by: "Downloaded By"
