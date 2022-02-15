@@ -1,15 +1,15 @@
 en:
   ad_privacy_policy:
     show:
-      title: "Privacy policy for assisted digital"
-      heading: "Privacy policy for Waste Carriers, Brokers and Dealers assisted digital"
+      title: "Privacy notice for assisted digital"
+      heading: "Privacy notice for Waste Carriers, Brokers and Dealers assisted digital"
       sub_heading: "Tell the customer:"
-      privacy_policy: "privacy policy"
-      first_paragraph: "The privacy policy for the Waste Carriers, Brokers and Dealers Service has been updated, and can be viewed online at: wastecarriersregistration.service.gov.uk/fo/pages/privacy"
-      second_paragraph: "If you want to read the updated privacy policy but don't have internet access, I can email or post a copy to you, or I can read it to you now."
-      third_paragraph: "You'll receive a copy of the privacy policy by email when you submit your registration."
+      privacy_policy: "privacy notice"
+      first_paragraph: "The privacy notice for the Waste Carriers, Brokers and Dealers Service has been updated, and can be viewed online at: wastecarriersregistration.service.gov.uk/fo/pages/privacy"
+      second_paragraph: "If you want to read the updated privacy notice but don't have internet access, I can email or post a copy to you, or I can read it to you now."
+      third_paragraph: "You'll receive a copy of the privacy notice by email when you submit your registration."
       fourth_paragraph: "Would you like me to read it to you now?"
-      privacy_policy_link_text: "Waste carriers, brokers and dealers privacy policy link"
+      privacy_policy_link_text: "Waste carriers, brokers and dealers privacy notice link"
       contact_details_dpo:
         summary: "Contact details for the Data Protection Officer"
         address_html: |
