@@ -9,7 +9,7 @@ module Reports
     let(:registration_2) { create(:registration) }
 
     let!(:order_item_log_1) do
-      create(:order_item_log, 
+      create(:order_item_log,
              type: "COPY_CARDS",
              registration_id: registration_1.id,
              quantity: 2,
@@ -66,7 +66,7 @@ module Reports
           expect(subject.scan(registration_1.reg_identifier).size).to eq 2
           expect(subject.scan(registration_2.reg_identifier).size).to eq 5
         end
-  
+
         # This is to ensure the export includes previously exported
         # items if run manually in addition to at the scheduled time.
         it "includes the same list of order items when run multiple times" do
@@ -77,7 +77,7 @@ module Reports
           expect(export2.scan(registration_1.reg_identifier).size).to eq 2
           expect(export2.scan(registration_2.reg_identifier).size).to eq 5
         end
-  
+
         it "excludes non-copy-card order items" do
           order_item_log_2.type = "NEW"
           order_item_log_2.save!
@@ -113,7 +113,7 @@ module Reports
         it "excludes order items for the earlier registration" do
           expect(subject).not_to include(registration.reg_identifier)
         end
-     end
+      end
 
       context "with no eligible order item logs" do
         before { WasteCarriersEngine::OrderItemLog.delete_all }
@@ -125,7 +125,7 @@ module Reports
 
       context "with a nil quantity card order item" do
         let!(:order_item_log_1) do
-          create(:order_item_log, 
+          create(:order_item_log,
                  type: "COPY_CARDS",
                  registration_id: registration_1.id,
                  quantity: nil,
