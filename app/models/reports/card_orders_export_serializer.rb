@@ -49,7 +49,7 @@ module Reports
       )
 
       # Expand the results to one row per card
-      @order_item_logs.map { |oil| Array.new(oil.quantity, oil) }.flatten
+      @order_item_logs.map { |oil| Array.new(oil.quantity || 0, oil) }.flatten
     end
 
     def parse_object(order_item_log)
