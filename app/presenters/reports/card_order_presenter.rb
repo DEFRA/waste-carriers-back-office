@@ -66,7 +66,7 @@ module Reports
     end
 
     def contact_phone_number
-      @registration.phone_number
+      "=\"#{@registration.phone_number}\""
     end
 
     # Define address-level fields dynamically

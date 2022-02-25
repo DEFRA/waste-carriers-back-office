@@ -106,7 +106,7 @@ module Reports
         expect(subject.registration_type).to eq registration.registration_type
         expect(subject.registration_date).to eq registration.metaData.dateRegistered.strftime(export_date_format)
         expect(subject.expires_on).to eq registration.expires_on.strftime(export_date_format)
-        expect(subject.contact_phone_number).to eq registration.phone_number
+        expect(subject.contact_phone_number).to eq "=\"#{registration.phone_number}\""
       end
     end
 
