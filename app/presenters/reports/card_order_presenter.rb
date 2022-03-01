@@ -84,12 +84,7 @@ module Reports
 
       # These fields if present are to map to lines 1-5 in the output,
       # with any blanks between lines removed.
-      address_values = [address.houseNumber,
-                        # Skip address line 1 if it matches the carrier name.
-                        address.addressLine1 == company_name ? "" : address.addressLine1,
-                        address.addressLine2,
-                        address.addressLine3,
-                        address.addressLine4].reject(&:blank?)
+      address_values = parse_address(address, company_name)
       address_hash = {}
 
       address_values.each_with_index do |value, index|
@@ -108,6 +103,17 @@ module Reports
       )
 
       address_hash
+    end
+
+    def parse_address(address, company_name)
+      [
+        # Skip house number and address line 1 if they match the company name.
+        address.houseNumber.downcase == company_name.downcase ? "" : address.houseNumber,
+        address.addressLine1.downcase == company_name.downcase ? "" : address.addressLine1,
+        address.addressLine2,
+        address.addressLine3,
+        address.addressLine4
+      ].reject(&:blank?)
     end
   end
 end

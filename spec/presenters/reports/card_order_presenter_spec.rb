@@ -8,14 +8,15 @@ module Reports
 
     export_date_format = "%d/%m/%Y"
 
-    # Allow this to be overridden to test company name on line 1
+    # Allow these to be overridden to test company name on house number and address line 1
     let(:reg_address_line_1) { Faker::Address.street_name }
+    let(:reg_house_number) { "" }
 
     # Use different address structures for registered and contact addresses
     # to test handling of blank fields.
     let(:registered_address) do
       {
-        house_number: "",
+        house_number: reg_house_number,
         address_line_1: reg_address_line_1,
         address_line_2: Faker::Address.secondary_address,
         address_line_3: nil,
@@ -140,15 +141,45 @@ module Reports
       end
     end
 
-    context "with company name in address line 1" do
-      let(:reg_address_line_1) { company_name }
+    context "checking for company name in the address fields" do
+      let(:registered_addr) { registration.addresses.select { |a| a.addressType == "REGISTERED" }[0] }
 
-      it "does not present the company name in address line 1" do
-        registered_addr = registration.addresses.select { |a| a.addressType == "REGISTERED" }[0]
-        expect(subject.registered_address_line_1).not_to eq registered_addr.address_line_1
-        expect(subject.registered_address_line_1).to eq registered_addr.address_line_2
+      context "with company name in address line 1" do
+        context "and the company name is a case sensitive match" do
+          let(:reg_address_line_1) { company_name }
+
+          it "does not present the company name in the subject's address line 1" do
+            expect(subject.registered_address_line_1).not_to eq registered_addr.address_line_1
+            expect(subject.registered_address_line_1).to eq registered_addr.address_line_2
+          end
+        end
+
+        context "and the company_name is in a different case" do
+          let(:reg_address_line_1) { company_name.upcase }
+
+          it "still does not present the company name in the subject's address line 1" do
+            expect(subject.registered_address_line_1).not_to eq registered_addr.address_line_1
+          end
+        end
       end
 
+      context "with company name in house number" do
+        context "and the company name is a case sensitive match" do
+          let(:reg_house_number) { company_name }
+
+          it "does not present the company name in the subject's address line 1" do
+            expect(subject.registered_address_line_1).not_to eq registered_addr.house_number
+          end
+        end
+
+        context "and the company_name is in a different case" do
+          let(:reg_house_number) { company_name.upcase }
+
+          it "still does not present the company name in the subject's address line 1" do
+            expect(subject.registered_address_line_1).not_to eq registered_addr.house_number
+          end
+        end
+      end
     end
   end
 end
