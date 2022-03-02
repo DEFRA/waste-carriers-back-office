@@ -115,6 +115,21 @@ module Reports
         end
       end
 
+      context "with an expired registration" do
+        let(:registration) { create(:registration, :expired) }
+        let!(:order_item_log) do
+          create(:order_item_log,
+                 type: "COPY_CARD",
+                 registration_id: registration.id,
+                 quantity: 2,
+                 activated_at: start_time + 1.second)
+        end
+
+        it "excludes order items for the expired registration" do
+          expect(subject).not_to include(registration.reg_identifier)
+        end
+      end
+
       context "with no eligible order item logs" do
         before { WasteCarriersEngine::OrderItemLog.delete_all }
 

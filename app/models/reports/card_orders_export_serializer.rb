@@ -43,13 +43,16 @@ module Reports
     private
 
     def scope
-      @order_item_logs = WasteCarriersEngine::OrderItemLog.where(
-        type: "COPY_CARDS",
-        activated_at: { "$gte": @start_time, "$lt": @end_time }
-      )
+      @order_item_logs =
+        WasteCarriersEngine::OrderItemLog.includes(:registration).where(
+          type: "COPY_CARDS",
+          activated_at: { "$gte": @start_time, "$lt": @end_time }
+        )
 
-      # Expand the results to one row per card
-      @order_item_logs.map { |oil| Array.new(oil.quantity || 0, oil) }.flatten
+      # Filter for active registrations and expand the results to one row per card
+      @order_item_logs
+        .select(&:active_registration?)
+        .map { |oil| Array.new(oil.quantity || 0, oil) }.flatten
     end
 
     def parse_object(order_item_log)
