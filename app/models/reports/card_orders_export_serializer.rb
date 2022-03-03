@@ -12,6 +12,7 @@ module Reports
       registered_address_line_3: "Registered Address Line 3",
       registered_address_line_4: "Registered Address Line 4",
       registered_address_line_5: "Registered Address Line 5",
+      registered_address_line_6: "Registered Address Line 6",
       registered_address_town_city: "Registered Town City",
       registered_address_postcode: "Registered Postcode",
       registered_address_country: "Registered Country",
@@ -24,6 +25,7 @@ module Reports
       contact_address_line_3: "Contact Address Line 3",
       contact_address_line_4: "Contact Address Line 4",
       contact_address_line_5: "Contact Address Line 5",
+      contact_address_line_6: "Contact Address Line 6",
       contact_address_town_city: "Contact Town City",
       contact_address_postcode: "Contact Postcode",
       contact_address_country: "Contact Country"

@@ -39,6 +39,7 @@ module Reports
         "Registered Address Line 3",
         "Registered Address Line 4",
         "Registered Address Line 5",
+        "Registered Address Line 6",
         "Registered Town City",
         "Registered Postcode",
         "Registered Country",
@@ -51,6 +52,7 @@ module Reports
         "Contact Address Line 3",
         "Contact Address Line 4",
         "Contact Address Line 5",
+        "Contact Address Line 6",
         "Contact Town City",
         "Contact Postcode",
         "Contact Country"
