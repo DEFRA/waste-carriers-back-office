@@ -80,6 +80,7 @@ en:
             payment_details: "Payment details"
             process_payment: "Process payment"
             revoke: "Cease or revoke"
+            refresh_companies_house: "Refresh registered company name from Companies House"
       expired_panel:
         heading: "Expired on %{date}"
         links:

@@ -1,7 +1,7 @@
 <% if resource.display_company_details_panel? %>
   <% if resource.company_name.present? %>
     <h2 class="govuk-heading-m">
-      <%= resource.company_name %>
+      <%= resource.entity_display_name %>
     </h2>
   <% end %>
   <% if resource.display_tier_and_registration_type.present? %>
