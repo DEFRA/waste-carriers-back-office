@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "RenewingRegistrations", type: :request do
+RSpec.describe "Registrations", type: :request do
   let(:registration) { create(:registration) }
 
   describe "/bo/registrations/:reg_identifier" do
