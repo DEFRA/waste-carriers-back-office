@@ -103,6 +103,12 @@ module ActionLinksHelper
     resource.active? && resource.upper_tier?
   end
 
+  def display_refresh_registered_company_name_link_for?(resource)
+    return false unless display_edit_link_for?(resource)
+
+    resource.active? && resource.company_no_required? && resource.upper_tier?
+  end
+
   def display_cancel_link_for?(resource)
     return false unless display_registration_links?(resource)
     return false unless can?(:cancel, WasteCarriersEngine::Registration)
