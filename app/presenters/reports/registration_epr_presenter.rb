@@ -2,6 +2,8 @@
 
 module Reports
   class RegistrationEprPresenter < ::WasteCarriersEngine::BasePresenter
+    include WasteCarriersEngine::CanPresentEntityDisplayName
+
     delegate :uprn, :house_number, :address_line_1, :address_line_2, :address_line_3, :address_line_4,
              :town_city, :postcode, :country, :easting, :northing,
              to: :company_address, prefix: true

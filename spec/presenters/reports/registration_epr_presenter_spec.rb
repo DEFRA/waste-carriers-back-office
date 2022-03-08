@@ -5,7 +5,7 @@ require "rails_helper"
 module Reports
   RSpec.describe RegistrationEprPresenter do
     subject { described_class.new(registration, nil) }
-    let(:registration) { double(:registration) }
+    let(:registration) { create(:registration) }
 
     describe "#reg_identifier" do
       it "returns the object reg identifier" do
@@ -27,13 +27,37 @@ module Reports
       end
     end
 
+    # This includes some basic tests to confirm that
+    # WasteCarriersEngine::CanPresentEntityDisplayName is being used.
+    # The bulk of the tests for entity name logic are in the waste-carriers-engine project.
     describe "#company_name" do
-      it "returns the object company_name" do
-        result = double(:result)
+      let(:registration) { create(:registration, registered_company_name: registered_name, company_name: company_name) }
 
-        expect(registration).to receive(:company_name).and_return(result)
+      context "with a registered name and without a trading name" do
+        let(:registered_name) { Faker::Company.name }
+        let(:company_name) { nil }
 
-        expect(subject.company_name).to eq(result)
+        it "returns the registered name" do
+          expect(subject.entity_display_name).to eq registered_name
+        end
+      end
+
+      context "without a registered name and with a trading name" do
+        let(:registered_name) { nil }
+        let(:company_name) { Faker::Lorem.sentence(word_count: 3) }
+
+        it "returns the trading name" do
+          expect(subject.entity_display_name).to eq company_name
+        end
+      end
+
+      context "with both a registered name and a trading name" do
+        let(:registered_name) { Faker::Company.name }
+        let(:company_name) { Faker::Lorem.sentence(word_count: 3) }
+
+        it "returns the entity display name" do
+          expect(subject.entity_display_name).to eq "#{registered_name} trading as #{company_name}"
+        end
       end
     end
 
