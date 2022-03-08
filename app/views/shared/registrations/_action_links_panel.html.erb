@@ -72,7 +72,7 @@
       </li>
     <% end %>
 
-    <% if display_edit_link_for?(resource) %>
+    <% if display_refresh_registered_company_name_link_for?(resource) %>
       <li>
         <%= link_to t(".actions_box.links.refresh_companies_house"),
                       registration_companies_house_details_path(resource.reg_identifier),
