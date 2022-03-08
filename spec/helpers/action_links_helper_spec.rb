@@ -649,6 +649,78 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
+  describe "#display_refresh_registered_company_name_link_for?" do
+    let(:resource) { build(:registration) }
+
+    before do
+      allow(helper).to receive(:can?).with(:edit, WasteCarriersEngine::Registration).and_return(can)
+    end
+
+    context "when the user has permission for editing" do
+      let(:can) { true }
+
+      before do
+        allow(resource).to receive(:active?).and_return(active)
+      end
+
+      context "when the resource is active" do
+        let(:active) { true }
+
+        before do
+          allow(resource).to receive(:upper_tier?).and_return(upper_tier)
+        end
+
+        context "when the resource is an upper tier" do
+          let(:upper_tier) { true }
+
+          context "when the resource is a limited company or a limited liability partnership" do
+            before do
+              allow(resource).to receive(:company_no_required?).and_return(true)
+            end
+
+            it "returns true" do
+              expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be_truthy
+            end
+          end
+
+          context "when the resource is neither a limited company nor a limited liability partnership" do
+            before do
+              allow(resource).to receive(:company_no_required?).and_return(false)
+            end
+
+            it "returns false" do
+              expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be_falsey
+            end
+          end
+        end
+
+        context "when the resource is not an upper tier" do
+          let(:upper_tier) { false }
+
+          it "returns false" do
+            expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be_falsey
+          end
+        end
+      end
+
+      context "when the resource is not active" do
+        let(:active) { false }
+
+        it "returns false" do
+          expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be_falsey
+        end
+      end
+    end
+
+    context "when the user does not have permission for editing" do
+      let(:can) { false }
+
+      it "returns false" do
+        expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be_falsey
+      end
+    end
+  end
+
   describe "#display_finance_details_link_for?" do
     let(:resource) { double(:resource) }
     let(:upper_tier) { true }
