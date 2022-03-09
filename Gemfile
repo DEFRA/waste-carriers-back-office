@@ -50,9 +50,8 @@ gem "defra_ruby_aws", "~> 0.4"
 
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
-path: "/vagrant/waste-carriers-engine"
-    # git: "https://github.com/DEFRA/waste-carriers-engine",
-    # branch: "develop"
+    git: "https://github.com/DEFRA/waste-carriers-engine",
+    branch: "develop"
 
 # Use the Defra Ruby Features gem to allow users with the correct permissions to
 # manage feature toggle (create / update / delete) from the back-office.
