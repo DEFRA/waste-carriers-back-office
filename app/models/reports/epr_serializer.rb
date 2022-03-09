@@ -4,7 +4,7 @@ module Reports
   class EprSerializer < BaseSerializer
     ATTRIBUTES = {
       reg_identifier: "Registration number",
-      company_name: "Organisation name",
+      entity_display_name: "Organisation name",
       company_address_uprn: "UPRN",
       company_address_house_number: "Building",
       company_address_address_line_1: "Address line 1",

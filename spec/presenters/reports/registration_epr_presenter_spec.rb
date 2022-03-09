@@ -30,7 +30,7 @@ module Reports
     # This includes some basic tests to confirm that
     # WasteCarriersEngine::CanPresentEntityDisplayName is being used.
     # The bulk of the tests for entity name logic are in the waste-carriers-engine project.
-    describe "#company_name" do
+    describe "#entity_display_name" do
       let(:registration) { create(:registration, registered_company_name: registered_name, company_name: company_name) }
 
       context "with a registered name and without a trading name" do
