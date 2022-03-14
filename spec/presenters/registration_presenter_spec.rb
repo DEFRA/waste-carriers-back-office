@@ -54,4 +54,53 @@ RSpec.describe RegistrationPresenter do
       expect(subject.display_registration_status).to eq("Pending")
     end
   end
+
+  describe "#entity_display_name" do
+    context "for a sole trader" do
+      let(:registration) do
+        build(:registration,
+              business_type: "soleTrader",
+              company_name: business_name,
+              key_people: [build(:key_person, :main)])
+      end
+      let(:key_person) { registration.key_people[0] }
+      let(:trader_name) { "#{key_person.first_name} #{key_person.last_name}" }
+
+      context "without a business name" do
+        let(:business_name) { nil }
+
+        it "returns the trader's name" do
+          expect(subject.entity_display_name).to eq trader_name
+        end
+      end
+
+      context "with a business name" do
+        let(:business_name) { Faker::Company.name }
+
+        it "returns the sole trader name and the business name" do
+          expect(subject.entity_display_name).to eq "#{trader_name} trading as #{business_name}"
+        end
+      end
+    end
+
+    context "for a limited company" do
+      let(:registration) { build(:registration, registered_company_name: reg_co_name) }
+
+      context "without a registered company name" do
+        let(:reg_co_name) { nil }
+
+        it "returns the business name" do
+          expect(subject.entity_display_name).to eq registration.company_name
+        end
+      end
+
+      context "with a registered_company_name and a business name" do
+        let(:reg_co_name) { Faker::Company.name }
+
+        it "returns the registered company name and the business name" do
+          expect(subject.entity_display_name).to eq "#{reg_co_name} trading as #{registration.company_name}"
+        end
+      end
+    end
+  end
 end
