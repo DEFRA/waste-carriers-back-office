@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: ce60e3756b81d231326bcd26d19e38933175b232
+  revision: aa664837e236dbb776c55ff65b9cecd6e4193034
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -463,7 +463,7 @@ GEM
     uk_postcode (2.1.7)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.8)
+    unf_ext (0.0.8.1)
     unicode-display_width (1.7.0)
     useragent (0.16.10)
     validates_email_format_of (1.6.3)
