@@ -468,7 +468,7 @@ GEM
     useragent (0.16.10)
     validates_email_format_of (1.6.3)
       i18n
-    vcr (6.0.0)
+    vcr (6.1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
