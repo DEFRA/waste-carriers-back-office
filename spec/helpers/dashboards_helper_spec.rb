@@ -18,7 +18,12 @@ RSpec.describe DashboardsHelper, type: :helper do
 
     context "when the address is present" do
       it "returns the correct value" do
-        expect(helper.inline_registered_address(result)).to eq("42, Foo Gardens, Baz City, FA1 1KE")
+        reg_address = result.addresses.select { |a| a.address_type == "REGISTERED" }.first
+        expect(helper.inline_registered_address(result).split(/\s*,\s*/))
+          .to include(reg_address.house_number,
+                      reg_address.address_line_1,
+                      reg_address.town_city,
+                      reg_address.postcode)
       end
     end
   end
