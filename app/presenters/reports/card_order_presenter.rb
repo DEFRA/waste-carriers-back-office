@@ -108,12 +108,19 @@ module Reports
     def parse_address(address, company_name)
       [
         # Skip house number and address line 1 if they match the company name.
-        address.houseNumber.downcase == company_name.downcase ? "" : address.houseNumber,
-        address.addressLine1.downcase == company_name.downcase ? "" : address.addressLine1,
+        address_line_unless_equal(company_name, address.houseNumber),
+        address_line_unless_equal(company_name, address.addressLine1),
         address.addressLine2,
         address.addressLine3,
         address.addressLine4
       ].reject(&:blank?)
+    end
+
+    def address_line_unless_equal(company_name, address_line)
+      return "" if address_line.nil?
+      return address_line if company_name.nil?
+
+      address_line.downcase == company_name.downcase ? "" : address_line
     end
   end
 end
