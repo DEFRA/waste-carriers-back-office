@@ -8,45 +8,6 @@ module Reports
 
     export_date_format = "%d/%m/%Y"
 
-    # Allow these to be overridden to test company name on house number and address line 1
-    let(:reg_address_line_1) { Faker::Address.street_name }
-    let(:reg_house_number) { "" }
-
-    # Use different address structures for registered and contact addresses
-    # to test handling of blank fields.
-    let(:registered_address) do
-      {
-        house_number: reg_house_number,
-        address_line_1: reg_address_line_1,
-        address_line_2: Faker::Address.secondary_address,
-        address_line_3: nil,
-        address_line_4: Faker::Address.community,
-        town_city: Faker::Address.city,
-        postcode: Faker::Address.postcode,
-        country: Faker::Address.country
-      }
-    end
-
-    let(:contact_address) do
-      {
-        house_number: "12",
-        address_line_1: Faker::Address.street_name,
-        address_line_2: Faker::Address.secondary_address,
-        address_line_3: Faker::Address.community,
-        address_line_4: "",
-        town_city: Faker::Address.city,
-        postcode: Faker::Address.postcode,
-        country: Faker::Address.country
-      }
-    end
-
-    let(:addresses) do
-      [
-        registered_address.merge(address_type: "REGISTERED"),
-        contact_address.merge(address_type: "POSTAL")
-      ]
-    end
-
     let(:business_type) { "limitedCompany" }
     let(:company_name) { Faker::Company.name }
     let(:registration) do
@@ -58,8 +19,6 @@ module Reports
     end
     let(:order) { registration.finance_details.orders[0] }
     let(:order_item_log) { create(:order_item_log, registration_id: registration.id, order_id: order.id) }
-
-    before { registration.addresses = addresses }
 
     describe "#reg_identifier" do
       it "returns the registration identifier" do
@@ -111,74 +70,110 @@ module Reports
       end
     end
 
-    describe "registered address fields" do
-      it "returns the registered address fields" do
-        registered_addr = registration.addresses.select { |a| a.addressType == "REGISTERED" }[0]
-        expect(subject.registered_address_line_1).to eq registered_addr.address_line_1
-        expect(subject.registered_address_line_2).to eq registered_addr.address_line_2
-        expect(subject.registered_address_line_3).to eq registered_addr.address_line_4
-        expect(subject.registered_address_line_4).to be_nil
-        expect(subject.registered_address_line_5).to be_nil
-        expect(subject.registered_address_line_6).to be_nil
-        expect(subject.registered_address_town_city).to eq registered_addr.town_city
-        expect(subject.registered_address_postcode).to eq registered_addr.postcode
-        expect(subject.registered_address_country).to eq registered_addr.country
+    RSpec.shared_examples "address fields" do |prefix, address_type|
+      # Allow these to be overridden to test company name on house number and address line 1
+      let(:house_number) { Faker::Number.number(digits: 2) }
+      let(:address_line_1) { Faker::Address.street_name }
+
+      let(:registered_address) do
+        build(:address, :registered, house_number: house_number, address_line_1: address_line_1)
+      end
+      let(:contact_address) do
+        build(:address, :contact, house_number: house_number, address_line_1: address_line_1)
+      end
+
+      before do
+        registration.addresses = [registered_address, contact_address]
+      end
+
+      let(:registration_address) { registration.addresses.select { |a| a.addressType == address_type }[0] }
+
+      context "with all address lines populated" do
+        it "returns the address fields" do
+          expect(subject.send("#{prefix}_address_line_1")).to eq registration_address.house_number
+          expect(subject.send("#{prefix}_address_line_2")).to eq registration_address.address_line_1
+          expect(subject.send("#{prefix}_address_line_3")).to eq registration_address.address_line_2
+          expect(subject.send("#{prefix}_address_line_4")).to eq registration_address.address_line_3
+          expect(subject.send("#{prefix}_address_line_5")).to eq registration_address.address_line_4
+          expect(subject.send("#{prefix}_address_town_city")).to eq registration_address.town_city
+          expect(subject.send("#{prefix}_address_postcode")).to eq registration_address.postcode
+          expect(subject.send("#{prefix}_address_country")).to eq registration_address.country
+        end
+      end
+
+      context "with all address lines nil" do
+        address_attributes = %i[house_number address_line_1 address_line_2 address_line_3
+                                address_line_4 town_city postcode country]
+        presenter_address_methods = %i[address_line_1 address_line_2 address_line_3 address_line_4
+                                       address_line_5 address_town_city address_postcode address_country]
+        before do
+          registration_address.assign_attributes(address_attributes.map { |a| [a, nil] }.to_h)
+        end
+
+        it "the presenter methods do not raise an exception" do
+          presenter_address_methods.each do |a|
+            expect { subject.send("#{prefix}_#{a}") }.not_to raise_exception
+          end
+        end
+      end
+
+      context "with a nil company_name" do
+        before { registration.company_name = nil }
+
+        it "does not raise an exception" do
+          expect { subject.send("#{prefix}_address_line_1") }.not_to raise_exception
+        end
+      end
+
+      context "checking for company name in the address fields" do
+
+        context "with company name in address line 1" do
+          let(:house_number) { nil }
+          context "and the company name is a case sensitive match" do
+            let(:address_line_1) { company_name }
+
+            it "does not present the company name in the subject's address line 1" do
+              expect(subject.send("#{prefix}_address_line_1")).not_to eq registration_address.address_line_1
+              expect(subject.send("#{prefix}_address_line_1")).to eq registration_address.address_line_2
+            end
+          end
+
+          context "and the company_name is in a different case" do
+            let(:address_line_1) { company_name.upcase }
+
+            it "still does not present the company name in the subject's address line 1" do
+              expect(subject.send("#{prefix}_address_line_1")).not_to eq registration_address.address_line_1
+            end
+          end
+        end
+
+        context "with company name in house number" do
+          context "and the company name is a case sensitive match" do
+            let(:house_number) { company_name }
+
+            it "does not present the company name in the subject's address line 1" do
+              expect(subject.send("#{prefix}_address_line_1")).not_to eq registration_address.house_number
+            end
+          end
+
+          context "and the company_name is in a different case" do
+            let(:house_number) { company_name.upcase }
+
+            it "still does not present the company name in the subject's address line 1" do
+              expect(subject.send("#{prefix}_address_line_1")).not_to eq registration_address.house_number
+            end
+          end
+        end
       end
     end
 
-    describe "contact address fields" do
-      it "returns the contact address fields" do
-        contact_addr = registration.addresses.select { |a| a.addressType == "POSTAL" }[0]
-        expect(subject.contact_address_line_1).to eq contact_addr.house_number
-        expect(subject.contact_address_line_2).to eq contact_addr.address_line_1
-        expect(subject.contact_address_line_3).to eq contact_addr.address_line_2
-        expect(subject.contact_address_line_4).to eq contact_addr.address_line_3
-        expect(subject.contact_address_line_5).to be_nil
-        expect(subject.contact_address_line_6).to be_nil
-        expect(subject.contact_address_town_city).to eq contact_addr.town_city
-        expect(subject.contact_address_postcode).to eq contact_addr.postcode
-        expect(subject.contact_address_country).to eq contact_addr.country
-      end
-    end
-
-    context "checking for company name in the address fields" do
-      let(:registered_addr) { registration.addresses.select { |a| a.addressType == "REGISTERED" }[0] }
-
-      context "with company name in address line 1" do
-        context "and the company name is a case sensitive match" do
-          let(:reg_address_line_1) { company_name }
-
-          it "does not present the company name in the subject's address line 1" do
-            expect(subject.registered_address_line_1).not_to eq registered_addr.address_line_1
-            expect(subject.registered_address_line_1).to eq registered_addr.address_line_2
-          end
-        end
-
-        context "and the company_name is in a different case" do
-          let(:reg_address_line_1) { company_name.upcase }
-
-          it "still does not present the company name in the subject's address line 1" do
-            expect(subject.registered_address_line_1).not_to eq registered_addr.address_line_1
-          end
-        end
+    describe "address fields" do
+      context "for the registered address" do
+        it_behaves_like "address fields", "registered", "REGISTERED"
       end
 
-      context "with company name in house number" do
-        context "and the company name is a case sensitive match" do
-          let(:reg_house_number) { company_name }
-
-          it "does not present the company name in the subject's address line 1" do
-            expect(subject.registered_address_line_1).not_to eq registered_addr.house_number
-          end
-        end
-
-        context "and the company_name is in a different case" do
-          let(:reg_house_number) { company_name.upcase }
-
-          it "still does not present the company name in the subject's address line 1" do
-            expect(subject.registered_address_line_1).not_to eq registered_addr.house_number
-          end
-        end
+      context "for the contact address" do
+        it_behaves_like "address fields", "contact", "POSTAL"
       end
     end
   end
