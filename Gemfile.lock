@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: aa664837e236dbb776c55ff65b9cecd6e4193034
+  revision: e56bd0d1fbfd101483459e853b9dc2cd45eb77d2
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -278,7 +278,7 @@ GEM
     kaminari-mongoid (1.0.2)
       kaminari-core (~> 1.0)
       mongoid
-    loofah (2.14.0)
+    loofah (2.15.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
