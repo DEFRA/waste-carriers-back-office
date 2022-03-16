@@ -7,7 +7,7 @@ class SearchService < ::WasteCarriersEngine::BaseService
     @page = page
     @term = term.strip
 
-    response_hash(search_results)
+    response_hash(search_results.map { |result| SearchResultPresenter.new(result) })
   end
 
   private

@@ -80,7 +80,7 @@
                 <% end %>
               </td>
               <td class="govuk-table__cell">
-                <%= result.company_name %>
+                <%= result.entity_display_name %>
                 <% if result.registered_address.present? %>
                   <p class="address font-xsmall">
                     <%= inline_registered_address(result) %>
