@@ -5,8 +5,8 @@ http_interactions:
     uri: https://api.notifications.service.gov.uk/v2/notifications/letter
     body:
       encoding: UTF-8
-      string: '{"template_id":"41ebbbc4-0d2f-425a-8d94-29e2beffd8ba","personalisation":{"contact_name":"Jane
-        Doe","expiry_date":"6 June 2021","reg_identifier":"CBDU1","registration_cost":"154","renewal_cost":"105","renewal_url":"localhost:3002/fo/renew/ePBEXbag1AMjrsUgfKEbNfYy","user_email":"whatever@example.com","email_date":"2021-04-25","from_email":"wcr-dev@example.com","address_line_1":"Jane
+      string: '{"template_id":"41ebbbc4-0d2f-425a-8d94-29e2beffd8ba","reference":"CBDU17","personalisation":{"contact_name":"Jane
+        Doe","expiry_date":"17 May 2022","reg_identifier":"CBDU17","registration_cost":"154","renewal_cost":"105","renewal_url":"localhost:3002/fo/renew/Ki3Mg315NiDrnM19tvjWMkfT","user_email":"whatever@example.com","email_date":"2022-04-05","address_line_1":"Jane
         Doe","address_line_2":"42","address_line_3":"Foo Gardens","address_line_4":"Baz
         City","address_line_5":"BS1 1AA"}}'
     headers:
@@ -34,19 +34,19 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 06 Apr 2021 14:20:09 GMT
+      - Thu, 17 Mar 2022 12:59:57 GMT
       Server:
       - nginx
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains
       X-B3-Spanid:
-      - 5a1f34325f84c13c
+      - 2cddc92e3ac25c4e6414e6bef33813b6
       X-B3-Traceid:
-      - 5a1f34325f84c13c
+      - 2cddc92e3ac25c4e6414e6bef33813b6
       X-Vcap-Request-Id:
-      - d28e5750-29e9-4642-5795-270d8bace2bc
+      - e9dd4d03-08ad-4e45-4355-8afaf7c18e66
       Content-Length:
-      - '1190'
+      - '1220'
       Connection:
       - keep-alive
     body:
@@ -54,14 +54,14 @@ http_interactions:
       string: '{"content":{"body":"Dear Jane Doe\r\n\r\nYou can renew online in a
         few minutes. It costs \u00a3105 and lasts for 3 years from the expiry date.\r\n\r\nHow
         to renew online:\r\n\r\n1. Search your email inbox and junk mail for the renewal
-        email sent to whatever@example.com on 2021-04-25, from wcr-dev@example.com\r\n2.
+        email sent to whatever@example.com on 2022-04-05, from nccc-carrierbroker@environment-agency.gov.uk\r\n2.
         Confirm details for your renewal\r\n3. Pay for your renewal\r\n\r\nIf you
         do not renew in time you\u2019ll need to create a new registration, which
         will instead cost \u00a3154.\r\n\r\nIf you\u2019re unable to find the renewal
-        email, begin your online renewal by using this unique link:\r\n\r\nlocalhost:3002/fo/renew/ePBEXbag1AMjrsUgfKEbNfYy\r\n\r\nYours
+        email, begin your online renewal by using this unique link:\r\n\r\nlocalhost:3002/fo/renew/Ki3Mg315NiDrnM19tvjWMkfT\r\n\r\nYours
         sincerely\r\nWaste carrier renewal team","subject":"You must renew your waste
-        carrier registration CBDU1 by 6 June 2021"},"id":"b6628d5c-5869-433e-9096-22ad759d447b","reference":null,"scheduled_for":null,"template":{"id":"41ebbbc4-0d2f-425a-8d94-29e2beffd8ba","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/41ebbbc4-0d2f-425a-8d94-29e2beffd8ba","version":5},"uri":"https://api.notifications.service.gov.uk/v2/notifications/b6628d5c-5869-433e-9096-22ad759d447b"}
+        carrier registration CBDU17 by 17 May 2022"},"id":"7c1bf4d4-93ad-492e-a6a6-80ebac653037","reference":"CBDU17","scheduled_for":null,"template":{"id":"41ebbbc4-0d2f-425a-8d94-29e2beffd8ba","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/41ebbbc4-0d2f-425a-8d94-29e2beffd8ba","version":6},"uri":"https://api.notifications.service.gov.uk/v2/notifications/7c1bf4d4-93ad-492e-a6a6-80ebac653037"}
 
 '
-  recorded_at: Tue, 06 Apr 2021 14:20:09 GMT
-recorded_with: VCR 6.0.0
+  recorded_at: Thu, 17 Mar 2022 12:59:31 GMT
+recorded_with: VCR 6.1.0

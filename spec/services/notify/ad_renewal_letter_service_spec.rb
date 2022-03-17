@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe Notify::AdRenewalLetterService do
   describe "run" do
-    let(:registration) { create(:registration, :expires_soon) }
+    let(:registration) { create(:registration, :expires_soon, :simple_address) }
     let(:service) do
       Notify::AdRenewalLetterService.run(registration: registration)
     end
@@ -20,6 +20,7 @@ RSpec.describe Notify::AdRenewalLetterService do
 
         expect(response).to be_a(Notifications::Client::ResponseNotification)
         expect(response.template["id"]).to eq("1b56d3a7-f7fd-414d-a3ba-2b50f627cf40")
+        expect(response.reference).to match(/CBDU*/)
         expect(response.content["subject"]).to include("Renew your waste carrier registration")
       end
     end

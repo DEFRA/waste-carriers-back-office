@@ -13,6 +13,7 @@ module Notify
       client = Notifications::Client.new(WasteCarriersEngine.configuration.notify_api_key)
 
       client.send_letter(template_id: template,
+                         reference: @registration.reg_identifier,
                          personalisation: personalisation)
     end
 

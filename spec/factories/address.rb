@@ -20,4 +20,14 @@ FactoryBot.define do
       address_type { "REGISTERED" }
     end
   end
+
+  # This is to support legacy tests (notify letters) that broke
+  # when the address factory was changed.
+  factory :simple_address, class: WasteCarriersEngine::Address do
+    house_number { "42" }
+    address_line_1 { "Foo Gardens" }
+    town_city { "Baz City" }
+    postcode { "FA1 1KE" }
+    address_type { "POSTAL" }
+  end
 end

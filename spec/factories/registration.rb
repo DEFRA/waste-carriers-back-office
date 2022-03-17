@@ -23,6 +23,10 @@ FactoryBot.define do
 
     metaData { build(:metaData) }
 
+    trait :simple_address do
+      addresses { [build(:simple_address)] }
+    end
+
     trait :ad_registration do
       account_email { ENV["WCRS_ASSISTED_DIGITAL_EMAIL"] }
       contact_email { ENV["WCRS_ASSISTED_DIGITAL_EMAIL"] }

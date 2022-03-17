@@ -5,8 +5,8 @@ http_interactions:
     uri: https://api.notifications.service.gov.uk/v2/notifications/letter
     body:
       encoding: UTF-8
-      string: '{"template_id":"1b56d3a7-f7fd-414d-a3ba-2b50f627cf40","personalisation":{"contact_name":"Jane
-        Doe","expiry_date":"30 May 2021","reg_identifier":"CBDU1","registration_cost":"154","renewal_cost":"105","renewal_url":"localhost:3002/fo/renew/9Z5AL9pDWbPwd5qahYSnQGUf","address_line_1":"Jane
+      string: '{"template_id":"1b56d3a7-f7fd-414d-a3ba-2b50f627cf40","reference":"CBDU8","personalisation":{"contact_name":"Jane
+        Doe","expiry_date":"17 May 2022","reg_identifier":"CBDU8","registration_cost":"154","renewal_cost":"105","renewal_url":"localhost:3002/fo/renew/U17FcPc5FJc46UKKPEqX8AVN","address_line_1":"Jane
         Doe","address_line_2":"42","address_line_3":"Foo Gardens","address_line_4":"Baz
         City","address_line_5":"BS1 1AA"}}'
     headers:
@@ -34,35 +34,35 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 30 Mar 2021 14:46:15 GMT
+      - Thu, 17 Mar 2022 12:59:56 GMT
       Server:
       - nginx
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains
       X-B3-Spanid:
-      - f1eab9a7fe57f234
+      - 575add09e43c7bb91438c125b8e6364b
       X-B3-Traceid:
-      - f1eab9a7fe57f234
+      - 575add09e43c7bb91438c125b8e6364b
       X-Vcap-Request-Id:
-      - 9c3d69af-6366-4eac-7d78-0dd38410eaf7
+      - 9df250ed-8eed-4db4-6391-574230017705
       Content-Length:
-      - '1291'
+      - '1241'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: '{"content":{"body":"Dear Jane Doe\r\n\r\nRenew online \u2013 you''ll
-        need an email address to use the service\r\n1. Go to the website:\r\nlocalhost:3002/fo/renew/9Z5AL9pDWbPwd5qahYSnQGUf\r\n2.
+        need an email address to use the service\r\n1. Go to the website:\r\nlocalhost:3002/fo/renew/U17FcPc5FJc46UKKPEqX8AVN\r\n2.
         Confirm details for your renewal\r\n3. Pay for your renewal\r\n\r\nIf you
         no longer carry out these waste operations, you can ignore this reminder.\r\n\r\nIf
         you do not renew in time you\u2019ll need to create a new registration, which
         will cost \u00a3154 instead.\r\n\r\nIf you need help completing the process
         online, or have specific access needs, you can give us a call.\r\n\r\n#Need
         help to renew?\r\nCall us on 03708 506 506 (Monday to Friday, 8am to 6pm).
-        \r\nYour waste carrier registration number is CBDU1.\r\n\r\nYours sincerely\r\nWaste
-        carrier renewal team","subject":"Renew your waste carrier registration CBDU1
-        by 30 May 2021. Renewal costs \u00a3105 and should take about 15 minutes."},"id":"29f9caaf-238e-4617-8337-1bf795146e87","reference":null,"scheduled_for":null,"template":{"id":"1b56d3a7-f7fd-414d-a3ba-2b50f627cf40","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/1b56d3a7-f7fd-414d-a3ba-2b50f627cf40","version":10},"uri":"https://api.notifications.service.gov.uk/v2/notifications/29f9caaf-238e-4617-8337-1bf795146e87"}
+        \r\nYour waste carrier registration number is CBDU8.","subject":"Renew your
+        waste carrier registration CBDU8 by 17 May 2022. Renewal costs \u00a3105 and
+        should take about 15 minutes."},"id":"2245b32a-0f56-4ce5-81f7-7e19264589f1","reference":"CBDU8","scheduled_for":null,"template":{"id":"1b56d3a7-f7fd-414d-a3ba-2b50f627cf40","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/1b56d3a7-f7fd-414d-a3ba-2b50f627cf40","version":11},"uri":"https://api.notifications.service.gov.uk/v2/notifications/2245b32a-0f56-4ce5-81f7-7e19264589f1"}
 
 '
-  recorded_at: Tue, 30 Mar 2021 14:46:14 GMT
-recorded_with: VCR 6.0.0
+  recorded_at: Thu, 17 Mar 2022 12:59:30 GMT
+recorded_with: VCR 6.1.0
