@@ -59,6 +59,16 @@ module Reports
       end
     end
 
+    describe "#company_name" do
+      context "when they registration does not have a company_name" do
+        let(:company_name) { nil }
+
+        it "is blank" do
+          expect(subject.company_name).to be_blank
+        end
+      end
+    end
+
     describe "base registration details" do
       it "returns the relevant registration attributes" do
         expect(subject.company_name).to eq registration.company_name
