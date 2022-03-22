@@ -38,7 +38,7 @@ module Reports
       when "soleTrader"
         "#{@registration.key_people[0].first_name} #{@registration.key_people[0].last_name}"
       else
-        @registration.company_name
+        @registration.registered_company_name.presence || @registration.company_name
       end
     end
 

@@ -43,8 +43,18 @@ module Reports
       end
 
       context "when the registration business type is NOT 'sole trader'" do
-        it "returns the company name" do
-          expect(subject.carrier_name).to eq(registration.company_name)
+        context "when the registration has a registered_company_name" do
+          before { registration.update(registered_company_name: "Acme Ltd") }
+
+          it "returns the registered_company_name" do
+            expect(subject.carrier_name).to eq("Acme Ltd")
+          end
+        end
+
+        context "when the registration does not have a registered_company_name" do
+          it "returns the company name" do
+            expect(subject.carrier_name).to eq(registration.company_name)
+          end
         end
       end
     end
