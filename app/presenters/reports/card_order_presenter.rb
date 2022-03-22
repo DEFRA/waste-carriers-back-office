@@ -34,18 +34,11 @@ module Reports
     end
 
     def carrier_name
-      case @registration.tier
-      when "LOWER"
-        @registration.company_name
-      when "UPPER"
-        case @registration.business_type
-        when "soleTrader"
-          "#{@registration.key_people[0].first_name} #{@registration.key_people[0].last_name}"
-        else
-          @registration.company_name
-        end
+      case @registration.business_type
+      when "soleTrader"
+        "#{@registration.key_people[0].first_name} #{@registration.key_people[0].last_name}"
       else
-        ""
+        @registration.company_name
       end
     end
 

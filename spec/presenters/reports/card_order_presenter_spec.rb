@@ -33,29 +33,18 @@ module Reports
     end
 
     describe "#carrier_name" do
-      context "when the registration is lower tier" do
-        let(:lower_tier) { true }
-        let(:upper_tier) { false }
+      context "when the registration business type is 'soleTrader'" do
+        let(:business_type) { "soleTrader" }
 
-        it "returns the company name" do
-          expect(subject.carrier_name).to eq(registration.company_name)
+        it "returns the carrier's name" do
+          main_person = registration.key_people[0]
+          expect(subject.carrier_name).to eq("#{main_person.first_name} #{main_person.last_name}")
         end
       end
 
-      context "when the registration is upper tier" do
-        context "when the registration business type is 'soleTrader'" do
-          let(:business_type) { "soleTrader" }
-
-          it "returns the carrier's name" do
-            main_person = registration.key_people[0]
-            expect(subject.carrier_name).to eq("#{main_person.first_name} #{main_person.last_name}")
-          end
-        end
-
-        context "when the registration business type is NOT 'sole trader'" do
-          it "returns the company name" do
-            expect(subject.carrier_name).to eq(registration.company_name)
-          end
+      context "when the registration business type is NOT 'sole trader'" do
+        it "returns the company name" do
+          expect(subject.carrier_name).to eq(registration.company_name)
         end
       end
     end
