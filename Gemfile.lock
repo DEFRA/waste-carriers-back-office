@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: c7d3a4517650c84cf8811e4a38eeebade9df9cc7
+  revision: 8b12b91a40894370d62b94878eab93ad09bc44b4
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -434,7 +434,7 @@ GEM
       rdoc (>= 5.0)
     secure_headers (5.2.0)
       useragent (>= 0.15.0)
-    simple_po_parser (1.1.5)
+    simple_po_parser (1.1.6)
     simplecov (0.17.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
