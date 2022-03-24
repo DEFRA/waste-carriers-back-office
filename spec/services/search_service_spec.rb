@@ -44,13 +44,6 @@ RSpec.describe SearchService do
         expect(service[:count]).to eq(2)
       end
 
-      it "returns a presentation object that supports `entity_display_name`" do
-        result = service[:results].first
-
-        expect(result).to be_a(SearchResultPresenter)
-        expect(result).to respond_to(:entity_display_name)
-      end
-
       it "displays the matching transient_registration" do
         expect(service[:results]).to include(matching_renewal)
       end

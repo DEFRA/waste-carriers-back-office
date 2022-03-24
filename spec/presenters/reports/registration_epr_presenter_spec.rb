@@ -27,40 +27,6 @@ module Reports
       end
     end
 
-    # This includes some basic tests to confirm that
-    # WasteCarriersEngine::CanPresentEntityDisplayName is being used.
-    # The bulk of the tests for entity name logic are in the waste-carriers-engine project.
-    describe "#entity_display_name" do
-      let(:registration) { create(:registration, registered_company_name: registered_name, company_name: company_name) }
-
-      context "with a registered name and without a trading name" do
-        let(:registered_name) { Faker::Company.name }
-        let(:company_name) { nil }
-
-        it "returns the registered name" do
-          expect(subject.entity_display_name).to eq registered_name
-        end
-      end
-
-      context "without a registered name and with a trading name" do
-        let(:registered_name) { nil }
-        let(:company_name) { Faker::Lorem.sentence(word_count: 3) }
-
-        it "returns the trading name" do
-          expect(subject.entity_display_name).to eq company_name
-        end
-      end
-
-      context "with both a registered name and a trading name" do
-        let(:registered_name) { Faker::Company.name }
-        let(:company_name) { Faker::Lorem.sentence(word_count: 3) }
-
-        it "returns the entity display name" do
-          expect(subject.entity_display_name).to eq "#{registered_name} trading as #{company_name}"
-        end
-      end
-    end
-
     describe "#expires_on" do
       before do
         expect(registration).to receive(:lower_tier?).and_return(lower_tier)

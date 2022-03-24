@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
-  include WasteCarriersEngine::CanPresentEntityDisplayName
-
   def display_company_details_panel?
     company_name.present? ||
       display_tier_and_registration_type.present? ||
