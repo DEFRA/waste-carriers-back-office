@@ -17,7 +17,7 @@
                 <%= result.reg_identifier %>
               </td>
               <td class="govuk-table__cell">
-                <%= result.company_name %>
+                <%= result.entity_display_name %>
               </td>
               <td class="govuk-table__cell">
                 <%= result.metaData.last_modified.in_time_zone("London").strftime("%H:%M %d/%m/%Y") %>
@@ -27,7 +27,7 @@
                   <%= t(".results.details_link.text") %>
                   <span class="govuk-visually-hidden">
                     <%= t(".results.details_link.visually_hidden_text",
-                          name: result.company_name) %>
+                          name: result.entity_display_name) %>
                   </span>
                 <% end %>
               </td>
