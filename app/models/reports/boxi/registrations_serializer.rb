@@ -10,7 +10,7 @@ module Reports
         tier: "Tier",
         business_type: "OrganisationType",
         registration_type: "RegistrationType",
-        company_name: "OrganisationName",
+        entity_display_name: "OrganisationName",
         company_no: "CompanyNumber",
         first_name: "ContactFirstName",
         last_name: "ContactLastName",

@@ -87,7 +87,7 @@ module Reports
           expect(presenter).to receive(:tier).and_return("tier")
           expect(presenter).to receive(:business_type).and_return("business_type")
           expect(presenter).to receive(:registration_type).and_return("registration_type")
-          expect(presenter).to receive(:company_name).and_return("company_name")
+          expect(presenter).to receive(:entity_display_name).and_return("company_name")
           expect(presenter).to receive(:company_no).and_return("company_no")
           expect(presenter).to receive(:first_name).and_return("first_name")
           expect(presenter).to receive(:last_name).and_return("last_name")
