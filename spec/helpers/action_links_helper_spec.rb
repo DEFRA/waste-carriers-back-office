@@ -342,8 +342,8 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:registration) }
 
       before do
-        allow(helper).to receive(:can?).with(:revoke, resource).and_return(can)
-        allow(helper).to receive(:can?).with(:cease, resource).and_return(can)
+        allow(helper).to receive(:can?).with(:revoke, WasteCarriersEngine::Registration).and_return(can)
+        allow(helper).to receive(:can?).with(:cease, WasteCarriersEngine::Registration).and_return(can)
       end
 
       context "when the user has permission for revoking" do
