@@ -73,7 +73,7 @@ class BasePaymentForm < WasteCarriersEngine::BaseForm
   def build_payment(params)
     params[:amount] = convert_amount_to_pence(params[:amount])
 
-    self.payment = WasteCarriersEngine::Payment.new_from_non_worldpay(params, order)
+    self.payment = WasteCarriersEngine::Payment.new_from_non_online_payment(params, order)
   end
 
   def update_finance_details
