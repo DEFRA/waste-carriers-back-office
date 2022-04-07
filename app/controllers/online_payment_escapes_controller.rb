@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class WorldpayEscapesController < ApplicationController
+class OnlinePaymentEscapesController < ApplicationController
   include CanFetchResource
 
   prepend_before_action :authenticate_user!
@@ -9,7 +9,7 @@ class WorldpayEscapesController < ApplicationController
   def new
     if correct_workflow_state?
       change_state_to_payment_summary
-      log_worldpay_escape
+      log_online_payment_escape
       redirect_to continue_journey_path
     else
       redirect_to details_page_path
@@ -30,7 +30,7 @@ class WorldpayEscapesController < ApplicationController
     @resource.update_attributes(workflow_state: "payment_summary_form")
   end
 
-  def log_worldpay_escape
+  def log_online_payment_escape
     params = {
       user: current_user.email,
       class: @resource.class.name,

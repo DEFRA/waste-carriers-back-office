@@ -33,7 +33,7 @@
                 <p class="govuk-body">
                   <%= t(".status.messages.worldpay.paragraph_2.revert") %>
                 </p>
-                <%= link_to t(".status.actions.revert_to_payment_summary_button"), new_resource_worldpay_escape_path(@transient_registration._id), class: 'button' %>
+                <%= link_to t(".status.actions.revert_to_payment_summary_button"), new_resource_online_payment_escape_path(@transient_registration._id), class: 'button' %>
               <% elsif can? :record_worldpay_missed_payment, @transient_registration %>
                 <p class="govuk-body">
                   <%= t(".status.messages.worldpay.paragraph_2.missed_payment") %>

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "WorldpayEscapes", type: :request do
+RSpec.describe "OnlinePaymentEscapes", type: :request do
   let(:transient_registration) { create(:renewing_registration) }
   let(:_id) { transient_registration._id }
 

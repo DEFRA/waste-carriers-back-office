@@ -85,7 +85,7 @@ Rails.application.routes.draw do
                         path: "payments/worldpay-missed",
                         path_names: { new: "" }
 
-              resources :worldpay_escapes,
+              resources :online_payment_escapes,
                         only: :new,
                         path: "revert-to-payment-summary",
                         path_names: { new: "" }
