@@ -26,7 +26,7 @@ FactoryBot.define do
       payment_type { WasteCarriersEngine::Payment::WORLDPAY }
     end
 
-    trait :worldpay_missed do
+    trait :online_missed do
       payment_type { WasteCarriersEngine::Payment::WORLDPAY_MISSED }
     end
   end

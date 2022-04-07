@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class WorldpayMissedPaymentNewRegistrationsController < ApplicationController
+class OnlineMissedPaymentNewRegistrationsController < ApplicationController
   include CanFetchResource
 
   prepend_before_action :authenticate_user!
@@ -9,7 +9,7 @@ class WorldpayMissedPaymentNewRegistrationsController < ApplicationController
   def new
     if ready_to_complete_and_add_missed_payment?
       complete_new_registration
-      redirect_to new_resource_worldpay_missed_payment_form_path(@registration._id)
+      redirect_to new_resource_online_missed_payment_form_path(@registration._id)
     else
       redirect_to new_registration_path(@resource.token)
     end
@@ -18,7 +18,7 @@ class WorldpayMissedPaymentNewRegistrationsController < ApplicationController
   private
 
   def authorize
-    authorize! :record_worldpay_missed_payment, @resource
+    authorize! :record_online_missed_payment, @resource
   end
 
   def ready_to_complete_and_add_missed_payment?

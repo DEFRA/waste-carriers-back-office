@@ -33,7 +33,7 @@ class Ability
   # Permissions for specific roles
 
   def permissions_for_agency_user
-    # This covers everything mounted in the engine and used for the assisted digital journey, including WorldPay
+    # This covers everything mounted in the engine and used for the assisted digital journey, including online payments
     can :update, WasteCarriersEngine::RenewingRegistration
     can :create, WasteCarriersEngine::Registration
     can :renew, :all
@@ -84,7 +84,7 @@ class Ability
     can :charge_adjust, :all
     can :write_off_large, WasteCarriersEngine::FinanceDetails
     can :view_certificate, WasteCarriersEngine::Registration
-    can :record_worldpay_missed_payment, :all
+    can :record_online_missed_payment, :all
     can :view_payments, :all
 
     can :reverse, WasteCarriersEngine::Payment do |payment|

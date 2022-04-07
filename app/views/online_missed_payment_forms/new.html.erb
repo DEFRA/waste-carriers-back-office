@@ -2,7 +2,7 @@
   <div class="govuk-grid-column-two-thirds">
     <%= render("waste_carriers_engine/shared/back", back_path: new_resource_payment_form_path(@resource._id)) %>
 
-    <%= render("waste_carriers_engine/shared/errors", object: @worldpay_missed_payment_form) %>
+    <%= render("waste_carriers_engine/shared/errors", object: @online_missed_payment_form) %>
 
     <h1 class="govuk-heading-l">
       <%= t(".heading", reg_identifier: @resource.reg_identifier) %>
@@ -10,8 +10,8 @@
 
     <%= render(
       "shared/payment_form",
-      form: @worldpay_missed_payment_form,
-      path: resource_worldpay_missed_payment_forms_path(@resource._id),
+      form: @online_missed_payment_form,
+      path: resource_online_missed_payment_forms_path(@resource._id),
       resource: @resource
     ) %>
   </div>

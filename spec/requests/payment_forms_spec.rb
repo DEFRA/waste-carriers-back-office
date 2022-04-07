@@ -94,15 +94,15 @@ RSpec.describe "PaymentForms", type: :request do
         end
       end
 
-      context "when the payment_type is worldpay_missed" do
+      context "when the payment_type is online_missed" do
         before do
-          params[:payment_type] = "worldpay_missed"
+          params[:payment_type] = "online_missed"
         end
 
-        it "redirects to the worldpay_missed payment form" do
+        it "redirects to the online_missed payment form" do
           post "/bo/resources/#{transient_registration._id}/payments", params: { payment_form: params }
 
-          expect(response).to redirect_to(new_resource_worldpay_missed_payment_form_path(transient_registration._id))
+          expect(response).to redirect_to(new_resource_online_missed_payment_form_path(transient_registration._id))
         end
       end
 

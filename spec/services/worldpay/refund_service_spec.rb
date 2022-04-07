@@ -7,7 +7,7 @@ module Worldpay
     let(:result) { described_class.run(payment: payment, amount: 100, merchant_code: merchant_code) }
 
     describe ".run" do
-      context "when the payment is not a worldpay payment nor a worldpay_missed payment" do
+      context "when the payment is not a worldpay payment nor a online_missed payment" do
         it "returns false" do
           expect(payment).to receive(:online?).and_return(false)
           expect(payment).to receive(:online_missed?).and_return(false)

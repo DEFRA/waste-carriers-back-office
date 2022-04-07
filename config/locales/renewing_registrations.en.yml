@@ -21,7 +21,7 @@ en:
           continue_button: "Continue as assisted digital"
           convictions_check_button: "Check conviction matches"
           revert_to_payment_summary_button: "Send back to payment summary"
-          missed_worldpay_payment_button: "Add a missed WorldPay payment"
+          missed_online_payment_button: "Add a missed WorldPay payment"
       conviction_heading: "Convictions"
       conviction_link: "Conviction details"
       conviction_information:

@@ -93,7 +93,7 @@ RSpec.shared_examples "finance examples" do
   end
 
   it "should not be able to record a worldpay payment" do
-    should_not be_able_to(:record_worldpay_missed_payment, WasteCarriersEngine::RenewingRegistration)
+    should_not be_able_to(:record_online_missed_payment, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "should not be able to review convictions" do

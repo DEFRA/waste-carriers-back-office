@@ -6,7 +6,7 @@ RSpec.describe "WorldpayMissedPaymentNewRegistrations", type: :request do
   let(:transient_registration) { create(:new_registration, :has_required_data) }
   let(:_id) { transient_registration._id }
 
-  describe "GET /bo/resources/:_id/missed-worldpay-payment-new-registration" do
+  describe "GET /bo/resources/:_id/missed-online-payment-new-registration" do
     let(:user) { create(:user) }
     before(:each) do
       sign_in(user)
@@ -25,13 +25,13 @@ RSpec.describe "WorldpayMissedPaymentNewRegistrations", type: :request do
           old_new_registration_count = WasteCarriersEngine::NewRegistration.count
           expected_reg_identifier = transient_registration.reg_identifier
 
-          get "/bo/resources/#{_id}/missed-worldpay-payment-new-registration"
+          get "/bo/resources/#{_id}/missed-online-payment-new-registration"
 
           expect(WasteCarriersEngine::Registration.count).to eq(old_registration_count + 1)
           expect(WasteCarriersEngine::NewRegistration.count).to eq(old_new_registration_count - 1)
 
           registration = WasteCarriersEngine::Registration.where(reg_identifier: expected_reg_identifier).first
-          expect(response).to redirect_to new_resource_worldpay_missed_payment_form_path(registration._id)
+          expect(response).to redirect_to new_resource_online_missed_payment_form_path(registration._id)
         end
       end
 
@@ -41,7 +41,7 @@ RSpec.describe "WorldpayMissedPaymentNewRegistrations", type: :request do
         end
 
         it "renders the new registration details page" do
-          get "/bo/resources/#{_id}/missed-worldpay-payment-new-registration"
+          get "/bo/resources/#{_id}/missed-online-payment-new-registration"
 
           expect(response).to redirect_to new_registration_path(transient_registration.token)
         end
@@ -52,7 +52,7 @@ RSpec.describe "WorldpayMissedPaymentNewRegistrations", type: :request do
       let(:user) { create(:user, :agency) }
 
       it "renders the permissions error page" do
-        get "/bo/resources/#{_id}/missed-worldpay-payment-new-registration"
+        get "/bo/resources/#{_id}/missed-online-payment-new-registration"
 
         expect(response).to redirect_to "/bo/pages/permission"
       end

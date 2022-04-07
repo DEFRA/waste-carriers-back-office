@@ -8,8 +8,8 @@ namespace :fix do
     puts "#{renewals.count} renewals to update"
 
     renewals.each do |renewal|
-      updated_state = if renewal.pending_worldpay_payment?
-                        "renewal_received_pending_worldpay_payment_form"
+      updated_state = if renewal.pending_online_payment?
+                        "renewal_received_pending_online_payment_form"
                       elsif renewal.unpaid_balance?
                         "renewal_received_pending_payment_form"
                       else

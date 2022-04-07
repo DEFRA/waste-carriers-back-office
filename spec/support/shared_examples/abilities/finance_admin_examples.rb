@@ -4,7 +4,7 @@ RSpec.shared_examples "finance_admin examples" do
   # finance_admin and finance_super users should be able to do this:
 
   it "should be able to record a worldpay payment" do
-    should be_able_to(:record_worldpay_missed_payment, WasteCarriersEngine::RenewingRegistration)
+    should be_able_to(:record_online_missed_payment, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "should be able to view the certificate" do
@@ -24,8 +24,8 @@ RSpec.shared_examples "finance_admin examples" do
       end
     end
 
-    context "when the payment is a worldpay_missed" do
-      let(:payment) { build(:payment, :worldpay_missed) }
+    context "when the payment is a online_missed" do
+      let(:payment) { build(:payment, :online_missed) }
 
       it "should be able to reverse the payment" do
         should be_able_to(:reverse, payment)
