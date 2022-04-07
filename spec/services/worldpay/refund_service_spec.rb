@@ -9,8 +9,8 @@ module Worldpay
     describe ".run" do
       context "when the payment is not a worldpay payment nor a worldpay_missed payment" do
         it "returns false" do
-          expect(payment).to receive(:worldpay?).and_return(false)
-          expect(payment).to receive(:worldpay_missed?).and_return(false)
+          expect(payment).to receive(:online?).and_return(false)
+          expect(payment).to receive(:online_missed?).and_return(false)
 
           expect(result).to be_falsey
         end
@@ -26,7 +26,7 @@ module Worldpay
         let(:worldpay_url) { "worldpay_url" }
 
         before do
-          allow(payment).to receive(:worldpay?).and_return(true)
+          allow(payment).to receive(:online?).and_return(true)
           allow(payment).to receive(:order_key).and_return("foo")
 
           allow(Rails.configuration).to receive(:worldpay_ecom_merchantcode).and_return(worldpay_ecom_merchantcode)

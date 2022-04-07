@@ -6,7 +6,7 @@ module Worldpay
     include ::WasteCarriersEngine::CanBuildWorldpayXml
 
     def run(payment:, amount:, merchant_code:)
-      return false unless payment.worldpay? || payment.worldpay_missed?
+      return false unless payment.online? || payment.online_missed?
 
       @payment = payment
       @amount = amount

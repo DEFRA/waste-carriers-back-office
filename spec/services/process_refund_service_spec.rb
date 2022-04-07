@@ -14,7 +14,7 @@ RSpec.describe ProcessRefundService do
     let(:worldpay) { true }
 
     before do
-      allow(payment).to receive(:worldpay?).and_return(worldpay)
+      allow(payment).to receive(:online?).and_return(worldpay)
       allow(orders).to receive(:find_by).and_return(order)
     end
 
@@ -70,7 +70,7 @@ RSpec.describe ProcessRefundService do
       let(:worldpay) { false }
 
       before do
-        allow(payment).to receive(:worldpay_missed?).and_return(false)
+        allow(payment).to receive(:online_missed?).and_return(false)
       end
 
       it "generates a new refund payment and associate it with the right finance details" do

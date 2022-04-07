@@ -60,7 +60,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   end
 
   def card_payment?
-    payment.worldpay?
+    payment.online?
   end
 
   def refund_comment

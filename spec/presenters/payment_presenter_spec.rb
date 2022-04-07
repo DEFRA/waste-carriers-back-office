@@ -160,7 +160,7 @@ RSpec.describe PaymentPresenter do
       allow(finance_details).to receive(:payments).and_return(scope)
       allow(scope).to receive(:where).with(order_key: "123_REFUNDED").and_return([refunded_payment])
 
-      allow(payment).to receive(:worldpay?).and_return(worldpay)
+      allow(payment).to receive(:online?).and_return(worldpay)
       allow(refunded_payment).to receive(:world_pay_payment_status).and_return(world_pay_payment_status)
     end
 

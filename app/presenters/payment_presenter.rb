@@ -16,7 +16,7 @@ class PaymentPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def refunded_message
-    if worldpay?
+    if online?
       I18n.t(".refunds.refunded_message.card", refund_status: refunded_payment.world_pay_payment_status)
     else
       I18n.t(".refunds.refunded_message.manual")

@@ -88,7 +88,7 @@ class Ability
     can :view_payments, :all
 
     can :reverse, WasteCarriersEngine::Payment do |payment|
-      payment.worldpay? || payment.worldpay_missed?
+      payment.online? || payment.online_missed?
     end
   end
 
