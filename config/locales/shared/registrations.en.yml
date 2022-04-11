@@ -36,7 +36,7 @@ en:
             business_type: "Business type"
             company_no: "Company number: %{number}"
             location: "Place of business: %{location}"
-            registered_address_html: "<span class=\"govuk-!-font-weight-bold\">Registered address</span>:"
+            registered_address_html: "<span class=\"govuk-!-font-weight-bold\">Trading address</span>:"
           no_business_information_available: "This registration application is still in progress, so there are no business details yet."
       pending_payment_panel:
         status:
