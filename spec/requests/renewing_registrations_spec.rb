@@ -12,12 +12,17 @@ RSpec.describe "RenewingRegistrations", type: :request do
         sign_in(user)
       end
 
-      it "renders the index template, returns a 200 response, includes a properly-displayed workflow_state and includes a link to continue the renewal" do
+      it "renders the index template and returns a 200 response" do
         get "/bo/renewing-registrations/#{transient_registration.reg_identifier}"
 
         expect(response).to render_template(:show)
         expect(response).to have_http_status(200)
-        expect(response.body).to include("Check your tier")
+      end
+
+      it "includes a properly-displayed workflow_state and includes a link to continue the renewal" do
+        get "/bo/renewing-registrations/#{transient_registration.reg_identifier}"
+
+        expect(response.body).to include("Renewal details")
         expect(response.body).to include("/bo/ad-privacy-policy?reg_identifier=#{transient_registration.reg_identifier}")
       end
 
