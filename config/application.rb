@@ -71,8 +71,14 @@ module WasteCarriersBackOffice
     config.data_retention_years = ENV["DATA_RETENTION_YEARS"] || 7
 
     # Companies House config
-    config.companies_house_host = ENV["WCRS_COMPANIES_HOUSE_URL"] || "https://api.companieshouse.gov.uk/company/"
     config.companies_house_api_key = ENV["WCRS_COMPANIES_HOUSE_API_KEY"]
+
+    config.companies_house_host =
+      if ENV["WCRS_MOCK_ENABLED"].to_s.downcase == "true"
+        ENV["WCRS_MOCK_FO_COMPANIES_HOUSE_URL"]
+      else
+        ENV["WCRS_COMPANIES_HOUSE_URL"] || "https://api.companieshouse.gov.uk/company/"
+      end
 
     # Paths
     config.wcrs_renewals_url = ENV["WCRS_RENEWALS_DOMAIN"] || "http://localhost:3002"
