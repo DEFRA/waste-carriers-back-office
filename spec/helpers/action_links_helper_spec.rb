@@ -721,6 +721,42 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
+  describe "#display_restart_renewal_link_for?" do
+    let(:resource) { build(:registration) }
+
+    before do
+      allow(helper).to receive(:can?).with(:edit, WasteCarriersEngine::Registration).and_return(can)
+    end
+
+    context "when the user has permission for editing" do
+      let(:can) { true }
+
+      context "when a renewal is not in progress" do
+        it "returns false" do
+          expect(helper.display_restart_renewal_link_for?(resource)).to be_falsey
+        end
+      end
+
+      context "when a renewal is in progress" do
+        let(:renewing_registration) { create(:renewing_registration) }
+
+        before { resource.reg_identifier = renewing_registration.reg_identifier }
+
+        it "returns true" do
+          expect(helper.display_restart_renewal_link_for?(resource)).to be_truthy
+        end
+      end
+    end
+
+    context "when the user does not have permission for editing" do
+      let(:can) { false }
+
+      it "returns false" do
+        expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be_falsey
+      end
+    end
+  end
+
   describe "#display_finance_details_link_for?" do
     let(:resource) { double(:resource) }
     let(:upper_tier) { true }
