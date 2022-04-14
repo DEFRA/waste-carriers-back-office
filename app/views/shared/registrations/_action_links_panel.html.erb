@@ -72,6 +72,14 @@
       </li>
     <% end %>
 
+    <% if display_restart_renewal_link_for?(resource) %>
+      <li>
+        <%= link_to t(".actions_box.links.restart_renewal"),
+                      renewing_registration_restart_renewal_path(resource.reg_identifier),
+                      method: :delete %>
+      </li>
+    <% end %>
+
     <% if display_refresh_registered_company_name_link_for?(resource) %>
       <li>
         <%= link_to t(".actions_box.links.refresh_companies_house"),
