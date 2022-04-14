@@ -17,6 +17,14 @@ class RenewingRegistrationsController < ApplicationController
     @transient_registration = RenewingRegistrationPresenter.new(transient_registration, view_context)
   end
 
+  def restart_renewal
+    reg_identifier = params[:reg_identifier]
+
+    WasteCarriersEngine::RenewingRegistration.where(reg_identifier: reg_identifier).destroy
+
+    redirect_back(fallback_location: registration_path(reg_identifier))
+  end
+
   private
 
   def fetch_renewing_registration

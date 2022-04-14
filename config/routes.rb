@@ -194,6 +194,10 @@ Rails.application.routes.draw do
       to: "convictions#begin_checks",
       as: :transient_registration_convictions_begin_checks
 
+  delete "/bo/renewing-registrations/:reg_identifier/restart_renewal",
+         to: "renewing_registrations#restart_renewal",
+         as: :renewing_registration_restart_renewal
+
   get "/bo/users",
       to: "users#index",
       as: :users
