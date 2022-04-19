@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "Restart renewal", type: :request do
-  describe "DELETE /bo/renewing-registrations/:reg_identifier/restart_renewal" do
+  describe "DELETE /bo/renewing-registrations/:reg_identifier/renewal" do
 
     subject { delete renewing_registration_restart_renewal_path(registration.reg_identifier) }
 
