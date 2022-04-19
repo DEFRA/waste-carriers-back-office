@@ -75,7 +75,7 @@
     <% if display_restart_renewal_link_for?(resource) %>
       <li>
         <%= link_to t(".actions_box.links.restart_renewal"),
-                      renewing_registration_restart_renewal_path(resource.reg_identifier),
+                      renewing_registration_destroy_path(resource.reg_identifier),
                       method: :delete %>
       </li>
     <% end %>
