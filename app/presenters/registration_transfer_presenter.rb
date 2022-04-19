@@ -28,6 +28,6 @@ class RegistrationTransferPresenter < WasteCarriersEngine::BasePresenter
   private
 
   def to_yml(key, options = {})
-    I18n.t(".registration_transfers.new.#{key}", options)
+    I18n.t(".registration_transfers.new.#{key}", **options)
   end
 end

@@ -49,7 +49,7 @@ RSpec.describe RegistrationTransferPresenter do
     end
 
     def message_for(key, options = {})
-      I18n.t(".registration_transfers.new.#{key}", options)
+      I18n.t(".registration_transfers.new.#{key}", **options)
     end
   end
 end
