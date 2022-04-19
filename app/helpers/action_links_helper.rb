@@ -104,7 +104,7 @@ module ActionLinksHelper
   end
 
   def display_restart_renewal_link_for?(resource)
-    return false unless display_registration_links?(resource)
+    return false unless display_renewing_registration_links?(resource)
     return false unless can?(:edit, WasteCarriersEngine::Registration)
 
     WasteCarriersEngine::RenewingRegistration.where(reg_identifier: resource.reg_identifier).count.positive?

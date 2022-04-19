@@ -731,7 +731,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
     context "when the user has permission for editing" do
       let(:can) { true }
 
-      context "when a renewal is not in progress" do
+      context "when the resource is a registration" do
         it "returns false" do
           expect(helper.display_restart_renewal_link_for?(resource)).to be_falsey
         end
@@ -740,19 +740,18 @@ RSpec.describe ActionLinksHelper, type: :helper do
       context "when a renewal is in progress" do
         let(:renewing_registration) { create(:renewing_registration) }
 
-        before { resource.reg_identifier = renewing_registration.reg_identifier }
-
         it "returns true" do
-          expect(helper.display_restart_renewal_link_for?(resource)).to be_truthy
+          expect(helper.display_restart_renewal_link_for?(renewing_registration)).to be_truthy
         end
       end
     end
 
     context "when the user does not have permission for editing" do
+      let(:renewing_registration) { create(:renewing_registration) }
       let(:can) { false }
 
       it "returns false" do
-        expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be_falsey
+        expect(helper.display_refresh_registered_company_name_link_for?(renewing_registration)).to be_falsey
       end
     end
   end
