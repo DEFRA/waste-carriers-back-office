@@ -76,7 +76,11 @@ Apex Limited,,11111111,ABC,99999999
     end
 
     context "when valid CSV data is not provided" do
-      let(:csv) { :not_a_csv }
+      # Use an object with a close method so that forwardable does not complain about forwarding to a private method.
+      class NotCsv
+        def close; end
+      end
+      let(:csv) { NotCsv.new }
 
       it "raises an InvalidCSVError and doesn't update any conviction data" do
         old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
