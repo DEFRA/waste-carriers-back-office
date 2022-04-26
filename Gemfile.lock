@@ -487,7 +487,7 @@ GEM
       chronic (>= 0.6.3)
     whenever-test (1.0.1)
       whenever
-    wicked_pdf (2.1.0)
+    wicked_pdf (2.6.0)
       activesupport
     zeitwerk (2.5.4)
 
