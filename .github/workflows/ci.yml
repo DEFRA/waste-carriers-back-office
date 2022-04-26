@@ -56,6 +56,7 @@ jobs:
       # Install various other dependencies
       - name: Install dependencies
         run: |
+          sudo apt-get update
           sudo apt-get install xvfb -y
           sudo apt-get install wkhtmltopdf -y
 
