@@ -1,5 +1,20 @@
 # Changelog
 
+## [v1.17.2](https://github.com/defra/waste-carriers-back-office/tree/v1.17.2) (2022-05-26)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.17.1...v1.17.2)
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `9083a06` to `5a2ea84` [\#1347](https://github.com/DEFRA/waste-carriers-back-office/pull/1347) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `e466f9c` to `9083a06` [\#1346](https://github.com/DEFRA/waste-carriers-back-office/pull/1346) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump jquery-rails from 4.4.0 to 4.5.0 [\#1345](https://github.com/DEFRA/waste-carriers-back-office/pull/1345) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump wicked\_pdf from 2.6.2 to 2.6.3 [\#1343](https://github.com/DEFRA/waste-carriers-back-office/pull/1343) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump govuk\_design\_system\_formbuilder from 3.0.2 to 3.0.3 [\#1342](https://github.com/DEFRA/waste-carriers-back-office/pull/1342) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Release v1.17.1 [\#1341](https://github.com/DEFRA/waste-carriers-back-office/pull/1341) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Bump faker from 2.20.0 to 2.21.0 [\#1339](https://github.com/DEFRA/waste-carriers-back-office/pull/1339) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 6.1.5.1 to 6.1.6 [\#1338](https://github.com/DEFRA/waste-carriers-back-office/pull/1338) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v1.17.1](https://github.com/defra/waste-carriers-back-office/tree/v1.17.1) (2022-05-06)
 
 [Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.16.2...v1.17.1)
