@@ -82,7 +82,7 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   def latest_order_payment_method
     return "-" unless latest_order.payment_method.present?
 
-    latest_order.payment_method.titleize    
+    latest_order.payment_method.titleize
   end
 
   def display_expiry_text
