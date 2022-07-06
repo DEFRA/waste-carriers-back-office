@@ -76,13 +76,11 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def latest_order
-    finance_details&.orders&.order_by(dateCreated: :desc)&.first
-  end
+    return unless finance_details&.orders&.present?
 
-  def latest_order_payment_method
-    return "-" unless latest_order.payment_method.present?
-
-    latest_order.payment_method.titleize
+    ::OrderPresenter.new(
+      finance_details.orders.order_by(dateCreated: :desc).first
+    )
   end
 
   def display_expiry_text

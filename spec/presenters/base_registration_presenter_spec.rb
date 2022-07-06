@@ -153,21 +153,6 @@ RSpec.describe BaseRegistrationPresenter do
     end
   end
 
-  describe "#latest_order_payment_method" do
-    let(:registration) { create(:registration) }
-
-    it "returns the last order's payment method'" do
-      expect(subject.latest_order_payment_method).to eq("Card")
-    end
-
-    context "when no payment method yet exists" do
-      before { registration.finance_details.orders.order_by(dateCreated: :desc).first.update(paymentMethod: nil) }
-      it "returns '-'" do
-        expect(subject.latest_order_payment_method).to eq("-")
-      end
-    end
-  end
-
   describe "#show_order_details?" do
     let(:upper_tier) { true }
     let(:finance_details) { double(:finance_details, orders: orders) }

@@ -21,7 +21,7 @@
           <%= t(".order_information.labels.payment_method") %>
         </th>
         <td class="govuk-table__cell govuk-table__cell--numeric">
-          <%= resource.latest_order_payment_method %>
+          <%= resource.latest_order&.payment_method %>
         </td>
       </tr>
       <% resource.latest_order.order_items.each do |item| %>
