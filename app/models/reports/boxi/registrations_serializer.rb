@@ -24,7 +24,7 @@ module Reports
         metadata_date_activated: "ActivationTimestamp",
         expires_on: "ExpiryTimestamp",
         metadata_date_last_modified: "LastModifiedTimestamp",
-        metadata_route: "Route",
+        assistance_mode: "AssistanceMode",
         other_businesses: "OtherBusinesses",
         is_main_service: "IsMainService",
         construction_waste: "ConstructionWaste",

@@ -53,6 +53,38 @@ module Reports
         end
       end
 
+      describe "assistance_mode" do
+        let(:metadata) { double(:metadata) }
+
+        before do
+          allow(registration).to receive(:metaData).and_return(metadata)
+        end
+
+        context "for an unassisted registration" do
+          before { allow(metadata).to receive(:route).and_return("DIGITAL") }
+
+          it "returns 'Unassisted'" do
+            expect(subject.assistance_mode).to eq("Unassisted")
+          end
+        end
+
+        context "for a fully assisted registration" do
+          before { allow(metadata).to receive(:route).and_return("ASSISTED_DIGITAL") }
+
+          it "returns 'Fully assisted'" do
+            expect(subject.assistance_mode).to eq("Fully assisted")
+          end
+        end
+
+        context "for a partially assisted registration" do
+          before { allow(metadata).to receive(:route).and_return("ASSISTED_DIGITAL_FROM_TRANSIENT_REGISTRATION") }
+
+          it "returns 'Partially assisted'" do
+            expect(subject.assistance_mode).to eq("Partially assisted")
+          end
+        end
+      end
+
       describe "#conviction_search_result_searched_at" do
         it "returns a formatted date" do
           conviction_search_result = double(:conviction_search_result)
