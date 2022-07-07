@@ -29,7 +29,7 @@ module Reports
           ActivationTimestamp
           ExpiryTimestamp
           LastModifiedTimestamp
-          Route
+          AssistanceMode
           OtherBusinesses
           IsMainService
           ConstructionWaste
@@ -69,7 +69,7 @@ module Reports
             "metadata_date_activated",
             "expires_on",
             "metadata_date_last_modified",
-            "metadata_route",
+            "assistance_mode",
             "other_businesses",
             "is_main_service",
             "construction_waste",
@@ -101,7 +101,7 @@ module Reports
           expect(presenter).to receive(:metadata_date_activated).and_return("metadata_date_activated")
           expect(presenter).to receive(:expires_on).and_return("expires_on")
           expect(presenter).to receive(:metadata_date_last_modified).and_return("metadata_date_last_modified")
-          expect(presenter).to receive(:metadata_route).and_return("metadata_route")
+          expect(presenter).to receive(:assistance_mode).and_return("assistance_mode")
           expect(presenter).to receive(:other_businesses).and_return("other_businesses")
           expect(presenter).to receive(:is_main_service).and_return("is_main_service")
           expect(presenter).to receive(:construction_waste).and_return("construction_waste")

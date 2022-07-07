@@ -30,6 +30,19 @@ module Reports
         metadata&.last_modified&.to_datetime&.to_formatted_s(:calendar_date_and_local_time)
       end
 
+      def assistance_mode
+        case metaData&.route
+        when "DIGITAL"
+          "Unassisted"
+        when "ASSISTED_DIGITAL_FROM_TRANSIENT_REGISTRATION"
+          "Partially assisted"
+        when "ASSISTED_DIGITAL"
+          "Fully assisted"
+        else
+          ""
+        end
+      end
+
       def conviction_search_result_searched_at
         conviction_search_result&.searched_at&.to_datetime&.to_formatted_s(:calendar_date_and_local_time)
       end
