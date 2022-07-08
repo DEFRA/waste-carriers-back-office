@@ -7,7 +7,7 @@ module Reports
     RSpec.describe OrderPresenter do
       let(:order) { double(:order) }
 
-      subject { described_class.new(order, nil) }
+      subject { ::Reports::Boxi::OrderPresenter.new(order, nil) }
 
       describe "#date_created" do
         it "returns the date as a formatted string" do

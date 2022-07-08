@@ -23,7 +23,7 @@ module Reports
       private
 
       def parse_order(order, uid, order_uid)
-        presenter = OrderPresenter.new(order, nil)
+        presenter = ::Reports::Boxi::OrderPresenter.new(order, nil)
 
         ATTRIBUTES.map do |key, _value|
           if key == :uid
