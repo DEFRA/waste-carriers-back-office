@@ -51,7 +51,7 @@ gem "defra_ruby_aws", "~> 0.4"
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",
-    branch: "govpay"
+    branch: "RUBY-2012-wcr-gov-pay-refunds"
 
 # Use the Defra Ruby Features gem to allow users with the correct permissions to
 # manage feature toggle (create / update / delete) from the back-office.
@@ -95,8 +95,8 @@ group :production do
 end
 
 group :development, :test do
-  # Call "binding.pry" anywhere in the code to stop execution and get a debugger console
-  gem "pry-byebug"
+  # Call "byebug" anywhere in the code to stop execution and get a debugger console
+  gem "byebug"
   # Apply our style guide to ensure consistency in how the code is written
   gem "defra_ruby_style"
   # Shim to load environment variables from a .env file into ENV in development

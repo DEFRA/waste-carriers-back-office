@@ -29,5 +29,9 @@ FactoryBot.define do
     trait :worldpay_missed do
       payment_type { WasteCarriersEngine::Payment::WORLDPAY_MISSED }
     end
+
+    trait :govpay do
+      payment_type { WasteCarriersEngine::Payment::GOVPAY }
+    end
   end
 end

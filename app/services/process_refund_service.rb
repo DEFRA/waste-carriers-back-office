@@ -5,7 +5,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     @finance_details = finance_details
     @payment = payment
     @user = user
-
+    byebug
     return false if amount_to_refund.zero?
     return false if card_payment? && !card_refund_result
 

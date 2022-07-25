@@ -28,7 +28,7 @@ class RefundsController < ApplicationController
       payment: @payment,
       user: current_user
     )
-
+    byebug
     if response
       flash_success(
         I18n.t("refunds.flash_messages.successful", amount: display_pence_as_pounds_and_cents(amount_to_refund))
