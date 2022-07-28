@@ -2,9 +2,6 @@ en:
   resend_renewal_email:
     messages:
       success: Renewal email sent to %{email}
-      assisted:
-        heading: Sorry, there has been a problem re-sending the renewal email.
-        details: You have requested to resend a renewal email to the contact email address, but this address matches %{email}.
       error:
         heading: We could not send an email to %{email}
         details: The error has been logged. Try again later or contact an administrator.

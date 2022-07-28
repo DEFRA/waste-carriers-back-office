@@ -17,8 +17,6 @@ class ResendConfirmationEmailController < ApplicationController
       )
     rescue Exceptions::MissingContactEmailError
       handle_missing_contact_email(:resend_confirmation_email)
-    rescue Exceptions::AssistedDigitalContactEmailError
-      handle_assisted_digital_contact_email(:resend_confirmation_email)
     rescue StandardError => e
       handle_resend_errored(e, :resend_confirmation_email, "resending confirmation email")
     end

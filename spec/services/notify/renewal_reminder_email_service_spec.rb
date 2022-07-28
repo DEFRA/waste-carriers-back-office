@@ -50,22 +50,13 @@ module Notify
       context "when the registration's contact email is missing" do
         before { registration.contact_email = nil }
 
-        it "throws an error" do
-          expect { subject }.to raise_error(Exceptions::MissingContactEmailError)
-        end
-      end
-
-      context "when the registration's contact email matches the assisted digital email" do
-        before do
-          allow(WasteCarriersEngine.configuration)
-            .to receive(:assisted_digital_email)
-            .and_return("nccc@example.com")
-
-          registration.contact_email = "nccc@example.com"
+        it "does not throw an error" do
+          expect { subject }.not_to raise_error
         end
 
-        it "throws an error" do
-          expect { subject }.to raise_error(Exceptions::AssistedDigitalContactEmailError)
+        it "does not send an email" do
+          expect_any_instance_of(Notifications::Client).not_to receive(:send_email)
+          subject
         end
       end
     end

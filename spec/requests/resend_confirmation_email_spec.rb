@@ -34,21 +34,6 @@ RSpec.describe "ResendConfirmationEmail", type: :request do
           expect(response).to redirect_to("/")
           expect(request.flash[:success]).to eq("Confirmation email sent to #{email}")
         end
-
-        context "but it matches the assisted digital email" do
-          before do
-            allow(WasteCarriersEngine.configuration).to receive(:assisted_digital_email).and_return(email)
-          end
-
-          let(:email) { "nccc@example.com" }
-
-          it "does not send an email, redirects to the previous page and displays a flash 'error' message" do
-            get request_path, headers: { "HTTP_REFERER" => "/" }
-
-            expect(response).to redirect_to("/")
-            expect(request.flash[:error]).to eq("Sorry, there has been a problem re-sending the confirmation email.")
-          end
-        end
       end
 
       context "and the registration has no contact email" do

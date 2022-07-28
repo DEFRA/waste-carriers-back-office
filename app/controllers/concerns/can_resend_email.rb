@@ -6,8 +6,8 @@ module CanResendEmail
   private
 
   def validate_contact_email(registration)
-    # checks that the email is present and not the same as the AD email
-    # can raise: MissingContactEmailError or AssistedDigitalContactEmailError
+    # checks that the email is present
+    # can raise: MissingContactEmailError
     ContactEmailValidatorService.run(registration)
   end
 
@@ -22,21 +22,7 @@ module CanResendEmail
     flash_error(message, description)
   end
 
-  # If the registration has a contact_email that matches the configured assisted
-  # digital one we know RenewalReminderMailer will throw a
-  # AssistedDigitalContactEmailError. This isn't something we want to record. So
-  # we don't worry about Airbrake or adding anything to the log.
-  def handle_assisted_digital_contact_email(scope)
-    message = I18n.t("#{scope}.messages.assisted.heading")
-    description = I18n.t(
-      "#{scope}.messages.assisted.details",
-      email: WasteCarriersEngine.configuration.assisted_digital_email
-    )
-
-    flash_error(message, description)
-  end
-
-  # Here we do notify Airbrake and log an error. If we get here it's for an
+  # Here we notify Airbrake and log an error. If we get here it's for an
   # unexpected reason hence we want to know about it.
   def handle_resend_errored(error, scope, applies_to)
     Airbrake.notify error, registration: registration.reg_identifier

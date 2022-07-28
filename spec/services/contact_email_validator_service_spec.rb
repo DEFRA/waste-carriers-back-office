@@ -23,18 +23,5 @@ RSpec.describe ContactEmailValidatorService do
         expect { subject }.to raise_error(Exceptions::MissingContactEmailError)
       end
     end
-
-    context "without a contact_email that matches the AD email" do
-      let(:contact_email) { "nccc@example.com" }
-      before do
-        allow(WasteCarriersEngine.configuration)
-          .to receive(:assisted_digital_email)
-          .and_return(contact_email)
-      end
-
-      it "raises an error" do
-        expect { subject }.to raise_error(Exceptions::AssistedDigitalContactEmailError)
-      end
-    end
   end
 end

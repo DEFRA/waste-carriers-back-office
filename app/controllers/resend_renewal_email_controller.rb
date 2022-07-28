@@ -17,8 +17,6 @@ class ResendRenewalEmailController < ApplicationController
       )
     rescue Exceptions::MissingContactEmailError
       handle_missing_contact_email(:resend_renewal_email)
-    rescue Exceptions::AssistedDigitalContactEmailError
-      handle_assisted_digital_contact_email(:resend_renewal_email)
     rescue StandardError => e
       handle_resend_errored(e, :resend_renewal_email, "resending renewal email")
     end

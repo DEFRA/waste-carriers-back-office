@@ -2,9 +2,6 @@ en:
   resend_confirmation_email:
     messages:
       success: Confirmation email sent to %{email}
-      assisted:
-        heading: Sorry, there has been a problem re-sending the confirmation email.
-        details: You have requested to resend a confirmation email to the contact email address, but this address matches %{email}.
       error:
         heading: We could not send an email to %{email}
         details: The error has been logged. Try again later or contact an administrator.

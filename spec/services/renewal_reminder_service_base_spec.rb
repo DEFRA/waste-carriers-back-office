@@ -13,14 +13,13 @@ RSpec.describe RenewalReminderServiceBase do
 
   describe ".run" do
     it "send emails to relevant registrations" do
-      ad_contact_email = WasteCarriersEngine.configuration.assisted_digital_email
       expiring = create(:registration, expires_on: 3.days.from_now)
       not_expiring = create(:registration, expires_on: 5.days.from_now)
       expiring_too_soon = create(:registration, expires_on: 2.days.from_now)
-      ad_contact_email = create(
+      ad_registration = create(
         :registration,
         expires_on: 3.days.from_now,
-        contact_email: ad_contact_email
+        contact_email: nil
       )
       empty_contact_email = create(:registration, expires_on: 3.days.from_now, contact_email: "")
       nil_contact_email = create(:registration, expires_on: 3.days.from_now, contact_email: nil)
@@ -29,7 +28,7 @@ RSpec.describe RenewalReminderServiceBase do
 
       expect_any_instance_of(TestRegistrationTransferService).to_not receive(:send_email).with(not_expiring)
       expect_any_instance_of(TestRegistrationTransferService).to_not receive(:send_email).with(expiring_too_soon)
-      expect_any_instance_of(TestRegistrationTransferService).to_not receive(:send_email).with(ad_contact_email)
+      expect_any_instance_of(TestRegistrationTransferService).to_not receive(:send_email).with(ad_registration)
       expect_any_instance_of(TestRegistrationTransferService).to_not receive(:send_email).with(empty_contact_email)
       expect_any_instance_of(TestRegistrationTransferService).to_not receive(:send_email).with(nil_contact_email)
 

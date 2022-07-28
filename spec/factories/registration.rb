@@ -28,8 +28,8 @@ FactoryBot.define do
     end
 
     trait :ad_registration do
-      account_email { ENV["WCRS_ASSISTED_DIGITAL_EMAIL"] }
-      contact_email { ENV["WCRS_ASSISTED_DIGITAL_EMAIL"] }
+      account_email { nil }
+      contact_email { nil }
     end
 
     trait :cancelled do

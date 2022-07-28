@@ -30,7 +30,7 @@ module Notify
           .order_by(reg_identifier: "ASC")
           .active
           .upper_tier
-          .not_in(contact_email: [WasteCarriersEngine.configuration.assisted_digital_email, nil, ""])
+          .not_in(contact_email: [nil, ""])
           .where(expires_on: { :$lte => to, :$gte => from })
       end.call
     end
