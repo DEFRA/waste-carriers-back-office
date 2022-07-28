@@ -12,6 +12,7 @@ RSpec.describe RegistrationTransferService do
 
   describe "#run" do
     let(:external_user) { create(:external_user) }
+    before { allow_any_instance_of(Notifications::Client).to receive(:send_email) }
 
     context "when there is an external user with a matching email" do
       it "updates the registration's account_email" do
