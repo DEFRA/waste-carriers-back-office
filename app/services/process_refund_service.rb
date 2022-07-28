@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class ProcessRefundService < WasteCarriersEngine::BaseService
-  def run(finance_details:, payment:, user:)
+  def run(finance_details:, payment:, user:, refunder: ::Worldpay::RefundService)
     @finance_details = finance_details
     @payment = payment
     @user = user
-    byebug
+    @refunder = refunder
     return false if amount_to_refund.zero?
-    return false if card_payment? && !card_refund_result
+    return false unless card_payment? && refunded?
 
     finance_details.payments << build_refund
 
@@ -19,10 +19,10 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
 
   private
 
-  attr_reader :payment, :user, :finance_details
+  attr_reader :payment, :user, :finance_details, :refunder
 
-  def card_refund_result
-    @_card_refund_result ||= ::Worldpay::RefundService.run(
+  def refunded?
+    @_refunded ||= refunder.run(
       payment: payment,
       amount: amount_to_refund,
       merchant_code: order.merchant_id
@@ -50,7 +50,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     refund.updated_by_user = user.email
     refund.comment = refund_comment
 
-    refund.world_pay_payment_status = "AUTHORISED" if card_payment?
+    refund.world_pay_payment_status = "AUTHORISED" if payment.worldpay?
 
     refund
   end
@@ -60,11 +60,11 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   end
 
   def card_payment?
-    payment.worldpay?
+    payment.worldpay? || payment.govpay?
   end
 
   def refund_comment
-    return I18n.t("refunds.comments.card") if card_payment?
+    return I18n.t("refunds.comments.card", payment.payment_type.titleize) if card_payment?
 
     I18n.t("refunds.comments.manual")
   end

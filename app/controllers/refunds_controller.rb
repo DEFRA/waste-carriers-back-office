@@ -26,9 +26,9 @@ class RefundsController < ApplicationController
     response = ProcessRefundService.run(
       finance_details: @resource.finance_details,
       payment: @payment,
-      user: current_user
+      user: current_user,
+      refunder: refunder
     )
-    byebug
     if response
       flash_success(
         I18n.t("refunds.flash_messages.successful", amount: display_pence_as_pounds_and_cents(amount_to_refund))
@@ -43,6 +43,14 @@ class RefundsController < ApplicationController
   end
 
   private
+
+  def refunder
+    @refunder ||= if @payment.govpay?
+      ::WasteCarriersEngine::GovpayRefundService
+    elsif @payment.worldpay?
+      ::Worldpay::RefundService
+    end
+  end
 
   def fetch_payment
     @payment = @resource.finance_details.payments.refundable.where(order_key: params[:order_key]).first

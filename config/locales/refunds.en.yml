@@ -2,7 +2,7 @@ en:
   refunds:
     comments:
       manual: "A manual refund has been requested for this payment"
-      card: "A refund has been requested for this worldpay payment"
+      card: "A refund has been requested for this %{type} payment"
     refunded_message:
       manual: "Refund: A manual refund has been requested for this payment"
       card: "Refund: %{refund_status}"
