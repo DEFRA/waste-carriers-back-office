@@ -64,7 +64,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   end
 
   def refund_comment
-    return I18n.t("refunds.comments.card", payment.payment_type.titleize) if card_payment?
+    return I18n.t("refunds.comments.card", type: payment.payment_type.titleize) if card_payment?
 
     I18n.t("refunds.comments.manual")
   end
