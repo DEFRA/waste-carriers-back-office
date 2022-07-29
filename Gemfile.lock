@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 669f4210a72e54d05ca455dac0aca7dd6f43aa8d
+  revision: 2c87ee129e2e72087bc5f4204e74172e3cb8e5c2
   branch: RUBY-2012-wcr-gov-pay-refunds
   specs:
     waste_carriers_engine (0.0.1)

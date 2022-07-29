@@ -44,7 +44,7 @@ RSpec.describe ProcessRefundService do
         end
 
         context "and the request succeeds" do
-          it "returns true and creates a (refund) payemnt"do
+          it "returns true and creates a (refund) payemnt" do
             description = double(:description)
 
             expect(finance_details).to receive(:payments).and_return(payments)

@@ -45,11 +45,12 @@ class RefundsController < ApplicationController
   private
 
   def refunder
-    @refunder ||= if @payment.govpay?
-      ::WasteCarriersEngine::GovpayRefundService
-    elsif @payment.worldpay?
-      ::Worldpay::RefundService
-    end
+    @refunder ||=
+      if @payment.govpay?
+        ::WasteCarriersEngine::GovpayRefundService
+      elsif @payment.worldpay?
+        ::Worldpay::RefundService
+      end
   end
 
   def fetch_payment
