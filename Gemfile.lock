@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: c854affdec935f005f58c6a8cf8b067fff1c39d5
+  revision: 646e36c6b374d7f5b66ac6a7176535e5f4509a05
   branch: RUBY-2012-wcr-gov-pay-refunds
   specs:
     waste_carriers_engine (0.0.1)
@@ -190,9 +190,9 @@ GEM
     docile (1.3.2)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    dotenv (2.7.6)
-    dotenv-rails (2.7.6)
-      dotenv (= 2.7.6)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
       railties (>= 3.2)
     erubi (1.10.0)
     execjs (2.7.0)
@@ -201,7 +201,7 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faker (2.21.0)
+    faker (2.22.0)
       i18n (>= 1.8.11, < 2)
     faraday (1.7.0)
       faraday-em_http (~> 1.0)
@@ -237,7 +237,7 @@ GEM
       rake (>= 10.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    govuk_design_system_formbuilder (3.1.0)
+    govuk_design_system_formbuilder (3.1.1)
       actionview (>= 6.1)
       activemodel (>= 6.1)
       activesupport (>= 6.1)
@@ -463,7 +463,7 @@ GEM
     unf_ext (0.0.8.2)
     unicode-display_width (1.7.0)
     useragent (0.16.10)
-    validates_email_format_of (1.6.3)
+    validates_email_format_of (1.7.0)
       i18n
     vcr (6.1.0)
     warden (1.2.9)
