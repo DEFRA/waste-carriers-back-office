@@ -6,11 +6,11 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     @payment = payment
     @user = user
     @refunder = refunder
+
     return false if amount_to_refund.zero?
-    return false unless card_payment? && refunded?
+    return false if card_payment? && !refunded?
 
     finance_details.payments << build_refund
-
     finance_details.update_balance
     finance_details.save!
 
