@@ -8,7 +8,7 @@ en:
       card: "Refund: %{refund_status}"
     flash_messages:
       successful: "£%{amount} refunded successfully"
-      error: "Sorry, there has been a problem communicating with Worldpay. Please try again."
+      error: "Sorry, there has been a problem communicating with %{type}. Please try again."
     index:
       title: "Refund a payment"
       heading: "Which payment do you want to refund?"

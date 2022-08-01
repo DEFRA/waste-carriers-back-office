@@ -35,7 +35,7 @@ class RefundsController < ApplicationController
       )
     else
       flash_error(
-        I18n.t("refunds.flash_messages.error"), nil
+        I18n.t("refunds.flash_messages.error", type: @payment.payment_type.titleize), nil
       )
     end
 
