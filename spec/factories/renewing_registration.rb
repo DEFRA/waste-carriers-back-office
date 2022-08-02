@@ -20,6 +20,10 @@ FactoryBot.define do
       finance_details { build(:finance_details, :has_overpaid_order_and_payment) }
     end
 
+    trait :overpaid_govpay do
+      finance_details { build(:finance_details, :has_overpaid_order_and_payment_govpay) }
+    end
+
     trait :submitted do
       workflow_state { "renewal_received_pending_payment_form" }
     end
