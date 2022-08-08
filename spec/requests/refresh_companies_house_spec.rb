@@ -5,14 +5,14 @@ require "rails_helper"
 RSpec.describe "Refresh companies house", type: :request do
   describe "PATCH /bo/registrations/:reg_identifier/companies_house_details" do
 
-    subject { patch registration_companies_house_details_path(registration.reg_identifier) }
+    subject { patch refresh_companies_house_name_path(registration.reg_identifier) }
 
     RSpec.shared_examples "all companies house details requests" do
 
       it "redirects to the same page" do
         subject
         expect(response.status).to eq 302
-        expect(response.location).to end_with registration_path(registration.reg_identifier)
+        expect(response.location).to end_with refresh_companies_house_name_path(registration.reg_identifier)
       end
     end
 

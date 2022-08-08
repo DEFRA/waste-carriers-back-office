@@ -187,8 +187,8 @@ Rails.application.routes.draw do
       as: :registration_convictions_begin_checks
 
   patch "/bo/registrations/:registration_reg_identifier/companies_house_details",
-        to: "registrations#update_companies_house_details",
-        as: :registration_companies_house_details
+        to: "refresh_companies_house_name#update_companies_house_details",
+        as: :refresh_companies_house_name
 
   get "/bo/transient-registrations/:transient_registration_reg_identifier/convictions/begin-checks",
       to: "convictions#begin_checks",

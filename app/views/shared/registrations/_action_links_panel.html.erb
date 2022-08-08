@@ -83,7 +83,7 @@
     <% if display_refresh_registered_company_name_link_for?(resource) %>
       <li>
         <%= link_to t(".actions_box.links.refresh_companies_house"),
-                      registration_companies_house_details_path(resource.reg_identifier),
+                      refresh_companies_house_name_path(resource.reg_identifier),
                       method: :patch %>
       </li>
     <% end %>

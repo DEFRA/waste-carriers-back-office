@@ -13,10 +13,10 @@ class RegistrationsController < ApplicationController
     @registration = RegistrationPresenter.new(registration, view_context)
   end
 
-  def update_companies_house_details
-    reg_identifier = params[:registration_reg_identifier]
-    WasteCarriersEngine::RefreshCompaniesHouseNameService.run(reg_identifier: reg_identifier)
-
-    redirect_back(fallback_location: registration_path(reg_identifier))
-  end
+  # def update_companies_house_details
+  #   reg_identifier = params[:registration_reg_identifier]
+  #   WasteCarriersEngine::RefreshCompaniesHouseNameService.run(reg_identifier: reg_identifier)
+  # 
+  #   redirect_back(fallback_location: registration_path(reg_identifier))
+  # end
 end

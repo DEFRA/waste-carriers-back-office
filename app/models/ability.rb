@@ -41,6 +41,7 @@ class Ability
     can :resend_confirmation_email, WasteCarriersEngine::Registration
     can :order_copy_cards, WasteCarriersEngine::Registration
     can :edit, WasteCarriersEngine::Registration
+    can :refresh_company_name, WasteCarriersEngine::Registration
 
     can :revert_to_payment_summary, :all
 

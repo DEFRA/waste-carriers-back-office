@@ -41,6 +41,10 @@ RSpec.shared_examples "agency examples" do
     should be_able_to(:resend_confirmation_email, WasteCarriersEngine::Registration)
   end
 
+  it "should be able to refresh the company name" do
+    should be_able_to(:refresh_company_name, WasteCarriersEngine::Registration)
+  end
+
   # All agency users should NOT be able to do this:
 
   it "should not be able to modify finance users" do
