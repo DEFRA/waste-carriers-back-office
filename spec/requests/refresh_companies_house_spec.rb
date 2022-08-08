@@ -12,7 +12,16 @@ RSpec.describe "Refresh companies house", type: :request do
       it "redirects to the same page" do
         subject
         expect(response.status).to eq 302
-        expect(response.location).to end_with refresh_companies_house_name_path(registration.reg_identifier)
+        expect(response.location).to end_with registration_path(registration.reg_identifier)
+      end
+
+      it "returns a success message" do
+        success_message = I18n.t("refresh_companies_house_name.messages.success")
+
+        subject
+        follow_redirect!
+
+        expect(response.body).to include(success_message)
       end
     end
 
@@ -45,6 +54,23 @@ RSpec.describe "Refresh companies house", type: :request do
 
       context "when the new company name is different to the old one" do
         it_behaves_like "all companies house details requests"
+      end
+
+      context "when an error happens" do
+        let(:old_registered_name) { Faker::Company.name }
+
+        before do
+          expect(WasteCarriersEngine::RefreshCompaniesHouseNameService).to receive(:run).and_raise(StandardError)
+        end
+
+        it "returns an error message" do
+          error_message = I18n.t("refresh_companies_house_name.messages.failure")
+
+          subject
+          follow_redirect!
+
+          expect(response.body).to include(error_message)
+        end
       end
     end
   end

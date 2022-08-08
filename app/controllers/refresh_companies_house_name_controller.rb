@@ -1,4 +1,4 @@
-# frozen_string_literal : true
+# frozen_string_literal: true
 
 class RefreshCompaniesHouseNameController < ApplicationController
   include CanSetFlashMessages
@@ -6,21 +6,16 @@ class RefreshCompaniesHouseNameController < ApplicationController
   before_action :authenticate_user!
 
   def update_companies_house_details
-
     begin
-      Rails.logger.warn("INSIDE THE BEGIN UPDATE METHOD")
-      #reg_identifier = params[:reg_identifier]
-      WasteCarriersEngine::RefreshCompaniesHouseNameService.run(reg_identifier: resource.reg_identifier)
-
-      Rails.logger.warn("AFTER THE API SERVICE CALL")
-
+      reg_identifier = params[:reg_identifier]
+      WasteCarriersEngine::RefreshCompaniesHouseNameService.run(reg_identifier: reg_identifier)
       flash_success(success_message)
     rescue StandardError
       Rails.logger.error "Failed to refresh"
       flash_error(failure_message, failure_desciption)
     end
 
-    redirect_back(fallback_location: "/")
+    redirect_back(fallback_location: registration_path(reg_identifier))
   end
 
   private
