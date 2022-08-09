@@ -9,10 +9,14 @@ class RefreshCompaniesHouseNameController < ApplicationController
     begin
       reg_identifier = params[:reg_identifier]
       WasteCarriersEngine::RefreshCompaniesHouseNameService.run(reg_identifier: reg_identifier)
-      flash_success(success_message)
+      flash_success(
+        I18n.t("refresh_companies_house_name.messages.success")
+      )
     rescue StandardError
       Rails.logger.error "Failed to refresh"
-      flash_error(failure_message, failure_desciption)
+      flash_error(
+        I18n.t("refresh_companies_house_name.messages.failure"), nil
+      )
     end
 
     redirect_back(fallback_location: registration_path(reg_identifier))
@@ -22,17 +26,5 @@ class RefreshCompaniesHouseNameController < ApplicationController
 
   def authenticate_user!
     authorize! :refresh_company_name, WasteCarriersEngine::Registration
-  end
-
-  def success_message
-    I18n.t("refresh_companies_house_name.messages.success")
-  end
-
-  def failure_message
-    I18n.t("refresh_companies_house_name.messages.failure")
-  end
-
-  def failure_desciption
-    I18n.t("refresh_companies_house_name.messages.failure_details")
   end
 end
