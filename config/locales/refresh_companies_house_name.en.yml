@@ -2,5 +2,5 @@ en:
   refresh_companies_house_name:
     messages:
       success: You have successfully refreshed the Companies House information.
-      failure: There was an error refreshing the Companies House information. Try again later
+      failure: There was an error refreshing the Companies House information. Try again later.
       failure_details: ""
