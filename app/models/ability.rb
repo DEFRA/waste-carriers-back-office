@@ -40,7 +40,6 @@ class Ability
 
   def permissions_for_data_agent_user
     can :view_certificate, WasteCarriersEngine::Registration
-    can :view_payments, :all
     can :view_revoked_reasons, :all
   end
 

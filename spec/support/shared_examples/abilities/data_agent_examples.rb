@@ -6,10 +6,6 @@ RSpec.shared_examples "data_agent examples" do
     should be_able_to(:view_certificate, WasteCarriersEngine::Registration)
   end
 
-  it "should be able to view payments" do
-    should be_able_to(:view_payments, WasteCarriersEngine::RenewingRegistration)
-  end
-
   it "should be able to view revoked reasons" do
     should be_able_to(:view_revoked_reasons, WasteCarriersEngine::RenewingRegistration)
   end
