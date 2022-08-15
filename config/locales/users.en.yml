@@ -22,6 +22,7 @@ en:
           finance_super: "finance super"
           developer: "developer"
           import_conviction_data: "agency user who can import conviction data"
+          data_agent: "User who can only read data"
         statuses:
           active: "active"
           deactivated: "deactivated"

@@ -10,11 +10,17 @@ class Ability
 
     can :use_back_office, :all
 
+    assign_data_agent_user_permissions(user)
     assign_agency_user_permissions(user)
     assign_finance_user_permissions(user)
   end
 
   private
+
+  def assign_data_agent_user_permissions(_user)
+    # Could assign here but assigned in a separate method to align with other permissions
+    permissions_for_data_agent_user
+  end
 
   def assign_agency_user_permissions(user)
     permissions_for_agency_user if agency_user?(user)
@@ -31,6 +37,12 @@ class Ability
   end
 
   # Permissions for specific roles
+
+  def permissions_for_data_agent_user
+    can :view_certificate, WasteCarriersEngine::Registration
+    can :view_payments, :all
+    can :view_revoked_reasons, :all
+  end
 
   def permissions_for_agency_user
     # This covers everything mounted in the engine and used for the assisted digital journey, including WorldPay

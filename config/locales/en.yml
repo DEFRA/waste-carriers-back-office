@@ -54,6 +54,7 @@ en:
           finance_super: "Finance super user"
           developer: "Developer"
           import_conviction_data: "Agency user who can import conviction data"
+          data_agent: "User who can only read data"
 
   # Kaminari overrides
   helpers:

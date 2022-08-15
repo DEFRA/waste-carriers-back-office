@@ -113,4 +113,14 @@ RSpec.describe Ability, type: :model do
 
     include_examples "active and inactive examples"
   end
+
+  context "when the user role is data_agent" do
+    let(:role) { "data_agent" }
+
+    include_examples "data_agent examples"
+
+    include_examples "non-developer examples"
+    include_examples "non-import_conviction_data examples"
+    include_examples "active and inactive examples"
+  end
 end
