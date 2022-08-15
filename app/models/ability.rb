@@ -17,9 +17,9 @@ class Ability
 
   private
 
-  def assign_data_agent_user_permissions(_user)
+  def assign_data_agent_user_permissions(user)
     # Could assign here but assigned in a separate method to align with other permissions
-    permissions_for_data_agent_user
+    permissions_for_data_agent_user if data_agent?(user)
   end
 
   def assign_agency_user_permissions(user)
@@ -175,6 +175,10 @@ class Ability
 
   def import_conviction_data?(user)
     user.role == "import_conviction_data"
+  end
+
+  def data_agent?(user)
+    user.role == "data_agent"
   end
 
   def write_off_agency_user_cap
