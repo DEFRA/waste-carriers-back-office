@@ -233,6 +233,10 @@ Rails.application.routes.draw do
             path: "/bo/import-convictions",
             path_names: { new: "" }
 
+  resource :finance_reports,
+           only: %i[show],
+           path: "/bo/reports/download_finance_reports"
+
   # Redirect old Devise routes
   # rubocop:disable Style/FormatStringToken
   get "/agency_users(*all)" => redirect("/bo/users%{all}")
