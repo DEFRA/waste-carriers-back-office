@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+bundle exec byebug -R ${BYEBUG_PORT_BACK_OFFICE:-8989}

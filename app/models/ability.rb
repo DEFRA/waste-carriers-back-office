@@ -27,7 +27,7 @@ class Ability
     permissions_for_agency_user_with_refund if agency_user_with_refund?(user)
     permissions_for_agency_super_user if agency_super_user?(user)
     permissions_for_developer_user if developer?(user)
-    permissions_for_import_conviction_data_user if import_conviction_data?(user)
+    permissions_for_cbd_user if cbd_user?(user)
   end
 
   def assign_finance_user_permissions(user)
@@ -120,6 +120,7 @@ class Ability
 
     can :manage_back_office_users, User
     can :charge_adjust, :all
+    can :run_finance_reports, :all
 
     # rubocop:disable Style/SymbolProc
     can :modify_user, User do |user|
@@ -134,12 +135,14 @@ class Ability
 
     can :manage, WasteCarriersEngine::FeatureToggle
     can :import_conviction_data, :all
+    can :run_finance_reports, :all
   end
 
-  def permissions_for_import_conviction_data_user
+  def permissions_for_cbd_user
     permissions_for_agency_user
 
     can :import_conviction_data, :all
+    can :run_finance_reports, :all
   end
 
   # Checks to see if role matches
@@ -172,8 +175,8 @@ class Ability
     user.role == "developer"
   end
 
-  def import_conviction_data?(user)
-    user.role == "import_conviction_data"
+  def cbd_user?(user)
+    user.role == "cbd_user"
   end
 
   def data_agent?(user)
