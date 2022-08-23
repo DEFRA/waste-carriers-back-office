@@ -21,7 +21,7 @@ en:
           agency_super: "agency super"
           finance_super: "finance super"
           developer: "developer"
-          import_conviction_data: "agency user who can import conviction data"
+          cbd_user: "CBD Team user"
           data_agent: "User who can only read data"
         statuses:
           active: "active"

@@ -64,8 +64,8 @@ RSpec.describe Ability, type: :model do
     include_examples "active and inactive examples"
   end
 
-  context "when the user role is import_conviction_data" do
-    let(:role) { "import_conviction_data" }
+  context "when the user role is cbd_user" do
+    let(:role) { "cbd_user" }
 
     include_examples "below agency_super examples"
     include_examples "below agency_with_refund examples"
@@ -73,6 +73,7 @@ RSpec.describe Ability, type: :model do
 
     include_examples "non-developer examples"
     include_examples "import_conviction_data examples"
+    include_examples "finance_report examples"
 
     include_examples "active and inactive examples"
   end

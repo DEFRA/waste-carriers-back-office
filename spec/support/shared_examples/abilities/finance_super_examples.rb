@@ -14,4 +14,6 @@ RSpec.shared_examples "finance_super examples" do
     user = build(:user, :finance)
     should be_able_to(:modify_user, user)
   end
+
+  include_examples "finance_report examples"
 end
