@@ -52,22 +52,5 @@ module Reports
         end
       end
     end
-
-    describe ".download_url" do
-      context "when the service has not yet been run" do
-        it "raises an exception" do
-          expect { described_class.new.download_url }.to raise_error(StandardError)
-        end
-      end
-
-      context "when the service has been run" do
-        it "returns the URL of report the file on S3" do
-          service = described_class.new
-          service.run
-
-          expect(service.download_url).to include "FINANCE_REPORTS"
-        end
-      end
-    end
   end
 end
