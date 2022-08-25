@@ -43,7 +43,7 @@ module Reports
             "updated_by_user"
           ]
 
-          expect(OrderPresenter).to receive(:new).with(order, nil).and_return(presenter)
+          expect(Boxi::OrderPresenter).to receive(:new).with(order, nil).and_return(presenter)
 
           expect(presenter).to receive(:order_code).and_return("order_code")
           expect(presenter).to receive(:payment_method).and_return("payment_method")
@@ -65,7 +65,7 @@ module Reports
           order = double(:order)
           presenter = double(:presenter, description: " string to\r\nsanitize\n").as_null_object
 
-          allow(OrderPresenter).to receive(:new).with(order, nil).and_return(presenter)
+          allow(Boxi::OrderPresenter).to receive(:new).with(order, nil).and_return(presenter)
 
           allow(CSV).to receive(:open).and_return(csv)
           allow(csv).to receive(:<<).with(headers)
