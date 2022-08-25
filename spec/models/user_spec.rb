@@ -142,8 +142,8 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context "when the role is import_conviction_data" do
-      let(:user) { build(:user, :import_conviction_data) }
+    context "when the role is cbd_user" do
+      let(:user) { build(:user, :cbd_user) }
 
       it "is true" do
         expect(user.in_agency_group?).to eq(true)

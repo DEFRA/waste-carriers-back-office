@@ -10,6 +10,7 @@ en:
         letters: "Download letters"
         users: "Manage users"
         conviction_imports: "Import conviction data"
+        finance_reports: "Download finance reports"
         feature_toggles: "Toggle features"
         card_order_exports: "Copy card orders"
       user_info:
@@ -53,7 +54,7 @@ en:
           agency_super: "Agency super user"
           finance_super: "Finance super user"
           developer: "Developer"
-          import_conviction_data: "Agency user who can import conviction data"
+          cbd_user: "Agency user who can import conviction data and download finance reports"
           data_agent: "User who can only read data"
 
   # Kaminari overrides

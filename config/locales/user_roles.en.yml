@@ -11,5 +11,6 @@ en:
         agency_super: "%{email} is currently an agency super user."
         finance_super: "%{email} is currently a finance super user."
         developer: "%{email} is currently a developer."
-        import_conviction_data: "%{email} is currently an agency user who can import conviction data."
+        cbd_user: "%{email} is currently a CBD Team user."
+        data_agent: "%{email} is currently a user who can only read data"
       submit_button: "Change role"

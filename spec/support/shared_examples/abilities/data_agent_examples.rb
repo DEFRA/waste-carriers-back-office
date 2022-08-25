@@ -35,6 +35,7 @@ RSpec.shared_examples "data_agent examples" do
     should_not be_able_to(:reverse, build(:payment, :cash))
     should_not be_able_to(:review_convictions, WasteCarriersEngine::RenewingRegistration)
     should_not be_able_to(:revoke, WasteCarriersEngine::Registration)
+    should_not be_able_to(:run_finance_reports, :all)
     should_not be_able_to(:transfer_registration, WasteCarriersEngine::Registration)
     should_not be_able_to(:update, WasteCarriersEngine::RenewingRegistration)
     should_not be_able_to(:write_off_large, WasteCarriersEngine::FinanceDetails)
