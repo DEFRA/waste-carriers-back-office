@@ -22,6 +22,11 @@ every :day, at: (ENV["EXPORT_SERVICE_EPR_EXPORT_TIME"] || "21:05"), roles: [:db]
   rake "reports:export:epr"
 end
 
+# This is the job to generate the daily finance reports.
+every :day, at: (ENV["GENERATE_FINANCE_REPORTS_TIME"] || "03:40"), roles: [:db] do
+  rake "reports:export:generate_finance_reports"
+end
+
 # This is the first renewal email reminder job. For each registration expiring
 # in 28 days time, it will generate and send the first email reminder
 every :day, at: (ENV["FIRST_RENEWAL_EMAIL_REMINDER_DAILY_RUN_TIME"] || "02:05"), roles: [:db] do
