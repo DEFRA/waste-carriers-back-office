@@ -29,14 +29,6 @@ module Reports
       File.unlink(file_path) if File.exist?(file_path)
     end
 
-    def download_url
-      @download_url ||= bucket.presigned_url("#{s3_directory}/#{file_name}")
-    end
-
-    def download_file_name
-      @download_file_name ||= file_name
-    end
-
     private
 
     def generate_csv_files
