@@ -9,4 +9,7 @@ RSpec.shared_examples "developer examples" do
     should_not be_able_to(:charge_adjust, WasteCarriersEngine::RenewingRegistration)
     should_not be_able_to(:charge_adjust, WasteCarriersEngine::Registration)
   end
+
+  include_examples "finance_report examples"
+
 end

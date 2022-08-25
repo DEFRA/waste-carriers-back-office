@@ -43,7 +43,7 @@ module Reports
             "updated_by_user"
           ]
 
-          expect(OrderPresenter).to receive(:new).with(order, nil).and_return(presenter)
+          expect(Boxi::OrderPresenter).to receive(:new).with(order, nil).and_return(presenter)
 
           expect(presenter).to receive(:order_code).and_return("order_code")
           expect(presenter).to receive(:payment_method).and_return("payment_method")
