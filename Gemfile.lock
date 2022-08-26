@@ -495,7 +495,7 @@ DEPENDENCIES
   aws-healthcheck
   cancancan (~> 3.2.1)
   database_cleaner-mongoid
-  defra_ruby_aws (~> 0.4)
+  defra_ruby_aws (~> 0.5)
   defra_ruby_features (~> 0.1)
   defra_ruby_mocks
   defra_ruby_style
