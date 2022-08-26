@@ -2,6 +2,21 @@
   <div class="govuk-grid-column-full">
     <%= render("waste_carriers_engine/shared/back", back_path: bo_path) %>
 
+    <h1 class="govuk-heading-l">
+      <%= t(".heading1") %>
+    </h1>
+
+    <h2 class="govuk-heading-m">
+      <%= t(".heading2") %>
+    </h2>
+
     <%= render("shared/flash_messages") %>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">
+          <%= link_to report_filename, report_download_url %>
+      </p>
+    </div>
   </div>
 </div>
