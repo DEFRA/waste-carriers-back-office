@@ -73,7 +73,7 @@ module Reports
     end
 
     def bucket
-      DefraRuby::Aws.get_bucket(bucket_name)
+      @bucket ||= DefraRuby::Aws.get_bucket(bucket_name)
     end
 
     def bucket_name
