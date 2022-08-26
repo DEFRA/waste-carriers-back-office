@@ -9,27 +9,36 @@ RSpec.describe "DownloadFinanceReports", type: :request do
     Dir[File.join(Pathname.new(Dir.mktmpdir).dirname, "*")]
   end
 
-  describe "GET /bo/card_order_exports" do
+  describe "GET /bo/download_finance_reports" do
 
     context "when a cbd_user is signed in" do
       let(:user) { create(:user, :cbd_user) }
+      let(:report_filename) { "report_file_2022-08-25_01-23-45.zip" }
+      let(:folder_prefix) { "SOME_FOLDER" }
+      let(:download_link) { "https://some_bucket.amazonaws.com/#{folder_prefix}/#{report_filename}" }
 
       before(:each) do
-        @tmp_dirs_pre = tmp_dirs
         sign_in(user)
-        get finance_reports_path
-      end
-
-      # Clean up the test /tmp area after generating the files
-      after(:each) do
-        tmp_dirs_added = tmp_dirs - @tmp_dirs_pre
-        tmp_dirs_added.each { |tmp_dir| FileUtils.rm_rf(tmp_dir) }
+        allow_any_instance_of(Reports::FinanceReportsAwsService).to receive(:download_link).and_return(download_link)
       end
 
       it "returns HTTP status 200" do
+        get finance_reports_path
+
         expect(response).to have_http_status(200)
       end
 
+      it "response includes the download URL" do
+        get finance_reports_path
+
+        expect(response.body).to include(download_link)
+      end
+
+      it "response includes the name of the report file" do
+        get finance_reports_path
+
+        expect(response.body).to include(report_filename)
+      end
     end
 
     context "when a non cbd_user is signed in" do
