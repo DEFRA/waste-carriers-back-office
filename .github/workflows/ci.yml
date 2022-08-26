@@ -28,6 +28,7 @@ jobs:
       AWS_WEEKLY_EXPORT_BUCKET: 5432
       FINANCE_REPORTS_BUCKET_NAME: 3456
       NOTIFY_API_KEY: ${{ secrets.NOTIFY_API_KEY }}
+
       # Just used to make the tests pass
       WCRS_WORLDPAY_MOTO_USERNAME: foo
       WCRS_WORLDPAY_MOTO_PASSWORD: foo
