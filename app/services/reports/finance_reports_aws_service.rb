@@ -24,7 +24,6 @@ module Reports
 
     def bucket_name
       @bucket_name ||= WasteCarriersBackOffice::Application.config.finance_reports_bucket_name
-      @bucket_name || (raise StandardError, "Environment variable \"FINANCE_REPORTS_BUCKET_NAME\" is undefined")
     end
 
     def s3_directory
