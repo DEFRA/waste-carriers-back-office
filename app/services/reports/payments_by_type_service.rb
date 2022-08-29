@@ -25,6 +25,9 @@ module Reports
 
     # rubocop:disable Metrics/MethodLength
     def run
+      # This definition is to avoid a SonarCloud complaint, it doesn't really help readability.
+      payment_date_key = "$payment.dateEntered"
+
       WasteCarriersEngine::Registration.collection.aggregate(
         [
           { "$match": {
@@ -43,9 +46,9 @@ module Reports
           { "$unwind": { path: "$payment" } },
           { "$project": {
             regIdentifier: 1,
-            day: ({ "$dayOfMonth": "$payment.dateEntered" } if @daily),
-            month: { "$month": "$payment.dateEntered" },
-            year: { "$year": "$payment.dateEntered" },
+            day: ({ "$dayOfMonth": payment_date_key } if @daily),
+            month: { "$month": payment_date_key },
+            year: { "$year": payment_date_key },
             paymentType: "$payment.paymentType",
             paymentAmount: "$payment.amount"
           }.compact },
