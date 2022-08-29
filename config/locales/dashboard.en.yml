@@ -1,62 +1,63 @@
 en:
   dashboards:
     index:
-      title: "Waste carriers registrations"
-      heading: "Waste carriers registrations"
+      title: Waste carriers registrations
+      heading: Waste carriers registrations
       actions:
-        subheading: "Actions"
-        new_registration: "Create new registration"
+        subheading: Actions
+        new_registration: Create new registration
       search:
-        label: "Search for a registration"
-        hint: "Using registration number, business or contact last name, postcode"
-        submit: "Search"
+        label: Search for a registration
+        hint: Search using registration number, business or contact last name or postcode. Use the checkbox to do a full name search across all names.
+        fullname_search_label: Search full name
+        submit: Search
       results:
         caption:
-          one: "Found 1 registration"
+          one: Found 1 registration
           other: "Found %{count} registrations"
         th:
-          reg_identifier: "Registration"
-          business: "Business"
-          status: "Status"
-          dates: "Dates"
-          actions: "Actions"
+          reg_identifier: Registration
+          business: Business
+          status: Status
+          dates: Dates
+          actions: Actions
         classes:
-          renewal: "Renewal"
-          new_registration: "New registration"
+          renewal: Renewal
+          new_registration: New registration
         statuses:
-          active: "active"
-          expired: "expired"
-          inactive: "inactive"
-          in_progress: "in progress"
-          pending_conviction_check: "convictions"
-          pending_payment: "payment needed"
-          refused: "refused"
-          revoked: "revoked"
-          stuck: "stuck"
+          active: active
+          expired: expired
+          inactive: inactive
+          in_progress: in progress
+          pending_conviction_check: convictions
+          pending_payment: payment needed
+          refused: refused
+          revoked: revoked
+          stuck: stuck
         date:
           expired: "Expired %{date}"
           last_modified: "Updated %{date}"
           will_expire: "Expires %{date}"
         actions:
           convictions:
-            link_text: "Conviction details"
+            link_text: Conviction details
             visually_hidden_text: "for %{name}"
           details:
-            link_text: "Registration details"
+            link_text: Registration details
             visually_hidden_text: "for %{name}"
           renew:
-            link_text: "Renew"
+            link_text: Renew
             visually_hidden_text: "%{name}"
           resume:
-            link_text: "Resume application"
+            link_text: Resume application
             visually_hidden_text: "for %{name}"
           cease_or_revoke:
-            link_text: "Cease or revoke"
+            link_text: Cease or revoke
             visually_hidden_text: "for %{name}"
           payment:
-            link_text: "Payment details"
+            link_text: Payment details
             visually_hidden_text: "for %{name}"
           transfer:
-            link_text: "Transfer"
+            link_text: Transfer
             visually_hidden_text: "%{name}"
-        no_results: "No results found."
+        no_results: No results found.
