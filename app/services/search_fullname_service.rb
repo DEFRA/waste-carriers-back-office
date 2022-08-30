@@ -93,12 +93,13 @@ class SearchFullnameService < ::WasteCarriersEngine::BaseService
                     # Need to determine the specific model type in order to map the document to a model instance.
                     doc["_type"].constantize
                   end
+
       # Skip any other registration types, e.g.EditRegistraitons
       next unless [WasteCarriersEngine::Registration,
                    WasteCarriersEngine::NewRegistration,
                    WasteCarriersEngine::RenewingRegistration].include? doc_model
 
       doc_model.new(doc.except(:fullname, :key_person, :key_fullname)) { |m| m.new_record = false }
-    end
+    end.compact
   end
 end
