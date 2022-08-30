@@ -26,8 +26,10 @@ class SearchFullnameService < ::WasteCarriersEngine::BaseService
   end
 
   def matching_resources
-    search(WasteCarriersEngine::Registration) +
-      search(WasteCarriersEngine::TransientRegistration)
+    # De-duplicate Registration results by reg_identifier
+    # and TransientRegistration results by reg_identifier and classname.
+    search(WasteCarriersEngine::Registration).uniq(&:reg_identifier) +
+      search(WasteCarriersEngine::TransientRegistration).uniq { |reg| "#{reg.reg_identifier}_#{reg.class}" }
   end
 
   def search(model)

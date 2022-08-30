@@ -72,8 +72,22 @@ RSpec.describe SearchFullnameService do
         matching_registration.save!
       end
 
-      it "matches the expected registration only" do
-        expect(service[:results]).to contain_exactly(matching_registration)
+      context "when there is no match on the registration owner" do
+        it "matches the expected registration only" do
+          expect(service[:results]).to contain_exactly(matching_registration)
+        end
+      end
+
+      context "when there is a match on both the registration owner and a key person" do
+        before do
+          matching_registration.first_name = key_first_name
+          matching_registration.last_name = key_last_name
+          matching_registration.save!
+        end
+
+        it "returns the registration once only" do
+          expect(service[:results].length).to eq 1
+        end
       end
     end
   end
