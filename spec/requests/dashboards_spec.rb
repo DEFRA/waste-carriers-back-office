@@ -29,6 +29,27 @@ RSpec.describe "Dashboards", type: :request do
           end
         end
 
+        context "when fullname search is selected" do
+          let(:first_name) { Faker::Name.first_name }
+          let(:last_name) { Faker::Name.last_name }
+          let!(:matching_renewal) { create(:renewing_registration, first_name: first_name, last_name: last_name) }
+          let!(:matching_registration) { WasteCarriersEngine::Registration.where(reg_identifier: matching_renewal.reg_identifier).first }
+
+          before do
+            matching_registration.first_name = first_name
+            matching_registration.last_name = last_name
+            matching_registration.save!
+          end
+
+          it "links to renewal details pages" do
+            link_to_renewal = renewing_registration_path(matching_renewal.reg_identifier)
+
+            get "/bo", params: { term: "#{first_name} #{last_name}", "search_fullname": "1" }
+
+            expect(response.body).to include(link_to_renewal)
+          end
+        end
+
         context "when there are no matches" do
           it "says there are no results" do
             get "/bo", params: { term: "foobarbaz" }
