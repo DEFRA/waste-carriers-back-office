@@ -38,13 +38,8 @@ class SearchFullnameService < ::WasteCarriersEngine::BaseService
     run_search_for_pipeline(
       model,
       [
-        # Preliminary filters on first and last name to reduce the amount of projecting needed
-        { "$match":
-          { "$expr":
-            { "$and": [
-              { "$eq": [{ "$indexOfCP": [@term, { "$toLower": "$firstName" }] }, 0] },
-              { "$ne": [{ "$indexOfCP": [@term, { "$toLower": "$lastName" }] }, -1] }
-            ] } } },
+        # Preliminary filter on first name to reduce the amount of projecting needed
+        { "$match": { "$expr": { "$eq": [{ "$indexOfCP": [@term, { "$toLower": "$firstName" }] }, 0] } } },
         # Project an additional fullname field and then match against it.
         { "$addFields": { fullname:
           { "$toLower": { "$concat": ["$firstName", " ", "$lastName"] } } } },
@@ -61,13 +56,8 @@ class SearchFullnameService < ::WasteCarriersEngine::BaseService
         # Create a separate document for each key person...
         { "$addFields": { key_person: "$key_people" } },
         { "$unwind": "$key_person" },
-        # Preliminary filters on first and last name to reduce the amount of projecting needed
-        { "$match":
-          { "$expr":
-            { "$and": [
-              { "$eq": [{ "$indexOfCP": [@term, { "$toLower": "$key_person.first_name" }] }, 0] },
-              { "$ne": [{ "$indexOfCP": [@term, { "$toLower": "$key_person.last_name" }] }, -1] }
-            ] } } },
+        # Preliminary filter on first name to reduce the amount of projecting needed
+        { "$match": { "$expr": { "$eq": [{ "$indexOfCP": [@term, { "$toLower": "$key_person.first_name" }] }, 0] } } },
         # ... then project an additional key_fullname field to match against.
         { "$addFields": { key_fullname:
           { "$toLower": { "$concat": ["$key_person.first_name", " ", "$key_person.last_name"] } } } },
