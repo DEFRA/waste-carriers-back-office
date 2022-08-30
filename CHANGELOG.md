@@ -1,5 +1,28 @@
 # Changelog
 
+## [v1.18.1](https://github.com/defra/waste-carriers-back-office/tree/v1.18.1) (2022-08-30)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.18.0...v1.18.1)
+
+**Implemented enhancements:**
+
+- Fullname search [\#1423](https://github.com/DEFRA/waste-carriers-back-office/pull/1423) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Feature/cbd user [\#1417](https://github.com/DEFRA/waste-carriers-back-office/pull/1417) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Fixed bugs:**
+
+- Add namespace to OrderPresenter to avoid intermittent CI failures [\#1419](https://github.com/DEFRA/waste-carriers-back-office/pull/1419) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Merged pull requests:**
+
+- Bump defra\_ruby\_aws from 0.4.1 to 0.5.0 [\#1422](https://github.com/DEFRA/waste-carriers-back-office/pull/1422) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `55764a7` to `94c0f1b` [\#1420](https://github.com/DEFRA/waste-carriers-back-office/pull/1420) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Release v1.18.0 [\#1418](https://github.com/DEFRA/waste-carriers-back-office/pull/1418) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Bump webmock from 3.17.1 to 3.18.1 [\#1416](https://github.com/DEFRA/waste-carriers-back-office/pull/1416) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pry-byebug from 3.9.0 to 3.10.1 [\#1415](https://github.com/DEFRA/waste-carriers-back-office/pull/1415) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump govuk\_design\_system\_formbuilder from 3.1.1 to 3.1.2 [\#1414](https://github.com/DEFRA/waste-carriers-back-office/pull/1414) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `62cb12e` to `55764a7` [\#1412](https://github.com/DEFRA/waste-carriers-back-office/pull/1412) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v1.18.0](https://github.com/defra/waste-carriers-back-office/tree/v1.18.0) (2022-08-16)
 
 [Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.17.2...v1.18.0)
