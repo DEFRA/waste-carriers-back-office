@@ -42,11 +42,9 @@ class SearchFullnameService < ::WasteCarriersEngine::BaseService
         { "$match":
           { "$expr":
             { "$and": [
-              { "$eq": [ { "$indexOfCP": [@term, { "$toLower": "$firstName" }] }, 0 ] },
-              { "$ne": [ { "$indexOfCP": [@term, { "$toLower": "$lastName" }] }, -1 ] } ]
-            }
-          }
-        },
+              { "$eq": [{ "$indexOfCP": [@term, { "$toLower": "$firstName" }] }, 0] },
+              { "$ne": [{ "$indexOfCP": [@term, { "$toLower": "$lastName" }] }, -1] }
+            ] } } },
         # Project an additional fullname field and then match against it.
         { "$addFields": { fullname:
           { "$toLower": { "$concat": ["$firstName", " ", "$lastName"] } } } },
@@ -67,11 +65,9 @@ class SearchFullnameService < ::WasteCarriersEngine::BaseService
         { "$match":
           { "$expr":
             { "$and": [
-              { "$eq": [ { "$indexOfCP": [@term, { "$toLower": "$key_person.first_name" }] }, 0 ] },
-              { "$ne": [ { "$indexOfCP": [@term, { "$toLower": "$key_person.last_name" }] }, -1 ] } ]
-            }
-          }
-        },
+              { "$eq": [{ "$indexOfCP": [@term, { "$toLower": "$key_person.first_name" }] }, 0] },
+              { "$ne": [{ "$indexOfCP": [@term, { "$toLower": "$key_person.last_name" }] }, -1] }
+            ] } } },
         # ... then project an additional key_fullname field to match against.
         { "$addFields": { key_fullname:
           { "$toLower": { "$concat": ["$key_person.first_name", " ", "$key_person.last_name"] } } } },
