@@ -51,6 +51,10 @@
     {
       "email" : "developer@wcr.gov.uk",
       "role" : "developer"
+    },
+    {
+      "email" : "cbd-user@wcr.gov.uk",
+      "role" : "cbd_user"
     }
   ]
 }
