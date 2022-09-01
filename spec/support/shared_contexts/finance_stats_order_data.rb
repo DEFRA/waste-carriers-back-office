@@ -45,23 +45,24 @@ RSpec.shared_context "Finance stats order data" do
     ]
   end
 
-  # tally the test data directly to aid comparisons, by totals per month and by type per month
+  # tally the test data directly to aid comparisons, by totals and types per date
   let(:test_charge_tallies) do
-    charges_by_date_by_type = {}
+    charges_by_date = {}
     order_data.each do |date_charge_data|
       date = date_charge_data[:date].strftime("%Y-%m-%d")
-      charges_by_date_by_type[date] ||= {}
+      charges_by_date[date] ||= { totals: { count: 0, amount: 0 } }
       date_charge_data[:orders].each do |order|
         order.each do |type_sym, amount|
           type = type_sym.to_s
-          charges_by_date_by_type[date] ||= {}
-          charges_by_date_by_type[date][type] ||= { count: 0, amount: 0 }
-          charges_by_date_by_type[date][type][:count] += 1
-          charges_by_date_by_type[date][type][:amount] += amount
+          charges_by_date[date][type] ||= { count: 0, amount: 0 }
+          charges_by_date[date][type][:count] += 1
+          charges_by_date[date][type][:amount] += amount
+          charges_by_date[date][:totals][:count] += 1
+          charges_by_date[date][:totals][:amount] += amount
         end
       end
     end
-    charges_by_date_by_type
+    charges_by_date
   end
 
   # map the report charge type names to the app charge types for use in specs
