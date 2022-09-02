@@ -164,5 +164,29 @@ RSpec.describe SearchService do
         expect(service[:results]).to include(matching_registration)
       end
     end
+
+    context "when there is a match on telephone number" do
+      let(:term) { matching_renewal.phone_number }
+
+      it "returns the correct count" do
+        expect(service[:count]).to eq(2)
+      end
+
+      it "displays the matching transient_registration" do
+        expect(service[:results]).to include(matching_renewal)
+      end
+
+      it "displays the matching registration" do
+        expect(service[:results]).to include(matching_registration)
+      end
+
+      it "does not display a non-matching transient_registration" do
+        expect(service[:results]).to_not include(non_matching_renewal)
+      end
+
+      it "does not display a non-matching registration" do
+        expect(service[:results]).to_not include(non_matching_registration)
+      end
+    end
   end
 end
