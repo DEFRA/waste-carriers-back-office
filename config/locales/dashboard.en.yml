@@ -8,7 +8,7 @@ en:
         new_registration: Create new registration
       search:
         label: Search for a registration
-        hint: Search using registration number, business or contact last name or postcode. Use the checkbox to do a full name search across all names.
+        hint: Search using registration number, business or contact last name, postcode or telephone number. Use the checkbox to do a full name search across all names.
         fullname_search_label: Search full name
         submit: Search
       results:
