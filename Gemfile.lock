@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: a399b0a94e2a30e4cfcc0c3be92cd424155d3eff
+  revision: 4ea4f28b723a54d6eacbd8ff4861af907ab8fbeb
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -317,7 +317,7 @@ GEM
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.7.1)
+    phonelib (0.7.2)
     protocol-hpack (1.4.2)
     protocol-http (0.22.5)
     protocol-http1 (0.14.1)
