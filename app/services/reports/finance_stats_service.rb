@@ -47,7 +47,7 @@ module Reports
     def results_entry(result)
       entry = find_matching_result(result)
       unless entry.present?
-        entry = {
+        entry = HashWithIndifferentAccess.new(
           period: entry_period(result),
           year: result[:year],
           month: result[:month],
@@ -77,7 +77,7 @@ module Reports
             edit: { count: 0, total: 0 },
             irimport: { count: 0, total: 0 }
           }
-        }.compact
+        ).compact
         @results << entry
       end
 
@@ -86,7 +86,11 @@ module Reports
     # rubocop:enable Metrics/MethodLength
 
     def find_matching_result(candidate)
-      @results.select { |result| result[:year] == candidate[:year] && result[:month] == candidate[:month] }.first
+      if @daily
+        @results.select { |result| result.slice(:year, :month, :day) == candidate.slice(:year, :month, :day) }.first
+      else
+        @results.select { |result| result.slice(:year, :month) == candidate.slice(:year, :month) }.first
+      end
     end
 
     def update_balance(entry, result)
