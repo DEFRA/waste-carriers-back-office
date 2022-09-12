@@ -20,7 +20,7 @@ RSpec.describe Reports::PaymentsByTypeService do
 
       it "returns the correct count for each payment type for each month" do
         [5.months.ago, 4.months.ago, 3.months.ago].each do |date|
-          date_key = date.strftime("%Y-%m-%d")
+          date_key = date.strftime("%Y-%m")
           report_payment_type_map.each do |report_type, db_type|
             expected_count = test_payment_tallies.dig(date_key, db_type, :count) || 0
             report_count = subject.select { |r| r[:year] == date.year && r[:month] == date.month }
@@ -34,7 +34,7 @@ RSpec.describe Reports::PaymentsByTypeService do
 
       it "returns the correct total payment amounts for each payment type for each month" do
         [5.months.ago, 4.months.ago, 3.months.ago].each do |date|
-          date_key = date.strftime("%Y-%m-%d")
+          date_key = date.strftime("%Y-%m")
           report_payment_type_map.each do |report_type, db_type|
             expected_amount = test_payment_tallies.dig(date_key, db_type, :amount) || 0
             report_amount = subject.select { |r| r[:year] == date.year && r[:month] == date.month }
@@ -51,7 +51,7 @@ RSpec.describe Reports::PaymentsByTypeService do
       subject { described_class.new(:ddmmyyyy).run }
 
       it "returns the correct count for each payment type for each date" do
-        [5.months.ago, 4.months.ago, 3.months.ago].each do |date|
+        [5.months.ago, 5.months.ago + 1.day, 4.months.ago - 1.day, 4.months.ago, 3.months.ago].each do |date|
           date_key = date.strftime("%Y-%m-%d")
           report_payment_type_map.each do |report_type, db_type|
             expected_count = test_payment_tallies.dig(date_key, db_type, :count) || 0
@@ -65,7 +65,7 @@ RSpec.describe Reports::PaymentsByTypeService do
       end
 
       it "returns the correct total payment amounts for each payment type for each date" do
-        [5.months.ago, 4.months.ago, 3.months.ago].each do |date|
+        [5.months.ago, 5.months.ago + 1.day, 4.months.ago - 1.day, 4.months.ago, 3.months.ago].each do |date|
           date_key = date.strftime("%Y-%m-%d")
           report_payment_type_map.each do |report_type, db_type|
             expected_amount = test_payment_tallies.dig(date_key, db_type, :amount) || 0

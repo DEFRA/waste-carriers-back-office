@@ -20,7 +20,7 @@ RSpec.describe Reports::ChargesByTypeService do
 
       it "returns the correct count for each charge type for each month" do
         [5.months.ago, 4.months.ago, 3.months.ago].each do |date|
-          date_key = date.strftime("%Y-%m-%d")
+          date_key = date.strftime("%Y-%m")
           report_charge_type_map.each do |report_type, db_type|
             expected_count = test_charge_tallies.dig(date_key, db_type, :count) || 0
             report_count = subject.select { |r| r[:year] == date.year && r[:month] == date.month }
@@ -34,7 +34,7 @@ RSpec.describe Reports::ChargesByTypeService do
 
       it "returns the correct total charge amounts for each charge type for each month" do
         [5.months.ago, 4.months.ago, 3.months.ago].each do |date|
-          date_key = date.strftime("%Y-%m-%d")
+          date_key = date.strftime("%Y-%m")
           report_charge_type_map.each do |report_type, db_type|
             expected_amount = test_charge_tallies.dig(date_key, db_type, :amount) || 0
             report_amount = subject.select { |r| r[:year] == date.year && r[:month] == date.month }
