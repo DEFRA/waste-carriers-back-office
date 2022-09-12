@@ -1,0 +1,4 @@
+en:
+  download_finance_reports:
+    messages:
+      failure: There was an error generating the finance reports. Please contact the Ruby Services team.
