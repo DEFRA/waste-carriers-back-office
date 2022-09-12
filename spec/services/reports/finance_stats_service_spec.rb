@@ -80,7 +80,7 @@ RSpec.describe Reports::FinanceStatsService do
         it "returns the correct total number of entries" do
           # The finance_details factory creates additional orders for the current date when creating the payments.
           # Expect one top-level structure per month (with orders) in the order data, plus one for the current month.
-          expect(subject.to_a.length).to eq 4
+          expect(subject.length).to eq 4
         end
 
         it "returns the correct top-level keys per row" do
@@ -195,9 +195,13 @@ RSpec.describe Reports::FinanceStatsService do
       context "results structure" do
 
         it "returns the correct total number of entries" do
+          payment_dates = payment_data.map { |dt| dt[:date].strftime("%Y-%m-%d") }
+          order_dates = order_data.map { |dt| dt[:date].strftime("%Y-%m-%d") }
+          all_dates = (payment_dates + order_dates).uniq
+
           # The finance_details factory creates additional orders for the current date when creating the payments.
           # Expect one top-level structure per date in the test data, plus one for the current date.
-          expect(subject.to_a.length).to eq 6
+          expect(subject.length).to eq all_dates.length + 1
         end
 
         it "returns the correct top-level keys per row" do
