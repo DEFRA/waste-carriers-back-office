@@ -17,6 +17,17 @@ RSpec.shared_context "Finance stats payment data" do
           "POSTALORDER" => [an_amount],
           "WORLDPAY" => [an_amount, an_amount, an_amount]
         } },
+      # ensure there are values for multiple days in at least one month
+      { date: 5.months.ago + 1.day,
+        payments: {
+          "BANKTRANSFER" => [an_amount, an_amount, an_amount],
+          "WORLDPAY" => [an_amount]
+        } },
+      { date: 4.months.ago - 1.day,
+        payments: {
+          "BANKTRANSFER" => [an_amount, an_amount, an_amount],
+          "WORLDPAY" => [an_amount]
+        } },
       { date: 4.months.ago,
         payments: {
           "POSTALORDER" => [an_amount, an_amount],
@@ -34,19 +45,28 @@ RSpec.shared_context "Finance stats payment data" do
 
   # tally the test data directly to aid comparisons, by date and by type.
   let(:test_payment_tallies) do
-    payments_by_date_by_type = {}
+    payments_by_date = {}
     payment_data.each do |date_payment_data|
-      date = date_payment_data[:date].strftime("%Y-%m-%d")
-      payments_by_date_by_type[date] ||= {}
+      yymm = date_payment_data[:date].strftime("%Y-%m")
+      yymmdd = date_payment_data[:date].strftime("%Y-%m-%d")
+      payments_by_date[yymm] ||= { totals: { count: 0, amount: 0 } }
+      payments_by_date[yymmdd] ||= { totals: { count: 0, amount: 0 } }
       date_payment_data[:payments].each do |type, amounts|
         amounts.each do |amount|
-          payments_by_date_by_type[date][type] ||= { count: 0, amount: 0 }
-          payments_by_date_by_type[date][type][:count] += 1
-          payments_by_date_by_type[date][type][:amount] += amount
+          payments_by_date[yymm][type] ||= { count: 0, amount: 0 }
+          payments_by_date[yymmdd][type] ||= { count: 0, amount: 0 }
+          payments_by_date[yymm][type][:count] += 1
+          payments_by_date[yymmdd][type][:count] += 1
+          payments_by_date[yymm][type][:amount] += amount
+          payments_by_date[yymmdd][type][:amount] += amount
+          payments_by_date[yymm][:totals][:count] += 1
+          payments_by_date[yymmdd][:totals][:count] += 1
+          payments_by_date[yymm][:totals][:amount] += amount
+          payments_by_date[yymmdd][:totals][:amount] += amount
         end
       end
     end
-    payments_by_date_by_type
+    payments_by_date
   end
 
   # map the report payment type names to the app payment types for use in specs

@@ -17,6 +17,19 @@ RSpec.shared_context "Finance stats order data" do
           { "EDIT": 2500 },
           { "IR_IMPORT": 9876 }
         ] },
+      # ensure there are values for multiple days in at least one month
+      { date: 5.months.ago + 1.day,
+        orders: [
+          { "NEW": 10_500 },
+          { "NEW": 10_500 },
+          { "RENEW": 10_000 }
+        ] },
+      { date: 4.months.ago - 1.day,
+        orders: [
+          { "NEW": 10_500 },
+          { "RENEW": 10_000 },
+          { "RENEW": 10_000 }
+        ] },
       { date: 4.months.ago,
         orders: [
           { "CHARGE_ADJUST": 1200 },
@@ -45,23 +58,31 @@ RSpec.shared_context "Finance stats order data" do
     ]
   end
 
-  # tally the test data directly to aid comparisons, by totals per month and by type per month
+  # tally the test data directly to aid comparisons, by totals and types per date
   let(:test_charge_tallies) do
-    charges_by_date_by_type = {}
+    charges_by_date = {}
     order_data.each do |date_charge_data|
-      date = date_charge_data[:date].strftime("%Y-%m-%d")
-      charges_by_date_by_type[date] ||= {}
+      yymm = date_charge_data[:date].strftime("%Y-%m")
+      yymmdd = date_charge_data[:date].strftime("%Y-%m-%d")
+      charges_by_date[yymm] ||= { totals: { count: 0, amount: 0 } }
+      charges_by_date[yymmdd] ||= { totals: { count: 0, amount: 0 } }
       date_charge_data[:orders].each do |order|
         order.each do |type_sym, amount|
           type = type_sym.to_s
-          charges_by_date_by_type[date] ||= {}
-          charges_by_date_by_type[date][type] ||= { count: 0, amount: 0 }
-          charges_by_date_by_type[date][type][:count] += 1
-          charges_by_date_by_type[date][type][:amount] += amount
+          charges_by_date[yymm][type] ||= { count: 0, amount: 0 }
+          charges_by_date[yymmdd][type] ||= { count: 0, amount: 0 }
+          charges_by_date[yymm][type][:count] += 1
+          charges_by_date[yymmdd][type][:count] += 1
+          charges_by_date[yymm][type][:amount] += amount
+          charges_by_date[yymmdd][type][:amount] += amount
+          charges_by_date[yymm][:totals][:count] += 1
+          charges_by_date[yymmdd][:totals][:count] += 1
+          charges_by_date[yymm][:totals][:amount] += amount
+          charges_by_date[yymmdd][:totals][:amount] += amount
         end
       end
     end
-    charges_by_date_by_type
+    charges_by_date
   end
 
   # map the report charge type names to the app charge types for use in specs

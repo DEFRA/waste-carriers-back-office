@@ -49,6 +49,10 @@ module Reports
       @rows = rows
     end
 
+    def to_csv
+      super(force_quotes: false)
+    end
+
     def scope
       @rows
     end

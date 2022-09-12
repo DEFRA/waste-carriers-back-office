@@ -4,8 +4,8 @@ require "csv"
 
 module Reports
   class BaseSerializer
-    def to_csv
-      CSV.generate(force_quotes: true) do |csv|
+    def to_csv(force_quotes: true)
+      CSV.generate(force_quotes: force_quotes) do |csv|
         csv << self.class::ATTRIBUTES.values
 
         each_data do |parsed_object|
