@@ -17,6 +17,7 @@ module Reports
     # These simple methods are easier to scan if defined on one line and without spaces between them.
     # rubocop:disable Style/SingleLineMethods
     # rubocop:disable Layout/EmptyLineBetweenDefs
+    def balance()                pounds(@row[:balance]) end
     def pay_cnt()                @row[:payments][:count] end
     def pay_bal()                pounds(@row[:payments][:balance]) end
     def pay_cash_cnt()           @row[:payments][:cash][:count] end

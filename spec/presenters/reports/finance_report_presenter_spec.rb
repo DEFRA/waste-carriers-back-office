@@ -7,6 +7,11 @@ module Reports
 
     let(:row) do
       {
+        period: "20220912",
+        year: "2022",
+        month: "09",
+        day: "12",
+        balance: Faker::Number.number(digits: 4),
         payments: {
           count: Faker::Number.number(digits: 2),
           balance: Faker::Number.number(digits: 4),
@@ -85,6 +90,7 @@ module Reports
     subject { described_class.new(row) }
 
     it "presents monetary amounts as pounds and pence" do
+      expect(subject.balance).to eq format("%<val>.2f", val: row[:balance] / 100.0)
       expect(subject.pay_bal).to eq format("%<val>.2f", val: row[:payments][:balance] / 100.0)
       expect(subject.pay_cash_tot).to eq format("%<val>.2f", val: row[:payments][:cash][:total] / 100.0)
       expect(subject.pay_reversal_tot).to eq format("%<val>.2f", val: row[:payments][:reversal][:total] / 100.0)
