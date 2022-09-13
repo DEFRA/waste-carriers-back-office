@@ -80,12 +80,12 @@ RSpec.describe Reports::FinanceStatsService do
         it "returns the correct total number of entries" do
           # The finance_details factory creates additional orders for the current date when creating the payments.
           # Expect one top-level structure per month (with orders) in the order data, plus one for the current month.
-          expect(subject.length).to eq 4
+          expect(subject.length).to eq 7
         end
 
         it "returns the correct top-level keys per row" do
           subject.each do |row|
-            expect(row.keys).to match_array(%w[period year month balance payments charges])
+            expect(row.keys).to match_array(%w[period year month balance renewals_due renewal_percent payments charges])
           end
         end
       end
@@ -102,7 +102,28 @@ RSpec.describe Reports::FinanceStatsService do
           end
         end
 
+        context "renewals due and actual" do
+          it "returns the correct expected renewal counts based on actual registrations 36 months previously" do
+            5.downto(3).each do |month_index|
+              # month indices are higher in the past because we use 'month_index.months.ago'
+              registration_month_index = month_index + 36
+              new_regs_36_months_ago = test_charges_tally_month(registration_month_index)["NEW"][:count]
+              renewals_36_months_ago = test_charges_tally_month(registration_month_index)["RENEW"][:count]
+
+              expect(result_for_month(month_index)[:renewals_due]).to eq new_regs_36_months_ago + renewals_36_months_ago
+            end
+          end
+
+          it "returns the correct actual renewal percentage" do
+            5.downto(3).each do |month_index|
+              row = result_for_month(month_index)
+              expect(row[:renewal_percent]).to eq row[:charges][:renew][:count].to_f / row[:renewals_due]
+            end
+          end
+        end
+
         context "payments" do
+
           it "returns entries for all payment types" do
             5.downto(3).each do |month_index|
               expect(result_for_month(month_index)[:payments].keys).to match_array(%w[count balance] + payment_types)
@@ -141,6 +162,7 @@ RSpec.describe Reports::FinanceStatsService do
         end
 
         context "charges" do
+
           it "returns entries for all charge types" do
             5.downto(3).each do |month_index|
               expect(result_for_month(month_index)[:charges].keys).to match_array(%w[count balance] + charge_types)
@@ -225,6 +247,7 @@ RSpec.describe Reports::FinanceStatsService do
         end
 
         context "payments" do
+
           it "returns entries for all payment types" do
             [5.months.ago, 5.months.ago + 1.day, 4.months.ago - 1.day, 4.months.ago, 3.months.ago].each do |date|
               expect(result_for_yyyymmdd(date)[:payments].keys).to match_array(%w[count balance] + payment_types)
@@ -263,6 +286,7 @@ RSpec.describe Reports::FinanceStatsService do
         end
 
         context "charges" do
+
           it "returns entries for all charge types" do
             [5.months.ago, 5.months.ago + 1.day, 4.months.ago - 1.day, 4.months.ago, 3.months.ago].each do |date|
               expect(result_for_yyyymmdd(date)[:charges].keys).to match_array(%w[count balance] + charge_types)
@@ -301,6 +325,7 @@ RSpec.describe Reports::FinanceStatsService do
         end
 
         context "balance" do
+
           it "returns the expected balance for each row" do
             [5.months.ago, 5.months.ago + 1.day, 4.months.ago - 1.day, 4.months.ago, 3.months.ago].each do |date|
               expect(result_for_yyyymmdd(date)[:balance]).to eq test_charges_total_day(date) - test_payments_total_day(date)

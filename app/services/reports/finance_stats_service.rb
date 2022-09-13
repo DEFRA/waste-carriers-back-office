@@ -32,6 +32,8 @@ module Reports
         update_entry(entry, result)
       end
 
+      monthly_post_process
+
       @results.sort_by { |res| res[:period] }
     end
 
@@ -41,6 +43,11 @@ module Reports
       else
         format("%<year>04i%<month>02i", year: result[:year], month: result[:month])
       end
+    end
+
+    def expiry_period(result)
+      expiry_date = Date.new(result[:year], result[:month], 1) + 36.months
+      format("%<year>04i%<month>02i", year: expiry_date.year, month: expiry_date.month)
     end
 
     # rubocop:disable Metrics/MethodLength
@@ -53,6 +60,8 @@ module Reports
           month: result[:month],
           day: (result[:day] if @daily),
           balance: 0,
+          renewals_due: (0 unless @daily),
+          renewal_percent: (0 unless @daily),
           payments: {
             count: 0,
             balance: 0,
@@ -132,6 +141,21 @@ module Reports
 
       update_payments(entry, result) if result[:resultType] == "pay"
       update_charges(entry, result) if result[:resultType] == "charge"
+    end
+
+    # If there is an entry for this month plus 36 months, populate renewals_due on it
+    def monthly_post_process
+      @results.each do |result|
+        expiry_result = @results.select { |r| r[:period] == expiry_period(result) }.first
+        next unless expiry_result.present?
+
+        expiry_result[:renewals_due] = result[:charges][:newreg][:count] + result[:charges][:renew][:count]
+        expiry_result[:renewal_percent] = if expiry_result[:renewals_due].positive?
+                                            expiry_result[:charges][:renew][:count].to_f / expiry_result[:renewals_due]
+                                          else
+                                            0.0
+                                          end
+      end
     end
   end
   # rubocop:enable Metrics/ClassLength
