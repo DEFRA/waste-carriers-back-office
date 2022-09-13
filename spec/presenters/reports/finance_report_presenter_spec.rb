@@ -114,7 +114,7 @@ module Reports
     end
 
     it "presents percentage amounts in the correct format" do
-      expect(subject.renewal_percent).to eq format("%<val>2.1f", val: row[:renewal_percent] / 100.0)
+      expect(subject.renewal_percent).to eq format("%<val>2.1f%%", val: row[:renewal_percent] * 100.0)
     end
   end
 end

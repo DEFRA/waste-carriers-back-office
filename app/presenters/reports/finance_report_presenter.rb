@@ -22,7 +22,7 @@ module Reports
     # rubocop:disable Style/SingleLineMethods
     # rubocop:disable Layout/EmptyLineBetweenDefs
     def balance()                pounds(@row[:balance]) end
-    def renewal_percent()        percent(@row[:renew_percent]) end
+    def renewal_percent()        percent(@row[:renewal_percent]) end
     def pay_cnt()                @row[:payments][:count] end
     def pay_bal()                pounds(@row[:payments][:balance]) end
     def pay_cash_cnt()           @row[:payments][:cash][:count] end
