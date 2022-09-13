@@ -12,6 +12,8 @@ module Reports
         month: "09",
         day: "12",
         balance: Faker::Number.number(digits: 4),
+        renewals_due: Faker::Number.number(digits: 2),
+        renewal_percent: Faker::Number.between(from: 0.0, to: 1.0),
         payments: {
           count: Faker::Number.number(digits: 2),
           balance: Faker::Number.number(digits: 4),
@@ -109,6 +111,10 @@ module Reports
       expect(subject.chg_renew_tot).to eq format("%<val>.2f", val: row[:charges][:renew][:total] / 100.0)
       expect(subject.chg_edit_tot).to eq format("%<val>.2f", val: row[:charges][:edit][:total] / 100.0)
       expect(subject.chg_irimport_tot).to eq format("%<val>.2f", val: row[:charges][:irimport][:total] / 100.0)
+    end
+
+    it "presents percentage amounts in the correct format" do
+      expect(subject.renewal_percent).to eq format("%<val>2.1f", val: row[:renewal_percent] / 100.0)
     end
   end
 end
