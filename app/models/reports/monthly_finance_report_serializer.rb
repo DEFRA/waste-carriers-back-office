@@ -7,6 +7,8 @@ module Reports
       year: "year",
       month: "month",
       balance: "balance",
+      renewals_due: "renewals_due",
+      renewal_percent: "renewal_percent",
       pay_cnt: "pay_cnt",
       pay_bal: "pay_bal",
       pay_cash_cnt: "pay_cash_cnt",
