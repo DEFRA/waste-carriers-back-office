@@ -5,9 +5,30 @@ RSpec.shared_context "Finance stats order data" do
 
   let(:order_data) do
     [
+      # Include values for 36 months prior to the core test period, to allow for exipiries
+      { date: 41.months.ago,
+        orders: [
+          { "NEW": 10_500 },
+          { "NEW": 10_500, "COPY_CARDS": 1500 },
+          { "COPY_CARDS": 1500 },
+          { "RENEW": 10_000, "COPY_CARDS": 2500 },
+          { "CHARGE_ADJUST": 1200 }
+        ] },
+      { date: 40.months.ago,
+        orders: [
+          { "NEW": 10_500 },
+          { "COPY_CARDS": 1500 },
+          { "RENEW": 10_000 },
+          { "EDIT": 2500 }
+        ] },
+      { date: 39.months.ago,
+        orders: [
+          { "NEW": 10_500 },
+          { "RENEW": 10_000 },
+          { "RENEW": 10_000 }
+        ] },
       { date: 5.months.ago,
         orders: [
-          # create one charge_adjust order for STG12, one new registration order with copy cards, etc.
           { "CHARGE_ADJUST": 1200 },
           { "NEW": 10_500, "COPY_CARDS": 1500 },
           { "NEW": 10_500 },
