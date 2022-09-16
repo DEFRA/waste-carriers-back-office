@@ -126,6 +126,14 @@ module WasteCarriersBackOffice
     config.worldpay_ecom_password = ENV["WCRS_WORLDPAY_ECOM_PASSWORD"]
     config.worldpay_macsecret = ENV["WCRS_WORLDPAY_MOTO_MACSECRET"]
 
+    # Govpay
+    config.govpay_url = if ENV["WCRS_MOCK_ENABLED"].to_s.downcase == "true"
+                          ENV["WCRS_MOCK_BO_GOVPAY_URL"]
+                        else
+                          ENV["WCRS_GOVPAY_URL"] || "https://publicapi.payments.service.gov.uk/v1"
+                        end
+    config.govpay_api_token = ENV["WCRS_GOVPAY_API_TOKEN"]
+
     # Emails
     config.email_service_name = "Waste Carriers Registration Service"
     config.email_service_email = ENV["WCRS_EMAIL_SERVICE_EMAIL"]

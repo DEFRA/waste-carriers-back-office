@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 6b9398826cbb77cf0860102618a11e963e0e125b
+  revision: d105246331c3c092ea7cd4644e55d9901acdb44d
   branch: govpay
   specs:
     waste_carriers_engine (0.0.1)
