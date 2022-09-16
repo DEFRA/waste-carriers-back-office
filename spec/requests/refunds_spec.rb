@@ -59,7 +59,7 @@ RSpec.describe "Refunds", type: :request do
   describe "POST /bo/resource/:_id/refunds/:order_key" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
-      let(:renewing_registration) { create(:renewing_registration, :overpaid) }
+      let(:renewing_registration) { create(:renewing_registration, :overpaid_govpay) }
       let(:payment) { renewing_registration.finance_details.payments.first }
 
       before(:each) do
