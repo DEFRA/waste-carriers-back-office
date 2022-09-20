@@ -11,7 +11,10 @@ class RefundsController < ApplicationController
   before_action :fetch_payment, only: %i[new create]
 
   def index
-    payments = @resource.finance_details.payments.refundable
+    # Do not list worldpay payments if govpay is active, and vice-versa.
+    payments = @resource.finance_details.payments.refundable.reject do |payment|
+      payment.payment_type == (WasteCarriersEngine::FeatureToggle.active?(:govpay_payments) ? "WORLDPAY" : "GOVPAY")
+    end
     @payments = ::PaymentPresenter.create_from_collection(payments, view_context)
   end
 
