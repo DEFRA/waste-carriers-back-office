@@ -59,7 +59,6 @@ RSpec.describe "Refunds", type: :request do
   describe "POST /bo/resource/:_id/refunds/:order_key" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
-      let(:renewing_registration) { create(:renewing_registration, :overpaid_govpay) }
       let(:payment) { renewing_registration.finance_details.payments.first }
 
       before(:each) do
@@ -69,19 +68,28 @@ RSpec.describe "Refunds", type: :request do
         sign_in(user)
       end
 
-      it "creates a refund payment, redirects to the finance details page and returns a 302 status" do
-        expected_payments_count = renewing_registration.finance_details.payments.count + 1
+      context "when the payment is a govpay payment" do
+        let(:renewing_registration) { create(:renewing_registration, :overpaid_govpay) }
+        before do
+          allow(WasteCarriersEngine::GovpayRefundService).to receive(:run).and_return(true)
+        end
 
-        post resource_refunds_path(renewing_registration._id), params: { order_key: payment.order_key }
+        it "creates a refund payment, redirects to the finance details page and returns a 302 status" do
+          expected_payments_count = renewing_registration.finance_details.payments.count + 1
 
-        renewing_registration.reload
-        expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
+          post resource_refunds_path(renewing_registration._id), params: { order_key: payment.order_key }
 
-        expect(response).to redirect_to(resource_finance_details_path(renewing_registration._id))
-        expect(response).to have_http_status(302)
+          renewing_registration.reload
+          expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
+
+          expect(response).to redirect_to(resource_finance_details_path(renewing_registration._id))
+          expect(response).to have_http_status(302)
+        end
       end
 
       context "when the payment is a worldpay payment" do
+        let(:renewing_registration) { create(:renewing_registration, :overpaid) }
+
         it "creates a refund payment, redirects to the finance details page, sends a confirmation to worldpay and returns a 302 status" do
           payment.payment_type = WasteCarriersEngine::Payment::WORLDPAY
           payment.save
