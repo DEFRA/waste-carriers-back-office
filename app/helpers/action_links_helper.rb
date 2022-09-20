@@ -56,6 +56,10 @@ module ActionLinksHelper
   def display_refund_link_for?(resource)
     return false if resource.balance >= 0
 
+    # Display the link only if there is at least one payment of the relevant type
+    refundable_type = WasteCarriersEngine::FeatureToggle.active?(:govpay_payments) ? "GOVPAY" : "WORLDPAY"
+    return false if resource.payments.find { |payment| payment.payment_type == refundable_type }.nil?
+
     can?(:refund, resource)
   end
 

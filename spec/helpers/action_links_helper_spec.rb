@@ -185,21 +185,54 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
 
     context "when the resource has a negative balance" do
-      let(:balance) { -20 }
+      let(:resource) { build(:finance_details, :has_overpaid_order_and_payment) }
 
-      context "when the user has the permissions to refund" do
-        it "returns true" do
-          expect(helper).to receive(:can?).with(:refund, resource).and_return(true)
-
-          expect(helper.display_refund_link_for?(resource)).to be_truthy
+      context "when the user does not have the permissions to refund" do
+        before { allow(helper).to receive(:can?).with(:refund, resource).and_return(false) }
+        it "returns false" do
+          expect(helper.display_refund_link_for?(resource)).to be_falsey
         end
       end
 
-      context "when the user does not have the permissions to refund" do
-        it "returns false" do
-          expect(helper).to receive(:can?).with(:refund, resource).and_return(false)
+      context "when the user has the permissions to refund" do
+        before { allow(helper).to receive(:can?).with(:refund, resource).and_return(true) }
 
-          expect(helper.display_refund_link_for?(resource)).to be_falsey
+        context "for a worldpay payment" do
+          let(:resource) { build(:finance_details, :has_overpaid_order_and_payment) }
+
+          context "with govpay payments enabled" do
+            before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(true) }
+
+            it "returns false" do
+              expect(helper.display_refund_link_for?(resource)).to be_falsey
+            end
+          end
+          context "with govpay payments disabled" do
+            before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(false) }
+
+            it "returns true" do
+              expect(helper.display_refund_link_for?(resource)).to be_truthy
+            end
+          end
+        end
+
+        context "for a govpay payment" do
+          let(:resource) { build(:finance_details, :has_overpaid_order_and_payment_govpay) }
+
+          context "with govpay payments enabled" do
+            before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(true) }
+
+            it "returns true" do
+              expect(helper.display_refund_link_for?(resource)).to be_truthy
+            end
+          end
+          context "with govpay payments disabled" do
+            before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(false) }
+
+            it "returns false" do
+              expect(helper.display_refund_link_for?(resource)).to be_falsey
+            end
+          end
         end
       end
     end
