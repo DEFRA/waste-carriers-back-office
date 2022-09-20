@@ -7,16 +7,43 @@ RSpec.describe "Refunds", type: :request do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
+      let(:worldpay_payment) { renewing_registration.finance_details.payments.select { |p| p.payment_type == "WORLDPAY" }.first }
+      let(:govpay_payment) { renewing_registration.finance_details.payments.select { |p| p.payment_type == "GOVPAY" }.first }
+      let(:govpay_active?) { false }
 
       before(:each) do
+        # Ensure the registration has both govpay and worldpay payments
+        renewing_registration.finance_details.payments << build(:payment, :govpay)
+        renewing_registration.save!
+
         sign_in(user)
+
+        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(govpay_active?)
+
+        get resource_refunds_path(renewing_registration._id)
       end
 
       it "renders the index template and returns a 200 status" do
-        get resource_refunds_path(renewing_registration._id)
-
         expect(response).to render_template(:index)
         expect(response).to have_http_status(200)
+      end
+
+      context "with govpay payments enabled" do
+        let(:govpay_active?) { true }
+
+        it "lists only govpay payments" do
+          expect(response.body).to match(/#{govpay_payment.order_key}/)
+          expect(response.body).not_to match(/#{worldpay_payment.order_key}/)
+        end
+      end
+
+      context "with govpay payments disabled" do
+        let(:govpay_active?) { false }
+
+        it "lists only worldpay payments" do
+          expect(response.body).to match(/#{worldpay_payment.order_key}/)
+          expect(response.body).not_to match(/#{govpay_payment.order_key}/)
+        end
       end
     end
 
