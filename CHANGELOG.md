@@ -1,5 +1,34 @@
 # Changelog
 
+## [v1.19.1](https://github.com/defra/waste-carriers-back-office/tree/v1.19.1) (2022-09-15)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.18.1...v1.19.1)
+
+**Implemented enhancements:**
+
+- Add renewal stats to the monthly finance report [\#1436](https://github.com/DEFRA/waste-carriers-back-office/pull/1436) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Adding in telephone search specs [\#1430](https://github.com/DEFRA/waste-carriers-back-office/pull/1430) ([Beckyrose200](https://github.com/Beckyrose200))
+- Automate finance reports [\#1421](https://github.com/DEFRA/waste-carriers-back-office/pull/1421) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Fixed bugs:**
+
+- Finance reports renewals stats [\#1437](https://github.com/DEFRA/waste-carriers-back-office/pull/1437) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Fix daily finance report [\#1434](https://github.com/DEFRA/waste-carriers-back-office/pull/1434) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `4ea4f28` to `ff4aba8` [\#1438](https://github.com/DEFRA/waste-carriers-back-office/pull/1438) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Fix daily finance reports [\#1435](https://github.com/DEFRA/waste-carriers-back-office/pull/1435) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Bump rails from 6.1.6.1 to 6.1.7 [\#1433](https://github.com/DEFRA/waste-carriers-back-office/pull/1433) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `a399b0a` to `4ea4f28` [\#1432](https://github.com/DEFRA/waste-carriers-back-office/pull/1432) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `83e94ba` to `a399b0a` [\#1431](https://github.com/DEFRA/waste-carriers-back-office/pull/1431) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump faker from 2.22.0 to 2.23.0 [\#1429](https://github.com/DEFRA/waste-carriers-back-office/pull/1429) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `c134c59` to `83e94ba` [\#1428](https://github.com/DEFRA/waste-carriers-back-office/pull/1428) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `a755f7a` to `c134c59` [\#1427](https://github.com/DEFRA/waste-carriers-back-office/pull/1427) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `94c0f1b` to `a755f7a` [\#1426](https://github.com/DEFRA/waste-carriers-back-office/pull/1426) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Add cbd\_user to seed data [\#1425](https://github.com/DEFRA/waste-carriers-back-office/pull/1425) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Version 1.18.1 [\#1424](https://github.com/DEFRA/waste-carriers-back-office/pull/1424) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
 ## [v1.18.1](https://github.com/defra/waste-carriers-back-office/tree/v1.18.1) (2022-08-30)
 
 [Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.18.0...v1.18.1)
@@ -591,7 +620,7 @@
 
 ## [v1.9.0](https://github.com/defra/waste-carriers-back-office/tree/v1.9.0) (2020-06-18)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.3...v1.9.0)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.2...v1.9.0)
 
 **Implemented enhancements:**
 
@@ -704,13 +733,13 @@
 - Bump waste\_carriers\_engine from `46ec95b` to `336551e` [\#818](https://github.com/DEFRA/waste-carriers-back-office/pull/818) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump waste\_carriers\_engine from `2799dbf` to `46ec95b` [\#813](https://github.com/DEFRA/waste-carriers-back-office/pull/813) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
-## [v1.8.3](https://github.com/defra/waste-carriers-back-office/tree/v1.8.3) (2020-05-12)
-
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.2...v1.8.3)
-
 ## [v1.8.2](https://github.com/defra/waste-carriers-back-office/tree/v1.8.2) (2020-05-12)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.1...v1.8.2)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.3...v1.8.2)
+
+## [v1.8.3](https://github.com/defra/waste-carriers-back-office/tree/v1.8.3) (2020-05-12)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.1...v1.8.3)
 
 ## [v1.8.1](https://github.com/defra/waste-carriers-back-office/tree/v1.8.1) (2020-04-17)
 
