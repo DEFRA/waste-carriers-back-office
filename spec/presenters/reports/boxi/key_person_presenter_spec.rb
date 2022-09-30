@@ -51,7 +51,7 @@ module Reports
           let(:conviction_search_result) { double(:conviction_search_result) }
 
           it "returns the match result" do
-            searched_at = Time.new(2019, 11, 19)
+            searched_at = Time.zone.new(2019, 11, 19)
 
             expect(conviction_search_result).to receive(:searched_at).and_return(searched_at)
             expect(subject.review_flag_timestamp.to_s).to eq("2019-11-19T00:00Z")

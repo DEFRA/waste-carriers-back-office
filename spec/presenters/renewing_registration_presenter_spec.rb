@@ -61,7 +61,7 @@ RSpec.describe RenewingRegistrationPresenter do
   end
 
   describe "#display_expiry_date" do
-    let(:expires_on) { Time.now }
+    let(:expires_on) { Time.zone.now }
     let(:registration) { double(:registration, expires_on: expires_on) }
     let(:renewing_registration) { double(:renewing_registration, registration: registration) }
 

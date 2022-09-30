@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :conviction_search_result, class: WasteCarriersEngine::ConvictionSearchResult do
-    searched_at { Time.now }
+    searched_at { Time.zone.now }
 
     trait :match_result_yes do
       confirmed { "no" }

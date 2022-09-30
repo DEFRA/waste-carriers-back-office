@@ -65,7 +65,7 @@ RSpec.describe "CardOrderExports", type: :request do
     it "logs the visit to the export file" do
       export_log = CardOrdersExportLog.first
       expect(export_log.first_visited_by).to eq user.email
-      expect(export_log.first_visited_at).to be_within(1.second).of(DateTime.now)
+      expect(export_log.first_visited_at).to be_within(1.second).of(DateTime.zone.now)
     end
 
     it "redirects the user to the AWS S3 download link" do

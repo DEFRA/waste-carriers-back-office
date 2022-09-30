@@ -49,7 +49,7 @@ RSpec.describe ReminderLetterPresenter do
 
   describe "#date_of_letter" do
     it "returns a date object for today" do
-      expect(subject.date_of_letter).to eq(Time.now.to_formatted_s(:day_month_year))
+      expect(subject.date_of_letter).to eq(Time.zone.now.to_formatted_s(:day_month_year))
     end
   end
 
@@ -64,7 +64,7 @@ RSpec.describe ReminderLetterPresenter do
   end
 
   describe "#expiry_date" do
-    let(:expires_on) { Time.now }
+    let(:expires_on) { Time.zone.now }
     let(:registration) { double(:registration, expires_on: expires_on) }
 
     it "returns a date object" do
@@ -106,7 +106,7 @@ RSpec.describe ReminderLetterPresenter do
 
   describe "#renewal_email_date" do
     let(:first_renewal_email_reminder_days) { 30 }
-    let(:expires_on) { Time.now }
+    let(:expires_on) { Time.zone.now }
     let(:registration) { double(:registration, expires_on: expires_on) }
 
     it "returns a date object" do

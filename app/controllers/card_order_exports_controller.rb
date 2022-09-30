@@ -10,7 +10,7 @@ class CardOrderExportsController < ApplicationController
 
   def show
     export_log = CardOrdersExportLog.find(params[:id])
-    export_log.first_visited_at = Time.now
+    export_log.first_visited_at = Time.zone.now
     export_log.first_visited_by = current_user.email
     export_log.save!
     redirect_to URI.parse(export_log.download_link).to_s

@@ -8,7 +8,7 @@ RSpec.describe RegistrationPresenter do
   subject { described_class.new(registration, view_context) }
 
   describe "#display_expiry_date" do
-    let(:expires_on) { Time.now }
+    let(:expires_on) { Time.zone.now }
     let(:registration) { double(:registration, expires_on: expires_on) }
 
     it "returns a date object" do

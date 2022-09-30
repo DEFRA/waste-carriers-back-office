@@ -7,7 +7,7 @@ module Reports
     describe ".run" do
       let(:file_name) { "card_orders_#{Date.today.strftime('%Y-%m-%d')}.csv" }
       let(:aws_file_pattern) { %r{https://.*\.s3\.eu-west-1\.amazonaws\.com/CARD_ORDERS/#{file_name}.*} }
-      let(:end_time) { DateTime.now + 1.hour }
+      let(:end_time) { DateTime.zone.now + 1.hour }
       let(:start_time) { end_time - 7.days }
       aws_stub = nil
 
@@ -38,7 +38,7 @@ module Reports
           export_log = CardOrdersExportLog.first
           expect(export_log.start_time.to_i).to eq start_time.to_i
           expect(export_log.end_time.to_i).to eq end_time.to_i
-          expect(export_log.exported_at).to be_within(1.second).of(DateTime.now)
+          expect(export_log.exported_at).to be_within(1.second).of(DateTime.zone.now)
           expect(export_log.export_filename).to eq file_name
         end
 

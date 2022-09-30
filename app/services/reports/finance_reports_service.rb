@@ -11,7 +11,7 @@ module Reports
       Dir.mktmpdir do |dir_path|
         @tmp_dir = dir_path
 
-        @report_timestamp = Time.now.strftime("%Y-%m-%d_%H-%M-%S")
+        @report_timestamp = Time.zone.now.strftime("%Y-%m-%d_%H-%M-%S")
 
         generate_csv_files
 

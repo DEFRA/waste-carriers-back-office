@@ -49,7 +49,7 @@ module Reports
     end
 
     def log_export
-      CardOrdersExportLog.new(@start_time, @end_time, file_name, Time.now).save!
+      CardOrdersExportLog.new(@start_time, @end_time, file_name, Time.zone.now).save!
       mark_order_items_exported
     end
 

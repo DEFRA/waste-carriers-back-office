@@ -23,7 +23,7 @@ module Reports
              activated_at: end_time - 1.second)
     end
 
-    let(:end_time) { DateTime.now + 3.days }
+    let(:end_time) { DateTime.zone.now + 3.days }
     let(:start_time) { end_time - 1.week }
 
     describe "#to_csv" do

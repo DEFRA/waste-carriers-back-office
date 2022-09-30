@@ -9,11 +9,11 @@ FactoryBot.define do
       end
       payment_method { "card" }
       total_amount { order_items.sum { |item| item[:amount] } }
-      date_created { Time.now }
+      date_created { Time.zone.now }
     end
 
     trait :has_copy_cards_item do
-      date_created { Time.now }
+      date_created { Time.zone.now }
 
       order_items do
         [WasteCarriersEngine::OrderItem.new_copy_cards_item(1)]
