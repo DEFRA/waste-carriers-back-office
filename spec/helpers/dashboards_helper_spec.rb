@@ -21,7 +21,7 @@ RSpec.describe DashboardsHelper, type: :helper do
         reg_address = result.addresses.select { |a| a.address_type == "REGISTERED" }.first
         expect(helper.inline_registered_address(result).split(/\s*,\s*/))
           .to include(reg_address.house_number,
-                      reg_address.address_line_1,
+                      reg_address.address_line1,
                       reg_address.town_city,
                       reg_address.postcode)
       end

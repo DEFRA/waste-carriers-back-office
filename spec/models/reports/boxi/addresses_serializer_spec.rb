@@ -39,10 +39,10 @@ module Reports
             "address_type",
             "uprn",
             "house_number",
-            "address_line_1",
-            "address_line_2",
-            "address_line_3",
-            "address_line_4",
+            "address_line1",
+            "address_line2",
+            "address_line3",
+            "address_line4",
             "town_city",
             "postcode",
             "country",
@@ -56,10 +56,10 @@ module Reports
           expect(address).to receive(:address_type).and_return("address_type")
           expect(address).to receive(:uprn).and_return("uprn")
           expect(address).to receive(:house_number).and_return("house_number")
-          expect(address).to receive(:address_line_1).and_return("address_line_1")
-          expect(address).to receive(:address_line_2).and_return("address_line_2")
-          expect(address).to receive(:address_line_3).and_return("address_line_3")
-          expect(address).to receive(:address_line_4).and_return("address_line_4")
+          expect(address).to receive(:address_line1).and_return("address_line1")
+          expect(address).to receive(:address_line2).and_return("address_line2")
+          expect(address).to receive(:address_line3).and_return("address_line3")
+          expect(address).to receive(:address_line4).and_return("address_line4")
           expect(address).to receive(:town_city).and_return("town_city")
           expect(address).to receive(:postcode).and_return("postcode")
           expect(address).to receive(:country).and_return("country")
@@ -76,7 +76,7 @@ module Reports
         end
 
         it "sanitize data before inserting them in the csv" do
-          address = double(:address, address_line_1: " string to\r\nsanitize\n", uprn: 123_456).as_null_object
+          address = double(:address, address_line1: " string to\r\nsanitize\n", uprn: 123_456).as_null_object
 
           allow(registration).to receive(:addresses).and_return([address])
           allow(CSV).to receive(:open).and_return(csv)
