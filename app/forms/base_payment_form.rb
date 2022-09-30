@@ -41,7 +41,7 @@ class BasePaymentForm < WasteCarriersEngine::BaseForm
   private
 
   def convert_amount_to_pence(amount_in_pounds)
-    return amount_in_pounds unless amount_in_pounds.present?
+    return amount_in_pounds if amount_in_pounds.blank?
 
     amount_in_pounds.to_d * 100
   end

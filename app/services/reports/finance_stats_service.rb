@@ -53,7 +53,7 @@ module Reports
     # rubocop:disable Metrics/MethodLength
     def results_entry(result)
       entry = find_matching_result(result)
-      unless entry.present?
+      if entry.blank?
         entry = HashWithIndifferentAccess.new(
           period: entry_period(result),
           year: result[:year],
@@ -147,7 +147,7 @@ module Reports
     def monthly_post_process
       @results.each do |result|
         expiry_result = @results.select { |r| r[:period] == expiry_period(result) }.first
-        next unless expiry_result.present?
+        next if expiry_result.blank?
 
         expiry_result[:renewals_due] = result[:charges][:newreg][:count] + result[:charges][:renew][:count]
         expiry_result[:renewal_percent] = if expiry_result[:renewals_due].positive?

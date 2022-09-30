@@ -2,7 +2,7 @@
 
 class ContactEmailValidatorService < ::WasteCarriersEngine::BaseService
   def run(registration)
-    raise Exceptions::MissingContactEmailError, registration.reg_identifier unless registration.contact_email.present?
+    raise Exceptions::MissingContactEmailError, registration.reg_identifier if registration.contact_email.blank?
 
     registration.contact_email
   end

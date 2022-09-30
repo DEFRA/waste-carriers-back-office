@@ -37,7 +37,7 @@ class WorldpayEscapesController < ApplicationController
       reg_identifier: @resource.reg_identifier,
       token: @resource.token
     }
-    Rails.logger.debug("#{params[:email]} sent #{params[:name]} #{params[:registration]} back to payment summary")
+    Rails.logger.debug { "#{params[:email]} sent #{params[:name]} #{params[:registration]} back to payment summary" }
     Airbrake.notify("Sent back to payment summary", params)
   end
 

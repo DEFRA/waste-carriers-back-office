@@ -16,7 +16,7 @@ class RegistrationTransferService < ::WasteCarriersEngine::BaseService
   end
 
   def transfer_to_existing_user
-    return nil unless @email.present?
+    return nil if @email.blank?
 
     return unless ExternalUser.where(email: @email).first
 
@@ -28,10 +28,10 @@ class RegistrationTransferService < ::WasteCarriersEngine::BaseService
   end
 
   def transfer_to_new_user
-    return nil unless @email.present?
+    return nil if @email.blank?
 
     token = invite_user_and_return_token
-    return unless token.present?
+    return if token.blank?
 
     # If a new user is created, transfer and return a success status
     update_account_emails

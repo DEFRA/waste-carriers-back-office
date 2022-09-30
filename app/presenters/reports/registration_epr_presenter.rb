@@ -18,7 +18,7 @@ module Reports
 
     def expires_on
       return if lower_tier?
-      return unless super.present?
+      return if super.blank?
 
       return extended_covid_expiry_date(super) if expired_with_covid_extension?(super)
 

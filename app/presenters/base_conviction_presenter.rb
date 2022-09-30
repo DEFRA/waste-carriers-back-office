@@ -66,7 +66,7 @@ class BaseConvictionPresenter < WasteCarriersEngine::BasePresenter
   private
 
   def unknown_people_convictions?
-    return true unless key_people.present?
+    return true if key_people.blank?
 
     # Check to see if any conviction_search_results are present
     conviction_search_results = key_people.map(&:conviction_search_result).compact

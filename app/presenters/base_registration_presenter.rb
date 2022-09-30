@@ -84,7 +84,7 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def display_expiry_text
-    return unless expires_on.present?
+    return if expires_on.blank?
     return unless upper_tier?
 
     if expired?
@@ -106,13 +106,13 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   private
 
   def displayable_tier
-    return unless tier.present?
+    return if tier.blank?
 
     I18n.t(".shared.registrations.attributes.tier.#{tier.downcase}")
   end
 
   def displayable_registration_type
-    return unless registration_type.present?
+    return if registration_type.blank?
 
     I18n.t(".shared.registrations.company_details_panel.attributes.registration_type.#{registration_type}")
   end

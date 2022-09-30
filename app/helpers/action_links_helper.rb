@@ -24,7 +24,7 @@ module ActionLinksHelper
 
   def renewal_magic_link_for(resource)
     return nil unless a_registration?(resource)
-    return nil unless resource.renew_token.present?
+    return nil if resource.renew_token.blank?
 
     RenewalMagicLinkService.run(token: resource.renew_token)
   end

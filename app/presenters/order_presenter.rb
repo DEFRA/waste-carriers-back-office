@@ -2,7 +2,7 @@
 
 class OrderPresenter < WasteCarriersEngine::BasePresenter
   def payment_method
-    return "-" unless super.present?
+    return "-" if super.blank?
 
     super.titleize
   end
