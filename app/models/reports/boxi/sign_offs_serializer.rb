@@ -11,7 +11,7 @@ module Reports
       }.freeze
 
       def add_entries_for(registration, uid)
-        return unless registration.conviction_sign_offs.present?
+        return if registration.conviction_sign_offs.blank?
 
         registration.conviction_sign_offs.each do |sign_off|
           csv << parse_sign_off(sign_off, uid)

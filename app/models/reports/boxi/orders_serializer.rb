@@ -26,9 +26,10 @@ module Reports
         presenter = ::Reports::Boxi::OrderPresenter.new(order, nil)
 
         ATTRIBUTES.map do |key, _value|
-          if key == :uid
+          case key
+          when :uid
             uid
-          elsif key == :order_uid
+          when :order_uid
             order_uid
           else
             sanitize(presenter.public_send(key))

@@ -14,7 +14,7 @@ module Reports
       }.freeze
 
       def add_entries_for(order, registration_uid, order_uid)
-        return unless order.order_items.present?
+        return if order.order_items.blank?
 
         order.order_items.each do |order_item|
           csv << parse_order_item(order_item, registration_uid, order_uid)
@@ -27,9 +27,10 @@ module Reports
         presenter = OrderItemPresenter.new(order_item, nil)
 
         ATTRIBUTES.map do |key, _value|
-          if key == :uid
+          case key
+          when :uid
             uid
-          elsif key == :order_uid
+          when :order_uid
             order_uid
           else
             sanitize(presenter.public_send(key))

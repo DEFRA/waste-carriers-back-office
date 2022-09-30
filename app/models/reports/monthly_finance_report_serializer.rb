@@ -48,6 +48,7 @@ module Reports
     }.freeze
 
     def initialize(rows)
+      super()
       @rows = rows
     end
 
