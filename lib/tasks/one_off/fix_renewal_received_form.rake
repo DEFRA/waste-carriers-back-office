@@ -17,7 +17,7 @@ namespace :fix do
                       end
 
       puts "Changing workflow_state of #{renewal.reg_identifier} to #{updated_state}"
-      renewal.update_attribute(:workflow_state, updated_state)
+      renewal.update(workflow_state: updated_state)
     end
   end
 end

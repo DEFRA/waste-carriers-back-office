@@ -32,11 +32,11 @@ class User
   end
 
   def activate!
-    update_attribute(:active, true)
+    update(active: true)
   end
 
   def deactivate!
-    update_attribute(:active, false)
+    update(active: false)
   end
 
   # Roles
