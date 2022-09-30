@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
+
+  delegate :balance, to: :finance_details, prefix: true
+
   def display_company_details_panel?
     company_name.present? ||
       display_tier_and_registration_type.present? ||
@@ -29,7 +32,7 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   def displayable_location
     location = show_translation_or_filler(:location)
 
-    I18n.t(".shared.registrations.business_information.labels.location_html", location: location).html_safe
+    I18n.t(".shared.registrations.business_information.labels.location_html", location: location)
   end
 
   def display_convictions_check_message
@@ -48,10 +51,6 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
 
   def show_no_finance_details_data?
     upper_tier? && finance_details.blank?
-  end
-
-  def finance_details_balance
-    finance_details.balance
   end
 
   def in_progress?
@@ -88,9 +87,9 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     return unless upper_tier?
 
     if expired?
-      I18n.t(".shared.registrations.labels.expired_html", formatted_date: display_expiry_date).html_safe
+      I18n.t(".shared.registrations.labels.expired_html", formatted_date: display_expiry_date)
     else
-      I18n.t(".shared.registrations.labels.expires_html", formatted_date: display_expiry_date).html_safe
+      I18n.t(".shared.registrations.labels.expires_html", formatted_date: display_expiry_date)
     end
   end
 

@@ -54,7 +54,7 @@ module Reports
     def results_entry(result)
       entry = find_matching_result(result)
       if entry.blank?
-        entry = HashWithIndifferentAccess.new(
+        entry = ActiveSupport::HashWithIndifferentAccess.new(
           period: entry_period(result),
           year: result[:year],
           month: result[:month],

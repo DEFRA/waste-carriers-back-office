@@ -21,6 +21,7 @@ module Reports
     attr_reader :dir_path
 
     # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/PerceivedComplexity
     def run(dir_path)
       @dir_path = dir_path
 
@@ -48,6 +49,7 @@ module Reports
       registration_serializers.each(&:close)
       order_serializers.each(&:close)
     end
+    # rubocop:enable Metrics/PerceivedComplexity
     # rubocop:enable Metrics/CyclomaticComplexity
 
     private
