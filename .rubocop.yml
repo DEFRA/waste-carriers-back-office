@@ -7,3 +7,5 @@ require:
 # Disable this cop to avoid having to rewrite all uses of update_all
 Rails/SkipsModelValidations:
   Enabled: false
+RSpec/NamedSubject:
+  Enabled: false
