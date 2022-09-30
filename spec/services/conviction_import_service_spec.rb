@@ -141,8 +141,7 @@ Apex Limited,,11111111,ABC,99999999
             run_service
           rescue InvalidConvictionDataError
             Rails.logger.debug "rescued expected exception"
-             .not_to change { new_conviction.count }
-          end
+          end.not_to change { new_conviction.count }
         end
       end
 
