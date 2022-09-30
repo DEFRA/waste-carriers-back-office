@@ -36,7 +36,7 @@ module Reports
         let(:filename_previous2) { "test_file_2022-08-25_12-44-26.csv" }
         let(:s3_filepath_previous1) { "#{WasteCarriersBackOffice::Application.config.finance_reports_directory}/#{filename_previous1}" }
         let(:s3_filepath_previous2) { "#{WasteCarriersBackOffice::Application.config.finance_reports_directory}/#{filename_previous2}" }
-        let("file_list") { [s3_filepath_previous2, s3_filepath, s3_filepath_previous1] }
+        let(:file_list) { [s3_filepath_previous2, s3_filepath, s3_filepath_previous1] }
 
         it "returns a download URL for the latest file" do
           allow(bucket).to receive(:presigned_url).with(s3_filepath).and_return(s3_url)

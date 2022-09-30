@@ -38,7 +38,7 @@ RSpec.describe RegistrationTransferService do
 
       context "when the notify service is called" do
         before do
-          expect(Notify::RegistrationTransferEmailService)
+          allow(Notify::RegistrationTransferEmailService)
             .to receive(:run)
             .with(registration: registration)
             .once
@@ -104,7 +104,7 @@ RSpec.describe RegistrationTransferService do
             .to receive(:raw_invitation_token)
             .and_return(token)
 
-          expect(Notify::RegistrationTransferWithInviteEmailService)
+          allow(Notify::RegistrationTransferWithInviteEmailService)
             .to receive(:run)
             .with(registration: registration, token: token)
             .once
