@@ -5,7 +5,7 @@ def find_or_create_user(email, role)
     email: email,
     role: role,
     password: ENV["WCRS_DEFAULT_PASSWORD"] || "Secret123",
-    confirmed_at: Time.new(2015, 1, 1)
+    confirmed_at: Time.zone.new(2015, 1, 1)
   )
 end
 
