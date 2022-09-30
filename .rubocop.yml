@@ -4,3 +4,6 @@ inherit_gem:
 require:
   - rubocop-rails
   - rubocop-rspec
+# Disable this cop to avoid having to rewrite all uses of update_all
+Rails/SkipsModelValidations:
+  Enabled: false
