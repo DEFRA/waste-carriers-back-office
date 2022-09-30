@@ -20,7 +20,7 @@ module Reports
       Rails.logger.error "Generate BOXI export error:\n#{e}"
     ensure
       # In case of failure before the file gets generated
-      File.unlink(file_path) if File.exist?(file_path)
+      FileUtils.rm_f(file_path)
     end
 
     private

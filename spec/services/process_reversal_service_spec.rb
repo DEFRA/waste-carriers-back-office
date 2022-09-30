@@ -17,8 +17,8 @@ RSpec.describe ProcessReversalService do
 
       expect(reversal).to receive(:order_key=).with("123_REVERSAL")
       expect(reversal).to receive(:amount=).with(-10)
-      expect(reversal).to receive(:date_entered=).with(Date.today)
-      expect(reversal).to receive(:date_received=).with(Date.today)
+      expect(reversal).to receive(:date_entered=).with(Time.zone.today)
+      expect(reversal).to receive(:date_received=).with(Time.zone.today)
       expect(reversal).to receive(:registration_reference=).with("Registration reference")
       expect(reversal).to receive(:updated_by_user=).with("user@example.com")
       expect(reversal).to receive(:comment=).with("A reason")

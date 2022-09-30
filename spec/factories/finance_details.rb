@@ -6,7 +6,7 @@ FactoryBot.define do
     transient do
       payment_type { :bank_transfer }
       payment_amount { 0 }
-      payment_date_entered { Date.today }
+      payment_date_entered { Time.zone.today }
     end
 
     trait :positive_balance do

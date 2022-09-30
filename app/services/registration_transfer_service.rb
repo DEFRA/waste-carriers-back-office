@@ -69,6 +69,6 @@ class RegistrationTransferService < ::WasteCarriersEngine::BaseService
 
   def log_email_error(error)
     Airbrake.notify(error, reg_identifier: @registration.reg_identifier) if defined?(Airbrake)
-    Rails.logger.error "Registration transfer confirmation email error: " + error.to_s
+    Rails.logger.error "Registration transfer confirmation email error: #{error.to_s}"
   end
 end

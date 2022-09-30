@@ -66,8 +66,6 @@ module Reports
     address_keys = %w[line1 line2 line3 line4 line5 line6 town_city postcode country].freeze
     address_keys.each do |key|
       define_method("registered_address_#{key}".to_sym) { @registered_address["registered_address_#{key}".to_sym] }
-    end
-    address_keys.each do |key|
       define_method("contact_address_#{key}".to_sym) { @contact_address["contact_address_#{key}".to_sym] }
     end
 

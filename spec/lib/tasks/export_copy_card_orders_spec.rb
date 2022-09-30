@@ -26,7 +26,7 @@ RSpec.describe "Export copy card orders task", type: :rake do
         #   Run time Monday 21st at 2:30    => Report range: Tuesday  7th at 00:00:00 <= T < Tuesday 15th at 00:00:00
         #   Run time Tuesday 22nd at 2:30   => Report range: Tuesday 15th at 00:00:00 <= T < Tuesday 22nd at 00:00:00
         #   Run time Wednesday 23rd at 2:30 => Report range: Tuesday 15th at 00:00:00 <= T < Tuesday 22nd at 00:00:00
-        expected_end_time = (Date.today.prev_occurring(:monday) + 1.day).midnight
+        expected_end_time = (Time.zone.today.prev_occurring(:monday) + 1.day).midnight
         expected_start_time = expected_end_time - 1.week
         expect(Reports::CardOrdersExportService).to receive(:run)
           .with(start_time: expected_start_time, end_time: expected_end_time)

@@ -16,13 +16,13 @@ module Reports
       Airbrake.notify e, file_name: file_name
       Rails.logger.error "Generate EPR export csv error for #{file_name}:\n#{e}"
     ensure
-      File.unlink(file_path) if File.exist?(file_path)
+      FileUtils.rm_f(file_path)
     end
 
     private
 
     def populate_temp_file
-      File.open(file_path, "w+") { |file| file.write(epr_report) }
+      File.write(file_path, epr_report)
     end
 
     def file_path

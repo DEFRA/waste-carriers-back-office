@@ -62,11 +62,7 @@ class BasePaymentForm < WasteCarriersEngine::BaseForm
 
   def set_date_received
     self.date_received = Date.new(date_received_year, date_received_month, date_received_day)
-  rescue NoMethodError
-    errors.add(:date_received, :invalid_date)
-  rescue ArgumentError
-    errors.add(:date_received, :invalid_date)
-  rescue TypeError
+  rescue NoMethodError, ArgumentError, TypeError
     errors.add(:date_received, :invalid_date)
   end
 

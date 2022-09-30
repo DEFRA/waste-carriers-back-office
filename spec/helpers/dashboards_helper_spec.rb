@@ -96,7 +96,7 @@ RSpec.describe DashboardsHelper, type: :helper do
         let(:result) { build(:renewing_registration) }
 
         it "returns the expected text" do
-          date = Date.today.strftime("%d/%m/%Y")
+          date = Time.zone.today.strftime("%d/%m/%Y")
           expect(helper.result_date(result)).to eq("Updated #{date}")
         end
       end

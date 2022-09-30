@@ -15,17 +15,17 @@ RSpec.describe "Export copy card orders date range task", type: :rake do
   context "with no specified start or end date" do
     it "start and end dates default to today" do
       expect(Reports::CardOrdersExportService).to receive(:run)
-        .with(start_time: Date.today.midnight, end_time: (Date.today + 1.day).midnight)
+        .with(start_time: Time.zone.today.midnight, end_time: (Time.zone.today + 1.day).midnight)
       subject.invoke
     end
   end
 
   context "with a specified start date and no specified end date" do
-    let(:start_date) { (Date.today - rand(1..10).days) }
+    let(:start_date) { (Time.zone.today - rand(1..10).days) }
 
     it "end date defaults to today" do
       expect(Reports::CardOrdersExportService).to receive(:run)
-        .with(start_time: start_date.midnight, end_time: (Date.today + 1.day).midnight)
+        .with(start_time: start_date.midnight, end_time: (Time.zone.today + 1.day).midnight)
       subject.invoke(start_date.strftime(date_format))
     end
   end
