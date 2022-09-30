@@ -80,7 +80,7 @@ module Reports
         let(:business_type) { "foo" }
 
         it "returns nil" do
-          expect(subject.company_no).to be(nil)
+          expect(subject.company_no).to be_nil
         end
       end
 

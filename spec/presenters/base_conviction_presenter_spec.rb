@@ -46,7 +46,7 @@ RSpec.describe BaseConvictionPresenter do
       let(:conviction_sign_offs) { [] }
 
       it "returns nil" do
-        expect(subject.sign_off).to be(nil)
+        expect(subject.sign_off).to be_nil
       end
     end
 

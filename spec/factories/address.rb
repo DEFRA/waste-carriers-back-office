@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :address, class: WasteCarriersEngine::Address do
+  factory :address, class: "WasteCarriersEngine::Address" do
     house_number { Faker::Number.number(digits: 2) }
     address_line1 { Faker::Address.street_name }
     address_line2 { Faker::Address.secondary_address }
@@ -23,7 +23,7 @@ FactoryBot.define do
 
   # This is to support legacy tests (notify letters) that broke
   # when the address factory was changed.
-  factory :simple_address, class: WasteCarriersEngine::Address do
+  factory :simple_address, class: "WasteCarriersEngine::Address" do
     house_number { "42" }
     address_line1 { "Foo Gardens" }
     town_city { "Baz City" }

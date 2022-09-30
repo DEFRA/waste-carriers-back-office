@@ -35,7 +35,7 @@ RSpec.describe BasePaymentForm, type: :model do
         expect(new_payment_count).to eq(payment_count + 1)
       end
 
-      it "adds  the correct amount to the payment" do
+      it "adds =the correct amount to the payment" do
         expected_amount = valid_params[:amount] * 100
         payment_form.submit(valid_params, payment_type)
 
@@ -43,14 +43,14 @@ RSpec.describe BasePaymentForm, type: :model do
         expect(payment.amount).to eq(expected_amount)
       end
 
-      it "adds  the correct payment_type to the payment" do
+      it "adds the correct payment_type to the payment" do
         payment_form.submit(valid_params, payment_type)
 
         payment = transient_registration.finance_details.payments.last
         expect(payment.payment_type).to eq(payment_type)
       end
 
-      it "adds  the correct values from params to the payment" do
+      it "adds the correct values from params to the payment" do
         payment_form.submit(valid_params, payment_type)
 
         payment = transient_registration.finance_details.payments.last
@@ -58,7 +58,7 @@ RSpec.describe BasePaymentForm, type: :model do
       end
 
       it "updates the finance_details balance" do
-        expected_balance = transient_registration.finance_details.balance - valid_params[:amount] * 100
+        expected_balance = (transient_registration.finance_details.balance - valid_params[:amount] * 100)
         payment_form.submit(valid_params, payment_type)
 
         expect(transient_registration.reload.finance_details.balance).to eq(expected_balance)

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :finance_details, class: WasteCarriersEngine::FinanceDetails do
+  factory :finance_details, class: "WasteCarriersEngine::FinanceDetails" do
 
     transient do
       payment_type { :bank_transfer }

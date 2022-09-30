@@ -40,7 +40,7 @@ RSpec.describe "Registrations API", type: :request do
     end
 
     context "when the tier is LOWER" do
-      let(:data) { File.read(Rails.root.join("spec/support/fixtures/lower_tier_registration_seed.json")) }
+      let(:data) { Rails.root.join("spec/support/fixtures/lower_tier_registration_seed.json").read }
 
       it "generates a new registration with a CBDL number" do
         allow(Rails.configuration).to receive(:expires_after).and_return(1)
@@ -54,7 +54,7 @@ RSpec.describe "Registrations API", type: :request do
     end
 
     context "when `expires_on` is set" do
-      let(:data) { File.read(Rails.root.join("spec/support/fixtures/expire_set_registration_seed.json")) }
+      let(:data) { Rails.root.join("spec/support/fixtures/expire_set_registration_seed.json").read }
 
       it "generates a new registration without overriding the expires_on date value" do
         expected_registrations_count = WasteCarriersEngine::Registration.count + 1

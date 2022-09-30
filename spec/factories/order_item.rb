@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :order_item, class: WasteCarriersEngine::OrderItem do
+  factory :order_item, class: "WasteCarriersEngine::OrderItem" do
     currency { "GBP" }
 
     trait :renewal_item do

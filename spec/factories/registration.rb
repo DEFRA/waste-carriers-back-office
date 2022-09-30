@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :registration, class: WasteCarriersEngine::Registration do
+  factory :registration, class: "WasteCarriersEngine::Registration" do
     sequence :reg_identifier do |n|
       "CBDU#{n}"
     end

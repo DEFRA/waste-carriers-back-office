@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :renewing_registration, class: WasteCarriersEngine::RenewingRegistration do
+  factory :renewing_registration, class: "WasteCarriersEngine::RenewingRegistration" do
     contact_email { "whatever@example.com" }
     first_name { "Jane" }
     last_name { "Doe" }

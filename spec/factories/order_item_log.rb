@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :order_item_log, class: WasteCarriersEngine::OrderItemLog do
+  factory :order_item_log, class: "WasteCarriersEngine::OrderItemLog" do
     order_item_id { SecureRandom.hex(12) }
     order_id { SecureRandom.hex(12) }
     registration_id { SecureRandom.hex(12) }
