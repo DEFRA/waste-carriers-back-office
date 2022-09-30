@@ -27,7 +27,7 @@ class WorldpayEscapesController < ApplicationController
   end
 
   def change_state_to_payment_summary
-    @resource.update_attributes(workflow_state: "payment_summary_form")
+    @resource.update(workflow_state: "payment_summary_form")
   end
 
   def log_worldpay_escape

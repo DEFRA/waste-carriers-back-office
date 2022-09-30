@@ -12,7 +12,7 @@ RSpec.describe RegistrationTransfersHelper, type: :helper do
 
     context "when there is an invitation_created_at" do
       before do
-        external_user.update_attributes(invitation_created_at: Time.current)
+        external_user.update(invitation_created_at: Time.current)
       end
 
       context "and there is no invitation_accepted_at" do
@@ -23,7 +23,7 @@ RSpec.describe RegistrationTransfersHelper, type: :helper do
 
       context "and there is an invitation_accepted_at" do
         before do
-          external_user.update_attributes(invitation_accepted_at: Time.current)
+          external_user.update(invitation_accepted_at: Time.current)
         end
 
         it "returns false" do

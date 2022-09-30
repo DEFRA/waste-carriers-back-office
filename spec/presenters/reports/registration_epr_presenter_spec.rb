@@ -21,7 +21,7 @@ module Reports
         metadata = double(:metadata)
 
         expect(registration).to receive(:metaData).and_return(metadata)
-        expect(metadata).to receive(:date_activated).and_return(Time.zone.new(2015, 1, 1))
+        expect(metadata).to receive(:date_activated).and_return(Time.zone.local(2015, 1, 1))
 
         expect(subject.metadata_date_activated).to eq("2015-01-01")
       end
@@ -51,7 +51,7 @@ module Reports
           it "returns the object expires_on formatted plus COVID grace window days" do
             allow(Rails.configuration).to receive(:covid_grace_window).and_return(3)
 
-            allow(registration).to receive(:expires_on).and_return(Time.zone.new(2015, 1, 1))
+            allow(registration).to receive(:expires_on).and_return(Time.zone.local(2015, 1, 1))
 
             expect(subject.expires_on).to eq("2015-01-04")
           end
@@ -63,7 +63,7 @@ module Reports
           end
 
           it "returns the object expires_on formatted" do
-            allow(registration).to receive(:expires_on).and_return(Time.zone.new(2015, 1, 1))
+            allow(registration).to receive(:expires_on).and_return(Time.zone.local(2015, 1, 1))
 
             expect(subject.expires_on).to eq("2015-01-01")
           end

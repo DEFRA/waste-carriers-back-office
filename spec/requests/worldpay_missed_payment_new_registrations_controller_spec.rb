@@ -17,7 +17,7 @@ RSpec.describe "WorldpayMissedPaymentNewRegistrations", type: :request do
 
       context "when the workflow_state is worldpay_form" do
         before do
-          transient_registration.update_attributes(workflow_state: "worldpay_form")
+          transient_registration.update(workflow_state: "worldpay_form")
         end
 
         it "creates a new registration and redirects to the 'add missed payment' form" do
@@ -37,7 +37,7 @@ RSpec.describe "WorldpayMissedPaymentNewRegistrations", type: :request do
 
       context "when the workflow_state is not worldpay_form" do
         before do
-          transient_registration.update_attributes(workflow_state: "payment_summary_form")
+          transient_registration.update(workflow_state: "payment_summary_form")
         end
 
         it "renders the new registration details page" do

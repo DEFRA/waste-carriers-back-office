@@ -17,7 +17,7 @@ RSpec.describe "WorldpayEscapes", type: :request do
 
       context "when the workflow_state is worldpay_form" do
         before do
-          transient_registration.update_attributes(workflow_state: "worldpay_form")
+          transient_registration.update(workflow_state: "worldpay_form")
         end
 
         it "redirects to the payment_summary_form and updates the workflow_state" do
@@ -30,7 +30,7 @@ RSpec.describe "WorldpayEscapes", type: :request do
 
       context "when the workflow_state is not worldpay_form" do
         before do
-          transient_registration.update_attributes(workflow_state: "renewal_start_form")
+          transient_registration.update(workflow_state: "renewal_start_form")
         end
 
         context "when the resource is a renewal" do

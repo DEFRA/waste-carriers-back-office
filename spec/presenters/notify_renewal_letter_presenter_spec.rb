@@ -14,7 +14,7 @@ RSpec.describe NotifyRenewalLetterPresenter do
 
   describe "#expiry_date" do
     it "returns the correct value" do
-      expect(registration).to receive(:expires_on).and_return(Time.zone.new(2020, 1, 1))
+      expect(registration).to receive(:expires_on).and_return(Time.zone.local(2020, 1, 1))
       expect(subject.expiry_date).to eq("1 January 2020")
     end
   end

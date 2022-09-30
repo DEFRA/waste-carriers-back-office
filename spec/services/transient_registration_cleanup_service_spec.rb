@@ -13,7 +13,7 @@ RSpec.describe TransientRegistrationCleanupService do
 
     context "when a transient_registration was created more than 30 days ago" do
       before do
-        transient_registration.update_attributes(created_at: Time.zone.now - 31.days)
+        transient_registration.update(created_at: Time.zone.now - 31.days)
       end
 
       it "deletes it" do

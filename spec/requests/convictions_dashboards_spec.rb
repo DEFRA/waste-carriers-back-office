@@ -6,7 +6,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   let!(:link_to_possible_matches_registration) do
     registration = create(:registration, :requires_conviction_check)
     # Make sure it's one of the 'oldest' registrations so would be top of the list
-    registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+    registration.metaData.update(last_modified: Date.new(1999, 1, 1))
 
     registration_convictions_path(registration.reg_identifier)
   end
@@ -14,7 +14,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   let!(:link_to_checks_in_progress_registration) do
     registration = create(:registration, :has_flagged_conviction_check)
     # Make sure it's one of the 'oldest' registrations so would be top of the list
-    registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+    registration.metaData.update(last_modified: Date.new(1999, 1, 1))
 
     registration_convictions_path(registration.reg_identifier)
   end
@@ -22,7 +22,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   let!(:link_to_pending_approved_registration) do
     registration = create(:registration, :has_approved_conviction_check, :pending)
     # Make sure it's one of the 'oldest' registrations so would be top of the list
-    registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+    registration.metaData.update(last_modified: Date.new(1999, 1, 1))
 
     registration_convictions_path(registration.reg_identifier)
   end
@@ -30,7 +30,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   let!(:link_to_active_approved_registration) do
     registration = create(:registration, :has_approved_conviction_check, :active)
     # Make sure it's one of the 'oldest' registrations so would be top of the list
-    registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+    registration.metaData.update(last_modified: Date.new(1999, 1, 1))
 
     registration_convictions_path(registration.reg_identifier)
   end
@@ -38,7 +38,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   let!(:link_to_rejected_registration) do
     registration = create(:registration, :has_rejected_conviction_check)
     # Make sure it's one of the 'oldest' registrations so would be top of the list
-    registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+    registration.metaData.update(last_modified: Date.new(1999, 1, 1))
 
     registration_convictions_path(registration.reg_identifier)
   end
@@ -46,7 +46,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   let!(:link_to_new_from_frontend_registration) do
     registration = create(:registration, :requires_conviction_check, :pending)
     # Make sure it's one of the 'oldest' registrations so would be top of the list
-    registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+    registration.metaData.update(last_modified: Date.new(1999, 1, 1))
     registration.conviction_sign_offs.first.unset(:workflow_state)
 
     registration_convictions_path(registration.reg_identifier)
@@ -55,7 +55,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   let!(:link_to_possible_matches_renewal) do
     renewal = create(:renewing_registration, :requires_conviction_check)
     # Make sure it's one of the 'oldest' renewals so would be top of the list
-    renewal.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+    renewal.metaData.update(last_modified: Date.new(1999, 1, 1))
 
     transient_registration_convictions_path(renewal.reg_identifier)
   end
@@ -63,7 +63,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   let!(:link_to_possible_matches_cancelled_registration) do
     registration = create(:registration, :requires_conviction_check, :cancelled)
     # Make sure it's one of the 'oldest' registrations so would be top of the list
-    registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+    registration.metaData.update(last_modified: Date.new(1999, 1, 1))
 
     transient_registration_convictions_path(registration.reg_identifier)
   end
@@ -71,7 +71,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   let!(:link_to_checks_in_progress_renewal) do
     renewal = create(:renewing_registration, :has_flagged_conviction_check)
     # Make sure it's one of the 'oldest' renewals so would be top of the list
-    renewal.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+    renewal.metaData.update(last_modified: Date.new(1999, 1, 1))
 
     transient_registration_convictions_path(renewal.reg_identifier)
   end
@@ -79,7 +79,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   let!(:link_to_checks_in_progress_cancelled_registration) do
     registration = create(:registration, :has_flagged_conviction_check, :cancelled)
     # Make sure it's one of the 'oldest' registrations so would be top of the list
-    registration.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+    registration.metaData.update(last_modified: Date.new(1999, 1, 1))
 
     transient_registration_convictions_path(registration.reg_identifier)
   end
@@ -87,7 +87,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   let!(:link_to_approved_renewal) do
     renewal = create(:renewing_registration, :has_approved_conviction_check)
     # Make sure it's one of the 'oldest' renewals so would be top of the list
-    renewal.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+    renewal.metaData.update(last_modified: Date.new(1999, 1, 1))
 
     transient_registration_convictions_path(renewal.reg_identifier)
   end
@@ -95,7 +95,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   let!(:link_to_rejected_renewal) do
     renewal = create(:renewing_registration, :has_rejected_conviction_check)
     # Make sure it's one of the 'oldest' renewals so would be top of the list
-    renewal.metaData.update_attributes(last_modified: Date.new(1999, 1, 1))
+    renewal.metaData.update(last_modified: Date.new(1999, 1, 1))
 
     transient_registration_convictions_path(renewal.reg_identifier)
   end

@@ -76,7 +76,7 @@ RSpec.describe BasePaymentForm, type: :model do
 
       context "when a payment already exists" do
         before do
-          transient_registration.finance_details.update_attributes(payments: [build(:payment)])
+          transient_registration.finance_details.update(payments: [build(:payment)])
         end
 
         it "should create an additional payment" do

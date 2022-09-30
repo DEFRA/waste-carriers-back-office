@@ -17,7 +17,7 @@ module Reports
              business_type: business_type,
              company_name: company_name,
              registered_company_name: registered_company_name,
-             expires_on: DateTime.zone.now.next_year(3))
+             expires_on: DateTime.now.next_year(3))
     end
     let(:order) { registration.finance_details.orders[0] }
     let(:order_item_log) { create(:order_item_log, registration_id: registration.id, order_id: order.id) }

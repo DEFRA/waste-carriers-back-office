@@ -34,7 +34,7 @@ RSpec.describe CardOrdersExportLog, type: :model do
       end
       it "records the time of the first visit" do
         expect { subject.visit_download_link(user) }.to change { subject.first_visited_at }.from(nil)
-        expect(subject.first_visited_at).to be_within(1.second).of(DateTime.zone.now)
+        expect(subject.first_visited_at).to be_within(1.second).of(DateTime.now)
       end
     end
 
