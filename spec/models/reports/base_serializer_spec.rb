@@ -5,23 +5,22 @@ require "rails_helper"
 module Reports
   RSpec.describe BaseSerializer do
 
-    # Skip this cop because we need to declare ATTRIBUTES as per the described class.
-    # rubocop:disable Lint/ConstantDefinitionInBlock
-    class TestObject < Reports::BaseSerializer
+    let(:test_class) do
+      Class.new(described_class) do
 
-      ATTRIBUTES = { reg_identifier: "reg_identifier" }.freeze
+        const_set(:ATTRIBUTES, { reg_identifier: "reg_identifier" })
 
-      def scope
-        ::WasteCarriersEngine::Registration.all # Will not actually be called, just stubbed
-      end
+        def scope
+          ::WasteCarriersEngine::Registration.all # Will not actually be called, just stubbed
+        end
 
-      def parse_object(registration)
-        [registration.reg_identifier]
+        def parse_object(registration)
+          [registration.reg_identifier]
+        end
       end
     end
-    # rubocop:enable Lint/ConstantDefinitionInBlock
 
-    subject { TestObject.new }
+    subject { test_class.new }
 
     describe "#to_csv" do
       it "returns a csv version of the given data based on attributes" do
