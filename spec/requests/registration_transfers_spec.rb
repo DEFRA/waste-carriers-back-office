@@ -19,7 +19,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
 
         expect(response).to render_template(:new)
         expect(response.body).to include("Transfer registration #{registration.reg_identifier}")
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -146,7 +146,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
 
         expect(response).to render_template(:success)
         expect(response.body).to include("Registration #{registration.reg_identifier} has been transferred")
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 

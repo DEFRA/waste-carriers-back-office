@@ -16,7 +16,7 @@ RSpec.describe "CardOrderExports", type: :request do
       end
 
       it "returns HTTP status 200" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it "presents the latest export date and time" do
@@ -40,7 +40,7 @@ RSpec.describe "CardOrderExports", type: :request do
         get card_order_exports_path
 
         expect(response).to redirect_to("/bo/pages/permission")
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
       end
     end
 

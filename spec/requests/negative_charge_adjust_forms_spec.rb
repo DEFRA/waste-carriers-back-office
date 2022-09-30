@@ -16,7 +16,7 @@ RSpec.describe "NegativeChargeAdjustForms", type: :request do
         get new_resource_negative_charge_adjust_form_path(renewing_registration._id)
 
         expect(response).to render_template(:new)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -32,7 +32,7 @@ RSpec.describe "NegativeChargeAdjustForms", type: :request do
         get new_resource_negative_charge_adjust_form_path(renewing_registration._id)
 
         expect(response).to redirect_to("/bo/pages/permission")
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
       end
     end
 
@@ -72,7 +72,7 @@ RSpec.describe "NegativeChargeAdjustForms", type: :request do
 
           renewing_registration.reload
 
-          expect(response).to have_http_status(302)
+          expect(response).to have_http_status(:found)
           expect(response).to redirect_to(resource_finance_details_path(renewing_registration._id))
           expect(renewing_registration.finance_details.orders.count).to eq(expected_orders_count)
         end
@@ -97,7 +97,7 @@ RSpec.describe "NegativeChargeAdjustForms", type: :request do
 
             registration.reload
 
-            expect(response).to have_http_status(302)
+            expect(response).to have_http_status(:found)
             expect(response).to redirect_to(resource_finance_details_path(registration._id))
             expect(registration.finance_details.orders.count).to be > previous_orders_count
           end
@@ -108,7 +108,7 @@ RSpec.describe "NegativeChargeAdjustForms", type: :request do
         it "returns a 200 status and renders the :new template" do
           post resource_negative_charge_adjust_form_path(renewing_registration._id), params: {}
 
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
           expect(response).to render_template(:new)
         end
       end

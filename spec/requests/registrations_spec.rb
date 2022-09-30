@@ -17,7 +17,7 @@ RSpec.describe "Registrations", type: :request do
         get "/bo/registrations/#{registration.reg_identifier}"
 
         expect(response).to render_template(:show)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       context "when no matching registration exists" do

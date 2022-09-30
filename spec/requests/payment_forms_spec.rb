@@ -17,7 +17,7 @@ RSpec.describe "PaymentForms", type: :request do
         get "/bo/resources/#{transient_registration._id}/payments"
 
         expect(response).to render_template(:new)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       context "when the resource is a registration" do
@@ -27,7 +27,7 @@ RSpec.describe "PaymentForms", type: :request do
           get "/bo/resources/#{registration._id}/payments"
 
           expect(response).to render_template(:new)
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end

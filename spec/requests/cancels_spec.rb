@@ -16,7 +16,7 @@ RSpec.describe "Cancels", type: :request do
         get new_resource_cancel_path(registration._id)
 
         expect(response).to render_template(:new)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -32,7 +32,7 @@ RSpec.describe "Cancels", type: :request do
         get new_resource_cancel_path(registration._id)
 
         expect(response).to redirect_to("/bo/pages/permission")
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
       end
     end
 
@@ -60,7 +60,7 @@ RSpec.describe "Cancels", type: :request do
         registration.reload
 
         expect(registration).to be_inactive
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
         expect(response).to redirect_to(registration_path(registration.reg_identifier))
       end
     end

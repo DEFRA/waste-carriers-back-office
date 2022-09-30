@@ -18,7 +18,7 @@ RSpec.describe "FinanceDetails", type: :request do
           get resource_finance_details_path(renewing_registration._id)
 
           expect(response).to render_template(:show)
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
 
@@ -29,7 +29,7 @@ RSpec.describe "FinanceDetails", type: :request do
           get resource_finance_details_path(registration._id)
 
           expect(response).to render_template(:show)
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end

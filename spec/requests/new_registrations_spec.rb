@@ -17,7 +17,7 @@ RSpec.describe "NewRegistrations", type: :request do
         get "/bo/new-registrations/#{transient_registration.token}"
 
         expect(response).to render_template(:show)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       context "when no matching transient_registration exists" do

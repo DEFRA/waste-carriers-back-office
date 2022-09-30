@@ -20,7 +20,7 @@ RSpec.describe "CashPaymentForms", type: :request do
         get "/bo/resources/#{transient_registration._id}/payments/cash"
 
         expect(response).to render_template(:new)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
         expect(response.body).to include(transient_registration.reg_identifier)
       end
 
@@ -31,7 +31,7 @@ RSpec.describe "CashPaymentForms", type: :request do
           get "/bo/resources/#{registration._id}/payments/cash"
 
           expect(response).to render_template(:new)
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
           expect(response.body).to include(registration.reg_identifier)
         end
       end

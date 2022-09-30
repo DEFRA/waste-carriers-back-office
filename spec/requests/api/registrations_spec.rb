@@ -20,7 +20,7 @@ RSpec.describe "Registrations API", type: :request do
   end
 
   describe "POST /bo/api/registrations" do
-    let(:data) { File.read(Rails.root.join("spec/support/fixtures/registration_seed.json")) }
+    let(:data) { Rails.root.join("spec/support/fixtures/registration_seed.json").read }
 
     it "generates a new registration, set an expire date and returns a json containing its info" do
       allow(Rails.configuration).to receive(:expires_after).and_return(1)

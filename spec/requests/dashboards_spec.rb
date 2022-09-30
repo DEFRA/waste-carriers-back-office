@@ -15,7 +15,7 @@ RSpec.describe "Dashboards", type: :request do
         get "/bo"
 
         expect(response).to render_template(:index)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       context "when a search term is included" do

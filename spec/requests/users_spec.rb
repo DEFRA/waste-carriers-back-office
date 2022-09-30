@@ -18,7 +18,7 @@ RSpec.describe "Users", type: :request do
         get "/bo/users"
 
         expect(response).to render_template(:index)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
         expect(response.body).to include("Manage back office users")
         expect(response.body).to include("Show all users")
         expect(response.body).to include(active_user.email)
@@ -64,7 +64,7 @@ RSpec.describe "Users", type: :request do
         get "/bo/users/all"
 
         expect(response).to render_template(:index)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
         expect(response.body).to include("Show enabled users only")
         expect(response.body).to include(active_user.email)
         expect(response.body).to include(deactivated_user.email)

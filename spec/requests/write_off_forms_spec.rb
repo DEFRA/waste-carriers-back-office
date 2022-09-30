@@ -22,7 +22,7 @@ RSpec.describe "WriteOffForms", type: :request do
           get new_resource_write_off_form_path(renewing_registration._id)
 
           expect(response).to render_template(:new)
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
 
@@ -51,7 +51,7 @@ RSpec.describe "WriteOffForms", type: :request do
         get new_resource_write_off_form_path(renewing_registration._id)
 
         expect(response).to render_template(:new)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -107,7 +107,7 @@ RSpec.describe "WriteOffForms", type: :request do
           expect(transient_registrations_count).to eq(0)
           expect(registration.finance_details.payments.count).to be > before_request_payments_count
           expect(registration.finance_details.balance).to eq(0)
-          expect(response).to have_http_status(302)
+          expect(response).to have_http_status(:found)
           expect(response).to redirect_to(resource_finance_details_path(registration._id))
         end
 
@@ -123,7 +123,7 @@ RSpec.describe "WriteOffForms", type: :request do
 
             expect(registration.finance_details.payments.count).to be > before_request_payments_count
             expect(registration.finance_details.balance).to eq(0)
-            expect(response).to have_http_status(302)
+            expect(response).to have_http_status(:found)
             expect(response).to redirect_to(resource_finance_details_path(registration._id))
           end
         end
@@ -133,7 +133,7 @@ RSpec.describe "WriteOffForms", type: :request do
         it "returns a 200 status and renders the :new template" do
           post resource_write_off_form_path(renewing_registration._id), params: {}
 
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
           expect(response).to render_template(:new)
         end
       end

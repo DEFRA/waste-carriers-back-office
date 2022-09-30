@@ -16,7 +16,7 @@ RSpec.describe "ChargeAdjustForms", type: :request do
         get new_resource_charge_adjust_form_path(renewing_registration._id)
 
         expect(response).to render_template(:new)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -32,7 +32,7 @@ RSpec.describe "ChargeAdjustForms", type: :request do
         get new_resource_charge_adjust_form_path(renewing_registration._id)
 
         expect(response).to redirect_to("/bo/pages/permission")
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
       end
     end
 
@@ -67,7 +67,7 @@ RSpec.describe "ChargeAdjustForms", type: :request do
           it "redirects to the positive charge adjust page with a 302" do
             post resource_charge_adjust_form_path(renewing_registration._id), params: params
 
-            expect(response).to have_http_status(302)
+            expect(response).to have_http_status(:found)
             expect(response).to redirect_to(resource_positive_charge_adjust_form_path(renewing_registration._id))
           end
         end
@@ -84,7 +84,7 @@ RSpec.describe "ChargeAdjustForms", type: :request do
           it "redirects to the negative charge adjust page with a 302" do
             post resource_charge_adjust_form_path(renewing_registration._id), params: params
 
-            expect(response).to have_http_status(302)
+            expect(response).to have_http_status(:found)
             expect(response).to redirect_to(resource_negative_charge_adjust_form_path(renewing_registration._id))
           end
         end
@@ -94,7 +94,7 @@ RSpec.describe "ChargeAdjustForms", type: :request do
         it "returns a 200 status and renders the :new template" do
           post resource_charge_adjust_form_path(renewing_registration._id), params: {}
 
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
           expect(response).to render_template(:new)
         end
       end

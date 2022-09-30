@@ -18,7 +18,7 @@ RSpec.describe "ConvictionImports", type: :request do
 
       it "returns a 200 response" do
         get "/bo/import-convictions"
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 

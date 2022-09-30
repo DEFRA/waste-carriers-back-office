@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
 RSpec.shared_context "with finance stats payment data" do
 
   def an_amount
@@ -106,4 +105,3 @@ RSpec.shared_context "with finance stats payment data" do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

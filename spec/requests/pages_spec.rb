@@ -12,7 +12,7 @@ RSpec.describe "Pages", type: :request do
       it "displays the correct page" do
         get "/bo/pages/deactivated"
 
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
         expect(response).to render_template(:deactivated)
       end
     end
@@ -25,7 +25,7 @@ RSpec.describe "Pages", type: :request do
       it "displays the correct page" do
         get "/bo/pages/deactivated"
 
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
         expect(response).to render_template(:deactivated)
       end
     end
@@ -34,7 +34,7 @@ RSpec.describe "Pages", type: :request do
       it "displays the correct page" do
         get "/bo/pages/deactivated"
 
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
         expect(response).to render_template(:deactivated)
       end
     end

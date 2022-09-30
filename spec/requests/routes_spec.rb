@@ -12,7 +12,7 @@ RSpec.describe "Root", type: :request do
       get "/"
 
       expect(response).to redirect_to(bo_path)
-      expect(response).to have_http_status(302)
+      expect(response).to have_http_status(:found)
     end
   end
 
@@ -23,7 +23,7 @@ RSpec.describe "Root", type: :request do
       it "returns a 200 response and redirects the user to the sign in page" do
         get "/bo/CBDU12345/renew"
 
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
         expect(response).to redirect_to(new_user_session_path)
       end
 
@@ -53,7 +53,7 @@ RSpec.describe "Root", type: :request do
       it "returns a 200 response and redirects the user to the renewal start page" do
         get "/bo/#{registration.reg_identifier}/renew"
 
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
         expect(response.body).to match(/You are about to renew registration CBDU\d+/)
       end
     end
@@ -69,7 +69,7 @@ RSpec.describe "Root", type: :request do
       it "returns a 302 (redirect) response" do
         get "/bo/#{registration.reg_identifier}/renew"
 
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
       end
     end
   end
@@ -79,7 +79,7 @@ RSpec.describe "Root", type: :request do
       it "returns a 301 and loads the new Devise URL" do
         get "/agency_users/sign_in"
 
-        expect(response).to have_http_status(301)
+        expect(response).to have_http_status(:moved_permanently)
         expect(response).to redirect_to("/bo/users/sign_in")
       end
     end
@@ -88,7 +88,7 @@ RSpec.describe "Root", type: :request do
       it "returns a 301 and loads the new Devise URL" do
         get "/agency_users/password/edit"
 
-        expect(response).to have_http_status(301)
+        expect(response).to have_http_status(:moved_permanently)
         expect(response).to redirect_to("/bo/users/password/edit")
       end
     end
@@ -99,7 +99,7 @@ RSpec.describe "Root", type: :request do
       it "returns a 301 and loads the new Devise URL" do
         get "/admins/sign_in"
 
-        expect(response).to have_http_status(301)
+        expect(response).to have_http_status(:moved_permanently)
         expect(response).to redirect_to("/bo/users/sign_in")
       end
     end
@@ -108,7 +108,7 @@ RSpec.describe "Root", type: :request do
       it "returns a 301 and loads the new Devise URL" do
         get "/admins/password/edit"
 
-        expect(response).to have_http_status(301)
+        expect(response).to have_http_status(:moved_permanently)
         expect(response).to redirect_to("/bo/users/password/edit")
       end
     end

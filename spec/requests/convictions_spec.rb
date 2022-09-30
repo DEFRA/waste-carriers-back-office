@@ -18,7 +18,7 @@ RSpec.describe "Convictions", type: :request do
         get "/bo/registrations/#{registration.reg_identifier}/convictions"
 
         expect(response).to render_template(:index)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
         expect(response.body).to include(registration.reg_identifier)
       end
     end
@@ -58,7 +58,7 @@ RSpec.describe "Convictions", type: :request do
         get "/bo/transient-registrations/#{transient_registration.reg_identifier}/convictions"
 
         expect(response).to render_template(:index)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
         expect(response.body).to include(transient_registration.reg_identifier)
       end
     end

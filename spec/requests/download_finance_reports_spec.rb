@@ -25,7 +25,7 @@ RSpec.describe "DownloadFinanceReports", type: :request do
       it "returns HTTP status 200" do
         get finance_reports_path
 
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it "response includes the download URL" do
@@ -52,7 +52,7 @@ RSpec.describe "DownloadFinanceReports", type: :request do
         get finance_reports_path
 
         expect(response).to redirect_to("/bo/pages/permission")
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
       end
     end
 

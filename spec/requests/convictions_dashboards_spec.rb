@@ -112,7 +112,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         get "/bo/convictions"
 
         expect(response).to render_template(:index)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
 
         expect(response.body).to include(link_to_possible_matches_registration)
         expect(response.body).to include(link_to_new_from_frontend_registration)
@@ -159,7 +159,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         get "/bo/convictions/in-progress"
 
         expect(response).to render_template(:checks_in_progress)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
 
         expect(response.body).to include(link_to_checks_in_progress_registration)
         expect(response.body).to include(link_to_checks_in_progress_renewal)
@@ -206,7 +206,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         get "/bo/convictions/approved"
 
         expect(response).to render_template(:approved)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
 
         expect(response.body).to include(link_to_pending_approved_registration)
         expect(response.body).to include(link_to_approved_renewal)
@@ -253,7 +253,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         get "/bo/convictions/rejected"
 
         expect(response).to render_template(:rejected)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
 
         expect(response.body).to include(link_to_rejected_renewal)
 

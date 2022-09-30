@@ -3,20 +3,20 @@
 RSpec.shared_examples "finance examples" do
   # Finance users can only do two things:
   it "is able to record a bank transfer payment" do
-    should be_able_to(:record_bank_transfer_payment, WasteCarriersEngine::RenewingRegistration)
+    is_expected.to be_able_to(:record_bank_transfer_payment, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "is not able to charge adjust a resource" do
-    should_not be_able_to(:charge_adjust, WasteCarriersEngine::RenewingRegistration)
-    should_not be_able_to(:charge_adjust, WasteCarriersEngine::Registration)
+    is_expected.not_to be_able_to(:charge_adjust, WasteCarriersEngine::RenewingRegistration)
+    is_expected.not_to be_able_to(:charge_adjust, WasteCarriersEngine::Registration)
   end
 
   it "is able to view payments" do
-    should be_able_to(:view_payments, WasteCarriersEngine::RenewingRegistration)
+    is_expected.to be_able_to(:view_payments, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "is able to view the certificate" do
-    should be_able_to(:view_certificate, WasteCarriersEngine::Registration)
+    is_expected.to be_able_to(:view_certificate, WasteCarriersEngine::Registration)
   end
 
   context "when action is :reverse" do
@@ -24,7 +24,7 @@ RSpec.shared_examples "finance examples" do
       let(:payment) { build(:payment, :bank_transfer) }
 
       it "is able to reverse the payment" do
-        should be_able_to(:reverse, payment)
+        is_expected.to be_able_to(:reverse, payment)
       end
     end
 
@@ -32,7 +32,7 @@ RSpec.shared_examples "finance examples" do
       let(:payment) { build(:payment) }
 
       it "is not able to reverse the payment" do
-        should_not be_able_to(:reverse, payment)
+        is_expected.not_to be_able_to(:reverse, payment)
       end
     end
   end
@@ -40,89 +40,89 @@ RSpec.shared_examples "finance examples" do
   # Everything else is off-limits.
 
   it "is not able to cancel a resource" do
-    should_not be_able_to(:cancel, WasteCarriersEngine::Registration)
+    is_expected.not_to be_able_to(:cancel, WasteCarriersEngine::Registration)
   end
 
   it "is not able to update a transient registration" do
-    should_not be_able_to(:update, WasteCarriersEngine::RenewingRegistration)
+    is_expected.not_to be_able_to(:update, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "is not able to create a registration" do
-    should_not be_able_to(:create, WasteCarriersEngine::Registration)
+    is_expected.not_to be_able_to(:create, WasteCarriersEngine::Registration)
   end
 
   it "is not able to write off large finance details" do
-    should_not be_able_to(:write_off_large, WasteCarriersEngine::FinanceDetails)
+    is_expected.not_to be_able_to(:write_off_large, WasteCarriersEngine::FinanceDetails)
   end
 
   it "is not able to write off small finance details" do
-    should_not be_able_to(:write_off_small, WasteCarriersEngine::FinanceDetails)
+    is_expected.not_to be_able_to(:write_off_small, WasteCarriersEngine::FinanceDetails)
   end
 
   it "is not able to renew" do
-    should_not be_able_to(:renew, WasteCarriersEngine::RenewingRegistration)
-    should_not be_able_to(:renew, WasteCarriersEngine::Registration)
+    is_expected.not_to be_able_to(:renew, WasteCarriersEngine::RenewingRegistration)
+    is_expected.not_to be_able_to(:renew, WasteCarriersEngine::Registration)
   end
 
   it "is not able to record a cash payment" do
-    should_not be_able_to(:record_cash_payment, WasteCarriersEngine::RenewingRegistration)
+    is_expected.not_to be_able_to(:record_cash_payment, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "is not able to refund a payment" do
-    should_not be_able_to(:refund, WasteCarriersEngine::Registration)
+    is_expected.not_to be_able_to(:refund, WasteCarriersEngine::Registration)
   end
 
   it "is not able to record a cheque payment" do
-    should_not be_able_to(:record_cheque_payment, WasteCarriersEngine::RenewingRegistration)
+    is_expected.not_to be_able_to(:record_cheque_payment, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "is not able to cease a registration" do
-    should_not be_able_to(:cease, WasteCarriersEngine::Registration)
+    is_expected.not_to be_able_to(:cease, WasteCarriersEngine::Registration)
   end
 
   it "is not able to revoke a registration" do
-    should_not be_able_to(:revoke, WasteCarriersEngine::Registration)
+    is_expected.not_to be_able_to(:revoke, WasteCarriersEngine::Registration)
   end
 
   it "is not able to edit a registration" do
-    should_not be_able_to(:edit, WasteCarriersEngine::Registration)
+    is_expected.not_to be_able_to(:edit, WasteCarriersEngine::Registration)
   end
 
   it "is not able to record a postal order payment" do
-    should_not be_able_to(:record_postal_order_payment, WasteCarriersEngine::RenewingRegistration)
+    is_expected.not_to be_able_to(:record_postal_order_payment, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "is not able to record a worldpay payment" do
-    should_not be_able_to(:record_worldpay_missed_payment, WasteCarriersEngine::RenewingRegistration)
+    is_expected.not_to be_able_to(:record_worldpay_missed_payment, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "is not able to review convictions" do
-    should_not be_able_to(:review_convictions, WasteCarriersEngine::RenewingRegistration)
+    is_expected.not_to be_able_to(:review_convictions, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "is not able to view revoked reasons" do
-    should_not be_able_to(:view_revoked_reasons, WasteCarriersEngine::RenewingRegistration)
+    is_expected.not_to be_able_to(:view_revoked_reasons, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "is not able to revert to payment summary" do
-    should_not be_able_to(:revert_to_payment_summary, WasteCarriersEngine::RenewingRegistration)
+    is_expected.not_to be_able_to(:revert_to_payment_summary, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "is not able to transfer a registration" do
-    should_not be_able_to(:transfer_registration, WasteCarriersEngine::Registration)
+    is_expected.not_to be_able_to(:transfer_registration, WasteCarriersEngine::Registration)
   end
 
   it "is not able to manage back office users" do
-    should_not be_able_to(:manage_back_office_users, User)
+    is_expected.not_to be_able_to(:manage_back_office_users, User)
   end
 
   it "is not able to modify agency users" do
     user = build(:user, :agency)
-    should_not be_able_to(:modify_user, user)
+    is_expected.not_to be_able_to(:modify_user, user)
   end
 
   it "is not able to modify finance users" do
     user = build(:user, :finance)
-    should_not be_able_to(:modify_user, user)
+    is_expected.not_to be_able_to(:modify_user, user)
   end
 end

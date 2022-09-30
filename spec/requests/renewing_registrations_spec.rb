@@ -17,7 +17,7 @@ RSpec.describe "RenewingRegistrations", type: :request do
         get "/bo/renewing-registrations/#{transient_registration.reg_identifier}"
 
         expect(response).to render_template(:show)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it "includes a properly-displayed workflow_state and includes a link to continue the renewal" do

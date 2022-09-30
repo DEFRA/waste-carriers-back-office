@@ -5,7 +5,7 @@ RSpec.shared_examples "active and inactive examples" do
     let(:deactivated) { false }
 
     it "is able to use the back office" do
-      should be_able_to(:use_back_office, :all)
+      is_expected.to be_able_to(:use_back_office, :all)
     end
   end
 
@@ -13,7 +13,7 @@ RSpec.shared_examples "active and inactive examples" do
     let(:deactivated) { true }
 
     it "is not able to use the back office" do
-      should_not be_able_to(:use_back_office, :all)
+      is_expected.not_to be_able_to(:use_back_office, :all)
     end
   end
 end

@@ -17,7 +17,7 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
         get "/bo/registrations/#{registration.reg_identifier}/convictions/approve"
 
         expect(response).to render_template(:new)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
         expect(response.body).to include(registration.reg_identifier)
       end
     end
@@ -45,6 +45,7 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
           revoked_reason: "foo"
         }
       end
+
       before do
         sign_in(user)
       end
@@ -104,6 +105,7 @@ RSpec.describe "RegistrationConvictionApprovalForms", type: :request do
           revoked_reason: "foo"
         }
       end
+
       before do
         sign_in(user)
       end
