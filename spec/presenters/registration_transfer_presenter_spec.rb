@@ -17,10 +17,10 @@ RSpec.describe RegistrationTransferPresenter do
         expect(presenter.new_registration_transfer_message_lines)
           .to eq(
             [
-              message_for(:paragraph_1, email: account_email),
-              message_for(:paragraph_2, reg_identifier: registration.reg_identifier),
-              message_for(:paragraph_3, email: account_email),
-              message_for(:paragraph_4, email: account_email)
+              message_for(:paragraph1, email: account_email),
+              message_for(:paragraph2, reg_identifier: registration.reg_identifier),
+              message_for(:paragraph3, email: account_email),
+              message_for(:paragraph4, email: account_email)
             ]
           )
       end
@@ -33,12 +33,12 @@ RSpec.describe RegistrationTransferPresenter do
     context "without an account_email" do
       let(:account_email) { "" }
 
-      it "returns the paragraph_1_no_email message" do
+      it "returns the paragraph1_no_email message" do
         expect(presenter.new_registration_transfer_message_lines)
           .to eq(
             [
-              message_for(:paragraph_1_no_account_email),
-              message_for(:paragraph_2, reg_identifier: registration.reg_identifier)
+              message_for(:paragraph1_no_account_email),
+              message_for(:paragraph2, reg_identifier: registration.reg_identifier)
             ]
           )
       end
