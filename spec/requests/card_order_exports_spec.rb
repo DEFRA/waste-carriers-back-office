@@ -10,7 +10,7 @@ RSpec.describe "CardOrderExports", type: :request do
     context "when an agency-with-refund user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
 
-      before(:each) do
+      before do
         sign_in(user)
         get card_order_exports_path
       end
@@ -32,7 +32,7 @@ RSpec.describe "CardOrderExports", type: :request do
     context "when a non agency-with-refund user is signed in" do
       let(:user) { create(:user, :agency) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 

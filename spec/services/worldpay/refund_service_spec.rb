@@ -55,7 +55,7 @@ module Worldpay
         context "when the response from worldpay contains the correct information" do
           it "returns true" do
             request_headers = {
-              "Authorization" => "Basic " + Base64.encode64("worldpay_username:worldpay_password").to_s
+              "Authorization" => "Basic #{Base64.encode64('worldpay_username:worldpay_password')}"
             }
 
             allow(RestClient::Request).to receive(:execute).with(hash_including(headers: request_headers)).and_return(

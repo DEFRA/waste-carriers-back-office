@@ -91,7 +91,7 @@ RSpec.shared_context "with finance stats payment data" do
     "WORLDPAY_MISSED" => :worldpay_missed
   }.freeze
 
-  before(:each) do
+  before do
     # create registrations with payment details as above
     payment_data.each do |date_set|
       date_set[:payments].each do |type, amounts|

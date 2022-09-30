@@ -44,8 +44,8 @@ RSpec.describe PaymentPresenter do
       end
     end
 
-    context "when a refunded payment do not exist for that order key" do
-      let(:refunded_payment) {}
+    context "when a refunded payment does not exist for that order key" do
+      let(:refunded_payment) { nil }
 
       it "returns false" do
         expect(subject).not_to be_already_refunded
@@ -69,8 +69,8 @@ RSpec.describe PaymentPresenter do
       end
     end
 
-    context "when a reversal payment do not exist for that order key" do
-      let(:reversed_payment) {}
+    context "when a reversal payment does not exist for that order key" do
+      let(:reversed_payment) { nil }
 
       it "returns false" do
         expect(subject).not_to be_already_reversed

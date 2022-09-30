@@ -8,7 +8,7 @@ RSpec.describe "Cancels", type: :request do
       let(:user) { create(:user, :agency_with_refund) }
       let(:registration) { create(:registration) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -24,7 +24,7 @@ RSpec.describe "Cancels", type: :request do
       let(:user) { create(:user, :finance_super) }
       let(:registration) { create(:registration) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -50,7 +50,7 @@ RSpec.describe "Cancels", type: :request do
       let(:user) { create(:user, :agency_with_refund) }
       let(:registration) { create(:registration, :pending) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 

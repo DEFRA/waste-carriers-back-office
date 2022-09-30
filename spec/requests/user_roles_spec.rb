@@ -7,7 +7,7 @@ RSpec.describe "User Roles", type: :request do
 
   describe "GET /users/:id/role" do
     context "when a super user is signed in" do
-      before(:each) do
+      before do
         sign_in(create(:user, :agency_super))
       end
 
@@ -33,7 +33,7 @@ RSpec.describe "User Roles", type: :request do
     let(:params) { { role: "agency_with_refund" } }
 
     context "when a super user is signed in" do
-      before(:each) do
+      before do
         sign_in(create(:user, :agency_super))
       end
 

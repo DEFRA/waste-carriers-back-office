@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "ResendRenewalEmail", type: :request do
   describe "GET /bo/resend-renewal-email/:reg_identifier" do
-    before(:each) { sign_in(user) }
+    before { sign_in(user) }
 
     let(:request_path) { "/bo/resend-renewal-email/#{registration.reg_identifier}" }
 

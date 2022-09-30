@@ -17,7 +17,7 @@ RSpec.describe "DownloadFinanceReports", type: :request do
       let(:folder_prefix) { "SOME_FOLDER" }
       let(:download_link) { "https://some_bucket.amazonaws.com/#{folder_prefix}/#{report_filename}" }
 
-      before(:each) do
+      before do
         sign_in(user)
         allow_any_instance_of(Reports::FinanceReportsAwsService).to receive(:download_link).and_return(download_link)
       end
@@ -44,7 +44,7 @@ RSpec.describe "DownloadFinanceReports", type: :request do
     context "when a non cbd_user is signed in" do
       let(:user) { create(:user, :agency) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 

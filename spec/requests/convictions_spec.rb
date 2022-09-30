@@ -10,7 +10,7 @@ RSpec.describe "Convictions", type: :request do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -26,7 +26,7 @@ RSpec.describe "Convictions", type: :request do
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -50,7 +50,7 @@ RSpec.describe "Convictions", type: :request do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -66,7 +66,7 @@ RSpec.describe "Convictions", type: :request do
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -90,7 +90,7 @@ RSpec.describe "Convictions", type: :request do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -105,7 +105,7 @@ RSpec.describe "Convictions", type: :request do
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -129,7 +129,7 @@ RSpec.describe "Convictions", type: :request do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -145,7 +145,7 @@ RSpec.describe "Convictions", type: :request do
   context "when a non-agency user is signed in" do
     let(:user) { create(:user, :finance) }
 
-    before(:each) do
+    before do
       sign_in(user)
     end
 

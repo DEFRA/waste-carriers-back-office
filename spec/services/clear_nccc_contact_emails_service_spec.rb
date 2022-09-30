@@ -9,7 +9,7 @@ end
 RSpec.describe ClearNcccContactEmailsService do
 
   describe ".run" do
-  
+
     subject { described_class.run }
 
     let(:contact_email) { "-" }
@@ -96,7 +96,7 @@ RSpec.describe ClearNcccContactEmailsService do
         wastecarriers@environment-agency.gov.uk
         waste-exemptions@environment-agency.gov.uk
       ]
-    
+
       emails_to_clear.each do |email|
         it_behaves_like "clears the contact_email", email
       end

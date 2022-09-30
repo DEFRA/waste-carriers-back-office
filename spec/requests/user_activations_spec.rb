@@ -12,7 +12,7 @@ RSpec.describe "User Activations", type: :request do
     context "when a super user is signed in" do
       let(:user) { create(:user, role: current_user_role) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -50,7 +50,7 @@ RSpec.describe "User Activations", type: :request do
     context "when a super user is signed in" do
       let(:user) { create(:user, role: current_user_role) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 

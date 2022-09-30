@@ -7,7 +7,7 @@ RSpec.describe RenewalReminderServiceBase do
   let(:test_class) do
     Class.new(described_class) do
       def expires_in_days; 3; end
-      def send_email(_arg); end  
+      def send_email(_arg); end
     end
   end
 
@@ -26,11 +26,11 @@ RSpec.describe RenewalReminderServiceBase do
 
       expect_any_instance_of(test_class).to receive(:send_email).with(expiring)
 
-      expect_any_instance_of(test_class).to_not receive(:send_email).with(not_expiring)
-      expect_any_instance_of(test_class).to_not receive(:send_email).with(expiring_too_soon)
-      expect_any_instance_of(test_class).to_not receive(:send_email).with(ad_registration)
-      expect_any_instance_of(test_class).to_not receive(:send_email).with(empty_contact_email)
-      expect_any_instance_of(test_class).to_not receive(:send_email).with(nil_contact_email)
+      expect_any_instance_of(test_class).not_to receive(:send_email).with(not_expiring)
+      expect_any_instance_of(test_class).not_to receive(:send_email).with(expiring_too_soon)
+      expect_any_instance_of(test_class).not_to receive(:send_email).with(ad_registration)
+      expect_any_instance_of(test_class).not_to receive(:send_email).with(empty_contact_email)
+      expect_any_instance_of(test_class).not_to receive(:send_email).with(nil_contact_email)
 
       test_class.run
     end

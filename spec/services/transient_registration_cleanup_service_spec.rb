@@ -13,7 +13,7 @@ RSpec.describe TransientRegistrationCleanupService do
 
     context "when a transient_registration was created more than 30 days ago" do
       before do
-        transient_registration.update(created_at: Time.zone.now - 31.days)
+        transient_registration.update(created_at: 31.days.ago)
       end
 
       it "deletes it" do
@@ -30,7 +30,7 @@ RSpec.describe TransientRegistrationCleanupService do
 
       context "when the transient_registration was last modified within the last 30 days" do
         before do
-          transient_registration.metaData.set(last_modified: Time.zone.now - 31.days)
+          transient_registration.metaData.set(last_modified: 31.days.ago)
         end
 
         it "deletes it" do
@@ -52,7 +52,7 @@ RSpec.describe TransientRegistrationCleanupService do
 
       context "when a transient_registration was last modified more than 30 days ago" do
         before do
-          transient_registration.metaData.set(last_modified: Time.zone.now - 31.days)
+          transient_registration.metaData.set(last_modified: 31.days.ago)
         end
 
         it "deletes it" do
@@ -70,7 +70,7 @@ RSpec.describe TransientRegistrationCleanupService do
 
       context "when a transient_registration was last modified within the last 30 days" do
         before do
-          transient_registration.metaData.set(last_modified: Time.zone.now - 1.days)
+          transient_registration.metaData.set(last_modified: 1.day.ago)
         end
 
         it "does not delete it" do

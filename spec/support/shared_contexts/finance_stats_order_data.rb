@@ -118,7 +118,7 @@ RSpec.shared_context "with finance stats order data" do
     }
   end
 
-  before(:each) do
+  before do
     # create registrations with order details as above
     order_data.each do |date_set|
       date_set[:orders].each do |order|

@@ -6,7 +6,7 @@ RSpec.describe "Assisted digital privacy policy", type: :request do
   let(:registration) { create(:registration, :expires_soon) }
   let(:user) { create(:user, :agency) }
 
-  before(:each) do
+  before do
     sign_in(user)
   end
 

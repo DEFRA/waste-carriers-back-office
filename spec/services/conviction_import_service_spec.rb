@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe ConvictionImportService do
-  let(:csv) {}
+  let(:csv) { nil }
   let(:run_service) do
     described_class.run(csv)
   end
@@ -82,7 +82,7 @@ Apex Limited,,11111111,ABC,99999999
         Class.new(described_class) do
           def close; end
         end
-      end    
+      end
 
       let(:csv) { test_class.new }
 

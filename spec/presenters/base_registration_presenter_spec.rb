@@ -30,7 +30,7 @@ RSpec.describe BaseRegistrationPresenter do
         let(:finance_details) { nil }
 
         it "returns true" do
-          expect(subject.show_no_finance_details_data?).to be_truthy
+          expect(subject.show_no_finance_details_data?).to be(true)
         end
       end
 
@@ -38,7 +38,7 @@ RSpec.describe BaseRegistrationPresenter do
         let(:finance_details) { "Something" }
 
         it "returns false" do
-          expect(subject.show_no_finance_details_data?).to be_falsey
+          expect(subject.show_no_finance_details_data?).to be(false)
         end
       end
     end
@@ -47,7 +47,7 @@ RSpec.describe BaseRegistrationPresenter do
       let(:upper_tier) { false }
 
       it "returns false" do
-        expect(subject.show_no_finance_details_data?).to be_falsey
+        expect(subject.show_no_finance_details_data?).to be(false)
       end
     end
   end
@@ -77,7 +77,7 @@ RSpec.describe BaseRegistrationPresenter do
 
     context "when it is neither revoked nor inactive" do
       it "returns false" do
-        expect(subject.show_ceased_revoked_panel?).to be_falsey
+        expect(subject.show_ceased_revoked_panel?).to be(false)
       end
     end
 
@@ -85,7 +85,7 @@ RSpec.describe BaseRegistrationPresenter do
       let(:revoked) { true }
 
       it "returns true" do
-        expect(subject.show_ceased_revoked_panel?).to be_truthy
+        expect(subject.show_ceased_revoked_panel?).to be(true)
       end
     end
 
@@ -93,7 +93,7 @@ RSpec.describe BaseRegistrationPresenter do
       let(:inactive) { true }
 
       it "returns true" do
-        expect(subject.show_ceased_revoked_panel?).to be_truthy
+        expect(subject.show_ceased_revoked_panel?).to be(true)
       end
     end
   end
@@ -170,7 +170,7 @@ RSpec.describe BaseRegistrationPresenter do
 
       context "when the registration is an upper tier" do
         it "returns true" do
-          expect(subject.show_order_details?).to be_truthy
+          expect(subject.show_order_details?).to be(true)
         end
       end
 
@@ -178,7 +178,7 @@ RSpec.describe BaseRegistrationPresenter do
         let(:upper_tier) { false }
 
         it "returns false" do
-          expect(subject.show_order_details?).to be_falsey
+          expect(subject.show_order_details?).to be(false)
         end
       end
     end
@@ -187,7 +187,7 @@ RSpec.describe BaseRegistrationPresenter do
       let(:orders) { [] }
 
       it "returns false" do
-        expect(subject.show_order_details?).to be_falsey
+        expect(subject.show_order_details?).to be(false)
       end
     end
   end

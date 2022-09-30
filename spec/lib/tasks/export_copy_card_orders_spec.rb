@@ -13,7 +13,7 @@ RSpec.describe "Export copy card orders task", type: :rake do
   RSpec.shared_examples "runs the report" do |report_run_time|
 
     context "with a given report run date and time" do
-      around(:each) do |example|
+      around do |example|
         Timecop.freeze(report_run_time) do
           example.run
         end

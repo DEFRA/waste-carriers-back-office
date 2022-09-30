@@ -9,7 +9,7 @@ RSpec.describe "WorldpayMissedPaymentNewRegistrations", type: :request do
   describe "GET /bo/resources/:_id/missed-worldpay-payment-new-registration" do
     let(:user) { create(:user) }
 
-    before(:each) do
+    before do
       sign_in(user)
     end
 

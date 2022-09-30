@@ -17,12 +17,12 @@ RSpec.describe BaseConvictionPresenter do
            conviction_check_required?: conviction_check_required)
   end
   let(:key_people) { [key_person] }
-  let(:relevant_people) {}
+  let(:relevant_people) { [] }
 
-  let(:business_has_matching_or_unknown_conviction) {}
-  let(:conviction_check_approved) {}
-  let(:key_person_has_matching_or_unknown_conviction) {}
-  let(:revoked) {}
+  let(:business_has_matching_or_unknown_conviction) { false }
+  let(:conviction_check_approved) { false }
+  let(:key_person_has_matching_or_unknown_conviction) { false }
+  let(:revoked) { false }
 
   let(:registration) do
     double(:registration,
@@ -99,7 +99,7 @@ RSpec.describe BaseConvictionPresenter do
     end
 
     context "when declared_convictions is blank" do
-      let(:declared_convictions) {}
+      let(:declared_convictions) { nil }
 
       it "returns the correct message" do
         message = "Unknown – the user has not answered this question yet."
@@ -111,7 +111,7 @@ RSpec.describe BaseConvictionPresenter do
 
   describe "#business_convictions_message" do
     context "when conviction_search_result is missing" do
-      let(:conviction_search_result) {}
+      let(:conviction_search_result) { nil }
 
       it "returns the correct message" do
         message = "Unknown – the automated conviction checks have not run yet. This may be because the registration application is still in progress."
@@ -196,7 +196,7 @@ RSpec.describe BaseConvictionPresenter do
 
   describe "#display_business_convictions?" do
     context "when conviction_search_result is missing" do
-      let(:conviction_search_result) {}
+      let(:conviction_search_result) { nil }
 
       it "returns false" do
         expect(subject.display_business_convictions?).to be(false)

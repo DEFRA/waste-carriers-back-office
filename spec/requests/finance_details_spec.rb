@@ -7,7 +7,7 @@ RSpec.describe "FinanceDetails", type: :request do
     context "when a valid user is signed in" do
       let(:user) { create(:user) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 

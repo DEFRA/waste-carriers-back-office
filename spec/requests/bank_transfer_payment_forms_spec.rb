@@ -12,7 +12,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :finance) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -40,7 +40,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
     context "when a non-finance user is signed in" do
       let(:user) { create(:user, :agency) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -67,7 +67,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :finance) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -173,7 +173,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
     context "when a non-finance user is signed in" do
       let(:user) { create(:user, :agency) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 

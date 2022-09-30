@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe RenewalMagicLinkService do
-  before(:each) do
+  before do
     allow(Rails.configuration).to receive(:wcrs_renewals_url).and_return("http://example.com")
   end
 

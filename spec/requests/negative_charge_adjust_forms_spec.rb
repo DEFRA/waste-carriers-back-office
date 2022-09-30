@@ -8,7 +8,7 @@ RSpec.describe "NegativeChargeAdjustForms", type: :request do
       let(:user) { create(:user, :finance_super) }
       let(:renewing_registration) { create(:renewing_registration) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -24,7 +24,7 @@ RSpec.describe "NegativeChargeAdjustForms", type: :request do
       let(:user) { create(:user) }
       let(:renewing_registration) { create(:renewing_registration) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -50,7 +50,7 @@ RSpec.describe "NegativeChargeAdjustForms", type: :request do
       let(:user) { create(:user, :finance_super) }
       let(:renewing_registration) { create(:renewing_registration) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 

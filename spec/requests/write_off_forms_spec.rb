@@ -8,7 +8,7 @@ RSpec.describe "WriteOffForms", type: :request do
       let(:user) { create(:user, :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -43,7 +43,7 @@ RSpec.describe "WriteOffForms", type: :request do
       let(:user) { create(:user, :finance_admin) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -69,7 +69,7 @@ RSpec.describe "WriteOffForms", type: :request do
       let(:user) { create(:user, :finance_admin) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid, workflow_state: :renewal_received_pending_payment_form) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 

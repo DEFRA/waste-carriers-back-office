@@ -8,7 +8,7 @@ RSpec.describe "ReversalForms", type: :request do
       let(:user) { create(:user, :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -35,7 +35,7 @@ RSpec.describe "ReversalForms", type: :request do
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
       let(:payment) { renewing_registration.finance_details.payments.first }
 
-      before(:each) do
+      before do
         sign_in(user)
 
         payment.payment_type = "CASH"
@@ -65,7 +65,7 @@ RSpec.describe "ReversalForms", type: :request do
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
       let(:payment) { renewing_registration.finance_details.payments.first }
 
-      before(:each) do
+      before do
         sign_in(user)
 
         payment.payment_type = WasteCarriersEngine::Payment::CASH

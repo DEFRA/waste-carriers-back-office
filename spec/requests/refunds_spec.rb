@@ -11,7 +11,7 @@ RSpec.describe "Refunds", type: :request do
       let(:govpay_payment) { renewing_registration.finance_details.payments.select { |p| p.payment_type == "GOVPAY" }.first }
       let(:govpay_active?) { false }
 
-      before(:each) do
+      before do
         # Ensure the registration has both govpay and worldpay payments
         renewing_registration.finance_details.payments << build(:payment, :govpay)
         renewing_registration.save!
@@ -62,7 +62,7 @@ RSpec.describe "Refunds", type: :request do
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
       let(:payment) { renewing_registration.finance_details.payments.first }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -88,7 +88,7 @@ RSpec.describe "Refunds", type: :request do
       let(:user) { create(:user, :agency_with_refund) }
       let(:payment) { renewing_registration.finance_details.payments.first }
 
-      before(:each) do
+      before do
         renewing_registration.finance_details.orders.first.order_code = payment.order_key
         renewing_registration.save
 

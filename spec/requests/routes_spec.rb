@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "Root", type: :request do
   describe "GET /" do
-    before(:each) do
+    before do
       sign_in(create(:user))
     end
 
@@ -46,7 +46,7 @@ RSpec.describe "Root", type: :request do
       # created and the test fails.
       let!(:registration) { create(:registration, :expires_soon, account_email: user.email) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 
@@ -62,7 +62,7 @@ RSpec.describe "Root", type: :request do
       let(:user) { create(:user, :inactive) }
       let(:registration) { create(:registration, reg_identifier: "CBDU12345") }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 

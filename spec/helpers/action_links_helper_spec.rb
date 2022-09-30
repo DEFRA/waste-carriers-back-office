@@ -42,7 +42,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
 
       context "when the balance is equal to 0" do
         it "returns false" do
-          expect(helper.display_write_off_small_link_for?(resource)).to be_falsey
+          expect(helper.display_write_off_small_link_for?(resource)).to be(false)
         end
       end
 
@@ -50,7 +50,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:balance) { 4 }
 
         it "returns true" do
-          expect(helper.display_write_off_small_link_for?(resource)).to be_truthy
+          expect(helper.display_write_off_small_link_for?(resource)).to be(true)
         end
       end
     end
@@ -59,7 +59,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:can) { false }
 
       it "returns false" do
-        expect(helper.display_write_off_small_link_for?(resource)).to be_falsey
+        expect(helper.display_write_off_small_link_for?(resource)).to be(false)
       end
     end
   end
@@ -77,7 +77,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
 
       context "when the balance is equal to 0" do
         it "returns false" do
-          expect(helper.display_write_off_large_link_for?(resource)).to be_falsey
+          expect(helper.display_write_off_large_link_for?(resource)).to be(false)
         end
       end
 
@@ -85,7 +85,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:balance) { 4 }
 
         it "returns true" do
-          expect(helper.display_write_off_large_link_for?(resource)).to be_truthy
+          expect(helper.display_write_off_large_link_for?(resource)).to be(true)
         end
       end
     end
@@ -94,7 +94,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:can) { false }
 
       it "returns false" do
-        expect(helper.display_write_off_large_link_for?(resource)).to be_falsey
+        expect(helper.display_write_off_large_link_for?(resource)).to be(false)
       end
     end
   end
@@ -172,7 +172,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:balance) { 5 }
 
       it "returns false" do
-        expect(helper.display_refund_link_for?(resource)).to be_falsey
+        expect(helper.display_refund_link_for?(resource)).to be(false)
       end
     end
 
@@ -180,7 +180,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:balance) { 0 }
 
       it "returns false" do
-        expect(helper.display_refund_link_for?(resource)).to be_falsey
+        expect(helper.display_refund_link_for?(resource)).to be(false)
       end
     end
 
@@ -189,8 +189,9 @@ RSpec.describe ActionLinksHelper, type: :helper do
 
       context "when the user does not have the permissions to refund" do
         before { allow(helper).to receive(:can?).with(:refund, resource).and_return(false) }
+
         it "returns false" do
-          expect(helper.display_refund_link_for?(resource)).to be_falsey
+          expect(helper.display_refund_link_for?(resource)).to be(false)
         end
       end
 
@@ -204,14 +205,15 @@ RSpec.describe ActionLinksHelper, type: :helper do
             before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(true) }
 
             it "returns false" do
-              expect(helper.display_refund_link_for?(resource)).to be_falsey
+              expect(helper.display_refund_link_for?(resource)).to be(false)
             end
           end
+
           context "with govpay payments disabled" do
             before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(false) }
 
             it "returns true" do
-              expect(helper.display_refund_link_for?(resource)).to be_truthy
+              expect(helper.display_refund_link_for?(resource)).to be(true)
             end
           end
         end
@@ -223,14 +225,15 @@ RSpec.describe ActionLinksHelper, type: :helper do
             before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(true) }
 
             it "returns true" do
-              expect(helper.display_refund_link_for?(resource)).to be_truthy
+              expect(helper.display_refund_link_for?(resource)).to be(true)
             end
           end
+
           context "with govpay payments disabled" do
             before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(false) }
 
             it "returns false" do
-              expect(helper.display_refund_link_for?(resource)).to be_falsey
+              expect(helper.display_refund_link_for?(resource)).to be(false)
             end
           end
         end
@@ -331,7 +334,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
 
         context "when the resource is an upper tier" do
           it "returns true" do
-            expect(helper.display_payment_link_for?(resource)).to be_truthy
+            expect(helper.display_payment_link_for?(resource)).to be(true)
           end
         end
 
@@ -339,7 +342,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:upper_tier) { false }
 
           it "returns false" do
-            expect(helper.display_payment_link_for?(resource)).to be_falsey
+            expect(helper.display_payment_link_for?(resource)).to be(false)
           end
         end
       end
@@ -348,7 +351,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:resource) { build(:renewing_registration) }
 
         it "returns false" do
-          expect(helper.display_payment_link_for?(resource)).to be_falsey
+          expect(helper.display_payment_link_for?(resource)).to be(false)
         end
       end
     end
@@ -356,7 +359,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
     context "when the resource is not a renewing registration" do
       context "when the resource is an upper tier" do
         it "returns true" do
-          expect(helper.display_payment_link_for?(resource)).to be_truthy
+          expect(helper.display_payment_link_for?(resource)).to be(true)
         end
       end
 
@@ -364,7 +367,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:upper_tier) { false }
 
         it "returns false" do
-          expect(helper.display_payment_link_for?(resource)).to be_falsey
+          expect(helper.display_payment_link_for?(resource)).to be(false)
         end
       end
     end
@@ -390,7 +393,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:active) { true }
 
           it "returns true" do
-            expect(helper.display_cease_or_revoke_link_for?(resource)).to be_truthy
+            expect(helper.display_cease_or_revoke_link_for?(resource)).to be(true)
           end
         end
 
@@ -398,7 +401,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:active) { false }
 
           it "returns false" do
-            expect(helper.display_cease_or_revoke_link_for?(resource)).to be_falsey
+            expect(helper.display_cease_or_revoke_link_for?(resource)).to be(false)
           end
         end
       end
@@ -407,7 +410,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:can) { false }
 
         it "returns false" do
-          expect(helper.display_cease_or_revoke_link_for?(resource)).to be_falsey
+          expect(helper.display_cease_or_revoke_link_for?(resource)).to be(false)
         end
       end
     end
@@ -416,7 +419,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:renewing_registration) }
 
       it "returns false" do
-        expect(helper.display_cease_or_revoke_link_for?(resource)).to be_falsey
+        expect(helper.display_cease_or_revoke_link_for?(resource)).to be(false)
       end
     end
   end
@@ -440,7 +443,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:pending) { true }
 
           it "returns true" do
-            expect(helper.display_cancel_link_for?(resource)).to be_truthy
+            expect(helper.display_cancel_link_for?(resource)).to be(true)
           end
         end
 
@@ -448,7 +451,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:pending) { false }
 
           it "returns false" do
-            expect(helper.display_cancel_link_for?(resource)).to be_falsey
+            expect(helper.display_cancel_link_for?(resource)).to be(false)
           end
         end
       end
@@ -457,7 +460,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:can) { false }
 
         it "returns false" do
-          expect(helper.display_cancel_link_for?(resource)).to be_falsey
+          expect(helper.display_cancel_link_for?(resource)).to be(false)
         end
       end
     end
@@ -466,7 +469,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:renewing_registration) }
 
       it "returns false" do
-        expect(helper.display_cancel_link_for?(resource)).to be_falsey
+        expect(helper.display_cancel_link_for?(resource)).to be(false)
       end
     end
   end
@@ -490,7 +493,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:active) { true }
 
           it "returns true" do
-            expect(helper.display_edit_link_for?(resource)).to be_truthy
+            expect(helper.display_edit_link_for?(resource)).to be(true)
           end
         end
 
@@ -498,7 +501,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:active) { false }
 
           it "returns false" do
-            expect(helper.display_edit_link_for?(resource)).to be_falsey
+            expect(helper.display_edit_link_for?(resource)).to be(false)
           end
         end
       end
@@ -508,7 +511,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:renewing_registration) }
 
       it "returns false" do
-        expect(helper.display_edit_link_for?(resource)).to be_falsey
+        expect(helper.display_edit_link_for?(resource)).to be(false)
       end
     end
   end
@@ -532,7 +535,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:active) { true }
 
           it "returns true" do
-            expect(helper.display_certificate_link_for?(resource)).to be_truthy
+            expect(helper.display_certificate_link_for?(resource)).to be(true)
           end
         end
 
@@ -540,7 +543,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:active) { false }
 
           it "returns false" do
-            expect(helper.display_certificate_link_for?(resource)).to be_falsey
+            expect(helper.display_certificate_link_for?(resource)).to be(false)
           end
         end
       end
@@ -549,7 +552,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:can) { false }
 
         it "returns false" do
-          expect(helper.display_certificate_link_for?(resource)).to be_falsey
+          expect(helper.display_certificate_link_for?(resource)).to be(false)
         end
       end
     end
@@ -558,7 +561,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:renewing_registration) }
 
       it "returns false" do
-        expect(helper.display_certificate_link_for?(resource)).to be_falsey
+        expect(helper.display_certificate_link_for?(resource)).to be(false)
       end
     end
   end
@@ -585,7 +588,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:active) { true }
 
           it "returns true" do
-            expect(helper.display_resend_confirmation_email_link_for?(resource)).to be_truthy
+            expect(helper.display_resend_confirmation_email_link_for?(resource)).to be(true)
           end
         end
 
@@ -593,7 +596,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:active) { false }
 
           it "returns false" do
-            expect(helper.display_resend_confirmation_email_link_for?(resource)).to be_falsey
+            expect(helper.display_resend_confirmation_email_link_for?(resource)).to be(false)
           end
         end
       end
@@ -602,7 +605,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:can) { false }
 
         it "returns false" do
-          expect(helper.display_resend_confirmation_email_link_for?(resource)).to be_falsey
+          expect(helper.display_resend_confirmation_email_link_for?(resource)).to be(false)
         end
       end
     end
@@ -611,7 +614,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:renewing_registration) }
 
       it "returns false" do
-        expect(helper.display_certificate_link_for?(resource)).to be_falsey
+        expect(helper.display_certificate_link_for?(resource)).to be(false)
       end
     end
   end
@@ -642,7 +645,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
             let(:upper_tier) { true }
 
             it "returns true" do
-              expect(helper.display_order_copy_cards_link_for?(resource)).to be_truthy
+              expect(helper.display_order_copy_cards_link_for?(resource)).to be(true)
             end
           end
 
@@ -650,7 +653,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
             let(:upper_tier) { false }
 
             it "returns false" do
-              expect(helper.display_order_copy_cards_link_for?(resource)).to be_falsey
+              expect(helper.display_order_copy_cards_link_for?(resource)).to be(false)
             end
           end
         end
@@ -659,7 +662,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:active) { false }
 
           it "returns false" do
-            expect(helper.display_order_copy_cards_link_for?(resource)).to be_falsey
+            expect(helper.display_order_copy_cards_link_for?(resource)).to be(false)
           end
         end
       end
@@ -668,7 +671,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:can) { false }
 
         it "returns false" do
-          expect(helper.display_order_copy_cards_link_for?(resource)).to be_falsey
+          expect(helper.display_order_copy_cards_link_for?(resource)).to be(false)
         end
       end
     end
@@ -677,7 +680,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:renewing_registration) }
 
       it "returns false" do
-        expect(helper.display_order_copy_cards_link_for?(resource)).to be_falsey
+        expect(helper.display_order_copy_cards_link_for?(resource)).to be(false)
       end
     end
   end
@@ -712,7 +715,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
             end
 
             it "returns true" do
-              expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be_truthy
+              expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be(true)
             end
           end
 
@@ -722,7 +725,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
             end
 
             it "returns false" do
-              expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be_falsey
+              expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be(false)
             end
           end
         end
@@ -731,7 +734,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:upper_tier) { false }
 
           it "returns false" do
-            expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be_falsey
+            expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be(false)
           end
         end
       end
@@ -740,7 +743,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:active) { false }
 
         it "returns false" do
-          expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be_falsey
+          expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be(false)
         end
       end
     end
@@ -749,7 +752,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:can) { false }
 
       it "returns false" do
-        expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be_falsey
+        expect(helper.display_refresh_registered_company_name_link_for?(resource)).to be(false)
       end
     end
   end
@@ -766,7 +769,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
 
       context "when the resource is a registration" do
         it "returns false" do
-          expect(helper.display_restart_renewal_link_for?(resource)).to be_falsey
+          expect(helper.display_restart_renewal_link_for?(resource)).to be(false)
         end
       end
 
@@ -774,7 +777,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:renewing_registration) { create(:renewing_registration) }
 
         it "returns true" do
-          expect(helper.display_restart_renewal_link_for?(renewing_registration)).to be_truthy
+          expect(helper.display_restart_renewal_link_for?(renewing_registration)).to be(true)
         end
       end
     end
@@ -784,7 +787,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:can) { false }
 
       it "returns false" do
-        expect(helper.display_refresh_registered_company_name_link_for?(renewing_registration)).to be_falsey
+        expect(helper.display_refresh_registered_company_name_link_for?(renewing_registration)).to be(false)
       end
     end
   end
@@ -803,7 +806,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       let(:resource) { build(:new_registration) }
 
       it "returns false" do
-        expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+        expect(helper.display_finance_details_link_for?(resource)).to be(false)
       end
     end
 
@@ -813,7 +816,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
 
         context "when the resource is an upper tier" do
           it "returns true" do
-            expect(helper.display_finance_details_link_for?(resource)).to be_truthy
+            expect(helper.display_finance_details_link_for?(resource)).to be(true)
           end
         end
 
@@ -821,7 +824,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:upper_tier) { false }
 
           it "returns false" do
-            expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+            expect(helper.display_finance_details_link_for?(resource)).to be(false)
           end
         end
       end
@@ -830,7 +833,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:resource) { build(:renewing_registration) }
 
         it "returns false" do
-          expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+          expect(helper.display_finance_details_link_for?(resource)).to be(false)
         end
       end
     end
@@ -839,7 +842,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       context "when the resource is an upper tier" do
         context "when the resource has finance details" do
           it "returns true" do
-            expect(helper.display_finance_details_link_for?(resource)).to be_truthy
+            expect(helper.display_finance_details_link_for?(resource)).to be(true)
           end
         end
 
@@ -847,7 +850,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
           let(:finance_details) { nil }
 
           it "returns false" do
-            expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+            expect(helper.display_finance_details_link_for?(resource)).to be(false)
           end
         end
       end
@@ -856,7 +859,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         let(:upper_tier) { false }
 
         it "returns false" do
-          expect(helper.display_finance_details_link_for?(resource)).to be_falsey
+          expect(helper.display_finance_details_link_for?(resource)).to be(false)
         end
       end
     end

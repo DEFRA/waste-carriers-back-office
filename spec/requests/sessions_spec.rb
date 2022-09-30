@@ -32,7 +32,7 @@ RSpec.describe "Sessions", type: :request do
     context "when the user is signed in" do
       let(:user) { create(:user) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 

@@ -13,7 +13,7 @@ RSpec.describe "Renewals API", type: :request do
     context "when a user is signed in" do
       let(:user) { create(:user, :finance) }
 
-      before(:each) do
+      before do
         sign_in(user)
       end
 

@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "ResendConfirmationEmail", type: :request do
   describe "GET /bo/resend-confirmation-email/:reg_identifier" do
-    before(:each) { sign_in(user) }
+    before { sign_in(user) }
 
     let(:request_path) { "/bo/resend-confirmation-email/#{registration.reg_identifier}" }
 

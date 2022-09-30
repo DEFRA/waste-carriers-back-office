@@ -6,7 +6,7 @@ RSpec.describe RegistrationConvictionPresenter do
   subject { described_class.new(registration, view_context) }
 
   let(:reg_identifier) { "CBDU1" }
-  let(:conviction_check_required) {}
+  let(:conviction_check_required) { false }
   let(:registration) do
     double(:registration,
            reg_identifier: reg_identifier,
