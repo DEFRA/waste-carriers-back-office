@@ -44,7 +44,7 @@ RSpec.describe "Sessions", type: :request do
         expect(controller.current_user).to be_nil
         expect(response).to have_http_status(302)
         expect(response).to redirect_to(new_user_session_path)
-        expect(user.reload.session_token).to_not eq(old_session_token)
+        expect(user.reload.session_token).not_to eq(old_session_token)
       end
 
       context "when the user is inactive" do

@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe StatusTagService do
   let(:service) do
-    StatusTagService.run(resource: resource)
+    described_class.run(resource: resource)
   end
 
   context "when the resource is a registration" do
@@ -40,7 +40,7 @@ RSpec.describe StatusTagService do
       before { allow(resource).to receive(:pending_manual_conviction_check?).and_return(false) }
 
       it "does not include :pending_conviction_check in the response" do
-        expect(service).to_not include(:pending_conviction_check)
+        expect(service).not_to include(:pending_conviction_check)
       end
     end
 
@@ -56,12 +56,12 @@ RSpec.describe StatusTagService do
       before { allow(resource).to receive(:pending_payment?).and_return(false) }
 
       it "does not include :pending_payment in the response" do
-        expect(service).to_not include(:pending_payment)
+        expect(service).not_to include(:pending_payment)
       end
     end
 
     it "does not include :stuck in the response" do
-      expect(service).to_not include(:stuck)
+      expect(service).not_to include(:stuck)
     end
   end
 
@@ -101,12 +101,12 @@ RSpec.describe StatusTagService do
         before { resource.workflow_state = "renewal_received_pending_payment_form" }
 
         it "does not include a status in the response" do
-          expect(service).to_not include(:active)
-          expect(service).to_not include(:in_progress)
-          expect(service).to_not include(:expired)
-          expect(service).to_not include(:pending)
-          expect(service).to_not include(:revoked)
-          expect(service).to_not include(:refused)
+          expect(service).not_to include(:active)
+          expect(service).not_to include(:in_progress)
+          expect(service).not_to include(:expired)
+          expect(service).not_to include(:pending)
+          expect(service).not_to include(:revoked)
+          expect(service).not_to include(:refused)
         end
       end
     end
@@ -126,7 +126,7 @@ RSpec.describe StatusTagService do
         before { allow(resource).to receive(:pending_manual_conviction_check?).and_return(false) }
 
         it "does not include :pending_conviction_check in the response" do
-          expect(service).to_not include(:pending_conviction_check)
+          expect(service).not_to include(:pending_conviction_check)
         end
       end
 
@@ -142,7 +142,7 @@ RSpec.describe StatusTagService do
         before { allow(resource).to receive(:pending_payment?).and_return(false) }
 
         it "does not include :pending_payment in the response" do
-          expect(service).to_not include(:pending_payment)
+          expect(service).not_to include(:pending_payment)
         end
       end
 
@@ -158,7 +158,7 @@ RSpec.describe StatusTagService do
         before { allow(resource).to receive(:stuck?).and_return(false) }
 
         it "does not include :stuck in the response" do
-          expect(service).to_not include(:stuck)
+          expect(service).not_to include(:stuck)
         end
       end
     end

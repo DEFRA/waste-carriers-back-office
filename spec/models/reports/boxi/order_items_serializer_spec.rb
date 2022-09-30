@@ -18,6 +18,7 @@ module Reports
           LastModifiedTimestamp
         ]
       end
+
       subject { described_class.new(dir) }
 
       describe "#add_entries_for" do

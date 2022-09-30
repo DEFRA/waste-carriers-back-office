@@ -3,11 +3,13 @@
 require "rails_helper"
 
 RSpec.describe BaseConvictionPresenter do
-  let(:conviction_search_result) {}
+  subject { described_class.new(registration, view_context) }
+
+  let(:conviction_search_result) { [] }
   let(:conviction_sign_off) { double(:conviction_sign_off, workflow_state: "possible_match") }
   let(:conviction_sign_offs) { [conviction_sign_off] }
 
-  let(:declared_convictions) {}
+  let(:declared_convictions) { "no" }
 
   let(:conviction_check_required) { false }
   let(:key_person) do
@@ -38,14 +40,13 @@ RSpec.describe BaseConvictionPresenter do
   end
 
   let(:view_context) { double(:view_context) }
-  subject { described_class.new(registration, view_context) }
 
   describe "#sign_off" do
     context "when the conviction_sign_off is not present" do
       let(:conviction_sign_offs) { [] }
 
       it "returns nil" do
-        expect(subject.sign_off).to eq(nil)
+        expect(subject.sign_off).to be(nil)
       end
     end
 
@@ -198,7 +199,7 @@ RSpec.describe BaseConvictionPresenter do
       let(:conviction_search_result) {}
 
       it "returns false" do
-        expect(subject.display_business_convictions?).to eq(false)
+        expect(subject.display_business_convictions?).to be(false)
       end
     end
 
@@ -209,7 +210,7 @@ RSpec.describe BaseConvictionPresenter do
         let(:business_has_matching_or_unknown_conviction) { true }
 
         it "returns true" do
-          expect(subject.display_business_convictions?).to eq(true)
+          expect(subject.display_business_convictions?).to be(true)
         end
       end
 
@@ -217,7 +218,7 @@ RSpec.describe BaseConvictionPresenter do
         let(:business_has_matching_or_unknown_conviction) { false }
 
         it "returns false" do
-          expect(subject.display_business_convictions?).to eq(false)
+          expect(subject.display_business_convictions?).to be(false)
         end
       end
     end
@@ -228,7 +229,7 @@ RSpec.describe BaseConvictionPresenter do
       let(:key_people) { [] }
 
       it "returns false" do
-        expect(subject.display_people_convictions?).to eq(false)
+        expect(subject.display_people_convictions?).to be(false)
       end
     end
 
@@ -237,7 +238,7 @@ RSpec.describe BaseConvictionPresenter do
         let(:key_person) { double(:key_person, conviction_search_result: nil) }
 
         it "returns false" do
-          expect(subject.display_people_convictions?).to eq(false)
+          expect(subject.display_people_convictions?).to be(false)
         end
       end
 
@@ -249,7 +250,7 @@ RSpec.describe BaseConvictionPresenter do
           let(:key_person_has_matching_or_unknown_conviction) { true }
 
           it "returns true" do
-            expect(subject.display_people_convictions?).to eq(true)
+            expect(subject.display_people_convictions?).to be(true)
           end
         end
 
@@ -257,7 +258,7 @@ RSpec.describe BaseConvictionPresenter do
           let(:key_person_has_matching_or_unknown_conviction) { false }
 
           it "returns false" do
-            expect(subject.display_people_convictions?).to eq(false)
+            expect(subject.display_people_convictions?).to be(false)
           end
         end
       end
@@ -269,7 +270,7 @@ RSpec.describe BaseConvictionPresenter do
       let(:conviction_check_approved) { true }
 
       it "returns true" do
-        expect(subject.approved_or_revoked?).to eq(true)
+        expect(subject.approved_or_revoked?).to be(true)
       end
     end
 
@@ -280,7 +281,7 @@ RSpec.describe BaseConvictionPresenter do
         let(:revoked) { true }
 
         it "returns true" do
-          expect(subject.approved_or_revoked?).to eq(true)
+          expect(subject.approved_or_revoked?).to be(true)
         end
       end
 
@@ -288,7 +289,7 @@ RSpec.describe BaseConvictionPresenter do
         let(:revoked) { false }
 
         it "returns false" do
-          expect(subject.approved_or_revoked?).to eq(false)
+          expect(subject.approved_or_revoked?).to be(false)
         end
       end
     end

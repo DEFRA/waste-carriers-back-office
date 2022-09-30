@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "developer examples" do
-  it "should be able to toggle features" do
+  it "is able to toggle features" do
     should be_able_to(:manage, WasteCarriersEngine::FeatureToggle)
   end
 
-  it "should not be able to charge adjust a resource" do
+  it "is not able to charge adjust a resource" do
     should_not be_able_to(:charge_adjust, WasteCarriersEngine::RenewingRegistration)
     should_not be_able_to(:charge_adjust, WasteCarriersEngine::Registration)
   end

@@ -8,8 +8,8 @@ RSpec.describe Reports::FinanceStatsService do
     # Note that the test payments and orders are unrelated at the transaction level.
     # This is acceptable for unit test purposes as the service queries payments and orders/charges independently
     # and aggregates the results above the transaction level.
-    include_context "Finance stats payment data"
-    include_context "Finance stats order data"
+    include_context "with finance stats payment data"
+    include_context "with finance stats order data"
 
     let(:payment_types) do
       %w[cash reversal postalorder refund worldpay worldpaymissed cheque banktransfer writeoffsmall writeofflarge]
@@ -75,7 +75,7 @@ RSpec.describe Reports::FinanceStatsService do
     context "with monthly granularity" do
       subject { described_class.new(:mmyyyy).run }
 
-      context "results structure" do
+      context "with results structure" do
 
         it "returns the correct total number of entries" do
           # The finance_details factory creates additional orders for the current date when creating the payments.
@@ -90,7 +90,7 @@ RSpec.describe Reports::FinanceStatsService do
         end
       end
 
-      context "results content" do
+      context "with results content" do
 
         it "returns the correct date values" do
           5.downto(3).each do |month_index|
@@ -102,7 +102,7 @@ RSpec.describe Reports::FinanceStatsService do
           end
         end
 
-        context "renewals due and actual" do
+        context "with renewals due and actual" do
           it "returns the correct expected renewal counts based on actual registrations 36 months previously" do
             5.downto(3).each do |month_index|
               # month indices are higher in the past because we use 'month_index.months.ago'
@@ -122,7 +122,7 @@ RSpec.describe Reports::FinanceStatsService do
           end
         end
 
-        context "payments" do
+        context "with payments" do
 
           it "returns entries for all payment types" do
             5.downto(3).each do |month_index|
@@ -161,7 +161,7 @@ RSpec.describe Reports::FinanceStatsService do
           end
         end
 
-        context "charges" do
+        context "with charges" do
 
           it "returns entries for all charge types" do
             5.downto(3).each do |month_index|
@@ -200,7 +200,7 @@ RSpec.describe Reports::FinanceStatsService do
           end
         end
 
-        context "balance" do
+        context "with balance" do
           it "returns the expected balance for each row" do
             5.downto(3).each do |month_index|
               expect(result_for_month(month_index)[:balance]).to eq test_charges_total_month(month_index) - test_payments_total_month(month_index)
@@ -214,7 +214,7 @@ RSpec.describe Reports::FinanceStatsService do
     context "with daily granularity" do
       subject { described_class.new(:ddmmyyyy).run }
 
-      context "results structure" do
+      context "with results structure" do
 
         it "returns the correct total number of entries" do
           payment_dates = payment_data.map { |dt| dt[:date].strftime("%Y-%m-%d") }
@@ -233,7 +233,7 @@ RSpec.describe Reports::FinanceStatsService do
         end
       end
 
-      context "results content" do
+      context "with results content" do
 
         it "returns the correct date values" do
           5.downto(3).each do |month_index|
@@ -246,7 +246,7 @@ RSpec.describe Reports::FinanceStatsService do
           end
         end
 
-        context "payments" do
+        context "with payments" do
 
           it "returns entries for all payment types" do
             [5.months.ago, 5.months.ago + 1.day, 4.months.ago - 1.day, 4.months.ago, 3.months.ago].each do |date|
@@ -285,7 +285,7 @@ RSpec.describe Reports::FinanceStatsService do
           end
         end
 
-        context "charges" do
+        context "with charges" do
 
           it "returns entries for all charge types" do
             [5.months.ago, 5.months.ago + 1.day, 4.months.ago - 1.day, 4.months.ago, 3.months.ago].each do |date|
@@ -324,7 +324,7 @@ RSpec.describe Reports::FinanceStatsService do
           end
         end
 
-        context "balance" do
+        context "with balance" do
 
           it "returns the expected balance for each row" do
             [5.months.ago, 5.months.ago + 1.day, 4.months.ago - 1.day, 4.months.ago, 3.months.ago].each do |date|

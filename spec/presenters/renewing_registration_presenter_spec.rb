@@ -3,9 +3,10 @@
 require "rails_helper"
 
 RSpec.describe RenewingRegistrationPresenter do
+  subject { described_class.new(renewing_registration, view_context) }
+
   let(:renewing_registration) { double(:renewing_registration) }
   let(:view_context) { double(:view_context) }
-  subject { described_class.new(renewing_registration, view_context) }
 
   describe "#display_current_workflow_state" do
     let(:workflow_state) { "a_workflow_state" }
@@ -23,7 +24,7 @@ RSpec.describe RenewingRegistrationPresenter do
       translated_header = double(:translated_header)
       key = ".renewing_registrations.show.status.headings.rejected"
 
-      expect(I18n).to receive(:t).with(key).and_return(translated_header)
+      allow(I18n).to receive(:t).with(key).and_return(translated_header)
 
       expect(subject.rejected_header).to eq(translated_header)
     end
@@ -34,7 +35,7 @@ RSpec.describe RenewingRegistrationPresenter do
       translated_message = double(:translated_message)
       key = ".renewing_registrations.show.status.messages.rejected"
 
-      expect(I18n).to receive(:t).with(key).and_return(translated_message)
+      allow(I18n).to receive(:t).with(key).and_return(translated_message)
 
       expect(subject.rejected_message).to eq(translated_message)
     end
@@ -55,7 +56,7 @@ RSpec.describe RenewingRegistrationPresenter do
       let(:submitted) { true }
 
       it "returns false" do
-        expect(subject).to_not be_in_progress
+        expect(subject).not_to be_in_progress
       end
     end
   end

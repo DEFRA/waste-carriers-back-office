@@ -6,6 +6,7 @@ RSpec.describe "Dashboards", type: :request do
   describe "/bo" do
     context "when a valid user is signed in" do
       let(:user) { create(:user) }
+
       before(:each) do
         sign_in(user)
       end

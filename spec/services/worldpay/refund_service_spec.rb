@@ -9,8 +9,8 @@ module Worldpay
     describe ".run" do
       context "when the payment is not a worldpay payment nor a worldpay_missed payment" do
         it "returns false" do
-          expect(payment).to receive(:worldpay?).and_return(false)
-          expect(payment).to receive(:worldpay_missed?).and_return(false)
+          allow(payment).to receive(:worldpay?).and_return(false)
+          allow(payment).to receive(:worldpay_missed?).and_return(false)
 
           expect(result).to be_falsey
         end
@@ -58,7 +58,7 @@ module Worldpay
               "Authorization" => "Basic " + Base64.encode64("worldpay_username:worldpay_password").to_s
             }
 
-            expect(RestClient::Request).to receive(:execute).with(hash_including(headers: request_headers)).and_return(
+            allow(RestClient::Request).to receive(:execute).with(hash_including(headers: request_headers)).and_return(
               <<-XML
                 <?xml version=\"1.0\" encoding=\"UTF-8\"?>
                 <!DOCTYPE paymentService PUBLIC \"-//WorldPay//DTD WorldPay PaymentService v1//EN\" \"http://dtd.worldpay.com/paymentService_v1.dtd\">
@@ -80,7 +80,7 @@ module Worldpay
 
         context "when the response from worldpay does not contain the correct information" do
           it "returns false" do
-            expect(RestClient::Request).to receive(:execute).and_return(
+            allow(RestClient::Request).to receive(:execute).and_return(
               <<-XML
                 <?xml version=\"1.0\" encoding=\"UTF-8\"?>
                 <!DOCTYPE paymentService PUBLIC \"-//WorldPay//DTD WorldPay PaymentService v1//EN\" \"http://dtd.worldpay.com/paymentService_v1.dtd\">

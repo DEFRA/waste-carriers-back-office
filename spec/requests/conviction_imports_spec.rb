@@ -6,6 +6,7 @@ RSpec.describe "ConvictionImports", type: :request do
   describe "GET /bo/import-convictions" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :developer) }
+
       before(:each) do
         sign_in(user)
       end
@@ -23,6 +24,7 @@ RSpec.describe "ConvictionImports", type: :request do
 
     context "when a non-developer user is signed in" do
       let(:user) { create(:user, :agency) }
+
       before(:each) do
         sign_in(user)
       end
@@ -48,6 +50,7 @@ Apex Limited,,11111111,ABC,99999999
 
     context "when a valid user is signed in" do
       let(:user) { create(:user, :developer) }
+
       before(:each) do
         sign_in(user)
       end
@@ -73,6 +76,7 @@ Apex Limited,,11111111,ABC,99999999
 
     context "when a non-developer user is signed in" do
       let(:user) { create(:user, :agency) }
+
       before(:each) do
         sign_in(user)
       end

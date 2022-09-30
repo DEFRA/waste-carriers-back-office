@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe ConvictionsDashboardsHelper, type: :helper do
   describe "#details_path" do
-    let(:resource) {}
+    let(:resource) { nil }
     let(:path) { helper.details_path(resource) }
 
     context "when the resource is a registration" do

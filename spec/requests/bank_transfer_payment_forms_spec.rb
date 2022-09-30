@@ -11,6 +11,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
   describe "GET /bo/resources/:_id/payments/bank-transfer" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :finance) }
+
       before(:each) do
         sign_in(user)
       end
@@ -38,6 +39,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
 
     context "when a non-finance user is signed in" do
       let(:user) { create(:user, :agency) }
+
       before(:each) do
         sign_in(user)
       end
@@ -145,7 +147,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
 
             registration.reload
 
-            expect(registration).to_not be_active
+            expect(registration).not_to be_active
           end
         end
       end
@@ -170,6 +172,7 @@ RSpec.describe "BankTransferPaymentForms", type: :request do
 
     context "when a non-finance user is signed in" do
       let(:user) { create(:user, :agency) }
+
       before(:each) do
         sign_in(user)
       end

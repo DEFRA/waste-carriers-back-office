@@ -3,16 +3,16 @@
 require "rails_helper"
 
 RSpec.describe "Export copy card orders task", type: :rake do
-  include_context "rake"
-
   subject { Rake.application["reports:export:weekly_copy_card_orders"] }
 
+  include_context "rake"
+
   # Reset @already_invoked between tests to allow multiple invocations of the same Rake task
-  before { subject.reenable }
+  before { Rake.application["reports:export:weekly_copy_card_orders"].reenable }
 
   RSpec.shared_examples "runs the report" do |report_run_time|
 
-    context "for a given report run date and time" do
+    context "with a given report run date and time" do
       around(:each) do |example|
         Timecop.freeze(report_run_time) do
           example.run
@@ -30,39 +30,41 @@ RSpec.describe "Export copy card orders task", type: :rake do
         expected_start_time = expected_end_time - 1.week
         expect(Reports::CardOrdersExportService).to receive(:run)
           .with(start_time: expected_start_time, end_time: expected_end_time)
-        subject.invoke
+        Rake.application["reports:export:weekly_copy_card_orders"].invoke
       end
     end
   end
 
-  describe "reports:export:weekly_copy_card_orders excluding Monday" do
-    first_run_date = Faker::Date.in_date_period
-    # check all weekdays and skip Monday
-    (0..6).each do |n|
-      run_date = first_run_date + n.days
-      next if Date::DAYNAMES[run_date.wday] == "Monday"
+  describe "reports:export:weekly_copy_card_orders" do
+    context "when excluding Monday" do
+      first_run_date = Faker::Date.in_date_period
+      # check all weekdays and skip Monday
+      (0..6).each do |n|
+        run_date = first_run_date + n.days
+        next if Date::DAYNAMES[run_date.wday] == "Monday"
 
-      it_behaves_like "runs the report", run_date.noon
-    end
-  end
-
-  # The logic of this spec is the same as the shared example but it is
-  # broken out explicitly here for clarity as Monday is an edge case.
-  describe "reports:export:weekly_copy_card_orders on Monday" do
-    let(:run_date) { Faker::Date.in_date_period.prev_occurring(:monday) }
-    let(:expected_end_time) { run_date.prev_occurring(:tuesday).midnight }
-    let(:expected_start_time) { expected_end_time - 1.week }
-
-    around do |example|
-      Timecop.freeze(run_date.noon) do
-        example.run
+        it_behaves_like "runs the report", run_date.noon
       end
     end
 
-    it "runs the report up to the end of the previous Monday" do
-      expect(Reports::CardOrdersExportService).to receive(:run)
-        .with(start_time: expected_start_time, end_time: expected_end_time)
-      subject.invoke
+    # The logic of this spec is the same as the shared example but it is
+    # broken out explicitly here for clarity as Monday is an edge case.
+    context "when on Monday" do
+      let(:run_date) { Faker::Date.in_date_period.prev_occurring(:monday) }
+      let(:expected_end_time) { run_date.prev_occurring(:tuesday).midnight }
+      let(:expected_start_time) { expected_end_time - 1.week }
+
+      around do |example|
+        Timecop.freeze(run_date.noon) do
+          example.run
+        end
+      end
+
+      it "runs the report up to the end of the previous Monday" do
+        expect(Reports::CardOrdersExportService).to receive(:run)
+          .with(start_time: expected_start_time, end_time: expected_end_time)
+        Rake.application["reports:export:weekly_copy_card_orders"].invoke
+      end
     end
   end
 end

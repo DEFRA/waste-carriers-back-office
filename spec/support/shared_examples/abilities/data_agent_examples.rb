@@ -2,15 +2,15 @@
 
 RSpec.shared_examples "data_agent examples" do
 
-  it "should be able to view the certificate" do
+  it "is able to view the certificate" do
     should be_able_to(:view_certificate, WasteCarriersEngine::Registration)
   end
 
-  it "should be able to view revoked reasons" do
+  it "is able to view revoked reasons" do
     should be_able_to(:view_revoked_reasons, WasteCarriersEngine::RenewingRegistration)
   end
 
-  it "should not be able to do anything else" do
+  it "is not able to do anything else" do
     should_not be_able_to(:cancel, WasteCarriersEngine::Registration)
     should_not be_able_to(:cease, WasteCarriersEngine::Registration)
     should_not be_able_to(:charge_adjust, WasteCarriersEngine::Registration)

@@ -5,6 +5,7 @@ require "rails_helper"
 RSpec.describe "Certificates", type: :request do
   let(:registration) { create(:registration, :expires_soon) }
   let(:user) { create(:user, :agency) }
+
   before(:each) do
     sign_in(user)
   end
@@ -20,7 +21,7 @@ RSpec.describe "Certificates", type: :request do
     end
 
     context "when the 'show_as_html' query string is present" do
-      context "and the value is 'true'" do
+      context "when the value is 'true'" do
         it "responds with HTML" do
           get "/bo/registrations/#{registration.reg_identifier}/certificate?show_as_html=true"
 
@@ -29,7 +30,7 @@ RSpec.describe "Certificates", type: :request do
       end
 
       [false, 1, 0, :foo].each do |bad_value|
-        context "and the value is '#{bad_value}'" do
+        context "when the value is '#{bad_value}'" do
           it "responds with a PDF" do
             get "/bo/registrations/#{registration.reg_identifier}/certificate?show_as_html=#{bad_value}"
 

@@ -9,7 +9,7 @@ RSpec.describe RegistrationTransferPresenter do
 
   let(:presenter) { described_class.new(registration) }
 
-  context "account_email messages" do
+  context "with account_email messages" do
     context "with an account_email" do
       let(:account_email) { "alice@example.com" }
 

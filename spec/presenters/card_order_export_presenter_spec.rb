@@ -3,8 +3,9 @@
 require "rails_helper"
 
 RSpec.describe CardOrderExportPresenter do
-  let(:card_orders_export_log) { create(:card_orders_export_log) }
   subject { described_class.new(card_orders_export_log) }
+
+  let(:card_orders_export_log) { create(:card_orders_export_log) }
 
   describe "#exported_at" do
     it "presents the export time in the correct format" do

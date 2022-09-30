@@ -12,7 +12,7 @@ RSpec.describe DashboardsHelper, type: :helper do
       end
 
       it "returns nil" do
-        expect(helper.inline_registered_address(result)).to eq(nil)
+        expect(helper.inline_registered_address(result)).to be(nil)
       end
     end
 
@@ -50,7 +50,7 @@ RSpec.describe DashboardsHelper, type: :helper do
 
       context "when the result is not pending" do
         it "returns nil" do
-          expect(helper.result_type(result)).to eq(nil)
+          expect(helper.result_type(result)).to be(nil)
         end
       end
     end
@@ -61,7 +61,7 @@ RSpec.describe DashboardsHelper, type: :helper do
       before { result.metaData.status = %w[INACTIVE REFUSED REVOKED].sample }
 
       it "returns nil" do
-        expect(helper.result_date(result)).to eq(nil)
+        expect(helper.result_date(result)).to be(nil)
       end
     end
 

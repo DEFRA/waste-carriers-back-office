@@ -3,6 +3,7 @@
 require "rails_helper"
 
 RSpec.describe RenewalReminderServiceBase do
+  # rubocop:disable Lint/ConstantDefinitionInBlock
   class TestRegistrationTransferService < RenewalReminderServiceBase
     def expires_in_days
       3
@@ -10,6 +11,7 @@ RSpec.describe RenewalReminderServiceBase do
 
     def send_email(_arg); end
   end
+  # rubocop:enable Lint/ConstantDefinitionInBlock
 
   describe ".run" do
     it "send emails to relevant registrations" do

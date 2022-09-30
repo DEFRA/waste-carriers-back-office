@@ -8,6 +8,7 @@ RSpec.describe "RegistrationConvictionRejectionForms", type: :request do
   describe "GET /bo/registrations/:reg_identifier/convictions/reject" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
+
       before(:each) do
         sign_in(user)
       end
@@ -23,6 +24,7 @@ RSpec.describe "RegistrationConvictionRejectionForms", type: :request do
 
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
+
       before(:each) do
         sign_in(user)
       end
@@ -38,14 +40,13 @@ RSpec.describe "RegistrationConvictionRejectionForms", type: :request do
   describe "POST /bo/registrations/:reg_identifier/convictions/reject" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
-      before(:each) do
-        sign_in(user)
-      end
-
       let(:params) do
         {
           revoked_reason: "foo"
         }
+      end
+      before(:each) do
+        sign_in(user)
       end
 
       it "redirects to the convictions page, refuses the registration, and updates the revoked_reason, workflow_state, and 'confirmed_' attributes" do
@@ -72,28 +73,27 @@ RSpec.describe "RegistrationConvictionRejectionForms", type: :request do
           post "/bo/registrations/#{registration.reg_identifier}/convictions/reject", params: { conviction_rejection_form: params }
 
           expect(response).to render_template(:new)
-          expect(registration.reload.metaData.revoked_reason).to_not eq(params[:revoked_reason])
+          expect(registration.reload.metaData.revoked_reason).not_to eq(params[:revoked_reason])
         end
       end
     end
 
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
-      before(:each) do
-        sign_in(user)
-      end
-
       let(:params) do
         {
           revoked_reason: "foo"
         }
+      end
+      before(:each) do
+        sign_in(user)
       end
 
       it "redirects to the permissions error page, and does not update the revoked_reason" do
         post "/bo/registrations/#{registration.reg_identifier}/convictions/reject", params: { conviction_rejection_form: params }
 
         expect(response).to redirect_to("/bo/pages/permission")
-        expect(registration.reload.metaData.revoked_reason).to_not eq(params[:revoked_reason])
+        expect(registration.reload.metaData.revoked_reason).not_to eq(params[:revoked_reason])
       end
     end
   end

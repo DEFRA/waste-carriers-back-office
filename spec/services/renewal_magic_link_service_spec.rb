@@ -8,7 +8,7 @@ RSpec.describe RenewalMagicLinkService do
   end
 
   let(:service) do
-    RenewalMagicLinkService.run(token: token)
+    described_class.run(token: token)
   end
 
   context "when token is nil" do

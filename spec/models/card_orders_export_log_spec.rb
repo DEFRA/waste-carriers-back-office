@@ -3,12 +3,12 @@
 require "rails_helper"
 
 RSpec.describe CardOrdersExportLog, type: :model do
+  subject { described_class.new(start_time, end_time, export_filename, exported_at) }
+
   let(:export_filename) { Faker::File.file_name }
   let(:start_time) { Faker::Date.in_date_period.midnight }
   let(:end_time) { start_time + 1.week }
   let(:exported_at) { end_time + 30.hours }
-
-  subject { described_class.new(start_time, end_time, export_filename, exported_at) }
 
   describe "#initialize" do
     it "records the time of the export" do
@@ -28,26 +28,28 @@ RSpec.describe CardOrdersExportLog, type: :model do
   describe "#visit_download_link" do
     let(:user) { build(:user) }
 
-    context "first visit" do
+    context "when it is the first visit" do
       it "records the first visit user" do
-        expect { subject.visit_download_link(user) }.to change { subject.first_visited_by }.from(nil).to(user.email)
+        expect { subject.visit_download_link(user) }.to change(subject, :first_visited_by).from(nil).to(user.email)
       end
+
       it "records the time of the first visit" do
-        expect { subject.visit_download_link(user) }.to change { subject.first_visited_at }.from(nil)
+        expect { subject.visit_download_link(user) }.to change(subject, :first_visited_at).from(nil)
         expect(subject.first_visited_at).to be_within(1.second).of(DateTime.now)
       end
     end
 
-    context "second visit" do
+    context "when it is the second visit" do
       let(:first_user) { build(:user) }
 
       before { subject.visit_download_link(first_user) }
 
       it "does not update the first visit user" do
-        expect { subject.visit_download_link(user) }.not_to change { subject.first_visited_by }.from(first_user.email)
+        expect { subject.visit_download_link(user) }.not_to change(subject, :first_visited_by).from(first_user.email)
       end
+
       it "does not update the time of the first visit" do
-        expect { subject.visit_download_link(user) }.not_to change { subject.first_visited_at }
+        expect { subject.visit_download_link(user) }.not_to change(subject, :first_visited_at)
       end
     end
   end

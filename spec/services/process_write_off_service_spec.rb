@@ -24,8 +24,9 @@ RSpec.describe ProcessWriteOffService do
 
     context "when the balance is 0" do
       let(:balance) { 0 }
+
       it "returns false" do
-        expect(result).to eq(false)
+        expect(result).to be(false)
       end
     end
 
@@ -40,7 +41,7 @@ RSpec.describe ProcessWriteOffService do
         it "generates a new write off large payment and assigns it to the finance details" do
           write_off = double(:write_off)
 
-          expect(WasteCarriersEngine::Payment).to receive(:new).with(payment_type: "WRITEOFFLARGE").and_return(write_off)
+          allow(WasteCarriersEngine::Payment).to receive(:new).with(payment_type: "WRITEOFFLARGE").and_return(write_off)
           expect(write_off).to receive(:order_key=)
           expect(write_off).to receive(:amount=).with(4)
           expect(write_off).to receive(:date_entered=)
@@ -63,7 +64,7 @@ RSpec.describe ProcessWriteOffService do
         it "generates a new write off small payment and assigns it to the finance details" do
           write_off = double(:write_off)
 
-          expect(WasteCarriersEngine::Payment).to receive(:new).with(payment_type: "WRITEOFFSMALL").and_return(write_off)
+          allow(WasteCarriersEngine::Payment).to receive(:new).with(payment_type: "WRITEOFFSMALL").and_return(write_off)
           expect(write_off).to receive(:order_key=)
           expect(write_off).to receive(:amount=).with(4)
           expect(write_off).to receive(:date_entered=)
@@ -89,7 +90,7 @@ RSpec.describe ProcessWriteOffService do
         it "generates a new write off payment in credit and assigns it to the finance details" do
           write_off = double(:write_off)
 
-          expect(WasteCarriersEngine::Payment).to receive(:new).and_return(write_off)
+          allow(WasteCarriersEngine::Payment).to receive(:new).and_return(write_off)
           expect(write_off).to receive(:order_key=)
           expect(write_off).to receive(:amount=).with(-4)
           expect(write_off).to receive(:date_entered=)

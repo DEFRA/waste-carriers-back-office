@@ -28,21 +28,19 @@ module Notify
         end
       end
 
-      context "in general" do
-        before do
-          expect_any_instance_of(Notifications::Client)
-            .to receive(:send_email)
-            .with(expected_notify_options)
-            .and_call_original
-        end
+      before do
+        allow_any_instance_of(Notifications::Client)
+          .to receive(:send_email)
+          .with(expected_notify_options)
+          .and_call_original
+      end
 
-        it "sends an email" do
-          expect(subject).to be_a(Notifications::Client::ResponseNotification)
-          expect(subject.template["id"]).to eq(template_id)
-          expect(subject.content["subject"]).to match(
-            /The waste carriers registration CBDU.* has been transferred to you/
-          )
-        end
+      it "sends an email" do
+        expect(subject).to be_a(Notifications::Client::ResponseNotification)
+        expect(subject.template["id"]).to eq(template_id)
+        expect(subject.content["subject"]).to match(
+          /The waste carriers registration CBDU.* has been transferred to you/
+        )
       end
     end
   end

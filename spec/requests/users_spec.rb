@@ -6,6 +6,7 @@ RSpec.describe "Users", type: :request do
   describe "/bo/users" do
     context "when a super user is signed in" do
       let(:user) { create(:user, :agency_super) }
+
       before(:each) do
         sign_in(user)
       end
@@ -21,12 +22,13 @@ RSpec.describe "Users", type: :request do
         expect(response.body).to include("Manage back office users")
         expect(response.body).to include("Show all users")
         expect(response.body).to include(active_user.email)
-        expect(response.body).to_not include(deactivated_user.email)
+        expect(response.body).not_to include(deactivated_user.email)
       end
     end
 
     context "when a non-super user is signed in" do
       let(:user) { create(:user, :agency) }
+
       before(:each) do
         sign_in(user)
       end
@@ -50,6 +52,7 @@ RSpec.describe "Users", type: :request do
   describe "/bo/users/all" do
     context "when a super user is signed in" do
       let(:user) { create(:user, :agency_super) }
+
       before(:each) do
         sign_in(user)
       end
@@ -70,6 +73,7 @@ RSpec.describe "Users", type: :request do
 
     context "when a non-super user is signed in" do
       let(:user) { create(:user, :agency) }
+
       before(:each) do
         sign_in(user)
       end

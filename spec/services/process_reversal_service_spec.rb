@@ -13,7 +13,7 @@ RSpec.describe ProcessReversalService do
       reversal = double(:reversal)
 
       expect(finance_details).to receive_message_chain(:payments, :<<).with(reversal)
-      expect(WasteCarriersEngine::Payment).to receive(:new).with(payment_type: WasteCarriersEngine::Payment::REVERSAL).and_return(reversal)
+      allow(WasteCarriersEngine::Payment).to receive(:new).with(payment_type: WasteCarriersEngine::Payment::REVERSAL).and_return(reversal)
 
       expect(reversal).to receive(:order_key=).with("123_REVERSAL")
       expect(reversal).to receive(:amount=).with(-10)

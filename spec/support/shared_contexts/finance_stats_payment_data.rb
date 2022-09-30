@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # rubocop:disable Metrics/BlockLength
-RSpec.shared_context "Finance stats payment data" do
+RSpec.shared_context "with finance stats payment data" do
 
   def an_amount
     Faker::Number.number(digits: 4)

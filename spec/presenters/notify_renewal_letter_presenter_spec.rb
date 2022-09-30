@@ -3,8 +3,9 @@
 require "rails_helper"
 
 RSpec.describe NotifyRenewalLetterPresenter do
-  let(:registration) { create(:registration) }
   subject { described_class.new(registration) }
+
+  let(:registration) { create(:registration) }
 
   describe "#contact_name" do
     it "returns the correct value" do
@@ -14,7 +15,7 @@ RSpec.describe NotifyRenewalLetterPresenter do
 
   describe "#expiry_date" do
     it "returns the correct value" do
-      expect(registration).to receive(:expires_on).and_return(Time.zone.local(2020, 1, 1))
+      allow(registration).to receive(:expires_on).and_return(Time.zone.local(2020, 1, 1))
       expect(subject.expiry_date).to eq("1 January 2020")
     end
   end
@@ -25,8 +26,8 @@ RSpec.describe NotifyRenewalLetterPresenter do
     it "returns the correct cost" do
       expected_cost = "£154"
 
-      expect(Rails.configuration).to receive(:new_registration_charge).and_return(cost)
-      expect_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(cost).and_return(expected_cost)
+      allow(Rails.configuration).to receive(:new_registration_charge).and_return(cost)
+      allow_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(cost).and_return(expected_cost)
       expect(subject.registration_cost).to eq(expected_cost)
     end
   end
@@ -37,8 +38,8 @@ RSpec.describe NotifyRenewalLetterPresenter do
     it "returns the correct cost" do
       expected_cost = "£105"
 
-      expect(Rails.configuration).to receive(:renewal_charge).and_return(cost)
-      expect_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(cost).and_return(expected_cost)
+      allow(Rails.configuration).to receive(:renewal_charge).and_return(cost)
+      allow_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(cost).and_return(expected_cost)
       expect(subject.renewal_cost).to eq(expected_cost)
     end
   end
@@ -50,7 +51,7 @@ RSpec.describe NotifyRenewalLetterPresenter do
     it "returns a correctly formatted URL" do
       expected_url = "wastecarriersregistration.service.gov.uk/fo/renew/tokengoeshere"
 
-      expect(Rails.configuration).to receive(:wcrs_renewals_url).and_return("https://wastecarriersregistration.service.gov.uk")
+      allow(Rails.configuration).to receive(:wcrs_renewals_url).and_return("https://wastecarriersregistration.service.gov.uk")
       expect(subject.renewal_url).to eq(expected_url)
     end
   end
@@ -63,7 +64,7 @@ RSpec.describe NotifyRenewalLetterPresenter do
     it "returns a date object" do
       expected_date = first_renewal_email_reminder_days.days.ago.to_date
 
-      expect(Rails.configuration).to receive(:first_renewal_email_reminder_days).and_return(first_renewal_email_reminder_days)
+      allow(Rails.configuration).to receive(:first_renewal_email_reminder_days).and_return(first_renewal_email_reminder_days)
       expect(subject.renewal_email_date).to eq(expected_date)
     end
   end

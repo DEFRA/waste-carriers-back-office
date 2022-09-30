@@ -24,8 +24,8 @@ module Reports
         it "returns a formatted date" do
           metadata = double(:metadata)
 
-          expect(registration).to receive(:metaData).and_return(metadata)
-          expect(metadata).to receive(:date_registered).and_return(Date.new(2019, 11, 11))
+          allow(registration).to receive(:metaData).and_return(metadata)
+          allow(metadata).to receive(:date_registered).and_return(Date.new(2019, 11, 11))
 
           expect(subject.metadata_date_registered.to_s).to eq("2019-11-11T00:00Z")
         end
@@ -35,8 +35,8 @@ module Reports
         it "returns a formatted date" do
           metadata = double(:metadata)
 
-          expect(registration).to receive(:metaData).and_return(metadata)
-          expect(metadata).to receive(:date_activated).and_return(Date.new(2019, 11, 11))
+          allow(registration).to receive(:metaData).and_return(metadata)
+          allow(metadata).to receive(:date_activated).and_return(Date.new(2019, 11, 11))
 
           expect(subject.metadata_date_activated.to_s).to eq("2019-11-11T00:00Z")
         end
@@ -46,8 +46,8 @@ module Reports
         it "returns a formatted date" do
           metadata = double(:metadata)
 
-          expect(registration).to receive(:metaData).and_return(metadata)
-          expect(metadata).to receive(:last_modified).and_return(Date.new(2019, 11, 11))
+          allow(registration).to receive(:metaData).and_return(metadata)
+          allow(metadata).to receive(:last_modified).and_return(Date.new(2019, 11, 11))
 
           expect(subject.metadata_date_last_modified.to_s).to eq("2019-11-11T00:00Z")
         end
@@ -60,7 +60,7 @@ module Reports
           allow(registration).to receive(:metaData).and_return(metadata)
         end
 
-        context "for an unassisted registration" do
+        context "with an unassisted registration" do
           before { allow(metadata).to receive(:route).and_return("DIGITAL") }
 
           it "returns 'Unassisted'" do
@@ -68,7 +68,7 @@ module Reports
           end
         end
 
-        context "for a fully assisted registration" do
+        context "with a fully assisted registration" do
           before { allow(metadata).to receive(:route).and_return("ASSISTED_DIGITAL") }
 
           it "returns 'Fully assisted'" do
@@ -76,7 +76,7 @@ module Reports
           end
         end
 
-        context "for a partially assisted registration" do
+        context "with a partially assisted registration" do
           before { allow(metadata).to receive(:route).and_return("ASSISTED_DIGITAL_FROM_TRANSIENT_REGISTRATION") }
 
           it "returns 'Partially assisted'" do
@@ -89,8 +89,8 @@ module Reports
         it "returns a formatted date" do
           conviction_search_result = double(:conviction_search_result)
 
-          expect(registration).to receive(:conviction_search_result).and_return(conviction_search_result)
-          expect(conviction_search_result).to receive(:searched_at).and_return(Date.new(2019, 11, 11))
+          allow(registration).to receive(:conviction_search_result).and_return(conviction_search_result)
+          allow(conviction_search_result).to receive(:searched_at).and_return(Date.new(2019, 11, 11))
 
           expect(subject.conviction_search_result_searched_at.to_s).to eq("2019-11-11T00:00Z")
         end
@@ -98,7 +98,7 @@ module Reports
 
       describe "#expires_on" do
         it "returns a formatted date" do
-          expect(registration).to receive(:expires_on).and_return(Date.new(2019, 11, 11))
+          allow(registration).to receive(:expires_on).and_return(Date.new(2019, 11, 11))
 
           expect(subject.expires_on.to_s).to eq("2019-11-11T00:00Z")
         end

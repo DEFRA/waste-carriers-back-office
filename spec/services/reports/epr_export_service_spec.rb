@@ -13,9 +13,9 @@ module Reports
           stub_request(:put, %r{https://.*\.s3\.eu-west-1\.amazonaws\.com/EPR/#{file_name}\.csv.*})
 
           # Expect no error gets notified
-          expect(Airbrake).to_not receive(:notify)
+          expect(Airbrake).not_to receive(:notify)
 
-          EprExportService.run
+          described_class.run
         end
       end
 
@@ -33,7 +33,7 @@ module Reports
           # Expect an error to get notified
           expect(Airbrake).to receive(:notify).once
 
-          EprExportService.run
+          described_class.run
         end
       end
     end

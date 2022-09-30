@@ -30,9 +30,9 @@ module Notify
         end
       end
 
-      context "in general" do
+      context "when the contact email is present" do
         before do
-          expect_any_instance_of(Notifications::Client)
+          allow_any_instance_of(Notifications::Client)
             .to receive(:send_email)
             .with(expected_notify_options)
             .and_call_original

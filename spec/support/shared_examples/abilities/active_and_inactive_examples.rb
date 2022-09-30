@@ -4,7 +4,7 @@ RSpec.shared_examples "active and inactive examples" do
   context "when the user is active" do
     let(:deactivated) { false }
 
-    it "should be able to use the back office" do
+    it "is able to use the back office" do
       should be_able_to(:use_back_office, :all)
     end
   end
@@ -12,7 +12,7 @@ RSpec.shared_examples "active and inactive examples" do
   context "when the user is deactivated" do
     let(:deactivated) { true }
 
-    it "should not be able to use the back office" do
+    it "is not able to use the back office" do
       should_not be_able_to(:use_back_office, :all)
     end
   end

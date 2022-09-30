@@ -4,11 +4,11 @@ require "rails_helper"
 
 RSpec.describe AdPrivacyPolicyPresenter do
 
+  subject { described_class.new(data_model) }
+
   let(:reg_identifier) { nil }
   let(:token) { nil }
   let(:data_model) { double(:data_model, reg_identifier: reg_identifier, token: token) }
-
-  subject { described_class.new(data_model) }
 
   describe "destination_path" do
     context "when a 'reg_identifier' is present" do

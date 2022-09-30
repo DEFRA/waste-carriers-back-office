@@ -3,9 +3,10 @@
 require "rails_helper"
 
 RSpec.describe RegistrationPresenter do
+  subject { described_class.new(registration, view_context) }
+
   let(:registration) { double(:registration) }
   let(:view_context) { double(:view_context) }
-  subject { described_class.new(registration, view_context) }
 
   describe "#display_expiry_date" do
     let(:expires_on) { Time.zone.now }
@@ -29,7 +30,7 @@ RSpec.describe RegistrationPresenter do
       translated_header = double(:translated_header)
       key = ".registrations.show.status.headings.rejected"
 
-      expect(I18n).to receive(:t).with(key).and_return(translated_header)
+      allow(I18n).to receive(:t).with(key).and_return(translated_header)
 
       expect(subject.rejected_header).to eq(translated_header)
     end
@@ -40,7 +41,7 @@ RSpec.describe RegistrationPresenter do
       translated_message = double(:translated_message)
       key = ".registrations.show.status.messages.rejected"
 
-      expect(I18n).to receive(:t).with(key).and_return(translated_message)
+      allow(I18n).to receive(:t).with(key).and_return(translated_message)
 
       expect(subject.rejected_message).to eq(translated_message)
     end

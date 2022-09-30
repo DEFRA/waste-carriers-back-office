@@ -136,12 +136,13 @@ module Reports
         end
       end
 
-      context "checking for company name in the address fields" do
+      context "when checking for company name in the address fields" do
 
         shared_examples "de-duplicates address fields" do |registration_attribute|
           context "with the source value in address line 1" do
             let(:house_number) { nil }
-            context "and the source value is a case sensitive match" do
+
+            context "when the source value is a case sensitive match" do
               let(:address_line1) { registration.public_send(registration_attribute) }
 
               it "does not present the source value in the subject's address line 1" do
@@ -150,7 +151,7 @@ module Reports
               end
             end
 
-            context "and the source value is in a different case" do
+            context "when the source value is in a different case" do
               let(:address_line1) { registration.public_send(registration_attribute).upcase }
 
               it "still does not present the source value in the subject's address line 1" do
@@ -160,7 +161,7 @@ module Reports
           end
 
           context "with the source value in house number" do
-            context "and the source value is a case sensitive match" do
+            context "when the source value is a case sensitive match" do
               let(:house_number) { registration.public_send(registration_attribute) }
 
               it "does not present the source value in the subject's address line 1" do
@@ -168,7 +169,7 @@ module Reports
               end
             end
 
-            context "and the source value is in a different case" do
+            context "when the source value is in a different case" do
               let(:house_number) { registration.public_send(registration_attribute).upcase }
 
               it "still does not present the source value in the subject's address line 1" do
@@ -178,12 +179,13 @@ module Reports
           end
         end
 
-        context "for company_name" do
+        context "with company_name" do
           it_behaves_like "de-duplicates address fields", :company_name
         end
 
-        context "for registered_company_name" do
+        context "with registered_company_name" do
           let(:registered_company_name) { Faker::Company.name }
+
           it_behaves_like "de-duplicates address fields", :registered_company_name
         end
 
@@ -191,11 +193,11 @@ module Reports
     end
 
     describe "address fields" do
-      context "for the registered address" do
+      context "with the registered address" do
         it_behaves_like "address fields", "registered", "REGISTERED"
       end
 
-      context "for the contact address" do
+      context "with the contact address" do
         it_behaves_like "address fields", "contact", "POSTAL"
       end
     end

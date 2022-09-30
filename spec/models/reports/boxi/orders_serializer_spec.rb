@@ -21,6 +21,7 @@ module Reports
           LastModifiedBy
         ]
       end
+
       subject { described_class.new(dir) }
 
       describe "#add_entries_for" do

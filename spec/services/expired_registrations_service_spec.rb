@@ -9,9 +9,9 @@ RSpec.describe ExpiredRegistrationsService do
       active_registration = create(:registration, :active, expires_on: Time.zone.now.end_of_day + 4.hours)
       lower_tier_registration = create(:registration, :active, tier: "LOWER", expires_on: Time.zone.now.beginning_of_day + 4.hours)
 
-      expect(expired_registration).to_not be_expired
-      expect(active_registration).to_not be_expired
-      expect(lower_tier_registration).to_not be_expired
+      expect(expired_registration).not_to be_expired
+      expect(active_registration).not_to be_expired
+      expect(lower_tier_registration).not_to be_expired
 
       described_class.run
 
@@ -20,8 +20,8 @@ RSpec.describe ExpiredRegistrationsService do
       lower_tier_registration.reload
 
       expect(expired_registration).to be_expired
-      expect(active_registration).to_not be_expired
-      expect(lower_tier_registration).to_not be_expired
+      expect(active_registration).not_to be_expired
+      expect(lower_tier_registration).not_to be_expired
     end
   end
 end

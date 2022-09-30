@@ -4,10 +4,11 @@ require "cancan/matchers"
 require "rails_helper"
 
 RSpec.describe Ability, type: :model do
-  let(:role) {}
+  subject(:ability) { described_class.new(user) }
+
+  let(:role) { nil }
   let(:deactivated) { false }
   let(:user) { double(:user, role: role, deactivated?: deactivated) }
-  subject(:ability) { Ability.new(user) }
 
   # Agency users have ascending permissions - each tier has the permissions of
   # the previous one, plus additional privileges.

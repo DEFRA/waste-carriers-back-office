@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Reports::ChargesByTypeService do
   describe ".run" do
 
-    include_context "Finance stats order data"
+    include_context "with finance stats order data"
 
     context "with invalid granularity" do
       subject { described_class.new(:nope).run }

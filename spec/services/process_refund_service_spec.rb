@@ -31,11 +31,11 @@ RSpec.describe ProcessRefundService do
     end
 
     context "when the payment is a card payment" do
-      context "using govpay" do
+      context "when using govpay" do
         let(:govpay) { true }
         let(:worldpay) { false }
 
-        context "and the request fails" do
+        context "when the request fails" do
           it "returns false and does not create a payment" do
             expect(WasteCarriersEngine::GovpayRefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(false)
 
@@ -43,7 +43,7 @@ RSpec.describe ProcessRefundService do
           end
         end
 
-        context "and the request succeeds" do
+        context "when the request succeeds" do
           it "returns true and creates a (refund) payment" do
             description = double(:description)
 
@@ -70,7 +70,7 @@ RSpec.describe ProcessRefundService do
         end
       end
 
-      context "using worldpay" do
+      context "when using worldpay" do
         let(:worldpay) { true }
 
         context "when a request to worldpay fails" do

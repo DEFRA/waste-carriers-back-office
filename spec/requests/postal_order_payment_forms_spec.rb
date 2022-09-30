@@ -13,6 +13,7 @@ RSpec.describe "PostalOrderPaymentForms", type: :request do
   describe "GET /bo/resources/:_id/payments/postal-order" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
+
       before(:each) do
         sign_in(user)
       end
@@ -25,7 +26,7 @@ RSpec.describe "PostalOrderPaymentForms", type: :request do
         expect(response.body).to include(transient_registration.reg_identifier)
       end
 
-      context "When the resource is a registration" do
+      context "when the resource is a registration" do
         let(:registration) { create(:registration) }
 
         it "renders the new template, returns a 200 response and includes the reg identifier" do
@@ -40,6 +41,7 @@ RSpec.describe "PostalOrderPaymentForms", type: :request do
 
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
+
       before(:each) do
         sign_in(user)
       end
@@ -71,6 +73,7 @@ RSpec.describe "PostalOrderPaymentForms", type: :request do
 
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
+
       before(:each) do
         sign_in(user)
       end
@@ -139,6 +142,7 @@ RSpec.describe "PostalOrderPaymentForms", type: :request do
 
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
+
       before(:each) do
         sign_in(user)
       end

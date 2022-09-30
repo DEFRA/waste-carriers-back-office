@@ -14,7 +14,7 @@ module Reports
           allow(key_person).to receive(:conviction_search_result).and_return(conviction_search_result)
         end
 
-        context "if there is no conviction_search_result" do
+        context "when there is no conviction_search_result" do
           let(:conviction_search_result) { nil }
 
           it "returns nil" do
@@ -22,13 +22,13 @@ module Reports
           end
         end
 
-        context "if there is a conviction_search_result" do
+        context "when there is a conviction_search_result" do
           let(:conviction_search_result) { double(:conviction_search_result) }
 
           it "returns the match result" do
             result = double(:result)
 
-            expect(conviction_search_result).to receive(:match_result).and_return(result)
+            allow(conviction_search_result).to receive(:match_result).and_return(result)
             expect(subject.flagged_for_review).to eq(result)
           end
         end
@@ -39,7 +39,7 @@ module Reports
           allow(key_person).to receive(:conviction_search_result).and_return(conviction_search_result)
         end
 
-        context "if there is no conviction_search_result" do
+        context "when there is no conviction_search_result" do
           let(:conviction_search_result) { nil }
 
           it "returns nil" do
@@ -47,13 +47,13 @@ module Reports
           end
         end
 
-        context "if there is a conviction_search_result" do
+        context "when there is a conviction_search_result" do
           let(:conviction_search_result) { double(:conviction_search_result) }
 
           it "returns the match result" do
             searched_at = Time.zone.local(2019, 11, 19)
 
-            expect(conviction_search_result).to receive(:searched_at).and_return(searched_at)
+            allow(conviction_search_result).to receive(:searched_at).and_return(searched_at)
             expect(subject.review_flag_timestamp.to_s).to eq("2019-11-19T00:00Z")
           end
         end

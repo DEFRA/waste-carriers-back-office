@@ -9,6 +9,7 @@ module Reports
       let(:aws_file_pattern) { %r{https://.*\.s3\.eu-west-1\.amazonaws\.com/CARD_ORDERS/#{file_name}.*} }
       let(:end_time) { DateTime.now + 1.hour }
       let(:start_time) { end_time - 7.days }
+
       aws_stub = nil
 
       before do
@@ -34,7 +35,7 @@ module Reports
         end
 
         it "creates a CardOrdersExportLog with the correct attributes" do
-          expect { subject }.to change { CardOrdersExportLog.count }.from(0).to(1)
+          expect { subject }.to change(CardOrdersExportLog, :count).from(0).to(1)
           export_log = CardOrdersExportLog.first
           expect(export_log.start_time.to_i).to eq start_time.to_i
           expect(export_log.end_time.to_i).to eq end_time.to_i
@@ -43,7 +44,7 @@ module Reports
         end
 
         it "does not report an error" do
-          expect(Airbrake).to_not receive(:notify)
+          expect(Airbrake).not_to receive(:notify)
 
           described_class.new.run(start_time: start_time, end_time: end_time)
         end

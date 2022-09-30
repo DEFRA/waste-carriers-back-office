@@ -3,11 +3,11 @@
 require "rails_helper"
 
 RSpec.describe PaymentPresenter do
+  subject { described_class.new(payment, view) }
+
   let(:finance_details) { double(:finance_details) }
   let(:payment) { double(:payment, finance_details: finance_details, order_key: "123") }
   let(:view) { nil }
-
-  subject { described_class.new(payment, view) }
 
   describe ".create_from_collection" do
     it "given a list of objects, returns a list of instances of itself" do
@@ -21,8 +21,8 @@ RSpec.describe PaymentPresenter do
 
       collection = [object1, object2]
 
-      expect(described_class).to receive(:new).with(object1, view).and_return(presenter1)
-      expect(described_class).to receive(:new).with(object2, view).and_return(presenter2)
+      allow(described_class).to receive(:new).with(object1, view).and_return(presenter1)
+      allow(described_class).to receive(:new).with(object2, view).and_return(presenter2)
 
       expect(described_class.create_from_collection(collection, view)).to eq([presenter1, presenter2])
     end
@@ -32,11 +32,11 @@ RSpec.describe PaymentPresenter do
     before do
       scope = double(:scope)
 
-      expect(finance_details).to receive(:payments).and_return(scope)
-      expect(scope).to receive(:where).with(order_key: "123_REFUNDED").and_return([refunded_payment])
+      allow(finance_details).to receive(:payments).and_return(scope)
+      allow(scope).to receive(:where).with(order_key: "123_REFUNDED").and_return([refunded_payment])
     end
 
-    context "if a refunded payment exist for that order key" do
+    context "when a refunded payment exist for that order key" do
       let(:refunded_payment) { double(:refunded_payment) }
 
       it "returns true" do
@@ -44,11 +44,11 @@ RSpec.describe PaymentPresenter do
       end
     end
 
-    context "if a refunded payment do not exist for that order key" do
+    context "when a refunded payment do not exist for that order key" do
       let(:refunded_payment) {}
 
       it "returns false" do
-        expect(subject).to_not be_already_refunded
+        expect(subject).not_to be_already_refunded
       end
     end
   end
@@ -57,11 +57,11 @@ RSpec.describe PaymentPresenter do
     before do
       scope = double(:scope)
 
-      expect(finance_details).to receive(:payments).and_return(scope)
-      expect(scope).to receive(:where).with(order_key: "123_REVERSAL").and_return([reversed_payment])
+      allow(finance_details).to receive(:payments).and_return(scope)
+      allow(scope).to receive(:where).with(order_key: "123_REVERSAL").and_return([reversed_payment])
     end
 
-    context "if a reversal payment exist for that order key" do
+    context "when a reversal payment exist for that order key" do
       let(:reversed_payment) { double(:reversed_payment) }
 
       it "returns true" do
@@ -69,11 +69,11 @@ RSpec.describe PaymentPresenter do
       end
     end
 
-    context "if a reversal payment do not exist for that order key" do
+    context "when a reversal payment do not exist for that order key" do
       let(:reversed_payment) {}
 
       it "returns false" do
-        expect(subject).to_not be_already_reversed
+        expect(subject).not_to be_already_reversed
       end
     end
   end
@@ -91,7 +91,7 @@ RSpec.describe PaymentPresenter do
       it "returns an already reversed message" do
         result = double(:result)
 
-        expect(I18n).to receive(:t).with(".reversal_forms.index.already_reversed").and_return(result)
+        allow(I18n).to receive(:t).with(".reversal_forms.index.already_reversed").and_return(result)
         expect(subject.no_action_message).to eq(result)
       end
     end
@@ -102,7 +102,7 @@ RSpec.describe PaymentPresenter do
       it "returns an already reversed message" do
         result = double(:result)
 
-        expect(I18n).to receive(:t).with(".reversal_forms.index.not_applicable").and_return(result)
+        allow(I18n).to receive(:t).with(".reversal_forms.index.not_applicable").and_return(result)
         expect(subject.no_action_message).to eq(result)
       end
     end
@@ -120,7 +120,7 @@ RSpec.describe PaymentPresenter do
       let(:can) { false }
 
       it "returns false" do
-        expect(subject).to_not be_reversible
+        expect(subject).not_to be_reversible
       end
     end
 
@@ -135,7 +135,7 @@ RSpec.describe PaymentPresenter do
         let(:already_reversed) { true }
 
         it "returns false" do
-          expect(subject).to_not be_reversible
+          expect(subject).not_to be_reversible
         end
       end
 
@@ -170,7 +170,7 @@ RSpec.describe PaymentPresenter do
       it "returns a card payment refunded message" do
         result = double(:result)
 
-        expect(I18n).to receive(:t).with(".refunds.refunded_message.card", refund_status: world_pay_payment_status).and_return(result)
+        allow(I18n).to receive(:t).with(".refunds.refunded_message.card", refund_status: world_pay_payment_status).and_return(result)
         expect(subject.refunded_message).to eq(result)
       end
     end
@@ -181,7 +181,7 @@ RSpec.describe PaymentPresenter do
       it "returns a cash payment refunded message" do
         result = double(:result)
 
-        expect(I18n).to receive(:t).with(".refunds.refunded_message.manual").and_return(result)
+        allow(I18n).to receive(:t).with(".refunds.refunded_message.manual").and_return(result)
         expect(subject.refunded_message).to eq(result)
       end
 

@@ -18,8 +18,8 @@ RSpec.describe RegistrationTransferForm, type: :model do
         allow(RegistrationTransferService).to receive(:run).and_return(:success_existing_user)
       end
 
-      it "should submit" do
-        expect(registration_transfer_form.submit(valid_params)).to eq(true)
+      it "submits" do
+        expect(registration_transfer_form.submit(valid_params)).to be(true)
       end
     end
 
@@ -31,8 +31,8 @@ RSpec.describe RegistrationTransferForm, type: :model do
         }
       end
 
-      it "should not submit" do
-        expect(registration_transfer_form.submit(invalid_params)).to eq(false)
+      it "does not submit" do
+        expect(registration_transfer_form.submit(invalid_params)).to be(false)
       end
     end
 
@@ -64,7 +64,7 @@ RSpec.describe RegistrationTransferForm, type: :model do
       end
 
       it "is not valid" do
-        expect(registration_transfer_form).to_not be_valid
+        expect(registration_transfer_form).not_to be_valid
       end
     end
 
@@ -75,7 +75,7 @@ RSpec.describe RegistrationTransferForm, type: :model do
       end
 
       it "is not valid" do
-        expect(registration_transfer_form).to_not be_valid
+        expect(registration_transfer_form).not_to be_valid
       end
     end
   end
@@ -87,7 +87,7 @@ RSpec.describe RegistrationTransferForm, type: :model do
       before { registration_transfer_form.confirm_email = "no_matchy@example.com" }
 
       it "is not valid" do
-        expect(registration_transfer_form).to_not be_valid
+        expect(registration_transfer_form).not_to be_valid
       end
 
       it "does not update the account_email" do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # rubocop:disable Metrics/BlockLength
-RSpec.shared_context "Finance stats order data" do
+RSpec.shared_context "with finance stats order data" do
 
   let(:order_data) do
     [

@@ -3,24 +3,25 @@
 require "rails_helper"
 
 RSpec.describe ReminderLetterPresenter do
+  subject { described_class.new(registration, view_context) }
+
   let(:registration) { double(:registration) }
   let(:view_context) { double(:view_context) }
-  subject { described_class.new(registration, view_context) }
 
   describe "#display_covid_warning?" do
     context "when the feature toggle is active" do
-      before { expect(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:display_covid_warning_in_letters).and_return(true) }
+      before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:display_covid_warning_in_letters).and_return(true) }
 
       it "is true" do
-        expect(subject.display_covid_warning?).to eq(true)
+        expect(subject.display_covid_warning?).to be(true)
       end
     end
 
     context "when the feature toggle is not active" do
-      before { expect(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:display_covid_warning_in_letters).and_return(false) }
+      before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:display_covid_warning_in_letters).and_return(false) }
 
       it "is false" do
-        expect(subject.display_covid_warning?).to eq(false)
+        expect(subject.display_covid_warning?).to be(false)
       end
     end
   end
@@ -31,7 +32,7 @@ RSpec.describe ReminderLetterPresenter do
     let(:registration) { double(:registration, company_name: company_name, contact_address: contact_address) }
     let(:address_lines) { ["line 1", "line 2"] }
 
-    before { expect_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:displayable_address).and_return(address_lines) }
+    before { allow_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:displayable_address).and_return(address_lines) }
 
     it "gets the displayable address lines" do
       expected_address = [company_name, address_lines].flatten
@@ -86,8 +87,8 @@ RSpec.describe ReminderLetterPresenter do
     it "returns the correct cost" do
       expected_cost = "105"
 
-      expect(Rails.configuration).to receive(:renewal_charge).and_return(renewal_cost)
-      expect_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(renewal_cost).and_return(expected_cost)
+      allow(Rails.configuration).to receive(:renewal_charge).and_return(renewal_cost)
+      allow_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(renewal_cost).and_return(expected_cost)
       expect(subject.renewal_cost).to eq(expected_cost)
     end
   end
@@ -98,8 +99,8 @@ RSpec.describe ReminderLetterPresenter do
     it "returns the correct cost" do
       expected_cost = "154"
 
-      expect(Rails.configuration).to receive(:new_registration_charge).and_return(new_reg_cost)
-      expect_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(new_reg_cost).and_return(expected_cost)
+      allow(Rails.configuration).to receive(:new_registration_charge).and_return(new_reg_cost)
+      allow_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(new_reg_cost).and_return(expected_cost)
       expect(subject.new_reg_cost).to eq(expected_cost)
     end
   end
@@ -112,7 +113,7 @@ RSpec.describe ReminderLetterPresenter do
     it "returns a date object" do
       expected_date = first_renewal_email_reminder_days.days.ago.to_date
 
-      expect(Rails.configuration).to receive(:first_renewal_email_reminder_days).and_return(first_renewal_email_reminder_days)
+      allow(Rails.configuration).to receive(:first_renewal_email_reminder_days).and_return(first_renewal_email_reminder_days)
       expect(subject.renewal_email_date).to eq(expected_date)
     end
   end
@@ -124,7 +125,7 @@ RSpec.describe ReminderLetterPresenter do
     it "returns a correctly formatted URL" do
       expected_url = "wastecarriersregistration.service.gov.uk/fo/renew/tokengoeshere"
 
-      expect(Rails.configuration).to receive(:wcrs_renewals_url).and_return("https://wastecarriersregistration.service.gov.uk")
+      allow(Rails.configuration).to receive(:wcrs_renewals_url).and_return("https://wastecarriersregistration.service.gov.uk")
       expect(subject.renewal_url).to eq(expected_url)
     end
   end
@@ -133,7 +134,7 @@ RSpec.describe ReminderLetterPresenter do
     let(:email_service_email) { "email_service_email@wcr.gov.uk" }
 
     it "returns the email_service_email from the config" do
-      expect(Rails.configuration).to receive(:email_service_email).and_return(email_service_email)
+      allow(Rails.configuration).to receive(:email_service_email).and_return(email_service_email)
       expect(subject.from_email).to eq(email_service_email)
     end
   end

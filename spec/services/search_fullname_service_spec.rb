@@ -7,7 +7,7 @@ RSpec.describe SearchFullnameService do
   let(:term) { nil }
 
   let(:service) do
-    SearchFullnameService.run(page: page, term: term)
+    described_class.run(page: page, term: term)
   end
 
   let(:first_name) { Faker::Name.first_name }

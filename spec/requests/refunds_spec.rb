@@ -97,6 +97,7 @@ RSpec.describe "Refunds", type: :request do
 
       context "when the payment is a govpay payment" do
         let(:renewing_registration) { create(:renewing_registration, :overpaid_govpay) }
+
         before do
           allow(WasteCarriersEngine::GovpayRefundService).to receive(:run).and_return(true)
         end

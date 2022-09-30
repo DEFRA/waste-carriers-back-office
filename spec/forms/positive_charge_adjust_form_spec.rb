@@ -26,7 +26,7 @@ RSpec.describe PositiveChargeAdjustForm, type: :model do
       end
     end
 
-    context "When the form is not valid" do
+    context "when the form is not valid" do
       it "returns false" do
         expect(subject.submit({})).to be_falsey
       end

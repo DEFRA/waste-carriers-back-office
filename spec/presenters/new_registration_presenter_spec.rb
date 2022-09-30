@@ -3,9 +3,10 @@
 require "rails_helper"
 
 RSpec.describe NewRegistrationPresenter do
+  subject { described_class.new(new_registration, view_context) }
+
   let(:new_registration) { double(:new_registration) }
   let(:view_context) { double(:view_context) }
-  subject { described_class.new(new_registration, view_context) }
 
   describe "#display_heading" do
     let(:new_registration) { double(:new_registration, company_name: company_name) }

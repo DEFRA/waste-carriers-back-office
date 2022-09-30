@@ -19,8 +19,10 @@
 # See also spec/support/rake_env.rb
 require "rake"
 
+# rubocop:disable RSpec/ContextWording
 RSpec.shared_context "rake" do
   let(:task_name) { self.class.description }
   let(:subject) { Rake.application[task_name] }
   let(:task_path) { "lib/tasks/#{task_name.split(':').first}" }
 end
+# rubocop:enable RSpec/ContextWording

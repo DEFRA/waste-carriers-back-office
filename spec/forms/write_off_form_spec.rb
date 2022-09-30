@@ -3,9 +3,10 @@
 require "rails_helper"
 
 RSpec.describe WriteOffForm do
+  subject { described_class.new(renewing_registration) }
+
   let(:renewing_registration) { build(:renewing_registration) }
   let(:user) { double(:user) }
-  subject { described_class.new(renewing_registration) }
 
   describe "#submit" do
     before do
@@ -18,7 +19,7 @@ RSpec.describe WriteOffForm do
       it "returns true" do
         comment = double(:comment)
 
-        expect(subject.submit(comment: comment)).to eq(true)
+        expect(subject.submit(comment: comment)).to be(true)
       end
     end
 
@@ -26,7 +27,7 @@ RSpec.describe WriteOffForm do
       let(:valid) { false }
 
       it "returns false" do
-        expect(subject.submit({})).to eq(false)
+        expect(subject.submit({})).to be(false)
       end
     end
   end

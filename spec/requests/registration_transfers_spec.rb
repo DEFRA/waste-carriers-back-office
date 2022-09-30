@@ -9,6 +9,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
   describe "GET /bo/registrations/:reg_identifier/transfer" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency) }
+
       before(:each) do
         sign_in(user)
       end
@@ -24,6 +25,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
 
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
+
       before(:each) do
         sign_in(user)
       end
@@ -54,6 +56,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
 
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency) }
+
       before(:each) do
         sign_in(user)
       end
@@ -103,6 +106,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
 
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
+
       before(:each) do
         sign_in(user)
       end
@@ -131,6 +135,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
 
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency) }
+
       before(:each) do
         sign_in(user)
       end
@@ -146,6 +151,7 @@ RSpec.describe "RegistrationTransfers", type: :request do
 
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
+
       before(:each) do
         sign_in(user)
       end

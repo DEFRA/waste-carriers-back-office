@@ -60,7 +60,7 @@ RSpec.describe "Refresh companies house", type: :request do
         let(:old_registered_name) { Faker::Company.name }
 
         before do
-          expect(WasteCarriersEngine::RefreshCompaniesHouseNameService).to receive(:run).and_raise(StandardError)
+          allow(WasteCarriersEngine::RefreshCompaniesHouseNameService).to receive(:run).and_raise(StandardError)
         end
 
         it "returns an error message" do

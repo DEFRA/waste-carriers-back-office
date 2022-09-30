@@ -9,21 +9,21 @@ RSpec.describe UsersHelper, type: :helper do
 
     context "when the current user has permission to modify the displayed user" do
       before do
-        expect(current_user).to receive(:can?).with(:modify_user, displayed_user).and_return(true)
+        allow(current_user).to receive(:can?).with(:modify_user, displayed_user).and_return(true)
       end
 
       it "returns true" do
-        expect(helper.display_user_actions?(displayed_user, current_user)).to eq(true)
+        expect(helper.display_user_actions?(displayed_user, current_user)).to be(true)
       end
     end
 
     context "when the current user does not have permission to manage agency users" do
       before do
-        expect(current_user).to receive(:can?).with(:modify_user, displayed_user).and_return(false)
+        allow(current_user).to receive(:can?).with(:modify_user, displayed_user).and_return(false)
       end
 
       it "returns false" do
-        expect(helper.display_user_actions?(displayed_user, current_user)).to eq(false)
+        expect(helper.display_user_actions?(displayed_user, current_user)).to be(false)
       end
     end
   end

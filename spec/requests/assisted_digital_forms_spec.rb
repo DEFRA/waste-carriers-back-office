@@ -8,6 +8,7 @@ RSpec.describe "Assisted Digital Forms", type: :request do
   describe "GET /bo/:reg_identifier/renew" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency) }
+
       before(:each) do
         sign_in(user)
       end
@@ -21,6 +22,7 @@ RSpec.describe "Assisted Digital Forms", type: :request do
 
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
+
       before(:each) do
         sign_in(user)
       end
@@ -36,6 +38,7 @@ RSpec.describe "Assisted Digital Forms", type: :request do
   describe "POST /bo/:reg_identifier/renew" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency) }
+
       before(:each) do
         sign_in(user)
       end

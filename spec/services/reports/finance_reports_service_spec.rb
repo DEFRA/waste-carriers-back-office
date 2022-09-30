@@ -24,18 +24,18 @@ module Reports
           File.open(file_path, "w")
 
           allow_any_instance_of(described_class).to receive(:file_name).and_return(test_filename)
-          expect(Dir).to receive(:mktmpdir).and_yield(temp_dir)
+          allow(Dir).to receive(:mktmpdir).and_yield(temp_dir)
           expect(DefraRuby::Aws).to receive(:get_bucket).and_return(bucket).at_least(:once)
-          expect(bucket).to receive(:load).and_return(upload_result)
+          allow(bucket).to receive(:load).and_return(upload_result)
           expect(upload_result).to receive(:successful?).and_return(true).at_least(:once)
-          expect(bucket).to receive(:list_files).and_return(list_files_result)
+          allow(bucket).to receive(:list_files).and_return(list_files_result)
           expect(list_files_result).to receive(:successful?).and_return(true).at_least(:once)
           expect(list_files_result).to receive(:result).and_return([s3_test_previous_filepath, s3_test_filepath]).at_least(:once)
           expect(bucket).to receive(:delete).with(s3_test_previous_filepath)
 
           # expect no errors
-          expect(Airbrake).to_not receive(:notify)
-          expect(Rails.logger).to_not receive(:error)
+          expect(Airbrake).not_to receive(:notify)
+          expect(Rails.logger).not_to receive(:error)
 
           described_class.run
         end
@@ -43,7 +43,7 @@ module Reports
 
       context "when an error happens" do
         it "raises an error" do
-          expect(FinanceStatsService).to receive(:new).and_raise("An error!")
+          allow(FinanceStatsService).to receive(:new).and_raise("An error!")
 
           expect(Airbrake).to receive(:notify)
           expect(Rails.logger).to receive(:error)

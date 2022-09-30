@@ -11,6 +11,7 @@ RSpec.describe "User Activations", type: :request do
   describe "GET /bo/users/:id/activate" do
     context "when a super user is signed in" do
       let(:user) { create(:user, role: current_user_role) }
+
       before(:each) do
         sign_in(user)
       end
@@ -48,6 +49,7 @@ RSpec.describe "User Activations", type: :request do
   describe "POST /bo/users/:id/activate" do
     context "when a super user is signed in" do
       let(:user) { create(:user, role: current_user_role) }
+
       before(:each) do
         sign_in(user)
       end
@@ -58,7 +60,7 @@ RSpec.describe "User Activations", type: :request do
             post "/bo/users/#{inactive_user.id}/activate"
 
             expect(response).to redirect_to(users_path)
-            expect(inactive_user.reload.active?).to eq(true)
+            expect(inactive_user.reload.active?).to be(true)
           end
         end
 

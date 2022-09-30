@@ -6,7 +6,7 @@ RSpec.describe Notify::AdRenewalLetterService do
   describe "run" do
     let(:registration) { create(:registration, :expires_soon, :simple_address) }
     let(:service) do
-      Notify::AdRenewalLetterService.run(registration: registration)
+      described_class.run(registration: registration)
     end
 
     it "sends a letter" do
@@ -14,7 +14,7 @@ RSpec.describe Notify::AdRenewalLetterService do
         # Make sure it's a real postcode for Notify validation purposes
         allow_any_instance_of(WasteCarriersEngine::Address).to receive(:postcode).and_return("BS1 1AA")
 
-        expect_any_instance_of(Notifications::Client).to receive(:send_letter).and_call_original
+        allow_any_instance_of(Notifications::Client).to receive(:send_letter).and_call_original
 
         response = service
 

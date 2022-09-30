@@ -13,7 +13,7 @@ module Reports
         it "returns the date as a formatted string" do
           last_updated = Time.zone.local(2019, 11, 19)
 
-          expect(order_item).to receive(:last_updated).and_return(last_updated)
+          allow(order_item).to receive(:last_updated).and_return(last_updated)
           expect(subject.last_updated.to_s).to eq("2019-11-19T00:00Z")
         end
       end

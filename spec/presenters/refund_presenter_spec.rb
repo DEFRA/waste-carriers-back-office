@@ -3,9 +3,10 @@
 require "rails_helper"
 
 RSpec.describe RefundPresenter do
+  subject { described_class.new(finance_details, payment) }
+
   let(:finance_details) { double(:finance_details) }
   let(:payment) { double(:payment) }
-  subject { described_class.new(finance_details, payment) }
 
   describe ".total_amount_paid" do
     let(:payment1) { double(:payment, amount: 100) }

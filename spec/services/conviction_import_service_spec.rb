@@ -5,11 +5,12 @@ require "rails_helper"
 RSpec.describe ConvictionImportService do
   let(:csv) {}
   let(:run_service) do
-    ConvictionImportService.run(csv)
+    described_class.run(csv)
   end
 
   describe "#run" do
     let(:old_conviction_name) { "Old Conviction" }
+
     before do
       WasteCarriersEngine::ConvictionsCheck::Entity.new(name: old_conviction_name).save
     end
@@ -77,9 +78,12 @@ Apex Limited,,11111111,ABC,99999999
 
     context "when valid CSV data is not provided" do
       # Use an object with a close method so that forwardable does not complain about forwarding to a private method.
+      # rubocop:disable Lint/ConstantDefinitionInBlock
       class NotCsv
         def close; end
       end
+      # rubocop:enable Lint/ConstantDefinitionInBlock
+
       let(:csv) { NotCsv.new }
 
       it "raises an InvalidCSVError and doesn't update any conviction data" do

@@ -23,7 +23,7 @@ RSpec.describe "ResendConfirmationEmail", type: :request do
       let(:user) { create(:user, :agency) }
       let(:registration) { create(:registration, :expires_soon, contact_email: email) }
 
-      context "and the registration has a contact email" do
+      context "when the registration has a contact email" do
         let(:email) { "simone@example.com" }
 
         it "sends an email, redirects to the previous page and displays a flash 'success' message" do
@@ -36,7 +36,7 @@ RSpec.describe "ResendConfirmationEmail", type: :request do
         end
       end
 
-      context "and the registration has no contact email" do
+      context "when the registration has no contact email" do
         let(:email) { nil }
 
         it "does not send an email, redirects to the previous page and displays a flash 'error' message" do

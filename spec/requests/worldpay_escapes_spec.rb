@@ -8,6 +8,7 @@ RSpec.describe "WorldpayEscapes", type: :request do
 
   describe "GET /bo/resources/:_id/revert-to-payment-summary" do
     let(:user) { create(:user) }
+
     before(:each) do
       sign_in(user)
     end

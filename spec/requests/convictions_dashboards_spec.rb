@@ -103,6 +103,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   describe "/bo/convictions" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
+
       before(:each) do
         sign_in(user)
       end
@@ -117,14 +118,15 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         expect(response.body).to include(link_to_new_from_frontend_registration)
         expect(response.body).to include(link_to_possible_matches_renewal)
 
-        expect(response.body).to_not include(link_to_checks_in_progress_registration)
-        expect(response.body).to_not include(link_to_checks_in_progress_renewal)
-        expect(response.body).to_not include(link_to_possible_matches_cancelled_registration)
+        expect(response.body).not_to include(link_to_checks_in_progress_registration)
+        expect(response.body).not_to include(link_to_checks_in_progress_renewal)
+        expect(response.body).not_to include(link_to_possible_matches_cancelled_registration)
       end
     end
 
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
+
       before(:each) do
         sign_in(user)
       end
@@ -148,6 +150,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   describe "/bo/convictions/in-progress" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
+
       before(:each) do
         sign_in(user)
       end
@@ -161,15 +164,16 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         expect(response.body).to include(link_to_checks_in_progress_registration)
         expect(response.body).to include(link_to_checks_in_progress_renewal)
 
-        expect(response.body).to_not include(link_to_possible_matches_registration)
-        expect(response.body).to_not include(link_to_new_from_frontend_registration)
-        expect(response.body).to_not include(link_to_rejected_renewal)
-        expect(response.body).to_not include(link_to_checks_in_progress_cancelled_registration)
+        expect(response.body).not_to include(link_to_possible_matches_registration)
+        expect(response.body).not_to include(link_to_new_from_frontend_registration)
+        expect(response.body).not_to include(link_to_rejected_renewal)
+        expect(response.body).not_to include(link_to_checks_in_progress_cancelled_registration)
       end
     end
 
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
+
       before(:each) do
         sign_in(user)
       end
@@ -193,6 +197,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   describe "/bo/convictions/approved" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
+
       before(:each) do
         sign_in(user)
       end
@@ -206,15 +211,16 @@ RSpec.describe "ConvictionsDashboards", type: :request do
         expect(response.body).to include(link_to_pending_approved_registration)
         expect(response.body).to include(link_to_approved_renewal)
 
-        expect(response.body).to_not include(link_to_active_approved_registration)
-        expect(response.body).to_not include(link_to_possible_matches_registration)
-        expect(response.body).to_not include(link_to_new_from_frontend_registration)
-        expect(response.body).to_not include(link_to_possible_matches_renewal)
+        expect(response.body).not_to include(link_to_active_approved_registration)
+        expect(response.body).not_to include(link_to_possible_matches_registration)
+        expect(response.body).not_to include(link_to_new_from_frontend_registration)
+        expect(response.body).not_to include(link_to_possible_matches_renewal)
       end
     end
 
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
+
       before(:each) do
         sign_in(user)
       end
@@ -238,6 +244,7 @@ RSpec.describe "ConvictionsDashboards", type: :request do
   describe "/bo/convictions/rejected" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
+
       before(:each) do
         sign_in(user)
       end
@@ -250,15 +257,16 @@ RSpec.describe "ConvictionsDashboards", type: :request do
 
         expect(response.body).to include(link_to_rejected_renewal)
 
-        expect(response.body).to_not include(link_to_rejected_registration)
-        expect(response.body).to_not include(link_to_possible_matches_registration)
-        expect(response.body).to_not include(link_to_new_from_frontend_registration)
-        expect(response.body).to_not include(link_to_possible_matches_renewal)
+        expect(response.body).not_to include(link_to_rejected_registration)
+        expect(response.body).not_to include(link_to_possible_matches_registration)
+        expect(response.body).not_to include(link_to_new_from_frontend_registration)
+        expect(response.body).not_to include(link_to_possible_matches_renewal)
       end
     end
 
     context "when a non-agency user is signed in" do
       let(:user) { create(:user, :finance) }
+
       before(:each) do
         sign_in(user)
       end

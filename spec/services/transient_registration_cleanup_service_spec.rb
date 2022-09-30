@@ -24,7 +24,7 @@ RSpec.describe TransientRegistrationCleanupService do
         let(:transient_registration) { create(:renewing_registration, workflow_state: "renewal_received_pending_payment_form") }
 
         it "does not delete it" do
-          expect { described_class.run }.to_not change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1)
+          expect { described_class.run }.not_to change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1)
         end
       end
 
@@ -41,7 +41,7 @@ RSpec.describe TransientRegistrationCleanupService do
 
     context "when a transient_registration was created within the last 30 days" do
       it "does not delete it" do
-        expect { described_class.run }.to_not change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1)
+        expect { described_class.run }.not_to change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1)
       end
     end
 
@@ -63,7 +63,7 @@ RSpec.describe TransientRegistrationCleanupService do
           let(:transient_registration) { create(:renewing_registration, workflow_state: "renewal_received_pending_payment_form") }
 
           it "does not delete it" do
-            expect { described_class.run }.to_not change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1)
+            expect { described_class.run }.not_to change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1)
           end
         end
       end
@@ -74,7 +74,7 @@ RSpec.describe TransientRegistrationCleanupService do
         end
 
         it "does not delete it" do
-          expect { described_class.run }.to_not change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1)
+          expect { described_class.run }.not_to change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1)
         end
       end
     end

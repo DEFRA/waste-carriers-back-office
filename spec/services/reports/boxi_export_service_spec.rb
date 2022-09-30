@@ -16,24 +16,24 @@ module Reports
         File.open(file_path, "w")
 
         expect(GenerateBoxiFilesService).to receive(:run).with(temp_dir)
-        expect(Dir).to receive(:mktmpdir).and_yield(temp_dir)
-        expect(Zip::File).to receive(:open).and_yield(zipfile)
+        allow(Dir).to receive(:mktmpdir).and_yield(temp_dir)
+        allow(Zip::File).to receive(:open).and_yield(zipfile)
         expect(zipfile).to receive(:add).with("test_file.csv", file_path)
-        expect(DefraRuby::Aws).to receive(:get_bucket).and_return(bucket)
+        allow(DefraRuby::Aws).to receive(:get_bucket).and_return(bucket)
         expect(File).to receive(:new)
-        expect(bucket).to receive(:load).and_return(result)
+        allow(bucket).to receive(:load).and_return(result)
         expect(result).to receive(:successful?).and_return(true).twice
 
         # expect no errors
-        expect(Airbrake).to_not receive(:notify)
-        expect(Rails.logger).to_not receive(:error)
+        expect(Airbrake).not_to receive(:notify)
+        expect(Rails.logger).not_to receive(:error)
 
         described_class.run
       end
 
       context "when an error happens" do
         it "raises an error" do
-          expect(Dir).to receive(:mktmpdir).and_raise("An error!")
+          allow(Dir).to receive(:mktmpdir).and_raise("An error!")
 
           expect(Airbrake).to receive(:notify)
           expect(Rails.logger).to receive(:error)

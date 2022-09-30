@@ -7,7 +7,7 @@ RSpec.describe SearchService do
   let(:term) { nil }
 
   let(:service) do
-    SearchService.run(page: page, term: term)
+    described_class.run(page: page, term: term)
   end
 
   let(:non_matching_renewal) { create(:renewing_registration) }
@@ -53,11 +53,11 @@ RSpec.describe SearchService do
       end
 
       it "does not display a non-matching transient_registration" do
-        expect(service[:results]).to_not include(non_matching_renewal)
+        expect(service[:results]).not_to include(non_matching_renewal)
       end
 
       it "does not display a non-matching registration" do
-        expect(service[:results]).to_not include(non_matching_registration)
+        expect(service[:results]).not_to include(non_matching_registration)
       end
     end
 
@@ -133,11 +133,11 @@ RSpec.describe SearchService do
       end
 
       it "does not include the partially-matching transient_registration" do
-        expect(service[:results]).to_not include(matching_renewal)
+        expect(service[:results]).not_to include(matching_renewal)
       end
 
       it "does not include the partially-matching registration" do
-        expect(service[:results]).to_not include(matching_registration)
+        expect(service[:results]).not_to include(matching_registration)
       end
     end
 
@@ -181,11 +181,11 @@ RSpec.describe SearchService do
       end
 
       it "does not display a non-matching transient_registration" do
-        expect(service[:results]).to_not include(non_matching_renewal)
+        expect(service[:results]).not_to include(non_matching_renewal)
       end
 
       it "does not display a non-matching registration" do
-        expect(service[:results]).to_not include(non_matching_registration)
+        expect(service[:results]).not_to include(non_matching_registration)
       end
     end
   end

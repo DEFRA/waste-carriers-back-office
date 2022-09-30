@@ -4,9 +4,9 @@ require "rails_helper"
 
 RSpec.describe ContactEmailValidatorService do
   describe ".run" do
-    let(:registration) { build(:registration, contact_email: contact_email) }
+    subject { described_class.run(registration) }
 
-    subject { ContactEmailValidatorService.run(registration) }
+    let(:registration) { build(:registration, contact_email: contact_email) }
 
     context "with a valid contact_email" do
       let(:contact_email) { "alice@example.com" }

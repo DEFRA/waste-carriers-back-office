@@ -8,6 +8,7 @@ RSpec.describe "NewRegistrations", type: :request do
   describe "/bo/new-registrations/:token" do
     context "when a valid user is signed in" do
       let(:user) { create(:user) }
+
       before(:each) do
         sign_in(user)
       end
