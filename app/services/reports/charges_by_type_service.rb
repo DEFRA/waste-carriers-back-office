@@ -33,11 +33,11 @@ module Reports
         [
           { "$match": {
             "$and": [
-              { 'financeDetails.orders': { "$exists": true } },
+              { "financeDetails.orders": { "$exists": true } },
               # We are only interested in completed registrations
-              { 'metaData.status': { "$ne": "PENDING" } },
+              { "metaData.status": { "$ne": "PENDING" } },
               # Ignore a large volume of imported IR registrations
-              { 'metaData.anotherString': { "$ne": "Imported-from-IR" } }
+              { "metaData.anotherString": { "$ne": "Imported-from-IR" } }
             ]
           } },
           { "$project": {

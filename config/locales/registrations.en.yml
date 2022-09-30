@@ -13,8 +13,8 @@ en:
           in_progress: "The current form is"
           rejected: "This registration was rejected during a convictions check and cannot be completed."
           worldpay:
-            paragraph_1: "The user is currently attempting to pay by WorldPay."
-            paragraph_2:
+            paragraph1: "The user is currently attempting to pay by WorldPay."
+            paragraph2:
               revert: "If an error has occurred and the user is stuck, you can send the registration back to the payment summary page. They can try to pay with WorldPay again, or select an alternative payment method."
               missed_payment: "If an error has occurred and payment has been received, but not recorded, you can record a missed WorldPay payment."
         actions:

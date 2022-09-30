@@ -20,7 +20,6 @@ module Reports
 
     # These simple methods are easier to scan if defined on one line and without spaces between them.
     # rubocop:disable Style/SingleLineMethods
-    # rubocop:disable Layout/EmptyLineBetweenDefs
     def balance()                pounds(@row[:balance]) end
     def renewal_percent()        percent(@row[:renewal_percent]) end
     def pay_cnt()                @row[:payments][:count] end
@@ -59,7 +58,6 @@ module Reports
     def chg_edit_tot()           pounds(@row[:charges][:edit][:total]) end
     def chg_irimport_cnt()       @row[:charges][:irimport][:count] end
     def chg_irimport_tot()       pounds(@row[:charges][:irimport][:total]) end
-    # rubocop:enable Layout/EmptyLineBetweenDefs
     # rubocop:enable Style/SingleLineMethods
   end
 end

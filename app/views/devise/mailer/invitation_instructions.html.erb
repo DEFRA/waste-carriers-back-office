@@ -1,14 +1,14 @@
-<p><%= t(".paragraph_1", email: @resource.email) %></p>
+<p><%= t(".paragraph1", email: @resource.email) %></p>
 
-<p><%= t(".paragraph_2", url: root_url) %></p>
+<p><%= t(".paragraph2", url: root_url) %></p>
 
-<p><%= t(".paragraph_3") %></p>
+<p><%= t(".paragraph3") %></p>
 
 <p><%= link_to accept_invitation_url(@resource, invitation_token: @token),
                accept_invitation_url(@resource, invitation_token: @token) %></p>
 
 <% if @resource.invitation_due_at %>
-  <p><%= t(".paragraph_4", due_date: l(@resource.invitation_due_at, format: :accept_until_format)) %></p>
+  <p><%= t(".paragraph4", due_date: l(@resource.invitation_due_at, format: :accept_until_format)) %></p>
 <% end %>
 
-<p><%= t(".paragraph_5") %></p>
+<p><%= t(".paragraph5") %></p>

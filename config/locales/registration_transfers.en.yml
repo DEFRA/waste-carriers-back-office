@@ -3,11 +3,11 @@ en:
     new:
       title: "Transfer a registration to a different user account"
       heading: "Transfer registration %{reg_identifier} to a different user account"
-      paragraph_1: "This registration currently belongs to %{email}."
-      paragraph_1_no_account_email: "This registration currently does not have an account associated with it."
-      paragraph_2: "If you know that a different user should own %{reg_identifier}, you can transfer it to a different account."
-      paragraph_3: "Once the registration is transferred, %{email} will no longer be able to view or manage it."
-      paragraph_4: "Any other registrations owned by %{email} will not be affected."
+      paragraph1: "This registration currently belongs to %{email}."
+      paragraph1_no_account_email: "This registration currently does not have an account associated with it."
+      paragraph2: "If you know that a different user should own %{reg_identifier}, you can transfer it to a different account."
+      paragraph3: "Once the registration is transferred, %{email} will no longer be able to view or manage it."
+      paragraph4: "Any other registrations owned by %{email} will not be affected."
       registration_info:
         heading: "About this registration"
         labels:
@@ -23,14 +23,14 @@ en:
     success:
       title: "Registration transferred successfully"
       heading: "Registration %{reg_identifier} has been transferred"
-      paragraph_1: "This registration is now owned by %{email}."
+      paragraph1: "This registration is now owned by %{email}."
       existing_user:
-        paragraph_2: "This user already had an account, so we've sent them an email letting them know how they can log in to manage the registration."
+        paragraph2: "This user already had an account, so we've sent them an email letting them know how they can log in to manage the registration."
       new_user:
-        paragraph_2: "This user didn't have an account, so a new one has been created."
-        paragraph_3: "We've sent the user an email confirming that we've created an account for them and transferred the registration to it."
-        paragraph_4: "The email also asks the user to set an account password. They must do this to finish setting up the account."
-        paragraph_5: "Once the account is set up, they should be able to log in and manage the registration."
+        paragraph2: "This user didn't have an account, so a new one has been created."
+        paragraph3: "We've sent the user an email confirming that we've created an account for them and transferred the registration to it."
+        paragraph4: "The email also asks the user to set an account password. They must do this to finish setting up the account."
+        paragraph5: "Once the account is set up, they should be able to log in and manage the registration."
       button: "Continue"
   activemodel:
     errors:

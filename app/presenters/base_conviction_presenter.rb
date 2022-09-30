@@ -14,9 +14,10 @@ class BaseConvictionPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def declared_convictions_message
-    if declared_convictions == "yes"
+    case declared_convictions
+    when "yes"
       I18n.t(".convictions.index.declared_convictions.yes")
-    elsif declared_convictions == "no"
+    when "no"
       I18n.t(".convictions.index.declared_convictions.no")
     else
       I18n.t(".convictions.index.declared_convictions.unknown")

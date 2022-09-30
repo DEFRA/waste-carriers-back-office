@@ -106,7 +106,7 @@ module Reports
         address.addressLine2,
         address.addressLine3,
         address.addressLine4
-      ].reject(&:blank?)
+      ].compact_blank
     end
 
     def address_line_unless_duplicate(registered_company_name, company_name, address_line)

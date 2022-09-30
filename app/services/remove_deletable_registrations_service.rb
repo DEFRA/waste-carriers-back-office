@@ -21,7 +21,7 @@ class RemoveDeletableRegistrationsService < ::WasteCarriersEngine::BaseService
 
   def deletable_registrations
     WasteCarriersEngine::Registration
-      .where("metaData.status" => { '$in': %w[EXPIRED INACTIVE REVOKED] })
+      .where("metaData.status" => { "$in": %w[EXPIRED INACTIVE REVOKED] })
       .where("metaData.lastModified" => { :$lte => cutoff_date })
   end
 

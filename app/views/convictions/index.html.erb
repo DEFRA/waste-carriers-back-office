@@ -119,10 +119,10 @@
       </h2>
       <% if can? :review_convictions, @resource %>
         <p class="govuk-body">
-          <%= t(".approve_or_reject.paragraph_1") %>
+          <%= t(".approve_or_reject.paragraph1") %>
         </p>
         <p class="govuk-body">
-          <%= t(".approve_or_reject.paragraph_2") %>
+          <%= t(".approve_or_reject.paragraph2") %>
         </p>
         <% if @resource.sign_off.may_approve? %>
           <%= link_to t(".approve_or_reject.buttons.approve"),

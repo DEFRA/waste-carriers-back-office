@@ -37,9 +37,7 @@ module Reports
     end
 
     def write_csv_file(granularity, serializer_class)
-      File.open(csv_file_path(granularity), "w+") do |file|
-        file.write(serializer_class.new(finance_stats(granularity)).to_csv)
-      end
+      File.write(csv_file_path(granularity), serializer_class.new(finance_stats(granularity)).to_csv)
     end
 
     def zip_report_files

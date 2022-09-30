@@ -3,7 +3,7 @@ en:
     new:
       title: "Change a user's role"
       heading: "Change a user's role"
-      paragraph_1:
+      paragraph1:
         agency: "%{email} is currently an agency user."
         agency_with_refund: "%{email} is currently an agency user with refund."
         finance: "%{email} is currently a finance user."

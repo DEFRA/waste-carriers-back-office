@@ -10,13 +10,13 @@ class RegistrationTransferPresenter < WasteCarriersEngine::BasePresenter
   def new_registration_transfer_message_lines
     paragraph = []
     if @registration.account_email.present?
-      paragraph << to_yml(:paragraph_1, email: @registration.account_email)
-      paragraph << to_yml(:paragraph_2, reg_identifier: @registration.reg_identifier)
-      paragraph << to_yml(:paragraph_3, email: @registration.account_email)
-      paragraph << to_yml(:paragraph_4, email: @registration.account_email)
+      paragraph << to_yml(:paragraph1, email: @registration.account_email)
+      paragraph << to_yml(:paragraph2, reg_identifier: @registration.reg_identifier)
+      paragraph << to_yml(:paragraph3, email: @registration.account_email)
+      paragraph << to_yml(:paragraph4, email: @registration.account_email)
     else
-      paragraph << to_yml(:paragraph_1_no_account_email)
-      paragraph << to_yml(:paragraph_2, reg_identifier: @registration.reg_identifier)
+      paragraph << to_yml(:paragraph1_no_account_email)
+      paragraph << to_yml(:paragraph2, reg_identifier: @registration.reg_identifier)
     end
     paragraph
   end

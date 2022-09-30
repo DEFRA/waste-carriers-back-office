@@ -12,14 +12,14 @@
     </h1>
 
     <div class="govuk-form-group">
-      <p class="govuk-body"><%= t(".paragraph_1", email: @registration.account_email) %></p>
+      <p class="govuk-body"><%= t(".paragraph1", email: @registration.account_email) %></p>
       <% if newly_invited_account?(@registration.account_email) %>
-        <p class="govuk-body"><%= t(".new_user.paragraph_2") %></p>
-        <p class="govuk-body"><%= t(".new_user.paragraph_3") %></p>
-        <p class="govuk-body"><%= t(".new_user.paragraph_4") %></p>
-        <p class="govuk-body"><%= t(".new_user.paragraph_5") %></p>
+        <p class="govuk-body"><%= t(".new_user.paragraph2") %></p>
+        <p class="govuk-body"><%= t(".new_user.paragraph3") %></p>
+        <p class="govuk-body"><%= t(".new_user.paragraph4") %></p>
+        <p class="govuk-body"><%= t(".new_user.paragraph5") %></p>
       <% else %>
-        <p class="govuk-body"><%= t(".existing_user.paragraph_2") %></p>
+        <p class="govuk-body"><%= t(".existing_user.paragraph2") %></p>
       <% end %>
     </div>
 

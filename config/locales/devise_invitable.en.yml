@@ -13,14 +13,14 @@ en:
       invitation_removed: "Your invitation was removed"
       new:
         heading: "Invite a new user"
-        paragraph_1: "The new user will receive an email containing a confirmation link."
-        paragraph_2: "They must follow the link and create a password before they can access this system."
-        paragraph_3: "Email links expire after 2 weeks."
+        paragraph1: "The new user will receive an email containing a confirmation link."
+        paragraph2: "They must follow the link and create a password before they can access this system."
+        paragraph3: "Email links expire after 2 weeks."
         email_label: "Email"
         submit_button: "Send invitation"
       edit:
         heading: "Create a new back office account"
-        paragraph_1: "To finish setting up your account, you need to create a password."
+        paragraph1: "To finish setting up your account, you need to create a password."
         password_label: "Password"
         password_hint:
           text: "It must:"
@@ -32,11 +32,11 @@ en:
     mailer:
       invitation_instructions:
         subject: "Confirm a waste carriers back office account"
-        paragraph_1: "Hello %{email}"
-        paragraph_2: "You have been added as a user to the back office system for the waste carriers service (%{url})"
-        paragraph_3: "Use the link below to confirm this."
-        paragraph_4: "This link will expire on %{due_date}."
-        paragraph_5: "If you don't want to confirm the account, please ignore this email."
+        paragraph1: "Hello %{email}"
+        paragraph2: "You have been added as a user to the back office system for the waste carriers service (%{url})"
+        paragraph3: "Use the link below to confirm this."
+        paragraph4: "This link will expire on %{due_date}."
+        paragraph5: "If you don't want to confirm the account, please ignore this email."
   time:
     formats:
       accept_until_format: "%e %B %Y at %l:%M%P"
