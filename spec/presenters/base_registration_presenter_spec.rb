@@ -321,12 +321,16 @@ RSpec.describe BaseRegistrationPresenter do
     end
 
     context "when the registration has no expiry date" do
+      let(:expires_on) { nil }
+
       it "returns nil" do
         expect(subject.display_expiry_text).to be_nil
       end
     end
 
     context "when the registration is not upper tier" do
+      let(:upper_tier) { false }
+
       it "returns nil" do
         expect(subject.display_expiry_text).to be_nil
       end

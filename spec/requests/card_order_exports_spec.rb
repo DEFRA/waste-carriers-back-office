@@ -69,7 +69,7 @@ RSpec.describe "CardOrderExports", type: :request do
     end
 
     it "redirects the user to the AWS S3 download link" do
-      expect(response.status).to eq 302
+      expect(response).to have_http_status(:found)
       # Match against location instead of expect redirect_to in order to exclude
       # variable "X-Amz-"" parameters from the comparison.
       expected_redirect_url = CardOrdersExportLog.first.download_link.split("&X-Amz")[0]

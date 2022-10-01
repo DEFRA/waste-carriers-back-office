@@ -90,11 +90,11 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    user_name: ENV["WCRS_EMAIL_USERNAME"],
-    password: ENV["WCRS_EMAIL_PASSWORD"],
+    user_name: ENV.fetch("WCRS_EMAIL_USERNAME", nil),
+    password: ENV.fetch("WCRS_EMAIL_PASSWORD", nil),
     domain: config.wcrs_back_office_url,
-    address: ENV["WCRS_EMAIL_HOST"],
-    port: ENV["WCRS_EMAIL_PORT"],
+    address: ENV.fetch("WCRS_EMAIL_HOST", nil),
+    port: ENV.fetch("WCRS_EMAIL_PORT", nil),
     authentication: :plain,
     enable_starttls_auto: true
   }

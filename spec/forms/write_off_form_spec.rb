@@ -9,13 +9,7 @@ RSpec.describe WriteOffForm do
   let(:user) { double(:user) }
 
   describe "#submit" do
-    before do
-      allow(subject).to receive(:valid?).and_return(valid)
-    end
-
     context "when the object is valid" do
-      let(:valid) { true }
-
       it "returns true" do
         comment = double(:comment)
 
@@ -24,8 +18,6 @@ RSpec.describe WriteOffForm do
     end
 
     context "when the object is invalid" do
-      let(:valid) { false }
-
       it "returns false" do
         expect(subject.submit({})).to be(false)
       end

@@ -56,7 +56,6 @@ RSpec.describe PaymentPresenter do
   describe "#already_reversed?" do
     before do
       scope = double(:scope)
-
       allow(finance_details).to receive(:payments).and_return(scope)
       allow(scope).to receive(:where).with(order_key: "123_REVERSAL").and_return([reversed_payment])
     end
@@ -79,14 +78,14 @@ RSpec.describe PaymentPresenter do
   end
 
   describe "#no_action_message" do
-    let(:reversed_payment) { double(:reversed_payment) }
-
     before do
-      allow(subject).to receive(:already_reversed?).and_return(already_reversed)
+      scope = double(:scope)
+      allow(finance_details).to receive(:payments).and_return(scope)
+      allow(scope).to receive(:where).with(order_key: "123_REVERSAL").and_return([reversed_payment])
     end
 
     context "when the payment was already reversed" do
-      let(:already_reversed) { true }
+      let(:reversed_payment) { double(:reversed_payment) }
 
       it "returns an already reversed message" do
         result = double(:result)
@@ -97,7 +96,7 @@ RSpec.describe PaymentPresenter do
     end
 
     context "when the payment was not reversed" do
-      let(:already_reversed) { false }
+      let(:reversed_payment) { nil }
 
       it "returns an already reversed message" do
         result = double(:result)
@@ -128,11 +127,13 @@ RSpec.describe PaymentPresenter do
       let(:can) { true }
 
       before do
-        allow(subject).to receive(:already_reversed?).and_return(already_reversed)
+        scope = double(:scope)
+        allow(finance_details).to receive(:payments).and_return(scope)
+        allow(scope).to receive(:where).with(order_key: "123_REVERSAL").and_return([reversed_payment])
       end
 
       context "when the payment is already reversed" do
-        let(:already_reversed) { true }
+        let(:reversed_payment) { double(:reversed_payment) }
 
         it "returns false" do
           expect(subject).not_to be_reversible
@@ -140,7 +141,7 @@ RSpec.describe PaymentPresenter do
       end
 
       context "when the payment has not been reversed yet" do
-        let(:already_reversed) { false }
+        let(:reversed_payment) { nil }
 
         it "returns true" do
           expect(subject).to be_reversible

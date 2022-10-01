@@ -10,7 +10,7 @@ def find_or_create_user(email, role)
 end
 
 def seed_users
-  seeds = JSON.parse(File.read("#{Rails.root}/db/seeds/users.json"))
+  seeds = JSON.parse(Rails.root.join("db/seeds/users.json").read)
   users = seeds["users"]
 
   users.each do |user|

@@ -51,9 +51,7 @@ RSpec.describe "ConvictionApprovalForms", type: :request do
 
       before do
         sign_in(user)
-      end
 
-      before do
         # Block renewal completion so we can check the values of the transient_registration after submission
         allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_return(nil)
       end

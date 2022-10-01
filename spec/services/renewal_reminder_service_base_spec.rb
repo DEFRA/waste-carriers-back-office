@@ -6,7 +6,7 @@ RSpec.describe RenewalReminderServiceBase do
 
   let(:test_class) do
     Class.new(described_class) do
-      def expires_in_days; 3; end
+      def expires_in_days = 3
       def send_email(_arg); end
     end
   end

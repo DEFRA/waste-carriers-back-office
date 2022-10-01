@@ -118,7 +118,7 @@ module Reports
         presenter_address_methods = %i[address_line1 address_line2 address_line3 address_line4
                                        address_line5 address_town_city address_postcode address_country]
         before do
-          registration_address.assign_attributes(address_attributes.map { |a| [a, nil] }.to_h)
+          registration_address.assign_attributes(address_attributes.index_with { nil })
         end
 
         it "the presenter methods do not raise an exception" do

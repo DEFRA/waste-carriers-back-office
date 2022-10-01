@@ -58,7 +58,7 @@ RSpec.describe BasePaymentForm, type: :model do
       end
 
       it "updates the finance_details balance" do
-        expected_balance = (transient_registration.finance_details.balance - valid_params[:amount] * 100)
+        expected_balance = (transient_registration.finance_details.balance - (valid_params[:amount] * 100))
         payment_form.submit(valid_params, payment_type)
 
         expect(transient_registration.reload.finance_details.balance).to eq(expected_balance)

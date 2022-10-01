@@ -4,8 +4,32 @@ inherit_gem:
 require:
   - rubocop-rails
   - rubocop-rspec
+# THis cop is n/a for rake tasks
+RSpec/DescribeClass:
+  Exclude:
+    - spec/lib/tasks/*
 # Disable this cop to avoid having to rewrite all uses of update_all
 Rails/SkipsModelValidations:
   Enabled: false
 RSpec/NamedSubject:
+  Enabled: false
+RSpec/AnyInstance:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/StubbedMock:
+  Enabled: false
+RSpec/MessageSpies:
+  Enabled: false
+RSpec/VerifiedDoubles:
+  Enabled: false
+RSpec/NestedGroups:
+  Enabled: false
+RSpec/MessageChain:
+  Enabled: false
+RSpec/ImplicitSubject:
   Enabled: false

@@ -10,9 +10,9 @@ DefraRubyMocks.configure do |configuration|
 
   # Tell the mocks engine details needed to mock worldpay. These are needed
   # so it can then generate values that the calling app will verify as valid
-  configuration.worldpay_admin_code = ENV["WCRS_WORLDPAY_ADMIN_CODE"]
-  configuration.worldpay_merchant_code = ENV["WCRS_WORLDPAY_ECOM_MERCHANTCODE"]
-  configuration.worldpay_mac_secret = ENV["WCRS_WORLDPAY_ECOM_MACSECRET"]
+  configuration.worldpay_admin_code = ENV.fetch("WCRS_WORLDPAY_ADMIN_CODE", nil)
+  configuration.worldpay_merchant_code = ENV.fetch("WCRS_WORLDPAY_ECOM_MERCHANTCODE", nil)
+  configuration.worldpay_mac_secret = ENV.fetch("WCRS_WORLDPAY_ECOM_MACSECRET", nil)
   # Tell the mocks engine what our domain is. For the worldpay mock it needs to
   # tell a calling app what url to redirect a user to in order to 'mock' the
   # payment part of the process. But in the environments it runs in it is

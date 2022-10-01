@@ -28,7 +28,7 @@ RSpec.describe UsersHelper, type: :helper do
     end
   end
 
-  describe "#display_user_actions?" do
+  describe "#display_user_actions? for agency group" do
     let(:in_agency_group) { false }
     let(:in_finance_group) { false }
     let(:current_user) do

@@ -5,33 +5,33 @@ require "defra_ruby/aws"
 # rubocop:disable Metrics/BlockLength
 DefraRuby::Aws.configure do |c|
   epr_bucket = {
-    name: ENV["AWS_DAILY_EXPORT_BUCKET"],
-    region: ENV["AWS_REGION"],
+    name: ENV.fetch("AWS_DAILY_EXPORT_BUCKET", nil),
+    region: ENV.fetch("AWS_REGION", nil),
     credentials: {
-      access_key_id: ENV["AWS_DAILY_EXPORT_ACCESS_KEY_ID"],
-      secret_access_key: ENV["AWS_DAILY_EXPORT_SECRET_ACCESS_KEY"]
+      access_key_id: ENV.fetch("AWS_DAILY_EXPORT_ACCESS_KEY_ID", nil),
+      secret_access_key: ENV.fetch("AWS_DAILY_EXPORT_SECRET_ACCESS_KEY", nil)
     },
-    encrypt_with_kms: ENV["AWS_DAILY_ENCRYPT_WITH_KMS"]
+    encrypt_with_kms: ENV.fetch("AWS_DAILY_ENCRYPT_WITH_KMS", nil)
   }
 
   boxy_bucket = {
-    name: ENV["AWS_BOXI_EXPORT_BUCKET"],
-    region: ENV["AWS_REGION"],
+    name: ENV.fetch("AWS_BOXI_EXPORT_BUCKET", nil),
+    region: ENV.fetch("AWS_REGION", nil),
     credentials: {
-      access_key_id: ENV["AWS_BOXI_EXPORT_ACCESS_KEY_ID"],
-      secret_access_key: ENV["AWS_BOXI_EXPORT_SECRET_ACCESS_KEY"]
+      access_key_id: ENV.fetch("AWS_BOXI_EXPORT_ACCESS_KEY_ID", nil),
+      secret_access_key: ENV.fetch("AWS_BOXI_EXPORT_SECRET_ACCESS_KEY", nil)
     },
-    encrypt_with_kms: ENV["AWS_BOXI_ENCRYPT_WITH_KMS"]
+    encrypt_with_kms: ENV.fetch("AWS_BOXI_ENCRYPT_WITH_KMS", nil)
   }
 
   weekly_exports_bucket = {
-    name: ENV["AWS_WEEKLY_EXPORT_BUCKET"],
-    region: ENV["AWS_REGION"],
+    name: ENV.fetch("AWS_WEEKLY_EXPORT_BUCKET", nil),
+    region: ENV.fetch("AWS_REGION", nil),
     credentials: {
-      access_key_id: ENV["AWS_WEEKLY_EXPORT_ACCESS_KEY_ID"],
-      secret_access_key: ENV["AWS_WEEKLY_EXPORT_SECRET_ACCESS_KEY"]
+      access_key_id: ENV.fetch("AWS_WEEKLY_EXPORT_ACCESS_KEY_ID", nil),
+      secret_access_key: ENV.fetch("AWS_WEEKLY_EXPORT_SECRET_ACCESS_KEY", nil)
     },
-    encrypt_with_kms: ENV["AWS_WEEKLY_ENCRYPT_WITH_KMS"]
+    encrypt_with_kms: ENV.fetch("AWS_WEEKLY_ENCRYPT_WITH_KMS", nil)
   }
 
   c.buckets = [boxy_bucket, epr_bucket, weekly_exports_bucket]

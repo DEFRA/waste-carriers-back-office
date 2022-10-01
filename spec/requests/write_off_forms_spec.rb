@@ -82,7 +82,7 @@ RSpec.describe "WriteOffForms", type: :request do
           }
         end
 
-        context "when the resource is a registration" do
+        context "when the resource is a registration with an unpaid order" do
           let(:registration) { create(:registration, :has_unpaid_order, :pending) }
 
           it "activates the registration" do
@@ -111,7 +111,7 @@ RSpec.describe "WriteOffForms", type: :request do
           expect(response).to redirect_to(resource_finance_details_path(registration._id))
         end
 
-        context "when the resource is a registration" do
+        context "when the resource is a registration with an overpayment" do
           let(:registration) { create(:registration, :overpaid) }
 
           it "generates a new payment, updates the registration balance, returns a 302 status and redirects to the registration finance details page" do

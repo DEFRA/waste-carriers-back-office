@@ -8,7 +8,7 @@ RSpec.describe RegistrationTransfersHelper, type: :helper do
   let(:registration) { build(:registration) }
 
   describe "#newly_invited_account?" do
-    let(:subject) { helper.newly_invited_account?(email) }
+    subject { helper.newly_invited_account?(email) }
 
     context "when there is an invitation_created_at" do
       before do

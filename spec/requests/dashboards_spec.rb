@@ -45,7 +45,7 @@ RSpec.describe "Dashboards", type: :request do
           it "links to renewal details pages" do
             link_to_renewal = renewing_registration_path(matching_renewal.reg_identifier)
 
-            get "/bo", params: { term: "#{first_name} #{last_name}", "search_fullname": "1" }
+            get "/bo", params: { term: "#{first_name} #{last_name}", search_fullname: "1" }
 
             expect(response.body).to include(link_to_renewal)
           end
