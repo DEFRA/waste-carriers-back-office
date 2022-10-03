@@ -2,6 +2,8 @@
 
 class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
 
+  include ActionView::Helpers::SanitizeHelper
+
   delegate :balance, to: :finance_details, prefix: true
 
   def display_company_details_panel?
@@ -32,7 +34,7 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   def displayable_location
     location = show_translation_or_filler(:location)
 
-    I18n.t(".shared.registrations.business_information.labels.location_html", location: location)
+    sanitize(I18n.t(".shared.registrations.business_information.labels.location_html", location: location))
   end
 
   def display_convictions_check_message
@@ -87,9 +89,9 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     return unless upper_tier?
 
     if expired?
-      I18n.t(".shared.registrations.labels.expired_html", formatted_date: display_expiry_date)
+      sanitize(I18n.t(".shared.registrations.labels.expired_html", formatted_date: display_expiry_date))
     else
-      I18n.t(".shared.registrations.labels.expires_html", formatted_date: display_expiry_date)
+      sanitize(I18n.t(".shared.registrations.labels.expires_html", formatted_date: display_expiry_date))
     end
   end
 
