@@ -41,6 +41,7 @@ gem "wicked_pdf"
 
 gem "matrix"
 
+gem "net-imap"
 gem "net-pop"
 gem "net-smtp"
 
