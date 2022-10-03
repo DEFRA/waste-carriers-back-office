@@ -41,7 +41,7 @@ gem "wicked_pdf"
 
 gem "matrix"
 
-gem 'net-pop'
+gem "net-pop"
 gem "net-smtp"
 
 # Use the Defra Ruby Aws gem for loading files to AWS buckets
