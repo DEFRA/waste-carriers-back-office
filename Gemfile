@@ -23,6 +23,9 @@ gem "defra_ruby_template"
 gem "devise", ">= 4.8"
 gem "devise_invitable", "~> 2.0"
 
+# To support method: :patch requests
+gem "jquery-rails"
+
 # Manage, create and open zip files https://github.com/rubyzip/rubyzip
 gem "rubyzip"
 
