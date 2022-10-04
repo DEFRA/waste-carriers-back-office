@@ -183,51 +183,51 @@ module Reports
       end
     end
 
-    describe "#company_address_address_line1" do
-      it "returns the object address address_line1" do
+    describe "#company_address_address_line_1" do
+      it "returns the object address address_line_1" do
         company_address = double(:company_address)
         result = double(:result)
 
         allow(registration).to receive(:company_address).and_return(company_address)
-        allow(company_address).to receive(:address_line1).and_return(result)
+        allow(company_address).to receive(:address_line_1).and_return(result)
 
-        expect(subject.company_address_address_line1).to eq(result)
+        expect(subject.company_address_address_line_1).to eq(result)
       end
     end
 
-    describe "#company_address_address_line2" do
-      it "returns the object address address_line2" do
+    describe "#company_address_address_line_2" do
+      it "returns the object address address_line_2" do
         company_address = double(:company_address)
         result = double(:result)
 
         allow(registration).to receive(:company_address).and_return(company_address)
-        allow(company_address).to receive(:address_line2).and_return(result)
+        allow(company_address).to receive(:address_line_2).and_return(result)
 
-        expect(subject.company_address_address_line2).to eq(result)
+        expect(subject.company_address_address_line_2).to eq(result)
       end
     end
 
-    describe "#company_address_address_line3" do
-      it "returns the object address address_line3" do
+    describe "#company_address_address_line_3" do
+      it "returns the object address address_line_3" do
         company_address = double(:company_address)
         result = double(:result)
 
         allow(registration).to receive(:company_address).and_return(company_address)
-        allow(company_address).to receive(:address_line3).and_return(result)
+        allow(company_address).to receive(:address_line_3).and_return(result)
 
-        expect(subject.company_address_address_line3).to eq(result)
+        expect(subject.company_address_address_line_3).to eq(result)
       end
     end
 
-    describe "#company_address_address_line4" do
-      it "returns the object address address_line4" do
+    describe "#company_address_address_line_4" do
+      it "returns the object address address_line_4" do
         company_address = double(:company_address)
         result = double(:result)
 
         allow(registration).to receive(:company_address).and_return(company_address)
-        allow(company_address).to receive(:address_line4).and_return(result)
+        allow(company_address).to receive(:address_line_4).and_return(result)
 
-        expect(subject.company_address_address_line4).to eq(result)
+        expect(subject.company_address_address_line_4).to eq(result)
       end
     end
 

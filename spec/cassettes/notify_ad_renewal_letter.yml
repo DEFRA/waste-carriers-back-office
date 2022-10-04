@@ -6,9 +6,9 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"template_id":"1b56d3a7-f7fd-414d-a3ba-2b50f627cf40","reference":"CBDU8","personalisation":{"contact_name":"Jane
-        Doe","expiry_date":"17 May 2022","reg_identifier":"CBDU8","registration_cost":"154","renewal_cost":"105","renewal_url":"localhost:3002/fo/renew/U17FcPc5FJc46UKKPEqX8AVN","address_line1":"Jane
-        Doe","address_line2":"42","address_line3":"Foo Gardens","address_line4":"Baz
-        City","address_line5":"BS1 1AA"}}'
+        Doe","expiry_date":"17 May 2022","reg_identifier":"CBDU8","registration_cost":"154","renewal_cost":"105","renewal_url":"localhost:3002/fo/renew/U17FcPc5FJc46UKKPEqX8AVN","address_line_1":"Jane
+        Doe","address_line_2":"42","address_line_3":"Foo Gardens","address_line_4":"Baz
+        City","address_line_5":"BS1 1AA"}}'
     headers:
       User-Agent:
       - NOTIFY-API-RUBY-CLIENT/5.3.0

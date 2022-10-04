@@ -84,13 +84,13 @@ module Reports
     RSpec.shared_examples "address fields" do |prefix, address_type|
       # Allow these to be overridden to test company name on house number and address line 1
       let(:house_number) { Faker::Number.number(digits: 2) }
-      let(:address_line1) { Faker::Address.street_name }
+      let(:address_line_1) { Faker::Address.street_name }
 
       let(:registered_address) do
-        build(:address, :registered, house_number: house_number, address_line1: address_line1)
+        build(:address, :registered, house_number: house_number, address_line_1: address_line_1)
       end
       let(:contact_address) do
-        build(:address, :contact, house_number: house_number, address_line1: address_line1)
+        build(:address, :contact, house_number: house_number, address_line_1: address_line_1)
       end
 
       before do
@@ -101,11 +101,11 @@ module Reports
 
       context "with all address lines populated" do
         it "returns the address fields" do
-          expect(subject.send("#{prefix}_address_line1")).to eq registration_address.house_number
-          expect(subject.send("#{prefix}_address_line2")).to eq registration_address.address_line1
-          expect(subject.send("#{prefix}_address_line3")).to eq registration_address.address_line2
-          expect(subject.send("#{prefix}_address_line4")).to eq registration_address.address_line3
-          expect(subject.send("#{prefix}_address_line5")).to eq registration_address.address_line4
+          expect(subject.send("#{prefix}_address_line_1")).to eq registration_address.house_number
+          expect(subject.send("#{prefix}_address_line_2")).to eq registration_address.address_line_1
+          expect(subject.send("#{prefix}_address_line_3")).to eq registration_address.address_line_2
+          expect(subject.send("#{prefix}_address_line_4")).to eq registration_address.address_line_3
+          expect(subject.send("#{prefix}_address_line_5")).to eq registration_address.address_line_4
           expect(subject.send("#{prefix}_address_town_city")).to eq registration_address.town_city
           expect(subject.send("#{prefix}_address_postcode")).to eq registration_address.postcode
           expect(subject.send("#{prefix}_address_country")).to eq registration_address.country
@@ -113,10 +113,10 @@ module Reports
       end
 
       context "with all address lines nil" do
-        address_attributes = %i[house_number address_line1 address_line2 address_line3
-                                address_line4 town_city postcode country]
-        presenter_address_methods = %i[address_line1 address_line2 address_line3 address_line4
-                                       address_line5 address_town_city address_postcode address_country]
+        address_attributes = %i[house_number address_line_1 address_line_2 address_line_3
+                                address_line_4 town_city postcode country]
+        presenter_address_methods = %i[address_line_1 address_line_2 address_line_3 address_line_4
+                                       address_line_5 address_town_city address_postcode address_country]
         before do
           registration_address.assign_attributes(address_attributes.index_with { nil })
         end
@@ -132,7 +132,7 @@ module Reports
         before { registration.company_name = nil }
 
         it "does not raise an exception" do
-          expect { subject.send("#{prefix}_address_line1") }.not_to raise_exception
+          expect { subject.send("#{prefix}_address_line_1") }.not_to raise_exception
         end
       end
 
@@ -143,19 +143,19 @@ module Reports
             let(:house_number) { nil }
 
             context "when the source value is a case sensitive match" do
-              let(:address_line1) { registration.public_send(registration_attribute) }
+              let(:address_line_1) { registration.public_send(registration_attribute) }
 
               it "does not present the source value in the subject's address line 1" do
-                expect(subject.send("#{prefix}_address_line1")).not_to eq registration_address.address_line1
-                expect(subject.send("#{prefix}_address_line1")).to eq registration_address.address_line2
+                expect(subject.send("#{prefix}_address_line_1")).not_to eq registration_address.address_line_1
+                expect(subject.send("#{prefix}_address_line_1")).to eq registration_address.address_line_2
               end
             end
 
             context "when the source value is in a different case" do
-              let(:address_line1) { registration.public_send(registration_attribute).upcase }
+              let(:address_line_1) { registration.public_send(registration_attribute).upcase }
 
               it "still does not present the source value in the subject's address line 1" do
-                expect(subject.send("#{prefix}_address_line1")).not_to eq registration_address.address_line1
+                expect(subject.send("#{prefix}_address_line_1")).not_to eq registration_address.address_line_1
               end
             end
           end
@@ -165,7 +165,7 @@ module Reports
               let(:house_number) { registration.public_send(registration_attribute) }
 
               it "does not present the source value in the subject's address line 1" do
-                expect(subject.send("#{prefix}_address_line1")).not_to eq registration_address.house_number
+                expect(subject.send("#{prefix}_address_line_1")).not_to eq registration_address.house_number
               end
             end
 
@@ -173,7 +173,7 @@ module Reports
               let(:house_number) { registration.public_send(registration_attribute).upcase }
 
               it "still does not present the source value in the subject's address line 1" do
-                expect(subject.send("#{prefix}_address_line1")).not_to eq registration_address.house_number
+                expect(subject.send("#{prefix}_address_line_1")).not_to eq registration_address.house_number
               end
             end
           end
