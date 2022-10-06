@@ -77,7 +77,7 @@ module Reports
         end
 
         context "with a partially assisted registration" do
-          before { allow(metadata).to receive(:route).and_return("ASSISTED_DIGITAL_FROM_TRANSIENT_REGISTRATION") }
+          before { allow(metadata).to receive(:route).and_return("PARTIALLY_ASSISTED_DIGITAL") }
 
           it "returns 'Partially assisted'" do
             expect(subject.assistance_mode).to eq("Partially assisted")

@@ -34,7 +34,7 @@ module Reports
         case metaData&.route
         when "DIGITAL"
           "Unassisted"
-        when "ASSISTED_DIGITAL_FROM_TRANSIENT_REGISTRATION"
+        when "PARTIALLY_ASSISTED_DIGITAL"
           "Partially assisted"
         when "ASSISTED_DIGITAL"
           "Fully assisted"
