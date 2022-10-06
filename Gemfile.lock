@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: bb4d6b33e83caf88b018838e97dc2498f2e7bf1d
+  revision: b122002713a6309e1288df197b44922f7aad8896
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -312,7 +312,7 @@ GEM
     nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    notifications-ruby-client (5.3.0)
+    notifications-ruby-client (5.4.0)
       jwt (>= 1.5, < 3)
     octokit (4.21.0)
       faraday (>= 0.9)
