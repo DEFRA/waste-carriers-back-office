@@ -13,6 +13,12 @@ module ActionLinksHelper
   end
 
   def resume_link_for(resource)
+    # If metaData.route is nil, the registration was started in the front-office
+    if resource.metaData.route.blank?
+      resource.metaData.route = "partial"
+      resource.save
+    end
+
     return ad_privacy_policy_path(token: resource.token) if a_new_registration?(resource)
 
     ad_privacy_policy_path(reg_identifier: resource.reg_identifier)

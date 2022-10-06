@@ -100,12 +100,31 @@ RSpec.describe ActionLinksHelper, type: :helper do
   end
 
   describe "resume_link_for" do
+
+    shared_examples "metaData.route updates" do
+      context "when the registration was started in the back office" do
+        it "does not change metaData.route" do
+          expect { helper.resume_link_for(resource) }.not_to change { resource.metaData.route }
+        end
+      end
+
+      context "when the registration was started in the front office" do
+        before { resource.metaData.route = nil }
+
+        it "changes the assistance mode to partial" do
+          expect { helper.resume_link_for(resource) }.to change { resource.metaData.route }.to("partial")
+        end
+      end
+    end
+
     context "when the resource is a new_registration" do
       let(:resource) { build(:new_registration) }
 
       it "returns the correct path" do
         expect(helper.resume_link_for(resource)).to eq(ad_privacy_policy_path(token: resource.token))
       end
+
+      it_behaves_like "metaData.route updates"
     end
 
     context "when the resource is a renewing_registration" do
@@ -114,6 +133,8 @@ RSpec.describe ActionLinksHelper, type: :helper do
       it "returns the correct path" do
         expect(helper.resume_link_for(resource)).to eq(ad_privacy_policy_path(reg_identifier: resource.reg_identifier))
       end
+
+      it_behaves_like "metaData.route updates"
     end
   end
 
