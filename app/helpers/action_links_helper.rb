@@ -15,7 +15,7 @@ module ActionLinksHelper
   def resume_link_for(resource)
     # If metaData.route is nil or DIGITAL, the registration was started in the front-office
     if resource.metaData.route.blank? || resource.metaData.route == "DIGITAL"
-      resource.metaData.route = "partial"
+      resource.metaData.route = "PARTIALLY_ASSISTED_DIGITAL"
       resource.save
     end
 
