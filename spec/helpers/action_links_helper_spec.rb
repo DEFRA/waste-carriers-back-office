@@ -108,8 +108,16 @@ RSpec.describe ActionLinksHelper, type: :helper do
         end
       end
 
-      context "when the registration was started in the front office" do
+      context "when the registration was started in the front office with a nil route" do
         before { resource.metaData.route = nil }
+
+        it "changes the assistance mode to partial" do
+          expect { helper.resume_link_for(resource) }.to change { resource.metaData.route }.to("partial")
+        end
+      end
+
+      context "when the registration was started in the front office with route = DIGITAL" do
+        before { resource.metaData.route = "DIGITAL" }
 
         it "changes the assistance mode to partial" do
           expect { helper.resume_link_for(resource) }.to change { resource.metaData.route }.to("partial")

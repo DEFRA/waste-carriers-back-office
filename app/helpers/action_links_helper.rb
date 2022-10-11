@@ -13,8 +13,8 @@ module ActionLinksHelper
   end
 
   def resume_link_for(resource)
-    # If metaData.route is nil, the registration was started in the front-office
-    if resource.metaData.route.blank?
+    # If metaData.route is nil or DIGITAL, the registration was started in the front-office
+    if resource.metaData.route.blank? || resource.metaData.route == "DIGITAL"
       resource.metaData.route = "partial"
       resource.save
     end
