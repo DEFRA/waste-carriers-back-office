@@ -112,7 +112,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         before { resource.metaData.route = nil }
 
         it "changes the assistance mode to partial" do
-          expect { helper.resume_link_for(resource) }.to change { resource.metaData.route }.to("partial")
+          expect { helper.resume_link_for(resource) }.to change { resource.metaData.route }.to("PARTIALLY_ASSISTED_DIGITAL")
         end
       end
 
@@ -120,7 +120,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
         before { resource.metaData.route = "DIGITAL" }
 
         it "changes the assistance mode to partial" do
-          expect { helper.resume_link_for(resource) }.to change { resource.metaData.route }.to("partial")
+          expect { helper.resume_link_for(resource) }.to change { resource.metaData.route }.to("PARTIALLY_ASSISTED_DIGITAL")
         end
       end
     end
