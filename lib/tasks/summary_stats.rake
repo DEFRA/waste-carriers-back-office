@@ -14,7 +14,7 @@ namespace :summary_stats do
     end
 
     start_date = Date.parse(args[:start_date])
-    end_date = Date.parse(args[:end_date])
+    end_date = Date.parse(args[:end_date]) + 1.day # the aggregations compare with start of day, not end of day
 
     puts "===================================================================================================="
 
@@ -48,18 +48,19 @@ namespace :summary_stats do
   def calcs_for_date_range(start_date, end_date, abandon_rate)
     puts "\tFrom #{start_date} to #{end_date} inclusive:"
 
-    orders_activated = WasteCarriersEngine::Registration.collection.aggregate(
+    activated_order_count = WasteCarriersEngine::Registration.collection.aggregate(
       [
         { "$match": { "metaData.dateActivated": { "$gte" => start_date, "$lte" => end_date } } },
         { "$project": { order: "$financeDetails.orders" } },
         { "$unwind": "$order" },
         { "$group": { _id: 0, order_count: { "$sum": 1 } } }
       ]
-    ).first["order_count"]
+    ).first
+    orders_activated = activated_order_count.present? ? activated_order_count["order_count"] : 0
     orders_activated_s = number_with_delimiter(orders_activated)
     puts "\tTotal orders activated: #{orders_activated}, of which:"
 
-    assisted_digital_orders = WasteCarriersEngine::Registration.collection.aggregate(
+    ad_order_count = WasteCarriersEngine::Registration.collection.aggregate(
       [
         { "$match": {
           "metaData.dateActivated": { "$gte" => start_date, "$lte" => end_date },
@@ -69,13 +70,14 @@ namespace :summary_stats do
         { "$unwind": "$order" },
         { "$group": { _id: 0, order_count: { "$sum": 1 } } }
       ]
-    ).first["order_count"]
+    ).first
+    assisted_digital_orders = ad_order_count.present? ? ad_order_count["order_count"] : 0
     assisted_digital_orders_s = number_with_delimiter(assisted_digital_orders)
     puts "\t... assisted digital: #{assisted_digital_orders_s}"
 
     # We could just subtract assisted_digital_orders from orders_activated,
     # but in some cases metaData.route is not populated so this is safer:
-    fully_digital_orders = WasteCarriersEngine::Registration.collection.aggregate(
+    digital_order_count = WasteCarriersEngine::Registration.collection.aggregate(
       [
         { "$match": {
           "metaData.dateActivated": { "$gte" => start_date, "$lte" => end_date },
@@ -85,7 +87,8 @@ namespace :summary_stats do
         { "$unwind": "$order" },
         { "$group": { _id: 0, order_count: { "$sum": 1 } } }
       ]
-    ).first["order_count"]
+    ).first
+    fully_digital_orders = digital_order_count.present? ? digital_order_count["order_count"] : 0
     fully_digital_orders_s = number_with_delimiter(fully_digital_orders)
     puts "\t... fully digital: #{fully_digital_orders}"
 
