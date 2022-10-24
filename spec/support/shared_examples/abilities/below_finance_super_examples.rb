@@ -6,7 +6,7 @@ RSpec.shared_examples "below finance_super examples" do
   end
 
   it "should not be able to modify finance users" do
-    user = build(:user, :finance)
+    user = build(:user, role: :finance)
     should_not be_able_to(:modify_user, user)
   end
 end

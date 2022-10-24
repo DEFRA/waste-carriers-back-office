@@ -8,7 +8,7 @@ RSpec.describe "CardOrderExports", type: :request do
     before { create_list(:card_orders_export_log, 5) }
 
     context "when an agency-with-refund user is signed in" do
-      let(:user) { create(:user, :agency_with_refund) }
+      let(:user) { create(:user, role: :agency_with_refund) }
 
       before(:each) do
         sign_in(user)
@@ -30,7 +30,7 @@ RSpec.describe "CardOrderExports", type: :request do
     end
 
     context "when a non agency-with-refund user is signed in" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, role: :agency) }
 
       before(:each) do
         sign_in(user)
@@ -54,7 +54,7 @@ RSpec.describe "CardOrderExports", type: :request do
   end
 
   describe "GET /bo/card_order_exports/:id" do
-    let(:user) { create(:user, :agency_with_refund) }
+    let(:user) { create(:user, role: :agency_with_refund) }
     let(:export_log) { create(:card_orders_export_log) }
 
     before do

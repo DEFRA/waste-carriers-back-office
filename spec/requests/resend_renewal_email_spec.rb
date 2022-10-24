@@ -9,7 +9,7 @@ RSpec.describe "ResendRenewalEmail", type: :request do
     let(:request_path) { "/bo/resend-renewal-email/#{registration.reg_identifier}" }
 
     context "when a finance user is signed in" do
-      let(:user) { create(:user, :finance) }
+      let(:user) { create(:user, role: :finance) }
       let(:registration) { create(:registration, :expires_soon) }
 
       it "redirects to permission page" do
@@ -20,7 +20,7 @@ RSpec.describe "ResendRenewalEmail", type: :request do
     end
 
     context "when an agency user is signed in" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, role: :agency) }
       let(:registration) { create(:registration, :expires_soon, contact_email: email) }
 
       context "and the registration has a contact email" do

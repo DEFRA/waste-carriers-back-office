@@ -13,7 +13,7 @@ RSpec.describe "WorldpayMissedPaymentNewRegistrations", type: :request do
     end
 
     context "when the user has the correct role" do
-      let(:user) { create(:user, :finance_admin) }
+      let(:user) { create(:user, role: :finance_admin) }
 
       context "when the workflow_state is worldpay_form" do
         before do
@@ -49,7 +49,7 @@ RSpec.describe "WorldpayMissedPaymentNewRegistrations", type: :request do
     end
 
     context "when the user does not have the correct role" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, role: :agency) }
 
       it "renders the permissions error page" do
         get "/bo/resources/#{_id}/missed-worldpay-payment-new-registration"

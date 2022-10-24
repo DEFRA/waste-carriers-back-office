@@ -119,7 +119,7 @@ RSpec.describe User, type: :model do
 
   describe "#in_agency_group?" do
     context "when the role is agency" do
-      let(:user) { build(:user, :agency) }
+      let(:user) { build(:user, role: :agency) }
 
       it "is true" do
         expect(user.in_agency_group?).to eq(true)
@@ -127,7 +127,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is agency_with_refund" do
-      let(:user) { build(:user, :agency_with_refund) }
+      let(:user) { build(:user, role: :agency_with_refund) }
 
       it "is true" do
         expect(user.in_agency_group?).to eq(true)
@@ -135,7 +135,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is agency_super" do
-      let(:user) { build(:user, :agency_super) }
+      let(:user) { build(:user, role: :agency_super) }
 
       it "is true" do
         expect(user.in_agency_group?).to eq(true)
@@ -143,7 +143,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is cbd_user" do
-      let(:user) { build(:user, :cbd_user) }
+      let(:user) { build(:user, role: :cbd_user) }
 
       it "is true" do
         expect(user.in_agency_group?).to eq(true)
@@ -151,7 +151,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is finance" do
-      let(:user) { build(:user, :finance) }
+      let(:user) { build(:user, role: :finance) }
 
       it "is false" do
         expect(user.in_agency_group?).to eq(false)
@@ -159,7 +159,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is finance_admin" do
-      let(:user) { build(:user, :finance_admin) }
+      let(:user) { build(:user, role: :finance_admin) }
 
       it "is false" do
         expect(user.in_agency_group?).to eq(false)
@@ -167,7 +167,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is finance_super" do
-      let(:user) { build(:user, :finance_super) }
+      let(:user) { build(:user, role: :finance_super) }
 
       it "is false" do
         expect(user.in_agency_group?).to eq(false)
@@ -185,7 +185,7 @@ RSpec.describe User, type: :model do
 
   describe "#in_finance_group?" do
     context "when the role is finance" do
-      let(:user) { build(:user, :finance) }
+      let(:user) { build(:user, role: :finance) }
 
       it "is true" do
         expect(user.in_finance_group?).to eq(true)
@@ -193,7 +193,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is finance_admin" do
-      let(:user) { build(:user, :finance_admin) }
+      let(:user) { build(:user, role: :finance_admin) }
 
       it "is true" do
         expect(user.in_finance_group?).to eq(true)
@@ -201,7 +201,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is finance_super" do
-      let(:user) { build(:user, :finance_super) }
+      let(:user) { build(:user, role: :finance_super) }
 
       it "is true" do
         expect(user.in_finance_group?).to eq(true)
@@ -209,7 +209,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is agency" do
-      let(:user) { build(:user, :agency) }
+      let(:user) { build(:user, role: :agency) }
 
       it "is false" do
         expect(user.in_finance_group?).to eq(false)
@@ -217,7 +217,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is agency_with_refund" do
-      let(:user) { build(:user, :agency_with_refund) }
+      let(:user) { build(:user, role: :agency_with_refund) }
 
       it "is false" do
         expect(user.in_finance_group?).to eq(false)
@@ -225,7 +225,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is agency_super" do
-      let(:user) { build(:user, :agency_super) }
+      let(:user) { build(:user, role: :agency_super) }
 
       it "is false" do
         expect(user.in_finance_group?).to eq(false)
@@ -242,7 +242,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "change_role" do
-    let(:user) { create(:user, :agency) }
+    let(:user) { create(:user, role: :agency) }
 
     it "should update the user's role" do
       new_role = "agency_with_refund"
@@ -263,7 +263,7 @@ RSpec.describe User, type: :model do
 
   describe "role" do
     context "when the role is agency" do
-      let(:user) { build(:user, :agency) }
+      let(:user) { build(:user, role: :agency) }
 
       it "is valid" do
         expect(user).to be_valid
@@ -271,7 +271,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is agency_with_refund" do
-      let(:user) { build(:user, :agency_with_refund) }
+      let(:user) { build(:user, role: :agency_with_refund) }
 
       it "is valid" do
         expect(user).to be_valid
@@ -279,7 +279,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is finance" do
-      let(:user) { build(:user, :finance) }
+      let(:user) { build(:user, role: :finance) }
 
       it "is valid" do
         expect(user).to be_valid
@@ -287,7 +287,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is finance_admin" do
-      let(:user) { build(:user, :finance_admin) }
+      let(:user) { build(:user, role: :finance_admin) }
 
       it "is valid" do
         expect(user).to be_valid
@@ -295,7 +295,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is agency_super" do
-      let(:user) { build(:user, :agency_super) }
+      let(:user) { build(:user, role: :agency_super) }
 
       it "is valid" do
         expect(user).to be_valid
@@ -303,7 +303,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the role is finance_super" do
-      let(:user) { build(:user, :finance_super) }
+      let(:user) { build(:user, role: :finance_super) }
 
       it "is valid" do
         expect(user).to be_valid

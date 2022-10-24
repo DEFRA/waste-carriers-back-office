@@ -13,7 +13,7 @@ RSpec.describe "WorldpayEscapes", type: :request do
     end
 
     context "when the user has the correct role" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, role: :agency) }
 
       context "when the workflow_state is worldpay_form" do
         before do
@@ -54,7 +54,7 @@ RSpec.describe "WorldpayEscapes", type: :request do
     end
 
     context "when the user does not have the correct role" do
-      let(:user) { create(:user, :finance) }
+      let(:user) { create(:user, role: :finance) }
 
       it "renders the permissions error page" do
         get "/bo/resources/#{_id}/revert-to-payment-summary"

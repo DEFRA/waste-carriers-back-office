@@ -118,7 +118,7 @@ RSpec.shared_examples "finance_admin examples" do
   end
 
   it "should not be able to modify agency users" do
-    user = build(:user, :agency)
+    user = build(:user, role: :agency)
     should_not be_able_to(:modify_user, user)
   end
 end

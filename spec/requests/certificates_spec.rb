@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "Certificates", type: :request do
   let(:registration) { create(:registration, :expires_soon) }
-  let(:user) { create(:user, :agency) }
+  let(:user) { create(:user, role: :agency) }
   before(:each) do
     sign_in(user)
   end

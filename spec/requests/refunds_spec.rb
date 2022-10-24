@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "Refunds", type: :request do
   describe "GET /bo/resources/:_id/refunds" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :agency_with_refund) }
+      let(:user) { create(:user, role: :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
 
       before(:each) do
@@ -31,7 +31,7 @@ RSpec.describe "Refunds", type: :request do
 
   describe "GET /bo/resource/:_id/refunds/new" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :agency_with_refund) }
+      let(:user) { create(:user, role: :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
       let(:payment) { renewing_registration.finance_details.payments.first }
 
@@ -58,7 +58,7 @@ RSpec.describe "Refunds", type: :request do
 
   describe "POST /bo/resource/:_id/refunds/:order_key" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :agency_with_refund) }
+      let(:user) { create(:user, role: :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
       let(:payment) { renewing_registration.finance_details.payments.first }
 

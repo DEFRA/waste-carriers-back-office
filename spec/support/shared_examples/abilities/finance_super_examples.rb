@@ -11,7 +11,7 @@ RSpec.shared_examples "finance_super examples" do
   end
 
   it "should be able to modify finance users" do
-    user = build(:user, :finance)
+    user = build(:user, role: :finance)
     should be_able_to(:modify_user, user)
   end
 
