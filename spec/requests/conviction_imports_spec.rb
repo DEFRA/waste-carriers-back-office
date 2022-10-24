@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "ConvictionImports", type: :request do
+RSpec.describe "ConvictionImports" do
   describe "GET /bo/import-convictions" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :developer) }

@@ -60,13 +60,13 @@ module Worldpay
 
             allow(RestClient::Request).to receive(:execute).with(hash_including(headers: request_headers)).and_return(
               <<-XML
-                <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-                <!DOCTYPE paymentService PUBLIC \"-//WorldPay//DTD WorldPay PaymentService v1//EN\" \"http://dtd.worldpay.com/paymentService_v1.dtd\">
-                <paymentService version=\"1.4\" merchantCode=\"EASERRSIMMOTO\">
+                <?xml version="1.0" encoding="UTF-8"?>
+                <!DOCTYPE paymentService PUBLIC "-//WorldPay//DTD WorldPay PaymentService v1//EN" "http://dtd.worldpay.com/paymentService_v1.dtd">
+                <paymentService version="1.4" merchantCode="EASERRSIMMOTO">
                   <reply>
                     <ok>
-                      <refundReceived orderCode=\"\">
-                        <amount value=\"100\" currencyCode=\"GBP\" exponent=\"2\" debitCreditIndicator=\"credit\"/>
+                      <refundReceived orderCode="">
+                        <amount value="100" currencyCode="GBP" exponent="2" debitCreditIndicator="credit"/>
                       </refundReceived>
                     </ok>
                   </reply>
@@ -82,9 +82,9 @@ module Worldpay
           it "returns false" do
             allow(RestClient::Request).to receive(:execute).and_return(
               <<-XML
-                <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-                <!DOCTYPE paymentService PUBLIC \"-//WorldPay//DTD WorldPay PaymentService v1//EN\" \"http://dtd.worldpay.com/paymentService_v1.dtd\">
-                <paymentService version=\"1.4\" merchantCode=\"EASERRSIMMOTO\"></paymentService>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <!DOCTYPE paymentService PUBLIC "-//WorldPay//DTD WorldPay PaymentService v1//EN" "http://dtd.worldpay.com/paymentService_v1.dtd">
+                <paymentService version="1.4" merchantCode="EASERRSIMMOTO"></paymentService>
               XML
             )
 

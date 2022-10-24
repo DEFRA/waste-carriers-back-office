@@ -3,7 +3,7 @@
 require "cancan/matchers"
 require "rails_helper"
 
-RSpec.describe ExternalUser, type: :model do
+RSpec.describe ExternalUser do
   describe "#password" do
     context "when the external_user's password meets the requirements" do
       let(:external_user) { build(:external_user, password: "Secret123") }

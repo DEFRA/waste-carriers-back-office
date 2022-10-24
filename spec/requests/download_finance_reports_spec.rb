@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "DownloadFinanceReports", type: :request do
+RSpec.describe "DownloadFinanceReports" do
 
   # for checking tmp dirs before and after tests, to support tmp file cleanup
   def tmp_dirs

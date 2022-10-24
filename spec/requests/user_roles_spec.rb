@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "User Roles", type: :request do
+RSpec.describe "User Roles" do
   let(:role_change_user) { create(:user) }
 
   describe "GET /users/:id/role" do

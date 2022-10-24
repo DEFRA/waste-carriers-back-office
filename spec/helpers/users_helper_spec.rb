@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe UsersHelper, type: :helper do
+RSpec.describe UsersHelper do
   describe "#display_user_actions?" do
     let(:displayed_user) { double(:displayed_user) }
     let(:current_user) { double(:current_user, can?: false) }

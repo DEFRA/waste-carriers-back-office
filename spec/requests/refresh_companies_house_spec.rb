@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Refresh companies house", type: :request do
+RSpec.describe "Refresh companies house" do
   describe "PATCH /bo/registrations/:reg_identifier/companies_house_details" do
 
     subject { patch refresh_companies_house_name_path(registration.reg_identifier) }

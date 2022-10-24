@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "FinanceDetails", type: :request do
+RSpec.describe "FinanceDetails" do
   describe "GET /bo/resource/:_id/finance-details" do
     context "when a valid user is signed in" do
       let(:user) { create(:user) }

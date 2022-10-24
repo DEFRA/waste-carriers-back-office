@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Certificates", type: :request do
+RSpec.describe "Certificates" do
   let(:registration) { create(:registration, :expires_soon) }
   let(:user) { create(:user, :agency) }
 

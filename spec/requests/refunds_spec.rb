@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Refunds", type: :request do
+RSpec.describe "Refunds" do
   describe "GET /bo/resources/:_id/refunds" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }
@@ -123,13 +123,13 @@ RSpec.describe "Refunds", type: :request do
           payment.save
 
           worldpay_valid_response = <<-XML
-            <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-            <!DOCTYPE paymentService PUBLIC \"-//WorldPay//DTD WorldPay PaymentService v1//EN\" \"http://dtd.worldpay.com/paymentService_v1.dtd\">
-            <paymentService version=\"1.4\" merchantCode=\"EASERRSIMMOTO\">
+            <?xml version="1.0" encoding="UTF-8"?>
+            <!DOCTYPE paymentService PUBLIC "-//WorldPay//DTD WorldPay PaymentService v1//EN" "http://dtd.worldpay.com/paymentService_v1.dtd">
+            <paymentService version="1.4" merchantCode="EASERRSIMMOTO">
               <reply>
                 <ok>
-                  <refundReceived orderCode=\"\">
-                    <amount value=\"100\" currencyCode=\"GBP\" exponent=\"2\" debitCreditIndicator=\"credit\"/>
+                  <refundReceived orderCode="">
+                    <amount value="100" currencyCode="GBP" exponent="2" debitCreditIndicator="credit"/>
                   </refundReceived>
                 </ok>
               </reply>

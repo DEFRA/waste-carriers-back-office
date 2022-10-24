@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "ResendConfirmationEmail", type: :request do
+RSpec.describe "ResendConfirmationEmail" do
   describe "GET /bo/resend-confirmation-email/:reg_identifier" do
     before { sign_in(user) }
 

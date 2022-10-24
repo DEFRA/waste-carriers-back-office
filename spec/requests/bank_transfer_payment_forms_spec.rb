@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "BankTransferPaymentForms", type: :request do
+RSpec.describe "BankTransferPaymentForms" do
   let(:transient_registration) do
     create(:renewing_registration, :has_finance_details, :does_not_require_conviction_check)
   end

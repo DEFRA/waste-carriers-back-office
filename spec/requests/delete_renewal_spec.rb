@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Delete renewal", type: :request do
+RSpec.describe "Delete renewal" do
   describe "DELETE /bo/renewing-registrations/:reg_identifier" do
 
     subject { delete renewing_registration_path(registration.reg_identifier) }

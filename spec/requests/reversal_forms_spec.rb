@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "ReversalForms", type: :request do
+RSpec.describe "ReversalForms" do
   describe "GET /bo/resources/:_id/reversals" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }

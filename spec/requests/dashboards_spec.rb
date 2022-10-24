@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Dashboards", type: :request do
+RSpec.describe "Dashboards" do
   describe "/bo" do
     context "when a valid user is signed in" do
       let(:user) { create(:user) }

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe ConvictionsDashboardsHelper, type: :helper do
+RSpec.describe ConvictionsDashboardsHelper do
   describe "#details_path" do
     let(:resource) { nil }
     let(:path) { helper.details_path(resource) }

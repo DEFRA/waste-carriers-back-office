@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "NegativeChargeAdjustForms", type: :request do
+RSpec.describe "NegativeChargeAdjustForms" do
   describe "GET /bo/resource/:_id/charge-adjust/negative" do
     context "when a finance super user is signed in" do
       let(:user) { create(:user, :finance_super) }

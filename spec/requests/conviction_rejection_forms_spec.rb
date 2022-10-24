@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "ConvictionRejectionForms", type: :request do
+RSpec.describe "ConvictionRejectionForms" do
   let(:transient_registration) { create(:renewing_registration, :has_flagged_conviction_check) }
 
   describe "GET /bo/transient-registrations/:reg_identifier/convictions/reject" do

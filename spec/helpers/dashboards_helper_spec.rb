@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe DashboardsHelper, type: :helper do
+RSpec.describe DashboardsHelper do
   let(:result) { build(:renewing_registration) }
 
   describe "#inline_registration_address" do

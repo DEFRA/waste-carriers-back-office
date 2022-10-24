@@ -13,10 +13,12 @@ Naming/VariableNumber:
 Rails/SkipsModelValidations:
   Enabled: false
 
-# This cop is n/a for rake tasks
 RSpec/DescribeClass:
   Exclude:
+# This cop is n/a for rake tasks
     - spec/lib/tasks/*
+# Allow more descriptiive strings for request specs
+    - spec/requests/**/*
 
 # TODO Revisit these over time
 RSpec/AnyInstance:

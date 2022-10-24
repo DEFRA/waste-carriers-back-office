@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "ConvictionApprovalForms", type: :request do
+RSpec.describe "ConvictionApprovalForms" do
   let(:transient_registration) { create(:renewing_registration, :requires_conviction_check, :no_pending_payment) }
   let(:registration) do
     WasteCarriersEngine::Registration.where(reg_identifier: transient_registration.reg_identifier).first

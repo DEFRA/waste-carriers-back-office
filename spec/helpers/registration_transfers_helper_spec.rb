@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe RegistrationTransfersHelper, type: :helper do
+RSpec.describe RegistrationTransfersHelper do
   let(:external_user) { create(:external_user) }
   let(:email) { external_user[:email] }
   let(:registration) { build(:registration) }

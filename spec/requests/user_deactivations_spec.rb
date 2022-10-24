@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "User Activations", type: :request do
+RSpec.describe "User Activations" do
   let(:current_user_role) { :agency_super }
   let(:subject_user_role) { :agency }
   let(:active_user) { create(:user, role: subject_user_role) }

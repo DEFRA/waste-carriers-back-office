@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Sessions", type: :request do
+RSpec.describe "Sessions" do
   describe "GET /bo/users/sign_in" do
     context "when a user is not signed in" do
       it "returns a success response" do

@@ -3,7 +3,7 @@
 require "cancan/matchers"
 require "rails_helper"
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   describe "#active?" do
     context "when 'active' is true" do
       let(:user) { described_class.new(active: true) }

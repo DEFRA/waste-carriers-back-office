@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "WorldpayMissedPaymentNewRegistrations", type: :request do
+RSpec.describe "WorldpayMissedPaymentNewRegistrations" do
   let(:transient_registration) { create(:new_registration, :has_required_data) }
   let(:_id) { transient_registration._id }
 
