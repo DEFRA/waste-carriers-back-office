@@ -67,7 +67,7 @@ RSpec.describe Ability, type: :model do
   context "when the user role is cbd_user" do
     let(:role) { "cbd_user" }
 
-    include_examples "below agency_super examples"
+    include_examples "cbd user examples"
     include_examples "below agency_with_refund examples"
     include_examples "agency examples"
 
