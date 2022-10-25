@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: b122002713a6309e1288df197b44922f7aad8896
+  revision: c9afdaed1a5e11f2eb9d9a16fd0154cda4c553ab
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -25,7 +25,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (5.3.1)
+    aasm (5.4.0)
       concurrent-ruby (~> 1.0)
     actioncable (6.1.7)
       actionpack (= 6.1.7)
@@ -325,7 +325,7 @@ GEM
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.7.3)
+    phonelib (0.7.4)
     protocol-hpack (1.4.2)
     protocol-http (0.22.5)
     protocol-http1 (0.14.1)
