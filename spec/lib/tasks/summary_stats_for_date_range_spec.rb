@@ -7,7 +7,7 @@ RSpec.describe "summary_stats:stats_for_date_range", type: :rake do
   include_context "rake"
 
   original_stdout = $stdout
-  
+
   let(:start_date) { 90.days.ago.strftime("%Y-%m-%d") }
   let(:end_date) { Time.zone.today.strftime("%Y-%m-%d") }
 
