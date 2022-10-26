@@ -27,7 +27,7 @@ module Reports
     private
 
     def scope
-      ::WasteCarriersEngine::Registration.active_and_expired.lower_tier_or_unexpired_or_in_covid_grace_window
+      ::WasteCarriersEngine::Registration.active_and_expired.registrations_for_epr_export
     end
 
     def parse_object(registration)
