@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "NewRegistrations", type: :request do
+RSpec.describe "NewRegistrations" do
   let(:transient_registration) { create(:new_registration, workflow_state: "check_your_tier_form") }
 
   describe "/bo/new-registrations/:token" do

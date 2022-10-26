@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: b122002713a6309e1288df197b44922f7aad8896
+  revision: e3a4bcf87c2e60a375f8e1ba3c3894bc7dd00212
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -25,7 +25,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (5.3.1)
+    aasm (5.4.0)
       concurrent-ruby (~> 1.0)
     actioncable (6.1.7)
       actionpack (= 6.1.7)
@@ -325,7 +325,7 @@ GEM
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.7.3)
+    phonelib (0.7.4)
     protocol-hpack (1.4.2)
     protocol-http (0.22.5)
     protocol-http1 (0.14.1)
@@ -380,7 +380,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rbtree3 (0.7.0)
-    regexp_parser (2.5.0)
+    regexp_parser (2.6.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -407,23 +407,23 @@ GEM
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
     rspec-support (3.11.1)
-    rubocop (1.36.0)
+    rubocop (1.37.1)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.2.1)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.20.1, < 2.0)
+      rubocop-ast (>= 1.23.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.21.0)
+    rubocop-ast (1.23.0)
       parser (>= 3.1.1.0)
     rubocop-rails (2.16.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
-    rubocop-rspec (2.13.2)
+    rubocop-rspec (2.14.2)
       rubocop (~> 1.33)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)

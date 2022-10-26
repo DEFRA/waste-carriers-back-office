@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "RenewingRegistrations", type: :request do
+RSpec.describe "RenewingRegistrations" do
   let(:transient_registration) { create(:renewing_registration, workflow_state: "tier_check_form") }
 
   describe "/bo/renewing-registrations/:reg_identifier" do

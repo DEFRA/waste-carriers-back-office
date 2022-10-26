@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Pages", type: :request do
+RSpec.describe "Pages" do
   describe "/bo/pages/deactivated" do
     context "when an active user is logged in" do
       before do

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Cancels", type: :request do
+RSpec.describe "Cancels" do
   describe "GET /bo/resource/:_id/cancel" do
     context "when an agency with refund user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }

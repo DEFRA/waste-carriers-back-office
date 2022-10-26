@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "ConvictionsDashboards", type: :request do
+RSpec.describe "ConvictionsDashboards" do
   let!(:link_to_possible_matches_registration) do
     registration = create(:registration, :requires_conviction_check)
     # Make sure it's one of the 'oldest' registrations so would be top of the list

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "RegistrationTransfers", type: :request do
+RSpec.describe "RegistrationTransfers" do
   let(:registration) { create(:registration) }
   let(:other_external_user) { create(:external_user) }
 

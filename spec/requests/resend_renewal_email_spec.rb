@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "ResendRenewalEmail", type: :request do
+RSpec.describe "ResendRenewalEmail" do
   describe "GET /bo/resend-renewal-email/:reg_identifier" do
     before { sign_in(user) }
 

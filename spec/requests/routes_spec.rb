@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Root", type: :request do
+RSpec.describe "Root" do
   describe "GET /" do
     before do
       sign_in(create(:user))

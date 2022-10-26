@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Registrations API", type: :request do
+RSpec.describe "Registrations API" do
   let(:registration) { create(:registration, renew_token: "renew_token") }
 
   before do

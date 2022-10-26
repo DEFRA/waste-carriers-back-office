@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "RegistrationConvictionRejectionForms", type: :request do
+RSpec.describe "RegistrationConvictionRejectionForms" do
   let(:registration) { create(:registration, :has_flagged_conviction_check) }
 
   describe "GET /bo/registrations/:reg_identifier/convictions/reject" do

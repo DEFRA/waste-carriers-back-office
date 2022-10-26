@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "WriteOffForms", type: :request do
+RSpec.describe "WriteOffForms" do
   describe "GET /bo/resource/:_id/write-off/new" do
     context "when an agency user is signed in" do
       let(:user) { create(:user, :agency_with_refund) }

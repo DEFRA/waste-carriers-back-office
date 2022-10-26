@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "CardOrderExports", type: :request do
+RSpec.describe "CardOrderExports" do
 
   describe "GET /bo/card_order_exports" do
     before { create_list(:card_orders_export_log, 5) }

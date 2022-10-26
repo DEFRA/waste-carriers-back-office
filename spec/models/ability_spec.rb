@@ -3,7 +3,7 @@
 require "cancan/matchers"
 require "rails_helper"
 
-RSpec.describe Ability, type: :model do
+RSpec.describe Ability do
   subject(:ability) { described_class.new(user) }
 
   let(:role) { nil }

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe TransientPaymentsHelper, type: :helper do
+RSpec.describe TransientPaymentsHelper do
   let(:transient_registration) { build(:renewing_registration) }
 
   before do

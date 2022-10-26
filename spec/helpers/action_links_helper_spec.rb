@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe ActionLinksHelper, type: :helper do
+RSpec.describe ActionLinksHelper do
   describe "details_link_for" do
     context "when the resource is a new registration" do
       let(:resource) { build(:new_registration, token: "foo") }

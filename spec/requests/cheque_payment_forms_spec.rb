@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "ChequePaymentForms", type: :request do
+RSpec.describe "ChequePaymentForms" do
   let(:transient_registration) do
     create(:renewing_registration, :does_not_require_conviction_check)
   end

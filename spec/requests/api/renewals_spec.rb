@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Renewals API", type: :request do
+RSpec.describe "Renewals API" do
   let(:renewal) { create(:renewing_registration) }
 
   before do

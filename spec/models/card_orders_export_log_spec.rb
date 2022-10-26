@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe CardOrdersExportLog, type: :model do
+RSpec.describe CardOrdersExportLog do
   subject { described_class.new(start_time, end_time, export_filename, exported_at) }
 
   let(:export_filename) { Faker::File.file_name }

@@ -23,12 +23,10 @@ module Reports
 
         subject { described_class.new.run(start_time: start_time, end_time: end_time) }
 
-        # rubocop:disable RSpec/NoExpectationExample
         it "executes a put request to AWS" do
           subject
           assert_requested aws_stub
         end
-        # rubocop:enable RSpec/NoExpectationExample
 
         it "updates the status of the exported order_item_logs" do
           expect { subject }

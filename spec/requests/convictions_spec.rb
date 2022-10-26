@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Convictions", type: :request do
+RSpec.describe "Convictions" do
   let(:registration) { create(:registration, :requires_conviction_check) }
   let(:transient_registration) { create(:renewing_registration, :requires_conviction_check) }
 
