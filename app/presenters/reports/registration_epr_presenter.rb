@@ -18,6 +18,13 @@ module Reports
 
     def expires_on
       return if lower_tier?
+
+      # for renewing registrations, use the original registration's expiry date plus three years
+      if __getobj__.instance_of?(WasteCarriersEngine::RenewingRegistration)
+        original_expiry = registration.expires_on
+        return (original_expiry + 3.years).to_formatted_s(:year_month_day_hyphens)
+      end
+
       return if super.blank?
 
       return extended_covid_expiry_date(super) if expired_with_covid_extension?(super)

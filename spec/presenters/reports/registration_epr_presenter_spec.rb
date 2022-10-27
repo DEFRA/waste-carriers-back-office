@@ -69,6 +69,17 @@ module Reports
           end
         end
       end
+
+      context "when the registration is a renewing registration pending a conviction check" do
+        let(:renewing_registration) { create(:renewing_registration, :requires_conviction_check) }
+        let(:lower_tier) { false }
+
+        subject { described_class.new(renewing_registration, nil) }
+
+        it "returns three years from the original registration's expiry date" do
+          expect(subject.expires_on).to eq((renewing_registration.registration.expires_on + 3.years).strftime("%Y-%m-%d"))
+        end
+      end
     end
 
     describe "#company_no" do
