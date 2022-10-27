@@ -29,7 +29,7 @@ gem "jquery-rails"
 # Manage, create and open zip files https://github.com/rubyzip/rubyzip
 gem "rubyzip"
 
-gem "secure_headers", "~> 6.3"
+gem "secure_headers", "~> 6.5"
 
 # Design system form builder
 gem "govuk_design_system_formbuilder"
