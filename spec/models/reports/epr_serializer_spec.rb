@@ -20,7 +20,7 @@ module Reports
     end
 
     describe "#scope" do
-      context "when a registration is pending a conviction check" do
+      context "when a renewal is pending a conviction check" do
         let(:renewing_registration) do
           create(:renewing_registration, :requires_conviction_check,
                  finance_details: build(:finance_details, balance: balance))
