@@ -18,5 +18,55 @@ module Reports
         expect(result).not_to include(expired.reg_identifier)
       end
     end
+
+    describe "#scope" do
+      context "when a registration is pending a conviction check" do
+        let(:renewing_registration) do
+          create(:renewing_registration, :requires_conviction_check,
+                 finance_details: build(:finance_details, balance: balance))
+        end
+        let(:balance) { 0 }
+        let(:original_registration) { renewing_registration.registration }
+
+        before { renewing_registration }
+
+        context "when the original registration is eligible for inclusion in the EPR" do
+          it "includes the original registration" do
+            expect(subject.send(:scope)).to include(original_registration)
+          end
+
+          it "does not include the renewing registration" do
+            expect(subject.send(:scope)).not_to include(renewing_registration)
+          end
+        end
+
+        context "when the original registration is not eligible for inclusion in the EPR" do
+          before do
+            original_registration.expires_on = Date.yesterday
+            original_registration.save!
+          end
+
+          it "does not include the original registration" do
+            expect(subject.send(:scope)).not_to include(original_registration)
+          end
+
+          context "with no unpaid balance" do
+            let(:balance) { 0 }
+
+            it "includes the renewing registration" do
+              expect(subject.send(:scope)).to include(renewing_registration)
+            end
+          end
+
+          context "with an unpaid balance" do
+            let(:balance) { 1 }
+
+            it "does not include the renewing registration" do
+              expect(subject.send(:scope)).not_to include(renewing_registration)
+            end
+          end
+        end
+      end
+    end
   end
 end

@@ -27,7 +27,19 @@ module Reports
     private
 
     def scope
-      ::WasteCarriersEngine::Registration.active_and_expired.registrations_for_epr_export
+      registrations = ::WasteCarriersEngine::Registration
+                      .active_and_expired
+                      .lower_tier_or_unexpired_or_in_covid_grace_window
+
+      renewing_registrations = ::WasteCarriersEngine::RenewingRegistration
+                               .where("conviction_sign_offs.confirmed": "no")
+                               .select do |rr|
+                                 rr.pending_manual_conviction_check? &&
+                                   !rr.pending_payment? &&
+                                   registrations.exclude?(rr.registration)
+                               end
+
+      registrations + renewing_registrations
     end
 
     def parse_object(registration)
