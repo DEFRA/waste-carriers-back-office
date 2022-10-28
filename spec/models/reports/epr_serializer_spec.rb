@@ -65,6 +65,17 @@ module Reports
               expect(subject.send(:scope)).not_to include(renewing_registration)
             end
           end
+
+          context "when the renewal has been revoked" do
+            before do
+              renewing_registration.metaData.status = "REVOKED"
+              renewing_registration.save!
+            end
+
+            it "does not include the renewing registration" do
+              expect(subject.send(:scope)).not_to include(renewing_registration)
+            end
+          end
         end
       end
     end

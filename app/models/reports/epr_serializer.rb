@@ -36,6 +36,7 @@ module Reports
                                .select do |rr|
                                  rr.pending_manual_conviction_check? &&
                                    !rr.pending_payment? &&
+                                   rr.metaData.status != "REVOKED" &&
                                    registrations.exclude?(rr.registration)
                                end
 
