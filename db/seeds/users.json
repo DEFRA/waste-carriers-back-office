@@ -55,6 +55,10 @@
     {
       "email" : "cbd-user@wcr.gov.uk",
       "role" : "cbd_user"
+    },
+    {
+      "email" : "data-user@wcr.gov.uk",
+      "role" : "data_agent"
     }
   ]
 }
