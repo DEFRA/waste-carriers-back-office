@@ -4,6 +4,7 @@ en:
       title: "Manage back office users"
       heading: "Manage back office users"
       options:
+        export_users_csv: "Export user list to CSV"
         invite_link: "Invite a new user"
         show_all_users: "Show all users"
         show_enabled_users_only: "Show enabled users only"

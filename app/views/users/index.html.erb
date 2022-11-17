@@ -15,6 +15,10 @@
         <%= link_to t(".options.show_all_users"), all_users_path %>
       <% end %>
     </p>
+
+    <p class="govuk-body">
+      <%= link_to t(".options.export_users_csv"), all_users_path(format: :csv) %>
+    </p>
   </div>
 </div>
 

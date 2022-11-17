@@ -12,9 +12,16 @@ class UsersController < ApplicationController
   def all
     authorize! :manage_back_office_users, current_user
 
-    @users = User.all.order_by(email: :asc).page(params[:page]).per(100)
+    respond_to do |format|
+      format.html do
+        @users = User.all.order_by(email: :asc).page(params[:page]).per(100)
+        @show_all_users = true
+        render :index
+      end
 
-    @show_all_users = true
-    render :index
+      format.csv do
+        send_data Reports::UserExportSerializer.new.to_csv, filename: "users.csv"
+      end
+    end
   end
 end
