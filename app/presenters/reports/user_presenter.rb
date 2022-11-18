@@ -17,10 +17,6 @@ module Reports
       @user.invitation_accepted_at&.strftime(DATETIME_FORMAT)
     end
 
-    def email
-      @user.email
-    end
-
     def status
       return "Deactivated" if @user.deactivated?
       return "Invitation Sent" if @user.invitation_token.present?

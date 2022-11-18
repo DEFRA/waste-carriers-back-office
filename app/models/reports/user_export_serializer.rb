@@ -5,6 +5,7 @@ module Reports
     ATTRIBUTES = {
       email: "Email Address",
       status: "Status",
+      role: "Role",
       current_sign_in_at: "Last Logged In",
       invitation_accepted_at: "Invitation Accepted"
     }.freeze

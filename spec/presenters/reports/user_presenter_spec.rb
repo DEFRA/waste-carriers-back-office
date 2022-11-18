@@ -5,14 +5,6 @@ require "rails_helper"
 RSpec.describe Reports::UserPresenter do
   subject { described_class.new(user) }
 
-  describe "#email" do
-    let(:user) { build(:user) }
-
-    it "returns the email address" do
-      expect(subject.email).to eq(user.email)
-    end
-  end
-
   describe "#status" do
     context "with an active user" do
       let(:user) { build(:user, active: true) }

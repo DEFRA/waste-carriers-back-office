@@ -32,6 +32,7 @@ RSpec.describe Reports::UserExportSerializer do
       [
         "Email Address",
         "Status",
+        "Role",
         "Last Logged In",
         "Invitation Accepted"
       ]
@@ -57,8 +58,9 @@ RSpec.describe Reports::UserExportSerializer do
       CSV.parse(subject).detect { |row| row.first == active_user.email }.tap do |row|
         expect(row[0]).to eq(active_user.email)
         expect(row[1]).to eq("Active")
-        expect(row[2]).to eq("01/01/1970 00:00")
+        expect(row[2]).to eq("agency")
         expect(row[3]).to eq("01/01/1970 00:00")
+        expect(row[4]).to eq("01/01/1970 00:00")
       end
     end
 
@@ -68,8 +70,9 @@ RSpec.describe Reports::UserExportSerializer do
       CSV.parse(subject).detect { |row| row.first == inactive_user.email }.tap do |row|
         expect(row[0]).to eq(inactive_user.email)
         expect(row[1]).to eq("Deactivated")
-        expect(row[2]).to eq("")
+        expect(row[2]).to eq("agency")
         expect(row[3]).to eq("")
+        expect(row[4]).to eq("")
       end
     end
 
@@ -79,8 +82,9 @@ RSpec.describe Reports::UserExportSerializer do
       CSV.parse(subject).detect { |row| row.first == invited_user.email }.tap do |row|
         expect(row[0]).to eq(invited_user.email)
         expect(row[1]).to eq("Invitation Sent")
-        expect(row[2]).to eq("")
-        expect(row[3]).to eq("01/01/1970 00:00")
+        expect(row[2]).to eq("agency")
+        expect(row[3]).to eq("")
+        expect(row[4]).to eq("01/01/1970 00:00")
       end
     end
   end
