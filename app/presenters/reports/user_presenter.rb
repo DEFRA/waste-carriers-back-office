@@ -22,10 +22,10 @@ module Reports
     end
 
     def status
-      return "Active" if @user.active?
-      return "Invitation Sent" if @user.invitation_sent_at.present?
+      return "Deactivated" if @user.deactivated?
+      return "Invitation Sent" if @user.invitation_token.present?
 
-      "Deactivated"
+      "Active"
     end
   end
 end

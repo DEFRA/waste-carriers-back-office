@@ -15,8 +15,8 @@ RSpec.describe Reports::UserExportSerializer do
   let(:invited_user) do
     create(
       :user,
-      active: false,
-      invitation_sent_at: Time.at(0).utc,
+      active: true,
+      invitation_token: "foobar",
       invitation_accepted_at: Time.at(0).utc
     )
   end

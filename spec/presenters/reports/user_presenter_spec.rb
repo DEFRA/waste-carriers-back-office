@@ -24,7 +24,7 @@ RSpec.describe Reports::UserPresenter do
 
     context "with an invited user" do
       let(:user) do
-        build(:user, active: false, invitation_sent_at: Time.at(0).utc)
+        build(:user, active: true, invitation_token: "foobar")
       end
 
       it "returns 'Invitation Sent'" do
@@ -34,6 +34,14 @@ RSpec.describe Reports::UserPresenter do
 
     context "with a deactivated user" do
       let(:user) { build(:user, active: false) }
+
+      it "returns 'Deactivated'" do
+        expect(subject.status).to eq("Deactivated")
+      end
+    end
+
+    context "with a deactivated user with invitation token" do
+      let(:user) { build(:user, active: false, invitation_token: "foobar") }
 
       it "returns 'Deactivated'" do
         expect(subject.status).to eq("Deactivated")
