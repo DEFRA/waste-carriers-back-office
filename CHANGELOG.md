@@ -1,5 +1,85 @@
 # Changelog
 
+## [v1.19.3](https://github.com/defra/waste-carriers-back-office/tree/v1.19.3) (2022-11-21)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.19.2...v1.19.3)
+
+**Implemented enhancements:**
+
+- Use correct govpay API in application config [\#1486](https://github.com/DEFRA/waste-carriers-back-office/pull/1486) ([endofunky](https://github.com/endofunky))
+- Add user's role to user export CSV [\#1484](https://github.com/DEFRA/waste-carriers-back-office/pull/1484) ([endofunky](https://github.com/endofunky))
+- Add CSV export of user list [\#1482](https://github.com/DEFRA/waste-carriers-back-office/pull/1482) ([endofunky](https://github.com/endofunky))
+- EPR pending convictions check [\#1472](https://github.com/DEFRA/waste-carriers-back-office/pull/1472) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- EPR pending convictions check [\#1470](https://github.com/DEFRA/waste-carriers-back-office/pull/1470) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Summary stats [\#1461](https://github.com/DEFRA/waste-carriers-back-office/pull/1461) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Track partially assisted digital [\#1452](https://github.com/DEFRA/waste-carriers-back-office/pull/1452) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Fixed bugs:**
+
+- Show correct user status in user export CSV [\#1483](https://github.com/DEFRA/waste-carriers-back-office/pull/1483) ([endofunky](https://github.com/endofunky))
+- Exclude revoked renewals rom EPR export [\#1473](https://github.com/DEFRA/waste-carriers-back-office/pull/1473) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Fix partial AD tracking [\#1455](https://github.com/DEFRA/waste-carriers-back-office/pull/1455) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Fix address lines [\#1450](https://github.com/DEFRA/waste-carriers-back-office/pull/1450) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Support HTTP patch requests [\#1449](https://github.com/DEFRA/waste-carriers-back-office/pull/1449) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Safe un-escape HTML [\#1447](https://github.com/DEFRA/waste-carriers-back-office/pull/1447) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Fix startup [\#1446](https://github.com/DEFRA/waste-carriers-back-office/pull/1446) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Fix web startup [\#1445](https://github.com/DEFRA/waste-carriers-back-office/pull/1445) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Use main engine branch [\#1442](https://github.com/DEFRA/waste-carriers-back-office/pull/1442) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Merged pull requests:**
+
+- Add data agent user seed update [\#1478](https://github.com/DEFRA/waste-carriers-back-office/pull/1478) ([timstone](https://github.com/timstone))
+- Bump faker from 2.23.0 to 3.0.0 [\#1475](https://github.com/DEFRA/waste-carriers-back-office/pull/1475) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump net-smtp from 0.3.2 to 0.3.3 [\#1474](https://github.com/DEFRA/waste-carriers-back-office/pull/1474) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-rails from 2.17.1 to 2.17.2 [\#1471](https://github.com/DEFRA/waste-carriers-back-office/pull/1471) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `b122002` to `c9afdae` [\#1468](https://github.com/DEFRA/waste-carriers-back-office/pull/1468) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-rails from 2.17.0 to 2.17.1 [\#1467](https://github.com/DEFRA/waste-carriers-back-office/pull/1467) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump secure\_headers from 6.4.0 to 6.5.0 [\#1466](https://github.com/DEFRA/waste-carriers-back-office/pull/1466) ([dependabot[bot]](https://github.com/apps/dependabot))
+- gem and rubocop tweaks [\#1465](https://github.com/DEFRA/waste-carriers-back-office/pull/1465) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Bump nokogiri from 1.13.8 to 1.13.9 [\#1460](https://github.com/DEFRA/waste-carriers-back-office/pull/1460) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 6.0.0 to 6.0.1 [\#1459](https://github.com/DEFRA/waste-carriers-back-office/pull/1459) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump simplecov from 0.17.1 to 0.21.2 [\#1458](https://github.com/DEFRA/waste-carriers-back-office/pull/1458) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 5.1.2 to 6.0.0 [\#1454](https://github.com/DEFRA/waste-carriers-back-office/pull/1454) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Check metaData.route DIGITAL as part of partial AD logic [\#1453](https://github.com/DEFRA/waste-carriers-back-office/pull/1453) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Bump waste\_carriers\_engine from `a157091` to `bb4d6b3` [\#1451](https://github.com/DEFRA/waste-carriers-back-office/pull/1451) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `2db75c3` to `be59931` [\#1448](https://github.com/DEFRA/waste-carriers-back-office/pull/1448) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Upgrade to Ruby 3 [\#1444](https://github.com/DEFRA/waste-carriers-back-office/pull/1444) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Merge govpay branch into main [\#1441](https://github.com/DEFRA/waste-carriers-back-office/pull/1441) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Bump spring from 4.0.0 to 4.1.0 [\#1440](https://github.com/DEFRA/waste-carriers-back-office/pull/1440) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.19.2](https://github.com/defra/waste-carriers-back-office/tree/v1.19.2) (2022-10-24)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.19.1...v1.19.2)
+
+## [v1.19.1](https://github.com/defra/waste-carriers-back-office/tree/v1.19.1) (2022-09-15)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.18.1...v1.19.1)
+
+**Implemented enhancements:**
+
+- Add renewal stats to the monthly finance report [\#1436](https://github.com/DEFRA/waste-carriers-back-office/pull/1436) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Adding in telephone search specs [\#1430](https://github.com/DEFRA/waste-carriers-back-office/pull/1430) ([Beckyrose200](https://github.com/Beckyrose200))
+- Automate finance reports [\#1421](https://github.com/DEFRA/waste-carriers-back-office/pull/1421) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Fixed bugs:**
+
+- Finance reports renewals stats [\#1437](https://github.com/DEFRA/waste-carriers-back-office/pull/1437) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Fix daily finance report [\#1434](https://github.com/DEFRA/waste-carriers-back-office/pull/1434) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `4ea4f28` to `ff4aba8` [\#1438](https://github.com/DEFRA/waste-carriers-back-office/pull/1438) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Fix daily finance reports [\#1435](https://github.com/DEFRA/waste-carriers-back-office/pull/1435) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Bump rails from 6.1.6.1 to 6.1.7 [\#1433](https://github.com/DEFRA/waste-carriers-back-office/pull/1433) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `a399b0a` to `4ea4f28` [\#1432](https://github.com/DEFRA/waste-carriers-back-office/pull/1432) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `83e94ba` to `a399b0a` [\#1431](https://github.com/DEFRA/waste-carriers-back-office/pull/1431) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump faker from 2.22.0 to 2.23.0 [\#1429](https://github.com/DEFRA/waste-carriers-back-office/pull/1429) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `c134c59` to `83e94ba` [\#1428](https://github.com/DEFRA/waste-carriers-back-office/pull/1428) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `a755f7a` to `c134c59` [\#1427](https://github.com/DEFRA/waste-carriers-back-office/pull/1427) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `94c0f1b` to `a755f7a` [\#1426](https://github.com/DEFRA/waste-carriers-back-office/pull/1426) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Add cbd\_user to seed data [\#1425](https://github.com/DEFRA/waste-carriers-back-office/pull/1425) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Version 1.18.1 [\#1424](https://github.com/DEFRA/waste-carriers-back-office/pull/1424) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
 ## [v1.18.1](https://github.com/defra/waste-carriers-back-office/tree/v1.18.1) (2022-08-30)
 
 [Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.18.0...v1.18.1)
