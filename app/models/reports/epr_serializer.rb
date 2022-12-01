@@ -34,13 +34,12 @@ module Reports
       renewing_registrations = ::WasteCarriersEngine::RenewingRegistration
                                .where("conviction_sign_offs.confirmed": "no")
                                .select do |rr|
-                                 rr.pending_manual_conviction_check? &&
-                                   !rr.pending_payment? &&
-                                   rr.metaData.status != "REVOKED" &&
-                                   registrations.exclude?(rr.registration)
-                               end
+        rr.pending_manual_conviction_check? &&
+          !rr.pending_payment? &&
+          rr.metaData.status != "REVOKED"
+      end
 
-      registrations + renewing_registrations
+      (registrations + renewing_registrations).uniq(&:reg_identifier)
     end
 
     def parse_object(registration)
