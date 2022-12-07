@@ -24,3 +24,10 @@ input.button-link {
   padding: 0;
   text-decoration: underline;
 }
+
+.inline-checkboxes {
+  .govuk-checkboxes__item {
+    padding-right: 1em;
+    clear: none;
+  }
+}

@@ -8,9 +8,12 @@ en:
         new_registration: Create new registration
       search:
         label: Search for a registration
-        hint: Search using registration number, business or contact last name, postcode or telephone number. Use the checkbox to do a full name search across all names.
+        hint: Search using registration number, business or contact last name, postcode or telephone number. Use the checkboxes to do a full name search or contact and account email search.
         fullname_search_label: Search full name
+        email_search_label: Email address
         submit: Search
+        search_type_error: You cannot search by full name and by email address at the same time. Only use one of the search checkboxes at a time.
+        invalid_email_error: Enter a valid email address
       results:
         caption:
           one: Found 1 registration
