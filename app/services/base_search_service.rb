@@ -33,7 +33,7 @@ class BaseSearchService < ::WasteCarriersEngine::BaseService
   end
 
   # Implement this in the subclasses
-  def search(model)
+  def search(_model)
     raise NotImplementedError
   end
 end
