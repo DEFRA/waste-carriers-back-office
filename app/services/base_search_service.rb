@@ -31,9 +31,4 @@ class BaseSearchService < ::WasteCarriersEngine::BaseService
     search(WasteCarriersEngine::Registration).uniq(&:reg_identifier) +
       search(WasteCarriersEngine::TransientRegistration).uniq { |reg| "#{reg.reg_identifier}_#{reg.class}" }
   end
-
-  # Implement this in the subclasses
-  def search(_model)
-    raise NotImplementedError
-  end
 end
