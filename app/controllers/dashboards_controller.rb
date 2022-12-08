@@ -8,7 +8,7 @@ class DashboardsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @term = params[:term].strip
+    @term = params[:term].strip if params[:term].present?
     @search_type = nil
     @result_count = 0
     @results = []
