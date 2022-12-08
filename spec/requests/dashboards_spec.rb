@@ -33,7 +33,13 @@ RSpec.describe "Dashboards" do
         expect(response).to have_http_status(:ok)
       end
 
-      context "when a search term is included" do
+      context "when no search term is provided" do
+        it "does not raise an error" do
+          expect { get "/bo", params: { term: nil } }.not_to raise_error
+        end
+      end
+
+      context "when a search term is provided" do
 
         context "when there are no matches" do
           it "says there are no results" do
@@ -100,6 +106,16 @@ RSpec.describe "Dashboards" do
 
           context "with a valid email search term matching contact_email" do
             let(:search_term) { matching_registration.contact_email }
+
+            it "includes links to the matched registrations" do
+              subject
+
+              expect(response.body).to include(registration_path(matching_registration.reg_identifier))
+            end
+          end
+
+          context "with a valid email search term with whitespace otherwise matching contact_email" do
+            let(:search_term) { " #{matching_registration.contact_email}   " }
 
             it "includes links to the matched registrations" do
               subject
