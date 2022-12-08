@@ -107,6 +107,16 @@ RSpec.describe "Dashboards" do
               expect(response.body).to include(registration_path(matching_registration.reg_identifier))
             end
           end
+
+          context "with a valid email search term with whitespace otherwise matching contact_email" do
+            let(:search_term) { " #{matching_registration.contact_email}   " }
+
+            it "includes links to the matched registrations" do
+              subject
+
+              expect(response.body).to include(registration_path(matching_registration.reg_identifier))
+            end
+          end
         end
       end
     end
