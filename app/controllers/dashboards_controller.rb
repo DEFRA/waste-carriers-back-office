@@ -14,7 +14,7 @@ class DashboardsController < ApplicationController
     @results = []
 
     if params[:search_fullname] == "1" && params[:search_email] == "1"
-      flash_error(I18n.t(".dashboards.index.search.search_type_error"), nil)
+      flash.now[:error] = I18n.t(".dashboards.index.search.search_type_error")
     else
       @search_type = search_type(params)
     end
@@ -29,7 +29,7 @@ class DashboardsController < ApplicationController
       :fullname
     elsif params[:search_email] == "1"
       if ValidatesEmailFormatOf.validate_email_format(@term)
-        flash_error(I18n.t(".dashboards.index.search.invalid_email_error"), nil)
+        flash.now[:error] = I18n.t(".dashboards.index.search.invalid_email_error")
         nil
       else
         :email
