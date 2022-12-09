@@ -25,65 +25,54 @@ RSpec.describe SearchEmailService do
     matching_registration.save!
   end
 
-  shared_examples "no matches" do
-    it "returns no results" do
-      expect(service).to eq(count: 0, results: [])
-    end
-  end
-
   shared_examples "matching registration and renewal" do
     it "matches the expected registration and renewal only" do
       expect(service[:results]).to contain_exactly(matching_renewal, matching_registration)
     end
   end
 
-  context "when there is no search term" do
-    it_behaves_like "no matches"
+  context "without an expected match" do
+    let(:term) { Faker::Internet.unique.email }
+
+    it "returns no results" do
+      expect(service).to eq(count: 0, results: [])
+    end
   end
 
-  context "when there is a search term" do
+  context "with an expected contact_email match" do
+    let(:term) { matching_renewal.contact_email }
 
-    context "without an expected match" do
-      let(:term) { Faker::Internet.unique.email }
+    it_behaves_like "matching registration and renewal"
+  end
 
-      it_behaves_like "no matches"
+  context "with an expected account_email match" do
+    let(:term) { matching_renewal.account_email }
+
+    it_behaves_like "matching registration and renewal"
+  end
+
+  context "when the term has a case-insensitive match" do
+    let(:term) { matching_renewal.contact_email.upcase }
+
+    it_behaves_like "matching registration and renewal"
+  end
+
+  context "when the term has excess whitespace" do
+    let(:term) { " #{matching_renewal.contact_email} " }
+
+    it_behaves_like "matching registration and renewal"
+  end
+
+  context "when there is a match on both the contact_email and account_email" do
+    let(:term) { matching_renewal.contact_email }
+
+    before do
+      matching_registration.account_email = matching_renewal.contact_email
+      matching_registration.save!
     end
 
-    context "with an expected contact_email match" do
-      let(:term) { matching_renewal.contact_email }
-
-      it_behaves_like "matching registration and renewal"
-    end
-
-    context "with an expected account_email match" do
-      let(:term) { matching_renewal.account_email }
-
-      it_behaves_like "matching registration and renewal"
-    end
-
-    context "when the term has a case-insensitive match" do
-      let(:term) { matching_renewal.contact_email.upcase }
-
-      it_behaves_like "matching registration and renewal"
-    end
-
-    context "when the term has excess whitespace" do
-      let(:term) { " #{matching_renewal.contact_email} " }
-
-      it_behaves_like "matching registration and renewal"
-    end
-
-    context "when there is a match on both the contact_email and account_email" do
-      let(:term) { matching_renewal.contact_email }
-
-      before do
-        matching_registration.account_email = matching_renewal.contact_email
-        matching_registration.save!
-      end
-
-      it "returns each matching registration and renewal once only" do
-        expect(service[:results]).to contain_exactly(matching_renewal, matching_registration)
-      end
+    it "returns each matching registration and renewal once only" do
+      expect(service[:results]).to contain_exactly(matching_renewal, matching_registration)
     end
   end
 end

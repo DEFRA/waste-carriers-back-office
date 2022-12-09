@@ -26,9 +26,8 @@ class BaseSearchService < ::WasteCarriersEngine::BaseService
   end
 
   def matching_resources
-    # De-duplicate Registration results by reg_identifier
-    # and TransientRegistration results by reg_identifier and classname.
+    # De-duplicate results for each class by reg_identifier
     search(WasteCarriersEngine::Registration).uniq(&:reg_identifier) +
-      search(WasteCarriersEngine::TransientRegistration).uniq { |reg| "#{reg.reg_identifier}_#{reg.class}" }
+      search(WasteCarriersEngine::RenewingRegistration).uniq(&:reg_identifier)
   end
 end

@@ -12,181 +12,158 @@ RSpec.describe SearchService do
 
   let(:non_matching_renewal) { create(:renewing_registration) }
   let(:non_matching_registration) { WasteCarriersEngine::Registration.where(reg_identifier: non_matching_renewal.reg_identifier).first }
+  let(:matching_renewal) { create(:renewing_registration) }
+  let(:matching_registration) { WasteCarriersEngine::Registration.where(reg_identifier: matching_renewal.reg_identifier).first }
 
-  context "when there is no search term" do
-    it "returns no results" do
-      expect(service).to eq(count: 0, results: [])
+  context "when there is a match on a reg_identifier" do
+    let(:term) { matching_renewal.reg_identifier }
+
+    it "returns the correct count" do
+      expect(service[:count]).to eq(2)
+    end
+
+    it "displays the matching transient_registration" do
+      expect(service[:results]).to include(matching_renewal)
+    end
+
+    it "displays the matching registration" do
+      expect(service[:results]).to include(matching_registration)
+    end
+
+    it "does not display a non-matching transient_registration" do
+      expect(service[:results]).not_to include(non_matching_renewal)
+    end
+
+    it "does not display a non-matching registration" do
+      expect(service[:results]).not_to include(non_matching_registration)
     end
   end
 
-  context "when there is a search term" do
-    let(:matching_renewal) do
-      create(:renewing_registration)
-    end
-    let(:matching_registration) { WasteCarriersEngine::Registration.where(reg_identifier: matching_renewal.reg_identifier).first }
+  context "when there is a match on a company_name" do
+    let(:term) { matching_renewal.company_name }
 
-    context "when there are results in different collections" do
-      let(:term) { "search for me" }
-
-      it "returns aggregated results from the different collections" do
-        matching_renewal = create(:renewing_registration, company_name: term)
-        matching_new_registration = create(:new_registration, company_name: term)
-
-        expect(service[:results]).to include(matching_renewal)
-        expect(service[:results]).to include(matching_new_registration)
-      end
+    it "returns the correct count" do
+      expect(service[:count]).to eq(2)
     end
 
-    context "when there is a match on a reg_identifier" do
-      let(:term) { matching_renewal.reg_identifier }
-
-      it "returns the correct count" do
-        expect(service[:count]).to eq(2)
-      end
-
-      it "displays the matching transient_registration" do
-        expect(service[:results]).to include(matching_renewal)
-      end
-
-      it "displays the matching registration" do
-        expect(service[:results]).to include(matching_registration)
-      end
-
-      it "does not display a non-matching transient_registration" do
-        expect(service[:results]).not_to include(non_matching_renewal)
-      end
-
-      it "does not display a non-matching registration" do
-        expect(service[:results]).not_to include(non_matching_registration)
-      end
+    it "displays the matching transient_registration" do
+      expect(service[:results]).to include(matching_renewal)
     end
 
-    context "when there is a match on a company_name" do
-      let(:term) { matching_renewal.company_name }
+    it "displays the matching registration" do
+      expect(service[:results]).to include(matching_registration)
+    end
+  end
 
-      it "returns the correct count" do
-        expect(service[:count]).to eq(2)
-      end
+  context "when there is a match on a last_name" do
+    let(:term) { matching_renewal.last_name }
 
-      it "displays the matching transient_registration" do
-        expect(service[:results]).to include(matching_renewal)
-      end
-
-      it "displays the matching registration" do
-        expect(service[:results]).to include(matching_registration)
-      end
+    it "returns the correct count" do
+      expect(service[:count]).to eq(2)
     end
 
-    context "when there is a match on a last_name" do
-      let(:term) { matching_renewal.last_name }
-
-      it "returns the correct count" do
-        expect(service[:count]).to eq(2)
-      end
-
-      it "displays the matching transient_registration" do
-        expect(service[:results]).to include(matching_renewal)
-      end
-
-      it "displays the matching registration" do
-        expect(service[:results]).to include(matching_registration)
-      end
+    it "displays the matching transient_registration" do
+      expect(service[:results]).to include(matching_renewal)
     end
 
-    context "when there is a match on a postcode" do
-      let(:term) { matching_renewal.addresses.first.postcode }
+    it "displays the matching registration" do
+      expect(service[:results]).to include(matching_registration)
+    end
+  end
 
-      it "returns the correct count" do
-        expect(service[:count]).to eq(2)
-      end
+  context "when there is a match on a postcode" do
+    let(:term) { matching_renewal.addresses.first.postcode }
 
-      it "displays the matching transient_registration" do
-        expect(service[:results]).to include(matching_renewal)
-      end
-
-      it "displays the matching registration" do
-        expect(service[:results]).to include(matching_registration)
-      end
+    it "returns the correct count" do
+      expect(service[:count]).to eq(2)
     end
 
-    context "when the term has a case-insensitive match" do
-      let(:term) { matching_renewal.reg_identifier.downcase }
-
-      it "returns the correct count" do
-        expect(service[:count]).to eq(2)
-      end
-
-      it "displays the matching transient_registration" do
-        expect(service[:results]).to include(matching_renewal)
-      end
-
-      it "displays the matching registration" do
-        expect(service[:results]).to include(matching_registration)
-      end
+    it "displays the matching transient_registration" do
+      expect(service[:results]).to include(matching_renewal)
     end
 
-    context "when there is a partial match on the reg_identifier" do
-      let(:term) { matching_renewal.reg_identifier.chop }
+    it "displays the matching registration" do
+      expect(service[:results]).to include(matching_registration)
+    end
+  end
 
-      it "returns the correct count" do
-        expect(service[:count]).to eq(0)
-      end
+  context "when the term has a case-insensitive match" do
+    let(:term) { matching_renewal.reg_identifier.downcase }
 
-      it "does not include the partially-matching transient_registration" do
-        expect(service[:results]).not_to include(matching_renewal)
-      end
-
-      it "does not include the partially-matching registration" do
-        expect(service[:results]).not_to include(matching_registration)
-      end
+    it "returns the correct count" do
+      expect(service[:count]).to eq(2)
     end
 
-    context "when there is a partial match on the last_name" do
-      let(:term) { matching_renewal.last_name.chop }
-
-      it "returns the correct count" do
-        expect(service[:count]).to eq(2)
-      end
-
-      it "includes the partially-matching transient_registration" do
-        expect(service[:results]).to include(matching_renewal)
-      end
-
-      it "includes the partially-matching registration" do
-        expect(service[:results]).to include(matching_registration)
-      end
+    it "displays the matching transient_registration" do
+      expect(service[:results]).to include(matching_renewal)
     end
 
-    context "when the term has excess whitespace" do
-      let(:term) { " #{matching_registration.reg_identifier} " }
+    it "displays the matching registration" do
+      expect(service[:results]).to include(matching_registration)
+    end
+  end
 
-      it "matches the term without whitespace" do
-        expect(service[:results]).to include(matching_registration)
-      end
+  context "when there is a partial match on the reg_identifier" do
+    let(:term) { matching_renewal.reg_identifier.chop }
+
+    it "returns the correct count" do
+      expect(service[:count]).to eq(0)
     end
 
-    context "when there is a match on telephone number" do
-      let(:term) { matching_renewal.phone_number }
+    it "does not include the partially-matching transient_registration" do
+      expect(service[:results]).not_to include(matching_renewal)
+    end
 
-      it "returns the correct count" do
-        expect(service[:count]).to eq(2)
-      end
+    it "does not include the partially-matching registration" do
+      expect(service[:results]).not_to include(matching_registration)
+    end
+  end
 
-      it "displays the matching transient_registration" do
-        expect(service[:results]).to include(matching_renewal)
-      end
+  context "when there is a partial match on the last_name" do
+    let(:term) { matching_renewal.last_name.chop }
 
-      it "displays the matching registration" do
-        expect(service[:results]).to include(matching_registration)
-      end
+    it "returns the correct count" do
+      expect(service[:count]).to eq(2)
+    end
 
-      it "does not display a non-matching transient_registration" do
-        expect(service[:results]).not_to include(non_matching_renewal)
-      end
+    it "includes the partially-matching transient_registration" do
+      expect(service[:results]).to include(matching_renewal)
+    end
 
-      it "does not display a non-matching registration" do
-        expect(service[:results]).not_to include(non_matching_registration)
-      end
+    it "includes the partially-matching registration" do
+      expect(service[:results]).to include(matching_registration)
+    end
+  end
+
+  context "when the term has excess whitespace" do
+    let(:term) { " #{matching_registration.reg_identifier} " }
+
+    it "matches the term without whitespace" do
+      expect(service[:results]).to include(matching_registration)
+    end
+  end
+
+  context "when there is a match on telephone number" do
+    let(:term) { matching_renewal.phone_number }
+
+    it "returns the correct count" do
+      expect(service[:count]).to eq(2)
+    end
+
+    it "displays the matching transient_registration" do
+      expect(service[:results]).to include(matching_renewal)
+    end
+
+    it "displays the matching registration" do
+      expect(service[:results]).to include(matching_registration)
+    end
+
+    it "does not display a non-matching transient_registration" do
+      expect(service[:results]).not_to include(non_matching_renewal)
+    end
+
+    it "does not display a non-matching registration" do
+      expect(service[:results]).not_to include(non_matching_registration)
     end
   end
 end
