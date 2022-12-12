@@ -28,6 +28,7 @@ class BaseSearchService < ::WasteCarriersEngine::BaseService
   def matching_resources
     # De-duplicate results for each class by reg_identifier
     search(WasteCarriersEngine::Registration).uniq(&:reg_identifier) +
-      search(WasteCarriersEngine::RenewingRegistration).uniq(&:reg_identifier)
+      search(WasteCarriersEngine::RenewingRegistration).uniq(&:reg_identifier) +
+      search(WasteCarriersEngine::NewRegistration).uniq(&:reg_identifier)
   end
 end

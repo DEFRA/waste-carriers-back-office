@@ -4,6 +4,14 @@ class SearchFullnameService < BaseSearchService
 
   private
 
+  # This service searches directly on the collections, not via the models, so we need
+  # to override the base class to ensure only one search on TransientRegistrations.
+  def matching_resources
+    # De-duplicate results for each class by reg_identifier
+    search(WasteCarriersEngine::Registration).uniq(&:reg_identifier) +
+      search(WasteCarriersEngine::RenewingRegistration).uniq(&:reg_identifier)
+  end
+
   def search(model)
     search_registered_name(model) + search_key_people(model)
   end

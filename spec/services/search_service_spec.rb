@@ -14,6 +14,7 @@ RSpec.describe SearchService do
   let(:non_matching_registration) { WasteCarriersEngine::Registration.where(reg_identifier: non_matching_renewal.reg_identifier).first }
   let(:matching_renewal) { create(:renewing_registration) }
   let(:matching_registration) { WasteCarriersEngine::Registration.where(reg_identifier: matching_renewal.reg_identifier).first }
+  let!(:in_progress_registration) { create(:new_registration, company_name: matching_renewal.company_name) }
 
   context "when there is a match on a reg_identifier" do
     let(:term) { matching_renewal.reg_identifier }
@@ -43,7 +44,7 @@ RSpec.describe SearchService do
     let(:term) { matching_renewal.company_name }
 
     it "returns the correct count" do
-      expect(service[:count]).to eq(2)
+      expect(service[:count]).to eq(3)
     end
 
     it "displays the matching transient_registration" do
@@ -52,6 +53,10 @@ RSpec.describe SearchService do
 
     it "displays the matching registration" do
       expect(service[:results]).to include(matching_registration)
+    end
+
+    it "displays the matching in-progress registration" do
+      expect(service[:results]).to include(in_progress_registration)
     end
   end
 
