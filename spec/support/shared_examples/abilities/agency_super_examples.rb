@@ -6,7 +6,7 @@ RSpec.shared_examples "agency_super examples" do
   end
 
   it "is able to modify agency users" do
-    user = build(:user, :agency)
+    user = build(:user, role: :agency)
     is_expected.to be_able_to(:modify_user, user)
   end
 end

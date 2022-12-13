@@ -102,7 +102,7 @@ RSpec.describe "ConvictionsDashboards" do
 
   describe "/bo/convictions" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :agency_with_refund) }
+      let(:user) { create(:user, role: :agency_with_refund) }
 
       before do
         sign_in(user)
@@ -125,7 +125,7 @@ RSpec.describe "ConvictionsDashboards" do
     end
 
     context "when a non-agency user is signed in" do
-      let(:user) { create(:user, :finance) }
+      let(:user) { create(:user, role: :finance) }
 
       before do
         sign_in(user)
@@ -149,7 +149,7 @@ RSpec.describe "ConvictionsDashboards" do
 
   describe "/bo/convictions/in-progress" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :agency_with_refund) }
+      let(:user) { create(:user, role: :agency_with_refund) }
 
       before do
         sign_in(user)
@@ -172,7 +172,7 @@ RSpec.describe "ConvictionsDashboards" do
     end
 
     context "when a non-agency user is signed in" do
-      let(:user) { create(:user, :finance) }
+      let(:user) { create(:user, role: :finance) }
 
       before do
         sign_in(user)
@@ -196,7 +196,7 @@ RSpec.describe "ConvictionsDashboards" do
 
   describe "/bo/convictions/approved" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :agency_with_refund) }
+      let(:user) { create(:user, role: :agency_with_refund) }
 
       before do
         sign_in(user)
@@ -219,7 +219,7 @@ RSpec.describe "ConvictionsDashboards" do
     end
 
     context "when a non-agency user is signed in" do
-      let(:user) { create(:user, :finance) }
+      let(:user) { create(:user, role: :finance) }
 
       before do
         sign_in(user)
@@ -243,7 +243,7 @@ RSpec.describe "ConvictionsDashboards" do
 
   describe "/bo/convictions/rejected" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :agency_with_refund) }
+      let(:user) { create(:user, role: :agency_with_refund) }
 
       before do
         sign_in(user)
@@ -265,7 +265,7 @@ RSpec.describe "ConvictionsDashboards" do
     end
 
     context "when a non-agency user is signed in" do
-      let(:user) { create(:user, :finance) }
+      let(:user) { create(:user, role: :finance) }
 
       before do
         sign_in(user)

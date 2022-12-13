@@ -11,7 +11,7 @@ RSpec.describe "Renewals API" do
 
   describe "GET /bo/api/renewals/:reg_identifier" do
     context "when a user is signed in" do
-      let(:user) { create(:user, :finance) }
+      let(:user) { create(:user, role: :finance) }
 
       before do
         sign_in(user)

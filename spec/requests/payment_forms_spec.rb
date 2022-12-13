@@ -7,7 +7,7 @@ RSpec.describe "PaymentForms" do
 
   describe "GET /bo/resources/:_id/payments" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :agency_super) }
+      let(:user) { create(:user, role: :agency_super) }
 
       before do
         sign_in(user)
@@ -35,7 +35,7 @@ RSpec.describe "PaymentForms" do
 
   describe "POST /bo/resources/:_id/payments" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :agency_super) }
+      let(:user) { create(:user, role: :agency_super) }
       let(:params) do
         {
           payment_type: "transfer"

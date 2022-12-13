@@ -12,7 +12,7 @@ RSpec.describe "DownloadFinanceReports" do
   describe "GET /bo/download_finance_reports" do
 
     context "when a cbd_user is signed in" do
-      let(:user) { create(:user, :cbd_user) }
+      let(:user) { create(:user, role: :cbd_user) }
       let(:report_filename) { "report_file_2022-08-25_01-23-45.zip" }
       let(:folder_prefix) { "SOME_FOLDER" }
       let(:download_link) { "https://some_bucket.amazonaws.com/#{folder_prefix}/#{report_filename}" }
@@ -42,7 +42,7 @@ RSpec.describe "DownloadFinanceReports" do
     end
 
     context "when a non cbd_user is signed in" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, role: :agency) }
 
       before do
         sign_in(user)

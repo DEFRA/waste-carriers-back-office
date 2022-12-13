@@ -108,11 +108,7 @@ class Ability
     permissions_for_agency_user_with_refund
 
     can :manage_back_office_users, :all
-    # rubocop:disable Style/SymbolProc
-    can :modify_user, User do |user|
-      user.in_agency_group?
-    end
-    # rubocop:enable Style/SymbolProc
+    can :modify_user, User, &:in_agency_group?
   end
 
   def permissions_for_finance_super_user
@@ -121,12 +117,7 @@ class Ability
     can :manage_back_office_users, User
     can :charge_adjust, :all
     can :run_finance_reports, :all
-
-    # rubocop:disable Style/SymbolProc
-    can :modify_user, User do |user|
-      user.in_finance_group?
-    end
-    # rubocop:enable Style/SymbolProc
+    can :modify_user, User, &:in_finance_group?
   end
 
   def permissions_for_developer_user
@@ -141,8 +132,13 @@ class Ability
   def permissions_for_cbd_user
     permissions_for_agency_user
 
+    can :manage_back_office_users, User
     can :import_conviction_data, :all
     can :run_finance_reports, :all
+
+    can :modify_user, User do |user|
+      data_agent?(user)
+    end
   end
 
   # Checks to see if role matches

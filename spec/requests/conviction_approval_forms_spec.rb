@@ -10,7 +10,7 @@ RSpec.describe "ConvictionApprovalForms" do
 
   describe "GET /bo/transient-registrations/:reg_identifier/convictions/approve" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :agency_with_refund) }
+      let(:user) { create(:user, role: :agency_with_refund) }
 
       before do
         sign_in(user)
@@ -26,7 +26,7 @@ RSpec.describe "ConvictionApprovalForms" do
     end
 
     context "when a non-agency user is signed in" do
-      let(:user) { create(:user, :finance) }
+      let(:user) { create(:user, role: :finance) }
 
       before do
         sign_in(user)
@@ -42,7 +42,7 @@ RSpec.describe "ConvictionApprovalForms" do
 
   describe "POST /bo/transient-registrations/:reg_identifier/convictions/approve" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :agency_with_refund) }
+      let(:user) { create(:user, role: :agency_with_refund) }
       let(:params) do
         {
           revoked_reason: "foo"
@@ -132,7 +132,7 @@ RSpec.describe "ConvictionApprovalForms" do
     end
 
     context "when a non-agency user is signed in" do
-      let(:user) { create(:user, :finance) }
+      let(:user) { create(:user, role: :finance) }
       let(:params) do
         {
           revoked_reason: "foo"

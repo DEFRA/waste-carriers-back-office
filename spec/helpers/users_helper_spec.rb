@@ -37,7 +37,10 @@ RSpec.describe UsersHelper do
              in_finance_group?: in_finance_group)
     end
 
+    before { allow(current_user).to receive(:role).and_return(role) }
+
     context "when the current user is in the agency user group" do
+      let(:role) { "agency" }
       let(:in_agency_group) { true }
 
       it "returns User::AGENCY_ROLES" do
@@ -48,12 +51,21 @@ RSpec.describe UsersHelper do
     end
 
     context "when the current user is in the finance user group" do
+      let(:role) { "finance" }
       let(:in_finance_group) { true }
 
       it "returns User::FINANCE_ROLES" do
         roles = %w[list of roles]
         stub_const("User::FINANCE_ROLES", roles)
         expect(helper.current_user_group_roles(current_user)).to eq(roles)
+      end
+    end
+
+    context "when the current user is a cbd_user" do
+      let(:role) { "cbd_user" }
+
+      it "returns the data_agent role only" do
+        expect(helper.current_user_group_roles(current_user)).to eq(["data_agent"])
       end
     end
   end
