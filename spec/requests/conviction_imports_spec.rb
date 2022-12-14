@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "ConvictionImports" do
   describe "GET /bo/import-convictions" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :developer) }
+      let(:user) { create(:user, role: :developer) }
 
       before do
         sign_in(user)
@@ -23,7 +23,7 @@ RSpec.describe "ConvictionImports" do
     end
 
     context "when a non-developer user is signed in" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, role: :agency) }
 
       before do
         sign_in(user)
@@ -49,7 +49,7 @@ Apex Limited,,11111111,ABC,99999999
     end
 
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :developer) }
+      let(:user) { create(:user, role: :developer) }
 
       before do
         sign_in(user)
@@ -75,7 +75,7 @@ Apex Limited,,11111111,ABC,99999999
     end
 
     context "when a non-developer user is signed in" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, role: :agency) }
 
       before do
         sign_in(user)

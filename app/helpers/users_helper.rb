@@ -7,7 +7,9 @@ module UsersHelper
   end
 
   def current_user_group_roles(current_user)
-    if current_user.in_agency_group?
+    if current_user.role == "cbd_user"
+      ["data_agent"]
+    elsif current_user.in_agency_group?
       User::AGENCY_ROLES
     elsif current_user.in_finance_group?
       User::FINANCE_ROLES

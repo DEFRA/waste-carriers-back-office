@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "ChargeAdjustForms" do
   describe "GET /bo/resource/:_id/charge-adjust" do
     context "when a finance super user is signed in" do
-      let(:user) { create(:user, :finance_super) }
+      let(:user) { create(:user, role: :finance_super) }
       let(:renewing_registration) { create(:renewing_registration) }
 
       before do
@@ -47,7 +47,7 @@ RSpec.describe "ChargeAdjustForms" do
 
   describe "POST /bo/resource/:_id/charge-adjust" do
     context "when a finance super user is signed in" do
-      let(:user) { create(:user, :finance_super) }
+      let(:user) { create(:user, role: :finance_super) }
       let(:renewing_registration) { create(:renewing_registration) }
 
       before do

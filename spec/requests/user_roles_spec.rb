@@ -8,7 +8,7 @@ RSpec.describe "User Roles" do
   describe "GET /users/:id/role" do
     context "when a super user is signed in" do
       before do
-        sign_in(create(:user, :agency_super))
+        sign_in(create(:user, role: :agency_super))
       end
 
       it "renders the new template" do
@@ -18,7 +18,7 @@ RSpec.describe "User Roles" do
       end
 
       context "when the current user does not have permission to manage this user" do
-        let(:role_change_user) { create(:user, :finance) }
+        let(:role_change_user) { create(:user, role: :finance) }
 
         it "redirects to the permissions error page" do
           get "/bo/users/#{role_change_user.id}/role"
@@ -34,7 +34,7 @@ RSpec.describe "User Roles" do
 
     context "when a super user is signed in" do
       before do
-        sign_in(create(:user, :agency_super))
+        sign_in(create(:user, role: :agency_super))
       end
 
       it "updates the user role and redirects to the user list" do
@@ -76,7 +76,7 @@ RSpec.describe "User Roles" do
       end
 
       context "when the current user does not have permission to manage this user" do
-        let(:role_change_user) { create(:user, :finance) }
+        let(:role_change_user) { create(:user, role: :finance) }
 
         it "redirects to the permissions error page" do
           get "/bo/users/#{role_change_user.id}/role", params: { user: params }

@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "WriteOffForms" do
   describe "GET /bo/resource/:_id/write-off/new" do
     context "when an agency user is signed in" do
-      let(:user) { create(:user, :agency_with_refund) }
+      let(:user) { create(:user, role: :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
 
       before do
@@ -40,7 +40,7 @@ RSpec.describe "WriteOffForms" do
     end
 
     context "when an finance admin user is signed in" do
-      let(:user) { create(:user, :finance_admin) }
+      let(:user) { create(:user, role: :finance_admin) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
 
       before do
@@ -66,7 +66,7 @@ RSpec.describe "WriteOffForms" do
 
   describe "POST /bo/resource/:_id/write-off" do
     context "when a finance admin user is signed in" do
-      let(:user) { create(:user, :finance_admin) }
+      let(:user) { create(:user, role: :finance_admin) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid, workflow_state: :renewal_received_pending_payment_form) }
 
       before do

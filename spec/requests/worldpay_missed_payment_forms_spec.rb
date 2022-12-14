@@ -10,7 +10,7 @@ RSpec.describe "WorldpayMissedPaymentForms" do
 
   describe "GET /bo/resources/:_id/payments/worldpay-missed" do
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :finance_admin) }
+      let(:user) { create(:user, role: :finance_admin) }
 
       before do
         sign_in(user)
@@ -38,7 +38,7 @@ RSpec.describe "WorldpayMissedPaymentForms" do
     end
 
     context "when a non-finance_admin user is signed in" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, role: :agency) }
 
       before do
         sign_in(user)
@@ -65,7 +65,7 @@ RSpec.describe "WorldpayMissedPaymentForms" do
     end
 
     context "when a valid user is signed in" do
-      let(:user) { create(:user, :finance_admin) }
+      let(:user) { create(:user, role: :finance_admin) }
 
       before do
         sign_in(user)
@@ -134,7 +134,7 @@ RSpec.describe "WorldpayMissedPaymentForms" do
     end
 
     context "when a non-finance_admin user is signed in" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, role: :agency) }
 
       before do
         sign_in(user)

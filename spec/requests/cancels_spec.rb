@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "Cancels" do
   describe "GET /bo/resource/:_id/cancel" do
     context "when an agency with refund user is signed in" do
-      let(:user) { create(:user, :agency_with_refund) }
+      let(:user) { create(:user, role: :agency_with_refund) }
       let(:registration) { create(:registration) }
 
       before do
@@ -21,7 +21,7 @@ RSpec.describe "Cancels" do
     end
 
     context "when a finance super user is signed in" do
-      let(:user) { create(:user, :finance_super) }
+      let(:user) { create(:user, role: :finance_super) }
       let(:registration) { create(:registration) }
 
       before do
@@ -47,7 +47,7 @@ RSpec.describe "Cancels" do
 
   describe "POST /bo/resource/:_id/charge-adjust" do
     context "when an agency with refund user is signed in" do
-      let(:user) { create(:user, :agency_with_refund) }
+      let(:user) { create(:user, role: :agency_with_refund) }
       let(:registration) { create(:registration, :pending) }
 
       before do

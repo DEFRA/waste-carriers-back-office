@@ -117,12 +117,12 @@ RSpec.shared_examples "finance examples" do
   end
 
   it "is not able to modify agency users" do
-    user = build(:user, :agency)
+    user = build(:user, role: :agency)
     is_expected.not_to be_able_to(:modify_user, user)
   end
 
   it "is not able to modify finance users" do
-    user = build(:user, :finance)
+    user = build(:user, role: :finance)
     is_expected.not_to be_able_to(:modify_user, user)
   end
 end

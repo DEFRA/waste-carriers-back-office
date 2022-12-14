@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "Users" do
   describe "/bo/users" do
     context "when a super user is signed in" do
-      let(:user) { create(:user, :agency_super) }
+      let(:user) { create(:user, role: :agency_super) }
 
       before do
         sign_in(user)
@@ -27,7 +27,7 @@ RSpec.describe "Users" do
     end
 
     context "when a non-super user is signed in" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, role: :agency) }
 
       before do
         sign_in(user)
@@ -51,7 +51,7 @@ RSpec.describe "Users" do
 
   describe "/bo/users/all" do
     context "when a super user is signed in" do
-      let(:user) { create(:user, :agency_super) }
+      let(:user) { create(:user, role: :agency_super) }
 
       before do
         sign_in(user)
@@ -72,7 +72,7 @@ RSpec.describe "Users" do
     end
 
     context "when a signed in super user requests a CSV" do
-      let(:user) { create(:user, :agency_super) }
+      let(:user) { create(:user, role: :agency_super) }
 
       let(:headers) do
         {
@@ -101,7 +101,7 @@ RSpec.describe "Users" do
     end
 
     context "when a non-super user is signed in" do
-      let(:user) { create(:user, :agency) }
+      let(:user) { create(:user, role: :agency) }
 
       before do
         sign_in(user)
