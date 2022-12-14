@@ -26,7 +26,7 @@
                 <%= order.date_created.to_formatted_s(:day_month_year_time_slashes) %>
               </td>
               <td class="govuk-table__cell">
-                <%= order_item.description.capitalize %>
+                <%= order_item&.description.capitalize %>
               </td>
               <td class="govuk-table__cell govuk-table__cell--numeric">
                 <%= display_pence_as_pounds_and_cents(order_item.amount) %>
