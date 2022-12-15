@@ -2,7 +2,26 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.19.3...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.19.4...HEAD)
+
+**Implemented enhancements:**
+
+- Allow CBD users to add data users [\#1500](https://github.com/DEFRA/waste-carriers-back-office/pull/1500) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Fixed bugs:**
+
+- Handle nil order item descriptions [\#1505](https://github.com/DEFRA/waste-carriers-back-office/pull/1505) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `8756efc` to `6494877` [\#1508](https://github.com/DEFRA/waste-carriers-back-office/pull/1508) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `1bb3b5a` to `8756efc` [\#1507](https://github.com/DEFRA/waste-carriers-back-office/pull/1507) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `976cfb2` to `1bb3b5a` [\#1506](https://github.com/DEFRA/waste-carriers-back-office/pull/1506) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump loofah from 2.19.0 to 2.19.1 [\#1501](https://github.com/DEFRA/waste-carriers-back-office/pull/1501) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.19.4](https://github.com/defra/waste-carriers-back-office/tree/v1.19.4) (2022-12-13)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.19.3...v1.19.4)
 
 **Implemented enhancements:**
 
@@ -31,6 +50,7 @@
 
 **Merged pull requests:**
 
+- Release v1.19.4 [\#1499](https://github.com/DEFRA/waste-carriers-back-office/pull/1499) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
 - Bump waste\_carriers\_engine from `186a2c7` to `976cfb2` [\#1497](https://github.com/DEFRA/waste-carriers-back-office/pull/1497) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump waste\_carriers\_engine from `36bd51e` to `186a2c7` [\#1495](https://github.com/DEFRA/waste-carriers-back-office/pull/1495) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump log\_level from debug to info [\#1494](https://github.com/DEFRA/waste-carriers-back-office/pull/1494) ([endofunky](https://github.com/endofunky))
