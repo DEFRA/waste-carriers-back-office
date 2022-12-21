@@ -15,6 +15,11 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     finance_details.save!
 
     true
+  rescue StandardError => e
+    Rails.logger.error "#{e.class} error processing refund for payment #{payment.govpay_id}"
+    Airbrake.notify(e, message: "Error processing refund for payment ", govpay_id: payment.govpay_id)
+
+    false
   end
 
   private
