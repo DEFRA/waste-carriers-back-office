@@ -25,7 +25,8 @@ RSpec.describe ProcessChargeAdjustService do
       expect(order).to receive(:payment_method=)
       expect(order).to receive(:merchant_id=)
 
-      expect(finance_details).to receive_message_chain(:orders, :<<).with(order)
+      allow(finance_details).to receive(:orders).and_return([])
+      expect(finance_details.orders).to receive(:<<).with(order)
       expect(finance_details).to receive(:update_balance)
       expect(finance_details).to receive(:save!)
 

@@ -2,6 +2,6 @@
 
 RSpec.shared_examples "non-developer examples" do
   it "is not able to toggle features" do
-    is_expected.not_to be_able_to(:manage, WasteCarriersEngine::FeatureToggle)
+    expect(subject).not_to be_able_to(:manage, WasteCarriersEngine::FeatureToggle)
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RenewalMagicLinkService < ::WasteCarriersEngine::BaseService
+class RenewalMagicLinkService < WasteCarriersEngine::BaseService
   def run(token:)
     [
       Rails.configuration.wcrs_renewals_url,

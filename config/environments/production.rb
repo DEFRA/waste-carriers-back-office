@@ -80,7 +80,7 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = Logger::Formatter.new
 
   # Sending e-mails is required for user management and registration e-mails
   config.action_mailer.default_url_options = { host: config.wcrs_back_office_url, protocol: "https" }

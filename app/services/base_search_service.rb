@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BaseSearchService < ::WasteCarriersEngine::BaseService
+class BaseSearchService < WasteCarriersEngine::BaseService
   def run(page:, term:)
     return response_hash([]) if term.blank?
 

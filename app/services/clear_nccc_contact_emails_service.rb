@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ClearNcccContactEmailsService < ::WasteCarriersEngine::BaseService
+class ClearNcccContactEmailsService < WasteCarriersEngine::BaseService
 
   # Include the correct NCCC email address prefixes and all known variants
   PREFIX_KEYWORDS = %w[

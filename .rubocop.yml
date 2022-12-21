@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 inherit_gem:
   defra_ruby_style:
     - default.yml
@@ -20,26 +22,9 @@ RSpec/DescribeClass:
   # Allow more descriptive string labels for request specs
     - spec/requests/**/*
 
-# TODO Revisit these over time
-RSpec/AnyInstance:
-  Enabled: false
-RSpec/ExampleLength:
-  Enabled: false
-RSpec/ImplicitSubject:
-  Enabled: false
-RSpec/MessageChain:
-  Enabled: false
-RSpec/MessageSpies:
-  Enabled: false
-RSpec/MultipleExpectations:
-  Enabled: false
-RSpec/MultipleMemoizedHelpers:
-  Enabled: false
-RSpec/NamedSubject:
-  Enabled: false
-RSpec/NestedGroups:
-  Enabled: false
-RSpec/StubbedMock:
-  Enabled: false
-RSpec/VerifiedDoubles:
-  Enabled: false
+# rubocop-rspec 2.16.0 introduced a false positive: https://github.com/rubocop/rubocop-rspec/issues/1520
+# TODO: Remove this after the next rubocop-rspec release is bundled
+RSpec/PendingWithoutReason:
+  Exclude:
+    - spec/factories/*
+    - spec/helpers/*

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RegistrationTransferService < ::WasteCarriersEngine::BaseService
+class RegistrationTransferService < WasteCarriersEngine::BaseService
   def run(registration:, email:)
     @registration = registration
     @transient_registration = find_transient_registration

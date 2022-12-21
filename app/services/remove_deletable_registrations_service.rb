@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RemoveDeletableRegistrationsService < ::WasteCarriersEngine::BaseService
+class RemoveDeletableRegistrationsService < WasteCarriersEngine::BaseService
   def run
     remove_deletable_registrations
   end

@@ -5,7 +5,7 @@ require "csv"
 class InvalidCSVError < StandardError; end
 class InvalidConvictionDataError < StandardError; end
 
-class ConvictionImportService < ::WasteCarriersEngine::BaseService
+class ConvictionImportService < WasteCarriersEngine::BaseService
   def run(csv)
     @old_convictions = WasteCarriersEngine::ConvictionsCheck::Entity.all
     @new_convictions = []

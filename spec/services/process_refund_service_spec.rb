@@ -39,7 +39,7 @@ RSpec.describe ProcessRefundService do
           it "returns false and does not create a payment" do
             expect(WasteCarriersEngine::GovpayRefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(false)
 
-            expect(refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: ::WasteCarriersEngine::GovpayRefundService)).to be_falsey
+            expect(refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: WasteCarriersEngine::GovpayRefundService)).to be_falsey
           end
         end
 
@@ -65,7 +65,7 @@ RSpec.describe ProcessRefundService do
 
             expect(WasteCarriersEngine::GovpayRefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(true)
 
-            expect(refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: ::WasteCarriersEngine::GovpayRefundService)).to be_truthy
+            expect(refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: WasteCarriersEngine::GovpayRefundService)).to be_truthy
           end
         end
       end

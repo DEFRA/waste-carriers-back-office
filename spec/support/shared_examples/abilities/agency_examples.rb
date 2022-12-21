@@ -4,51 +4,51 @@ RSpec.shared_examples "agency examples" do
   # All agency users should be able to do this:
 
   it "is able to update a transient registration" do
-    is_expected.to be_able_to(:update, WasteCarriersEngine::RenewingRegistration)
+    expect(subject).to be_able_to(:update, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "is able to create a registration" do
-    is_expected.to be_able_to(:create, WasteCarriersEngine::Registration)
+    expect(subject).to be_able_to(:create, WasteCarriersEngine::Registration)
   end
 
   it "is not able to charge adjust a resource" do
-    is_expected.not_to be_able_to(:charge_adjust, WasteCarriersEngine::RenewingRegistration)
-    is_expected.not_to be_able_to(:charge_adjust, WasteCarriersEngine::Registration)
+    expect(subject).not_to be_able_to(:charge_adjust, WasteCarriersEngine::RenewingRegistration)
+    expect(subject).not_to be_able_to(:charge_adjust, WasteCarriersEngine::Registration)
   end
 
   it "is able to renew" do
-    is_expected.to be_able_to(:renew, WasteCarriersEngine::RenewingRegistration)
-    is_expected.to be_able_to(:renew, WasteCarriersEngine::Registration)
+    expect(subject).to be_able_to(:renew, WasteCarriersEngine::RenewingRegistration)
+    expect(subject).to be_able_to(:renew, WasteCarriersEngine::Registration)
   end
 
   it "is able to edit a registration" do
-    is_expected.to be_able_to(:edit, WasteCarriersEngine::Registration)
+    expect(subject).to be_able_to(:edit, WasteCarriersEngine::Registration)
   end
 
   it "is not able to write off large" do
-    is_expected.not_to be_able_to(:write_off_large, WasteCarriersEngine::FinanceDetails)
+    expect(subject).not_to be_able_to(:write_off_large, WasteCarriersEngine::FinanceDetails)
   end
 
   it "is able to transfer a registration" do
-    is_expected.to be_able_to(:transfer_registration, WasteCarriersEngine::Registration)
+    expect(subject).to be_able_to(:transfer_registration, WasteCarriersEngine::Registration)
   end
 
   it "is able to revert to payment summary" do
-    is_expected.to be_able_to(:revert_to_payment_summary, WasteCarriersEngine::RenewingRegistration)
+    expect(subject).to be_able_to(:revert_to_payment_summary, WasteCarriersEngine::RenewingRegistration)
   end
 
   it "is able to resend a confirmation email" do
-    is_expected.to be_able_to(:resend_confirmation_email, WasteCarriersEngine::Registration)
+    expect(subject).to be_able_to(:resend_confirmation_email, WasteCarriersEngine::Registration)
   end
 
   it "is able to refresh the company name" do
-    is_expected.to be_able_to(:refresh_company_name, WasteCarriersEngine::Registration)
+    expect(subject).to be_able_to(:refresh_company_name, WasteCarriersEngine::Registration)
   end
 
   # All agency users should NOT be able to do this:
 
   it "is not able to modify finance users" do
     user = build(:user, role: :finance)
-    is_expected.not_to be_able_to(:modify_user, user)
+    expect(subject).not_to be_able_to(:modify_user, user)
   end
 end

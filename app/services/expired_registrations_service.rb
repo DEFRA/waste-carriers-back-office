@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ExpiredRegistrationsService < ::WasteCarriersEngine::BaseService
+class ExpiredRegistrationsService < WasteCarriersEngine::BaseService
   def run
     all_expired_registrations.each(&:expire!)
   end

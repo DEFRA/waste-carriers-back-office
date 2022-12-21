@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TransientRegistrationCleanupService < ::WasteCarriersEngine::BaseService
+class TransientRegistrationCleanupService < WasteCarriersEngine::BaseService
   def run
     transient_registrations_to_remove.destroy_all
     no_created_at_transient_registrations_to_remove.destroy_all

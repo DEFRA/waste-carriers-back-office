@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class StatusTagService < ::WasteCarriersEngine::BaseService
+class StatusTagService < WasteCarriersEngine::BaseService
   def run(resource:)
     return [] if resource.blank?
 
