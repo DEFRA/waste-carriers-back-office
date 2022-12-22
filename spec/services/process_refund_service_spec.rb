@@ -15,6 +15,7 @@ RSpec.describe ProcessRefundService do
     let(:refund) { double(:refund) }
     let(:worldpay) { true }
     let(:govpay) { false }
+    let(:govpay_host) { "https://publicapi.payments.service.gov.uk" }
 
     before do
       allow(payment).to receive(:worldpay?).and_return(worldpay)
@@ -40,6 +41,23 @@ RSpec.describe ProcessRefundService do
             expect(WasteCarriersEngine::GovpayRefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(false)
 
             expect(refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: WasteCarriersEngine::GovpayRefundService)).to be_falsey
+          end
+        end
+
+        context "when the Govpay refind service returns an error" do
+          let(:govpay_refund_service) { instance_double(WasteCarriersEngine::GovpayRefundService) }
+
+          before do
+            allow(payment).to receive(:govpay_id)
+            allow(WasteCarriersEngine::GovpayRefundService).to receive(:new).and_return(govpay_refund_service)
+            allow(govpay_refund_service).to receive(:run).and_raise(WasteCarriersEngine::GovpayApiError)
+            allow(Airbrake).to receive(:notify)
+          end
+
+          it "notifies Airbrake" do
+            refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: WasteCarriersEngine::GovpayRefundService)
+          rescue WasteCarriersEngine::GovpayApiError
+            expect(Airbrake).to have_received(:notify) # rubocop:disable RSpec/MessageSpies
           end
         end
 
