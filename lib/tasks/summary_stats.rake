@@ -38,7 +38,7 @@ namespace :summary_stats do
 
     abandoned_30d = transient_30d.to_f / started_30d
     puts "\tSo approximate abandon rate = #{transient_30d} / #{started_30d} " \
-         "= #{number_to_percentage(100.0 * abandoned_30d, precision: 0)}"
+         "= #{number_to_percentage(abandoned_30d * 100.0, precision: 0)}"
 
     abandoned_30d
   end
@@ -95,8 +95,8 @@ namespace :summary_stats do
     delta = orders_activated - assisted_digital_orders - fully_digital_orders
     puts "\t(delta of #{delta} is due to some registrations not having metaData.route set)" unless delta.zero?
 
-    abandon_rate_s = number_to_percentage(100.0 * abandon_rate, precision: 0)
-    non_abandon_rate_s = number_to_percentage(100.0 * (1 - abandon_rate), precision: 0)
+    abandon_rate_s = number_to_percentage(abandon_rate * 100.0, precision: 0)
+    non_abandon_rate_s = number_to_percentage((1 - abandon_rate) * 100.0, precision: 0)
 
     total_orders_started = (orders_activated / (1.0 - abandon_rate)).round(0)
     total_orders_started_s = number_with_delimiter(total_orders_started.to_i)
