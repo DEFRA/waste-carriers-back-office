@@ -37,7 +37,10 @@ RSpec.describe "User Invitations" do
     let(:email) { attributes_for(:user)[:email] }
     let(:role) { attributes_for(:user)[:role] }
     let(:params) do
-      { user: { email: email, role: role } }
+      {
+        user: { email: email, role: role },
+        commit: "Send invitation"
+      }
     end
 
     context "when a super user is signed in" do
@@ -57,17 +60,29 @@ RSpec.describe "User Invitations" do
         expect(User.find_by(email: email).role).to eq(role)
       end
 
+      shared_examples "user creation error" do
+
+        it "does not create a new user" do
+          expect { post "/bo/users/invitation", params: params }.not_to change(User, :count)
+        end
+
+        it "renders the new template" do
+          post "/bo/users/invitation", params: params
+
+          expect(response).to render_template(:new)
+        end
+      end
+
       context "when the current user does not have permission to select this role" do
         let(:role) { :finance }
 
-        it "does not create a new user and renders the new template" do
-          old_user_count = User.count
+        it_behaves_like "user creation error"
+      end
 
-          post "/bo/users/invitation", params: params
+      context "when the user already exists" do
+        before { create(:user, email: email, role: role) }
 
-          expect(User.count).to eq(old_user_count)
-          expect(response).to render_template(:new)
-        end
+        it_behaves_like "user creation error"
       end
     end
 
