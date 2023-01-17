@@ -41,6 +41,8 @@ module Reports
     def to_csv(csv: nil, force_quotes: true)
       csv_file = super
       csv_file.close
+    ensure
+      csv_file.close unless csv_file.nil? || csv_file.closed?
     end
 
     # Let the caller decide when it's ok to mark the documents as successfully exported
