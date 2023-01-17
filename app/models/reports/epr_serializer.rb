@@ -47,16 +47,10 @@ module Reports
     end
 
     def parse_object(registration)
-      return if already_processed(registration.reg_identifier)
-
       ATTRIBUTES.map do |key, _value|
         presenter = RegistrationEprPresenter.new(registration, nil)
         presenter.public_send(key)
       end
-    end
-
-    def already_processed(_)
-      false
     end
   end
 end
