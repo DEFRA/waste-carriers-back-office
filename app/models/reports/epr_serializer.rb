@@ -55,7 +55,11 @@ module Reports
       end
     end
 
-    def already_processed(_)
+    def already_processed(registration_id)
+      # SonarCloud complains about the unused parameter even with a leading underscore
+      # Removing it breaks epr_renewal_serializer. Adding a NOP so that the parameter is referenced.
+      registration_id.to_s
+
       false
     end
   end
