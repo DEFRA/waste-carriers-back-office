@@ -12,19 +12,25 @@ module Reports
     end
 
     def to_csv(csv: nil, force_quotes: true)
-      unless csv
-        csv = CSV.open(@path, "w", force_quotes: force_quotes)
-        csv << self.class::ATTRIBUTES.values
-      end
+      return fill_csv(csv: csv) if csv
 
-      each_data do |parsed_object|
-        csv << parsed_object unless parsed_object.nil?
-      end
+      CSV.open(@path, "w", force_quotes: force_quotes) do |csv_file|
+        csv_file << self.class::ATTRIBUTES.values
 
-      csv
+        fill_csv(csv_file)
+
+        yield csv_file if block_given?
+      end
     rescue StandardError => e
       Rails.logger.error "Error writing CSV file to #{@path}: #{e}"
       Airbrake.notify(e, csv_file_path: @path)
     end
+
+    def fill_csv(csv)
+      each_data do |parsed_object|
+        csv << parsed_object unless parsed_object.nil?
+      end
+    end
+
   end
 end

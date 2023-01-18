@@ -28,7 +28,7 @@ module Reports
     }.freeze
 
     def initialize(path: nil, processed_ids: nil)
-      @processed_ids = processed_ids
+      @processed_ids = processed_ids || Set.new
 
       super(path)
     end
