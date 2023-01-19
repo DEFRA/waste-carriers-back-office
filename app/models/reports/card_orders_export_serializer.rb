@@ -38,9 +38,8 @@ module Reports
       super(file_path)
     end
 
-    def to_csv(csv: nil, force_quotes: true)
-      csv_file = super
-      csv_file.close
+    def to_csv
+      super(csv: nil, force_quotes: true)
     end
 
     # Let the caller decide when it's ok to mark the documents as successfully exported

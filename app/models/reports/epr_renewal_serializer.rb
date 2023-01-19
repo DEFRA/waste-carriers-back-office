@@ -12,7 +12,6 @@ module Reports
     end
 
     def already_processed(reg_identifier)
-      @processed_ids ||= Set.new
       return true if @processed_ids.include?(reg_identifier)
 
       @processed_ids << reg_identifier

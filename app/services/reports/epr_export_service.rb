@@ -24,14 +24,10 @@ module Reports
     def populate_temp_file
       # Write the registrations first, then use the registration ids
       # for de-duplication while writing the renewing_registrations
-
       epr_serializer = EprSerializer.new(path: file_path, processed_ids: nil)
-      csv = epr_serializer.to_csv
-
-      epr_renewal_serializer = EprRenewalSerializer.new(path: nil, processed_ids: epr_serializer.registration_ids)
-      epr_renewal_serializer.to_csv(csv: csv)
-    ensure
-      csv.close unless csv.nil? || csv.closed?
+      epr_serializer.to_csv do |csv|
+        EprRenewalSerializer.new(path: nil, processed_ids: epr_serializer.registration_ids).to_csv(csv: csv)
+      end
     end
 
     def file_path
