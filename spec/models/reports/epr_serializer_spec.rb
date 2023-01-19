@@ -16,9 +16,7 @@ module Reports
 
       before do
         allow(Rails.configuration).to receive(:grace_window).and_return(3)
-        csv = described_class.new(path: file_path).to_csv
-      ensure
-        csv.close unless csv.nil? || csv.closed?
+        described_class.new(path: file_path).to_csv
       end
 
       it "returns a csv object with the expected headers" do
