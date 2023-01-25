@@ -49,6 +49,18 @@ module Reports
           expect(subject.send(:scope)).not_to include(renewing_registration)
         end
       end
+
+      context "when the registration expires later today" do
+        before do
+          original_registration.expires_on = 3.minutes.from_now
+          original_registration.save!
+        end
+
+        # Decision: https://eaflood.atlassian.net/browse/RUBY-2249?focusedCommentId=470109
+        it "does not include the registration" do
+          expect(subject.send(:scope)).not_to include(original_registration)
+        end
+      end
     end
   end
 end

@@ -38,7 +38,7 @@ module Reports
     def scope
       registrations = ::WasteCarriersEngine::Registration
                       .active_and_expired
-                      .lower_tier_or_unexpired_or_in_covid_grace_window
+                      .lower_tier_or_unexpired
 
       # Save these for de-duplication purposes
       @registration_ids = registrations.pluck(:reg_identifier).to_set

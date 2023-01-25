@@ -43,30 +43,10 @@ module Reports
       context "when the registration is not a lower tier" do
         let(:lower_tier) { false }
 
-        context "when the registration had a COVID extension" do
-          before do
-            allow(Rails.configuration).to receive(:end_of_covid_extension).and_return(Date.new(2020, 10, 1))
-          end
+        it "returns the object expires_on formatted" do
+          allow(registration).to receive(:expires_on).and_return(Time.zone.local(2015, 1, 1))
 
-          it "returns the object expires_on formatted plus COVID grace window days" do
-            allow(Rails.configuration).to receive(:covid_grace_window).and_return(3)
-
-            allow(registration).to receive(:expires_on).and_return(Time.zone.local(2015, 1, 1))
-
-            expect(subject.expires_on).to eq("2015-01-04")
-          end
-        end
-
-        context "when the registration did not have a COVID extension" do
-          before do
-            allow(Rails.configuration).to receive(:end_of_covid_extension).and_return(Date.new(2010, 1, 1))
-          end
-
-          it "returns the object expires_on formatted" do
-            allow(registration).to receive(:expires_on).and_return(Time.zone.local(2015, 1, 1))
-
-            expect(subject.expires_on).to eq("2015-01-01")
-          end
+          expect(subject.expires_on).to eq("2015-01-01")
         end
       end
 

@@ -17,7 +17,7 @@ module WasteCarriersEngine
 
     def renewable_front_office_date?
       return false if expires_on.blank?
-      return true if check_service.in_expiry_grace_window?(ignore_extended_grace_window: true)
+      return true if check_service.in_expiry_grace_window?
       return false if check_service.expired?
 
       check_service.in_renewal_window?

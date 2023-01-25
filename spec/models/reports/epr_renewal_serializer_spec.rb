@@ -74,6 +74,17 @@ module Reports
             expect(serializer.send(:scope)).not_to include(renewing_registration)
           end
         end
+
+        context "when the original registration has expired" do
+          before do
+            renewing_registration.metaData.status = "EXPIRED"
+            renewing_registration.save!
+          end
+
+          it "includes the renewing registration" do
+            expect(serializer.send(:scope)).to include(renewing_registration)
+          end
+        end
       end
     end
   end

@@ -26,8 +26,6 @@ module Reports
 
       return if super.blank?
 
-      return extended_covid_expiry_date(super) if expired_with_covid_extension?(super)
-
       super.to_formatted_s(:year_month_day_hyphens)
     end
 
@@ -43,18 +41,6 @@ module Reports
       return if number.chars.uniq == ["0"]
 
       number
-    end
-
-    private
-
-    def expired_with_covid_extension?(original_expires_on)
-      end_of_covid_extension = Rails.configuration.end_of_covid_extension
-
-      original_expires_on < end_of_covid_extension
-    end
-
-    def extended_covid_expiry_date(original_expires_on)
-      (original_expires_on + Rails.configuration.covid_grace_window.days).to_formatted_s(:year_month_day_hyphens)
     end
   end
 end
