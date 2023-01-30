@@ -12,7 +12,7 @@ module Reports
     end
 
     def to_csv(csv: nil, force_quotes: true)
-      return fill_csv(csv: csv) if csv
+      return fill_csv(csv) if csv
 
       CSV.open(@path, "w", force_quotes: force_quotes) do |csv_file|
         csv_file << self.class::ATTRIBUTES.values
