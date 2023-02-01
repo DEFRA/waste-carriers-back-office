@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 34fc9435d49a260a64e846f2bae7fb96f4856e6e
+  revision: fdeb07d402bd30e32aa7482cf69c737717ba07e2
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -314,7 +314,7 @@ GEM
       net-protocol
     netrc (0.11.0)
     nio4r (2.5.8)
-    nokogiri (1.14.0)
+    nokogiri (1.14.1)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     notifications-ruby-client (5.4.0)
