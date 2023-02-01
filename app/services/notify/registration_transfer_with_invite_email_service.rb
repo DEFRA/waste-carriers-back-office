@@ -24,7 +24,7 @@ module Notify
     end
 
     def accept_invite_url
-      [Rails.configuration.wcrs_renewals_url,
+      [Rails.configuration.wcrs_fo_link_domain,
        "/fo/users/invitation/accept?invitation_token=",
        @token].join
     end

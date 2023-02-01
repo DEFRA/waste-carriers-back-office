@@ -180,7 +180,7 @@ RSpec.describe ActionLinksHelper do
 
         it "returns the registration path" do
           expect(helper.renewal_magic_link_for(resource))
-            .to eq("#{Rails.configuration.wcrs_renewals_url}/fo/renew/#{renew_token}")
+            .to eq("#{Rails.configuration.wcrs_fo_link_domain}/fo/renew/#{renew_token}")
         end
       end
 

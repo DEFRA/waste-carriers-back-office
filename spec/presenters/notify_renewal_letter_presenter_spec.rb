@@ -51,7 +51,7 @@ RSpec.describe NotifyRenewalLetterPresenter do
     it "returns a correctly formatted URL" do
       expected_url = "wastecarriersregistration.service.gov.uk/fo/renew/tokengoeshere"
 
-      allow(Rails.configuration).to receive(:wcrs_renewals_url).and_return("https://wastecarriersregistration.service.gov.uk")
+      allow(Rails.configuration).to receive(:wcrs_fo_link_domain).and_return("https://wastecarriersregistration.service.gov.uk")
       expect(subject.renewal_url).to eq(expected_url)
     end
   end

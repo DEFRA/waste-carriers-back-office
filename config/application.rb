@@ -84,7 +84,9 @@ module WasteCarriersBackOffice
       end
 
     # Paths
-    config.wcrs_renewals_url = ENV["WCRS_RENEWALS_DOMAIN"] || "http://localhost:3002"
+    # This is the domain to use on URLs for FO services such as renewal and deregistration
+    config.wcrs_fo_link_domain = ENV["WCRS_RENEWALS_DOMAIN"] || "http://localhost:3002"
+
     config.wcrs_frontend_url = ENV["WCRS_FRONTEND_DOMAIN"] || "http://localhost:3000"
     config.wcrs_backend_url = ENV["WCRS_FRONTEND_ADMIN_DOMAIN"] || "http://localhost:3000"
     config.wcrs_back_office_url = ENV["WCRS_BACK_OFFICE_DOMAIN"] || "http://localhost:8001"

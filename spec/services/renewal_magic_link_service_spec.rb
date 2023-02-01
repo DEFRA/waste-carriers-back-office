@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe RenewalMagicLinkService do
   before do
-    allow(Rails.configuration).to receive(:wcrs_renewals_url).and_return("http://example.com")
+    allow(Rails.configuration).to receive(:wcrs_fo_link_domain).and_return("http://example.com")
   end
 
   let(:service) do

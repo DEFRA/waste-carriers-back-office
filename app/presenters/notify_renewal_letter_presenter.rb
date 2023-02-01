@@ -21,7 +21,7 @@ class NotifyRenewalLetterPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def renewal_url
-    root_url = Rails.configuration.wcrs_renewals_url.split("//").last
+    root_url = Rails.configuration.wcrs_fo_link_domain.split("//").last
 
     [root_url,
      "/fo/renew/",
