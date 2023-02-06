@@ -20,7 +20,7 @@ module Reports
       report << "  - Total registration attempts for the last 30 days: #{total_attempts_last_30_days}"
       @abandon_rate = total_attempts_last_30_days.zero? ? 0 : transients_last_30_days.to_f / total_attempts_last_30_days
       @abandon_rate_percent = (abandon_rate * 100.0).to_i
-      report << "  - Estimated abandon rate: #{@abandon_rate} (#{@abandon_rate_percent}%)"
+      report << "  - Estimated abandon rate: #{@abandon_rate.round(2)} (#{@abandon_rate_percent}%)"
       report << "------------------------------------------------------------------------------------------------------------------"
 
       4.downto(1).each do |q|
@@ -47,7 +47,7 @@ module Reports
 
       report << "2. Number of orders started and NOT completed: Unknown. Rough estimate based on abandon rate for the last 30 days:"
       report << "  - Given #{completed_online} completed online with an abandon rate of #{@abandon_rate_percent}%:"
-      report << "  - ESTIMATED orders stared online and not completed: " \
+      report << "  - ESTIMATED orders started online and not completed: " \
                 "#{estimate_started_online(completed_online, abandon_rate)}"
 
       report << "3. Same data as 1"
@@ -80,7 +80,8 @@ module Reports
     def estimate_started_online(completed_online, abandon_rate)
       return "N/A" unless completed_online.positive? && abandon_rate < 1.0
 
-      "#{completed_online} / (1 - #{(@abandon_rate * 100.0).to_i}%) = #{completed_online / (1 - @abandon_rate)}"
+      "#{completed_online} / (1 - #{(@abandon_rate * 100.0).to_i}%) = " \
+        "#{(completed_online / (1 - @abandon_rate)).round(0)}"
     end
 
     def quarter_start_month(date)
