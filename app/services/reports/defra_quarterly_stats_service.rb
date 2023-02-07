@@ -20,7 +20,7 @@ module Reports
       report << "  - Total registration attempts for the last 30 days: #{total_attempts_last_30_days}"
       @abandon_rate = total_attempts_last_30_days.zero? ? 0 : transients_last_30_days.to_f / total_attempts_last_30_days
       @abandon_rate_percent = (abandon_rate * 100.0).to_i
-      report << "  - Estimated abandon rate: #{@abandon_rate.round(2)} (#{@abandon_rate_percent}%)"
+      report << "  - Estimated abandon rate: #{@abandon_rate.round(3)} (#{@abandon_rate_percent}%)"
       report << "------------------------------------------------------------------------------------------------------------------"
 
       4.downto(1).each do |q|
@@ -52,7 +52,7 @@ module Reports
 
       report << "3. Same data as 1"
 
-      report << "4. Total number of orders completed online AND via the Back office: #{completed_online} (of which AD: " \
+      report << "4. Total number of orders completed online AND via the Back office: #{activated_total} (of which AD: " \
                 "#{activated_assisted_digital})"
 
       report

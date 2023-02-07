@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class QuarterlyReportsController < ApplicationController
-  include CanSetFlashMessages
-  include CanListFilesOnAws
 
   before_action :authorize_user
 
