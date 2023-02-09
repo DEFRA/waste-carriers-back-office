@@ -95,6 +95,8 @@ module Reports
         10
       when 101..331
         1
+      else
+        0
       end
     end
 
