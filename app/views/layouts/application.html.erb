@@ -53,6 +53,9 @@
                 main_app.finance_reports_path,
                 class: "govuk-header__link"  %>
           </li>
+        <% end %>
+
+        <% if can?(:read, Reports::DefraQuarterlyStatsService, current_user) %>
           <li class="govuk-header__navigation-item">
             <%= link_to t("layouts.application.menu.quarterly_reports"),
                 main_app.quarterly_reports_path,

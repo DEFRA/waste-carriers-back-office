@@ -109,6 +109,7 @@ class Ability
 
     can :manage_back_office_users, :all
     can :modify_user, User, &:in_agency_group?
+    can :read, Reports::DefraQuarterlyStatsService
   end
 
   def permissions_for_finance_super_user
@@ -127,6 +128,7 @@ class Ability
     can :manage, WasteCarriersEngine::FeatureToggle
     can :import_conviction_data, :all
     can :run_finance_reports, :all
+    can :read, Reports::DefraQuarterlyStatsService
   end
 
   def permissions_for_cbd_user
