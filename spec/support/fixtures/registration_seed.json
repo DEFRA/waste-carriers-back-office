@@ -18,8 +18,7 @@
         "lastModified" : "2018-05-14T10:38:22.692Z",
         "dateActivated" : "2018-05-14T10:38:22.692Z",
         "status" : "ACTIVE",
-        "route" : "DIGITAL",
-        "distance" : "n/a"
+        "route" : "DIGITAL"
     },
     "financeDetails" : {
         "orders" : [
