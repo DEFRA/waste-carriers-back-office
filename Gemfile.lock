@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 249b874b6f6bb3d32bb33694d77082dde8632455
+  revision: 9026e95c2b218ba9829c104aa3194125365e4bfb
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -279,7 +279,7 @@ GEM
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.8.0.1)
+    mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
       net-pop
@@ -506,7 +506,7 @@ GEM
       whenever
     wicked_pdf (2.6.3)
       activesupport
-    zeitwerk (2.6.6)
+    zeitwerk (2.6.7)
 
 PLATFORMS
   ruby
