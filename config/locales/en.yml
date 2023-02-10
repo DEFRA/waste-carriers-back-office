@@ -11,6 +11,7 @@ en:
         users: "Manage users"
         conviction_imports: "Import conviction data"
         finance_reports: "Download finance reports"
+        quarterly_reports: DEFRA quarterly statistics
         feature_toggles: "Toggle features"
         card_order_exports: "Copy card orders"
       user_info:

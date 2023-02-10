@@ -5,6 +5,10 @@ RSpec.shared_examples "developer examples" do
     expect(subject).to be_able_to(:manage, WasteCarriersEngine::FeatureToggle)
   end
 
+  it "is able to view DEFRA quarterly reports" do
+    expect(subject).to be_able_to(:read, Reports::DefraQuarterlyStatsService)
+  end
+
   it "is not able to charge adjust a resource" do
     expect(subject).not_to be_able_to(:charge_adjust, WasteCarriersEngine::RenewingRegistration)
     expect(subject).not_to be_able_to(:charge_adjust, WasteCarriersEngine::Registration)

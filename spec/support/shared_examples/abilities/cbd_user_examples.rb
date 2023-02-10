@@ -19,4 +19,8 @@ RSpec.shared_examples "cbd user examples" do
     user = build(:user, role: :finance)
     expect(subject).not_to be_able_to(:modify_user, user)
   end
+
+  it "is not able to view DEFRA quarterly reports" do
+    expect(subject).not_to be_able_to(:read, Reports::DefraQuarterlyStatsService)
+  end
 end

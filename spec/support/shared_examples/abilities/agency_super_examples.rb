@@ -9,4 +9,8 @@ RSpec.shared_examples "agency_super examples" do
     user = build(:user, role: :agency)
     expect(subject).to be_able_to(:modify_user, user)
   end
+
+  it "is able to view DEFRA quarterly reports" do
+    expect(subject).to be_able_to(:read, Reports::DefraQuarterlyStatsService)
+  end
 end

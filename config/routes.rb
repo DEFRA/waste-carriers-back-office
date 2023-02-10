@@ -237,6 +237,10 @@ Rails.application.routes.draw do
            only: %i[show],
            path: "/bo/reports/download_finance_reports"
 
+  resource :quarterly_reports,
+           only: %i[show],
+           path: "/bo/reports/quarterly_reports"
+
   # Redirect old Devise routes
   # rubocop:disable Style/FormatStringToken
   get "/agency_users(*all)" => redirect("/bo/users%{all}")
