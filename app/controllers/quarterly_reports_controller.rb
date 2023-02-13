@@ -11,6 +11,6 @@ class QuarterlyReportsController < ApplicationController
   private
 
   def authorize_user
-    authorize! :run_finance_reports, current_user
+    authorize! :read, Reports::DefraQuarterlyStatsService, current_user
   end
 end
