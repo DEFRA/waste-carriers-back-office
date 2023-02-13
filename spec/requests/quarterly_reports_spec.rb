@@ -6,8 +6,8 @@ RSpec.describe "DefraQuarterlyStats" do
 
   describe "GET /bo/quarterly_reports" do
 
-    context "when a cbd_user is signed in" do
-      let(:user) { create(:user, role: :cbd_user) }
+    context "when an agency_super user is signed in" do
+      let(:user) { create(:user, role: :agency_super) }
 
       before do
         sign_in(user)
