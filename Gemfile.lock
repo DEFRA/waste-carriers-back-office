@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 72d05c13c66bfc91ed8f962f5c48f741465c539c
-  branch: main
+  revision: b450a6e413440d591dec05da9404dd7a4faffa0d
+  branch: fix/is_moto
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.3)
