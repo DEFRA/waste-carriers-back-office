@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "rest-client"
-# require_relative "./govpay"
-
 class GovpayRefundService < WasteCarriersEngine::BaseService
   include WasteCarriersEngine::CanSendGovpayRequest
 
