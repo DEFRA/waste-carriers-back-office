@@ -50,7 +50,7 @@ class RefundsController < ApplicationController
   def refunder
     @refunder ||=
       if @payment.govpay?
-        ::WasteCarriersEngine::GovpayRefundService
+        GovpayRefundService
       elsif @payment.worldpay?
         ::Worldpay::RefundService
       end

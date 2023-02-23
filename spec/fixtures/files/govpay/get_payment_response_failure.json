@@ -1,0 +1,9 @@
+{
+    "amount": 2000,
+    "state": {
+        "status": "failed",
+        "finished": true,
+        "message": "Payment expired",
+        "code": "P0020"
+    }
+  }

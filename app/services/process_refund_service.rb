@@ -27,6 +27,8 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   attr_reader :payment, :user, :finance_details, :refunder
 
   def refunded?
+    Rails.logger.warn "\n============ process_refund_service\n"
+    Rails.logger.warn "\n============ process_refund_service, refunder: #{refunder}\n"
     @_refunded ||= refunder.run(
       payment: payment,
       amount: amount_to_refund,

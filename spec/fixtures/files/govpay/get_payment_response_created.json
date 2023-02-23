@@ -1,0 +1,73 @@
+{
+    "amount": 10501,
+    "description": "Waste carrier registration upper tier",
+    "reference": "12345",
+    "language": "en",
+    "metadata": {
+        "ledger_code": "AB100",
+        "an_internal_reference_number": 200
+    },
+    "email": "sherlock.holmes@example.com",
+    "state": {
+        "status": "created",
+        "finished": false
+    },
+    "payment_id": "cjgt8i57kavb8jfufhjlh129fm",
+    "payment_provider": "sandbox",
+    "created_date": "2022-05-18T11:46:54.697Z",
+    "refund_summary": {
+        "status": "pending",
+        "amount_available": 10501,
+        "amount_submitted": 0
+    },
+    "settlement_summary": {},
+    "card_details": {
+        "last_digits_card_number": null,
+        "first_digits_card_number": null,
+        "cardholder_name": "Sherlock Holmes",
+        "expiry_date": null,
+        "billing_address": {
+            "line1": "221 Baker Street",
+            "line2": "Flat b",
+            "postcode": "NW1 6XE",
+            "city": "London",
+            "country": "GB"
+        },
+        "card_brand": "",
+        "card_type": null
+    },
+    "delayed_capture": false,
+    "moto": false,
+    "return_url": "https://some-wcr-env.defra.gov.uk/completed",
+    "authorisation_mode": "web",
+    "_links": {
+        "self": {
+            "href": "https://publicapi.payments.service.gov.uk/v1/payments/cjgt8i57kavb8jfufhjlh129fm",
+            "method": "GET"
+        },
+        "next_url": {
+            "href": "https://www.payments.service.gov.uk/secure/c3b8908b-68df-478a-ad94-6a724e614e46",
+            "method": "GET"
+        },
+        "next_url_post": {
+            "type": "application/x-www-form-urlencoded",
+            "params": {
+                "chargeTokenId": "c3b8908b-68df-478a-ad94-6a724e614e46"
+            },
+            "href": "https://www.payments.service.gov.uk/secure",
+            "method": "POST"
+        },
+        "events": {
+            "href": "https://publicapi.payments.service.gov.uk/v1/payments/cjgt8i57kavb8jfufhjlh129fm/events",
+            "method": "GET"
+        },
+        "refunds": {
+            "href": "https://publicapi.payments.service.gov.uk/v1/payments/cjgt8i57kavb8jfufhjlh129fm/refunds",
+            "method": "GET"
+        },
+        "cancel": {
+            "href": "https://publicapi.payments.service.gov.uk/v1/payments/cjgt8i57kavb8jfufhjlh129fm/cancel",
+            "method": "POST"
+        }
+    }
+}

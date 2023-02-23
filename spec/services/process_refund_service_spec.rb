@@ -38,26 +38,26 @@ RSpec.describe ProcessRefundService do
 
         context "when the request fails" do
           it "returns false and does not create a payment" do
-            expect(WasteCarriersEngine::GovpayRefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(false)
+            expect(GovpayRefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(false)
 
-            expect(refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: WasteCarriersEngine::GovpayRefundService)).to be_falsey
+            expect(refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: GovpayRefundService)).to be_falsey
           end
         end
 
         context "when the Govpay refind service returns an error" do
-          let(:govpay_refund_service) { instance_double(WasteCarriersEngine::GovpayRefundService) }
+          let(:govpay_refund_service) { instance_double(GovpayRefundService) }
 
           before do
             allow(payment).to receive(:govpay_id)
-            allow(WasteCarriersEngine::GovpayRefundService).to receive(:new).and_return(govpay_refund_service)
+            allow(GovpayRefundService).to receive(:new).and_return(govpay_refund_service)
             allow(govpay_refund_service).to receive(:run).and_raise(WasteCarriersEngine::GovpayApiError)
             allow(Airbrake).to receive(:notify)
           end
 
           it "notifies Airbrake" do
-            refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: WasteCarriersEngine::GovpayRefundService)
+            refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: GovpayRefundService)
           rescue WasteCarriersEngine::GovpayApiError
-            expect(Airbrake).to have_received(:notify) # rubocop:disable RSpec/MessageSpies
+            expect(Airbrake).to have_received(:notify)
           end
         end
 
@@ -81,9 +81,9 @@ RSpec.describe ProcessRefundService do
             expect(I18n).to receive(:t).with("refunds.comments.card", type: "Payment Type").and_return(description)
             expect(refund).to receive(:comment=).with(description)
 
-            expect(WasteCarriersEngine::GovpayRefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(true)
+            expect(GovpayRefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(true)
 
-            expect(refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: WasteCarriersEngine::GovpayRefundService)).to be_truthy
+            expect(refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: GovpayRefundService)).to be_truthy
           end
         end
       end

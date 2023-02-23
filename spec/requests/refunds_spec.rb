@@ -99,7 +99,7 @@ RSpec.describe "Refunds" do
         let(:renewing_registration) { create(:renewing_registration, :overpaid_govpay) }
 
         before do
-          allow(WasteCarriersEngine::GovpayRefundService).to receive(:run).and_return(true)
+          allow(GovpayRefundService).to receive(:run).and_return(true)
         end
 
         it "creates a refund payment, redirects to the finance details page and returns a 302 status" do
