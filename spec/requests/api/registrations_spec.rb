@@ -29,7 +29,7 @@ RSpec.describe "Registrations API" do
 
       post "/bo/api/registrations", params: data, headers: headers
 
-      response_info = JSON.parse(response.body)
+      response_info = response.parsed_body
       expect(response_info).to have_key("reg_identifier")
       expect(response_info["reg_identifier"]).to start_with("CBDU")
 
@@ -48,7 +48,7 @@ RSpec.describe "Registrations API" do
 
         post "/bo/api/registrations", params: data, headers: headers
 
-        response_info = JSON.parse(response.body)
+        response_info = response.parsed_body
         expect(response_info["reg_identifier"]).to start_with("CBDL")
       end
     end
@@ -62,7 +62,7 @@ RSpec.describe "Registrations API" do
 
         post "/bo/api/registrations", params: data, headers: headers
 
-        response_info = JSON.parse(response.body)
+        response_info = response.parsed_body
         registration = WasteCarriersEngine::Registration.find_by reg_identifier: response_info["reg_identifier"]
 
         expect(registration.expires_on.to_s).to eq("2021-05-14T10:38:22+00:00")

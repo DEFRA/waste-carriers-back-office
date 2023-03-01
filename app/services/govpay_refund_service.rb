@@ -25,11 +25,6 @@ class GovpayRefundService < WasteCarriersEngine::BaseService
 
   attr_reader :transient_registration, :payment, :current_user, :amount
 
-  # Use the FO API token unless this is a MOTO payment
-  def override_api_token
-    !payment.moto
-  end
-
   def govpay_payment
     @govpay_payment ||=
       WasteCarriersEngine::GovpayPaymentDetailsService.new(
@@ -59,7 +54,7 @@ class GovpayRefundService < WasteCarriersEngine::BaseService
   def request
     @request ||=
       send_request(
-        method: :post, path: "/payments/#{payment.govpay_id}/refunds", params:, override_api_token:
+        method: :post, path: "/payments/#{payment.govpay_id}/refunds", params:, is_moto: payment.moto
       )
   end
 
