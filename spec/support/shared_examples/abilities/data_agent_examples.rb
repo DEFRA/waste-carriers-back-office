@@ -25,7 +25,6 @@ RSpec.shared_examples "data_agent examples" do
     expect(subject).not_to be_able_to(:record_cash_payment, WasteCarriersEngine::RenewingRegistration)
     expect(subject).not_to be_able_to(:record_cheque_payment, WasteCarriersEngine::RenewingRegistration)
     expect(subject).not_to be_able_to(:record_postal_order_payment, WasteCarriersEngine::RenewingRegistration)
-    expect(subject).not_to be_able_to(:record_worldpay_missed_payment, WasteCarriersEngine::RenewingRegistration)
     expect(subject).not_to be_able_to(:refresh_company_name, WasteCarriersEngine::Registration)
     expect(subject).not_to be_able_to(:refund, WasteCarriersEngine::Registration)
     expect(subject).not_to be_able_to(:renew, WasteCarriersEngine::Registration)

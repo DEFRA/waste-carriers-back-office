@@ -20,6 +20,7 @@ RSpec.describe ProcessRefundService do
     before do
       allow(payment).to receive(:worldpay?).and_return(worldpay)
       allow(payment).to receive(:govpay?).and_return(govpay)
+      allow(payment).to receive(:govpay_id)
       allow(orders).to receive(:find_by).and_return(order)
     end
 
@@ -40,7 +41,7 @@ RSpec.describe ProcessRefundService do
           it "returns false and does not create a payment" do
             expect(GovpayRefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(false)
 
-            expect(refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: GovpayRefundService)).to be_falsey
+            expect(refund_service.run(finance_details: finance_details, payment: payment, user: user)).to be_falsey
           end
         end
 
@@ -48,14 +49,13 @@ RSpec.describe ProcessRefundService do
           let(:govpay_refund_service) { instance_double(GovpayRefundService) }
 
           before do
-            allow(payment).to receive(:govpay_id)
             allow(GovpayRefundService).to receive(:new).and_return(govpay_refund_service)
             allow(govpay_refund_service).to receive(:run).and_raise(WasteCarriersEngine::GovpayApiError)
             allow(Airbrake).to receive(:notify)
           end
 
           it "notifies Airbrake" do
-            refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: GovpayRefundService)
+            refund_service.run(finance_details: finance_details, payment: payment, user: user)
           rescue WasteCarriersEngine::GovpayApiError
             expect(Airbrake).to have_received(:notify)
           end
@@ -82,45 +82,6 @@ RSpec.describe ProcessRefundService do
             expect(refund).to receive(:comment=).with(description)
 
             expect(GovpayRefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(true)
-
-            expect(refund_service.run(finance_details: finance_details, payment: payment, user: user, refunder: GovpayRefundService)).to be_truthy
-          end
-        end
-      end
-
-      context "when using worldpay" do
-        let(:worldpay) { true }
-
-        context "when a request to worldpay fails" do
-          it "returns false and does not create a payment" do
-            expect(Worldpay::RefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(false)
-
-            expect(refund_service.run(finance_details: finance_details, payment: payment, user: user)).to be_falsey
-          end
-        end
-
-        context "when a request to worldpay is successfull" do
-          it "sends a refund request to worldpay, generates a new refund payment and associate it with the right finance details" do
-            description = double(:description)
-
-            expect(finance_details).to receive(:payments).and_return(payments)
-            expect(payments).to receive(:<<).with(refund)
-            expect(finance_details).to receive(:update_balance)
-            expect(finance_details).to receive(:save!)
-
-            expect(WasteCarriersEngine::Payment).to receive(:new).with(payment_type: WasteCarriersEngine::Payment::REFUND).and_return(refund)
-            expect(refund).to receive(:order_key=).with("123_REFUNDED")
-            expect(refund).to receive(:date_entered=).with(Date.current)
-            expect(refund).to receive(:date_received=).with(Date.current)
-            expect(refund).to receive(:amount=).with(-500)
-            expect(refund).to receive(:registration_reference=).with("registration_reference")
-            expect(refund).to receive(:updated_by_user=).with("user@example.com")
-            expect(refund).to receive(:world_pay_payment_status=).with("AUTHORISED")
-
-            expect(I18n).to receive(:t).with("refunds.comments.card", type: "Payment Type").and_return(description)
-            expect(refund).to receive(:comment=).with(description)
-
-            expect(Worldpay::RefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(true)
 
             expect(refund_service.run(finance_details: finance_details, payment: payment, user: user)).to be_truthy
           end

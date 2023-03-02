@@ -230,40 +230,16 @@ RSpec.describe ActionLinksHelper do
         context "with a worldpay payment" do
           let(:resource) { build(:finance_details, :has_overpaid_order_and_payment) }
 
-          context "with govpay payments enabled" do
-            before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(true) }
-
-            it "returns false" do
-              expect(helper.display_refund_link_for?(resource)).to be(false)
-            end
-          end
-
-          context "with govpay payments disabled" do
-            before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(false) }
-
-            it "returns true" do
-              expect(helper.display_refund_link_for?(resource)).to be(true)
-            end
+          it "returns false" do
+            expect(helper.display_refund_link_for?(resource)).to be(false)
           end
         end
 
         context "with a govpay payment" do
           let(:resource) { build(:finance_details, :has_overpaid_order_and_payment_govpay) }
 
-          context "with govpay payments enabled" do
-            before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(true) }
-
-            it "returns true" do
-              expect(helper.display_refund_link_for?(resource)).to be(true)
-            end
-          end
-
-          context "with govpay payments disabled" do
-            before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(false) }
-
-            it "returns false" do
-              expect(helper.display_refund_link_for?(resource)).to be(false)
-            end
+          it "returns true" do
+            expect(helper.display_refund_link_for?(resource)).to be(true)
           end
         end
       end
@@ -304,14 +280,6 @@ RSpec.describe ActionLinksHelper do
 
       context "when the resource has been submitted" do
         before { resource.workflow_state = "renewal_received_pending_payment_form" }
-
-        it "returns false" do
-          expect(helper.display_resume_link_for?(resource)).to be(false)
-        end
-      end
-
-      context "when the resource is in WorldPay" do
-        before { resource.workflow_state = "worldpay_form" }
 
         it "returns false" do
           expect(helper.display_resume_link_for?(resource)).to be(false)

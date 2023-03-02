@@ -62,7 +62,6 @@ RSpec/MessageSpies:
     - 'spec/services/reports/epr_export_service_spec.rb'
     - 'spec/services/reports/finance_reports_service_spec.rb'
     - 'spec/services/second_renewal_reminder_service_spec.rb'
-    - 'spec/services/worldpay/refund_service_spec.rb'
 
 # Offense count: 232
 RSpec/MultipleExpectations:
@@ -205,4 +204,3 @@ RSpec/VerifiedDoubles:
     - 'spec/services/reports/boxi_export_service_spec.rb'
     - 'spec/services/reports/finance_reports_aws_service_spec.rb'
     - 'spec/services/reports/finance_reports_service_spec.rb'
-    - 'spec/services/worldpay/refund_service_spec.rb'

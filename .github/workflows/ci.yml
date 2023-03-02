@@ -26,12 +26,6 @@ jobs:
       NOTIFY_API_KEY: ${{ secrets.NOTIFY_API_KEY }}
 
       # Just used to make the tests pass
-      WCRS_WORLDPAY_MOTO_USERNAME: foo
-      WCRS_WORLDPAY_MOTO_PASSWORD: foo
-      WCRS_WORLDPAY_MOTO_MERCHANTCODE: abc
-      WCRS_WORLDPAY_MOTO_MACSECRET: def
-      WCRS_WORLDPAY_ECOM_USERNAME: foo
-      WCRS_WORLDPAY_ECOM_PASSWORD: foo
       WCRS_USE_XVFB_FOR_WICKEDPDF: true
 
     # Service containers to run with `runner-job`

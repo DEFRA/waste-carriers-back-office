@@ -94,18 +94,6 @@ RSpec.describe "PaymentForms" do
         end
       end
 
-      context "when the payment_type is worldpay_missed" do
-        before do
-          params[:payment_type] = "worldpay_missed"
-        end
-
-        it "redirects to the worldpay_missed payment form" do
-          post "/bo/resources/#{transient_registration._id}/payments", params: { payment_form: params }
-
-          expect(response).to redirect_to(new_resource_worldpay_missed_payment_form_path(transient_registration._id))
-        end
-      end
-
       context "when the payment_type is not recognised" do
         before do
           params[:payment_type] = "foo"

@@ -29,8 +29,7 @@ WasteCarriersEngine.configure do |configuration|
 
   # By telling the engine it is hosted in the back-office it can make decisions
   # about any changes in behaviour needed. For example, the payment confirmation
-  # email from Worldpay is only applicable to users in the front-office. This is
-  # because Worldpay does not send one if the merchant code is MOTO. So the
+  # email is only applicable to users in the front-office. So the
   # engine can use this flag to determine whether to show payment confirmation
   # related content
   configuration.host_is_back_office = true

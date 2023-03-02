@@ -11,9 +11,9 @@ class RefundsController < ApplicationController
   before_action :fetch_payment, only: %i[new create]
 
   def index
-    # Do not list worldpay payments if govpay is active, and vice-versa.
+    # Do not list worldpay payments for refunding.
     payments = @resource.finance_details.payments.refundable.reject do |payment|
-      payment.payment_type == (WasteCarriersEngine::FeatureToggle.active?(:govpay_payments) ? "WORLDPAY" : "GOVPAY")
+      payment.payment_type == "WORLDPAY"
     end
     @payments = ::PaymentPresenter.create_from_collection(payments, view_context)
   end
@@ -29,8 +29,7 @@ class RefundsController < ApplicationController
     response = ProcessRefundService.run(
       finance_details: @resource.finance_details,
       payment: @payment,
-      user: current_user,
-      refunder: refunder
+      user: current_user
     )
     if response
       flash_success(
@@ -46,15 +45,6 @@ class RefundsController < ApplicationController
   end
 
   private
-
-  def refunder
-    @refunder ||=
-      if @payment.govpay?
-        GovpayRefundService
-      elsif @payment.worldpay?
-        ::Worldpay::RefundService
-      end
-  end
 
   def fetch_payment
     @payment = @resource.finance_details.payments.refundable.where(order_key: params[:order_key]).first

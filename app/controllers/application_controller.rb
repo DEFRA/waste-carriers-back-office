@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   rescue_from StandardError do |e|
     Airbrake.notify e
     Rails.logger.error "Unhandled exception: #{e}"
-    log_transient_registration_details("Uncaught system error", @transient_registration)
+    log_transient_registration_details("Uncaught system error", e, @transient_registration)
     redirect_to "/bo/pages/system_error"
   end
 

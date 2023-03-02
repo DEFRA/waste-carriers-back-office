@@ -63,8 +63,7 @@ module ActionLinksHelper
     return false if resource.balance >= 0
 
     # Display the link only if there is at least one payment of the relevant type
-    refundable_type = WasteCarriersEngine::FeatureToggle.active?(:govpay_payments) ? "GOVPAY" : "WORLDPAY"
-    return false if resource.payments.find { |payment| payment.payment_type == refundable_type }.nil?
+    return false if resource.payments.find { |payment| payment.payment_type == "GOVPAY" }.nil?
 
     can?(:refund, resource)
   end
@@ -194,7 +193,6 @@ module ActionLinksHelper
   def display_resume_link_for_renewal?(resource)
     return false unless display_renewing_registration_links?(resource)
     return false if resource.renewal_application_submitted?
-    return false if resource.workflow_state == "worldpay_form"
 
     can?(:renew, resource)
   end

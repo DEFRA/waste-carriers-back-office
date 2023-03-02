@@ -44,7 +44,7 @@ class Ability
   end
 
   def permissions_for_agency_user
-    # This covers everything mounted in the engine and used for the assisted digital journey, including WorldPay
+    # This covers everything mounted in the engine and used for the assisted digital journey
     can :update, WasteCarriersEngine::RenewingRegistration
     can :create, WasteCarriersEngine::Registration
     can :renew, :all
@@ -96,12 +96,13 @@ class Ability
     can :charge_adjust, :all
     can :write_off_large, WasteCarriersEngine::FinanceDetails
     can :view_certificate, WasteCarriersEngine::Registration
-    can :record_worldpay_missed_payment, :all
     can :view_payments, :all
 
+    # rubocop:disable Style/SymbolProc
     can :reverse, WasteCarriersEngine::Payment do |payment|
-      payment.worldpay? || payment.worldpay_missed? || payment.govpay?
+      payment.govpay?
     end
+    # rubocop:enable Style/SymbolProc
   end
 
   def permissions_for_agency_super_user

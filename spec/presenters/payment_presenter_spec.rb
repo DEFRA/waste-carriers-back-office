@@ -152,7 +152,7 @@ RSpec.describe PaymentPresenter do
   end
 
   describe "#refunded_message" do
-    let(:world_pay_payment_status) { "world_pay_payment_status" }
+    let(:govpay_payment_status) { "govpay_payment_status" }
     let(:refunded_payment) { double(:refunded_payment) }
 
     before do
@@ -161,23 +161,23 @@ RSpec.describe PaymentPresenter do
       allow(finance_details).to receive(:payments).and_return(scope)
       allow(scope).to receive(:where).with(order_key: "123_REFUNDED").and_return([refunded_payment])
 
-      allow(payment).to receive(:worldpay?).and_return(worldpay)
-      allow(refunded_payment).to receive(:world_pay_payment_status).and_return(world_pay_payment_status)
+      allow(payment).to receive(:govpay?).and_return(govpay)
+      allow(refunded_payment).to receive(:govpay_payment_status).and_return(govpay_payment_status)
     end
 
-    context "when the payment is a card paymend" do
-      let(:worldpay) { true }
+    context "when the payment is a card payment" do
+      let(:govpay) { true }
 
       it "returns a card payment refunded message" do
         result = double(:result)
 
-        allow(I18n).to receive(:t).with(".refunds.refunded_message.card", refund_status: world_pay_payment_status).and_return(result)
+        allow(I18n).to receive(:t).with(".refunds.refunded_message.card", refund_status: govpay_payment_status).and_return(result)
         expect(subject.refunded_message).to eq(result)
       end
     end
 
     context "when the payment is a cash payment" do
-      let(:worldpay) { false }
+      let(:govpay) { false }
 
       it "returns a cash payment refunded message" do
         result = double(:result)

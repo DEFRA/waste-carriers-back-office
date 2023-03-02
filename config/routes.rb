@@ -80,21 +80,6 @@ Rails.application.routes.draw do
                         path: "payments/bank-transfer",
                         path_names: { new: "" }
 
-              resources :worldpay_missed_payment_forms,
-                        only: %i[new create],
-                        path: "payments/worldpay-missed",
-                        path_names: { new: "" }
-
-              resources :worldpay_escapes,
-                        only: :new,
-                        path: "revert-to-payment-summary",
-                        path_names: { new: "" }
-
-              resources :worldpay_missed_payment_new_registrations,
-                        only: :new,
-                        path: "missed-worldpay-payment-new-registration",
-                        path_names: { new: "" }
-
               resource :finance_details,
                        only: :show,
                        path: "finance-details"

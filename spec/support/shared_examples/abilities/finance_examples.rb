@@ -92,10 +92,6 @@ RSpec.shared_examples "finance examples" do
     expect(subject).not_to be_able_to(:record_postal_order_payment, WasteCarriersEngine::RenewingRegistration)
   end
 
-  it "is not able to record a worldpay payment" do
-    expect(subject).not_to be_able_to(:record_worldpay_missed_payment, WasteCarriersEngine::RenewingRegistration)
-  end
-
   it "is not able to review convictions" do
     expect(subject).not_to be_able_to(:review_convictions, WasteCarriersEngine::RenewingRegistration)
   end

@@ -22,7 +22,7 @@ FactoryBot.define do
       upper
 
       after(:build, :create) do |new_registration|
-        new_registration.prepare_for_payment(:worldpay, nil)
+        new_registration.prepare_for_payment(:govpay, nil)
       end
     end
 

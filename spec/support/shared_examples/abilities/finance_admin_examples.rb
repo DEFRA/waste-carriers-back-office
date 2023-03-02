@@ -3,10 +3,6 @@
 RSpec.shared_examples "finance_admin examples" do
   # finance_admin and finance_super users should be able to do this:
 
-  it "is able to record a worldpay payment" do
-    expect(subject).to be_able_to(:record_worldpay_missed_payment, WasteCarriersEngine::RenewingRegistration)
-  end
-
   it "is able to view the certificate" do
     expect(subject).to be_able_to(:view_certificate, WasteCarriersEngine::Registration)
   end
@@ -16,16 +12,8 @@ RSpec.shared_examples "finance_admin examples" do
   end
 
   context "when action is :reverse" do
-    context "when the payment is a worldpay" do
-      let(:payment) { build(:payment, :worldpay) }
-
-      it "is able to reverse the payment" do
-        expect(subject).to be_able_to(:reverse, payment)
-      end
-    end
-
-    context "when the payment is a worldpay_missed" do
-      let(:payment) { build(:payment, :worldpay_missed) }
+    context "when the payment is govpay" do
+      let(:payment) { build(:payment, :govpay) }
 
       it "is able to reverse the payment" do
         expect(subject).to be_able_to(:reverse, payment)

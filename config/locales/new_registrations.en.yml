@@ -11,15 +11,9 @@ en:
           in_progress: "Application in progress"
         messages:
           in_progress: "The current form is"
-          worldpay:
-            paragraph1: "The user is currently attempting to pay by WorldPay."
-            paragraph2:
-              revert: "If an error has occurred and the user is stuck, you can send the registration back to the payment summary page. They can try to pay with WorldPay again, or select an alternative payment method."
-              missed_payment: "If an error has occurred and payment has been received, but not recorded, you can record a missed WorldPay payment."
         actions:
           continue_button: "Continue as assisted digital"
           revert_to_payment_summary_button: "Send back to payment summary"
-          missed_worldpay_payment_button: "Add a missed WorldPay payment"
       conviction_heading: "Convictions"
       conviction_link: "Conviction details"
       conviction_information:

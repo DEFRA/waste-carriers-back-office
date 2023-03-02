@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class ProcessRefundService < WasteCarriersEngine::BaseService
-  def run(finance_details:, payment:, user:, refunder: ::Worldpay::RefundService)
+  def run(finance_details:, payment:, user:)
     @finance_details = finance_details
     @payment = payment
     @user = user
-    @refunder = refunder
 
     return false if amount_to_refund.zero?
     return false if card_payment? && !refunded?
@@ -24,12 +23,10 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
 
   private
 
-  attr_reader :payment, :user, :finance_details, :refunder
+  attr_reader :payment, :user, :finance_details
 
   def refunded?
-    Rails.logger.warn "\n============ process_refund_service\n"
-    Rails.logger.warn "\n============ process_refund_service, refunder: #{refunder}\n"
-    @_refunded ||= refunder.run(
+    @_refunded ||= GovpayRefundService.run(
       payment: payment,
       amount: amount_to_refund,
       merchant_code: order.merchant_id
@@ -56,8 +53,6 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     refund.updated_by_user = user.email
     refund.comment = refund_comment
 
-    refund.world_pay_payment_status = "AUTHORISED" if payment.worldpay?
-
     refund
   end
 
@@ -66,7 +61,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   end
 
   def card_payment?
-    payment.worldpay? || payment.govpay?
+    payment.govpay?
   end
 
   def refund_comment

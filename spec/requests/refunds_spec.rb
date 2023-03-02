@@ -18,8 +18,6 @@ RSpec.describe "Refunds" do
 
         sign_in(user)
 
-        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(govpay_active?)
-
         get resource_refunds_path(renewing_registration._id)
       end
 
@@ -28,22 +26,9 @@ RSpec.describe "Refunds" do
         expect(response).to have_http_status(:ok)
       end
 
-      context "with govpay payments enabled" do
-        let(:govpay_active?) { true }
-
-        it "lists only govpay payments" do
-          expect(response.body).to match(/#{govpay_payment.order_key}/)
-          expect(response.body).not_to match(/#{worldpay_payment.order_key}/)
-        end
-      end
-
-      context "with govpay payments disabled" do
-        let(:govpay_active?) { false }
-
-        it "lists only worldpay payments" do
-          expect(response.body).to match(/#{worldpay_payment.order_key}/)
-          expect(response.body).not_to match(/#{govpay_payment.order_key}/)
-        end
+      it "lists only govpay payments" do
+        expect(response.body).to match(/#{govpay_payment.order_key}/)
+        expect(response.body).not_to match(/#{worldpay_payment.order_key}/)
       end
     end
 
@@ -112,62 +97,6 @@ RSpec.describe "Refunds" do
 
           expect(response).to redirect_to(resource_finance_details_path(renewing_registration._id))
           expect(response).to have_http_status(:found)
-        end
-      end
-
-      context "when the payment is a worldpay payment" do
-        let(:renewing_registration) { create(:renewing_registration, :overpaid) }
-
-        it "creates a refund payment, redirects to the finance details page, sends a confirmation to worldpay and returns a 302 status" do
-          payment.payment_type = WasteCarriersEngine::Payment::WORLDPAY
-          payment.save
-
-          worldpay_valid_response = <<-XML
-            <?xml version="1.0" encoding="UTF-8"?>
-            <!DOCTYPE paymentService PUBLIC "-//WorldPay//DTD WorldPay PaymentService v1//EN" "http://dtd.worldpay.com/paymentService_v1.dtd">
-            <paymentService version="1.4" merchantCode="EASERRSIMMOTO">
-              <reply>
-                <ok>
-                  <refundReceived orderCode="">
-                    <amount value="100" currencyCode="GBP" exponent="2" debitCreditIndicator="credit"/>
-                  </refundReceived>
-                </ok>
-              </reply>
-            </paymentService>
-          XML
-
-          stub_request(:post, Rails.configuration.worldpay_url).to_return(body: worldpay_valid_response)
-
-          expected_payments_count = renewing_registration.finance_details.payments.count + 1
-
-          post resource_refunds_path(renewing_registration._id), params: { order_key: payment.order_key }
-
-          renewing_registration.reload
-          expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
-
-          expect(response).to redirect_to(resource_finance_details_path(renewing_registration._id))
-          expect(response).to have_http_status(:found)
-        end
-
-        context "when the request to worldpay returns unexpected results" do
-          it "does not create a payment and redirects to the finance details page" do
-            payment.payment_type = WasteCarriersEngine::Payment::WORLDPAY
-            payment.save
-
-            worldpay_response = ""
-
-            stub_request(:post, Rails.configuration.worldpay_url).to_return(body: worldpay_response)
-
-            expected_payments_count = renewing_registration.finance_details.payments.count
-
-            post resource_refunds_path(renewing_registration._id), params: { order_key: payment.order_key }
-
-            renewing_registration.reload
-            expect(renewing_registration.finance_details.payments.count).to eq(expected_payments_count)
-
-            expect(response).to redirect_to(resource_finance_details_path(renewing_registration._id))
-            expect(response).to have_http_status(:found)
-          end
         end
       end
     end

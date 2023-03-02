@@ -24,29 +24,11 @@
               <%= t(".status.headings.in_progress") %>
             </h2>
 
-            <% if @transient_registration.workflow_state == "worldpay_form" %>
-              <p class="govuk-body">
-                <%= t(".status.messages.worldpay.paragraph1") %>
-              </p>
-
-              <% if can? :revert_to_payment_summary, @transient_registration %>
-                <p class="govuk-body">
-                  <%= t(".status.messages.worldpay.paragraph2.revert") %>
-                </p>
-                <%= link_to t(".status.actions.revert_to_payment_summary_button"), new_resource_worldpay_escape_path(@transient_registration._id), class: 'button' %>
-              <% elsif can? :record_worldpay_missed_payment, @transient_registration %>
-                <p class="govuk-body">
-                  <%= t(".status.messages.worldpay.paragraph2.missed_payment") %>
-                </p>
-                <%= link_to t(".status.actions.missed_worldpay_payment_button"), new_resource_worldpay_missed_payment_form_path(@transient_registration._id), class: 'button' %>
-              <% end %>
-            <% else %>
-              <p class="govuk-body">
-                <%= @transient_registration.display_current_workflow_state %>
-              </p>
-              <% if can? :renew, @transient_registration %>
-                <%= link_to t(".status.actions.continue_button"), resume_link_for(@transient_registration), class: 'govuk-button' %>
-              <% end %>
+            <p class="govuk-body">
+              <%= @transient_registration.display_current_workflow_state %>
+            </p>
+            <% if can? :renew, @transient_registration %>
+              <%= link_to t(".status.actions.continue_button"), resume_link_for(@transient_registration), class: 'govuk-button' %>
             <% end %>
           </div>
         <% end %>
