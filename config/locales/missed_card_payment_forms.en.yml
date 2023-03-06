@@ -1,0 +1,19 @@
+en:
+  missed_card_payment_forms:
+    new:
+      title: "Add a missed card payment"
+      heading: "Add a missed card payment for %{reg_identifier}"
+  activemodel:
+    errors:
+      models:
+        missed_card_payment_form:
+          attributes:
+            amount:
+              not_a_number: "You must enter a valid number"
+              greater_than_or_equal_to: "You must enter a number greater than or equal to 0.01"
+            comment:
+              too_long: "Your comment must not be longer than 500 characters"
+            date_received:
+              blank: "You must enter a valid date"
+            registration_reference:
+              blank: "You must enter a reference"

@@ -96,6 +96,7 @@ class Ability
     can :charge_adjust, :all
     can :write_off_large, WasteCarriersEngine::FinanceDetails
     can :view_certificate, WasteCarriersEngine::Registration
+    can :record_missed_card_payment, :all
     can :view_payments, :all
 
     # rubocop:disable Style/SymbolProc

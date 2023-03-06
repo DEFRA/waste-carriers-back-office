@@ -80,6 +80,16 @@ Rails.application.routes.draw do
                         path: "payments/bank-transfer",
                         path_names: { new: "" }
 
+              resources :missed_card_payment_forms,
+                        only: %i[new create],
+                        path: "payments/missed-card-payment",
+                        path_names: { new: "" }
+
+              resources :missed_card_payment_new_registrations,
+                        only: :new,
+                        path: "missed-card-payment-new-registration",
+                        path_names: { new: "" }
+
               resource :finance_details,
                        only: :show,
                        path: "finance-details"

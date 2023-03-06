@@ -3,7 +3,7 @@
 class PaymentForm
   include ActiveModel::Model
 
-  PAYMENT_TYPES = %w[cash cheque postal_order bank_transfer worldpay_missed].freeze
+  PAYMENT_TYPES = %w[cash cheque postal_order bank_transfer missed_card].freeze
 
   attr_accessor :payment_type
 
