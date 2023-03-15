@@ -8,7 +8,9 @@
 
     <%= form_tag(email_exports_path) do %>
       <div class="govuk-form-group">
-        <legend class="govuk-visually-hidden"> <%= t(".heading") %> </legend>
+        <label class="govuk-label govuk-visually-hidden" for="batch_size">
+          <%= t(".heading") %>
+        </label>
 
         <input name="batch_size" type="text" class="govuk-input govuk-!-width-one-half" inputmode="numeric" pattern="[0-9]*">
       </div>
