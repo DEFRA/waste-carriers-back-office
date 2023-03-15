@@ -27,7 +27,7 @@
               <%= link_to export.export_filename, email_exports_path(id: export.id) %>
             </td>
             <td class="govuk-table__cell">
-              <table style="border: none">
+              <table style="border: none" aria-label=<%= t(".downloaded_by") %> >
                 <% export.download_log.each do |dl| %>
                 <tr><th></th><th></th></tr>
                 <tr><td>
@@ -37,7 +37,7 @@
               </table>
             </td>
             <td class="govuk-table__cell">
-              <table style="border: none">
+              <table style="border: none" aria-label=<%= t(".downloaded_at") %> >
                 <% export.download_log.each do |dl| %>
                 <tr><th></th><th></th></tr>
                 <tr><td>
