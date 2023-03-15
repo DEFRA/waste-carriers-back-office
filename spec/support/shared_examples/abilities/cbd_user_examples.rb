@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "cbd user examples" do
+
+  it "is able to view bulk email exports" do
+    expect(subject).to be_able_to(:read, DeregistrationEmailExportService)
+  end
+
   it "is able to manage back office users" do
     expect(subject).to be_able_to(:manage_back_office_users, User)
   end

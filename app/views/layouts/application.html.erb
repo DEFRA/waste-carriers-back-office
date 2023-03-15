@@ -77,7 +77,21 @@
                 main_app.card_order_exports_path,
                 class: "govuk-header__link"  %>
           </li>
-        <% end %>      </ul>
+        <% end %>
+
+        <% if can?(:read, DeregistrationEmailExportService, current_user) %>
+          <li class="govuk-header__navigation-item">
+            <%= link_to t("layouts.application.menu.email_exports"),
+                main_app.new_email_exports_path,
+                class: "govuk-header__link"  %>
+          </li>
+          <li class="govuk-header__navigation-item">
+            <%= link_to t("layouts.application.menu.email_export_list"),
+                main_app.new_email_exports_list_path,
+                class: "govuk-header__link"  %>
+          </li>
+        <% end %>
+      </ul>
     </nav>
   <% end %>
 <% end %>

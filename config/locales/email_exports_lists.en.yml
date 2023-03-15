@@ -1,0 +1,8 @@
+en:
+  email_exports_lists:
+    new:
+      title: Lower tier email export
+      heading: Lower tier email export
+      file_name: Export File
+      downloaded_by: Downloaded By
+      downloaded_at: Downloaded At

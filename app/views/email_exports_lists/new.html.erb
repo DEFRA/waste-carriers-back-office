@@ -1,0 +1,53 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= render("waste_carriers_engine/shared/back", back_path: bo_path) %>
+
+    <h1 class="govuk-heading-l"> <%= t(".heading") %> </h1>
+
+    <%= render("shared/flash_messages") %>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <table class="govuk-table" aria-label="<%= t(".heading") %>" >
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col"><%= t(".file_name") %></th>
+          <th class="govuk-table__header" scope="col"><%= t(".downloaded_by") %></th>
+          <th class="govuk-table__header" scope="col"><%= t(".downloaded_at") %></th>
+        </tr>
+      </thead>
+
+      <tbody class="govuk-table__body govuk-body-s">
+        <% email_exports.sort_by { |e| e.exported_at }.reverse.each do |export| %>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <%= link_to export.export_filename, email_exports_path(id: export.id) %>
+            </td>
+            <td class="govuk-table__cell">
+              <table style="border: none">
+                <% export.download_log.each do |dl| %>
+                <tr><td>
+                  <%= dl[:by] %>
+                </td></tr>
+                <% end %>
+              </table>
+            </td>
+            <td class="govuk-table__cell">
+              <table style="border: none">
+                <% export.download_log.each do |dl| %>
+                <tr><td>
+                  <%= dl[:at].try(:strftime, Time::DATE_FORMATS[:year_month_day_hour_minutes_hyphens]) %>
+                </td></tr>
+                <% end %>
+              </table>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>

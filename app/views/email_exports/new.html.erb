@@ -1,0 +1,19 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= render("waste_carriers_engine/shared/back", back_path: bo_path) %>
+
+    <h1 class="govuk-heading-l"> <%= t(".heading") %> </h1>
+
+    <%= render("shared/flash_messages") %>
+
+    <%= form_tag(email_exports_path) do %>
+      <div class="govuk-form-group">
+        <input name="batch_size" type="text" class="govuk-input govuk-!-width-one-half" inputmode="numeric" pattern="[0-9]*">
+      </div>
+
+      <div class="govuk-form-group">
+        <%= submit_tag t(".button"), class: "govuk-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+en:
+  email_exports:
+    new:
+      title: How many emails do you want in this batch?
+      heading: How many emails do you want in this batch?
+      button: Continue
+    messages:
+      error: Invalid batch size
+      invalid_batch_size: Enter the number of emails to be included in the export

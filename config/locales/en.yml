@@ -5,66 +5,68 @@ en:
     application:
       feedback_url: https://www.gov.uk/done/waste-carrier-or-broker-registration
       menu:
-        dashboard: "Registrations search"
-        convictions: "Conviction checks"
-        letters: "Download letters"
-        users: "Manage users"
-        conviction_imports: "Import conviction data"
-        finance_reports: "Download finance reports"
+        dashboard: Registrations search
+        convictions: Conviction checks
+        letters: Download letters
+        users: Manage users
+        conviction_imports: Import conviction data
+        finance_reports: Download finance reports
         quarterly_reports: DEFRA quarterly statistics
-        feature_toggles: "Toggle features"
-        card_order_exports: "Copy card orders"
+        feature_toggles: Toggle features
+        card_order_exports: Copy card orders
+        email_exports: Email exports
+        email_export_list: Export list
       user_info:
         signed_in_user: "Signed in as %{email}."
-        sign_out_link: "Sign out"
+        sign_out_link: Sign out
   shared:
     conviction_search_result:
-      match_result: "Match result"
-      matching_system: "Matching system"
-      reference: "Reference"
-      matched_name: "Matched name"
-      searched_at: "Searched at"
-      confirmed: "Confirmed"
+      match_result: Match result
+      matching_system: Matching system
+      reference: Reference
+      matched_name: Matched name
+      searched_at: Searched at
+      confirmed: Confirmed
     payment_form:
       current_balance: "The current balance is £%{balance}."
       labels:
         amount: "Amount received (£)"
-        amount_hint: "For example, 120.50"
-        date_received: "Date received"
-        date_received_hint: "For example, 26 5 2018"
-        date_received_day: "Day"
-        date_received_month: "Month"
-        date_received_year: "Year"
-        registration_reference: "Transaction reference"
-        comment: "Reason"
-        comment_hint: "Maximum 500 characters"
-      renewal_message: "This application will automatically be completed once it is fully paid for and there are no pending conviction checks."
-      submit_button: "Add this payment"
+        amount_hint: For example, 120.50
+        date_received: Date received
+        date_received_hint: For example, 26 5 2018
+        date_received_day: Day
+        date_received_month: Month
+        date_received_year: Year
+        registration_reference: Transaction reference
+        comment: Reason
+        comment_hint: Maximum 500 characters
+      renewal_message: This application will automatically be completed once it is fully paid for and there are no pending conviction checks.
+      submit_button: Add this payment
     person_table_rows:
-      name: "Name"
-      position: "Position"
-      dob: "Date of birth"
+      name: Name
+      position: Position
+      dob: Date of birth
     select_role:
       roles:
         legend: "Select a role:"
         options:
-          agency: "Agency user"
-          agency_with_refund: "Agency user with refund"
-          finance: "Finance user"
-          finance_admin: "Finance admin user"
-          agency_super: "Agency super user"
-          finance_super: "Finance super user"
-          developer: "Developer"
-          cbd_user: "Agency user who can import conviction data and download finance reports"
-          data_agent: "User who can only read data"
+          agency: Agency user
+          agency_with_refund: Agency user with refund
+          finance: Finance user
+          finance_admin: Finance admin user
+          agency_super: Agency super user
+          finance_super: Finance super user
+          developer: Developer
+          cbd_user: Agency user who can import conviction data and download finance reports
+          data_agent: User who can only read data
 
   # Kaminari overrides
   helpers:
     page_entries_info:
       one_page:
         display_entries:
-          zero: "No results found"
-          one: "Displaying 1 result"
+          zero: No results found
+          one: Displaying 1 result
           other: "Displaying all %{count} results"
       more_pages:
         display_entries: "Showing %{first} &ndash; %{last} of %{total} results"

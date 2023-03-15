@@ -61,14 +61,16 @@ module WasteCarriersBackOffice
 
     # Data export config
     config.epr_reports_bucket_name = ENV.fetch("AWS_DAILY_EXPORT_BUCKET", nil)
-    config.epr_export_filename = ENV["EPR_DAILY_REPORT_FILE_NAME"] || "waste_carriers_epr_daily_full"
+    config.epr_export_filename = ENV.fetch("EPR_DAILY_REPORT_FILE_NAME", "waste_carriers_epr_daily_full")
     config.boxi_exports_bucket_name = ENV.fetch("AWS_BOXI_EXPORT_BUCKET", nil)
-    config.boxi_exports_filename = ENV["BOXI_EXPORTS_FILENAME"] || "waste_carriers_boxi_daily_full"
+    config.boxi_exports_filename = ENV.fetch("BOXI_EXPORTS_FILENAME", "waste_carriers_boxi_daily_full")
     config.weekly_exports_bucket_name = ENV.fetch("AWS_WEEKLY_EXPORT_BUCKET", nil)
-    config.card_orders_export_filename = ENV["CARD_ORDERS_EXPORT_FILENAME"] || "card_orders"
-    config.finance_report_filename_prefix = ENV["FINANCE_REPORT_FILENAME_PREFIX"] || "finance_stats_"
+    config.card_orders_export_filename = ENV.fetch("CARD_ORDERS_EXPORT_FILENAME", "card_orders")
+    config.finance_report_filename_prefix = ENV.fetch("FINANCE_REPORT_FILENAME_PREFIX", "finance_stats_")
     config.finance_reports_bucket_name = ENV.fetch("FINANCE_REPORTS_BUCKET", nil)
-    config.finance_reports_directory = ENV["FINANCE_REPORTS"] || "FINANCE_REPORTS"
+    config.finance_reports_directory = ENV.fetch("FINANCE_REPORTS", "FINANCE_REPORTS")
+    config.email_exports_bucket_name = ENV.fetch("AWS_EMAIL_EXPORT_BUCKET", nil)
+    config.email_exports_directory = ENV.fetch("EMAIL_EXPORTS_DIRECTORY", "EMAIL_EXPORTS")
 
     # Data retention
     config.data_retention_years = ENV["DATA_RETENTION_YEARS"] || 7

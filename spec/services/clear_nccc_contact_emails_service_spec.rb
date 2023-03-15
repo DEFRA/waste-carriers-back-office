@@ -17,7 +17,7 @@ RSpec.describe ClearNcccContactEmailsService do
 
     shared_examples "clears the contact_email" do |base_contact_email|
 
-      context "upper case (#{base_contact_email})" do
+      context "with upper case (#{base_contact_email})" do
         let(:contact_email) { base_contact_email.upcase }
 
         it "sets contact_email to nil" do
@@ -25,7 +25,7 @@ RSpec.describe ClearNcccContactEmailsService do
         end
       end
 
-      context "lower case (#{base_contact_email})" do
+      context "with lower case (#{base_contact_email})" do
         let(:contact_email) { base_contact_email.downcase }
 
         it "sets contact_email to nil" do
@@ -33,7 +33,7 @@ RSpec.describe ClearNcccContactEmailsService do
         end
       end
 
-      context "mixed case (#{base_contact_email})" do
+      context "with mixed case (#{base_contact_email})" do
         let(:contact_email) { mix_case(base_contact_email.to_s) }
 
         it "sets contact_email to nil" do
