@@ -13,7 +13,9 @@ class EmailExportsController < ApplicationController
     redirect_to URI.parse(export_log.download_link).to_s
   end
 
-  def new; end
+  def new
+    # intentionally empty (SonarCloud)
+  end
 
   def create
     batch_size = params[:batch_size].to_i
