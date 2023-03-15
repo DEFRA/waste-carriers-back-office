@@ -57,13 +57,13 @@ RSpec.describe "EmailExports" do
       context "with a valid batch size" do
         it "runs the DeregistrationEmailExportService" do
           post "/bo/email-exports", params: { batch_size: 5 }
-  
+
           expect(DeregistrationEmailExportService).to have_received(:run)
         end
-  
+
         it "redirects to the exports list page" do
           post "/bo/email-exports", params: { batch_size: 5 }
-  
+
           expect(response).to redirect_to(new_email_exports_list_path)
         end
       end
@@ -71,7 +71,7 @@ RSpec.describe "EmailExports" do
       context "with an invalid batch size" do
         it "does not run the DeregistrationEmailExportService" do
           post "/bo/email-exports", params: { batch_size: nil }
-  
+
           expect(DeregistrationEmailExportService).not_to have_received(:run)
         end
       end
