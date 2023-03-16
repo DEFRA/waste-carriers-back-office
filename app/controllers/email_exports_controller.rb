@@ -9,7 +9,7 @@ class EmailExportsController < ApplicationController
     export_log = EmailExportLog.find(params[:id])
     export_log.download_log << { at: Time.zone.now, by: current_user.email }
     export_log.save!
-    Rails.logger.warn "\nRedirecting to #{export_log.download_link}\n"
+    Rails.logger.info "\nRedirecting to #{export_log.download_link}\n"
     redirect_to URI.parse(export_log.download_link).to_s
   end
 
@@ -19,8 +19,6 @@ class EmailExportsController < ApplicationController
 
   def create
     batch_size = params[:batch_size].to_i
-
-    Rails.logger.warn "\nbatch size: #{batch_size}\n"
 
     if valid_batch_size?(batch_size)
       DeregistrationEmailExportService.run(params[:batch_size])

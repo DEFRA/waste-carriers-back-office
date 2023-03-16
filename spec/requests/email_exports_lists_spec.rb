@@ -26,9 +26,7 @@ RSpec.describe "EmailExportsLists" do
     context "when a non-CBD user is signed in" do
       let(:user) { create(:user, role: :agency) }
 
-      before do
-        sign_in(user)
-      end
+      before { sign_in(user) }
 
       it "redirects to the permissions error page" do
         get "/bo/email-exports-list/new"

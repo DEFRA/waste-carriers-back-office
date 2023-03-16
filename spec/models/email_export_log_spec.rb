@@ -27,18 +27,4 @@ RSpec.describe EmailExportLog do
       expect(export_log.download_link).to include export_log.export_filename
     end
   end
-
-  describe "#visit_download_link" do
-    let(:user) { build(:user) }
-
-    it "records the user" do
-      expect { export_log.visit_download_link(user) }.to change { export_log.download_log.length }.by(1)
-      expect(export_log.download_log.first[:by]).to eq user.email
-    end
-
-    it "records the time" do
-      export_log.visit_download_link(user)
-      expect(export_log.download_log.first[:at]).to be_within(1.second).of(DateTime.now)
-    end
-  end
 end

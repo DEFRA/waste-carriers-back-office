@@ -17,11 +17,6 @@ class EmailExportLog
     bucket.presigned_url("EMAIL_EXPORTS/#{export_filename}")
   end
 
-  def visit_download_link(user)
-    download_log << { by: user.email, at: DateTime.now }
-    save!
-  end
-
   private
 
   def bucket
