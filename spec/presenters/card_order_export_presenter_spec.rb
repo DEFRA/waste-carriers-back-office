@@ -24,7 +24,7 @@ RSpec.describe CardOrderExportPresenter do
     context "with a visited download link" do
       let(:user) { create(:user) }
 
-      before { card_orders_export_log.visit_download_link(user) }
+      before { card_orders_export_log.update!(first_visited_by: user.email, first_visited_at: Time.zone.now) }
 
       it "returns the user's email address" do
         expect(subject.first_downloaded_by).to eq user.email
@@ -42,7 +42,7 @@ RSpec.describe CardOrderExportPresenter do
     context "with a visited download link" do
       let(:user) { create(:user) }
 
-      before { card_orders_export_log.visit_download_link(user) }
+      before { card_orders_export_log.update!(first_visited_by: user.email, first_visited_at: Time.zone.now) }
 
       it "returns the link visit time in the correct format" do
         expect(subject.first_downloaded_at).to eq card_orders_export_log.first_visited_at.strftime("%Y-%m-%d %H:%M")

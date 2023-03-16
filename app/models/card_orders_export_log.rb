@@ -23,14 +23,6 @@ class CardOrdersExportLog
     bucket.presigned_url("CARD_ORDERS/#{export_filename}")
   end
 
-  def visit_download_link(user)
-    return if first_visited_by || first_visited_at
-
-    self.first_visited_by = user.email
-    self.first_visited_at = DateTime.now
-    save!
-  end
-
   private
 
   def bucket

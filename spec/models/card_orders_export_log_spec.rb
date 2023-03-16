@@ -25,35 +25,6 @@ RSpec.describe CardOrdersExportLog do
     end
   end
 
-  describe "#visit_download_link" do
-    let(:user) { build(:user) }
-
-    context "when it is the first visit" do
-      it "records the first visit user" do
-        expect { subject.visit_download_link(user) }.to change(subject, :first_visited_by).from(nil).to(user.email)
-      end
-
-      it "records the time of the first visit" do
-        expect { subject.visit_download_link(user) }.to change(subject, :first_visited_at).from(nil)
-        expect(subject.first_visited_at).to be_within(1.second).of(DateTime.now)
-      end
-    end
-
-    context "when it is the second visit" do
-      let(:first_user) { build(:user) }
-
-      before { subject.visit_download_link(first_user) }
-
-      it "does not update the first visit user" do
-        expect { subject.visit_download_link(user) }.not_to change(subject, :first_visited_by).from(first_user.email)
-      end
-
-      it "does not update the time of the first visit" do
-        expect { subject.visit_download_link(user) }.not_to change(subject, :first_visited_at)
-      end
-    end
-  end
-
   describe "#download_link" do
     it "includes the designated AWS S3 bucket name" do
       expect(subject.download_link).to include WasteCarriersBackOffice::Application.config.weekly_exports_bucket_name
