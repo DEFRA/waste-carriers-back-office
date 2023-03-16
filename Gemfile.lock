@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 942d2b524f73cb83235b5f0d8d80cfb7abf46a5d
+  revision: d41597d4a5c64473f9f7b1bd7496a3de84727fd3
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -346,8 +346,8 @@ GEM
       pry (>= 0.13, < 0.15)
     public_suffix (5.0.0)
     racc (1.6.2)
-    rack (2.2.6.3)
-    rack-test (2.0.2)
+    rack (2.2.6.4)
+    rack-test (2.1.0)
       rack (>= 1.3)
     rails (6.1.7.2)
       actioncable (= 6.1.7.2)
