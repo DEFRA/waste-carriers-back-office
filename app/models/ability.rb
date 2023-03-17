@@ -131,6 +131,7 @@ class Ability
     can :import_conviction_data, :all
     can :run_finance_reports, :all
     can :read, Reports::DefraQuarterlyStatsService
+    can :read, DeregistrationEmailExportService
   end
 
   def permissions_for_cbd_user
