@@ -33,7 +33,7 @@ class DeregistrationEmailExportSerializer < Reports::BaseCsvFileSerializer
         "metaData.dateRegistered": { "$lte": registration_date_cutoff }
       )
       .not_selected_for_email(@notify_template_id)
-      .order_by(expires_on: :asc)
+      .order_by("metaData.dateRegistered": :asc)
       .limit(@batch_size)
   end
 

@@ -6,12 +6,20 @@ RSpec.describe DeregistrationEmailExportSerializer do
 
   subject(:serializer) { described_class.new(file_path, email_type, email_template_id, batch_size) }
 
-  let!(:eligible_registration) do
+  let!(:eligible_registration_1) do
     create(:registration,
            tier: "LOWER",
            metaData: build(:metaData,
                            :active,
                            dateRegistered: 15.months.ago))
+  end
+
+  let!(:eligible_registration_2) do
+    create(:registration,
+           tier: "LOWER",
+           metaData: build(:metaData,
+                           :active,
+                           dateRegistered: 2.years.ago))
   end
 
   let!(:recent_registration) do
@@ -77,8 +85,13 @@ RSpec.describe DeregistrationEmailExportSerializer do
         expect(export_content).to include(expected_columns.map { |title| "\"#{title}\"" }.join(","))
       end
 
-      it "includes the eligible registration" do
-        expect(export_content.scan(eligible_registration.reg_identifier).size).to eq 1
+      it "includes the eligible registrations" do
+        expect(export_content.scan(eligible_registration_1.reg_identifier).size).to eq 1
+        expect(export_content.scan(eligible_registration_2.reg_identifier).size).to eq 1
+      end
+
+      it "includes the older eligible registration before the more recent one" do
+        expect(export_content).to match(/#{eligible_registration_2.reg_identifier}.*\n*.*#{eligible_registration_1.reg_identifier}/)
       end
 
       it "does not include the already-emailed registration" do
@@ -122,7 +135,7 @@ RSpec.describe DeregistrationEmailExportSerializer do
 
     context "when serializing the export" do
       it "updates the email history for an eligible registration" do
-        expect { serializer.to_csv }.to change { eligible_registration.reload.email_history.length }.by(1)
+        expect { serializer.to_csv }.to change { eligible_registration_1.reload.email_history.length }.by(1)
       end
 
       it "does not modify the email history for an ineligible registration" do
