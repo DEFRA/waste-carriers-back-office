@@ -26,10 +26,12 @@ class DeregistrationEmailExportSerializer < Reports::BaseCsvFileSerializer
 
   def scope
     WasteCarriersEngine::Registration
+      .active
+      .lower_tier
       .where(
         :contact_email.nin => ["", nil],
         "metaData.dateRegistered": { "$lte": registration_date_cutoff }
-      ).lower_tier
+      )
       .not_selected_for_email(@notify_template_id)
       .order_by(expires_on: :asc)
       .limit(@batch_size)

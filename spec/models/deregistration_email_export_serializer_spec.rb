@@ -8,27 +8,42 @@ RSpec.describe DeregistrationEmailExportSerializer do
 
   let!(:eligible_registration) do
     create(:registration,
-           :active,
            tier: "LOWER",
-           metaData: build(:metaData, dateRegistered: 15.months.ago))
+           metaData: build(:metaData,
+                           :active,
+                           dateRegistered: 15.months.ago))
   end
+
   let!(:recent_registration) do
     create(:registration,
-           :active,
            tier: "LOWER",
-           metaData: build(:metaData, dateRegistered: 3.months.ago))
+           metaData: build(:metaData,
+                           :active,
+                           dateRegistered: 3.months.ago))
   end
+
   let!(:upper_tier_registration) do
     create(:registration,
-           :active,
            tier: "UPPER",
-           metaData: build(:metaData, dateRegistered: 15.months.ago))
+           metaData: build(:metaData,
+                           :active,
+                           dateRegistered: 15.months.ago))
   end
+
+  let!(:revoked_registration) do
+    create(:registration,
+           tier: "LOWER",
+           metaData: build(:metaData,
+                           :revoked,
+                           dateRegistered: 15.months.ago))
+  end
+
   let!(:already_emailed_registration) do
     create(:registration,
-           :active,
            tier: "LOWER",
-           metaData: build(:metaData, dateRegistered: 15.months.ago),
+           metaData: build(:metaData,
+                           :active,
+                           dateRegistered: 15.months.ago),
            email_history: [{ description: "foo", template_id: email_template_id, time: Time.zone.now }])
   end
 
@@ -76,6 +91,10 @@ RSpec.describe DeregistrationEmailExportSerializer do
 
       it "does not include the recent registration" do
         expect(export_content.scan(recent_registration.reg_identifier).size).to eq 0
+      end
+
+      it "does not include the revoked registration" do
+        expect(export_content.scan(revoked_registration.reg_identifier).size).to eq 0
       end
 
       context "when the cutoff months environment variable is set" do
