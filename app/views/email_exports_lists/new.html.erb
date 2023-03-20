@@ -28,7 +28,7 @@
             </td>
             <td class="govuk-table__cell">
               <table style="border: none" aria-label=<%= t(".downloaded_by") %> >
-                <thead></thead>
+                <thead><tr><th></th><th></th></tr></thead>
                 <% export.download_log.each do |dl| %>
                 <tr><td>
                   <%= dl[:by] %>
@@ -38,7 +38,7 @@
             </td>
             <td class="govuk-table__cell">
               <table style="border: none" aria-label=<%= t(".downloaded_at") %> >
-                <thead></thead>
+                <thead><tr><th></th><th></th></tr></thead>
                 <% export.download_log.each do |dl| %>
                 <tr><td>
                   <%= dl[:at].try(:strftime, Time::DATE_FORMATS[:year_month_day_hour_minutes_hyphens]) %>
