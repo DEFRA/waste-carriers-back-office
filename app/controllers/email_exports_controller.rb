@@ -21,7 +21,7 @@ class EmailExportsController < ApplicationController
     batch_size = params[:batch_size].to_i
 
     if valid_batch_size?(batch_size)
-      DeregistrationEmailExportService.run(params[:batch_size])
+      DeregistrationEmailExportService.run(batch_size)
       redirect_to new_email_exports_list_path
     else
       flash_error(I18n.t("email_exports.messages.error"),
