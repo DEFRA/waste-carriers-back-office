@@ -35,9 +35,9 @@ class DeregistrationEmailExportSerializer < Reports::BaseCsvFileSerializer
           "metaData.dateRegistered": { "$lte": registration_date_cutoff },
           "email_history.template_id": { "$nin": [@notify_template_id] }
         } },
-        { "$project": projectable },
         { "$sort": { "metaData.dateRegistered": 1 } },
-        { "$limit": @batch_size }
+        { "$limit": @batch_size },
+        { "$project": projectable }
       ],
       { allow_disk_use: true }
     )
@@ -46,9 +46,8 @@ class DeregistrationEmailExportSerializer < Reports::BaseCsvFileSerializer
   def projectable
     # DATA_ATTRIBUTES are required in the export
     # tier and addresses are required to instantiate the registration
-    # metaData.dateRegistered is required to support sorting
     DATA_ATTRIBUTES.keys.index_with { 1 }
-                   .merge(tier: 1, addresses: 1, "metaData.dateRegistered": 1)
+                   .merge(tier: 1, addresses: 1)
   end
 
   # Add just enough to allow the registration to be instantiated for token generation
