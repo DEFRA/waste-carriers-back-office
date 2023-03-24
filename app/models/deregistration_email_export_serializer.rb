@@ -37,22 +37,10 @@ class DeregistrationEmailExportSerializer < Reports::BaseCsvFileSerializer
         } },
         { "$sort": { "metaData.dateRegistered": 1 } },
         { "$limit": @batch_size },
-        { "$project": projectable }
+        { "$project": DATA_ATTRIBUTES.keys.index_with { 1 } }
       ],
       { allow_disk_use: true }
     )
-  end
-
-  def projectable
-    # DATA_ATTRIBUTES are required in the export
-    # tier and addresses are required to instantiate the registration
-    DATA_ATTRIBUTES.keys.index_with { 1 }
-                   .merge(tier: 1, addresses: 1)
-  end
-
-  # Add just enough to allow the registration to be instantiated for token generation
-  def extend_bson(bson)
-    bson.merge(metaData: {})
   end
 
   def parse_object(registration_bson)
