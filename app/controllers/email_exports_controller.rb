@@ -33,7 +33,7 @@ class EmailExportsController < ApplicationController
   private
 
   def valid_batch_size?(batch_size)
-    batch_size.is_a?(Integer) && batch_size.positive? && batch_size < 1_000_000
+    batch_size.is_a?(Integer) && batch_size.positive? && batch_size <= 100_000
   end
 
   def authorize_user
