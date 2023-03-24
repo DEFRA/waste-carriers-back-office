@@ -46,6 +46,24 @@ RSpec.describe DeregistrationEmailExportSerializer do
                            dateRegistered: 15.months.ago))
   end
 
+  let!(:no_email_registration) do
+    create(:registration,
+           tier: "LOWER",
+           contact_email: nil,
+           metaData: build(:metaData,
+                           :active,
+                           dateRegistered: 15.months.ago))
+  end
+
+  let!(:empty_email_registration) do
+    create(:registration,
+           tier: "LOWER",
+           contact_email: "",
+           metaData: build(:metaData,
+                           :active,
+                           dateRegistered: 15.months.ago))
+  end
+
   let!(:already_emailed_registration) do
     create(:registration,
            tier: "LOWER",
@@ -108,6 +126,14 @@ RSpec.describe DeregistrationEmailExportSerializer do
 
       it "does not include the revoked registration" do
         expect(export_content.scan(revoked_registration.reg_identifier).size).to eq 0
+      end
+
+      it "does not include a registration with no contact_email" do
+        expect(export_content.scan(no_email_registration.reg_identifier).size).to eq 0
+      end
+
+      it "does not include a registration with an empty string as contact_email" do
+        expect(export_content.scan(empty_email_registration.reg_identifier).size).to eq 0
       end
 
       context "when the cutoff months environment variable is set" do

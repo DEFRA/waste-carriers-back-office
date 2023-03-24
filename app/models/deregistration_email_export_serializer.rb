@@ -31,7 +31,7 @@ class DeregistrationEmailExportSerializer < Reports::BaseCsvFileSerializer
         { "$match": {
           "metaData.status": "ACTIVE",
           tier: "LOWER",
-          contactEmail: { "$exists": true, "$type": 2 },
+          contactEmail: { "$exists": true, "$type": 2, "$ne": "" },
           "metaData.dateRegistered": { "$lte": registration_date_cutoff },
           "email_history.template_id": { "$nin": [@notify_template_id] }
         } },
