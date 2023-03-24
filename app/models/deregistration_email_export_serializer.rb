@@ -56,7 +56,7 @@ class DeregistrationEmailExportSerializer < Reports::BaseCsvFileSerializer
   end
 
   def parse_object(registration_bson)
-    registration = WasteCarriersEngine::Registration.instantiate(extend_bson(registration_bson))
+    registration = WasteCarriersEngine::Registration.find_by(reg_identifier: registration_bson[:regIdentifier])
     presenter = DeregistrationEmailExportPresenter.new(registration)
     row = ATTRIBUTES.map do |key, _value|
       presenter.public_send(key)
