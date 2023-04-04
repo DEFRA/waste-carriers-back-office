@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: f3a2a650791253b53ba4f38871a6055f3f86c958
+  revision: f568a9ccda0cc42d2bad4e74cf80e9ebe07fce87
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -90,8 +90,8 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     airbrake (13.0.3)
       airbrake-ruby (~> 6.0)
-    airbrake-ruby (6.2.0)
-      rbtree3 (~> 0.5)
+    airbrake-ruby (6.2.1)
+      rbtree3 (~> 0.6)
     ast (2.4.2)
     async (1.30.1)
       console (~> 1.10)
@@ -140,7 +140,7 @@ GEM
     concurrent-ruby (1.2.2)
     console (1.13.1)
       fiber-local
-    countries (5.3.1)
+    countries (5.3.2)
       unaccent (~> 0.3)
     crack (0.4.5)
       rexml
@@ -276,7 +276,7 @@ GEM
     kaminari-mongoid (1.0.2)
       kaminari-core (~> 1.0)
       mongoid
-    loofah (2.19.1)
+    loofah (2.20.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.8.1)
@@ -313,7 +313,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     netrc (0.11.0)
-    nio4r (2.5.8)
+    nio4r (2.5.9)
     nokogiri (1.14.2)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
