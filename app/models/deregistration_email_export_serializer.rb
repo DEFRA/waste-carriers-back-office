@@ -45,21 +45,6 @@ class DeregistrationEmailExportSerializer < Reports::BaseCsvFileSerializer
 
   def parse_object(registration_bson)
     registration = WasteCarriersEngine::Registration.find_by(reg_identifier: registration_bson[:regIdentifier])
-
-    # If running in a replicaSet environment, use a database transaction to combine
-    # the writes for deregistration_token and email_history
-    if ENV.fetch("WCRS_REGSDB_URI").match?(/replicaSet/)
-      registration.with_session do |session|
-        session.start_transaction
-        process_registration(registration)
-        session.end_transaction
-      end
-    else
-      process_registration(registration)
-    end
-  end
-
-  def process_registration(registration)
     presenter = DeregistrationEmailExportPresenter.new(registration)
     row = ATTRIBUTES.map do |key, _value|
       presenter.public_send(key)

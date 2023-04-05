@@ -86,8 +86,6 @@ RSpec.describe DeregistrationEmailExportSerializer do
       let(:cutoff_months) { 12 }
 
       before do
-        # No replicaSet currently enabled for test
-        allow(ENV).to receive(:fetch).with("WCRS_REGSDB_URI").and_return "mongodb://foo@bar:27017,mongodb2:27017,mongodb3:27017/waste-carriers"
         allow(ENV).to receive(:fetch).with("DEREGISTRATION_EMAIL_CUTOFF_MONTHS", any_args).and_return(cutoff_months.to_s)
         serializer.to_csv
       end
