@@ -51,8 +51,10 @@ class DeregistrationEmailExportSerializer < Reports::BaseCsvFileSerializer
     if ENV.fetch("WCRS_REGSDB_URI").match?(/replicaSet/)
       registration.with_session do |session|
         session.start_transaction
-        process_registration(registration)
+        row = process_registration(registration)
         session.commit_transaction
+
+        row
       end
     else
       process_registration(registration)
