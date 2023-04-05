@@ -52,7 +52,7 @@ class DeregistrationEmailExportSerializer < Reports::BaseCsvFileSerializer
       registration.with_session do |session|
         session.start_transaction
         process_registration(registration)
-        session.end_transaction
+        session.commit_transaction
       end
     else
       process_registration(registration)
