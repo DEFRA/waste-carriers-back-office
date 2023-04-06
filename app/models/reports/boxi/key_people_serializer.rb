@@ -8,6 +8,7 @@ module Reports
         person_type: "PersonType",
         first_name: "FirstName",
         last_name: "LastName",
+        date_of_birth: "DateOfBirth",
         position: "Position",
         flagged_for_review: "FlaggedForReview",
         review_flag_timestamp: "ReviewFlagTimestamp"

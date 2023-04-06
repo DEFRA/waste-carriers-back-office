@@ -13,6 +13,7 @@ module Reports
           PersonType
           FirstName
           LastName
+          DateOfBirth
           Position
           FlaggedForReview
           ReviewFlagTimestamp
@@ -33,6 +34,7 @@ module Reports
             "person_type",
             "first_name",
             "last_name",
+            "date_of_birth",
             "position",
             "flagged_for_review",
             "review_flag_timestamp"
@@ -44,6 +46,7 @@ module Reports
           expect(presenter).to receive(:person_type).and_return("person_type")
           expect(presenter).to receive(:first_name).and_return("first_name")
           expect(presenter).to receive(:last_name).and_return("last_name")
+          expect(presenter).to receive(:date_of_birth).and_return("date_of_birth")
           expect(presenter).to receive(:position).and_return("position")
           expect(presenter).to receive(:flagged_for_review).and_return("flagged_for_review")
           expect(presenter).to receive(:review_flag_timestamp).and_return("review_flag_timestamp")
@@ -55,7 +58,7 @@ module Reports
           subject.add_entries_for(registration, 0)
         end
 
-        it "sanitize data before inserting them in the csv" do
+        it "sanitizes data before inserting it in the csv" do
           key_person = double(:key_person)
           presenter = double(:presenter, position: " string to\r\nsanitize\n").as_null_object
 
