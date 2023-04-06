@@ -58,6 +58,26 @@ module Reports
           end
         end
       end
+
+      describe "#date_of_birth" do
+        before { allow(key_person).to receive(:dob).and_return(dob) }
+
+        context "with date of birth not populated" do
+          let(:dob) { nil }
+
+          it "returns nil" do
+            expect(subject.date_of_birth).to be_nil
+          end
+        end
+
+        context "with date of birth populated" do
+          let(:dob) { DateTime.new(1980, 1, 23) }
+
+          it "returns the date of birth in the expected format" do
+            expect(subject.date_of_birth).to eq("23/01/1980")
+          end
+        end
+      end
     end
   end
 end
