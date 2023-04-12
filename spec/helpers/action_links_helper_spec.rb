@@ -985,16 +985,16 @@ RSpec.describe ActionLinksHelper do
         context "when the user has permission" do
           before { allow(helper).to receive(:can?).with(:restore, WasteCarriersEngine::Registration).and_return(true) }
 
-          context "when the registration has expired" do
-            before { resource.metaData.status = "EXPIRED" }
+          context "when the registration has an expiry date in the past" do
+            before { resource.expires_on = 2.days.ago }
 
             it "returns false" do
               expect(display_link).to be(false)
             end
           end
 
-          context "when the registration has not expired" do
-            before { resource.metaData.status = "REVOKED" }
+          context "when the registration has an expiry date not in the past" do
+            before { resource.expires_on = 1.day.from_now }
 
             it "returns true" do
               expect(display_link).to be(true)

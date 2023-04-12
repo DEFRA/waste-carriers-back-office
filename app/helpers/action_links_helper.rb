@@ -148,7 +148,7 @@ module ActionLinksHelper
   def display_restore_registration_link_for?(resource)
     return false unless a_registration?(resource)
     return false unless can?(:restore, WasteCarriersEngine::Registration)
-    return false if resource.expired?
+    return false if resource.expires_on.present? && WasteCarriersEngine::ExpiryCheckService.new(resource).expired?
 
     resource.revoked? || resource.inactive?
   end
