@@ -145,6 +145,14 @@ module ActionLinksHelper
     can?(:transfer_registration, WasteCarriersEngine::Registration)
   end
 
+  def display_restore_registration_link_for?(resource)
+    return false unless a_registration?(resource)
+    return false unless can?(:restore, WasteCarriersEngine::Registration)
+    return false if resource.expired?
+
+    resource.revoked? || resource.inactive?
+  end
+
   def display_ways_to_share_magic_link_for?(resource)
     return false unless WasteCarriersEngine::FeatureToggle.active?(:renewal_reminders)
     return false unless display_registration_links?(resource)

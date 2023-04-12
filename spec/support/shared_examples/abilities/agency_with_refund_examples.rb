@@ -98,4 +98,8 @@ RSpec.shared_examples "agency_with_refund examples" do
   it "is able to revoke a registration" do
     expect(subject).to be_able_to(:revoke, WasteCarriersEngine::Registration)
   end
+
+  it "is able to restore a registration" do
+    expect(subject).to be_able_to(:restore, WasteCarriersEngine::Registration)
+  end
 end

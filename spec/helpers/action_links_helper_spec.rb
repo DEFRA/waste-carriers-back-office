@@ -946,6 +946,65 @@ RSpec.describe ActionLinksHelper do
     end
   end
 
+  describe "#display_restore_registration_link_for?" do
+
+    subject(:display_link) { helper.display_restore_registration_link_for?(resource) }
+
+    before { allow(helper).to receive(:can?).with(:restore, WasteCarriersEngine::Registration).and_return(true) }
+
+    context "when the resource is not a Registration" do
+      let(:resource) { build(:renewing_registration) }
+
+      it "returns false" do
+        expect(display_link).to be(false)
+      end
+    end
+
+    context "when the resource is a Registration" do
+      let(:resource) { build(:registration) }
+
+      context "when the resource is not revoked or ceased" do
+        before { resource.metaData.status = %w[ACTIVE EXPIRED REFUSED PENDING].sample }
+
+        it "returns false" do
+          expect(display_link).to be(false)
+        end
+      end
+
+      context "when the resource has been revoked or ceased" do
+        before { resource.metaData.status = %w[REVOKED INACTIVE].sample }
+
+        context "when the user does not have permission" do
+          before { allow(helper).to receive(:can?).with(:restore, WasteCarriersEngine::Registration).and_return(false) }
+
+          it "returns false" do
+            expect(display_link).to be(false)
+          end
+        end
+
+        context "when the user has permission" do
+          before { allow(helper).to receive(:can?).with(:restore, WasteCarriersEngine::Registration).and_return(true) }
+
+          context "when the registration has expired" do
+            before { resource.metaData.status = "EXPIRED" }
+
+            it "returns false" do
+              expect(display_link).to be(false)
+            end
+          end
+
+          context "when the registration has not expired" do
+            before { resource.metaData.status = "REVOKED" }
+
+            it "returns true" do
+              expect(display_link).to be(true)
+            end
+          end
+        end
+      end
+    end
+  end
+
   describe "#display_ways_to_share_magic_link_for?" do
     let(:resource) { build(:registration) }
 

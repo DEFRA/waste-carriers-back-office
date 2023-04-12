@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 0222428c02cab6518705d95bacec49279c511dc3
+  revision: 3c02ade25ed541955d77b9769dd7bf28cfb469f5
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -314,7 +314,7 @@ GEM
       net-protocol
     netrc (0.11.0)
     nio4r (2.5.9)
-    nokogiri (1.14.2)
+    nokogiri (1.14.3)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     notifications-ruby-client (5.4.0)
@@ -325,12 +325,12 @@ GEM
     orm_adapter (0.5.0)
     os_map_ref (0.5.0)
     parallel (1.22.1)
-    parser (3.2.1.1)
+    parser (3.2.2.0)
       ast (~> 2.4.1)
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.8.0)
+    phonelib (0.8.1)
     protocol-hpack (1.4.2)
     protocol-http (0.22.5)
     protocol-http1 (0.14.1)
@@ -412,21 +412,21 @@ GEM
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
     rspec-support (3.11.1)
-    rubocop (1.48.1)
+    rubocop (1.50.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.2.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.26.0, < 2.0)
+      rubocop-ast (>= 1.28.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.27.0)
+    rubocop-ast (1.28.0)
       parser (>= 3.2.1.0)
     rubocop-capybara (2.17.1)
       rubocop (~> 1.41)
-    rubocop-rails (2.18.0)
+    rubocop-rails (2.19.0)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)

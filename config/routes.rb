@@ -147,6 +147,12 @@ Rails.application.routes.draw do
                         path: "transfer",
                         path_names: { new: "" }
 
+              resources :registration_restores,
+                        only: %i[new create],
+                        param: :reg_identifier,
+                        path: "restore",
+                        path_names: { new: "" }
+
               get "transfer/success",
                   to: "registration_transfers#success",
                   as: :registration_transfer_success

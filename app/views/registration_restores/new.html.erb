@@ -1,0 +1,36 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: registration_path(@registration.reg_identifier)) %>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= render("waste_carriers_engine/shared/errors", object: @registration_restore_form) %>
+
+    <h1 class="govuk-heading-l"> <%= t(".heading", reg_identifier: @registration.reg_identifier) %> </h1>
+
+    <h2 class="govuk-heading"> <%= @registration.company_name %> </h2>
+
+    <p class="govuk-body">
+      <%= t(".tier.#{@registration.tier}") %> -  <%= t(".registration_type.#{@registration.registration_type}") %>
+    </p>
+
+    <p class="govuk-body">
+      <%= displayable_address(@registration.company_address).join(", ") %>
+    </p>
+
+    <%= form_for(@registration_restore_form,
+        url: registration_registration_restores_path,
+        builder: GOVUKDesignSystemFormBuilder::FormBuilder) do |f| %>
+      <div class="govuk-form-group">
+        <%= f.govuk_text_area :restored_reason,
+          max_chars: 500,
+          label: { text: t(".reason.label") },
+          hint: { text: t(".reason.hint") } %>
+
+         <%= f.govuk_submit t(".confirm") %>
+      </div>
+    <% end %>
+  </div>
+</div>

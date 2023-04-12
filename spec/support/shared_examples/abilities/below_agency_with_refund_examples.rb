@@ -78,4 +78,8 @@ RSpec.shared_examples "below agency_with_refund examples" do
   it "is not able to review convictions" do
     expect(subject).not_to be_able_to(:review_convictions, WasteCarriersEngine::RenewingRegistration)
   end
+
+  it "is not able to restore a registration" do
+    expect(subject).not_to be_able_to(:restore, WasteCarriersEngine::Registration)
+  end
 end

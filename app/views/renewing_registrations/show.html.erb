@@ -43,6 +43,11 @@
 
         <hr/>
 
+        <% if @transient_registration.show_restored_panel? %>
+          <%= render "shared/registrations/restored_panel", resource: @registration %>
+          <hr/>
+        <% end %>
+
         <h2 class="govuk-heading-m"><%= t(".conviction_heading") %></h2>
         <p class="govuk-body">
           <%= @transient_registration.display_convictions_check_message %>

@@ -1,0 +1,23 @@
+en:
+  registration_restores:
+    new:
+      title: Restore registration %{reg_identifier}
+      heading: Restore registration %{reg_identifier}
+      tier:
+        UPPER: Upper tier
+        LOWER: Lower tier
+      registration_type:
+        carrier_dealer: Carrier and dealer
+        broker_dealer: Broker and dealer
+        carrier_broker_dealer: Carrier, broker and dealer
+      reason:
+        label: Reason
+        hint: Maximum 500 characters
+      confirm: "Confirm"
+  activemodel:
+    errors:
+      models:
+        registration_restore_form:
+          attributes:
+            restored_reason:
+              blank: "Enter the reason for restoring the registration"

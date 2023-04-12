@@ -82,6 +82,10 @@ en:
             revoke: "Cease or revoke"
             restart_renewal: "Restart renewal"
             refresh_companies_house: "Refresh registered company name from Companies House"
+            restore: Restore registration
+      restored_panel:
+        restored_details:
+          heading: Restored registration
       expired_panel:
         heading: "Expired on %{date}"
         links:

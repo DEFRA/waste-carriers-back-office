@@ -64,6 +64,10 @@ FactoryBot.define do
       metaData { build(:metaData, :revoked) }
     end
 
+    trait :restored do
+      metaData { build(:metaData, :active, restored_reason: "a reason", restored_by: "foo@example.com") }
+    end
+
     trait :has_orders_and_payments do
       finance_details { build(:finance_details, :has_paid_order_and_payment) }
     end

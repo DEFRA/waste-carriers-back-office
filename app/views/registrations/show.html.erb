@@ -36,6 +36,11 @@
 
         <hr/>
 
+        <% if @registration.show_restored_panel? %>
+          <%= render "shared/registrations/restored_panel", resource: @registration %>
+          <hr/>
+        <% end %>
+
         <h2 class="govuk-heading-m"><%= t(".conviction_heading") %></h2>
         <div>
           <p class="govuk-body">
