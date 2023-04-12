@@ -9,7 +9,7 @@
         <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>
       </h1>
 
-      <div class="govuk-form-group <%= "govu-form-group--error" if @conviction_approval_form.errors[:revoked_reason].any? %>">
+      <div class="govuk-form-group <%= "govuk-form-group--error" if @conviction_approval_form.errors[:revoked_reason].any? %>">
         <fieldset id="company_name" class="govuk-fieldset">
           <legend class="govuk-visually-hidden">
             <%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %>

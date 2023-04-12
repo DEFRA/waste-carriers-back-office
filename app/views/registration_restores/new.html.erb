@@ -13,7 +13,10 @@
     <h2 class="govuk-heading"> <%= @registration.company_name %> </h2>
 
     <p class="govuk-body">
-      <%= t(".tier.#{@registration.tier}") %> -  <%= t(".registration_type.#{@registration.registration_type}") %>
+      <%= t(".tier.#{@registration.tier}") %>
+      <% if @registration.upper_tier? %>
+        -  <%= t(".registration_type.#{@registration.registration_type}") %>
+      <% end %>
     </p>
 
     <p class="govuk-body">
@@ -23,13 +26,16 @@
     <%= form_for(@registration_restore_form,
         url: registration_registration_restores_path,
         builder: GOVUKDesignSystemFormBuilder::FormBuilder) do |f| %>
-      <div class="govuk-form-group">
-        <%= f.govuk_text_area :restored_reason,
-          max_chars: 500,
-          label: { text: t(".reason.label") },
-          hint: { text: t(".reason.hint") } %>
 
-         <%= f.govuk_submit t(".confirm") %>
+      <div class="govuk-form-group <%= "govuk-form-group--error" if @registration_restore_form.errors[:restored_reason].any? %>" id="restored_reason">
+
+      <%= f.govuk_text_area :restored_reason,
+        max_chars: 500,
+        label: { text: t(".reason.label") },
+        hint: { text: t(".reason.hint") } %>
+
+      <div class="govuk-form-group">
+        <%= f.govuk_submit t(".confirm") %>
       </div>
     <% end %>
   </div>

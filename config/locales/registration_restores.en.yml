@@ -1,7 +1,7 @@
 en:
   registration_restores:
     new:
-      title: Restore registration %{reg_identifier}
+      title: Restore registration
       heading: Restore registration %{reg_identifier}
       tier:
         UPPER: Upper tier
