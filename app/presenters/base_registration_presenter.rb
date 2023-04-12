@@ -55,13 +55,12 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     upper_tier? && finance_details.blank?
   end
 
-  def in_progress?
-    # TODO: For now all registrations are submitted in the new system. To update when we build front end flow.
-    false
-  end
-
   def show_ceased_revoked_panel?
     revoked? || inactive?
+  end
+
+  def show_restored_panel?
+    active? && metaData.restored_reason.present?
   end
 
   def ceased_revoked_header

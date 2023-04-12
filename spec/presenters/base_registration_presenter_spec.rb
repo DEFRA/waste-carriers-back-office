@@ -8,12 +8,6 @@ RSpec.describe BaseRegistrationPresenter do
   let(:registration) { double(:registration) }
   let(:view_context) { double(:view_context) }
 
-  describe "#in_progress?" do
-    it "returns false" do
-      expect(subject).not_to be_in_progress
-    end
-  end
-
   describe "#show_no_finance_details_data?" do
     before do
       allow(registration).to receive(:upper_tier?).and_return(upper_tier)
@@ -95,6 +89,22 @@ RSpec.describe BaseRegistrationPresenter do
       it "returns true" do
         expect(subject.show_ceased_revoked_panel?).to be(true)
       end
+    end
+  end
+
+  describe "#show_restored_panel?" do
+    let(:registration) { create(:registration, status) }
+
+    context "when it has not been restored" do
+      let(:status) { :active }
+
+      it { expect(subject.show_restored_panel?).to be(false) }
+    end
+
+    context "when it has been restored" do
+      let(:status) { :restored }
+
+      it { expect(subject.show_restored_panel?).to be(true) }
     end
   end
 
