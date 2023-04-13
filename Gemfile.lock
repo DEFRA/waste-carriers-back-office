@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 3c02ade25ed541955d77b9769dd7bf28cfb469f5
+  revision: 0850792331442669858ee3a91f88d82f8368dfe7
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -140,7 +140,7 @@ GEM
     concurrent-ruby (1.2.2)
     console (1.13.1)
       fiber-local
-    countries (5.3.2)
+    countries (5.4.0)
       unaccent (~> 0.3)
     crack (0.4.5)
       rexml
