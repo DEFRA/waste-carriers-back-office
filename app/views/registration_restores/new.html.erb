@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<div class="govuk-grid-row">
+<div class="govuk-grid-row govuk-body">
   <div class="govuk-grid-column-two-thirds">
     <%= render("waste_carriers_engine/shared/errors", object: @registration_restore_form) %>
 
@@ -12,14 +12,14 @@
 
     <h2 class="govuk-heading"> <%= @registration.company_name %> </h2>
 
-    <p class="govuk-body">
+    <p>
       <%= t(".tier.#{@registration.tier}") %>
       <% if @registration.upper_tier? %>
         -  <%= t(".registration_type.#{@registration.registration_type}") %>
       <% end %>
     </p>
 
-    <p class="govuk-body">
+    <p>
       <%= displayable_address(@registration.company_address).join(", ") %>
     </p>
 
