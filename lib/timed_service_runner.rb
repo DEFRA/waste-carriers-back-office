@@ -38,5 +38,3 @@ class TimedServiceRunner
     Rails.logger.error "#{service.name.demodulize} failed:\n #{error}"
   end
 end
-
-

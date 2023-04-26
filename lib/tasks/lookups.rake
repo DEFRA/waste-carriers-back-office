@@ -17,4 +17,3 @@ namespace :lookups do
     end
   end
 end
-
