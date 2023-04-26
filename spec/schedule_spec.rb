@@ -15,7 +15,7 @@ RSpec.describe "Whenever::Test::Shedule" do
 
   it "makes sure 'rake' statements exist" do
     rake_jobs = schedule.jobs[:rake]
-    expect(rake_jobs.count).to eq(11)
+    expect(rake_jobs.count).to eq(12)
   end
 
   it "picks up the EPR export run frequency and time" do
