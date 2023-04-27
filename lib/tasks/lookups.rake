@@ -8,7 +8,25 @@ namespace :lookups do
     task missing_area: :environment do
       run_for = WasteCarriersBackOffice::Application.config.area_lookup_run_for.to_i
       address_limit = WasteCarriersBackOffice::Application.config.area_lookup_address_limit.to_i
-      addresses_scope = WasteCarriersEngine::Address.missing_area.with_postcode.limit(address_limit)
+      counter = 0
+      addresses_scope = []
+
+      WasteCarriersEngine::Registration.all.each do |registration|
+        break if counter >= address_limit
+
+        missing_area_addresses = registration.addresses.missing_area.with_postcode
+        missing_area_count = missing_area_addresses.count
+        counter += missing_area_count
+
+        # Limit the number of addresses added if the counter goes over the limit
+        if counter > address_limit
+          missing_area_count -= (counter - address_limit)
+        end
+
+        addresses_scope.concat(missing_area_addresses.limit(missing_area_count))
+      end
+
+      addresses_scope = addresses_scope.take(address_limit) if addresses_scope.count > address_limit
 
       TimedServiceRunner.run(
         scope: addresses_scope,
