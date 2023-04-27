@@ -34,7 +34,7 @@ class TimedServiceRunner
   end
 
   def handle_error(error, address_id)
-    Airbrake.notify(error, address_id: address_id) if defined? Airbrake
+    Airbrake.notify(error, address_id: address_id)
     Rails.logger.error "#{service.name.demodulize} failed:\n #{error}"
   end
 end
