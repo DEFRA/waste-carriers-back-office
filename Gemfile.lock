@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: c87cd3b7b39e0b145d5a82df43efa8741f04e6bb
+  revision: aa317634ebb271ba756c9b301a4a44c312319c86
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -8,6 +8,7 @@ GIT
       countries
       defra_ruby_address
       defra_ruby_alert (~> 2.1)
+      defra_ruby_area (~> 2.0)
       defra_ruby_email
       defra_ruby_validators (>= 2.5.0)
       high_voltage (~> 3.1)
@@ -154,6 +155,9 @@ GEM
       rest-client (~> 2.0)
     defra_ruby_alert (2.2.1)
       airbrake
+    defra_ruby_area (2.0.3)
+      nokogiri (>= 1.13.2)
+      rest-client (~> 2.0)
     defra_ruby_aws (0.5.0)
       aws-sdk-s3
     defra_ruby_email (1.2.0)
@@ -249,7 +253,7 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
-    i18n (1.12.0)
+    i18n (1.13.0)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
