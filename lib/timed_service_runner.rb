@@ -21,7 +21,7 @@ class TimedServiceRunner
   def self.run(scope:, run_for:, service:)
     run_until = run_for.minutes.from_now
 
-    scope.find_each do |address|
+    scope.each do |address|
       break if Time.zone.now > run_until
 
       begin
