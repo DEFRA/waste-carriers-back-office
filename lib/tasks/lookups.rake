@@ -11,7 +11,7 @@ namespace :lookups do
       counter = 0
       addresses_scope = []
 
-      WasteCarriersEngine::Registration.all.each do |registration|
+      WasteCarriersEngine::Registration.where("address.area": nil).each do |registration|
         break if counter >= address_limit
 
         missing_area_addresses = registration.addresses.missing_area.with_postcode
