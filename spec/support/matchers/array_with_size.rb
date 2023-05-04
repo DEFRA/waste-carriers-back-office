@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/support/matchers/array_with_size.rb
 
 RSpec::Matchers.define :array_with_size do |expected_size, expected_class|
