@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 # spec/tasks/lookups_rake_spec.rb
-require 'rails_helper'
-require 'rake'
+require "rails_helper"
+require "rake"
 
 RSpec.describe "lookups:update:missing_area" do
   before do

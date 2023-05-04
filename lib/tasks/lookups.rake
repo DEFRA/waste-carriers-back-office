@@ -19,9 +19,7 @@ namespace :lookups do
         counter += missing_area_count
 
         # Limit the number of addresses added if the counter goes over the limit
-        if counter > address_limit
-          missing_area_count -= (counter - address_limit)
-        end
+        missing_area_count -= (counter - address_limit) if counter > address_limit
 
         addresses_scope.concat(missing_area_addresses.limit(missing_area_count))
       end
