@@ -14,28 +14,33 @@ RSpec.shared_context "with finance stats payment data" do
           "CHEQUE" => [an_amount],
           "CASH" => [an_amount, an_amount, an_amount, an_amount],
           "POSTALORDER" => [an_amount],
+          "GOVPAY" => [an_amount, an_amount, an_amount],
           "WORLDPAY" => [an_amount, an_amount, an_amount]
         } },
       # ensure there are values for multiple days in at least one month
       { date: 5.months.ago + 1.day,
         payments: {
           "BANKTRANSFER" => [an_amount, an_amount, an_amount],
+          "GOVPAY" => [an_amount],
           "WORLDPAY" => [an_amount]
         } },
       { date: 4.months.ago - 1.day,
         payments: {
           "BANKTRANSFER" => [an_amount, an_amount, an_amount],
+          "GOVPAY" => [an_amount],
           "WORLDPAY" => [an_amount]
         } },
       { date: 4.months.ago,
         payments: {
           "POSTALORDER" => [an_amount, an_amount],
           "BANKTRANSFER" => [an_amount, an_amount, an_amount],
+          "GOVPAY" => [an_amount],
           "WORLDPAY" => [an_amount]
         } },
       { date: 3.months.ago,
         payments: {
           "POSTALORDER" => [an_amount, an_amount],
+          "GOVPAY" => [an_amount, an_amount, an_amount, an_amount],
           "WORLDPAY" => [an_amount, an_amount, an_amount, an_amount],
           "WORLDPAY_MISSED" => [an_amount, an_amount]
         } }
@@ -75,6 +80,7 @@ RSpec.shared_context "with finance stats payment data" do
       "cheque" => "CHEQUE",
       "cash" => "CASH",
       "postalorder" => "POSTALORDER",
+      "govpay" => "GOVPAY",
       "worldpay" => "WORLDPAY",
       "worldpaymissed" => "WORLDPAY_MISSED"
     }
@@ -86,6 +92,7 @@ RSpec.shared_context "with finance stats payment data" do
     "CHEQUE" => :cheque,
     "CASH" => :cash,
     "POSTALORDER" => :postal_order,
+    "GOVPAY" => :govpay,
     "WORLDPAY" => :worldpay,
     "WORLDPAY_MISSED" => :worldpay_missed
   }.freeze

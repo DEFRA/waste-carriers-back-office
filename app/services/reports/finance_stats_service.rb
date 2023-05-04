@@ -69,6 +69,7 @@ module Reports
             reversal: { count: 0, total: 0 },
             postalorder: { count: 0, total: 0 },
             refund: { count: 0, total: 0 },
+            govpay: { count: 0, total: 0 },
             worldpay: { count: 0, total: 0 },
             worldpaymissed: { count: 0, total: 0 },
             cheque: { count: 0, total: 0 },

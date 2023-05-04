@@ -12,7 +12,7 @@ RSpec.describe Reports::FinanceStatsService do
     include_context "with finance stats order data"
 
     let(:payment_types) do
-      %w[cash reversal postalorder refund worldpay worldpaymissed cheque banktransfer writeoffsmall writeofflarge]
+      %w[cash reversal postalorder refund govpay worldpay worldpaymissed cheque banktransfer writeoffsmall writeofflarge]
     end
 
     let(:charge_types) do
