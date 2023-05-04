@@ -2,17 +2,9 @@
 
 # spec/tasks/lookups_rake_spec.rb
 require "rails_helper"
-require "rake"
 
-RSpec.describe "lookups:update:missing_area" do
-  before do
-    Rails.application.load_tasks
-    Rake::Task["lookups:update:missing_area"].reenable
-  end
-
-  after do
-    Rake::Task.clear
-  end
+RSpec.describe "lookups:update:missing_area", type: :rake do
+  include_context "rake"
 
   it "updates the area field for a maximum of 50 addresses with missing area and a postcode" do
     # Create registrations with addresses that have a missing area and a postcode
