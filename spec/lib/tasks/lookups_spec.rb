@@ -21,14 +21,17 @@ RSpec.describe "lookups:update:missing_area" do
       create(:address, registration: registration, area: nil, postcode: "AB1 2CD")
     end
 
+    # Set up TimedServiceRunner as a spy
+    allow(TimedServiceRunner).to receive(:run)
+
+    # Run the rake task
+    Rake::Task["lookups:update:missing_area"].invoke
+
     # Expect TimedServiceRunner to be called with the correct amount of addresses
-    expect(TimedServiceRunner).to receive(:run).with(
+    expect(TimedServiceRunner).to have_received(:run).with(
       scope: array_with_size(50, WasteCarriersEngine::Address),
       run_for: 60,
       service: WasteCarriersEngine::AssignSiteDetailsService
     ).at_least(:once)
-
-    # Run the rake task
-    Rake::Task["lookups:update:missing_area"].invoke
   end
 end

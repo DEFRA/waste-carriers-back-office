@@ -21,24 +21,16 @@ class TimedServiceRunner
   def self.run(scope:, run_for:, service:)
     run_until = run_for.minutes.from_now
 
-    Rails.logger.debug { "#{Time.zone.now}: TimedServiceRunner started running" }
-
     scope.each do |address|
       break if Time.zone.now > run_until
 
-      Rails.logger.debug { "#{Time.zone.now}: About to run service for address: #{address.id}" }
-
       begin
         service.run(address: address)
-        Rails.logger.debug { "#{Time.zone.now}: Service ran successfully, about to save address" }
         address.save!
-        Rails.logger.debug { "#{Time.zone.now}: Address saved successfully" }
       rescue StandardError => e
         handle_error(e, address.id)
       end
     end
-
-    Rails.logger.debug { "#{Time.zone.now}: TimedServiceRunner finished running" }
   end
 
   def handle_error(error, address_id)
