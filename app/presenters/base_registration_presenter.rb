@@ -103,6 +103,10 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     metaData.last_modified.to_datetime
   end
 
+  def ea_area
+    registered_address.area || "Pending"
+  end
+
   private
 
   def displayable_tier

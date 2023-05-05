@@ -51,6 +51,9 @@
       <p class="govuk-body">
         <%= resource.displayable_location %>
       </p>
+      <p class="govuk-body">
+        <%= t(".business_information.labels.ea_area_html", ea_area: resource.ea_area) %>
+      </p>
     <% else %>
       <p class="govuk-body"><%= t(".business_information.no_business_information_available") %></p>
     <% end %>

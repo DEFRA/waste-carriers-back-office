@@ -37,6 +37,7 @@ en:
             company_no: "Company number: %{number}"
             location: "Place of business: %{location}"
             registered_address_html: "<span class=\"govuk-!-font-weight-bold\">Trading address</span>:"
+            ea_area_html: "<span class=\"govuk-!-font-weight-bold\">EA area</span>: %{ea_area}"
           no_business_information_available: "This registration application is still in progress, so there are no business details yet."
       pending_payment_panel:
         status:
