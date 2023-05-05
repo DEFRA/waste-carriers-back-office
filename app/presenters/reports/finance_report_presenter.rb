@@ -32,6 +32,8 @@ module Reports
     def pay_postalorder_tot()    pounds(@row[:payments][:postalorder][:total]) end
     def pay_refund_cnt()         @row[:payments][:refund][:count] end
     def pay_refund_tot()         pounds(@row[:payments][:refund][:total]) end
+    def pay_govpay_cnt()         @row[:payments][:govpay][:count] end
+    def pay_govpay_tot()         pounds(@row[:payments][:govpay][:total]) end
     def pay_worldpay_cnt()       @row[:payments][:worldpay][:count] end
     def pay_worldpay_tot()       pounds(@row[:payments][:worldpay][:total]) end
     def pay_worldpaymissed_cnt() @row[:payments][:worldpaymissed][:count] end

@@ -8,6 +8,12 @@ module Reports
     # Tests for the structure and content of the report are in the serializer_spec.
     describe ".run" do
 
+      # Note that the test payments and orders are unrelated at the transaction level.
+      # This is acceptable for unit test purposes as the service queries payments and orders/charges independently
+      # and aggregates the results above the transaction level.
+      include_context "with finance stats payment data"
+      include_context "with finance stats order data"
+
       context "when the report is successfully generated and uploaded to S3" do
         let(:temp_dir) { Dir.mktmpdir }
         let(:bucket) { double(:bucket) }

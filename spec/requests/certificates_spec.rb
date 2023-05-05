@@ -17,7 +17,7 @@ RSpec.describe "Certificates" do
       expect(response.media_type).to eq("application/pdf")
       expected_content_disposition = "inline; filename=\"#{registration.reg_identifier}.pdf\"; filename*=UTF-8''#{registration.reg_identifier}.pdf"
       expect(response.headers["Content-Disposition"]).to eq(expected_content_disposition)
-      expect(response.code).to eq("200")
+      expect(response).to have_http_status(:ok)
     end
 
     context "when the 'show_as_html' query string is present" do

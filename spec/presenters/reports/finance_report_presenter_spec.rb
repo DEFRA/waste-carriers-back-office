@@ -33,6 +33,10 @@ module Reports
             count: Faker::Number.number(digits: 2),
             total: Faker::Number.number(digits: 4)
           },
+          govpay: {
+            count: Faker::Number.number(digits: 2),
+            total: Faker::Number.number(digits: 4)
+          },
           worldpay: {
             count: Faker::Number.number(digits: 2),
             total: Faker::Number.number(digits: 4)
@@ -98,6 +102,7 @@ module Reports
       expect(subject.pay_reversal_tot).to eq format("%<val>.2f", val: row[:payments][:reversal][:total] / 100.0)
       expect(subject.pay_postalorder_tot).to eq format("%<val>.2f", val: row[:payments][:postalorder][:total] / 100.0)
       expect(subject.pay_refund_tot).to eq format("%<val>.2f", val: row[:payments][:refund][:total] / 100.0)
+      expect(subject.pay_govpay_tot).to eq format("%<val>.2f", val: row[:payments][:govpay][:total] / 100.0)
       expect(subject.pay_worldpay_tot).to eq format("%<val>.2f", val: row[:payments][:worldpay][:total] / 100.0)
       expect(subject.pay_worldpaymissed_tot).to eq format("%<val>.2f", val: row[:payments][:worldpaymissed][:total] / 100.0)
       expect(subject.pay_cheque_tot).to eq format("%<val>.2f", val: row[:payments][:cheque][:total] / 100.0)

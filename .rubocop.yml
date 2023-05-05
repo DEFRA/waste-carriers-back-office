@@ -22,6 +22,10 @@ RSpec/DescribeClass:
   # Allow more descriptive string labels for request specs
     - spec/requests/**/*
 
+# Using 'let(:registration1)' in a unit test isn't necessarily unreasonable.
+RSpec/IndexedLet:
+  Enabled: false
+
 # rubocop-rspec 2.16.0 introduced a false positive: https://github.com/rubocop/rubocop-rspec/issues/1520
 # TODO: Remove this after the next rubocop-rspec release is bundled
 RSpec/PendingWithoutReason:

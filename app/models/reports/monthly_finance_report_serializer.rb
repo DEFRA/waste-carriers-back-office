@@ -19,6 +19,8 @@ module Reports
       pay_postalorder_tot: "pay_postalorder_tot",
       pay_refund_cnt: "pay_refund_cnt",
       pay_refund_tot: "pay_refund_tot",
+      pay_govpay_cnt: "pay_govpay_cnt",
+      pay_govpay_tot: "pay_govpay_tot",
       pay_worldpay_cnt: "pay_worldpay_cnt",
       pay_worldpay_tot: "pay_worldpay_tot",
       pay_worldpaymissed_cnt: "pay_worldpaymissed_cnt",
