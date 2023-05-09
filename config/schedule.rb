@@ -82,3 +82,7 @@ end
 every :tuesday, at: (ENV["EXPORT_COPY_CARD_ORDERS_RUN_TIME"] || "02:15"), roles: [:db] do
   rake "reports:export:weekly_copy_card_orders"
 end
+
+every :day, at: (ENV["AREA_LOOKUP"] || "01:05"), roles: [:db] do
+  rake "lookups:update:missing_area"
+end
