@@ -8,7 +8,7 @@ module CanBehaveLikeUser
     "!" => "i", "?" => "c", "%" => "o", "*" => "a", "&" => "b", "#" => "h",
     "+" => "t", "=" => "e", "~" => "n", "_" => "t", "^" => "a", ":" => "i",
     ";" => "i", "|" => "i"
-  }
+  }.freeze
 
   # rubocop:disable Metrics/BlockLength
   included do
@@ -76,7 +76,7 @@ module CanBehaveLikeUser
   end
 
   def password_must_not_be_dictionary_word
-    return unless password.present?
+    return if password.blank?
 
     dictionary = File.read("./lib/words_alpha.txt").split("\n").map(&:strip)
     password_without_substitutions = simple_substitution_converter(password)
@@ -86,7 +86,8 @@ module CanBehaveLikeUser
   end
 
   def password_must_not_contain_obvious_sequences
-    return unless password.present?
+    return if password.blank?
+
     sequences = %w[
       123 234 345 456 567 678 789 890 098 987 876 765 654 543 432 321 210 012 111
       222 333 444 555 666 777 888 999 000 abc bcd cde def efg fgh ghi hij ijk jkl
@@ -107,6 +108,6 @@ module CanBehaveLikeUser
       end
     end
 
-    return word_clone
+    word_clone
   end
 end
