@@ -6,7 +6,7 @@ FactoryBot.define do
       "user#{n}@example.com"
     end
 
-    password { "Secret123" }
+    password { "Secretofth3w0rld" }
 
     role { "agency" }
 
