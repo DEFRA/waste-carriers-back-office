@@ -18,7 +18,8 @@ module Reports
         easting: "Easting",
         northing: "Northing",
         first_name: "CorrespondentFirstName",
-        last_name: "CorrespondentLastName"
+        last_name: "CorrespondentLastName",
+        area: "EAArea"
       }.freeze
 
       def add_entries_for(registration, uid)
