@@ -24,6 +24,7 @@ module Reports
           Northing
           CorrespondentFirstName
           CorrespondentLastName
+          EAArea
         ]
       end
 
@@ -50,7 +51,8 @@ module Reports
             "easting",
             "northing",
             "first_name",
-            "last_name"
+            "last_name",
+            "area"
           ]
 
           allow(registration).to receive(:addresses).and_return([address])
@@ -68,6 +70,7 @@ module Reports
           expect(address).to receive(:northing).and_return("northing")
           expect(address).to receive(:first_name).and_return("first_name")
           expect(address).to receive(:last_name).and_return("last_name")
+          expect(address).to receive(:area).and_return("area")
 
           expect(CSV).to receive(:open).and_return(csv)
           expect(csv).to receive(:<<).with(headers)
