@@ -145,5 +145,8 @@ module WasteCarriersBackOffice
     config.generators do |g|
       g.orm :mongoid
     end
+
+    config.area_lookup_run_for = ENV["AREA_LOOKUP_RUN_FOR"] || 60
+    config.area_lookup_address_limit = ENV["AREA_LOOKUP_ADDRESS_LIMIT"] || 50
   end
 end
