@@ -55,3 +55,17 @@ en:
               obvious_sequence: "The password must not contain an obvious sequence of characters"
             role:
               inclusion: "You must select a role"
+        external_user:
+          attributes:
+            email:
+              blank: "Enter an email address"
+              invalid: "Enter a valid email address - there’s a mistake in that one"
+              taken: "There is already a user with this email"
+            password:
+              blank: "You must enter a password"
+              too_short: "The password must be at least 14 characters long"
+              invalid_format: "The password must contain uppercase letters, lowercase letters, and numbers or symbols"
+              dictionary_word: "The password must not be a single word from the dictionary"
+              obvious_sequence: "The password must not contain an obvious sequence of characters"
+            role:
+              inclusion: "You must select a role"
