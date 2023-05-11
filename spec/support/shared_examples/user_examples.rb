@@ -67,4 +67,3 @@ RSpec.shared_examples "a user" do |model_name|
     end
   end
 end
-
