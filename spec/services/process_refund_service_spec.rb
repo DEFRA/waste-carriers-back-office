@@ -7,7 +7,7 @@ RSpec.describe ProcessRefundService do
     subject(:refund_service) { described_class }
 
     let(:orders) { double(:orders) }
-    let(:order) { double(:order, merchant_id: "merchant_code") }
+    let(:order) { double(:order) }
     let(:finance_details) { double(:finance_details, balance: -500, orders: orders) }
     let(:payment) { double(:payment, order_key: "123", registration_reference: "registration_reference", amount: 1_500, payment_type: "payment_type") }
     let(:user) { double(:user, email: "user@example.com") }
@@ -39,13 +39,13 @@ RSpec.describe ProcessRefundService do
 
         context "when the request fails" do
           it "returns false and does not create a payment" do
-            expect(GovpayRefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(false)
+            expect(GovpayRefundService).to receive(:run).with(payment: payment, amount: 500).and_return(false)
 
             expect(refund_service.run(finance_details: finance_details, payment: payment, user: user)).to be_falsey
           end
         end
 
-        context "when the Govpay refind service returns an error" do
+        context "when the Govpay refund service returns an error" do
           let(:govpay_refund_service) { instance_double(GovpayRefundService) }
 
           before do
@@ -71,7 +71,8 @@ RSpec.describe ProcessRefundService do
             expect(finance_details).to receive(:save!)
 
             expect(WasteCarriersEngine::Payment).to receive(:new).with(payment_type: WasteCarriersEngine::Payment::REFUND).and_return(refund)
-            expect(refund).to receive(:order_key=).with("123_REFUNDED")
+            expect(refund).to receive(:govpay_payment_status=).with("submitted")
+            expect(refund).to receive(:order_key=).with("123_PENDING")
             expect(refund).to receive(:date_entered=).with(Date.current)
             expect(refund).to receive(:date_received=).with(Date.current)
             expect(refund).to receive(:amount=).with(-500)
@@ -81,7 +82,7 @@ RSpec.describe ProcessRefundService do
             expect(I18n).to receive(:t).with("refunds.comments.card", type: "Payment Type").and_return(description)
             expect(refund).to receive(:comment=).with(description)
 
-            expect(GovpayRefundService).to receive(:run).with(payment: payment, amount: 500, merchant_code: "merchant_code").and_return(true)
+            expect(GovpayRefundService).to receive(:run).with(payment: payment, amount: 500).and_return(true)
 
             expect(refund_service.run(finance_details: finance_details, payment: payment, user: user)).to be_truthy
           end
@@ -105,7 +106,7 @@ RSpec.describe ProcessRefundService do
         expect(finance_details).to receive(:save!)
 
         expect(WasteCarriersEngine::Payment).to receive(:new).with(payment_type: WasteCarriersEngine::Payment::REFUND).and_return(refund)
-        expect(refund).to receive(:order_key=).with("123_REFUNDED")
+        expect(refund).to receive(:order_key=).with("123_SUBMITTED")
         expect(refund).to receive(:date_entered=).with(Date.current)
         expect(refund).to receive(:date_received=).with(Date.current)
         expect(refund).to receive(:amount=).with(-500)

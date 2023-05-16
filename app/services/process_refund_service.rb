@@ -28,8 +28,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   def refunded?
     @_refunded ||= GovpayRefundService.run(
       payment: payment,
-      amount: amount_to_refund,
-      merchant_code: order.merchant_id
+      amount: amount_to_refund
     )
   end
 
@@ -45,7 +44,12 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   def build_refund
     refund = WasteCarriersEngine::Payment.new(payment_type: WasteCarriersEngine::Payment::REFUND)
 
-    refund.order_key = "#{payment.order_key}_REFUNDED"
+    if payment.govpay?
+      refund.govpay_payment_status = "submitted"
+      refund.order_key = "#{payment.order_key}_PENDING"
+    else
+      refund.order_key = "#{payment.order_key}_SUBMITTED"
+    end
     refund.amount = -amount_to_refund
     refund.date_entered = Date.current
     refund.date_received = Date.current
