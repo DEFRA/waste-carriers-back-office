@@ -24,7 +24,7 @@ en:
         password_label: "Password"
         password_hint:
           text: "It must:"
-          list_item_1: "have at least 8 characters"
+          list_item_1: "have at least 14 characters"
           list_item_2: "include some numbers"
           list_item_3: "have a mix of lower and upper case letters"
           list_item_4: "not use single dictionary words"
