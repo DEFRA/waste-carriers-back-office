@@ -42,7 +42,7 @@ Rails.application.routes.draw do
             only: [],
             path: "/bo/resources" do
               resources :refunds,
-                        only: %i[index new create],
+                        only: %i[index new create update],
                         param: :order_key
 
               resources :cancels,

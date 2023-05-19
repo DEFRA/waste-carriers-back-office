@@ -2,12 +2,15 @@ en:
   refunds:
     comments:
       manual: "A manual refund has been requested for this payment"
-      card: "A refund has been requested for this %{type} payment"
+      card_pending: "A refund request has been submitted"
+      card_complete: "A manual refund has been successful"
     refunded_message:
       manual: "Refund: A manual refund has been requested for this payment"
       card: "Refund: %{refund_status}"
+      updated: "The refund status has been updated"
+      not_updated: "The refund status has not changed"
     flash_messages:
-      successful: "£%{amount} refunded successfully"
+      successful: "A £%{amount} refund request has been submitted"
       error: "Sorry, there has been a problem communicating with %{type}. Please try again."
     index:
       title: "Refund a payment"

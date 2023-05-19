@@ -44,6 +44,18 @@ class RefundsController < ApplicationController
     redirect_to resource_finance_details_path(@resource._id)
   end
 
+  def update
+    updated = GovpayUpdateRefundStatusService.run(registration: @resource, refund_id: params[:order_key])
+
+    if updated
+      flash_success(I18n.t("refunds.refunded_message.updated"))
+    else
+      flash_message(I18n.t("refunds.refunded_message.not_updated"))
+    end
+
+    redirect_to resource_finance_details_path(@resource._id)
+  end
+
   private
 
   def fetch_payment

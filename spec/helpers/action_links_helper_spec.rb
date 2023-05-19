@@ -246,6 +246,30 @@ RSpec.describe ActionLinksHelper do
     end
   end
 
+  describe "#display_check_refund_status_link_for?" do
+    let(:resource) { build(:finance_details) }
+
+    context "when there is a refund but it is not pending" do
+      before do
+        resource.payments << build(:payment, :govpay_refund_complete)
+      end
+
+      it "returns false" do
+        expect(helper.display_check_refund_status_link_for?(resource)).to be(false)
+      end
+    end
+
+    context "when there is a pending refund" do
+      before do
+        resource.payments << build(:payment, :govpay_refund_pending)
+      end
+
+      it "returns true" do
+        expect(helper.display_check_refund_status_link_for?(resource)).to be(true)
+      end
+    end
+  end
+
   describe "#display_resume_link_for?" do
     context "when the resource is a NewRegistration" do
       let(:resource) { build(:new_registration) }

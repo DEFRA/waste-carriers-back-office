@@ -7,7 +7,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     @user = user
 
     return false if amount_to_refund.zero?
-    return false if card_payment? && !refunded?
+    return false if card_payment? && refund_details.blank?
 
     finance_details.payments << build_refund
     finance_details.update_balance
@@ -25,8 +25,8 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
 
   attr_reader :payment, :user, :finance_details
 
-  def refunded?
-    @_refunded ||= GovpayRefundService.run(
+  def refund_details
+    @refund_details ||= GovpayRefundService.run(
       payment: payment,
       amount: amount_to_refund
     )
@@ -45,8 +45,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     refund = WasteCarriersEngine::Payment.new(payment_type: WasteCarriersEngine::Payment::REFUND)
 
     if payment.govpay?
-      refund.govpay_payment_status = "submitted"
-      refund.order_key = "#{payment.order_key}_PENDING"
+      assign_govpay_attributes(refund, payment)
     else
       refund.order_key = "#{payment.order_key}_SUBMITTED"
     end
@@ -60,6 +59,13 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     refund
   end
 
+  def assign_govpay_attributes(refund, payment)
+    refund.govpay_payment_status = "submitted"
+    refund.govpay_id = @refund_details["refund_id"]
+    refund.refunded_payment_govpay_id = payment.govpay_id
+    refund.order_key = "#{payment.order_key}_PENDING"
+  end
+
   def order
     @_order ||= finance_details.orders.find_by(order_code: payment.order_key)
   end
@@ -69,7 +75,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   end
 
   def refund_comment
-    return I18n.t("refunds.comments.card", type: payment.payment_type.titleize) if card_payment?
+    return I18n.t("refunds.comments.card_pending") if card_payment?
 
     I18n.t("refunds.comments.manual")
   end

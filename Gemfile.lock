@@ -1,7 +1,12 @@
-GIT
-  remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 4d1a81ddd7428ab0e0b5649fe0144c4ee8728b72
-  branch: main
+PATH
+  remote: ../defra-ruby-mocks
+  specs:
+    defra_ruby_mocks (2.3.3)
+      rails (~> 6.0)
+      sprockets (~> 3.7.2)
+
+PATH
+  remote: ../waste-carriers-engine
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.3)
@@ -168,10 +173,6 @@ GEM
       cancancan (>= 1.10)
       devise (>= 4.4.3)
       rails (~> 6.0)
-    defra_ruby_mocks (2.3.3)
-      nokogiri
-      rails (~> 6.0)
-      sprockets (~> 3.7.2)
     defra_ruby_style (0.3.0)
       rubocop (>= 1.0, < 2.0)
     defra_ruby_template (3.13.0)
@@ -503,7 +504,6 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    webrick (1.8.1)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -524,7 +524,7 @@ DEPENDENCIES
   database_cleaner-mongoid
   defra_ruby_aws (~> 0.5)
   defra_ruby_features (~> 0.1)
-  defra_ruby_mocks
+  defra_ruby_mocks!
   defra_ruby_style
   defra_ruby_template
   devise (>= 4.8)
@@ -561,7 +561,6 @@ DEPENDENCIES
   waste_carriers_engine!
   web-console
   webmock (~> 3.4)
-  webrick
   whenever (~> 1.0)
   whenever-test (~> 1.0)
   wicked_pdf

@@ -62,6 +62,8 @@ RSpec.describe ProcessRefundService do
         end
 
         context "when the request succeeds" do
+          let(:govpay_refund_response) { Rails.root.join("spec/fixtures/files/govpay/get_refund_response_submitted.json").read }
+
           it "returns true and creates a (refund) payment" do
             description = double(:description)
 
@@ -71,7 +73,9 @@ RSpec.describe ProcessRefundService do
             expect(finance_details).to receive(:save!)
 
             expect(WasteCarriersEngine::Payment).to receive(:new).with(payment_type: WasteCarriersEngine::Payment::REFUND).and_return(refund)
+            expect(refund).to receive(:refunded_payment_govpay_id=).with(payment.govpay_id)
             expect(refund).to receive(:govpay_payment_status=).with("submitted")
+            expect(refund).to receive(:govpay_id=)
             expect(refund).to receive(:order_key=).with("123_PENDING")
             expect(refund).to receive(:date_entered=).with(Date.current)
             expect(refund).to receive(:date_received=).with(Date.current)
@@ -79,10 +83,10 @@ RSpec.describe ProcessRefundService do
             expect(refund).to receive(:registration_reference=).with("registration_reference")
             expect(refund).to receive(:updated_by_user=).with("user@example.com")
 
-            expect(I18n).to receive(:t).with("refunds.comments.card", type: "Payment Type").and_return(description)
+            expect(I18n).to receive(:t).with("refunds.comments.card_pending").and_return(description)
             expect(refund).to receive(:comment=).with(description)
 
-            expect(GovpayRefundService).to receive(:run).with(payment: payment, amount: 500).and_return(true)
+            expect(GovpayRefundService).to receive(:run).with(payment: payment, amount: 500).and_return(govpay_refund_response)
 
             expect(refund_service.run(finance_details: finance_details, payment: payment, user: user)).to be_truthy
           end
