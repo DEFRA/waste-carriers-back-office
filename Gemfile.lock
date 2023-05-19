@@ -1,12 +1,7 @@
-PATH
-  remote: ../defra-ruby-mocks
-  specs:
-    defra_ruby_mocks (2.3.3)
-      rails (~> 6.0)
-      sprockets (~> 3.7.2)
-
-PATH
-  remote: ../waste-carriers-engine
+GIT
+  remote: https://github.com/DEFRA/waste-carriers-engine
+  revision: 07cf5bfe0d0471414b751c02f9ef59c4b58afdd6
+  branch: main
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.3)
@@ -173,6 +168,10 @@ GEM
       cancancan (>= 1.10)
       devise (>= 4.4.3)
       rails (~> 6.0)
+    defra_ruby_mocks (2.3.3)
+      nokogiri
+      rails (~> 6.0)
+      sprockets (~> 3.7.2)
     defra_ruby_style (0.3.0)
       rubocop (>= 1.0, < 2.0)
     defra_ruby_template (3.13.0)
@@ -524,7 +523,7 @@ DEPENDENCIES
   database_cleaner-mongoid
   defra_ruby_aws (~> 0.5)
   defra_ruby_features (~> 0.1)
-  defra_ruby_mocks!
+  defra_ruby_mocks
   defra_ruby_style
   defra_ruby_template
   devise (>= 4.8)
