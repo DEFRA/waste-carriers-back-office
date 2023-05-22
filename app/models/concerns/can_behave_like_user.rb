@@ -47,6 +47,7 @@ module CanBehaveLikeUser
     field :last_sign_in_at,    type: Time
     field :current_sign_in_ip, type: String
     field :last_sign_in_ip,    type: String
+    field :current_login_token, type: String
 
     ## Lockable
     field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
