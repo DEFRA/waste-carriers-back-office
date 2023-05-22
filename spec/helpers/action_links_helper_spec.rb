@@ -254,18 +254,20 @@ RSpec.describe ActionLinksHelper do
         resource.payments << build(:payment, :govpay_refund_complete)
       end
 
-      it "returns false" do
-        expect(helper.display_check_refund_status_link_for?(resource)).to be(false)
+      it "returns nil" do
+        expect(helper.display_check_refund_status_link_for?(resource)).to be_nil
       end
     end
 
     context "when there is a pending refund" do
+      let(:refund) { build(:payment, :govpay_refund_pending) }
+
       before do
-        resource.payments << build(:payment, :govpay_refund_pending)
+        resource.payments << refund
       end
 
       it "returns true" do
-        expect(helper.display_check_refund_status_link_for?(resource)).to be(true)
+        expect(helper.display_check_refund_status_link_for?(resource)).to eq refund.govpay_id
       end
     end
   end

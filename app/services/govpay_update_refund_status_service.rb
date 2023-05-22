@@ -17,26 +17,31 @@ class GovpayUpdateRefundStatusService < WasteCarriersEngine::BaseService
     current_status = GovpayRefundDetailsService.run(refund_id:)["status"]
 
     return false if current_status == previous_status
+    return false if current_status != "success"
 
-    if current_status == "success"
-      refund.update({
-                      govpay_payment_status: current_status,
-                      comment: I18n.t("refunds.comments.card_complete"),
-                      order_key: refund.order_key.sub("_PENDING", "_REFUNDED")
-                    })
-      refund.save!
+    process_success(registration, refund)
 
-      registration.reload.finance_details.update_balance
-      registration.save!
-
-      return true
-    end
-
-    false
+    true
   rescue StandardError => e
     Rails.logger.error "#{e.class} error in Govpay update refund details service for payment " \
                        "#{payment_id}, refund #{refund_id}"
     Airbrake.notify(e, message: "Error in Govpay update refund details service", payment_id:, refund_id:)
     raise e
+  end
+
+  private
+
+  def process_success(registration, refund)
+    refund.update(
+      {
+        govpay_payment_status: "success",
+        comment: I18n.t("refunds.comments.card_complete"),
+        order_key: refund.order_key.sub("_PENDING", "_REFUNDED")
+      }
+    )
+    refund.save!
+
+    registration.reload.finance_details.update_balance
+    registration.save!
   end
 end
