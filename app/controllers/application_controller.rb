@@ -83,13 +83,13 @@ class ApplicationController < ActionController::Base
   end
 
   def check_concurrent_session
-    if is_already_logged_in?
-      sign_out(current_user)
-      redirect_to new_user_session_path, alert: t("sessions.failure.already_authenticated")
-    end
+    return unless is_already_logged_in?
+
+    sign_out(current_user)
+    redirect_to new_user_session_path, alert: t("sessions.failure.already_authenticated")
   end
 
   def is_already_logged_in?
-    current_user && !(session[:login_token] == current_user.current_login_token)
+    current_user && session[:login_token] != current_user.current_login_token
   end
 end

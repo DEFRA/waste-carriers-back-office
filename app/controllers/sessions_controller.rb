@@ -17,6 +17,7 @@ class SessionsController < Devise::SessionsController
   end
 
   private
+
   def set_login_token
     token = Devise.friendly_token
     session[:login_token] = token
