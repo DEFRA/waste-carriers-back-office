@@ -13,9 +13,10 @@ RSpec.describe "Sessions" do
   end
 
   describe "POST /bo/users/sign_in" do
+    let(:user) { create(:user) }
+
     context "when a user is not signed in" do
       context "when valid user details are submitted" do
-        let(:user) { create(:user) }
 
         it "signs the user in, returns a 302 response and redirects to /bo" do
           post user_session_path, params: { user: { email: user.email, password: user.password } }
@@ -23,6 +24,14 @@ RSpec.describe "Sessions" do
           expect(controller.current_user).to eq(user)
           expect(response).to have_http_status(:found)
           expect(response).to redirect_to(bo_path)
+        end
+
+        it "sets the current_login_token" do
+          post user_session_path, params: { user: { email: user.email, password: user.password } }
+
+          user.reload
+
+          expect(user.current_login_token).not_to be_nil
         end
       end
     end
