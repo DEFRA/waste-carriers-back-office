@@ -3,7 +3,7 @@
 class GovpayRefundService < WasteCarriersEngine::BaseService
   include WasteCarriersEngine::CanSendGovpayRequest
 
-  def run(payment:, amount:, merchant_code: nil) # rubocop:disable Lint/UnusedMethodArgument
+  def run(payment:, amount:)
     return false unless WasteCarriersEngine.configuration.host_is_back_office?
     return false unless payment.govpay?
 
@@ -12,7 +12,8 @@ class GovpayRefundService < WasteCarriersEngine::BaseService
 
     return false unless govpay_payment.refundable?(amount)
     return false if error
-    return false unless refund.success?
+
+    return false unless refund_state_ok?
 
     refund
   rescue StandardError => e
@@ -60,6 +61,10 @@ class GovpayRefundService < WasteCarriersEngine::BaseService
 
   def response
     @response ||= JSON.parse(request)
+  end
+
+  def refund_state_ok?
+    refund.success? || refund.submitted?
   end
 
   def status_code

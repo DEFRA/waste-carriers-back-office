@@ -82,9 +82,10 @@ RSpec.describe "Refunds" do
 
       context "when the payment is a govpay payment" do
         let(:renewing_registration) { create(:renewing_registration, :overpaid_govpay) }
+        let(:govpay_refund_response) { Rails.root.join("spec/fixtures/files/govpay/get_refund_response_submitted.json").read }
 
         before do
-          allow(GovpayRefundService).to receive(:run).and_return(true)
+          allow(GovpayRefundService).to receive(:run).and_return(govpay_refund_response)
         end
 
         it "creates a refund payment, redirects to the finance details page and returns a 302 status" do
@@ -116,6 +117,44 @@ RSpec.describe "Refunds" do
         post resource_refunds_path("foo"), params: { order_key: "bar" }
 
         expect(response).to redirect_to("/bo/pages/permission")
+      end
+    end
+  end
+
+  describe "PATCH /bo/resources/:_id/refunds" do
+
+    let(:registration) { create(:registration, :overpaid) }
+    let(:refund) { build(:payment, :govpay_refund_pending) }
+
+    context "when a user is not signed in" do
+      it "redirects to the sign-in page" do
+        patch resource_refund_path(registration, refund.id)
+
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    context "when a valid user is signed in" do
+      let(:user) { create(:user, role: :agency_with_refund) }
+      let(:update_service) { instance_double(GovpayUpdateRefundStatusService) }
+
+      before do
+        registration.finance_details.payments << refund
+
+        allow(GovpayUpdateRefundStatusService).to receive(:new).and_return(update_service)
+        allow(update_service).to receive(:run)
+
+        sign_in(user)
+
+        patch resource_refund_path(registration, refund.id)
+      end
+
+      it "calls the refund update service" do
+        expect(update_service).to have_received(:run)
+      end
+
+      it "redirects to the finance-details page" do
+        expect(response).to redirect_to resource_finance_details_path(registration)
       end
     end
   end

@@ -23,5 +23,10 @@
     <% if display_refund_link_for?(registration.finance_details) %>
       <%= link_to t(".refund"), resource_refunds_path(registration._id), class: "govuk-button" %>
     <% end %>
+
+    <% pending_refund_id = display_check_refund_status_link_for?(registration.finance_details) %>
+    <% if pending_refund_id %>
+      <%= link_to t(".check_refund_status"), resource_refund_path(registration, pending_refund_id), method: :patch, class: "govuk-button" %>
+    <% end %>
   </div>
 </div>

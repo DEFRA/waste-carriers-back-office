@@ -36,6 +36,19 @@ FactoryBot.define do
 
     trait :govpay do
       payment_type { WasteCarriersEngine::Payment::GOVPAY }
+      govpay_id { SecureRandom.hex(24) }
+    end
+
+    trait :govpay_refund_pending do
+      payment_type { WasteCarriersEngine::Payment::REFUND }
+      govpay_id { SecureRandom.hex(22) }
+      govpay_payment_status { "submitted" }
+    end
+
+    trait :govpay_refund_complete do
+      payment_type { WasteCarriersEngine::Payment::REFUND }
+      govpay_id { SecureRandom.hex(22) }
+      govpay_payment_status { "success" }
     end
   end
 end
