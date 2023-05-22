@@ -12,7 +12,7 @@ RSpec.describe GovpayRefundService do
   let(:govpay_host) { "https://publicapi.payments.service.gov.uk" }
   let(:registration) { create(:registration) }
 
-  let(:refund_response) { :get_refund_response_success }
+  let(:refund_response) { :get_refund_response_submitted }
   let(:back_office_api_token) { "back_office_token" }
   let(:govpay_api_token) { back_office_api_token }
 
@@ -42,9 +42,9 @@ RSpec.describe GovpayRefundService do
 
   describe ".run" do
     context "when the request is valid" do
-      it "returns a successful Refund object" do
+      it "returns a Refund object with 'submitted' status" do
         expect(govpay_refund.class).to eq WasteCarriersEngine::Govpay::Refund
-        expect(govpay_refund.success?).to be true
+        expect(govpay_refund.submitted?).to be true
       end
     end
 
@@ -58,8 +58,8 @@ RSpec.describe GovpayRefundService do
         payment.update!(moto: false)
       end
 
-      it "uses the front-office API token and returns success" do
-        expect(govpay_refund.success?).to be true
+      it "uses the front-office API token and returns a response with 'submitted' status" do
+        expect(govpay_refund.submitted?).to be true
       end
     end
 

@@ -79,6 +79,6 @@ Rails.application.configure do
   # but just the first part of it.
   # https://github.com/rails/web-console#configuration
   # https://stackoverflow.com/a/29417509
-  config.web_console.whitelisted_ips = ENV.fetch("SSH_CLIENT", "127.0.0.1").split.first
+  config.web_console.allowed_ips = ENV.fetch("SSH_CLIENT", "127.0.0.1").split.first
 end
 # rubocop:enable Metrics/BlockLength
