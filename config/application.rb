@@ -148,5 +148,8 @@ module WasteCarriersBackOffice
 
     config.area_lookup_run_for = ENV["AREA_LOOKUP_RUN_FOR"] || 60
     config.area_lookup_address_limit = ENV["AREA_LOOKUP_ADDRESS_LIMIT"] || 50
+
+    # prevent comments showing ruby version:
+    config.sass.line_comments = false
   end
 end
