@@ -6,14 +6,12 @@ class GovpayUpdateRefundStatusService < WasteCarriersEngine::BaseService
     refund = GovpayFindPaymentService.run(payment_id: refund_id)
     return false if refund.blank?
 
-    refund_id = refund.govpay_id
-
     payment = GovpayFindPaymentService.run(payment_id: refund.refunded_payment_govpay_id)
     return false if payment.blank?
 
     payment_id = payment.govpay_id
 
-    previous_status = refund.govpay_payment_status
+    previous_status = refund.reload.govpay_payment_status
     current_status = GovpayRefundDetailsService.run(refund_id:)["status"]
 
     return false if current_status == previous_status
