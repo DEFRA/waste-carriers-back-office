@@ -4,6 +4,7 @@ class DeregistrationEmailExportSerializer < Reports::BaseCsvFileSerializer
   DATA_ATTRIBUTES = {
     regIdentifier: "reg_identifier",
     contactEmail: "email_address",
+    phoneNumber: "phone_number",
     companyName: "company_name",
     firstName: "first_name",
     lastName: "last_name"

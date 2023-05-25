@@ -94,6 +94,7 @@ RSpec.describe DeregistrationEmailExportSerializer do
         expected_columns = %w[
           reg_identifier
           email_address
+          phone_number
           company_name
           first_name
           last_name
