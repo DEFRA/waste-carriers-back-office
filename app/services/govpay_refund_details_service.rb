@@ -26,7 +26,9 @@ class GovpayRefundDetailsService < WasteCarriersEngine::BaseService
 
   def request
     @request ||=
-      send_request(method: :get, path: "/payments/#{payment.govpay_id}/refunds/#{refund.govpay_id}")
+      send_request(
+        method: :get, path: "/payments/#{payment.govpay_id}/refunds/#{refund.govpay_id}", is_moto: payment.moto
+      )
   end
 
   def response

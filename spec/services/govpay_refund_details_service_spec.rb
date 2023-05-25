@@ -15,6 +15,7 @@ module WasteCarriersEngine
       let(:govpay_refund_id) { refund.govpay_id }
 
       before do
+        allow(WasteCarriersEngine.configuration).to receive(:host_is_back_office?).and_return(true)
         allow(Rails.configuration).to receive(:govpay_url).and_return(govpay_host)
         registration.finance_details.payments << refund
       end
@@ -40,15 +41,41 @@ module WasteCarriersEngine
 
       context "with a valid refund id" do
         let(:refund_id) { refund.govpay_id }
+        let(:front_office_token) { "front office token" }
+        let(:back_office_token) { "back office token" }
+        let(:govpay_api_token) { back_office_token }
 
         context "when the govpay request succeeds" do
           before do
+            allow(Rails.configuration).to receive(:govpay_front_office_api_token).and_return(front_office_token)
+            allow(Rails.configuration).to receive(:govpay_back_office_api_token).and_return(back_office_token)
             stub_request(:get, %r{.*#{govpay_host}/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}})
+              .with(headers: { "Authorization" => "Bearer #{govpay_api_token}" })
               .to_return(status: 200, body: File.read("./spec/fixtures/files/govpay/get_refund_details_response_submitted.json"))
           end
 
-          it "returns the expected status" do
-            expect(run_service["status"]).to eq "submitted"
+          context "with a non-MOTO payment" do
+            # This ensures that the Govpay API is not stubbed for the back office bearer token,
+            # so the spec will fail if the request is made using the back office token.
+            let(:govpay_api_token) { front_office_token }
+
+            before { original_payment.update!(moto: false) }
+
+            it "returns the expected status" do
+              expect(run_service["status"]).to eq "submitted"
+            end
+          end
+
+          context "with a MOTO payment" do
+            # This ensures that the Govpay API is not stubbed for the front office bearer token,
+            # so the spec will fail if the request is made using the front office token.
+            let(:govpay_api_token) { back_office_token }
+
+            before { original_payment.update(moto: true) }
+
+            it "returns the expected status" do
+              expect(run_service["status"]).to eq "submitted"
+            end
           end
         end
 
