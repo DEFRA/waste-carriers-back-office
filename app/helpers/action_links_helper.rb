@@ -68,6 +68,9 @@ module ActionLinksHelper
     # Do not display the link if there is a pending refund
     return false unless resource.payments.find(&:refund?).nil?
 
+    # Do not display the link if there is a pending refund
+    return false unless resource.payments.find { |payment| payment.payment_type == "REFUND" }.nil?
+
     can?(:refund, resource)
   end
 
