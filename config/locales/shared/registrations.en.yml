@@ -56,12 +56,14 @@ en:
       company_details_panel:
         labels:
           account_html: "<span class=\"govuk-!-font-weight-bold\">Account</span>: %{email}"
+          registration_date_html: "<span class=\"govuk-!-font-weight-bold\">Original registration date</span>: %{formatted_date}"
         attributes:
           registration_type:
             carrier_dealer: "Carrier and dealer"
             broker_dealer: "Broker and dealer"
             carrier_broker_dealer: "Carrier, broker and dealer"
         no_company_details_available: "This registration application is still in progress, so there are no company details yet."
+        find_renewal_dates: "To find renewal dates check the payment history in payment details section."
       action_links_panel:
         actions_box:
           heading:
