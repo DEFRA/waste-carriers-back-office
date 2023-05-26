@@ -63,10 +63,10 @@ module ActionLinksHelper
     return false if resource.balance >= 0
 
     # Display the link only if there is at least one payment of the relevant type
-    return false if resource.payments.find { |payment| payment.payment_type == "GOVPAY" }.nil?
+    return false if resource.payments.find(&:govpay?).nil?
 
     # Do not display the link if there is a pending refund
-    return false unless resource.payments.find { |payment| payment.payment_type == "REFUND" }.nil?
+    return false unless resource.payments.find(&:refund?).nil?
 
     can?(:refund, resource)
   end
