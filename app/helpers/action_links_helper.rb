@@ -62,8 +62,11 @@ module ActionLinksHelper
   def display_refund_link_for?(resource)
     return false if resource.balance >= 0
 
-    # Display the link only if there is at least one payment of the relevant type
-    return false if resource.payments.find { |payment| payment.payment_type == "GOVPAY" }.nil?
+    # Display the link only if there is at least one govpay payment
+    return false if resource.payments.find(&:govpay?).nil?
+
+    # Do not display the link if there is a pending refund
+    return false if resource.payments.select(&:refund?).pluck(:govpay_payment_status).include?("submitted")
 
     can?(:refund, resource)
   end

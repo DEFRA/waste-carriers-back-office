@@ -7,8 +7,8 @@ RSpec.describe "Refunds" do
     context "when a valid user is signed in" do
       let(:user) { create(:user, role: :agency_with_refund) }
       let(:renewing_registration) { create(:renewing_registration, :overpaid) }
-      let(:worldpay_payment) { renewing_registration.finance_details.payments.select { |p| p.payment_type == "WORLDPAY" }.first }
-      let(:govpay_payment) { renewing_registration.finance_details.payments.select { |p| p.payment_type == "GOVPAY" }.first }
+      let(:worldpay_payment) { renewing_registration.finance_details.payments.select(&:worldpay?).first }
+      let(:govpay_payment) { renewing_registration.finance_details.payments.select(&:govpay?).first }
       let(:govpay_active?) { false }
 
       before do

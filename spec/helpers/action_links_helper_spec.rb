@@ -197,20 +197,24 @@ RSpec.describe ActionLinksHelper do
   describe "#display_refund_link_for?" do
     let(:resource) { build(:finance_details, balance: balance) }
 
+    shared_examples "returns true" do
+      it { expect(helper.display_refund_link_for?(resource)).to be(true) }
+    end
+
+    shared_examples "returns false" do
+      it { expect(helper.display_refund_link_for?(resource)).to be(false) }
+    end
+
     context "when the resource has a positive balance" do
       let(:balance) { 5 }
 
-      it "returns false" do
-        expect(helper.display_refund_link_for?(resource)).to be(false)
-      end
+      it_behaves_like "returns false"
     end
 
     context "when the resource has a balance of 0" do
       let(:balance) { 0 }
 
-      it "returns false" do
-        expect(helper.display_refund_link_for?(resource)).to be(false)
-      end
+      it_behaves_like "returns false"
     end
 
     context "when the resource has a negative balance" do
@@ -219,9 +223,7 @@ RSpec.describe ActionLinksHelper do
       context "when the user does not have the permissions to refund" do
         before { allow(helper).to receive(:can?).with(:refund, resource).and_return(false) }
 
-        it "returns false" do
-          expect(helper.display_refund_link_for?(resource)).to be(false)
-        end
+        it_behaves_like "returns false"
       end
 
       context "when the user has the permissions to refund" do
@@ -230,17 +232,22 @@ RSpec.describe ActionLinksHelper do
         context "with a worldpay payment" do
           let(:resource) { build(:finance_details, :has_overpaid_order_and_payment) }
 
-          it "returns false" do
-            expect(helper.display_refund_link_for?(resource)).to be(false)
-          end
+          it_behaves_like "returns false"
         end
 
         context "with a govpay payment" do
           let(:resource) { build(:finance_details, :has_overpaid_order_and_payment_govpay) }
 
-          it "returns true" do
-            expect(helper.display_refund_link_for?(resource)).to be(true)
-          end
+          it_behaves_like "returns true"
+        end
+
+        context "with a govpay payment and a pending govpay refund" do
+          let(:resource) { build(:finance_details, :has_overpaid_order_and_payment_govpay) }
+          let(:refund) { build(:payment, :govpay_refund_pending) }
+
+          before { resource.payments << refund }
+
+          it_behaves_like "returns false"
         end
       end
     end
