@@ -19,9 +19,7 @@
         <%= t(".labels.account_html", email: resource.account_email).html_safe %>
         <br>
       <% end %>
-      <% if resource.display_original_registration_date.present? %>
-        <%= resource.display_original_registration_date %>
-      <% end %>
+      <%= resource.display_original_registration_date %>
     </p>
     <p class="govuk-body">
       <%= t(".find_renewal_dates") %>
