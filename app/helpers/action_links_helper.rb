@@ -72,6 +72,8 @@ module ActionLinksHelper
   end
 
   def display_check_refund_status_link_for?(resource)
+    return nil unless can?(:refund, resource)
+
     pending_refund = resource.payments.where(
       payment_type: WasteCarriersEngine::Payment::REFUND, govpay_payment_status: "submitted"
     ).first
