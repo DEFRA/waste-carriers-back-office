@@ -48,6 +48,23 @@ RSpec.describe "lookups:update:missing_area", type: :rake do
     end
   end
 
+  context "when a registration is inactive" do
+    it "does not include the address in the service call" do
+      create(:registration, :inactive, addresses: [build(:address, :registered, postcode: "AB1 2CD")])
+
+      allow(TimedServiceRunner).to receive(:run)
+
+      Rake::Task["lookups:update:missing_area"].invoke
+
+      expect(TimedServiceRunner).to have_received(:run).with(
+        scope: [],
+        run_for: WasteCarriersBackOffice::Application.config.area_lookup_run_for.to_i,
+        service: WasteCarriersEngine::AssignSiteDetailsService,
+        throttle: 0.1
+      ).at_least(:once)
+    end
+  end
+
   context "when the postcode is blank" do
     it "does not include the address in the service call" do
       create(:registration, addresses: [build(:address, :registered, postcode: nil)])

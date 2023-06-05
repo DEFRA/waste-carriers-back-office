@@ -14,7 +14,7 @@ namespace :lookups do
       counter = 0
       addresses_scope = []
 
-      WasteCarriersEngine::Registration.where("address.area": nil).each do |registration|
+      WasteCarriersEngine::Registration.active.where("address.area": nil).each do |registration|
         break if counter >= address_limit
 
         address = registration.company_address
