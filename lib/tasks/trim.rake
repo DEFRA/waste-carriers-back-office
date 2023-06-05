@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 namespace :db do
   namespace :sessions do
     desc "Trim old sessions from the database (older than 30 days)"
-    task :trim => :environment do
+    task trim: :environment do
       cutoff_period = 30.days.ago
 
       # Assuming that the session data is stored in a Mongoid document named 'Session'
@@ -11,4 +13,3 @@ namespace :db do
     end
   end
 end
-
