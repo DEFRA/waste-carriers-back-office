@@ -259,6 +259,7 @@ RSpec.describe ActionLinksHelper do
     context "when there is a refund but it is not pending" do
       before do
         resource.payments << build(:payment, :govpay_refund_complete)
+        allow(helper).to receive(:can?).with(:refund, resource).and_return(true)
       end
 
       it "returns nil" do
@@ -269,12 +270,22 @@ RSpec.describe ActionLinksHelper do
     context "when there is a pending refund" do
       let(:refund) { build(:payment, :govpay_refund_pending) }
 
-      before do
-        resource.payments << refund
+      before { resource.payments << refund }
+
+      context "when the user does not have permission to refund" do
+        before { allow(helper).to receive(:can?).with(:refund, resource).and_return(false) }
+
+        it "returns nil" do
+          expect(helper.display_check_refund_status_link_for?(resource)).to be_nil
+        end
       end
 
-      it "returns true" do
-        expect(helper.display_check_refund_status_link_for?(resource)).to eq refund.govpay_id
+      context "when the user has permission to refund" do
+        before { allow(helper).to receive(:can?).with(:refund, resource).and_return(true) }
+
+        it "returns true" do
+          expect(helper.display_check_refund_status_link_for?(resource)).to eq refund.govpay_id
+        end
       end
     end
   end
