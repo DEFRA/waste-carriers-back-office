@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 9c5c55cf5df8a91b94883b7650bfcb77302bcd5c
+  revision: a66381da21eedfde6bbdb091a822020207876793
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -13,6 +13,7 @@ GIT
       defra_ruby_validators (>= 2.5.0)
       high_voltage (~> 3.1)
       jbuilder (~> 2.11)
+      mongo_session_store
       mongoid
       mongoid-locker (= 2.0.0)
       nokogiri
@@ -298,6 +299,9 @@ GEM
     minitest (5.18.0)
     mongo (2.18.2)
       bson (>= 4.14.1, < 5.0.0)
+    mongo_session_store (3.2.1)
+      actionpack (>= 4.0)
+      mongo (~> 2.0)
     mongoid (7.5.2)
       activemodel (>= 5.1, < 7.1, != 7.0.0)
       mongo (>= 2.10.5, < 3.0.0)
@@ -537,6 +541,7 @@ DEPENDENCIES
   kaminari (~> 1.2)
   kaminari-mongoid (~> 1.0)
   matrix
+  mongo_session_store
   mongoid (~> 7.5)
   net-imap
   net-pop
