@@ -88,7 +88,7 @@ gem "github_changelog_generator", require: false
 # Test with `curl -I http://localhost:8001/healthcheck`
 gem "aws-healthcheck"
 
-group :production, :development do
+group :production do
   # Web application server that replaces webrick. It handles HTTP requests,
   # manages processes and resources, and enables administration, monitoring
   # and problem diagnosis. It is used in production because it gives us an ability
@@ -112,6 +112,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "puma"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   # Access an IRB console on exception pages or by using <%= console %> in views
