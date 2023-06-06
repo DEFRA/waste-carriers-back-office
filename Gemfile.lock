@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: a66381da21eedfde6bbdb091a822020207876793
+  revision: 5feaf489aab73463df1b2dc4c24beb3557a97f5c
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -175,8 +175,10 @@ GEM
     defra_ruby_style (0.3.0)
       rubocop (>= 1.0, < 2.0)
     defra_ruby_template (3.13.0)
-    defra_ruby_validators (2.5.0)
+    defra_ruby_validators (2.5.1)
       activemodel
+      i18n
+      matrix
       os_map_ref
       phonelib
       rest-client (~> 2.0)
@@ -253,7 +255,7 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
-    i18n (1.14.0)
+    i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -337,7 +339,7 @@ GEM
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.8.1)
+    phonelib (0.8.2)
     protocol-hpack (1.4.2)
     protocol-http (0.22.5)
     protocol-http1 (0.14.1)
