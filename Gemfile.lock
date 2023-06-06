@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 35209814e6cc9f122354fa1baa6d4455b2bc1792
+  revision: 5feaf489aab73463df1b2dc4c24beb3557a97f5c
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -13,6 +13,7 @@ GIT
       defra_ruby_validators (>= 2.5.0)
       high_voltage (~> 3.1)
       jbuilder (~> 2.11)
+      mongo_session_store
       mongoid
       mongoid-locker (= 2.0.0)
       nokogiri
@@ -174,8 +175,10 @@ GEM
     defra_ruby_style (0.3.0)
       rubocop (>= 1.0, < 2.0)
     defra_ruby_template (3.13.0)
-    defra_ruby_validators (2.5.0)
+    defra_ruby_validators (2.5.1)
       activemodel
+      i18n
+      matrix
       os_map_ref
       phonelib
       rest-client (~> 2.0)
@@ -298,6 +301,9 @@ GEM
     minitest (5.18.0)
     mongo (2.18.2)
       bson (>= 4.14.1, < 5.0.0)
+    mongo_session_store (3.2.1)
+      actionpack (>= 4.0)
+      mongo (~> 2.0)
     mongoid (7.5.2)
       activemodel (>= 5.1, < 7.1, != 7.0.0)
       mongo (>= 2.10.5, < 3.0.0)
@@ -333,7 +339,7 @@ GEM
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.8.1)
+    phonelib (0.8.2)
     protocol-hpack (1.4.2)
     protocol-http (0.22.5)
     protocol-http1 (0.14.1)
@@ -539,6 +545,7 @@ DEPENDENCIES
   kaminari (~> 1.2)
   kaminari-mongoid (~> 1.0)
   matrix
+  mongo_session_store
   mongoid (~> 7.5)
   net-imap
   net-pop

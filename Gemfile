@@ -5,6 +5,8 @@ ruby "3.1.2"
 
 # Use MongoDB as the database, and mongoid as our ORM for it.
 gem "mongoid", "~> 7.5"
+
+gem "mongo_session_store"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
 gem "rails", ">= 6.1.7"
 # Use SCSS for stylesheets

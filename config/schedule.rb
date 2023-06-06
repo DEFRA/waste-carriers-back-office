@@ -86,3 +86,7 @@ end
 every :day, at: (ENV["AREA_LOOKUP"] || "01:05"), roles: [:db] do
   rake "lookups:update:missing_area"
 end
+
+every :day, at: (ENV["CLEANUP_OLD_SESSIONS_TIME"] || "01:00"), roles: [:db] do
+  rake "db:sessions:trim"
+end
