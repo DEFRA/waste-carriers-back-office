@@ -52,6 +52,10 @@ FactoryBot.define do
       metaData { build(:metaData, :active) }
     end
 
+    trait :inactive do
+      metaData { build(:metaData, :cancelled) }
+    end
+
     trait :ceased do
       metaData { build(:metaData, :ceased) }
     end
