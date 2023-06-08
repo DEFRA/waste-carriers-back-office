@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 5feaf489aab73463df1b2dc4c24beb3557a97f5c
+  revision: e2f2233d6b274ce909235fde0f59cf56891cbebb
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -356,7 +356,7 @@ GEM
     public_suffix (5.0.0)
     puma (6.3.0)
       nio4r (~> 2.0)
-    racc (1.6.2)
+    racc (1.7.0)
     rack (2.2.7)
     rack-test (2.1.0)
       rack (>= 1.3)
