@@ -77,7 +77,7 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def latest_order
-    return unless finance_details&.orders&.present?
+    return if finance_details&.orders.blank?
 
     ::OrderPresenter.new(
       finance_details.orders.order_by(dateCreated: :desc).first
@@ -108,15 +108,11 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     registered_address.area || "Pending"
   end
 
-  def display_registration_date
-    metaData.dateRegistered&.to_date
-  end
-
   def display_original_registration_date
-    return if metaData.dateRegistered.blank?
+    return if original_activation_date.blank?
 
     sanitize(I18n.t(".shared.registrations.company_details_panel.labels.registration_date_html",
-                    formatted_date: display_registration_date))
+                    formatted_date: original_activation_date.to_date))
   end
 
   private

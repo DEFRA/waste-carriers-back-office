@@ -384,23 +384,13 @@ RSpec.describe BaseRegistrationPresenter do
     end
   end
 
-  describe "#display_registration_date" do
-    let(:date_registered) { Time.zone.now }
-    let(:metadata) { double(:metadata, dateRegistered: date_registered) }
-    let(:registration) { double(:registration, metaData: metadata) }
-
-    it "returns a formatted registration date" do
-      expect(subject.display_registration_date).to eq(date_registered.to_date)
-    end
-  end
-
   describe "#display_original_registration_date" do
-    let(:date_registered) { Time.zone.now }
-    let(:metadata) { double(:metadata, dateRegistered: date_registered) }
+    let(:date_activated) { Time.zone.now }
+    let(:metadata) { double(:metadata, dateActivated: date_activated) }
     let(:registration) { double(:registration, metaData: metadata) }
 
     it "returns a formatted registration date with label added" do
-      expect(subject.display_original_registration_date).to include(I18n.t(".shared.registrations.company_details_panel.labels.registration_date_html", formatted_date: date_registered.to_date))
+      expect(subject.display_original_registration_date).to include(I18n.t(".shared.registrations.company_details_panel.labels.registration_date_html", formatted_date: date_activated.to_date))
     end
   end
 end
