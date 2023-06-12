@@ -12,15 +12,12 @@ namespace :lookups do # rubocop:disable Metrics/BlockLength
       run_for = WasteCarriersBackOffice::Application.config.area_lookup_run_for.to_i
       address_limit = WasteCarriersBackOffice::Application.config.area_lookup_address_limit.to_i
 
-      address_docs = WasteCarriersEngine::Registration.collection.aggregate(pipeline(address_limit))
-
-      # AssignSiteDetailsService expects an array of address objects, not BSON documents
-      addresses_scope = address_docs.map { |address_doc| WasteCarriersEngine::Address.new(address_doc.except("_id")) }
+      registrations_scope = WasteCarriersEngine::Registration.collection.aggregate(pipeline(address_limit)).pluck(:_id)
 
       throttle = MINUTE_IN_SECONDS / MAX_REQUESTS_PER_MINUTE
 
       TimedServiceRunner.run(
-        scope: addresses_scope,
+        scope: registrations_scope,
         run_for: run_for,
         service: WasteCarriersEngine::AssignSiteDetailsService,
         throttle: throttle
@@ -40,8 +37,8 @@ namespace :lookups do # rubocop:disable Metrics/BlockLength
           "addresses.postcode": { "$nin": [nil, ""] }
         } },
         { "$limit": address_limit },
-        #  flatten the results to return an array of address documents
-        { "$replaceRoot": { newRoot: "$addresses" } }
+        # we need only the registration ids
+        { "$project": { _id: 1 } }
       ]
     end
   end
