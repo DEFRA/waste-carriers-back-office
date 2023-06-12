@@ -385,9 +385,8 @@ RSpec.describe BaseRegistrationPresenter do
   end
 
   describe "#display_original_registration_date" do
-    let(:date_activated) { Time.zone.now }
-    let(:metadata) { double(:metadata, dateActivated: date_activated) }
-    let(:registration) { double(:registration, metaData: metadata) }
+    let(:date_activated) { 1.year.ago }
+    let(:registration) { double(:registration, original_activation_date: date_activated) }
 
     it "returns a formatted registration date with label added" do
       expect(subject.display_original_registration_date).to include(I18n.t(".shared.registrations.company_details_panel.labels.registration_date_html", formatted_date: date_activated.to_date))
