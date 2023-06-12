@@ -6,7 +6,7 @@ module Notify
       @expires_on = expires_on
 
       digital_expiring_registrations.each do |registration|
-        if registration.mobile?
+        if registration.mobile? && WasteCarriersEngine::FeatureToggle.active?(:send_digital_renewal_sms)
           send_sms(registration)
         else
           send_letter(registration)
