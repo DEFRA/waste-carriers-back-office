@@ -21,21 +21,20 @@ class TimedServiceRunner
   def self.run(scope:, run_for:, service:, throttle: 0)
     run_until = run_for.minutes.from_now
 
-    scope.each do |address|
+    scope.each do |registration_id|
       break if Time.zone.now > run_until
 
       begin
-        service.run(address: address)
-        address.save!
+        service.run(registration_id: registration_id)
       rescue StandardError => e
-        handle_error(e, address.id, service)
+        handle_error(e, registration_id, service)
       end
       sleep(throttle) if throttle.positive?
     end
   end
 
-  def self.handle_error(error, address_id, service)
-    Airbrake.notify(error, address_id: address_id)
+  def self.handle_error(error, registration_id, service)
+    Airbrake.notify(error, registration_id: registration_id)
     Rails.logger.error "#{service.name.demodulize} failed:\n #{error}"
   end
 end
