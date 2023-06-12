@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NotifyRenewalPresenter < WasteCarriersEngine::BasePresenter
+class NotifyRenewalLetterPresenter < WasteCarriersEngine::BasePresenter
   include WasteCarriersEngine::ApplicationHelper
   include ActionView::Helpers::NumberHelper
 
