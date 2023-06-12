@@ -28,7 +28,7 @@ namespace :notify do
                                                        .days
                                                        .from_now
 
-      registrations = Notify::BulkDigitalRenewalNotificationService.run(expires_on)
+      registrations = Notify::BulkDigitalRenewalLettersService.run(expires_on)
 
       if registrations.any?
         Rails.logger.info "Notify digital renewal letters sent for #{registrations.map(&:reg_identifier).join(', ')}"

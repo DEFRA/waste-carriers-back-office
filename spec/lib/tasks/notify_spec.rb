@@ -14,7 +14,7 @@ RSpec.describe "Notify task", type: :rake do
 
   describe "notify:letters:digital_renewals" do
     it "runs without error" do
-      allow(Notify::BulkDigitalRenewalNotificationService).to receive(:run).and_return([build(:registration)])
+      allow(Notify::BulkDigitalRenewalLettersService).to receive(:run).and_return([build(:registration)])
       expect { subject.invoke }.not_to raise_error
     end
   end
