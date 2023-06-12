@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe NotifyRenewalNotificationPresenter, type: :helper do
+RSpec.describe NotifyRenewalPresenter, type: :helper do
   subject(:presenter) { described_class.new(registration) }
 
   let(:registration) { create(:registration) }

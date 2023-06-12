@@ -8,7 +8,7 @@ module Notify
     include ::WasteCarriersEngine::ApplicationHelper
 
     def run(registration:)
-      @registration = NotifyRenewalNotificationPresenter.new(registration)
+      @registration = NotifyRenewalPresenter.new(registration)
 
       client = Notifications::Client.new(WasteCarriersEngine.configuration.notify_api_key)
 
