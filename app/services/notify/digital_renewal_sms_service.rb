@@ -2,8 +2,10 @@
 
 module Notify
   class DigitalRenewalSmsService < ::WasteCarriersEngine::BaseService
+    TEMPLATE_ID = "c23c1300-6d49-4310-bda6-99174ca0cd23"
+
     def run(registration:)
-      @registration = NotifyRenewalLetterPresenter.new(registration)
+      @registration = NotifyRenewalPresenter.new(registration)
 
       client = Notifications::Client.new(WasteCarriersEngine.configuration.notify_api_key)
       client.send_sms(
@@ -17,7 +19,7 @@ module Notify
     private
 
     def template
-      "c23c1300-6d49-4310-bda6-99174ca0cd23"
+      TEMPLATE_ID
     end
 
     def personalisation
