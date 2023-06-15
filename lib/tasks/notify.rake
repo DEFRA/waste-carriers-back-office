@@ -13,7 +13,9 @@ namespace :notify do
       registrations = Notify::BulkDigitalRenewalNotificationService.run(expires_on)
 
       if registrations.any?
-        Rails.logger.info "Notify digital renewal notifications sent for #{registrations.map(&:reg_identifier).join(', ')}"
+        Rails.logger.info(
+          "Notify digital renewal notifications sent for #{registrations.map(&:reg_identifier).join(', ')}"
+        )
       else
         Rails.logger.info "No matching registrations for Notify digital renewal notifications"
       end
