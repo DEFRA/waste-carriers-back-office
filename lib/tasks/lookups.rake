@@ -6,9 +6,11 @@ MAX_REQUESTS_PER_MINUTE = 600
 
 namespace :lookups do # rubocop:disable Metrics/BlockLength
   namespace :update do # rubocop:disable Metrics/BlockLength
-    desc "Update all sites with a missing area (postcode must be populated)"
 
+    desc "Update all sites with a missing area (postcode must be populated)"
     task missing_area: :environment do
+      return false unless WasteCarriersEngine::FeatureToggle.active?(:run_ea_areas_job)
+
       run_for = WasteCarriersBackOffice::Application.config.area_lookup_run_for.to_i
       address_limit = WasteCarriersBackOffice::Application.config.area_lookup_address_limit.to_i
 
