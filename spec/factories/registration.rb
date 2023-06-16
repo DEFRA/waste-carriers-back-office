@@ -16,15 +16,15 @@ FactoryBot.define do
     phone_number { "03708 506506" }
     tier { "UPPER" }
 
-    finance_details { build(:finance_details, :has_paid_order_and_payment) }
+    finance_details { association(:finance_details, :has_paid_order_and_payment, strategy: :build) }
 
-    addresses { [build(:address, :registered), build(:address, :contact)] }
-    key_people { [build(:key_person, :does_not_require_conviction_check)] }
+    addresses { [association(:address, :registered, strategy: :build), association(:address, :contact, strategy: :build)] }
+    key_people { [association(:key_person, :does_not_require_conviction_check, strategy: :build)] }
 
-    metaData { build(:metaData) }
+    metaData { association(:metaData, strategy: :build) }
 
     trait :simple_address do
-      addresses { [build(:simple_address)] }
+      addresses { [association(:simple_address, strategy: :build)] }
     end
 
     trait :ad_registration do
@@ -33,93 +33,93 @@ FactoryBot.define do
     end
 
     trait :cancelled do
-      metaData { build(:metaData, :cancelled) }
+      metaData { association(:metaData, :cancelled, strategy: :build) }
     end
 
     trait :overpaid do
-      finance_details { build(:finance_details, :has_overpaid_order_and_payment) }
+      finance_details { association(:finance_details, :has_overpaid_order_and_payment, strategy: :build) }
     end
 
     trait :pending do
-      metaData { build(:metaData, :pending) }
+      metaData { association(:metaData, :pending, strategy: :build) }
     end
 
     trait :has_unpaid_order do
-      finance_details { build(:finance_details, :has_unpaid_order) }
+      finance_details { association(:finance_details, :has_unpaid_order, strategy: :build) }
     end
 
     trait :active do
-      metaData { build(:metaData, :active) }
+      metaData { association(:metaData, :active, strategy: :build) }
     end
 
     trait :inactive do
-      metaData { build(:metaData, :cancelled) }
+      metaData { association(:metaData, :cancelled, strategy: :build) }
     end
 
     trait :ceased do
-      metaData { build(:metaData, :ceased) }
+      metaData { association(:metaData, :ceased, strategy: :build) }
     end
 
     trait :expired do
-      metaData { build(:metaData, :expired) }
+      metaData { association(:metaData, :expired, strategy: :build) }
     end
 
     trait :revoked do
-      metaData { build(:metaData, :revoked) }
+      metaData { association(:metaData, :revoked, strategy: :build) }
     end
 
     trait :restored do
-      metaData { build(:metaData, :active, restored_reason: "a reason", restored_by: "foo@example.com") }
+      metaData { association(:metaData, :active, restored_reason: "a reason", restored_by: "foo@example.com", strategy: :build) }
     end
 
     trait :has_orders_and_payments do
-      finance_details { build(:finance_details, :has_paid_order_and_payment) }
+      finance_details { association(:finance_details, :has_paid_order_and_payment, strategy: :build) }
     end
 
     trait :expires_soon do
-      metaData { build(:metaData, :active) }
+      metaData { association(:metaData, :active, strategy: :build) }
       expires_on { 2.months.from_now }
     end
 
     trait :expires_tomorrow do
-      metaData { build(:metaData, :active) }
+      metaData { association(:metaData, :active, strategy: :build) }
       expires_on { 1.day.from_now }
     end
 
     trait :pending_payment do
-      finance_details { build(:finance_details, :positive_balance) }
+      finance_details { association(:finance_details, :positive_balance, strategy: :build) }
     end
 
     trait :no_pending_payment do
-      finance_details { build(:finance_details, :zero_balance) }
+      finance_details { association(:finance_details, :zero_balance, strategy: :build) }
     end
 
     trait :requires_conviction_check do
       pending
 
-      key_people { [build(:key_person, :requires_conviction_check)] }
-      conviction_search_result { build(:conviction_search_result, :match_result_yes) }
-      conviction_sign_offs { [build(:conviction_sign_off)] }
+      key_people { [association(:key_person, :requires_conviction_check, strategy: :build)] }
+      conviction_search_result { association(:conviction_search_result, :match_result_yes, strategy: :build) }
+      conviction_sign_offs { [association(:conviction_sign_off, strategy: :build)] }
     end
 
     trait :has_flagged_conviction_check do
       pending
 
-      key_people { [build(:key_person, :requires_conviction_check)] }
-      conviction_search_result { build(:conviction_search_result, :match_result_yes) }
-      conviction_sign_offs { [build(:conviction_sign_off, :checks_in_progress)] }
+      key_people { [association(:key_person, :requires_conviction_check, strategy: :build)] }
+      conviction_search_result { association(:conviction_search_result, :match_result_yes, strategy: :build) }
+      conviction_sign_offs { [association(:conviction_sign_off, :checks_in_progress, strategy: :build)] }
     end
 
     trait :has_approved_conviction_check do
-      key_people { [build(:key_person, :requires_conviction_check)] }
-      conviction_search_result { build(:conviction_search_result, :match_result_yes) }
-      conviction_sign_offs { [build(:conviction_sign_off, :approved)] }
+      key_people { [association(:key_person, :requires_conviction_check, strategy: :build)] }
+      conviction_search_result { association(:conviction_search_result, :match_result_yes, strategy: :build) }
+      conviction_sign_offs { [association(:conviction_sign_off, :approved, strategy: :build)] }
     end
 
     trait :has_rejected_conviction_check do
-      key_people { [build(:key_person, :requires_conviction_check)] }
-      conviction_search_result { build(:conviction_search_result, :match_result_yes) }
-      conviction_sign_offs { [build(:conviction_sign_off, :rejected)] }
+      key_people { [association(:key_person, :requires_conviction_check, strategy: :build)] }
+      conviction_search_result { association(:conviction_search_result, :match_result_yes, strategy: :build) }
+      conviction_sign_offs { [association(:conviction_sign_off, :rejected, strategy: :build)] }
     end
   end
 end

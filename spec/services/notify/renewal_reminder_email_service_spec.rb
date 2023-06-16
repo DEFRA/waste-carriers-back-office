@@ -17,7 +17,7 @@ module Notify
             reg_identifier: reg_identifier,
             first_name: "Jane",
             last_name: "Doe",
-            expires_on: registration.expires_on.to_formatted_s(:day_month_year),
+            expires_on: registration.expires_on.to_fs(:day_month_year),
             renew_fee: "105",
             renew_link: "http://localhost:3002/fo/renew/#{registration.renew_token}"
           }

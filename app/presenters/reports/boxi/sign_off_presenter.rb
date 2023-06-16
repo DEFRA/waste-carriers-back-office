@@ -4,7 +4,7 @@ module Reports
   module Boxi
     class SignOffPresenter < WasteCarriersEngine::BasePresenter
       def confirmed_at
-        super&.to_datetime&.to_formatted_s(:calendar_date_and_local_time)
+        super&.to_datetime&.to_fs(:calendar_date_and_local_time)
       end
     end
   end

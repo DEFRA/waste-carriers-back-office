@@ -15,11 +15,11 @@ FactoryBot.define do
     end
 
     trait :requires_conviction_check do
-      conviction_search_result { build(:conviction_search_result, :match_result_yes) }
+      conviction_search_result { association(:conviction_search_result, :match_result_yes, strategy: :build) }
     end
 
     trait :does_not_require_conviction_check do
-      conviction_search_result { build(:conviction_search_result, :match_result_no) }
+      conviction_search_result { association(:conviction_search_result, :match_result_no, strategy: :build) }
     end
   end
 end

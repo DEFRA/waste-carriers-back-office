@@ -15,7 +15,7 @@ class ReminderLetterPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def date_of_letter
-    Time.zone.now.to_formatted_s(:day_month_year)
+    Time.zone.now.to_fs(:day_month_year)
   end
 
   def contact_full_name

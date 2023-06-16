@@ -6,7 +6,7 @@ module Reports
       include FinanceDetailsHelper
 
       def last_updated
-        super&.to_datetime&.to_formatted_s(:calendar_date_and_local_time)
+        super&.to_datetime&.to_fs(:calendar_date_and_local_time)
       end
 
       def amount

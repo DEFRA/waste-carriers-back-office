@@ -7,7 +7,7 @@ module Reports
              to: :company_address, prefix: true
 
     def metadata_date_activated
-      metaData&.date_activated&.to_formatted_s(:year_month_day_hyphens)
+      metaData&.date_activated&.to_fs(:year_month_day_hyphens)
     end
 
     def registration_type
@@ -21,12 +21,12 @@ module Reports
 
       # for renewing registrations, use the original registration's expiry date plus three years
       if __getobj__.instance_of?(WasteCarriersEngine::RenewingRegistration)
-        return __getobj__.future_expiry_date.to_formatted_s(:year_month_day_hyphens)
+        return __getobj__.future_expiry_date.to_fs(:year_month_day_hyphens)
       end
 
       return if super.blank?
 
-      super.to_formatted_s(:year_month_day_hyphens)
+      super.to_fs(:year_month_day_hyphens)
     end
 
     def company_no

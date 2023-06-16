@@ -9,7 +9,7 @@ class NotifyRenewalLetterPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def expiry_date
-    expires_on.to_formatted_s(:unpadded_day_month_year)
+    expires_on.to_fs(:unpadded_day_month_year)
   end
 
   def registration_cost

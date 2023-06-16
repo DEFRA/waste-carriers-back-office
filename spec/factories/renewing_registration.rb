@@ -9,19 +9,18 @@ FactoryBot.define do
     temp_cards { 1 }
     phone_number { "03708 506506" }
 
-    addresses { [build(:address, :registered), build(:address, :contact)] }
+    addresses { [association(:address, :registered, strategy: :build), association(:address, :contact, strategy: :build)] }
 
-    finance_details { build(:finance_details, :has_paid_order_and_payment) }
+    finance_details { association(:finance_details, :has_paid_order_and_payment, strategy: :build) }
 
-    # Create a new registration when initializing
     initialize_with { new(reg_identifier: create(:registration, :expires_soon).reg_identifier) }
 
     trait :overpaid do
-      finance_details { build(:finance_details, :has_overpaid_order_and_payment) }
+      finance_details { association(:finance_details, :has_overpaid_order_and_payment, strategy: :build) }
     end
 
     trait :overpaid_govpay do
-      finance_details { build(:finance_details, :has_overpaid_order_and_payment_govpay) }
+      finance_details { association(:finance_details, :has_overpaid_order_and_payment_govpay, strategy: :build) }
     end
 
     trait :submitted do
@@ -32,9 +31,9 @@ FactoryBot.define do
       declared_convictions { "no" }
       submitted
 
-      conviction_search_result { build(:conviction_search_result, :match_result_no) }
-      finance_details { build(:finance_details, :zero_balance) }
-      key_people { [build(:key_person, :does_not_require_conviction_check)] }
+      conviction_search_result { association(:conviction_search_result, :match_result_no, strategy: :build) }
+      finance_details { association(:finance_details, :zero_balance, strategy: :build) }
+      key_people { [association(:key_person, :does_not_require_conviction_check, strategy: :build)] }
 
       initialize_with { new(reg_identifier: create(:registration, :expires_soon).reg_identifier) }
     end
@@ -42,52 +41,52 @@ FactoryBot.define do
     trait :pending_payment do
       submitted
 
-      finance_details { build(:finance_details, :has_unpaid_order) }
+      finance_details { association(:finance_details, :has_unpaid_order, strategy: :build) }
     end
 
     trait :no_pending_payment do
       submitted
 
-      finance_details { build(:finance_details, :zero_balance) }
+      finance_details { association(:finance_details, :zero_balance, strategy: :build) }
     end
 
     trait :requires_conviction_check do
       submitted
 
-      key_people { [build(:key_person, :requires_conviction_check)] }
-      conviction_search_result { build(:conviction_search_result, :match_result_yes) }
-      conviction_sign_offs { [build(:conviction_sign_off)] }
+      key_people { [association(:key_person, :requires_conviction_check, strategy: :build)] }
+      conviction_search_result { association(:conviction_search_result, :match_result_yes, strategy: :build) }
+      conviction_sign_offs { [association(:conviction_sign_off, strategy: :build)] }
     end
 
     trait :does_not_require_conviction_check do
       submitted
 
-      key_people { [build(:key_person, :does_not_require_conviction_check)] }
-      conviction_search_result { build(:conviction_search_result, :match_result_no) }
+      key_people { [association(:key_person, :does_not_require_conviction_check, strategy: :build)] }
+      conviction_search_result { association(:conviction_search_result, :match_result_no, strategy: :build) }
     end
 
     trait :has_flagged_conviction_check do
       submitted
 
-      key_people { [build(:key_person, :requires_conviction_check)] }
-      conviction_search_result { build(:conviction_search_result, :match_result_yes) }
-      conviction_sign_offs { [build(:conviction_sign_off, :checks_in_progress)] }
+      key_people { [association(:key_person, :requires_conviction_check, strategy: :build)] }
+      conviction_search_result { association(:conviction_search_result, :match_result_yes, strategy: :build) }
+      conviction_sign_offs { [association(:conviction_sign_off, :checks_in_progress, strategy: :build)] }
     end
 
     trait :has_approved_conviction_check do
       submitted
 
-      key_people { [build(:key_person, :requires_conviction_check)] }
-      conviction_search_result { build(:conviction_search_result, :match_result_yes) }
-      conviction_sign_offs { [build(:conviction_sign_off, :approved)] }
+      key_people { [association(:key_person, :requires_conviction_check, strategy: :build)] }
+      conviction_search_result { association(:conviction_search_result, :match_result_yes, strategy: :build) }
+      conviction_sign_offs { [association(:conviction_sign_off, :approved, strategy: :build)] }
     end
 
     trait :has_rejected_conviction_check do
       submitted
 
-      key_people { [build(:key_person, :requires_conviction_check)] }
-      conviction_search_result { build(:conviction_search_result, :match_result_yes) }
-      conviction_sign_offs { [build(:conviction_sign_off, :rejected)] }
+      key_people { [association(:key_person, :requires_conviction_check, strategy: :build)] }
+      conviction_search_result { association(:conviction_search_result, :match_result_yes, strategy: :build) }
+      conviction_sign_offs { [association(:conviction_sign_off, :rejected, strategy: :build)] }
     end
 
     trait :has_finance_details do
