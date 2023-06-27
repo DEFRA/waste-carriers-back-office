@@ -9,7 +9,7 @@ namespace :db do
       # Assuming that the session data is stored in a Mongoid document named 'Session'
       MongoidStore::Session.where(:updated_at.lt => cutoff_time).delete_all
 
-      puts "Sessions older than #{cutoff_time} have been removed."
+      puts "Sessions older than #{cutoff_time} have been removed." unless Rails.env.test?
     end
   end
 end
