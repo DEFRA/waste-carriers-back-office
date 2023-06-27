@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: bb55049ac9bdd5a212036cc627c1e4a0576ee567
+  revision: 8a11e671866a0b79dad51b424db6952dbea5eea2
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -175,7 +175,7 @@ GEM
     defra_ruby_style (0.3.0)
       rubocop (>= 1.0, < 2.0)
     defra_ruby_template (3.13.0)
-    defra_ruby_validators (2.5.1)
+    defra_ruby_validators (2.5.2)
       activemodel
       i18n
       matrix
@@ -299,7 +299,7 @@ GEM
     mini_mime (1.1.2)
     mini_portile2 (2.8.2)
     minitest (5.18.1)
-    mongo (2.18.2)
+    mongo (2.19.0)
       bson (>= 4.14.1, < 5.0.0)
     mongo_session_store (3.2.1)
       actionpack (>= 4.0)
@@ -482,7 +482,7 @@ GEM
     thor (1.2.2)
     tilt (2.0.11)
     timecop (0.9.6)
-    timeout (0.3.2)
+    timeout (0.4.0)
     timers (4.3.3)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
