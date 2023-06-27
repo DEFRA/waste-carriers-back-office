@@ -5,6 +5,11 @@ require "rails_helper"
 RSpec.describe RegistrationTransferForm, type: :model do
   let(:registration_transfer_form) { build(:registration_transfer_form) }
 
+  before do
+    allow(Notify::RegistrationTransferEmailService).to receive(:run)
+    allow(Notify::RegistrationTransferWithInviteEmailService).to receive(:run)
+  end
+
   describe "#submit" do
     context "when the form is valid" do
       let(:valid_params) do
