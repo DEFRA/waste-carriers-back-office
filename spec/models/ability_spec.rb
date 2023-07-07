@@ -378,6 +378,7 @@ RSpec.describe Ability do
     let(:permitted_roles) do
       %w[
         agency_super
+        cbd_user
         developer
       ]
     end
