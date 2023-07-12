@@ -5,6 +5,7 @@ class CertificatesController < ApplicationController
 
   def show
     registration = WasteCarriersEngine::Registration.find_by(reg_identifier: params[:registration_reg_identifier])
+    registration.increment_certificate_version
     @presenter = WasteCarriersEngine::CertificatePresenter.new(registration, view_context)
 
     render pdf: registration.reg_identifier,
