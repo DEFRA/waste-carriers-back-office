@@ -36,6 +36,7 @@ module Notify
       end
 
       it "sends an email" do
+        Rails.configuration.wcrs_fo_link_domain = "http://localhost:3002"
         expect(subject).to be_a(Notifications::Client::ResponseNotification)
         expect(subject.template["id"]).to eq(template_id)
         expect(subject.content["subject"]).to match(
