@@ -128,6 +128,7 @@ group :test do
   gem "faker"
   gem "rails-controller-testing"
   gem "timecop"
+  gem "rspec-retry"
 
   # Generates a test coverage report on every `bundle exec rspec` call. We use
   # the output to feed SonarCloud's stats and analysis

@@ -426,6 +426,8 @@ GEM
       rspec-expectations (~> 3.12)
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
+    rspec-retry (0.6.2)
+      rspec-core (> 3.3)
     rspec-support (3.12.1)
     rubocop (1.54.1)
       json (~> 2.3)
@@ -560,6 +562,7 @@ DEPENDENCIES
   rails (>= 6.1.7)
   rails-controller-testing
   rspec-rails
+  rspec-retry
   rubocop-rails
   rubocop-rspec
   rubyzip
