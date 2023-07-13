@@ -8,7 +8,7 @@ require "./spec/support/simplecov"
 require "pry-byebug"
 
 # RSpec::Retry adds a :retry option for intermittently failing rspec examples
-require 'rspec/retry'
+require "rspec/retry"
 
 require "rails-controller-testing"
 Rails::Controller::Testing.install
@@ -95,7 +95,7 @@ RSpec.configure do |config|
   # show exception that triggers a retry if verbose_retry is set to true
   config.display_try_failure_messages = true
 
-  config.around(:each) do |ex|
+  config.around do |ex|
     ex.run_with_retry retry: 3
   end
 end
