@@ -17,7 +17,7 @@ module Notify
             reg_identifier: reg_identifier,
             account_email: registration.account_email,
             company_name: registration.company_name,
-            accept_invite_url: "http://localhost:3002/fo/users/invitation/accept?invitation_token=abc-123"
+            accept_invite_url: "#{Rails.configuration.wcrs_fo_link_domain}/fo/users/invitation/accept?invitation_token=abc-123"
           }
         }
       end
@@ -36,7 +36,6 @@ module Notify
       end
 
       it "sends an email" do
-        Rails.configuration.wcrs_fo_link_domain = "http://localhost:3002"
         expect(subject).to be_a(Notifications::Client::ResponseNotification)
         expect(subject.template["id"]).to eq(template_id)
         expect(subject.content["subject"]).to match(
