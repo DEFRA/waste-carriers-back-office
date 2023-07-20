@@ -6,6 +6,23 @@
 
 **Implemented enhancements:**
 
+- Feature/ruby 2549 defra report privs [\#1669](https://github.com/DEFRA/waste-carriers-back-office/pull/1669) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- RUBY-2500: feature toggle for registration transfer link [\#1650](https://github.com/DEFRA/waste-carriers-back-office/pull/1650) ([brujeo](https://github.com/brujeo))
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `c9245b3` to `f3a4375` [\#1668](https://github.com/DEFRA/waste-carriers-back-office/pull/1668) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Feature/update waste carries engine [\#1667](https://github.com/DEFRA/waste-carriers-back-office/pull/1667) ([brujeo](https://github.com/brujeo))
+- Bump waste\_carriers\_engine from `bb55049` to `8a11e67` [\#1664](https://github.com/DEFRA/waste-carriers-back-office/pull/1664) ([dependabot[bot]](https://github.com/apps/dependabot))
+- RUBY-2528: switching from original engine template to app dedicated template when displaying payment details [\#1652](https://github.com/DEFRA/waste-carriers-back-office/pull/1652) ([brujeo](https://github.com/brujeo))
+- Put in digital reminder text through reverting revert of PR "Revert "RUBY-2453 Send last digital reminder via text if registration has a mobile number \(\#1642\)" \(\#1646\)" [\#1647](https://github.com/DEFRA/waste-carriers-back-office/pull/1647) ([jjromeo](https://github.com/jjromeo))
+
+## [v1.21.0](https://github.com/defra/waste-carriers-back-office/tree/v1.21.0) (2023-06-22)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.20.1...v1.21.0)
+
+**Implemented enhancements:**
+
 - Revert "RUBY-2453 Send last digital reminder via text if registration has a mobile number \(\#1642\)" [\#1646](https://github.com/DEFRA/waste-carriers-back-office/pull/1646) ([jjromeo](https://github.com/jjromeo))
 - RUBY-2453 Send last digital reminder via text if registration has a mobile number [\#1642](https://github.com/DEFRA/waste-carriers-back-office/pull/1642) ([jjromeo](https://github.com/jjromeo))
 - Filter registrations by active during area lookup [\#1638](https://github.com/DEFRA/waste-carriers-back-office/pull/1638) ([jjromeo](https://github.com/jjromeo))
@@ -40,6 +57,7 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG [\#1658](https://github.com/DEFRA/waste-carriers-back-office/pull/1658) ([jjromeo](https://github.com/jjromeo))
 - Bump waste\_carriers\_engine from `ca60944` to `bb55049` [\#1655](https://github.com/DEFRA/waste-carriers-back-office/pull/1655) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump waste\_carriers\_engine from `e2f2233` to `b26156c` [\#1644](https://github.com/DEFRA/waste-carriers-back-office/pull/1644) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump waste\_carriers\_engine from `5feaf48` to `e2f2233` [\#1643](https://github.com/DEFRA/waste-carriers-back-office/pull/1643) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -67,10 +85,6 @@
 - Bump waste\_carriers\_engine from `3c02ade` to `c87cd3b` [\#1592](https://github.com/DEFRA/waste-carriers-back-office/pull/1592) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rubocop-rails from 2.19.0 to 2.19.1 [\#1590](https://github.com/DEFRA/waste-carriers-back-office/pull/1590) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump faker from 3.1.1 to 3.2.0 [\#1589](https://github.com/DEFRA/waste-carriers-back-office/pull/1589) ([dependabot[bot]](https://github.com/apps/dependabot))
-
-## [v1.21.0](https://github.com/defra/waste-carriers-back-office/tree/v1.21.0) (2023-06-20)
-
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.20.1...v1.21.0)
 
 ## [v1.20.1](https://github.com/defra/waste-carriers-back-office/tree/v1.20.1) (2023-04-13)
 
