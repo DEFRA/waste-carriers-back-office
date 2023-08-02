@@ -17,8 +17,7 @@ module Reports
       before do
         allow(DefraRuby::Aws).to receive(:get_bucket).and_return(bucket)
         allow(bucket).to receive(:list_files).and_return(list_files_result)
-        allow(list_files_result).to receive(:successful?).and_return(true)
-        allow(list_files_result).to receive(:result).and_return(file_list)
+        allow(list_files_result).to receive_messages(successful?: true, result: file_list)
       end
 
       context "when a single report file exists on S3" do

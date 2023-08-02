@@ -47,8 +47,7 @@ module WasteCarriersEngine
 
         context "when the govpay request succeeds" do
           before do
-            allow(Rails.configuration).to receive(:govpay_front_office_api_token).and_return(front_office_token)
-            allow(Rails.configuration).to receive(:govpay_back_office_api_token).and_return(back_office_token)
+            allow(Rails.configuration).to receive_messages(govpay_front_office_api_token: front_office_token, govpay_back_office_api_token: back_office_token)
             stub_request(:get, %r{.*#{govpay_host}/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}})
               .with(headers: { "Authorization" => "Bearer #{govpay_api_token}" })
               .to_return(status: 200, body: File.read("./spec/fixtures/files/govpay/get_refund_details_response_submitted.json"))

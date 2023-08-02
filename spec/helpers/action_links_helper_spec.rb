@@ -839,8 +839,7 @@ RSpec.describe ActionLinksHelper do
     let(:finance_details) { double(:finance_details) }
 
     before do
-      allow(resource).to receive(:upper_tier?).and_return(upper_tier)
-      allow(resource).to receive(:finance_details).and_return(finance_details)
+      allow(resource).to receive_messages(upper_tier?: upper_tier, finance_details: finance_details)
     end
 
     context "when the resource is a new registration" do
