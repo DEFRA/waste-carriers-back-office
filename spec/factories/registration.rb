@@ -72,6 +72,10 @@ FactoryBot.define do
       metaData { association(:metaData, :active, restored_reason: "a reason", restored_by: "foo@example.com", strategy: :build) }
     end
 
+    trait :registered_15_months_ago do
+      metaData { association(:metaData, :active, dateRegistered: 15.months.ago, strategy: :build) }
+    end
+
     trait :has_orders_and_payments do
       finance_details { association(:finance_details, :has_paid_order_and_payment, strategy: :build) }
     end

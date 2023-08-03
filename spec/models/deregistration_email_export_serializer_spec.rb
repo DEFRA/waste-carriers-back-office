@@ -8,10 +8,8 @@ RSpec.describe DeregistrationEmailExportSerializer do
 
   let!(:eligible_registration_1) do
     create(:registration,
-           tier: "LOWER",
-           metaData: build(:metaData,
-                           :active,
-                           dateRegistered: 15.months.ago))
+           :registered_15_months_ago,
+           tier: "LOWER")
   end
 
   let!(:eligible_registration_2) do
@@ -150,8 +148,8 @@ RSpec.describe DeregistrationEmailExportSerializer do
       before do
         create_list(:registration, 15,
                     :active,
-                    tier: "LOWER",
-                    metaData: build(:metaData, dateRegistered: 15.months.ago))
+                    :registered_15_months_ago,
+                    tier: "LOWER")
         serializer.to_csv
       end
 
