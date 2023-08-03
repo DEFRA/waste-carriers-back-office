@@ -276,7 +276,7 @@ RSpec.describe ActionLinksHelper do
         before { allow(helper).to receive(:can?).with(:refund, resource).and_return(false) }
 
         it "returns false" do
-          expect(helper.display_check_refund_status_link_for?(resource)).to eq false
+          expect(helper.display_check_refund_status_link_for?(resource)).to be false
         end
       end
 
