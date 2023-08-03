@@ -275,8 +275,8 @@ RSpec.describe ActionLinksHelper do
       context "when the user does not have permission to refund" do
         before { allow(helper).to receive(:can?).with(:refund, resource).and_return(false) }
 
-        it "returns nil" do
-          expect(helper.display_check_refund_status_link_for?(resource)).to be_nil
+        it "returns false" do
+          expect(helper.display_check_refund_status_link_for?(resource)).to eq false
         end
       end
 
