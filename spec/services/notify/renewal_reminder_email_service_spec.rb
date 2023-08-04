@@ -17,7 +17,7 @@ module Notify
             reg_identifier: reg_identifier,
             first_name: "Jane",
             last_name: "Doe",
-            expires_on: registration.expires_on.to_formatted_s(:day_month_year),
+            expires_on: registration.expires_on.to_fs(:day_month_year),
             renew_fee: (Rails.configuration.renewal_charge / 100).to_s,
             renew_link: "#{Rails.configuration.wcrs_fo_link_domain}/fo/renew/#{registration.renew_token}"
           }
