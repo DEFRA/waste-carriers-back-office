@@ -6,6 +6,7 @@ require "rails_helper"
 RSpec.describe "lookups:update:missing_area", type: :rake do
   include_context "rake"
   before do
+    allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:run_ea_areas_job).and_return(true)
     Rake::Task["lookups:update:missing_area"].reenable
   end
 
@@ -103,12 +104,17 @@ RSpec.describe "lookups:update:missing_area", type: :rake do
     it "calls the TimedServiceRunner with the correct attributes" do
       registration = create(:registration, addresses: [build(:address, :registered, area: nil, postcode: "AB1 2CD")])
 
+      # Because the aggregation in the rake task converts BSON documents into dummy models,
+      # we can't use array_including(registration.company_address) as the ids won't match.
+      # Instead confirm that some key attribute values are present.
+      address_attributes = registration.company_address.attributes.slice(:addresstype, :postcode, :addressLine1, :addressLine2)
+
       allow(TimedServiceRunner).to receive(:run)
 
       Rake::Task["lookups:update:missing_area"].invoke
 
       expect(TimedServiceRunner).to have_received(:run).with(
-        scope: array_including(registration.company_address),
+        scope: array_including(an_object_having_attributes(address_attributes)),
         run_for: WasteCarriersBackOffice::Application.config.area_lookup_run_for.to_i,
         service: WasteCarriersEngine::AssignSiteDetailsService,
         throttle: 0.1

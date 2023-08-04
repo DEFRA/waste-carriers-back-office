@@ -12,7 +12,7 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <%= render "shared/company_details_panel", registration: @resource %>
+    <%= render "shared/registrations/company_details_panel", resource: @resource %>
 
     <% if !@resource.pending_payment? %>
       <%= render "shared/registrations/pending_payment_panel", resource: @resource, hide_payment_link: true %>

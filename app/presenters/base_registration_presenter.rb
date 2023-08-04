@@ -109,7 +109,7 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def display_original_registration_date
-    return if original_activation_date.blank?
+    return unless respond_to?(:original_activation_date) && original_activation_date.present?
 
     sanitize(I18n.t(".shared.registrations.company_details_panel.labels.registration_date_html",
                     formatted_date: original_activation_date.to_date))

@@ -54,10 +54,10 @@ RSpec.describe "Whenever::Test::Shedule" do
   end
 
   it "picks up the Notify digital renewal letters run frequency and time" do
-    job_details = schedule.jobs[:rake].find { |h| h[:task] == "notify:letters:digital_renewals" }
+    job_details = schedule.jobs[:rake].find { |h| h[:task] == "notify:notifications:digital_renewals" }
 
     expect(job_details[:every][0]).to eq(:day)
-    expect(job_details[:every][1][:at]).to eq("02:45")
+    expect(job_details[:every][1][:at]).to eq("10:00")
   end
 
   it "picks up the BOXI export run frequency and time" do

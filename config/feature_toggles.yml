@@ -5,3 +5,5 @@ api:
   active: <%= ENV["FEATURE_TOGGLE_API"] %>
 renewal_reminders:
   active: <%= ENV["FEATURE_TOGGLE_RENEWAL_REMINDERS"] %>
+send_digital_renewal_sms:
+  active: <%= ENV["FEATURE_TOGGLE_SEND_DIGITAL_RENEWAL_SMS"] %>

@@ -2,6 +2,26 @@
 
 # rubocop:disable Metrics/BlockLength
 namespace :notify do
+  namespace :notifications do
+    task digital_renewals: :environment do
+      expires_on = WasteCarriersBackOffice::Application.config
+                                                       .digital_reminder_notifications_exports_expires_in
+                                                       .to_i
+                                                       .days
+                                                       .from_now
+
+      registrations = Notify::BulkDigitalRenewalNotificationService.run(expires_on)
+
+      if registrations.any?
+        Rails.logger.info(
+          "Notify digital renewal notifications sent for #{registrations.map(&:reg_identifier).join(', ')}"
+        )
+      else
+        Rails.logger.info "No matching registrations for Notify digital renewal notifications"
+      end
+    end
+  end
+
   namespace :letters do
     desc "Send AD renewal letters"
     task ad_renewals: :environment do
@@ -21,21 +41,6 @@ namespace :notify do
     end
 
     desc "Send digital renewal letters"
-    task digital_renewals: :environment do
-      expires_on = WasteCarriersBackOffice::Application.config
-                                                       .digital_reminder_letters_exports_expires_in
-                                                       .to_i
-                                                       .days
-                                                       .from_now
-
-      registrations = Notify::BulkDigitalRenewalLettersService.run(expires_on)
-
-      if registrations.any?
-        Rails.logger.info "Notify digital renewal letters sent for #{registrations.map(&:reg_identifier).join(', ')}"
-      else
-        Rails.logger.info "No matching registrations for Notify digital renewal letters"
-      end
-    end
   end
 
   namespace :test do

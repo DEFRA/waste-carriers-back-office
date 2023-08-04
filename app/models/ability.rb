@@ -142,6 +142,7 @@ class Ability
     can :import_conviction_data, :all
     can :run_finance_reports, :all
     can :read, DeregistrationEmailExportService
+    can :read, Reports::DefraQuarterlyStatsService
 
     can :modify_user, User do |user|
       data_agent?(user)

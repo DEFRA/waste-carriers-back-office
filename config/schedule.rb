@@ -56,8 +56,8 @@ end
 
 # This is the Notify digital renewal letters job. When run it will send out Notify
 # renewal letters for all digital registrations expiring in X days' time
-every :day, at: (ENV["NOTIFY_DIGITAL_RENEWAL_LETTERS_TIME"] || "02:45"), roles: [:db] do
-  rake "notify:letters:digital_renewals"
+every :day, at: (ENV["NOTIFY_DIGITAL_RENEWAL_LETTERS_TIME"] || "10:00"), roles: [:db] do
+  rake "notify:notifications:digital_renewals"
 end
 
 # This is the registration exemptions expiry job which will collect all active upper tier

@@ -17,7 +17,7 @@ module Notify
             reg_identifier: reg_identifier,
             account_email: registration.account_email,
             company_name: registration.company_name,
-            sign_in_link: "http://localhost:3002/fo/users/sign_in"
+            sign_in_link: "#{Rails.configuration.wcrs_fo_link_domain}/fo/users/sign_in"
           }
         }
       end
