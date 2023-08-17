@@ -75,6 +75,7 @@ class Ability
     can :view_payments, :all
     can :review_convictions, :all
     can :view_card_order_exports, :all
+    can :manage_back_office_users, User
 
     can :write_off_small, WasteCarriersEngine::FinanceDetails do |finance_details|
       finance_details.zero_difference_balance <= write_off_agency_user_cap
