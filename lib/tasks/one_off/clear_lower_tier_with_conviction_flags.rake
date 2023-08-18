@@ -6,7 +6,7 @@ namespace :one_off do
     registration_ids = scope
     registration_ids.each do |id|
       registration = WasteCarriersEngine::Registration.find(id)
-      registration.conviction_sign_off = nil
+      registration.conviction_sign_offs.destroy_all
       registration.save
     end
   end
@@ -20,10 +20,13 @@ namespace :one_off do
       # Match registrations with the desired tier
       { "$match": { "tier": "LOWER" } },
 
-      # Check if conviction_sign_off exists and is not null
-      { "$match": { "convictionSignOff": { "$exists": true, "$ne": nil } } },
+      # Add a field to calculate the size of the conviction_sign_offs array
+      { "$addFields": { "numConvictions": { "$size": { "$ifNull": [ "$convictionSignOffs", [] ] } } } },
 
-      # Project only the _id for the output
+      # Filter out documents where conviction_sign_offs is empty or does not exist
+      { "$match": { "numConvictions": { "$eq": 0 } } },
+
+      # Project only the _id (registration id) for further processing
       { "$project": { _id: 1 } }
     ]
   end
