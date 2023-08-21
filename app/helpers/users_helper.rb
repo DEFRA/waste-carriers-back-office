@@ -7,7 +7,7 @@ module UsersHelper
   end
 
   def current_user_group_roles(current_user)
-    if current_user.role == "cbd_user"
+    if current_user.role == "cbd_user" || agency_user_with_refund_on_invite_page?
       ["data_agent"]
     elsif current_user.in_agency_group?
       User::AGENCY_ROLES
@@ -17,6 +17,10 @@ module UsersHelper
   end
 
   private
+
+  def agency_user_with_refund_on_invite_page?
+    current_user.role == "agency_with_refund" && controller_name == 'invitations'
+  end
 
   def assign_user
     @user = User.find(params[:user_id])
