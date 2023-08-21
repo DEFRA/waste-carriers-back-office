@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe UsersHelper do
+  before { allow(helper).to receive(:current_user).and_return(current_user) }
+
   describe "#display_user_actions?" do
     let(:displayed_user) { double(:displayed_user) }
     let(:current_user) { double(:current_user, can?: false) }
@@ -44,9 +46,27 @@ RSpec.describe UsersHelper do
       let(:in_agency_group) { true }
 
       it "returns User::AGENCY_ROLES" do
-        roles = %w[list of roles]
-        stub_const("User::AGENCY_ROLES", roles)
-        expect(helper.current_user_group_roles(current_user)).to eq(roles)
+        expect(helper.current_user_group_roles(current_user)).to eq(User::AGENCY_ROLES)
+      end
+
+      context "when the current user is an agency_with_refund" do
+        let(:role) { "agency_with_refund" }
+
+        context "when the current user is on the user_invitations page" do
+          before { allow(helper).to receive(:controller_name).and_return("user_invitations") }
+
+          it "returns User::AGENCY_ROLES" do
+            expect(helper.current_user_group_roles(current_user)).to eq(["data_agent"])
+          end
+        end
+
+        context "when the current user is not on the user_invitations page" do
+          before { allow(helper).to receive(:controller_name).and_return("not_user_invitations") }
+
+          it "returns User::AGENCY_ROLES" do
+            expect(helper.current_user_group_roles(current_user)).to eq(User::AGENCY_ROLES)
+          end
+        end
       end
     end
 
