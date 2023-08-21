@@ -19,7 +19,7 @@ module UsersHelper
   private
 
   def agency_user_with_refund_on_invite_page?
-    current_user.role == "agency_with_refund" && controller_name == 'invitations'
+    current_user.role == "agency_with_refund" && controller_name == "user_invitations"
   end
 
   def assign_user
