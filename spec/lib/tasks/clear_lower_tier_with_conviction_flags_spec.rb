@@ -16,7 +16,7 @@ RSpec.describe "one_off:clear_lower_tier_with_conviction_flags", type: :rake do
   end
 
   context "when a LOWER tier registration has a conviction sign off" do
-    let!(:registration) { create(:registration, :requires_conviction_check, tier: "LOWER", ) }
+    let!(:registration) { create(:registration, :requires_conviction_check, tier: "LOWER") }
 
     it "clears the conviction sign off for the registration" do
       task.invoke
@@ -29,7 +29,7 @@ RSpec.describe "one_off:clear_lower_tier_with_conviction_flags", type: :rake do
     let!(:registration) { create(:registration, tier: "LOWER") }
 
     it "does not modify the registration" do
-      expect { task.invoke }.not_to change { registration.conviction_sign_offs }
+      expect { task.invoke }.not_to change(registration, :conviction_sign_offs)
     end
   end
 
@@ -43,4 +43,3 @@ RSpec.describe "one_off:clear_lower_tier_with_conviction_flags", type: :rake do
     end
   end
 end
-
