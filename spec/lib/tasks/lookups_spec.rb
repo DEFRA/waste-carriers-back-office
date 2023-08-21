@@ -5,6 +5,8 @@ require "rails_helper"
 
 RSpec.describe "lookups:update:missing_area", type: :rake do
   include_context "rake"
+  let(:task) { Rake::Task["lookups:update:missing_area"] }
+
   before do
     allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:run_ea_areas_job).and_return(true)
     task.reenable

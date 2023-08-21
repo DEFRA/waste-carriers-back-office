@@ -21,21 +21,9 @@ require "rake"
 
 # rubocop:disable RSpec/ContextWording
 RSpec.shared_context "rake" do
-  subject(:task) { Rake.application[task_name] }
+  subject { Rake.application[task_name] }
 
   let(:task_name) { self.class.description }
-
-  # `task_name` retrieves the description of the top-level `describe` block.
-  # It iterates up the RSpec metadata chain, moving from the current context or example
-  # to its parent (if present), until it reaches the outermost `describe` block.
-  # This is so that we can get the task name based on the describe block rather
-  # than it failing if we are at any deeper level such as context blocks in the test.
-  let(:task_name) do
-    current_metadata = self.class.metadata
-    current_metadata = current_metadata[:parent_example_group] while current_metadata[:parent_example_group]
-    current_metadata[:description]
-  end
-
   let(:task_path) { "lib/tasks/#{task_name.split(':').first}" }
 end
 # rubocop:enable RSpec/ContextWording
