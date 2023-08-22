@@ -55,7 +55,7 @@ RSpec.describe UsersHelper do
         context "when the current user is on the user_invitations page" do
           before { allow(helper).to receive(:controller_name).and_return("user_invitations") }
 
-          it "returns User::AGENCY_ROLES" do
+          it "returns data_agent only" do
             expect(helper.current_user_group_roles(current_user)).to eq(["data_agent"])
           end
         end
