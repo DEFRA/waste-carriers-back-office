@@ -6,14 +6,8 @@ module UsersHelper
     current_user.can?(:modify_user, displayed_user)
   end
 
-  def current_user_group_roles(current_user)
-    if current_user.role == "cbd_user" || agency_user_with_refund_on_invite_page?
-      ["data_agent"]
-    elsif current_user.in_agency_group?
-      User::AGENCY_ROLES
-    elsif current_user.in_finance_group?
-      User::FINANCE_ROLES
-    end
+  def current_user_group_roles(current_user, context: nil)
+    UserGroupRolesService.call(current_user, context:)
   end
 
   private

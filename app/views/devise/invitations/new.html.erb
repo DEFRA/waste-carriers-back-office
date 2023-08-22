@@ -28,7 +28,7 @@
         </div>
       <% end %>
 
-      <%= render("shared/select_role", resource: resource, f: f) %>
+      <%= render("shared/select_role", resource: resource, f: f, context: :invite) %>
 
       <div class="govuk-form-group">
         <%= f.submit t(".submit_button"), class: "govuk-button" %>
