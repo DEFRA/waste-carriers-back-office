@@ -34,7 +34,7 @@ RSpec.describe UsersHelper do
     let(:current_user) { double(:current_user) }
 
     before do
-      allow(UserGroupRolesService).to receive(:call).with(current_user, context: nil).and_return(["data_agent"])
+      allow(UserGroupRolesService).to receive(:call).with(current_user).and_return(["data_agent"])
     end
 
     it "calls UserGroupRolesService.call" do

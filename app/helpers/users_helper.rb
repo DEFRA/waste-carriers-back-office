@@ -6,15 +6,11 @@ module UsersHelper
     current_user.can?(:modify_user, displayed_user)
   end
 
-  def current_user_group_roles(current_user, context: nil)
-    UserGroupRolesService.call(current_user, context:)
+  def current_user_group_roles(current_user)
+    UserGroupRolesService.call(current_user)
   end
 
   private
-
-  def agency_user_with_refund_on_invite_page?
-    current_user.role == "agency_with_refund" && controller_name == "user_invitations"
-  end
 
   def assign_user
     @user = User.find(params[:user_id])

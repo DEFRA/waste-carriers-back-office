@@ -9,7 +9,7 @@
         <span class="govuk-error-message"><%= resource.errors[:role].join(", ") %></span>
       <% end %>
 
-      <% current_user_group_roles(current_user, context: local_assigns[:context]).each do |role| %>
+      <% current_user_group_roles(current_user).each do |role| %>
         <div class="govuk-radios__item">
           <%= f.radio_button :role, role, class: "govuk-radios__input" %>
           <%= f.label :role, t(".roles.options.#{role}"), value: role, class: "govuk-label govuk-radios__label" %>
