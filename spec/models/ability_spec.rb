@@ -343,6 +343,7 @@ RSpec.describe Ability do
         agency_super
         cbd_user
         finance_super
+        agency_with_refund
       ]
     end
 
