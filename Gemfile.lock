@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 6f4c45e1300a49c07d9101bc2831c74824178a09
+  revision: d7262d0cc9050e8c49d3309145a9d55634586d1c
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -242,8 +242,8 @@ GEM
       octokit (~> 4.6)
       rainbow (>= 2.2.1)
       rake (>= 10.0)
-    globalid (1.1.0)
-      activesupport (>= 5.0)
+    globalid (1.2.0)
+      activesupport (>= 6.1)
     govuk_design_system_formbuilder (4.1.1)
       actionview (>= 6.1)
       activemodel (>= 6.1)
