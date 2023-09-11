@@ -17,7 +17,7 @@ module Notify
             reg_identifier: reg_identifier,
             account_email: registration.account_email,
             company_name: registration.company_name,
-            accept_invite_url: "http://localhost:3002/fo/users/invitation/accept?invitation_token=abc-123"
+            accept_invite_url: "#{Rails.configuration.wcrs_fo_link_domain}/fo/users/invitation/accept?invitation_token=abc-123"
           }
         }
       end
