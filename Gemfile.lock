@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 1901d2d1a26c2efca0da32ecb9a6c94c087169e0
+  revision: 2382118c5955e3d5986cc779a3d82ad8afcb2b51
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -10,6 +10,7 @@ GIT
       defra_ruby_alert (~> 2.1)
       defra_ruby_area (~> 2.0)
       defra_ruby_email
+      defra_ruby_govpay
       defra_ruby_validators (>= 2.5.0)
       high_voltage (~> 3.1)
       jbuilder (~> 2.11)
@@ -170,6 +171,8 @@ GEM
       cancancan (>= 1.10)
       devise (>= 4.4.3)
       rails (~> 6.0)
+    defra_ruby_govpay (0.1.2)
+      rest-client (~> 2.1)
     defra_ruby_mocks (2.4.2)
       rails (~> 6.0)
       sprockets (~> 3.7.2)
