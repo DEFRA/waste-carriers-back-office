@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: af6b41ea4ceaaa1161dc13160c145a4783a550ad
+  revision: 006143324262d3d119ac8cfe02b14e639b11b732
   branch: feature/RUBY-2477-wcr-tech-upgrade-to-rails-7
   specs:
     waste_carriers_engine (0.0.1)
