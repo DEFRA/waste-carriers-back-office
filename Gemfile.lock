@@ -543,6 +543,7 @@ DEPENDENCIES
   database_cleaner-mongoid
   defra_ruby_aws (~> 0.5)
   defra_ruby_features (~> 0.1)
+  defra_ruby_govpay
   defra_ruby_mocks
   defra_ruby_style
   defra_ruby_template

@@ -62,6 +62,8 @@ gem "waste_carriers_engine",
 # manage feature toggle (create / update / delete) from the back-office.
 gem "defra_ruby_features", "~> 0.1"
 
+gem "defra_ruby_govpay"
+
 # Use the defra ruby mocks engine to add support for mocking external services
 # in live environment. Essentially with this gem added and enabled the app
 # also becomes a 'mock' for external services like companies house.
