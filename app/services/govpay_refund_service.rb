@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class GovpayRefundService < WasteCarriersEngine::BaseService
-  include WasteCarriersEngine::CanSendGovpayRequest
-
   def run(payment:, amount:)
     return false unless WasteCarriersEngine.configuration.host_is_back_office?
     return false unless payment.govpay?
@@ -54,7 +52,7 @@ class GovpayRefundService < WasteCarriersEngine::BaseService
 
   def request
     @request ||=
-      send_request(
+      DefraRubyGovpayAPI.send_request(
         method: :post, path: "/payments/#{payment.govpay_id}/refunds", params:, is_moto: payment.moto
       )
   end
