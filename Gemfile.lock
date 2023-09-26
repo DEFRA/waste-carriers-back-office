@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 2382118c5955e3d5986cc779a3d82ad8afcb2b51
-  branch: main
+  revision: f1f5a7b758dd53bf819277311fe0930d83772063
+  branch: defra-govpay-fix
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.3)
@@ -171,7 +171,7 @@ GEM
       cancancan (>= 1.10)
       devise (>= 4.4.3)
       rails (~> 6.0)
-    defra_ruby_govpay (0.1.2)
+    defra_ruby_govpay (0.2.0)
       rest-client (~> 2.1)
     defra_ruby_mocks (2.4.2)
       rails (~> 6.0)
@@ -345,7 +345,7 @@ GEM
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.8.3)
+    phonelib (0.8.4)
     protocol-hpack (1.4.2)
     protocol-http (0.24.7)
     protocol-http1 (0.15.1)

@@ -34,13 +34,13 @@ class GovpayRefundService < WasteCarriersEngine::BaseService
   end
 
   def refund
-    @refund ||= WasteCarriersEngine::Govpay::Refund.new response
+    @refund ||= DefraRubyGovpay::Refund.new response
   end
 
   def error
     return @error if defined?(@error)
 
-    @error = (Govpay::Error.new(response) if status_code.is_a?(Integer) && (400..500).include?(status_code))
+    @error = (DefraRubyGovpay::Error.new(response) if status_code.is_a?(Integer) && (400..500).include?(status_code))
   end
 
   def params

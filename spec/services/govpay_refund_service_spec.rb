@@ -23,8 +23,16 @@ RSpec.describe GovpayRefundService do
     allow(Rails.configuration).to receive(:govpay_back_office_api_token).and_return(back_office_api_token)
     payment.update!(govpay_id: "govpay123", payment_type: "GOVPAY", moto: true)
 
+    DefraRubyGovpay.configure do |config|
+      config.govpay_front_office_api_token = "front_office_token"
+      config.govpay_back_office_api_token = "back_office_token"
+      config.host_is_back_office = true
+    end
+
+    stub_const("DefraRubyGovpayAPI", DefraRubyGovpay::API.new)
+
     # retrieve a payment's details
-    stub_request(:get, "#{govpay_host}/payments/#{payment.govpay_id}")
+    stub_request(:get, %r{#{govpay_host}/v1/payments/#{payment.govpay_id}})
       .with(headers: { "Authorization" => "Bearer #{govpay_api_token}" })
       .to_return(
         status: 200,
@@ -32,18 +40,19 @@ RSpec.describe GovpayRefundService do
       )
 
     # requesting a refund
-    stub_request(:post, "#{govpay_host}/payments/#{payment.govpay_id}/refunds")
+    stub_request(:post, %r{#{govpay_host}/v1/payments/#{payment.govpay_id}/refunds})
       .with(headers: { "Authorization" => "Bearer #{govpay_api_token}" })
       .to_return(
         status: 200,
         body: file_fixture("govpay/#{refund_response}.json")
       )
+
   end
 
   describe ".run" do
     context "when the request is valid" do
       it "returns a Refund object with 'submitted' status" do
-        expect(govpay_refund.class).to eq WasteCarriersEngine::Govpay::Refund
+        expect(govpay_refund.class).to eq DefraRubyGovpay::Refund
         expect(govpay_refund.submitted?).to be true
       end
     end
@@ -88,7 +97,7 @@ RSpec.describe GovpayRefundService do
       rescue StandardError
         expect(Airbrake).to have_received(:notify).with(RestClient::InternalServerError,
                                                         hash_including(message: "Error sending govpay request", path: "/payments/#{payment.govpay_id}"))
-        expect(Airbrake).to have_received(:notify).with(WasteCarriersEngine::GovpayApiError,
+        expect(Airbrake).to have_received(:notify).with(DefraRubyGovpay::GovpayApiError,
                                                         hash_including(message: "Error in Govpay refund service", govpay_id: payment.govpay_id))
       end
     end
@@ -104,7 +113,7 @@ RSpec.describe GovpayRefundService do
       rescue StandardError
         expect(Airbrake).to have_received(:notify).with(RestClient::InternalServerError,
                                                         hash_including(message: "Error sending govpay request", path: "/payments/#{payment.govpay_id}/refunds"))
-        expect(Airbrake).to have_received(:notify).with(WasteCarriersEngine::GovpayApiError,
+        expect(Airbrake).to have_received(:notify).with(DefraRubyGovpay::GovpayApiError,
                                                         hash_including(message: "Error in Govpay refund service", govpay_id: payment.govpay_id))
       end
     end

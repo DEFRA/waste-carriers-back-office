@@ -60,7 +60,6 @@ module WasteCarriersEngine
             allow(Rails.configuration).to receive(:govpay_back_office_api_token).and_return(back_office_token)
 
             # https://publicapi.payments.service.gov.uk
-            puts "govpay_api_token: #{govpay_api_token}"
             stub_request(:get, %r{#{govpay_host}/v1/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}})
               .with(
                 headers: {
@@ -68,10 +67,6 @@ module WasteCarriersEngine
                   "Content-Type" => "application/json"
                 }
               ).to_return(status: 200, body: File.read("./spec/fixtures/files/govpay/get_refund_details_response_submitted.json"))
-
-            # stub_request(:get, %r{.*#{govpay_host}/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}})
-            # .with(headers: { "Authorization" => "Bearer #{govpay_api_token}" })
-            # .to_return(status: 200, body: File.read("./spec/fixtures/files/govpay/get_refund_details_response_submitted.json"))
           end
 
           context "with a non-MOTO payment" do
