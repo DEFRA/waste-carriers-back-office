@@ -17,6 +17,15 @@ module WasteCarriersEngine
       before do
         allow(WasteCarriersEngine.configuration).to receive(:host_is_back_office?).and_return(true)
         allow(Rails.configuration).to receive(:govpay_url).and_return(govpay_host)
+
+        DefraRubyGovpay.configure do |config|
+          config.govpay_front_office_api_token = "front_office_token"
+          config.govpay_back_office_api_token = "back_office_token"
+          config.host_is_back_office = true
+        end
+
+        stub_const("DefraRubyGovpayAPI", DefraRubyGovpay::API.new)
+
         registration.finance_details.payments << refund
       end
 
@@ -41,22 +50,33 @@ module WasteCarriersEngine
 
       context "with a valid refund id" do
         let(:refund_id) { refund.govpay_id }
-        let(:front_office_token) { "front office token" }
-        let(:back_office_token) { "back office token" }
+        let(:front_office_token) { "front_office_token" }
+        let(:back_office_token) { "back_office_token" }
         let(:govpay_api_token) { back_office_token }
 
         context "when the govpay request succeeds" do
           before do
             allow(Rails.configuration).to receive(:govpay_front_office_api_token).and_return(front_office_token)
             allow(Rails.configuration).to receive(:govpay_back_office_api_token).and_return(back_office_token)
-            stub_request(:get, %r{.*#{govpay_host}/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}})
-              .with(headers: { "Authorization" => "Bearer #{govpay_api_token}" })
-              .to_return(status: 200, body: File.read("./spec/fixtures/files/govpay/get_refund_details_response_submitted.json"))
+
+            # https://publicapi.payments.service.gov.uk
+            puts "govpay_api_token: #{govpay_api_token}"
+            stub_request(:get, %r{#{govpay_host}/v1/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}})
+              .with(
+                headers: {
+                  "Authorization" => "Bearer #{govpay_api_token}",
+                  "Content-Type" => "application/json"
+                }
+              ).to_return(status: 200, body: File.read("./spec/fixtures/files/govpay/get_refund_details_response_submitted.json"))
+
+            # stub_request(:get, %r{.*#{govpay_host}/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}})
+            # .with(headers: { "Authorization" => "Bearer #{govpay_api_token}" })
+            # .to_return(status: 200, body: File.read("./spec/fixtures/files/govpay/get_refund_details_response_submitted.json"))
           end
 
           context "with a non-MOTO payment" do
             # This ensures that the Govpay API is not stubbed for the back office bearer token,
-            # so the spec will fail if the request is made using the back office token.
+            # so the spec will fail if the request is made using the back_office_token.
             let(:govpay_api_token) { front_office_token }
 
             before { original_payment.update!(moto: false) }
@@ -68,7 +88,7 @@ module WasteCarriersEngine
 
           context "with a MOTO payment" do
             # This ensures that the Govpay API is not stubbed for the front office bearer token,
-            # so the spec will fail if the request is made using the front office token.
+            # so the spec will fail if the request is made using the front_office_token.
             let(:govpay_api_token) { back_office_token }
 
             before { original_payment.update(moto: true) }
@@ -81,24 +101,26 @@ module WasteCarriersEngine
 
         context "when the govpay request fails" do
           before do
-            stub_request(:get, %r{.*#{govpay_host}/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}})
+            stub_request(:get, %r{#{govpay_host}/v1/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}})
               .to_return(status: 500)
             allow(Airbrake).to receive(:notify)
           end
 
           it "raises an exception" do
-            expect { run_service }.to raise_exception(WasteCarriersEngine::GovpayApiError)
+            expect { run_service }.to raise_exception(DefraRubyGovpay::GovpayApiError)
           end
 
           it "notifies Airbrake" do
             run_service
-          rescue GovpayApiError
-            expect(Airbrake).to have_received(:notify)
-              .with(RestClient::InternalServerError,
-                    hash_including(
-                      message: "Error sending govpay request",
-                      path: "/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}"
-                    ))
+          rescue DefraRubyGovpay::GovpayApiError
+            error_message = "Error sending request to govpay (get /payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}, params: ): 500 Internal Server Error"
+            expect(Airbrake).to have_received(:notify) do |error, details|
+              expect(error).to be_a(DefraRubyGovpay::GovpayApiError)
+              expect(error.message).to eq(error_message)
+              expect(details[:message]).to eq("Error in Govpay refund details service")
+              expect(details[:payment_id]).to eq(govpay_payment_id)
+              expect(details[:refund_id]).to eq(govpay_refund_id)
+            end
           end
         end
       end
