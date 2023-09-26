@@ -50,13 +50,13 @@ RSpec.describe ProcessRefundService do
 
           before do
             allow(GovpayRefundService).to receive(:new).and_return(govpay_refund_service)
-            allow(govpay_refund_service).to receive(:run).and_raise(WasteCarriersEngine::GovpayApiError)
+            allow(govpay_refund_service).to receive(:run).and_raise(DefraRubyGovpay::GovpayApiError)
             allow(Airbrake).to receive(:notify)
           end
 
           it "notifies Airbrake" do
             refund_service.run(finance_details: finance_details, payment: payment, user: user)
-          rescue WasteCarriersEngine::GovpayApiError
+          rescue DefraRubyGovpay::GovpayApiError
             expect(Airbrake).to have_received(:notify)
           end
         end
