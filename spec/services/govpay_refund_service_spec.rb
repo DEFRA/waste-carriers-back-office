@@ -32,7 +32,7 @@ RSpec.describe GovpayRefundService do
     stub_const("DefraRubyGovpayAPI", DefraRubyGovpay::API.new)
 
     # retrieve a payment's details
-    stub_request(:get, %r{#{govpay_host}/v1/payments/#{payment.govpay_id}})
+    stub_request(:get, "#{govpay_host}/v1/payments/#{payment.govpay_id}")
       .with(headers: { "Authorization" => "Bearer #{govpay_api_token}" })
       .to_return(
         status: 200,
@@ -40,7 +40,7 @@ RSpec.describe GovpayRefundService do
       )
 
     # requesting a refund
-    stub_request(:post, %r{#{govpay_host}/v1/payments/#{payment.govpay_id}/refunds})
+    stub_request(:post, "#{govpay_host}/v1/payments/#{payment.govpay_id}/refunds")
       .with(headers: { "Authorization" => "Bearer #{govpay_api_token}" })
       .to_return(
         status: 200,
