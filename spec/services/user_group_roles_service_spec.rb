@@ -20,8 +20,7 @@ RSpec.describe UserGroupRolesService do
 
     context "when user is in agency group" do
       before do
-        allow(user).to receive(:role).and_return("some_other_role")
-        allow(user).to receive(:in_agency_group?).and_return(true)
+        allow(user).to receive_messages(role: "some_other_role", in_agency_group?: true)
       end
 
       it "returns AGENCY_ROLES" do
@@ -31,9 +30,7 @@ RSpec.describe UserGroupRolesService do
 
     context "when user is in finance group" do
       before do
-        allow(user).to receive(:role).and_return("some_other_role")
-        allow(user).to receive(:in_agency_group?).and_return(false)
-        allow(user).to receive(:in_finance_group?).and_return(true)
+        allow(user).to receive_messages(role: "some_other_role", in_agency_group?: false, in_finance_group?: true)
       end
 
       it "returns FINANCE_ROLES" do
@@ -43,9 +40,7 @@ RSpec.describe UserGroupRolesService do
 
     context "when user does not fit any predefined group" do
       before do
-        allow(user).to receive(:role).and_return("some_other_role")
-        allow(user).to receive(:in_agency_group?).and_return(false)
-        allow(user).to receive(:in_finance_group?).and_return(false)
+        allow(user).to receive_messages(role: "some_other_role", in_agency_group?: false, in_finance_group?: false)
       end
 
       it "returns an empty array" do

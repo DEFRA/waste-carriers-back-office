@@ -18,8 +18,7 @@ RSpec.describe ProcessRefundService do
     let(:govpay_host) { "https://publicapi.payments.service.gov.uk" }
 
     before do
-      allow(payment).to receive(:worldpay?).and_return(worldpay)
-      allow(payment).to receive(:govpay?).and_return(govpay)
+      allow(payment).to receive_messages(worldpay?: worldpay, govpay?: govpay)
       allow(payment).to receive(:govpay_id)
       allow(orders).to receive(:find_by).and_return(order)
     end

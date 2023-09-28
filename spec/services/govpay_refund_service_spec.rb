@@ -19,8 +19,7 @@ RSpec.describe GovpayRefundService do
   before do
     allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(true)
     allow(WasteCarriersEngine.configuration).to receive(:host_is_back_office?).and_return(true)
-    allow(Rails.configuration).to receive(:govpay_url).and_return(govpay_host)
-    allow(Rails.configuration).to receive(:govpay_back_office_api_token).and_return(back_office_api_token)
+    allow(Rails.configuration).to receive_messages(govpay_url: govpay_host, govpay_back_office_api_token: back_office_api_token)
     payment.update!(govpay_id: "govpay123", payment_type: "GOVPAY", moto: true)
 
     DefraRubyGovpay.configure do |config|

@@ -57,7 +57,7 @@ class BasePaymentForm < WasteCarriersEngine::BaseForm
   def format_date_field_value(value)
     # If this isn't a valid integer, .to_i returns 0
     integer_value = value.to_i
-    return integer_value if integer_value.positive?
+    integer_value if integer_value.positive?
   end
 
   def set_date_received
