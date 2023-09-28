@@ -14,6 +14,8 @@ class CertificatesController < ApplicationController
            page_size: "A4",
            margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
            print_media_type: true,
-           template: "waste_carriers_engine/pdfs/certificate"
+           template: "waste_carriers_engine/pdfs/certificate",
+           enable_local_file_access: true,
+           allow: [WasteCarriersEngine::Engine.root.join("app", "assets", "images", "environment_agency_logo.png").to_s]
   end
 end
