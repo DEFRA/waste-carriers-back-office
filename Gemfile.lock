@@ -172,7 +172,7 @@ GEM
       cancancan (>= 1.10)
       devise (>= 4.4.3)
       rails (~> 6.0)
-    defra_ruby_govpay (0.2.0)
+    defra_ruby_govpay (0.2.1)
       rest-client (~> 2.1)
     defra_ruby_mocks (2.4.2)
       rails (~> 6.0)
