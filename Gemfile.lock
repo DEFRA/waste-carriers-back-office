@@ -162,7 +162,7 @@ GEM
     console (1.19.0)
       fiber-annotation
       fiber-local
-    countries (5.6.0)
+    countries (5.5.0)
       unaccent (~> 0.3)
     crack (0.4.5)
       rexml
@@ -319,7 +319,6 @@ GEM
     mongoid-locker (2.0.2)
       mongoid (>= 5.0, < 9)
     multi_json (1.15.0)
-    multipart-post (2.1.1)
     net-imap (0.3.7)
       date
       net-protocol
@@ -536,7 +535,7 @@ GEM
       chronic (>= 0.6.3)
     whenever-test (1.0.1)
       whenever
-    wicked_pdf (2.7.0)
+    wicked_pdf (2.6.3)
       activesupport
     zeitwerk (2.6.12)
 
@@ -550,6 +549,7 @@ DEPENDENCIES
   database_cleaner-mongoid
   defra_ruby_aws
   defra_ruby_features
+  defra_ruby_govpay
   defra_ruby_mocks!
   defra_ruby_style
   defra_ruby_template
