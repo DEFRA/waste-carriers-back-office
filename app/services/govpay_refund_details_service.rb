@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class GovpayRefundDetailsService < WasteCarriersEngine::BaseService
-  include WasteCarriersEngine::CanSendGovpayRequest
-
   def run(refund_id:)
     @refund = GovpayFindPaymentService.run(payment_id: refund_id)
     raise ArgumentError, "Invalid refund id #{refund_id}" if refund.nil?
@@ -26,7 +24,7 @@ class GovpayRefundDetailsService < WasteCarriersEngine::BaseService
 
   def request
     @request ||=
-      send_request(
+      DefraRubyGovpayAPI.send_request(
         method: :get, path: "/payments/#{payment.govpay_id}/refunds/#{refund.govpay_id}", is_moto: payment.moto
       )
   end

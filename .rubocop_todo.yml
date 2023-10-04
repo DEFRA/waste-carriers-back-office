@@ -6,6 +6,16 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
+# Offense count: 37
+# Configuration parameters: Include.
+# Include: **/*_spec.rb, **/spec/**/*, **/test/**/*, **/features/support/factories/**/*.rb
+FactoryBot/FactoryAssociationWithStrategy:
+  Exclude:
+    - 'spec/factories/key_person.rb'
+    - 'spec/factories/new_registration.rb'
+    - 'spec/factories/registration.rb'
+    - 'spec/factories/renewing_registration.rb'
+
 # Offense count: 46
 RSpec/AnyInstance:
   Exclude:

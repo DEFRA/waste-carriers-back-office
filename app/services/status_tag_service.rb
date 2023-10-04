@@ -32,7 +32,8 @@ class StatusTagService < WasteCarriersEngine::BaseService
 
   def transient_reg_metadata_status
     return :in_progress if transient_new?
-    return :in_progress unless @resource.renewal_application_submitted?
+
+    :in_progress unless @resource.renewal_application_submitted?
   end
 
   def reg_metadata_status
