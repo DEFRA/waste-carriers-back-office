@@ -55,7 +55,8 @@ gem "defra_ruby_aws"
 
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
-    git: "https://github.com/DEFRA/waste-carriers-engine"
+    git: "https://github.com/DEFRA/waste-carriers-engine",
+    branch: "main"
 
 # Use the Defra Ruby Features gem to allow users with the correct permissions to
 # manage feature toggle (create / update / delete) from the back-office.
@@ -71,8 +72,7 @@ gem "defra_ruby_govpay"
 # With the environment properly configured, when any app in an environment needs
 # to call Companies House, instead it will call this app which will mock the end
 # point and return the response expected.
-gem "defra_ruby_mocks",
-    git: "https://github.com/DEFRA/defra-ruby-mocks.git"
+gem "defra_ruby_mocks"
 
 # Allows us to automatically generate the change log from the tags, issues,
 # labels and pull requests on GitHub. Added as a dependency so all dev's have
