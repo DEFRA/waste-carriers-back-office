@@ -153,8 +153,8 @@ module ActionLinksHelper
     resource.can_start_renewal?
   end
 
-  def display_transfer_link_for?(resource)
-    return false
+  def display_transfer_link_for?(_resource)
+    false
   end
 
   def display_restore_registration_link_for?(resource)
