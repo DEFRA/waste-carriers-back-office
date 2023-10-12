@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 6f353d7b1e80247a64c81b480b90264c1d0cc907
-  branch: RUBY-2658-wcr-back-office-notify-templates-for-devise-use-cases
+  revision: dc57b54995b9f680953b7f1892e9632b718e8989
+  branch: main
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
