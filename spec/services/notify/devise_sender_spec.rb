@@ -4,7 +4,7 @@ require "rails_helper"
 
 module Notify
   RSpec.describe DeviseSender do
-    let(:user_with_email) { create(:user, email: "test@example.com") }
+    let(:user_with_email) { create(:user, email: "test@example.com", invitation_sent_at: Time.now) }
     let(:token) { "example_token" }
 
     let(:notifications_client) { instance_double(Notifications::Client) }

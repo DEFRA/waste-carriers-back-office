@@ -3,42 +3,40 @@
 require "rails_helper"
 
 RSpec.describe DeviseCustomMailer do
-  describe "#invitation_instructions" do
-    let(:user) { create(:user, email: "test@example.com", invitation_created_at: Time.zone.now) }
-    let(:token) { "example_token" }
-    let(:opts) { {} }
+  let(:user) { create(:user, email: "test@example.com") }
+  let(:token) { "example_token" }
+  let(:opts) { {} }
 
-    let(:expected_notify_options) do
-      {
+  describe '#invitation_instructions' do
+    it 'calls the DeviseSender with correct arguments' do
+      expect(Notify::DeviseSender).to receive(:run).with(
         template: :invitation_instructions,
         record: user,
-        opts: {
-          invite_link: invite_url,
-          invitation_due_at: user.invitation_due_at,
-          service_link: service_url
-        }
-      }
-    end
-
-    let(:invite_url) do
-      Rails.application.routes.url_helpers.accept_user_invitation_url(
-        host: Rails.configuration.wcrs_back_office_url,
-        invitation_token: token
+        opts: opts.merge(token: token)
       )
+      subject.invitation_instructions(user, token, opts)
     end
+  end
 
-    let(:service_url) do
-      Rails.application.routes.url_helpers.root_url(host: Rails.configuration.wcrs_back_office_url)
+  describe '#reset_password_instructions' do
+    it 'calls the DeviseSender with correct arguments' do
+      expect(Notify::DeviseSender).to receive(:run).with(
+        template: :reset_password_instructions,
+        record: user,
+        opts: opts.merge(token: token)
+      )
+      subject.reset_password_instructions(user, token, opts)
     end
+  end
 
-    before do
-      allow(WasteCarriersEngine::Notify::DeviseSender).to receive(:run)
-    end
-
-    it "calls the Notify::DeviseSender with expected arguments" do
-      described_class.new.invitation_instructions(user, token, opts)
-
-      expect(WasteCarriersEngine::Notify::DeviseSender).to have_received(:run).with(expected_notify_options)
+  describe '#unlock_instructions' do
+    it 'calls the DeviseSender with correct arguments' do
+      expect(Notify::DeviseSender).to receive(:run).with(
+        template: :unlock_instructions,
+        record: user,
+        opts: opts.merge(token: token)
+      )
+      subject.unlock_instructions(user, token, opts)
     end
   end
 end

@@ -18,7 +18,7 @@ class DeviseCustomMailer < Devise::Mailer
   private
 
   def send_via_gov_notify(template, record, opts)
-    WasteCarriersEngine::Notify::DeviseSender.run(template: template, record: record, opts: opts)
+    Notify::DeviseSender.run(template: template, record: record, opts: opts)
   end
 
   def invite_url(token)
