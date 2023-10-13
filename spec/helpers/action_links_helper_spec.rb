@@ -947,14 +947,6 @@ RSpec.describe ActionLinksHelper do
     end
   end
 
-  describe "#display_transfer_link_for?" do
-    let(:resource) { build(:registration) }
-
-    it "returns false" do
-      expect(helper.display_transfer_link_for?(resource)).to be(false)
-    end
-  end
-
   describe "#display_restore_registration_link_for?" do
 
     subject(:display_link) { helper.display_restore_registration_link_for?(resource) }
