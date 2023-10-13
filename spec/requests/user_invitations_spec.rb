@@ -3,6 +3,12 @@
 require "rails_helper"
 
 RSpec.describe "User Invitations" do
+  before do
+    allow(Notifications::Client).to receive(:new).and_return(
+      instance_double(Notifications::Client, send_email: nil)
+    )
+  end
+
   describe "GET /bo/users/invitation/new" do
     context "when a super user is signed in" do
       let(:user) { create(:user, role: :agency_super) }
