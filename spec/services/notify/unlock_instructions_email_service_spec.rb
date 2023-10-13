@@ -14,6 +14,7 @@ module Notify
           email_address: user.email,
           template_id: template_id,
           personalisation: {
+            email_address: user.email,
             unlock_link: Rails.application.routes.url_helpers.user_unlock_url(
               host: Rails.configuration.wcrs_back_office_url,
               unlock_token: token

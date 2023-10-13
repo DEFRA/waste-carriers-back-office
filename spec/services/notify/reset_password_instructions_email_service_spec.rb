@@ -14,6 +14,7 @@ module Notify
           email_address: user.email,
           template_id: template_id,
           personalisation: {
+            email_address: user.email,
             reset_password_link: Rails.application.routes.url_helpers.edit_user_password_url(
               host: Rails.configuration.wcrs_back_office_url,
               reset_password_token: token

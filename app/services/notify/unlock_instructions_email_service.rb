@@ -16,6 +16,7 @@ module Notify
         email_address: record.email,
         template_id: "a3295516-26a6-4c01-9e3a-d5000f1a86c6",
         personalisation: {
+          email_address: record.email,
           unlock_link: unlock_url(opts[:token])
         }
       }

@@ -13,6 +13,7 @@ module Notify
           email_address: user.email,
           template_id: "5b5c1a42-b19b-4dc1-bece-4842f42edb65",
           personalisation: {
+            email_address: user.email,
             invite_link: Rails.application.routes.url_helpers.accept_user_invitation_url(
               host: Rails.configuration.wcrs_back_office_url,
               invitation_token: token

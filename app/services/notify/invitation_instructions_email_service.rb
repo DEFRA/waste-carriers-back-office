@@ -24,6 +24,7 @@ module Notify
         email_address: record.email,
         template_id: "5b5c1a42-b19b-4dc1-bece-4842f42edb65",
         personalisation: {
+          email_address: record.email,
           invite_link: invite_url(opts[:token]),
           service_link: service_url,
           expiry_date: expiry_date(record).to_s(:day_month_year)

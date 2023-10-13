@@ -16,6 +16,7 @@ module Notify
         email_address: record.email,
         template_id: "bfe66f5e-29ed-4f78-82e1-8baf5548f97a",
         personalisation: {
+          email_address: record.email,
           reset_password_link: reset_url(opts[:token])
         }
       }
