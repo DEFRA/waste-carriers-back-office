@@ -105,12 +105,6 @@ RSpec.describe Ability do
     it_behaves_like "allows only the permitted roles", false, :edit, WasteCarriersEngine::Registration
   end
 
-  context "when the action is transfer a registration" do
-    let(:permitted_roles) { agency_plus_roles }
-
-    it_behaves_like "allows only the permitted roles", false, :transfer_registration, WasteCarriersEngine::Registration
-  end
-
   context "when the action is cancel a resource" do
     let(:permitted_roles) do
       %w[
