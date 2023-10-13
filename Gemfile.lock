@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: dc57b54995b9f680953b7f1892e9632b718e8989
+  revision: 591e39432ee0581545d1f289544308dd50a7ac57
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -285,7 +285,7 @@ GEM
       kaminari-core (~> 1.0)
       mongoid
     language_server-protocol (3.17.0.3)
-    loofah (2.21.3)
+    loofah (2.21.4)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -298,7 +298,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.5.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2023.0808)
+    mime-types-data (3.2023.1003)
     mini_mime (1.1.5)
     minitest (5.20.0)
     mongo (2.19.1)
@@ -313,7 +313,7 @@ GEM
     mongoid-locker (2.0.2)
       mongoid (>= 5.0, < 9)
     multi_json (1.15.0)
-    net-imap (0.4.0)
+    net-imap (0.4.1)
       date
       net-protocol
     net-pop (0.1.2)

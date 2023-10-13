@@ -24,12 +24,6 @@
       </li>
     <% end %>
 
-    <% if display_transfer_link_for?(resource) %>
-      <li>
-        <%= link_to t(".actions_box.links.transfer"), new_registration_registration_transfer_path(resource.reg_identifier) %>
-      </li>
-    <% end %>
-
     <% if display_edit_link_for?(resource) %>
       <li>
         <%= link_to t(".actions_box.links.edit"), WasteCarriersEngine::Engine.routes.url_helpers.new_edit_form_path(resource.reg_identifier) %>

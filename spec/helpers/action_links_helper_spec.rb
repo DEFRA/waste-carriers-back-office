@@ -947,48 +947,6 @@ RSpec.describe ActionLinksHelper do
     end
   end
 
-  describe "#display_transfer_link_for?" do
-    context "when the resource is not a Registration" do
-      let(:resource) { build(:renewing_registration) }
-
-      it "returns false" do
-        expect(helper.display_transfer_link_for?(resource)).to be(false)
-      end
-    end
-
-    context "when the resource is a Registration" do
-      let(:resource) { build(:registration) }
-
-      context "when the resource has been revoked or refused" do
-        before { resource.metaData.status = %w[REVOKED REFUSED].sample }
-
-        it "returns false" do
-          expect(helper.display_transfer_link_for?(resource)).to be(false)
-        end
-      end
-
-      context "when the resource is not revoked or refused" do
-        before { resource.metaData.status = %w[ACTIVE EXPIRED PENDING].sample }
-
-        context "when the user does not have permission" do
-          before { allow(helper).to receive(:can?).with(:transfer_registration, WasteCarriersEngine::Registration).and_return(false) }
-
-          it "returns false" do
-            expect(helper.display_transfer_link_for?(resource)).to be(false)
-          end
-        end
-
-        context "when the user has permission" do
-          before { allow(helper).to receive(:can?).with(:transfer_registration, WasteCarriersEngine::Registration).and_return(true) }
-
-          it "returns true" do
-            expect(helper.display_transfer_link_for?(resource)).to be(true)
-          end
-        end
-      end
-    end
-  end
-
   describe "#display_restore_registration_link_for?" do
 
     subject(:display_link) { helper.display_restore_registration_link_for?(resource) }

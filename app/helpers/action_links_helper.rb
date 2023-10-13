@@ -153,13 +153,6 @@ module ActionLinksHelper
     resource.can_start_renewal?
   end
 
-  def display_transfer_link_for?(resource)
-    return false if WasteCarriersEngine::FeatureToggle.active?(:block_front_end_logins)
-    return false unless display_registration_links?(resource)
-
-    can?(:transfer_registration, WasteCarriersEngine::Registration)
-  end
-
   def display_restore_registration_link_for?(resource)
     return false unless a_registration?(resource)
     return false unless can?(:restore, WasteCarriersEngine::Registration)
