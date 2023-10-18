@@ -19,7 +19,7 @@ module Notify
               invitation_token: token
             ),
             service_link: Rails.application.routes.url_helpers.root_url(host: Rails.configuration.wcrs_back_office_url),
-            expiry_date: (user.invitation_sent_at + Devise.invite_for).to_s(:day_month_year)
+            expiry_date: (user.invitation_sent_at + Devise.invite_for).to_fs(:day_month_year)
           }
         }
       end

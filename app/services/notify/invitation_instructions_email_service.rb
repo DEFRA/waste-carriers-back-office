@@ -27,7 +27,7 @@ module Notify
           email_address: record.email,
           invite_link: invite_url(opts[:token]),
           service_link: service_url,
-          expiry_date: expiry_date(record).to_s(:day_month_year)
+          expiry_date: expiry_date(record).to_fs(:day_month_year)
         }
       }
     end
