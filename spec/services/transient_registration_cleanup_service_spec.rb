@@ -20,8 +20,16 @@ RSpec.describe TransientRegistrationCleanupService do
         expect { described_class.run }.to change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1).to(0)
       end
 
-      context "when the transient_registration is a submitted renewal" do
+      context "when the transient_registration is a submitted renewal with a pending payment" do
         let(:transient_registration) { create(:renewing_registration, workflow_state: "renewal_received_pending_payment_form") }
+
+        it "deletes it" do
+          expect { described_class.run }.to change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1).to(0)
+        end
+      end
+
+      context "when the transient_registration is a submitted renewal with a pending conviction check" do
+        let(:transient_registration) { create(:renewing_registration, workflow_state: "renewal_received_pending_conviction_form") }
 
         it "does not delete it" do
           expect { described_class.run }.not_to change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1)
@@ -60,7 +68,7 @@ RSpec.describe TransientRegistrationCleanupService do
         end
 
         context "when the transient_registration is a submitted renewal" do
-          let(:transient_registration) { create(:renewing_registration, workflow_state: "renewal_received_pending_payment_form") }
+          let(:transient_registration) { create(:renewing_registration, workflow_state: "renewal_received_pending_conviction_form") }
 
           it "does not delete it" do
             expect { described_class.run }.not_to change { WasteCarriersEngine::TransientRegistration.where(token: token).count }.from(1)

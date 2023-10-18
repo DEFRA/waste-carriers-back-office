@@ -13,7 +13,7 @@ class TransientRegistrationCleanupService < WasteCarriersEngine::BaseService
   def transient_registrations_to_remove
     WasteCarriersEngine::TransientRegistration.where(
       "created_at" => { "$lt" => oldest_possible_date },
-      "workflow_state" => { "$nin" => WasteCarriersEngine::RenewingRegistration::SUBMITTED_STATES }
+      "workflow_state" => { "$nin" => excluded_states }
     )
   end
 
@@ -23,12 +23,17 @@ class TransientRegistrationCleanupService < WasteCarriersEngine::BaseService
     WasteCarriersEngine::TransientRegistration.where(
       "created_at" => nil,
       "metaData.lastModified" => { "$lt" => oldest_possible_date },
-      "workflow_state" => { "$nin" => WasteCarriersEngine::RenewingRegistration::SUBMITTED_STATES }
+      "workflow_state" => { "$nin" => excluded_states }
     )
   end
 
   def oldest_possible_date
     max = Rails.configuration.max_transient_registration_age_days.to_i
     max.days.ago
+  end
+
+  def excluded_states
+    # we also remove submitted-but-pending-payment transient_registrations older than the cutoff
+    WasteCarriersEngine::RenewingRegistration::SUBMITTED_STATES - ["renewal_received_pending_payment_form"]
   end
 end
