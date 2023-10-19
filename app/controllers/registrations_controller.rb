@@ -5,6 +5,7 @@ class RegistrationsController < ApplicationController
 
   def show
     begin
+      @back_link = request.referer || bo_path
       registration = WasteCarriersEngine::Registration.find_by(reg_identifier: params[:reg_identifier])
     rescue Mongoid::Errors::DocumentNotFound
       return redirect_to bo_path
