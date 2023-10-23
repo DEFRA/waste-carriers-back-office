@@ -10,7 +10,8 @@ class TransientRegistrationCleanupService < WasteCarriersEngine::BaseService
     unless Rails.env.test?
       puts "Removing transient_registrations created up to #{oldest_possible_date} excluding #{excluded_states}"
       puts "Removing #{transient_registrations_with_created_at.count} transient_registrations with a created_at value"
-      puts "Removing #{transient_registrations_without_created_at.count} transient_registrations without a created_at value"
+      puts "Removing #{transient_registrations_without_created_at.count} transient_registrations " \
+           "without a created_at value"
     end
     # :nocov:
     # rubocop:enable Rails/Output
