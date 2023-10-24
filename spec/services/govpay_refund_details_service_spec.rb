@@ -7,7 +7,6 @@ module WasteCarriersEngine
 
     describe "#run" do
 
-      let(:govpay_host) { "https://publicapi.payments.service.gov.uk" }
       let(:registration) { create(:registration, finance_details: build(:finance_details, :has_overpaid_order_and_payment_govpay)) }
       let(:original_payment) { registration.finance_details.payments.first }
       let(:govpay_payment_id) { original_payment.govpay_id }
@@ -15,9 +14,6 @@ module WasteCarriersEngine
       let(:govpay_refund_id) { refund.govpay_id }
 
       before do
-        allow(WasteCarriersEngine.configuration).to receive(:host_is_back_office?).and_return(true)
-        allow(Rails.configuration).to receive(:govpay_url).and_return(govpay_host)
-
         DefraRubyGovpay.configure do |config|
           config.govpay_front_office_api_token = "front_office_token"
           config.govpay_back_office_api_token = "back_office_token"
@@ -59,7 +55,7 @@ module WasteCarriersEngine
             allow(Rails.configuration).to receive_messages(govpay_front_office_api_token: front_office_token, govpay_back_office_api_token: back_office_token)
 
             # https://publicapi.payments.service.gov.uk
-            stub_request(:get, %r{#{govpay_host}/v1/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}})
+            stub_request(:get, %r{\A.*?/v1/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}\z})
               .with(
                 headers: {
                   "Authorization" => "Bearer #{govpay_api_token}",
@@ -95,7 +91,7 @@ module WasteCarriersEngine
 
         context "when the govpay request fails" do
           before do
-            stub_request(:get, %r{#{govpay_host}/v1/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}})
+            stub_request(:get, %r{\A.*?/v1/payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}\z})
               .to_return(status: 500)
             allow(Airbrake).to receive(:notify)
           end

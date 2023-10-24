@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 928d39178a56f4fb632d146cd45461345a369370
+  revision: e77be46b2fbc3daf55520467ee10af65c0e4acdd
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -198,7 +198,7 @@ GEM
       phonelib
       rest-client (~> 2.0)
       validates_email_format_of
-    devise (4.9.2)
+    devise (4.9.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -285,7 +285,7 @@ GEM
       kaminari-core (~> 1.0)
       mongoid
     language_server-protocol (3.17.0.3)
-    loofah (2.21.3)
+    loofah (2.21.4)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -298,7 +298,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.5.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2023.0808)
+    mime-types-data (3.2023.1003)
     mini_mime (1.1.5)
     minitest (5.20.0)
     mongo (2.19.1)
@@ -402,7 +402,7 @@ GEM
       ffi (~> 1.0)
     rbtree3 (0.7.1)
     regexp_parser (2.8.1)
-    responders (3.1.0)
+    responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
     rest-client (2.1.0)
@@ -488,9 +488,9 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    thor (1.2.2)
+    thor (1.3.0)
     tilt (2.2.0)
-    timecop (0.9.6)
+    timecop (0.9.8)
     timeout (0.4.0)
     timers (4.3.5)
     traces (0.11.1)
@@ -533,6 +533,7 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
+  x86_64-darwin-21
   x86_64-darwin-22
   x86_64-linux
 
