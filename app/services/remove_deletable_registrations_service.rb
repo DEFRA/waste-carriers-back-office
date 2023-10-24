@@ -34,10 +34,8 @@ class RemoveDeletableRegistrationsService < WasteCarriersEngine::BaseService
     Rails.configuration.data_retention_years.to_i.years.ago.end_of_day
   end
 
-  # rubocop:disable Rails/Output
   def log(msg)
     # Avoid cluttering up the test logs
-    puts msg unless Rails.env.test?
+    puts msg unless Rails.env.test? # rubocop:disable Rails/Output
   end
-  # rubocop:enable Rails/Output
 end
