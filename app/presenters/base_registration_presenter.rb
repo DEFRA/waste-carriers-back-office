@@ -105,7 +105,7 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def ea_area
-    registered_address.area || "Pending"
+    registered_address&.area || "Pending"
   end
 
   def display_original_registration_date
