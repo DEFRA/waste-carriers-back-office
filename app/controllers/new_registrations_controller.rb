@@ -5,6 +5,7 @@ class NewRegistrationsController < ApplicationController
 
   def show
     begin
+      @back_link = request.referer || bo_path
       transient_registration = fetch_new_registration
     rescue Mongoid::Errors::DocumentNotFound
       return redirect_to bo_path

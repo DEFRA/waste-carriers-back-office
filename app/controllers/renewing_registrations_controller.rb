@@ -5,6 +5,7 @@ class RenewingRegistrationsController < ApplicationController
 
   def show
     begin
+      @back_link = request.referer || bo_path
       transient_registration = fetch_renewing_registration
     rescue Mongoid::Errors::DocumentNotFound
       scope = WasteCarriersEngine::Registration.where(reg_identifier: params[:reg_identifier])

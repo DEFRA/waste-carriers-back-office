@@ -5,6 +5,7 @@ en:
       heading:
         without_company_name: "New registration"
         with_company_name: "New registration for %{company_name}"
+      back_link: Back to search results
       filler: "–"
       status:
         headings:
