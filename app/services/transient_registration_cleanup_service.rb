@@ -1,23 +1,19 @@
 # frozen_string_literal: true
 
 class TransientRegistrationCleanupService < WasteCarriersEngine::BaseService
+
   def run
+    console_log "Removing transient_registrations created up to #{oldest_possible_date} excluding #{excluded_states}"
+
     transient_registrations_with_created_at = transient_registrations_to_remove
+    console_log "Removing #{transient_registrations_with_created_at.count} transient_registrations " \
+                "with a created_at value:"
+    remove_transient_registrations transient_registrations_with_created_at
+
     transient_registrations_without_created_at = no_created_at_transient_registrations_to_remove
-
-    # rubocop:disable Rails/Output
-    # :nocov:
-    unless Rails.env.test?
-      puts "Removing transient_registrations created up to #{oldest_possible_date} excluding #{excluded_states}"
-      puts "Removing #{transient_registrations_with_created_at.count} transient_registrations with a created_at value"
-      puts "Removing #{transient_registrations_without_created_at.count} transient_registrations " \
-           "without a created_at value"
-    end
-    # :nocov:
-    # rubocop:enable Rails/Output
-
-    transient_registrations_with_created_at.destroy_all
-    transient_registrations_without_created_at.destroy_all
+    console_log "Removing #{transient_registrations_without_created_at.count} transient_registrations " \
+                "without a created_at value:"
+    remove_transient_registrations transient_registrations_without_created_at
   end
 
   private
@@ -52,4 +48,19 @@ class TransientRegistrationCleanupService < WasteCarriersEngine::BaseService
       registration_received_pending_payment_form
     ]
   end
+
+  def remove_transient_registrations(transient_registrations)
+    transient_registrations.each do |transient_registration|
+      console_log transient_registration.reg_identifier
+      transient_registration.destroy
+    end
+  end
+
+  # rubocop:disable Rails/Output
+  def console_log(text)
+    # :nocov:
+    puts text unless Rails.env.test?
+    # :nocov:
+  end
+  # rubocop:enable Rails/Output
 end
