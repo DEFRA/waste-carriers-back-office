@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -61,4 +60,3 @@ Rails.application.configure do
   # https://stackoverflow.com/a/29417509
   config.web_console.allowed_ips = ENV.fetch("SSH_CLIENT", "127.0.0.1").split.first
 end
-# rubocop:enable Metrics/BlockLength
