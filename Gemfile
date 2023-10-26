@@ -48,7 +48,6 @@ gem "matrix"
 
 gem "net-imap"
 gem "net-pop"
-gem "net-smtp"
 
 # Use the Defra Ruby Aws gem for loading files to AWS buckets
 gem "defra_ruby_aws"

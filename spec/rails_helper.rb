@@ -46,9 +46,4 @@ RSpec.configure do |config|
 
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::ControllerHelpers, type: :helper
-
-  # Clean the email queue before running tests
-  config.before(:suite) do
-    ActionMailer::Base.deliveries.clear
-  end
 end

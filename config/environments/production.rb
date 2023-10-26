@@ -81,21 +81,4 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = Logger::Formatter.new
-
-  # Sending e-mails is required for user management and registration e-mails
-  config.action_mailer.default_url_options = { host: config.wcrs_back_office_url, protocol: "https" }
-
-  # Don't care if the mailer can't send (if set to false)
-  config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.delivery_method = :smtp
-
-  config.action_mailer.smtp_settings = {
-    user_name: ENV.fetch("WCRS_EMAIL_USERNAME", nil),
-    password: ENV.fetch("WCRS_EMAIL_PASSWORD", nil),
-    domain: config.wcrs_back_office_url,
-    address: ENV.fetch("WCRS_EMAIL_HOST", nil),
-    port: ENV.fetch("WCRS_EMAIL_PORT", nil),
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
 end
