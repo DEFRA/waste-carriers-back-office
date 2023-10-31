@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "csv"
-require "factory_bot_rails"
 
 # rubocop:disable Metrics/BlockLength
 namespace :debug do
