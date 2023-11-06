@@ -250,6 +250,10 @@ Rails.application.routes.draw do
            only: %i[new],
            path: "/bo/email-exports-list"
 
+  resources :analytics,
+            only: %i[index],
+            path: "/bo/analytics"
+
   # Redirect old Devise routes
   get "/agency_users(*all)" => redirect("/bo/users%{all}")
   get "/admins(*all)" => redirect("/bo/users%{all}")

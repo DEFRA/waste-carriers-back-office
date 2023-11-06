@@ -1,0 +1,69 @@
+<h1>Analytics Dashboard</h1>
+
+<%= form_with url: '#', method: :get, local: true do |form| %>
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          Select date range
+        </h1>
+      </legend>
+
+      <div class="govuk-date-input" id="date-range">
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <%= form.label :start_date, "Start date", class: "govuk-label govuk-date-input__label" %>
+            <%= form.date_field :start_date, max: Date.today.to_s, class: "govuk-input govuk-date-input__input govuk-input--width-20" %>
+          </div>
+        </div>
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <%= form.label :end_date, "End date", class: "govuk-label govuk-date-input__label" %>
+            <%= form.date_field :end_date, max: Date.today.to_s, class: "govuk-input govuk-date-input__input govuk-input--width-20" %>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="govuk-form-group">
+    <%= form.submit "Filter", class: "govuk-button" %>
+  </div>
+<% end %>
+<% if @start_date.present? && @end_date.present? %>
+  <p>Date Range: <%= @start_date.strftime('%B %d, %Y') %> to <%= @end_date.strftime('%B %d, %Y') %></p>
+<% end %>
+<div>
+</div>
+
+<table class="govuk-table">
+  <caption class="govuk-table__caption govuk-table__caption--m">Aggregate Data</caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Metric</th>
+      <th scope="col" class="govuk-table__header">Value</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Total Journeys Started</th>
+      <td class="govuk-table__cell"><%= @analytics_data[:total_journeys_started] %></td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Total Journeys Completed</th>
+      <td class="govuk-table__cell"><%= @analytics_data[:total_journeys_completed] %></td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Completion Rate</th>
+      <td class="govuk-table__cell"><%= @analytics_data[:completion_rate] %>%</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Front Office Completions</th>
+      <td class="govuk-table__cell"><%= @analytics_data[:front_office_completions] %></td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Back Office Completions</th>
+      <td class="govuk-table__cell"><%= @analytics_data[:back_office_completions] %></td>
+    </tr>
+  </tbody>
+</table>

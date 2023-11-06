@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: d9c7ffc17fbbaf28e03f0b37106162cdc12b853d
-  branch: main
+  revision: 8fd4285ec2be354bde4f3aa95205673d2d4629a7
+  branch: RUBY-2709-wcr-analytics-metrics-improvements
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
@@ -180,7 +180,7 @@ GEM
       devise (>= 4.9)
       rails
       sprockets-rails
-    defra_ruby_govpay (0.2.1)
+    defra_ruby_govpay (0.2.2)
       rest-client (~> 2.1)
     defra_ruby_mocks (4.0.0)
       rails (~> 7.0)
@@ -312,7 +312,7 @@ GEM
     mongoid-locker (2.0.2)
       mongoid (>= 5.0, < 9)
     multi_json (1.15.0)
-    net-imap (0.4.3)
+    net-imap (0.4.4)
       date
       net-protocol
     net-pop (0.1.2)
@@ -341,7 +341,7 @@ GEM
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.8.4)
+    phonelib (0.8.5)
     protocol-hpack (1.4.2)
     protocol-http (0.24.7)
     protocol-http1 (0.15.1)
@@ -358,7 +358,7 @@ GEM
     public_suffix (5.0.3)
     puma (6.4.0)
       nio4r (~> 2.0)
-    racc (1.7.1)
+    racc (1.7.3)
     rack (2.2.8)
     rack-test (2.1.0)
       rack (>= 1.3)

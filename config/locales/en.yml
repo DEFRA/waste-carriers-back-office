@@ -19,6 +19,7 @@ en:
         card_order_exports: Copy card orders
         email_exports: Email exports
         email_export_list: Export list
+        analytics: Analytics
       user_info:
         signed_in_user: "Signed in as %{email}."
         sign_out_link: Sign out
