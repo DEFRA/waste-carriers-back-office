@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AnalyticsController < WasteCarriersEngine::ApplicationController
+  prepend_before_action :authenticate_user!
+  prepend_before_action :authorize_user
   def index
     @start_date = start_date
     @end_date = end_date
@@ -21,5 +23,9 @@ class AnalyticsController < WasteCarriersEngine::ApplicationController
     return nil if params[:end_date].blank?
 
     Date.parse(params[:end_date])
+  end
+
+  def authorize_user
+    authorize! :view_analytics, :all
   end
 end
