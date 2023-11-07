@@ -45,8 +45,16 @@
   </thead>
   <tbody class="govuk-table__body">
     <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.total_journeys_completed") %></th>
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.total_journeys_started") %></th>
       <td class="govuk-table__cell"><%= @analytics_data[:total_journeys_started] %></td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.front_office_started") %></th>
+      <td class="govuk-table__cell"><%= @analytics_data[:front_office_started] %></td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.back_office_started") %></th>
+      <td class="govuk-table__cell"><%= @analytics_data[:back_office_started] %></td>
     </tr>
     <tr class="govuk-table__row">
       <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.total_journeys_completed") %></th>
@@ -63,6 +71,10 @@
     <tr class="govuk-table__row">
       <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.back_office_completions") %></th>
       <td class="govuk-table__cell"><%= @analytics_data[:back_office_completions] %></td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.cross_office_completions") %></th>
+      <td class="govuk-table__cell"><%= @analytics_data[:cross_office_completions] %></td>
     </tr>
   </tbody>
 </table>
