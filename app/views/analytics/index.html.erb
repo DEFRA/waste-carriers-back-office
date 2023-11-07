@@ -1,25 +1,29 @@
-<h1>Analytics Dashboard</h1>
+<h1 class="govuk-heading-l">
+  <%= t(".title") %>
+</h1>
 
 <%= form_with url: '#', method: :get, local: true do |form| %>
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">
-          Select date range
-        </h1>
-      </legend>
 
       <div class="govuk-date-input" id="date-range">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h2 class="govuk-heading-m">
+          <%= t(".select_date_range") %>
+        </h2>
+      </legend>
         <div class="govuk-date-input__item">
           <div class="govuk-form-group">
-            <%= form.label :start_date, "Start date", class: "govuk-label govuk-date-input__label" %>
-            <%= form.date_field :start_date, max: Date.today.to_s, class: "govuk-input govuk-date-input__input govuk-input--width-20" %>
+            <%= form.label :start_date, t(".labels.start_date"), class: "govuk-label govuk-date-input__label" %>
+            <% start_date_value = @start_date&.strftime('%Y-%m-%d') %>
+            <%= form.date_field :start_date, max: Date.today.to_s, class: "govuk-input govuk-date-input__input govuk-input--width-20", value: start_date_value %>
           </div>
         </div>
         <div class="govuk-date-input__item">
           <div class="govuk-form-group">
-            <%= form.label :end_date, "End date", class: "govuk-label govuk-date-input__label" %>
-            <%= form.date_field :end_date, max: Date.today.to_s, class: "govuk-input govuk-date-input__input govuk-input--width-20" %>
+            <%= form.label :end_date, t(".labels.end_date"), class: "govuk-label govuk-date-input__label" %>
+            <% end_date_value = @end_date&.strftime('%Y-%m-%d') %>
+            <%= form.date_field :end_date, max: Date.today.to_s, class: "govuk-input govuk-date-input__input govuk-input--width-20", value: end_date_value %>
           </div>
         </div>
       </div>
@@ -27,17 +31,12 @@
   </div>
 
   <div class="govuk-form-group">
-    <%= form.submit "Filter", class: "govuk-button" %>
+    <%= form.submit t(".filter"), class: "govuk-button" %>
   </div>
 <% end %>
-<% if @start_date.present? && @end_date.present? %>
-  <p>Date Range: <%= @start_date.strftime('%B %d, %Y') %> to <%= @end_date.strftime('%B %d, %Y') %></p>
-<% end %>
-<div>
-</div>
 
 <table class="govuk-table">
-  <caption class="govuk-table__caption govuk-table__caption--m">Aggregate Data</caption>
+  <caption class="govuk-table__caption govuk-table__caption--m"><%= t(".aggregate_data_table.header") %></caption>
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header">Metric</th>
@@ -46,23 +45,23 @@
   </thead>
   <tbody class="govuk-table__body">
     <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">Total Journeys Started</th>
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.total_journeys_completed") %></th>
       <td class="govuk-table__cell"><%= @analytics_data[:total_journeys_started] %></td>
     </tr>
     <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">Total Journeys Completed</th>
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.total_journeys_completed") %></th>
       <td class="govuk-table__cell"><%= @analytics_data[:total_journeys_completed] %></td>
     </tr>
     <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">Completion Rate</th>
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.completion_rate") %></th>
       <td class="govuk-table__cell"><%= @analytics_data[:completion_rate] %>%</td>
     </tr>
     <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">Front Office Completions</th>
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.front_office_completions") %></th>
       <td class="govuk-table__cell"><%= @analytics_data[:front_office_completions] %></td>
     </tr>
     <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">Back Office Completions</th>
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.back_office_completions") %></th>
       <td class="govuk-table__cell"><%= @analytics_data[:back_office_completions] %></td>
     </tr>
   </tbody>
