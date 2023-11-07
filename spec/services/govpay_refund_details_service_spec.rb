@@ -103,7 +103,8 @@ module WasteCarriersEngine
           it "notifies Airbrake" do
             run_service
           rescue DefraRubyGovpay::GovpayApiError
-            error_message = "Error sending request to govpay (get /payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}, params: ): 500 Internal Server Error"
+            error_message = "Error sending request to govpay (get /payments/#{govpay_payment_id}/refunds/#{govpay_refund_id}, " \
+                            "params: ), response body: : 500 Internal Server Error"
             expect(Airbrake).to have_received(:notify) do |error, details|
               expect(error).to be_a(DefraRubyGovpay::GovpayApiError)
               expect(error.message).to eq(error_message)
