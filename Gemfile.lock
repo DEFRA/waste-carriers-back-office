@@ -180,7 +180,7 @@ GEM
       devise (>= 4.9)
       rails
       sprockets-rails
-    defra_ruby_govpay (0.2.1)
+    defra_ruby_govpay (0.2.3)
       rest-client (~> 2.1)
     defra_ruby_mocks (4.0.0)
       rails (~> 7.0)
