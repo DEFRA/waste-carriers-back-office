@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class AnalyticsController < WasteCarriersEngine::ApplicationController
-  prepend_before_action :authenticate_user!
+class AnalyticsController < ApplicationController
   prepend_before_action :authorize_user
+
   def index
     @start_date = start_date
     @end_date = end_date
