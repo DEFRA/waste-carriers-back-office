@@ -49,6 +49,8 @@ gem "matrix"
 gem "net-imap"
 gem "net-pop"
 
+gem "defra_ruby_storm"
+
 # Use the Defra Ruby Aws gem for loading files to AWS buckets
 gem "defra_ruby_aws"
 
