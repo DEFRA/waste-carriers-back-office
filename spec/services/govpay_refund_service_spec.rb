@@ -10,17 +10,12 @@ RSpec.describe GovpayRefundService do
   let(:amount) { 1 }
   let(:registration) { create(:registration) }
   let(:refund_response) { :get_refund_response_submitted }
-
-  let(:back_office_api_token) { "a_back_office_api_token" }
-  let(:front_office_api_token) { "a_front_office_api_token" }
+  let(:back_office_api_token) { DefraRubyGovpay.configuration.govpay_back_office_api_token }
+  let(:front_office_api_token) { DefraRubyGovpay.configuration.govpay_front_office_api_token }
   let(:govpay_api_token) { back_office_api_token }
 
   before do
-    allow(DefraRubyGovpay.configuration).to receive_messages(
-      host_is_back_office: true,
-      govpay_back_office_api_token: back_office_api_token,
-      govpay_front_office_api_token: front_office_api_token
-    )
+    allow(DefraRubyGovpay.configuration).to receive(:host_is_back_office).and_return(true)
 
     payment.update!(govpay_id: "govpay123", payment_type: "GOVPAY", moto: true)
 
