@@ -13,12 +13,14 @@ module WasteCarriersEngine
       let(:refund) { build(:payment, :govpay_refund_pending, refunded_payment_govpay_id: original_payment.govpay_id) }
       let(:govpay_refund_id) { refund.govpay_id }
 
-      let(:back_office_api_token) { DefraRubyGovpay.configuration.govpay_back_office_api_token }
-      let(:front_office_api_token) { DefraRubyGovpay.configuration.govpay_front_office_api_token }
+      let(:back_office_api_token) { "back office APi token" }
+      let(:front_office_api_token) { "front office token" }
       let(:govpay_api_token) { back_office_api_token }
 
       before do
         allow(DefraRubyGovpay.configuration).to receive(:host_is_back_office).and_return(true)
+        allow(DefraRubyGovpay.configuration).to receive(:govpay_back_office_api_token).and_return(back_office_api_token)
+        allow(DefraRubyGovpay.configuration).to receive(:govpay_front_office_api_token).and_return(front_office_api_token)
 
         registration.finance_details.payments << refund
       end
