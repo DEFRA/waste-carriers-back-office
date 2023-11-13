@@ -13,8 +13,8 @@ module WasteCarriersEngine
       let(:refund) { build(:payment, :govpay_refund_pending, refunded_payment_govpay_id: original_payment.govpay_id) }
       let(:govpay_refund_id) { refund.govpay_id }
 
-      let(:back_office_api_token) { "back office APi token" }
-      let(:front_office_api_token) { "front office token" }
+      let(:back_office_api_token) { "back office API token" }
+      let(:front_office_api_token) { "front office API token" }
       let(:govpay_api_token) { back_office_api_token }
 
       before do
