@@ -57,10 +57,6 @@ gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",
     branch: "main"
 
-gem "defra_ruby_govpay",
-    git: "https://github.com/DEFRA/defra-ruby-govpay",
-    branch: "chore/temp_debug"
-
 # Use the Defra Ruby Features gem to allow users with the correct permissions to
 # manage feature toggle (create / update / delete) from the back-office.
 gem "defra_ruby_features"
