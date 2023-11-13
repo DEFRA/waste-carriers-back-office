@@ -18,9 +18,11 @@ module WasteCarriersEngine
       let(:govpay_api_token) { back_office_api_token }
 
       before do
-        allow(DefraRubyGovpay.configuration).to receive(:host_is_back_office).and_return(true)
-        allow(DefraRubyGovpay.configuration).to receive(:govpay_back_office_api_token).and_return(back_office_api_token)
-        allow(DefraRubyGovpay.configuration).to receive(:govpay_front_office_api_token).and_return(front_office_api_token)
+        allow(DefraRubyGovpay.configuration).to receive_messages(
+          host_is_back_office: true,
+          govpay_back_office_api_token: back_office_api_token,
+          govpay_front_office_api_token: front_office_api_token
+        )
 
         registration.finance_details.payments << refund
       end
