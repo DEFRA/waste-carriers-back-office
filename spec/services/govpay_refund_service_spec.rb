@@ -8,22 +8,21 @@ RSpec.describe GovpayRefundService do
 
   let(:payment) { registration.finance_details.payments.first }
   let(:amount) { 1 }
-
   let(:registration) { create(:registration) }
-
   let(:refund_response) { :get_refund_response_submitted }
-  let(:back_office_api_token) { "back_office_token" }
+
+  let(:back_office_api_token) { "a_back_office_api_token" }
+  let(:front_office_api_token) { "a_front_office_api_token" }
   let(:govpay_api_token) { back_office_api_token }
 
   before do
-    allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:govpay_payments).and_return(true)
-    payment.update!(govpay_id: "govpay123", payment_type: "GOVPAY", moto: true)
+    allow(DefraRubyGovpay.configuration).to receive_messages(
+      host_is_back_office: true,
+      govpay_back_office_api_token: back_office_api_token,
+      govpay_front_office_api_token: front_office_api_token
+    )
 
-    DefraRubyGovpay.configure do |config|
-      config.govpay_front_office_api_token = "front_office_token"
-      config.govpay_back_office_api_token = "back_office_token"
-      config.host_is_back_office = true
-    end
+    payment.update!(govpay_id: "govpay123", payment_type: "GOVPAY", moto: true)
 
     stub_const("DefraRubyGovpayAPI", DefraRubyGovpay::API.new)
 
@@ -54,9 +53,8 @@ RSpec.describe GovpayRefundService do
     end
 
     context "when a non-MOTO payment is refunded from the back office" do
-      # This ensures that the Govpay API is not stubbed for the back office bearer token,
-      # so the spec will fail if the request is made using the back office token.
-      let(:govpay_api_token) { "front_office_token" }
+      # host_is_back_office is true, but need to stub the request with the front office API token
+      let(:govpay_api_token) { front_office_api_token }
 
       before do
         allow(Rails.configuration).to receive(:govpay_front_office_api_token).and_return(govpay_api_token)
