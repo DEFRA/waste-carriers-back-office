@@ -55,7 +55,7 @@ gem "defra_ruby_aws"
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",
-    branch: "RUBY-2709-wcr-analytics-metrics-improvements"
+    branch: "main"
 
 # Use the Defra Ruby Features gem to allow users with the correct permissions to
 # manage feature toggle (create / update / delete) from the back-office.
