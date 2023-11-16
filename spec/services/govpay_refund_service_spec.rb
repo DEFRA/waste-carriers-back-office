@@ -17,14 +17,11 @@ RSpec.describe GovpayRefundService do
 
   before do
     allow(DefraRubyGovpay.configuration).to receive_messages(
-      host_is_back_office: true,
       govpay_back_office_api_token: back_office_api_token,
       govpay_front_office_api_token: front_office_api_token
     )
 
     payment.update!(govpay_id: "govpay123", payment_type: "GOVPAY", moto: true)
-
-    stub_const("DefraRubyGovpayAPI", DefraRubyGovpay::API.new)
 
     # retrieve a payment's details
     stub_request(:get, %r{\A.*?/v1/payments/#{payment.govpay_id}\z})

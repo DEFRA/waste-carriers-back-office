@@ -50,9 +50,13 @@ class GovpayRefundService < WasteCarriersEngine::BaseService
     }
   end
 
+  def defra_ruby_govpay_api
+    DefraRubyGovpay::API.new(host_is_back_office: true)
+  end
+
   def request
     @request ||=
-      DefraRubyGovpayAPI.send_request(
+      defra_ruby_govpay_api.send_request(
         method: :post, path: "/payments/#{payment.govpay_id}/refunds", params:, is_moto: payment.moto
       )
   end
