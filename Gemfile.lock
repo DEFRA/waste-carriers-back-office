@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: d7c81bf93547d4756bbb985e5c27275d590a34d3
+  revision: 4deebed15ba187ffbcac70ed712b5b5aef672198
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -180,7 +180,7 @@ GEM
       devise (>= 4.9)
       rails
       sprockets-rails
-    defra_ruby_govpay (0.2.4)
+    defra_ruby_govpay (0.2.5)
       rest-client (~> 2.1)
     defra_ruby_mocks (4.0.0)
       rails (~> 7.0)
@@ -208,8 +208,7 @@ GEM
       devise (>= 4.6)
     diff-lcs (1.5.0)
     docile (1.4.0)
-    domain_name (0.5.20190701)
-      unf (>= 0.0.5, < 1.0.0)
+    domain_name (0.6.20231109)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -284,7 +283,7 @@ GEM
       kaminari-core (~> 1.0)
       mongoid
     language_server-protocol (3.17.0.3)
-    loofah (2.21.4)
+    loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -322,7 +321,7 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     netrc (0.11.0)
-    nio4r (2.5.9)
+    nio4r (2.6.0)
     nokogiri (1.15.4-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.4-x86_64-linux)
@@ -501,9 +500,6 @@ GEM
       execjs (>= 0.3.0, < 3)
     uk_postcode (2.1.8)
     unaccent (0.4.0)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.9)
     unicode-display_width (2.5.0)
     validates_email_format_of (1.7.2)
       i18n
