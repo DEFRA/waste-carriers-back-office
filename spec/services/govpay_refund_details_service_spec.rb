@@ -19,7 +19,6 @@ module WasteCarriersEngine
 
       before do
         allow(DefraRubyGovpay.configuration).to receive_messages(
-          host_is_back_office: true,
           govpay_back_office_api_token: back_office_api_token,
           govpay_front_office_api_token: front_office_api_token
         )
