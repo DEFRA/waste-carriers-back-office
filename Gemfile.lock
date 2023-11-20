@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 4deebed15ba187ffbcac70ed712b5b5aef672198
+  revision: 3bff3f5324edaa4b58fa6fa7e773480085bc10d9
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -299,7 +299,7 @@ GEM
     mime-types-data (3.2023.1003)
     mini_mime (1.1.5)
     minitest (5.20.0)
-    mongo (2.19.2)
+    mongo (2.19.3)
       bson (>= 4.14.1, < 5.0.0)
     mongo_session_store (3.2.1)
       actionpack (>= 4.0)
@@ -322,9 +322,9 @@ GEM
       net-protocol
     netrc (0.11.0)
     nio4r (2.6.0)
-    nokogiri (1.15.4-x86_64-darwin)
+    nokogiri (1.15.5-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.4-x86_64-linux)
+    nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
     notifications-ruby-client (5.4.0)
       jwt (>= 1.5, < 3)
