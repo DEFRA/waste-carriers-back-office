@@ -1,0 +1,93 @@
+<% unless WasteCarriersEngine.configuration.host_is_back_office? %>
+  <% content_for :page_scripts do %>
+    <%= javascript_include_tag "receipt_email" %>
+  <% end %>
+<% end %>
+
+<%= render("waste_carriers_engine/shared/back", back_path: WasteCarriersEngine::Engine.routes.url_helpers.go_back_forms_path(@payment_summary_form.token)) %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <%= render("shared/call_recording_banner") %>
+    <%= form_for(@payment_summary_form) do |f| %>
+      <%= render("waste_carriers_engine/shared/payment_errors") %>
+
+      <%= render partial: "waste_carriers_engine/shared/error_summary", locals: { f: f } %>
+
+      <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-table__caption--l">
+          <%= t("waste_carriers_engine.payment_summary_forms.new.heading") %>
+        </caption>
+
+        <tbody class="govuk-table__body">
+          <% if @presenter.renewal? %>
+            <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header"><%= t("waste_carriers_engine.payment_summary_forms.new.renewal_fee") %></th>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£<%= display_pence_as_pounds(Rails.configuration.renewal_charge) %></td>
+            </tr>
+
+            <% if @transient_registration.registration_type_changed? %>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header"><%= t("waste_carriers_engine.payment_summary_forms.new.cbd_fee") %></th>
+                <td class="govuk-table__cell govuk-table__cell--numeric">£<%= display_pence_as_pounds(Rails.configuration.type_change_charge) %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header"><%= t("waste_carriers_engine.payment_summary_forms.new.registration_fee") %></th>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£<%= display_pence_as_pounds(Rails.configuration.new_registration_charge) %></td>
+            </tr>
+          <% end %>
+          <% if @payment_summary_form.registration_cards > 0 %>
+            <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header"><%= t("waste_carriers_engine.payment_summary_forms.new.cards_fee", count: @payment_summary_form.registration_cards) %></th>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£<%= display_pence_as_pounds(@payment_summary_form.registration_card_charge) %></td>
+            </tr>
+          <% end %>
+
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header"><strong><%= t("waste_carriers_engine.payment_summary_forms.new.total_fee") %></strong></th>
+            <td class="govuk-table__cell govuk-table__cell--numeric"><strong>£<%= display_pence_as_pounds(@payment_summary_form.total_charge) %></strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="govuk-body-s"><%= t("waste_carriers_engine.payment_summary_forms.new.vat_statement") %></p>
+
+      <div class="govuk-form-group <%= "govuk-form-group--error" if @payment_summary_form.errors[:temp_payment_method].any? %>">
+        <% if @payment_summary_form.errors[:temp_payment_method].any? %>
+          <span class="govuk-error-message"><%= @payment_summary_form.errors[:temp_payment_method].join(", ") %></span>
+        <% end %>
+
+        <%= f.govuk_radio_buttons_fieldset :temp_payment_method,
+          legend: {
+            text: t("waste_carriers_engine.payment_summary_forms.new.make_payment_subheading"),
+            size: "m",
+            tag: "h2"
+          } do %>
+          <%= f.govuk_radio_button :temp_payment_method,
+          :card,
+          label: {
+            text: t("waste_carriers_engine.payment_summary_forms.new.options.card.label")
+          },
+          hint: {
+            text: t("waste_carriers_engine.payment_summary_forms.new.options.card.hint")
+          } do %>
+        <% end %>
+
+        <%= f.govuk_radio_button :temp_payment_method,
+          :bank_transfer,
+          label: {
+            text: t("waste_carriers_engine.payment_summary_forms.new.options.bank_transfer.label")
+          },
+          hint: {
+            text: t("waste_carriers_engine.payment_summary_forms.new.options.bank_transfer.hint")
+          } %>
+      <% end %>
+      </div>
+
+      <%= f.govuk_submit t("waste_carriers_engine.payment_summary_forms.new.next_button") %>
+    <% end %>
+  </div>
+</div>

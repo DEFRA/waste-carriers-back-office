@@ -21,6 +21,35 @@ Rails.application.routes.draw do
     get "/resend-renewal-email/:reg_identifier",
         to: "resend_renewal_email#new",
         as: "resend_renewal_email"
+
+    scope "/:token" do
+      #  override the default payment summary form routes from engine
+      resources :payment_summary_forms,
+                only: %i[new create],
+                path: "payment-summary",
+                controller: "payment_summary_forms",
+                path_names: { new: "" }
+
+    resources :edit_payment_summary_forms,
+              only: %i[new create],
+              path: "edit-payment",
+              path_names: { new: "" } do
+                get "back",
+                    to: "edit_payment_summary_forms#go_back",
+                    as: "back",
+                    on: :collection
+              end
+
+    resources :copy_cards_payment_forms,
+              only: %i[new create],
+              path: "order-copy-cards-payment",
+              path_names: { new: "" } do
+                get "back",
+                    to: "copy_cards_payment_forms#go_back",
+                    as: "back",
+                    on: :collection
+              end
+    end
   end
 
   devise_for :users,
@@ -259,5 +288,6 @@ Rails.application.routes.draw do
   mount DefraRubyFeatures::Engine => "/bo/features", as: "features_engine"
 
   mount WasteCarriersEngine::Engine => "/bo", as: "basic_app_engine"
+
 end
 # rubocop:enable Metrics/BlockLength

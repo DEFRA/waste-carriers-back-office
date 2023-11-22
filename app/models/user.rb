@@ -10,6 +10,10 @@ class User
   field :active, type: Boolean, default: true
   field :session_token, type: String
 
+  # Storm
+  field :storm_user_id, type: String
+  field :call_recording_state, type: Boolean, default: false
+
   delegate :can?, :cannot?, to: :ability
 
   # Devise security improvements, used to invalidate old sessions on logout

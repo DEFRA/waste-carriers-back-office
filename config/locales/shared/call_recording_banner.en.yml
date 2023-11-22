@@ -1,0 +1,6 @@
+en:
+  shared:
+    call_recording_banner:
+      success: Call recording is paused
+      error: There is an issue with pausing the call recording, please check that call recording is paused before taking a card payment
+
