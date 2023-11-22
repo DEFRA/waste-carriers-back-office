@@ -59,6 +59,8 @@ gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",
     branch: "main"
 
+# Get waste carriers engine from local path for development
+
 # Use the Defra Ruby Features gem to allow users with the correct permissions to
 # manage feature toggle (create / update / delete) from the back-office.
 gem "defra_ruby_features"

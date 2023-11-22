@@ -30,25 +30,25 @@ Rails.application.routes.draw do
                 controller: "payment_summary_forms",
                 path_names: { new: "" }
 
-    resources :edit_payment_summary_forms,
-              only: %i[new create],
-              path: "edit-payment",
-              path_names: { new: "" } do
-                get "back",
-                    to: "edit_payment_summary_forms#go_back",
-                    as: "back",
-                    on: :collection
-              end
+      resources :edit_payment_summary_forms,
+                only: %i[new create],
+                path: "edit-payment",
+                path_names: { new: "" } do
+                  get "back",
+                      to: "edit_payment_summary_forms#go_back",
+                      as: "back",
+                      on: :collection
+                end
 
-    resources :copy_cards_payment_forms,
-              only: %i[new create],
-              path: "order-copy-cards-payment",
-              path_names: { new: "" } do
-                get "back",
-                    to: "copy_cards_payment_forms#go_back",
-                    as: "back",
-                    on: :collection
-              end
+      resources :copy_cards_payment_forms,
+                only: %i[new create],
+                path: "order-copy-cards-payment",
+                path_names: { new: "" } do
+                  get "back",
+                      to: "copy_cards_payment_forms#go_back",
+                      as: "back",
+                      on: :collection
+                end
     end
   end
 
