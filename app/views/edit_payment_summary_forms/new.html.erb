@@ -2,20 +2,20 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-  <%= render("waste_carriers_engine/shared/call_recording_banner") %>
+  <%= render("shared/call_recording_banner") %>
   <%= form_for(@edit_payment_summary_form) do |f| %>
       <%= render("waste_carriers_engine/shared/payment_errors") %>
 
       <%= render(partial: "waste_carriers_engine/shared/error_summary", locals: { f: f }) %>
 
-      <h1 class="govuk-heading-l"><%= t("waste_carriers_engine.edit_payment_summary_forms.heading") %></h1>
+      <h1 class="govuk-heading-l"><%= t("waste_carriers_engine.edit_payment_summary_forms.new.heading") %></h1>
 
       <%= render("waste_carriers_engine/shared/order_and_total", presenter: @order_and_total_presenter) %>
 
       <%= render("waste_carriers_engine/shared/payment_summary_options", form: @edit_payment_summary_form, f: f) %>
 
       <div class="govuk-form-group">
-        <%= f.submit t("waste_carriers_engine.edit_payment_summary_forms.next_button"), class: "govuk-button" %>
+        <%= f.submit t("waste_carriers_engine.edit_payment_summary_forms.new.next_button"), class: "govuk-button" %>
       </div>
     <% end %>
   </div>
