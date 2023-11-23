@@ -16,7 +16,7 @@ RSpec.describe CallRecordingService do
       before do
         allow(DefraRuby::Storm::PauseCallRecordingService).to receive(:run)
           .with(agent_user_id: user.storm_user_id)
-          .and_return(instance_double(DefraRuby::Storm::PauseCallRecordingResponse, result: described_class::SUCCESS_RESULT))
+          .and_return(instance_double(DefraRuby::Storm::RecordingResponse, result: described_class::SUCCESS_RESULT))
       end
 
       context "when pausing is successful" do
@@ -28,7 +28,7 @@ RSpec.describe CallRecordingService do
       context "when pausing fails" do
         before do
           allow(DefraRuby::Storm::PauseCallRecordingService).to receive(:run).with(agent_user_id: user.storm_user_id)
-                                                                             .and_return(instance_double(DefraRuby::Storm::PauseCallRecordingResponse, result: "1"))
+                                                                             .and_return(instance_double(DefraRuby::Storm::RecordingResponse, result: "1"))
         end
 
         it "returns false" do
@@ -46,10 +46,10 @@ RSpec.describe CallRecordingService do
           allow(user).to receive(:update)
           allow(DefraRuby::Storm::UserDetailsService).to receive(:run)
             .with(username: user.email)
-            .and_return(instance_double(DefraRuby::Storm::UserDetailsServiceResponse, user_id: fetched_storm_user_id))
+            .and_return(instance_double(DefraRuby::Storm::GetUserDetailsResponse, user_id: fetched_storm_user_id))
           allow(DefraRuby::Storm::PauseCallRecordingService).to receive(:run)
             .with(agent_user_id: fetched_storm_user_id)
-            .and_return(instance_double(DefraRuby::Storm::PauseCallRecordingResponse, result: described_class::SUCCESS_RESULT))
+            .and_return(instance_double(DefraRuby::Storm::RecordingResponse, result: described_class::SUCCESS_RESULT))
         end
 
         it "fetches storm_user_id and returns true" do
