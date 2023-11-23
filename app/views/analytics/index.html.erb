@@ -1,0 +1,80 @@
+<h1 class="govuk-heading-l">
+  <%= t(".title") %>
+</h1>
+
+<%= form_with url: '#', method: :get, local: true do |form| %>
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+
+      <div class="govuk-date-input" id="date-range">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h2 class="govuk-heading-m">
+            <%= t(".select_date_range") %>
+          </h2>
+        </legend>
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <%= form.label :start_date, t(".labels.start_date"), class: "govuk-label govuk-date-input__label", for: "start_date" %>
+            <% start_date_value = @start_date&.strftime('%Y-%m-%d') %>
+            <%= form.date_field :start_date, max: Date.today.to_s, class: "govuk-input govuk-date-input__input govuk-input--width-20", value: start_date_value, id: "start_date" %>
+          </div>
+        </div>
+        <div class="govuk-date-input__item">
+          <div class="govuk-form-group">
+            <%= form.label :end_date, t(".labels.end_date"), class: "govuk-label govuk-date-input__label", for: "end_date" %>
+            <% end_date_value = @end_date&.strftime('%Y-%m-%d') %>
+            <%= form.date_field :end_date, max: Date.today.to_s, class: "govuk-input govuk-date-input__input govuk-input--width-20", value: end_date_value, id: "end_date" %>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="govuk-form-group">
+    <%= form.submit t(".filter"), class: "govuk-button" %>
+  </div>
+<% end %>
+
+<table class="govuk-table">
+  <caption class="govuk-table__caption govuk-table__caption--m"><%= t(".aggregate_data_table.header") %></caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Metric</th>
+      <th scope="col" class="govuk-table__header">Value</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.total_journeys_started") %></th>
+      <td class="govuk-table__cell"><%= @analytics_data[:total_journeys_started] %></td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.front_office_started") %></th>
+      <td class="govuk-table__cell"><%= @analytics_data[:front_office_started] %></td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.back_office_started") %></th>
+      <td class="govuk-table__cell"><%= @analytics_data[:back_office_started] %></td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.total_journeys_completed") %></th>
+      <td class="govuk-table__cell"><%= @analytics_data[:total_journeys_completed] %></td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.completion_rate") %></th>
+      <td class="govuk-table__cell"><%= @analytics_data[:completion_rate] %>%</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.front_office_completions") %></th>
+      <td class="govuk-table__cell"><%= @analytics_data[:front_office_completions] %></td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.back_office_completions") %></th>
+      <td class="govuk-table__cell"><%= @analytics_data[:back_office_completions] %></td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.cross_office_completions") %></th>
+      <td class="govuk-table__cell"><%= @analytics_data[:cross_office_completions] %></td>
+    </tr>
+  </tbody>
+</table>
