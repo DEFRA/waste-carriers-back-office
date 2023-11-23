@@ -91,6 +91,14 @@
                 class: "govuk-header__link"  %>
           </li>
         <% end %>
+
+        <% if can?(:view_analytics, current_user) %>
+          <li class="govuk-header__navigation-item">
+            <%= link_to t("layouts.application.menu.analytics"),
+                main_app.analytics_path,
+                class: "govuk-header__link"  %>
+          </li>
+        <% end %>
       </ul>
     </nav>
   <% end %>

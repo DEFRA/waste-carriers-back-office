@@ -1,0 +1,19 @@
+en:
+  analytics:
+    index:
+      title: "Analytics Dashboard"
+      select_date_range: "Select date range"
+      labels:
+        start_date: "Start date"
+        end_date: "End date"
+      filter: "Filter"
+      aggregate_data_table:
+        header: "Aggregate User Journey data"
+        total_journeys_started: "Total journeys started"
+        front_office_started: "Front office journeys started"
+        back_office_started: "Back office journeys started"
+        total_journeys_completed: "Total journeys completed"
+        completion_rate: "Completion rate"
+        front_office_completions: "Front office completions"
+        back_office_completions: "Back office completions"
+        cross_office_completions: "Cross office completions"
