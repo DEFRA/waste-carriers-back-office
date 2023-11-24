@@ -4,7 +4,6 @@ class UserInvitationsController < Devise::InvitationsController
   include UsersHelper
 
   before_action :authorize, only: %i[new create]
-  # rubocop:enable Rails/LexicallyScopedActionFilter
 
   before_action :configure_permitted_parameters
 
