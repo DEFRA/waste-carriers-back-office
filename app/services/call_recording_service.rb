@@ -29,7 +29,9 @@ class CallRecordingService
   end
 
   def get_agent_user_id_from_email(user)
-    agency_user_id = DefraRuby::Storm::UserDetailsService.run(username: user.email)&.user_id
+    mappings = YAML.load_file(Rails.root.join("config/storm_email_to_username_mappings.yml")) || {}
+    username = mappings[user.email] || user.email
+    agency_user_id = DefraRuby::Storm::UserDetailsService.run(username: username)&.user_id
     user.update(storm_user_id: agency_user_id) unless agency_user_id.nil?
     agency_user_id
   rescue DefraRuby::Storm::ApiError => e

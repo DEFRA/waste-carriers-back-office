@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module CanControlCallRecording
+module CanPauseCallRecording
   extend ActiveSupport::Concern
 
   included do
