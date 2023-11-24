@@ -3,10 +3,6 @@
 module CanPauseCallRecording
   extend ActiveSupport::Concern
 
-  included do
-    before_action :check_and_pause_call_recording, only: %i[new]
-  end
-
   def check_and_pause_call_recording
     return unless WasteCarriersEngine::FeatureToggle.active?(:control_call_recording)
 
