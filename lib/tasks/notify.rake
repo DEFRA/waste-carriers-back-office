@@ -3,6 +3,7 @@
 # rubocop:disable Metrics/BlockLength
 namespace :notify do
   namespace :notifications do
+    desc "Run bulk digital renewal notification service"
     task digital_renewals: :environment do
       expires_on = WasteCarriersBackOffice::Application.config
                                                        .digital_reminder_notifications_exports_expires_in
