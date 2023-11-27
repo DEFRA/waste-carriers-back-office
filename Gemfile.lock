@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 3bff3f5324edaa4b58fa6fa7e773480085bc10d9
+  revision: 96f2e562f79a4a782bef4a14d8520bd08b532bc1
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -182,12 +182,15 @@ GEM
       sprockets-rails
     defra_ruby_govpay (0.2.5)
       rest-client (~> 2.1)
-    defra_ruby_mocks (4.0.0)
+    defra_ruby_mocks (4.1.0)
       rails (~> 7.0)
       sprockets
       sprockets-rails
-    defra_ruby_style (0.3.0)
+    defra_ruby_style (0.4.0)
       rubocop (>= 1.0, < 2.0)
+      rubocop-factory_bot
+      rubocop-rake
+      rubocop-rspec
     defra_ruby_template (3.13.0)
     defra_ruby_validators (2.5.2)
       activemodel
@@ -215,10 +218,10 @@ GEM
       railties (>= 3.2)
     erubi (1.12.0)
     execjs (2.8.1)
-    factory_bot (6.2.1)
+    factory_bot (6.4.1)
       activesupport (>= 5.0.0)
-    factory_bot_rails (6.2.0)
-      factory_bot (~> 6.2.0)
+    factory_bot_rails (6.4.0)
+      factory_bot (~> 6.4)
       railties (>= 5.0.0)
     faker (3.2.2)
       i18n (>= 1.8.11, < 2)
@@ -311,7 +314,7 @@ GEM
     mongoid-locker (2.0.2)
       mongoid (>= 5.0, < 9)
     multi_json (1.15.0)
-    net-imap (0.4.5)
+    net-imap (0.4.6)
       date
       net-protocol
     net-pop (0.1.2)
@@ -321,7 +324,7 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     netrc (0.11.0)
-    nio4r (2.6.0)
+    nio4r (2.6.1)
     nokogiri (1.15.5-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
@@ -445,10 +448,13 @@ GEM
       rubocop (~> 1.41)
     rubocop-factory_bot (2.24.0)
       rubocop (~> 1.33)
-    rubocop-rails (2.22.1)
+    rubocop-rails (2.22.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
+      rubocop-ast (>= 1.30.0, < 2.0)
+    rubocop-rake (0.6.0)
+      rubocop (~> 1.0)
     rubocop-rspec (2.25.0)
       rubocop (~> 1.40)
       rubocop-capybara (~> 2.17)
