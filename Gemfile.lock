@@ -182,7 +182,7 @@ GEM
       sprockets-rails
     defra_ruby_govpay (0.2.5)
       rest-client (~> 2.1)
-    defra_ruby_mocks (4.0.0)
+    defra_ruby_mocks (4.1.0)
       rails (~> 7.0)
       sprockets
       sprockets-rails
@@ -321,7 +321,7 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     netrc (0.11.0)
-    nio4r (2.6.0)
+    nio4r (2.6.1)
     nokogiri (1.15.5-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
