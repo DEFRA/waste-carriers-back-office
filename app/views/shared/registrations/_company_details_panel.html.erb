@@ -9,14 +9,10 @@
       <%= resource.display_tier_and_registration_type %>
     </p>
   <% end %> 
-  <% if resource.display_expiry_text.present? || resource.account_email.present? || resource.display_original_registration_date.present? %>
+  <% if resource.display_expiry_text.present? || resource.display_original_registration_date.present? %>
     <p class="govuk-body">
       <% if resource.display_expiry_text.present? %>
         <%= resource.display_expiry_text %>
-        <br>
-      <% end %>
-      <% if resource.account_email.present? %>
-        <%= t(".labels.account_html", email: resource.account_email).html_safe %>
         <br>
       <% end %>
       <%= resource.display_original_registration_date %>
