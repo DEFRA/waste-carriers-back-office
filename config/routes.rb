@@ -2,6 +2,14 @@
 
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
+  get "copy_cards_order_completed_forms/new"
+  get "copy_cards_order_completed_forms/create"
+  get "renewal_received_pending_conviction_forms/new"
+  get "renewal_received_pending_conviction_forms/create"
+  get "renewal_complete_forms/new"
+  get "renewal_complete_forms/create"
+  get "registration_received_pending_conviction_forms/new"
+  get "registration_completed_forms/new"
   root to: "application#redirect_root_to_dashboard"
 
   scope "/bo" do
@@ -49,6 +57,32 @@ Rails.application.routes.draw do
                       as: "back",
                       on: :collection
                 end
+
+      #  override the default payment completed form routes from engine
+      resources :registration_completed_forms,
+                only: :new,
+                path: "registration-completed",
+                path_names: { new: "" }
+
+      resources :registration_received_pending_conviction_forms,
+                only: :new,
+                path: "registration-received",
+                path_names: { new: "" }
+
+      resources :renewal_complete_forms,
+                only: %i[new create],
+                path: "renewal-complete",
+                path_names: { new: "" }
+
+      resources :renewal_received_pending_conviction_forms,
+                only: %i[new create],
+                path: "renewal-received",
+                path_names: { new: "" }
+
+      resources :copy_cards_order_completed_forms,
+                only: %i[new create],
+                path: "order-copy-cards-complete",
+                path_names: { new: "" }
     end
   end
 

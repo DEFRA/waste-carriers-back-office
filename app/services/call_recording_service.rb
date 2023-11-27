@@ -19,6 +19,17 @@ class CallRecordingService
     false
   end
 
+  def resume
+    response = DefraRuby::Storm::ResumeCallRecordingService.run(agent_user_id: get_agent_user_id(user))
+
+    return true if response.result == SUCCESS_RESULT
+
+    false
+  rescue DefraRuby::Storm::ApiError => e
+    Rails.logger.error "Error resuming call recording: #{e.message}"
+    false
+  end
+
   private
 
   def get_agent_user_id(user)
