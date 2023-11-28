@@ -29,7 +29,7 @@ RSpec.describe "Root" do
 
       it "redirects the user to the renewal start page after sign in" do
         user = create(:user)
-        reg_identifier = create(:registration, :expires_soon, account_email: user.email).reg_identifier
+        reg_identifier = create(:registration, :expires_soon).reg_identifier
         renew_path = "/bo/#{reg_identifier}/renew"
 
         get renew_path
@@ -44,7 +44,7 @@ RSpec.describe "Root" do
       # We have to force invocation of creating the registration because we
       # don't directly reference it in our test, which means it doesn't get
       # created and the test fails.
-      let!(:registration) { create(:registration, :expires_soon, account_email: user.email) }
+      let!(:registration) { create(:registration, :expires_soon) }
 
       before do
         sign_in(user)

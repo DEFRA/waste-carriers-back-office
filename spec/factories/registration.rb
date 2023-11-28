@@ -5,7 +5,6 @@ FactoryBot.define do
     sequence :reg_identifier do |n|
       "CBDU#{n}"
     end
-    account_email { "whatever@example.com" }
     business_type { "limitedCompany" }
     company_name { "WasteCo" }
     company_no { "09360070" } # We need to use a valid company number
@@ -28,7 +27,6 @@ FactoryBot.define do
     end
 
     trait :ad_registration do
-      account_email { nil }
       contact_email { nil }
     end
 

@@ -4,8 +4,8 @@ require_relative "../timed_service_runner"
 MINUTE_IN_SECONDS = 60.0
 MAX_REQUESTS_PER_MINUTE = 600
 
-namespace :lookups do # rubocop:disable Metrics/BlockLength
-  namespace :update do # rubocop:disable Metrics/BlockLength
+namespace :lookups do
+  namespace :update do
 
     desc "Update all sites with a missing area (postcode must be populated)"
     task missing_area: :environment do
@@ -25,23 +25,23 @@ namespace :lookups do # rubocop:disable Metrics/BlockLength
         throttle: throttle
       )
     end
-
-    def pipeline(address_limit)
-      [
-        # Include active registrations with a registered address
-        { "$match": { "metaData.status": "ACTIVE", "addresses.addressType": "REGISTERED" } },
-        #  Unwind to one document per address element...
-        { "$unwind": "$addresses" },
-        #  ... and include only registered addresses without an area and with a postcode
-        { "$match": {
-          "addresses.addressType": "REGISTERED",
-          "addresses.area": nil,
-          "addresses.postcode": { "$nin": [nil, ""] }
-        } },
-        { "$limit": address_limit },
-        # we need only the registration ids
-        { "$project": { _id: 1 } }
-      ]
-    end
   end
+end
+
+def pipeline(address_limit)
+  [
+    # Include active registrations with a registered address
+    { "$match": { "metaData.status": "ACTIVE", "addresses.addressType": "REGISTERED" } },
+    #  Unwind to one document per address element...
+    { "$unwind": "$addresses" },
+    #  ... and include only registered addresses without an area and with a postcode
+    { "$match": {
+      "addresses.addressType": "REGISTERED",
+      "addresses.area": nil,
+      "addresses.postcode": { "$nin": [nil, ""] }
+    } },
+    { "$limit": address_limit },
+    # we need only the registration ids
+    { "$project": { _id: 1 } }
+  ]
 end
