@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-class CopyCardsOrderCompletedFormsController < ApplicationController
-  def new; end
+class CopyCardsOrderCompletedFormsController < WasteCarriersEngine::CopyCardsOrderCompletedFormsController
+  include CanResumeCallRecording
 
-  def create; end
+  # rubocop:disable Rails/LexicallyScopedActionFilter
+  before_action :check_and_resume_call_recording, only: %i[new]
+  # rubocop:enable Rails/LexicallyScopedActionFilter
 end

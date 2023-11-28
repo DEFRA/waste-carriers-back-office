@@ -7,9 +7,9 @@ module CanResumeCallRecording
     return unless WasteCarriersEngine::FeatureToggle.active?(:control_call_recording)
 
     flash[:call_recording] = if call_recording_service.resume
-                               { success: t("shared.call_recording_banner.success") }
+                               { success: t("shared.call_recording_banner.call_resuming.success") }
                              else
-                               { error: t("shared.call_recording_banner.error") }
+                               { error: t("shared.call_recording_banner.call_resuming.error") }
                              end
   end
 

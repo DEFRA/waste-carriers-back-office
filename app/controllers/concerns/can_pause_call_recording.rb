@@ -7,9 +7,9 @@ module CanPauseCallRecording
     return unless WasteCarriersEngine::FeatureToggle.active?(:control_call_recording)
 
     flash[:call_recording] = if call_recording_service.pause
-                               { success: t("shared.call_recording_banner.success") }
+                               { success: t("shared.call_recording_banner.call_pausing.success") }
                              else
-                               { error: t("shared.call_recording_banner.error") }
+                               { error: t("shared.call_recording_banner.call_pausing.error") }
                              end
   end
 
