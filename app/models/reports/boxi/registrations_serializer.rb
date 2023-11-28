@@ -16,7 +16,6 @@ module Reports
         last_name: "ContactLastName",
         phone_number: "ContactPhoneNumber",
         contact_email: "ContactEmail",
-        account_email: "AccountEmail",
         metadata_status: "Status",
         finance_details_balance: "Balance",
         metadata_revoked_reason: "RevokedReason",

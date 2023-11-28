@@ -21,7 +21,6 @@ module Reports
           ContactLastName
           ContactPhoneNumber
           ContactEmail
-          AccountEmail
           Status
           Balance
           RevokedReason
@@ -62,7 +61,6 @@ module Reports
             "last_name",
             "phone_number",
             "contact_email",
-            "account_email",
             "metadata_status",
             "finance_details_balance",
             "metadata_revoked_reason",
@@ -94,7 +92,6 @@ module Reports
           expect(presenter).to receive(:last_name).and_return("last_name")
           expect(presenter).to receive(:phone_number).and_return("phone_number")
           expect(presenter).to receive(:contact_email).and_return("contact_email")
-          expect(presenter).to receive(:account_email).and_return("account_email")
           expect(presenter).to receive(:metadata_status).and_return("metadata_status")
           expect(presenter).to receive(:metadata_revoked_reason).and_return("metadata_revoked_reason")
           expect(presenter).to receive(:finance_details_balance).and_return("finance_details_balance")

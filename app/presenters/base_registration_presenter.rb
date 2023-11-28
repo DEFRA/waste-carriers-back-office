@@ -10,8 +10,7 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
   def display_company_details_panel?
     company_name.present? ||
       display_tier_and_registration_type.present? ||
-      display_expiry_text.present? ||
-      account_email.present?
+      display_expiry_text.present?
   end
 
   def display_contact_information_panel?
