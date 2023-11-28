@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "RenewalReceivedPendingConvictionForms" do
   let(:user) { create(:user, role: :agency_super) }
-  let(:transient_registration) { create(:new_registration, :has_required_data, workflow_state: 'renewal_received_pending_conviction_form') }
+  let(:transient_registration) { create(:new_registration, :has_required_data, workflow_state: "renewal_received_pending_conviction_form") }
   let(:call_recording_service) { instance_spy(CallRecordingService) }
 
   before do

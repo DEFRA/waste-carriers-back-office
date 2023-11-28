@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class RegistrationReceivedPendingConvictionFormsController < WasteCarriersEngine::RegistrationReceivedPendingConvictionFormsController
+class RegistrationReceivedPendingConvictionFormsController <
+      WasteCarriersEngine::RegistrationReceivedPendingConvictionFormsController
   include CanResumeCallRecording
 
   # rubocop:disable Rails/LexicallyScopedActionFilter
