@@ -5,12 +5,12 @@ require "rails_helper"
 RSpec.describe "Refresh EA area" do
   describe "PATCH /bo/registrations/:reg_identifier/ea_area" do
 
-    subject { patch refresh_ea_area_path(registration.reg_identifier) }
+    subject(:refresh_ea_area_call) { patch refresh_ea_area_path(registration.reg_identifier) }
 
     RSpec.shared_examples "all ea area requests" do
 
       it "redirects to the same page" do
-        subject
+        refresh_ea_area_call
         expect(response).to have_http_status(:found)
         expect(response.location).to end_with registration_path(registration.reg_identifier)
       end
@@ -18,7 +18,7 @@ RSpec.describe "Refresh EA area" do
       it "returns a success message" do
         success_message = I18n.t("refresh_ea_area.messages.success")
 
-        subject
+        refresh_ea_area_call
         follow_redirect!
 
         expect(response.body).to include(success_message)
@@ -32,7 +32,7 @@ RSpec.describe "Refresh EA area" do
     before do
       sign_in(user)
       stub_request(:get, /.*environment.data.gov.uk.*/).to_return(
-        status: 200, 
+        status: 200,
         body: File.read("./spec/fixtures/files/environment.data.gov.uk/public_face_area_valid.xml")
       )
     end
@@ -66,7 +66,7 @@ RSpec.describe "Refresh EA area" do
         it "returns an error message" do
           error_message = I18n.t("refresh_ea_area.messages.failure")
 
-          subject
+          refresh_ea_area_call
           follow_redirect!
 
           expect(response.body).to include(error_message)
