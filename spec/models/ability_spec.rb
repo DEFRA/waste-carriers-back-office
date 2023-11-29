@@ -158,6 +158,12 @@ RSpec.describe Ability do
     it_behaves_like "allows only the permitted roles", false, :refresh_company_name, WasteCarriersEngine::Registration
   end
 
+  context "when the action is refresh the ea area" do
+    let(:permitted_roles) { agency_plus_roles }
+
+    it_behaves_like "allows only the permitted roles", false, :refresh_ea_area, WasteCarriersEngine::Registration
+  end
+
   # payments and write-offs
 
   context "when the action is record a cash payment" do

@@ -220,6 +220,10 @@ Rails.application.routes.draw do
         to: "refresh_companies_house_name#update_companies_house_details",
         as: :refresh_companies_house_name
 
+  patch "/bo/registrations/:reg_identifier/ea_area",
+        to: "refresh_ea_area#update_ea_area",
+        as: :refresh_ea_area
+
   get "/bo/transient-registrations/:transient_registration_reg_identifier/convictions/begin-checks",
       to: "convictions#begin_checks",
       as: :transient_registration_convictions_begin_checks
