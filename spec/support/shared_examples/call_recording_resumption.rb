@@ -2,7 +2,7 @@
 
 RSpec.shared_examples "a controller that resumes call recording" do
   let(:user) { create(:user, role: :agency_super) }
-  let(:call_recording_service) { instance_spy(CallRecordingService) }
+  let(:call_recording_service) { instance_double(CallRecordingService) }
 
   before do
     sign_in(user)
@@ -17,29 +17,31 @@ RSpec.shared_examples "a controller that resumes call recording" do
   context "when feature flag is on" do
     before do
       allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(true)
-      get path
     end
 
     it "resumes call recording" do
+      allow(call_recording_service).to receive(:resume).and_return(true)
+      get path
       expect(call_recording_service).to have_received(:resume)
     end
 
     it "sets the correct flash message on success" do
       allow(call_recording_service).to receive(:resume).and_return(true)
       get path
-      expect(flash[:call_recording]).to eq(success: "Call recording has resumed")
+      expect(flash[:call_recording]).to eq(success: I18n.t("shared.call_recording_banner.call_resuming.success"))
     end
 
     it "sets the correct flash message on failure" do
       allow(call_recording_service).to receive(:resume).and_return(false)
       get path
-      expect(flash[:call_recording]).to eq(error: "There is an issue with starting the call recording, please check that call recording has restarted")
+      expect(flash[:call_recording]).to eq(error: I18n.t("shared.call_recording_banner.call_resuming.error"))
     end
   end
 
   context "when feature flag is off" do
     before do
       allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(false)
+      allow(call_recording_service).to receive(:resume)
       get path
     end
 
