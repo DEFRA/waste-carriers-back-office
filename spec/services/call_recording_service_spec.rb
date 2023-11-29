@@ -112,7 +112,7 @@ RSpec.describe CallRecordingService do
       context "when resuming fails" do
         before do
           allow(DefraRuby::Storm::ResumeCallRecordingService).to receive(:run).with(agent_user_id: user.storm_user_id)
-                                                                             .and_return(instance_double(DefraRuby::Storm::RecordingResponse, result: "1"))
+                                                                              .and_return(instance_double(DefraRuby::Storm::RecordingResponse, result: "1"))
         end
 
         it "returns false" do
@@ -161,7 +161,7 @@ RSpec.describe CallRecordingService do
 
       before do
         allow(DefraRuby::Storm::ResumeCallRecordingService).to receive(:run).with(agent_user_id: user.storm_user_id)
-                                                                           .and_raise(api_error)
+                                                                            .and_raise(api_error)
       end
 
       it "logs the error and returns false" do
