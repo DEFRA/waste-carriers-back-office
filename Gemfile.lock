@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 30c81ebf1ec1b1e869c41b46077d6d45eedd9f05
+  revision: 9b55439a31f0e4f9c960008be6150186930094e4
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -97,7 +97,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
-    airbrake (13.0.3)
+    airbrake (13.0.4)
       airbrake-ruby (~> 6.0)
     airbrake-ruby (6.2.2)
       rbtree3 (~> 0.6)
@@ -191,7 +191,6 @@ GEM
       sprockets-rails
     defra_ruby_storm (0.1.0)
       savon (~> 2.13.0)
-    defra_ruby_style (0.3.0)
     defra_ruby_style (0.4.0)
       rubocop (>= 1.0, < 2.0)
       rubocop-factory_bot
