@@ -23,12 +23,7 @@ Rails.application.routes.draw do
         as: "resend_renewal_email"
 
     scope "/:token" do
-      #  override the default payment summary form routes from engine
-      # resources :payment_summary_forms,
-      # only: %i[new create],
-      # path: "payment-summary",
-      # controller: "payment_summary_forms",
-      # path_names: { new: "" }
+      #  override the default payment form routes from engine
 
       resources :payment_method_confirmation_forms,
                 only: %i[new create],
@@ -224,6 +219,10 @@ Rails.application.routes.draw do
   patch "/bo/registrations/:reg_identifier/companies_house_details",
         to: "refresh_companies_house_name#update_companies_house_details",
         as: :refresh_companies_house_name
+
+  patch "/bo/registrations/:reg_identifier/ea_area",
+        to: "refresh_ea_area#update_ea_area",
+        as: :refresh_ea_area
 
   get "/bo/transient-registrations/:transient_registration_reg_identifier/convictions/begin-checks",
       to: "convictions#begin_checks",

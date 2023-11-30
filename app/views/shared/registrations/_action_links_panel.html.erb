@@ -87,5 +87,13 @@
                       method: :patch %>
       </li>
     <% end %>
+
+    <% if display_refresh_ea_area_link_for?(resource) %>
+      <li>
+        <%= link_to t(".actions_box.links.refresh_ea_area"), 
+                      refresh_ea_area_path(reg_identifier: resource.reg_identifier), 
+                      method: :patch  %>
+      </li>
+    <% end %>
   </ul>
 </div>

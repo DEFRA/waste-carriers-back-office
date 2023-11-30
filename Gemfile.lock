@@ -1,14 +1,13 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
   revision: f00ce35efbfb5475a42a48edada59796df0698a1
-  branch: RUBY-2765-wcr-bo-call-recording-to-be-paused-before-card-payment
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
       countries (~> 5.5.0)
       defra_ruby_address (~> 0.1.0)
       defra_ruby_alert (~> 2.2.1)
-      defra_ruby_area (~> 2.0.3)
+      defra_ruby_area (~> 2.2)
       defra_ruby_email (~> 1.3.0)
       defra_ruby_govpay
       defra_ruby_validators (~> 2.5.1)
@@ -169,7 +168,7 @@ GEM
       rest-client (~> 2.0)
     defra_ruby_alert (2.2.1)
       airbrake
-    defra_ruby_area (2.0.3)
+    defra_ruby_area (2.2.0)
       nokogiri (>= 1.13.2)
       rest-client (~> 2.0)
     defra_ruby_aws (0.5.0)
@@ -185,14 +184,17 @@ GEM
       sprockets-rails
     defra_ruby_govpay (0.2.5)
       rest-client (~> 2.1)
-    defra_ruby_mocks (4.0.0)
+    defra_ruby_mocks (4.1.0)
       rails (~> 7.0)
       sprockets
       sprockets-rails
     defra_ruby_storm (0.1.0)
       savon (~> 2.13.0)
-    defra_ruby_style (0.3.0)
+    defra_ruby_style (0.4.0)
       rubocop (>= 1.0, < 2.0)
+      rubocop-factory_bot
+      rubocop-rake
+      rubocop-rspec
     defra_ruby_template (3.13.0)
     defra_ruby_validators (2.5.2)
       activemodel
@@ -220,10 +222,10 @@ GEM
       railties (>= 3.2)
     erubi (1.12.0)
     execjs (2.8.1)
-    factory_bot (6.2.1)
+    factory_bot (6.4.2)
       activesupport (>= 5.0.0)
-    factory_bot_rails (6.2.0)
-      factory_bot (~> 6.2.0)
+    factory_bot_rails (6.4.2)
+      factory_bot (~> 6.4)
       railties (>= 5.0.0)
     faker (3.2.2)
       i18n (>= 1.8.11, < 2)
@@ -321,7 +323,7 @@ GEM
     mongoid-locker (2.0.2)
       mongoid (>= 5.0, < 9)
     multi_json (1.15.0)
-    net-imap (0.4.5)
+    net-imap (0.4.7)
       date
       net-protocol
     net-pop (0.1.2)
@@ -331,7 +333,7 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     netrc (0.11.0)
-    nio4r (2.6.0)
+    nio4r (2.6.1)
     nokogiri (1.15.5-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
@@ -428,7 +430,7 @@ GEM
     rspec-mocks (3.12.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-rails (6.0.3)
+    rspec-rails (6.1.0)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       railties (>= 6.1)
@@ -456,10 +458,13 @@ GEM
       rubocop (~> 1.41)
     rubocop-factory_bot (2.24.0)
       rubocop (~> 1.33)
-    rubocop-rails (2.22.1)
+    rubocop-rails (2.22.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
+      rubocop-ast (>= 1.30.0, < 2.0)
+    rubocop-rake (0.6.0)
+      rubocop (~> 1.0)
     rubocop-rspec (2.25.0)
       rubocop (~> 1.40)
       rubocop-capybara (~> 2.17)
@@ -497,7 +502,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    spring (4.1.2)
+    spring (4.1.3)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)

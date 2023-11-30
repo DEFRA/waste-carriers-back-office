@@ -53,6 +53,7 @@ class Ability
     can :order_copy_cards, WasteCarriersEngine::Registration
     can :edit, WasteCarriersEngine::Registration
     can :refresh_company_name, WasteCarriersEngine::Registration
+    can :refresh_ea_area, WasteCarriersEngine::Registration
 
     can :revert_to_payment_summary, :all
   end
