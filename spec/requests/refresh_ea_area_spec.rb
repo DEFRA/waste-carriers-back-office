@@ -33,7 +33,7 @@ RSpec.describe "Refresh EA area" do
       sign_in(user)
       stub_request(:get, /.*environment.data.gov.uk.*/).to_return(
         status: 200,
-        body: File.read("./spec/fixtures/files/environment.data.gov.uk/public_face_area_valid.xml")
+        body: File.read("./spec/fixtures/files/environment.data.gov.uk/public_face_area_valid.json")
       )
     end
 
