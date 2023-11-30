@@ -24,10 +24,15 @@ Rails.application.routes.draw do
 
     scope "/:token" do
       #  override the default payment summary form routes from engine
-      resources :payment_summary_forms,
+      # resources :payment_summary_forms,
+      # only: %i[new create],
+      # path: "payment-summary",
+      # controller: "payment_summary_forms",
+      # path_names: { new: "" }
+
+      resources :payment_method_confirmation_forms,
                 only: %i[new create],
-                path: "payment-summary",
-                controller: "payment_summary_forms",
+                path: "payment-method-confirmation",
                 path_names: { new: "" }
 
       resources :edit_payment_summary_forms,

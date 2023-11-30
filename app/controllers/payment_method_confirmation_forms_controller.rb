@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PaymentSummaryFormsController < WasteCarriersEngine::PaymentSummaryFormsController
+class PaymentMethodConfirmationFormsController < WasteCarriersEngine::PaymentMethodConfirmationFormsController
   include CanPauseCallRecording
 
   # rubocop:disable Rails/LexicallyScopedActionFilter
