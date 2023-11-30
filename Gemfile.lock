@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: f00ce35efbfb5475a42a48edada59796df0698a1
+  revision: 5270e93f2b178807119f5b7aac9ba41578d5dc1c
+  branch: RUBY-2765-wcr-bo-call-recording-to-be-paused-before-card-payment
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
