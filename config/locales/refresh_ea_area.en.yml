@@ -1,0 +1,7 @@
+en:
+  refresh_ea_area:
+    messages:
+      success: You have successfully refreshed the Environment agency admin area.
+      failure: There is a problem refreshing the Environment agency admin area.
+      failure_details: ""
+      

@@ -85,6 +85,7 @@ en:
             revoke: "Cease or revoke"
             restart_renewal: "Restart renewal"
             refresh_companies_house: "Refresh registered company name from Companies House"
+            refresh_ea_area: "Refresh EA area"
             restore: Restore registration
       restored_panel:
         restored_details:
