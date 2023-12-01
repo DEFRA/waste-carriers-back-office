@@ -5,34 +5,14 @@ require "rails_helper"
 RSpec.describe "Payment method confirmation forms" do
   describe "/bo/:token/payment-method-confirmation" do
     let(:user) { create(:user, role: :agency_super) }
-    let(:new_registration) { create(:new_registration) }
-    let(:call_recording_service) { instance_spy(CallRecordingService) }
+    let(:new_registration) { create(:new_registration, workflow_state: "payment_method_confirmation_form") }
+    let(:path) { "/bo/#{new_registration.token}/payment-method-confirmation" }
 
     before do
       sign_in(user)
       allow(CallRecordingService).to receive(:new).with(user: user).and_return(call_recording_service)
     end
 
-    context "when feature flag is on" do
-      before do
-        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(true)
-        get "/bo/#{new_registration.token}/payment-method-confirmation"
-      end
-
-      it "pauses call recording" do
-        expect(call_recording_service).to have_received(:pause)
-      end
-    end
-
-    context "when feature flag is off" do
-      before do
-        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(false)
-        get "/bo/#{new_registration.token}/payment-method-confirmation"
-      end
-
-      it "does not pause call recording" do
-        expect(call_recording_service).not_to have_received(:pause)
-      end
-    end
+    it_behaves_like "a controller that pauses call recording"
   end
 end
