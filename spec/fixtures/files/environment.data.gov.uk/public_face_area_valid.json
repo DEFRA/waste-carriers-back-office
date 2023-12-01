@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+      {
+          "type": "Feature",
+          "id": "Administrative_Boundaries_Environment_Agency_and_Natural_England_Public_Face_Areas.23",
+          "geometry": null,
+          "properties": {
+              "identifier": 51,
+              "long_name": "West Midlands",
+              "short_name": "West Midlands",
+              "code": "WMD"
+          },
+          "bbox": [
+              316114.5,
+              187934.4,
+              456472.5,
+              369909.5
+          ]
+      }
+  ],
+  "totalFeatures": 1,
+  "numberMatched": 1,
+  "numberReturned": 1,
+  "timeStamp": "2023-11-29T23:19:54.884Z",
+  "crs": null
+}

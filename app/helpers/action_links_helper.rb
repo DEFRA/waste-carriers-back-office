@@ -90,6 +90,13 @@ module ActionLinksHelper
     resource.renewal_application_submitted?
   end
 
+  def display_refresh_ea_area_link_for?(resource)
+    return false if resource.company_address.blank?
+    return false if resource.company_address.postcode.blank?
+
+    true
+  end
+
   def display_cease_or_revoke_link_for?(resource)
     return false unless display_registration_links?(resource)
     return false unless can?(:revoke, WasteCarriersEngine::Registration)

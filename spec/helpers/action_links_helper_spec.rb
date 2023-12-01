@@ -905,6 +905,34 @@ RSpec.describe ActionLinksHelper do
     end
   end
 
+  describe "#display_refresh_ea_area_link_for?" do
+    context "when address is present" do
+      let(:company_address) { build(:address, :registered) }
+      let(:resource) { build(:registration, company_address: company_address) }
+
+      it "returns true" do
+        expect(helper.display_refresh_ea_area_link_for?(resource)).to be(true)
+      end
+    end
+
+    context "when address is blank" do
+      let(:resource) { build(:registration, company_address: nil) }
+
+      it "returns false" do
+        expect(helper.display_refresh_ea_area_link_for?(resource)).to be(false)
+      end
+    end
+
+    context "when address postcode is blank" do
+      let(:company_address) { build(:address, :registered, postcode: nil) }
+      let(:resource) { build(:registration, company_address: company_address) }
+
+      it "returns false" do
+        expect(helper.display_refresh_ea_area_link_for?(resource)).to be(false)
+      end
+    end
+  end
+
   describe "#display_renew_link_for?" do
     context "when the resource is not a Registration" do
       let(:resource) { build(:renewing_registration) }
