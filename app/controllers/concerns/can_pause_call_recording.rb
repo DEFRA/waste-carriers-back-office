@@ -13,6 +13,11 @@ module CanPauseCallRecording
                              end
   end
 
+  def form_path
+    basic_app_engine.send("new_#{@transient_registration.workflow_state}_path".to_sym,
+                          token: @transient_registration.token)
+  end
+
   private
 
   def pause_call_recording
