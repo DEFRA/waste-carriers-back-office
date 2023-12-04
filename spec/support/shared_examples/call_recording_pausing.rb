@@ -40,4 +40,15 @@ RSpec.shared_examples "a controller that pauses call recording" do
       expect(call_recording_service).not_to have_received(:pause)
     end
   end
+
+  context "when determining form path" do
+    before do
+      allow(controller).to receive(:find_or_initialize_transient_registration).and_return(transient_registration)
+      get path
+    end
+
+    it "generates the correct form path" do
+      expect(controller.form_path).to eq(path)
+    end
+  end
 end
