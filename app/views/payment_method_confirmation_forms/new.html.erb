@@ -1,0 +1,29 @@
+<%= render("waste_carriers_engine/shared/back", back_path: WasteCarriersEngine::Engine.routes.url_helpers.go_back_forms_path(@payment_method_confirmation_form.token)) %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= render("shared/call_recording_banner") %>
+    <%= form_for @payment_method_confirmation_form do |f| %>
+      <%= render partial: "waste_carriers_engine/shared/error_summary", locals: { f: f } %>
+      <%=
+        f.govuk_collection_radio_buttons :temp_confirm_payment_method,
+        [
+          OpenStruct.new(
+            id: "yes",
+            name: t("waste_carriers_engine.payment_method_confirmation_forms.new.options.yes")
+          ),
+          OpenStruct.new(
+            id: "no",
+            name: t("waste_carriers_engine.payment_method_confirmation_forms.new.options.no")
+          )
+        ],
+        :id,
+        :name,
+        inline: true,
+        legend: { text: t("waste_carriers_engine.payment_method_confirmation_forms.new.heading", payment_method: t("waste_carriers_engine.payment_method_confirmation_forms.new.payment_method.#{@payment_method_confirmation_form.temp_payment_method}")), size: "l", tag: "h1" },
+        hint: { text: t("waste_carriers_engine.payment_method_confirmation_forms.new.paragraph") }
+
+      %>
+      <%= f.govuk_submit t("waste_carriers_engine.payment_method_confirmation_forms.new.next_button") %>
+    <% end %>
+  </div>
+</div>
