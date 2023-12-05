@@ -23,11 +23,11 @@ Rails.application.routes.draw do
         as: "resend_renewal_email"
 
     scope "/:token" do
-      #  override the default payment summary form routes from engine
-      resources :payment_summary_forms,
+      #  override the default payment form routes from engine
+
+      resources :payment_method_confirmation_forms,
                 only: %i[new create],
-                path: "payment-summary",
-                controller: "payment_summary_forms",
+                path: "payment-method-confirmation",
                 path_names: { new: "" }
 
       resources :edit_payment_summary_forms,
