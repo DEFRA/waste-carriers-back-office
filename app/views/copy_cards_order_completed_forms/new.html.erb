@@ -1,5 +1,6 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    <%= render("shared/call_recording_banner") %>
     <h1 class="govuk-heading-l"><%= t("waste_carriers_engine.copy_cards_order_completed_forms.new.heading") %></h1>
 
     <% if @transient_registration.temp_payment_method == "card" %>

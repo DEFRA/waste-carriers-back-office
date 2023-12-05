@@ -1,5 +1,6 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    <%= render("shared/call_recording_banner") %>
     <% if @renewal_received_pending_conviction_form.errors.any? %>
 
       <h1 class="govuk-heading-l"><%= t("waste_carriers_engine.renewal_received_pending_conviction_forms.new.error_heading") %></h1>
