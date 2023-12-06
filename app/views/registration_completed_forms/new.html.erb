@@ -1,0 +1,43 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+    <%= render("shared/call_recording_banner") %>
+    <div class="govuk-panel govuk-panel--confirmation">
+      <h1 class="govuk-panel__title"><%= t("waste_carriers_engine.registration_completed_forms.new.heading") %></h1>
+      <div class="govuk-panel__body">
+        <%= t("waste_carriers_engine.registration_completed_forms.new.highlight_text") %>
+        <br>
+        <span id="reg_identifier"><strong><%= @registration.reg_identifier %></strong></span>
+      </div>
+    </div>
+
+    <% if @registration.contact_email.present? %>
+      <p class="govuk-body"><%= t("waste_carriers_engine.registration_completed_forms.new.paragraph_1.email", email: @registration.contact_email) %></p>
+    <% else %>
+      <p class="govuk-body"><%= t("waste_carriers_engine.registration_completed_forms.new.paragraph_1.letter") %></p>
+    <% end %>
+
+    <% unless WasteCarriersEngine.configuration.host_is_back_office? %>
+      <% if @registration.upper_tier? %>
+        <p class="govuk-body"><%= t("waste_carriers_engine.registration_completed_forms.new.paragraph_2", email: @registration.email_to_send_receipt) %></p>
+      <% end %>
+    <% end %>
+
+    <h2 class="govuk-heading-m"><%= t("waste_carriers_engine.registration_completed_forms.new.subheading_1") %></h2>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <% t("waste_carriers_engine.registration_completed_forms.new.list_1.#{@registration.tier}", expires_on: @registration.expires_on&.to_formatted_s(:month_year)).each do |list_item| %>
+        <li><%= list_item %></li>
+      <% end %>
+    </ul>
+
+    <%= render "shared/contact_environment_agency" %>
+
+    <%= render "shared/duty_of_care" %>
+
+    <%= render "shared/registration_checks" %>
+
+    <%= render "shared/registration_finished_button" %>
+
+    <%= render "shared/link_to_survey" %>
+  </div>
+</div>

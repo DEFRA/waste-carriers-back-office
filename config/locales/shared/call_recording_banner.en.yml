@@ -2,6 +2,9 @@ en:
   shared:
     call_recording_banner:
       error_title: Warning
-      success: Call recording is paused
-      error: There is an issue with pausing the call recording, please check that call recording is paused before taking a card payment
-
+      call_pausing:
+        success: Call recording is paused
+        error: There is an issue with pausing the call recording, please check that call recording is paused before taking a card payment
+      call_resuming:
+        success: Call recording has resumed
+        error: There is an issue with starting the call recording, please check that call recording has restarted

@@ -1,0 +1,61 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= render("shared/call_recording_banner") %>
+    <% if @renewal_complete_form.errors.any? %>
+      <h1 class="govuj-heading-l"><%= t("waste_carriers_engine.renewal_complete_forms.new.error_heading") %></h1>
+
+      <% @renewal_complete_form.errors.full_messages.each do |message| %>
+        <p class="govuk-body"><%= message %></p>
+      <% end %>
+    <% else %>
+      <%= form_for(@renewal_complete_form) do |f| %>
+        <%= render partial: "waste_carriers_engine/shared/error_summary", locals: { f: f } %>
+
+        <div class="govuk-panel govuk-panel--confirmation">
+          <h1 class="govuk-panel__title">
+            <%= t("waste_carriers_engine.renewal_complete_forms.new.heading") %>
+          </h1>
+          <div class="govuk-panel__body">
+            <%= t("waste_carriers_engine.renewal_complete_forms.new.highlight_text") %><br>
+            <span id="reg_identifier"><strong><%= @renewal_complete_form.reg_identifier %></strong></span>
+          </div>
+        </div>
+
+        <p class="govuk-body"><%= t("waste_carriers_engine.renewal_complete_forms.new.paragraph_1", date: @renewal_complete_form.projected_renewal_end_date) %></p>
+        <% if @renewal_complete_form.contact_email.present?%>
+          <p class="govuk-body"><%= t("waste_carriers_engine.renewal_complete_forms.new.paragraph_2.email", email: @renewal_complete_form.contact_email) %></p>
+        <% else%>
+          <p class="govuk-body"><%= t("waste_carriers_engine.renewal_complete_forms.new.paragraph_2.letter") %></p>
+        <% end %>
+
+        <% unless WasteCarriersEngine.configuration.host_is_back_office? %>
+          <p class="govuk-body"><%= t("waste_carriers_engine.renewal_complete_forms.new.paragraph_3", email: @renewal_complete_form.transient_registration.email_to_send_receipt) %></p>
+        <% end %>
+
+        <h2 class="govuk-heading-m"><%= t("waste_carriers_engine.renewal_complete_forms.new.subheading_2") %></h2>
+        <p class="govuk-body"><%= t("waste_carriers_engine.renewal_complete_forms.new.paragraph_4.#{@renewal_complete_form.registration_type}") %></p>
+        <p class="govuk-body"><%= t("waste_carriers_engine.renewal_complete_forms.new.paragraph_5.#{@renewal_complete_form.registration_type}") %></p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <% t("waste_carriers_engine.renewal_complete_forms.new.list_1").each do |list_item| %>
+            <li><%= list_item %></li>
+          <% end %>
+        </ul>
+
+        <%= render "shared/duty_of_care" %>
+
+        <h2 class="govuk-heading-m"><%= t("waste_carriers_engine.renewal_complete_forms.new.subheading_3") %></h2>
+        <p class="govuk-body"><%= t("waste_carriers_engine.renewal_complete_forms.new.paragraph_6") %></p>
+        <p class="govuk-body"><%= t("waste_carriers_engine.renewal_complete_forms.new.paragraph_7") %></p>
+
+        <div class="govuk-inset-text">
+          <p class="govuk-body"><%= t("waste_carriers_engine.renewal_complete_forms.new.paragraph_8") %></p>
+        </div>
+
+        <p class="govuk-body"><%= link_to(t("waste_carriers_engine.renewal_complete_forms.new.survey_link_text"), t("layouts.application.feedback_url")) %> <%= t("waste_carriers_engine.renewal_complete_forms.new.survey_link_hint") %></p>
+
+        <%= render "shared/registration_finished_button" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

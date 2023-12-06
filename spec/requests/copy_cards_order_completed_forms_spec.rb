@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require "support/shared_examples/call_recording_resumption"
 
 RSpec.describe "CopyCardsOrderCompletedForms" do
   describe "GET new_copy_cards_order_completed_form_path" do
+    let(:path) { new_copy_cards_order_completed_form_path(transient_registration.token) }
+
+    before do
+      allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording)
+      allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:additional_debug_logging)
+    end
+
     context "when a valid user is signed in" do
       let(:user) { create(:user) }
 
@@ -12,8 +20,10 @@ RSpec.describe "CopyCardsOrderCompletedForms" do
       end
 
       context "when no transient registration exists" do
+        let(:path) { new_copy_cards_order_completed_form_path("foo") }
+
         it "redirects to the invalid page" do
-          get new_copy_cards_order_completed_form_path("wibblewobblejellyonaplate")
+          get path
 
           expect(response).to redirect_to(page_path("invalid"))
         end
@@ -28,11 +38,13 @@ RSpec.describe "CopyCardsOrderCompletedForms" do
           )
         end
 
+        it_behaves_like "resumes call recording"
+
         context "when the workflow_state is correct" do
           it "deletes the transient object, copy all finance details to the registration, load the confirmation page and sends an email" do
             registration = transient_registration.registration
 
-            get new_copy_cards_order_completed_form_path(transient_registration.token)
+            get path
 
             finance_details = registration.reload.finance_details
             order = finance_details.orders.last

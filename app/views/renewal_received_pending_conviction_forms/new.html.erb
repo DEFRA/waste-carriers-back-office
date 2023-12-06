@@ -1,0 +1,55 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= render("shared/call_recording_banner") %>
+    <% if @renewal_received_pending_conviction_form.errors.any? %>
+
+      <h1 class="govuk-heading-l"><%= t("waste_carriers_engine.renewal_received_pending_conviction_forms.new.error_heading") %></h1>
+
+      <ul class="govuk-list">
+        <% @renewal_received_pending_conviction_form.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+
+    <% else %>
+      <%= form_for(@renewal_received_pending_conviction_form) do |f| %>
+        <%= render partial: "waste_carriers_engine/shared/error_summary", locals: { f: f } %>
+
+        <div class="govuk-panel govuk-panel--confirmation">
+          <h1 class="govuk-panel__title">
+            <%= t("waste_carriers_engine.renewal_received_pending_conviction_forms.new.heading") %>
+          </h1>
+          <div class="govuk-panel__body">
+            <%= t("waste_carriers_engine.renewal_received_pending_conviction_forms.new.highlight_text") %><br>
+            <span id="reg_identifier"><strong><%= @renewal_received_pending_conviction_form.reg_identifier %></strong></span>
+          </div>
+        </div>
+
+        <% if @renewal_received_pending_conviction_form.transient_registration.contact_email.present? %>
+          <p class="govuk-body"><%= t("waste_carriers_engine.renewal_received_pending_conviction_forms.new.paragraph_1", email: @renewal_received_pending_conviction_form.transient_registration.contact_email) %></p>
+        <% end %>
+
+        <% unless WasteCarriersEngine.configuration.host_is_back_office? %>
+          <% if @renewal_received_pending_conviction_form.transient_registration.email_to_send_receipt.present? %>
+            <p class="govuk-body"><%= t("waste_carriers_engine.renewal_received_pending_conviction_forms.new.paragraph_2", email: @renewal_received_pending_conviction_form.transient_registration.email_to_send_receipt) %></p>
+          <% end %>
+        <% end %>
+
+        <h2 class="govuk-heading-m"><%= t("waste_carriers_engine.renewal_received_pending_conviction_forms.new.subheading") %></h2>
+
+        <p class="govuk-body"><%= t("waste_carriers_engine.renewal_received_pending_conviction_forms.new.paragraph_3") %></p>
+
+        <p class="govuk-body"><%= t("waste_carriers_engine.renewal_received_pending_conviction_forms.new.paragraph_4") %></p>
+
+        <div class="govuk-inset-text">
+          <p class="govuk-body"><%= t("waste_carriers_engine.renewal_received_pending_conviction_forms.new.paragraph_5") %></p>
+        </div>
+
+        <p class="govuk-body"><%= link_to(t("waste_carriers_engine.renewal_received_pending_conviction_forms.new.survey_link_text"), t("layouts.application.feedback_url")) %> <%= t("waste_carriers_engine.renewal_received_pending_conviction_forms.new.survey_link_hint") %></p>
+
+        <%= render "shared/registration_finished_button" %>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>
