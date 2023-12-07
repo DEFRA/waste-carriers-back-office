@@ -21,6 +21,7 @@ RSpec.describe "Payment method confirmation forms" do
       end
 
       let(:call_recording_service) { instance_spy(CallRecordingService) }
+
       context "when user is on the bacs payment confirmation page" do
         before do
           transient_registration.temp_payment_method = "bank_transfer"
