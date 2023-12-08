@@ -14,7 +14,7 @@ class CallRecordingService
     return true if response.result == SUCCESS_RESULT
 
     false
-  rescue DefraRuby::Storm::ApiError => e
+  rescue StandardError => e
     Rails.logger.error "Error pausing call recording: #{e.message}"
     false
   end
@@ -25,7 +25,7 @@ class CallRecordingService
     return true if response.result == SUCCESS_RESULT
 
     false
-  rescue DefraRuby::Storm::ApiError => e
+  rescue StandardError => e
     Rails.logger.error "Error resuming call recording: #{e.message}"
     false
   end
@@ -45,7 +45,7 @@ class CallRecordingService
     agency_user_id = DefraRuby::Storm::UserDetailsService.run(username: username)&.user_id
     user.update(storm_user_id: agency_user_id) unless agency_user_id.nil?
     agency_user_id
-  rescue DefraRuby::Storm::ApiError => e
+  rescue StandardError => e
     Rails.logger.error "Error getting agent user id from email: #{e.class} #{e.message}"
     raise e
   end
