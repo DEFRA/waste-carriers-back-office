@@ -85,6 +85,20 @@ RSpec.describe CallRecordingService do
         expect(Rails.logger).to have_received(:error).with("Error pausing call recording: #{api_error.message}")
       end
     end
+
+    context "when there is a Savon::SOAPFault error" do
+      let(:soap_error) { instance_double(Savon::SOAPFault, to_s: "SOAP error") }
+
+      before do
+        allow(DefraRuby::Storm::PauseCallRecordingService).to receive(:run).with(agent_user_id: user.storm_user_id)
+                                                                           .and_raise(soap_error)
+      end
+
+      it "logs the error and returns false" do
+        expect(call_recording_service.pause).to be false
+        expect(Rails.logger).to have_received(:error).with(/Error pausing call recording:/)
+      end
+    end
   end
 
   describe "#resume" do
@@ -167,6 +181,20 @@ RSpec.describe CallRecordingService do
       it "logs the error and returns false" do
         call_recording_service.resume
         expect(Rails.logger).to have_received(:error).with("Error resuming call recording: #{api_error.message}")
+      end
+    end
+
+    context "when there is a Savon::SOAPFault error" do
+      let(:soap_error) { instance_double(Savon::SOAPFault, to_s: "SOAP error") }
+
+      before do
+        allow(DefraRuby::Storm::PauseCallRecordingService).to receive(:run).with(agent_user_id: user.storm_user_id)
+                                                                           .and_raise(soap_error)
+      end
+
+      it "logs the error and returns false" do
+        expect(call_recording_service.pause).to be false
+        expect(Rails.logger).to have_received(:error).with(/Error pausing call recording:/)
       end
     end
   end
