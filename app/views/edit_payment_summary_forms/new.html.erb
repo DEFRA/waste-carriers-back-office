@@ -8,14 +8,14 @@
 
       <%= render(partial: "waste_carriers_engine/shared/error_summary", locals: { f: f }) %>
 
-      <h1 class="govuk-heading-l"><%= t("waste_carriers_engine.edit_payment_summary_forms.new.heading") %></h1>
+      <h1 class="govuk-heading-l"><%= t("edit_payment_summary_forms.new.heading") %></h1>
 
-      <%= render("waste_carriers_engine/shared/order_and_total", presenter: @order_and_total_presenter) %>
+      <%= render("shared/order_and_total", presenter: @order_and_total_presenter) %>
 
-      <%= render("waste_carriers_engine/shared/payment_summary_options", form: @edit_payment_summary_form, f: f) %>
+      <%= render("shared/payment_summary_options", form: @edit_payment_summary_form, f: f) %>
 
       <div class="govuk-form-group">
-        <%= f.submit t("waste_carriers_engine.edit_payment_summary_forms.new.next_button"), class: "govuk-button" %>
+        <%= f.submit t("edit_payment_summary_forms.new.next_button"), class: "govuk-button" %>
       </div>
     <% end %>
   </div>

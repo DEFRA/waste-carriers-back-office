@@ -1,0 +1,8 @@
+<div class="govuk-form-group">
+  <p>
+    <%= f.submit t(".next_button"), class: "govuk-button" %>
+    <%= link_to t(".cancel_button"),
+        new_confirm_edit_cancelled_form_path(@presenter.token),
+        class: "govuk-button govuk-button--secondary" %>
+  </p>
+</div>

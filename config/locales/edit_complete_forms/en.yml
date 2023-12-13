@@ -1,0 +1,7 @@
+en:
+  edit_complete_forms:
+    new:
+      title: Edit complete
+      heading: Edit complete
+      paragraph_1: Your changes have been saved and the registration has been updated.
+      next_button: View registration

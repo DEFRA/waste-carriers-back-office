@@ -1,0 +1,29 @@
+en:
+  cease_or_revoke_forms:
+    new:
+      title: "Revoke or cease registration %{reg_identifier}"
+      heading: "Revoke or cease registration %{reg_identifier}"
+      reason:
+        label: "Reason"
+        help_text: "Maximum 500 characters"
+      cease_or_revoke:
+        legend: "What do you want to do?"
+        options:
+          revoke: "Revoke"
+          cease: "Cease"
+        reason:
+          label: "Reason"
+          hint: "Maximum 500 characters"
+      contact_address:
+        heading: "Contact address:"
+      next_button: "Confirm"
+  activemodel:
+    errors:
+      models:
+        waste_carriers_engine/cease_or_revoke_form:
+          attributes:
+            status:
+              presence: "Select revoke or cease"
+            revoked_reason:
+              presence: "Enter a reason"
+              length: "Reason must be 500 characters or fewer"

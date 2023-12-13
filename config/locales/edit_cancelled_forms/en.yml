@@ -1,0 +1,15 @@
+en:
+  edit_cancelled_forms:
+    new:
+      title: Edit cancelled
+      heading: Edit cancelled
+      paragraph_1: "Your changes have been discarded. The registration was not updated."
+      next_button: View registration
+  activemodel:
+    errors:
+      models:
+        waste_carriers_engine/edit_cancelled_form:
+          attributes:
+            token:
+              invalid_format: "The token is not valid"
+              missing: "The token is missing"

@@ -1,0 +1,15 @@
+en:
+  confirm_edit_cancelled_forms:
+    new:
+      title: Do you want to cancel this edit?
+      heading: Do you want to cancel this edit?
+      paragraph_1: Your changes will not be saved.
+      next_button: Cancel
+  activemodel:
+    errors:
+      models:
+        waste_carriers_engine/confirm_edit_cancelled_form:
+          attributes:
+            token:
+              invalid_format: "The token is not valid"
+              missing: "The token is missing"

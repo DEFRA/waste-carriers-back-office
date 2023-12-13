@@ -1,0 +1,31 @@
+<div class="govuk-form-group <%= "govuk-form-group--error" if form.errors[:temp_payment_method].any? %>">
+  <fieldset class="govuk-fieldset" id="temp_payment_method" class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+      <h2 class="govuk-fieldset__heading">
+        <%= t(".payment_method.subheading") %>
+      </h2>
+      <p class="govuk-hint"><%= t(".payment_method.legend") %></p>
+    </legend>
+    <% if form.errors[:temp_payment_method].any? %>
+      <span class="govuk-error-message"><%= form.errors[:temp_payment_method].join(", ") %></span>
+    <% end %>
+
+    <div class="govuk-radios">
+      <div class="govuk-radios__item">
+        <%= f.radio_button :temp_payment_method, "card", class: "govuk-radios__input" %>
+        <%= f.label :temp_payment_method, value: "card", class: "govuk-label govuk-radios__label" do %>
+          <%= t(".options.card") %>
+          <span class="govuk-hint"><%= t(".hint_pay_by_card") %></span>
+        <% end %>
+      </div>
+
+      <div class="govuk-radios__item">
+        <%= f.radio_button :temp_payment_method, "bank_transfer", class: "govuk-radios__input" %>
+        <%= f.label :temp_payment_method, value: "bank_transfer", class: "govuk-label govuk-radios__label" do %>
+          <%= t(".options.bank_transfer") %>
+          <span class="govuk-hint"><%= t(".hint_pay_by_bank_transfer") %></span>
+        <% end %>
+      </div>
+    </div>
+  </fieldset>
+</div>

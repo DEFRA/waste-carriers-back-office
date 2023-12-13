@@ -1,0 +1,19 @@
+<%= render("waste_carriers_engine/shared/back", token: @edit_bank_transfer_form.token) %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= form_for(@edit_bank_transfer_form) do |f| %>
+      <%= render(partial: "waste_carriers_engine/shared/error_summary", locals: { f: f }) %>
+
+      <h1 class="govuk-heading-l"><%= t(".heading") %></h1>
+
+      <%= render("waste_carriers_engine/shared/bank_transfer_details",
+          reg_identifier: @edit_bank_transfer_form.reg_identifier,
+          payment_due: @edit_bank_transfer_form.transient_registration.finance_details.balance) %>
+
+      <div class="govuk-form-group">
+        <%= f.submit t(".next_button"), class: "govuk-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

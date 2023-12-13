@@ -17,5 +17,13 @@ FactoryBot.define do
       type { "COPY_CARDS" }
       quantity { 1 }
     end
+
+    trait :new_type_change_item do
+      currency { "GBP" }
+      amount { Rails.configuration.type_change_charge }
+      description { "changing carrier type" }
+      type { "EDIT" }
+      quantity { 1 }
+    end
   end
 end

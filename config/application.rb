@@ -20,9 +20,9 @@ module WasteCarriersBackOffice
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Set Mongoid logging level to INFO. We have found mongoid to ber overly
+    # Set Mongoid logging level to WARN. We have found mongoid to be overly
     # chatty in the logs.
-    Mongoid.logger.level = Logger::INFO
+    Mongoid.logger.level = Logger::WARN
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.

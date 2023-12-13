@@ -1,0 +1,32 @@
+en:
+  copy_cards_bank_transfer_forms:
+    new:
+      title: "Details for bank transfer"
+      next_button: Continue
+      heading: "Details for bank transfer"
+      subheading_panel: "Make sure the customer includes their CBDU number as the payment reference, or we won’t be able to match the payment."
+      uk_payment_table:
+        heading: "Bank details"
+        sort_code:
+          label: Sort code
+          value: 60-70-80
+        account_number:
+          label: Account number
+          value: "10014411"
+        reference_number:
+          label: Payment reference
+        total_cost:
+          label: Payment due
+      overseas_payments:
+        heading: "Overseas payments"
+        iban: "IBAN: GB23 NWBK 607080 10014411"
+        swiftbic: "SWIFTBIC: NWBK GB2L"
+        currency: "Currency: Sterling"
+      send_confirmation:
+        heading: "Send us confirmation"
+        sub_heading: "Remind the customer to send us notification of the payment once the bank transfer has been arranged."
+      email_us:
+        label: "Email us"
+        value: "ea_fsc_ar@gov.sscl.com"
+      cards_info: "Cards will be sent out after the payment has cleared."
+      next_button: "Complete order"

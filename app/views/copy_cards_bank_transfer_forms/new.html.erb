@@ -1,0 +1,102 @@
+<%= render("waste_carriers_engine/shared/back", back_path: WasteCarriersEngine::Engine.routes.url_helpers.go_back_forms_path(@copy_cards_bank_transfer_form.token)) %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= form_for(@copy_cards_bank_transfer_form) do |f| %>
+      <%= render partial: "waste_carriers_engine/shared/error_summary", locals: { f: f } %>
+
+      <h1 class="govuk-heading-l"><%= t(".heading") %></h1>
+
+      <div class="govuk-inset-text">
+        <%= t(".subheading_panel") %>
+      </div>
+
+      <div class="govuk-form-group">
+        <table class="govuk-table">
+          <caption class="govuk-table__caption govuk-table__caption--m">
+            <%= t(".uk_payment_table.heading") %>
+          </caption>
+
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row ">
+              <th scope="row" class="govuk-table__header">
+                <%= t(".uk_payment_table.sort_code.label") %>
+              </th>
+              <td class="govuk-table__cell govuk-table__cell--numeric">
+                <%= t(".uk_payment_table.sort_code.value") %>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="govuk-table__header">
+                <%= t(".uk_payment_table.account_number.label") %>
+              </th>
+              <td class="govuk-table__cell govuk-table__cell--numeric">
+                <%= t(".uk_payment_table.account_number.value") %>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="govuk-table__header">
+                <%= t(".uk_payment_table.reference_number.label") %>
+              </th>
+              <td class="govuk-table__cell govuk-table__cell--numeric">
+                <%= @copy_cards_bank_transfer_form.reg_identifier %>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" class="govuk-table__header">
+                <%= t(".uk_payment_table.total_cost.label") %>
+              </th>
+              <td class="govuk-table__cell govuk-table__cell--numeric">
+                £<%= display_pence_as_pounds(@transient_registration.finance_details.balance) %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            <%= t(".overseas_payments.heading") %>
+          </span>
+        </summary>
+        <div class="govuk-details__text">
+          <%= t(".overseas_payments.iban") %><br/><br/>
+          <%= t(".overseas_payments.swiftbic") %><br/><br/>
+          <%= t(".overseas_payments.currency") %>
+        </div>
+      </details>
+
+
+       <div class="govuk-form-group">
+        <table class="govuk-table">
+          <caption class="govuk-table__caption govuk-table__caption--m">
+            <%= t(".send_confirmation.heading") %>
+            <div class="govuk-inset-text">
+              <%= t(".send_confirmation.sub_heading") %>
+            </div>
+          </caption>
+
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row ">
+              <th scope="row" class="govuk-table__header">
+                <%= t(".email_us.label") %>
+              </th>
+              <td class="govuk-table__cell govuk-table__cell--numeric">
+                <%= t(".email_us.value") %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="govuk-body">
+        <%= t(".cards_info") %>
+      </p>
+
+      <div class="govuk-form-group">
+        <%= f.submit t(".next_button"), class: "govuk-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

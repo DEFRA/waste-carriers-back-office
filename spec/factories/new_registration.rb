@@ -8,7 +8,7 @@ FactoryBot.define do
       location { "england" }
       declared_convictions { "no" }
       temp_cards { 1 }
-      contact_email { "foo@example.com" }
+      contact_email { "whatever@example.com" }
       first_name { "Jane" }
       last_name { "Doe" }
       metaData { association(:metaData, route: "DIGITAL", strategy: :build) }

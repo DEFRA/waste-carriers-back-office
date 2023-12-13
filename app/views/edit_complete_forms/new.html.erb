@@ -1,0 +1,7 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t(".heading") %></h1>
+    <p class="govuk-body"><%= t(".paragraph_1") %></p>
+    <p><%= link_to t(".next_button"), Rails.application.routes.url_helpers.registration_path(@transient_registration.reg_identifier), class: "govuk-button" %></p>
+  </div>
+</div>

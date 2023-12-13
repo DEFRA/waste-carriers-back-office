@@ -18,7 +18,7 @@ FactoryBot.define do
     finance_details { association(:finance_details, :has_paid_order_and_payment, strategy: :build) }
 
     addresses { [association(:address, :registered, strategy: :build), association(:address, :contact, strategy: :build)] }
-    key_people { [association(:key_person, :does_not_require_conviction_check, strategy: :build)] }
+    key_people { [association(:key_person, :does_not_require_conviction_check, :main, strategy: :build)] }
 
     metaData { association(:metaData, strategy: :build) }
 
@@ -46,6 +46,10 @@ FactoryBot.define do
       finance_details { association(:finance_details, :has_unpaid_order, strategy: :build) }
     end
 
+    trait :has_copy_cards_order do
+      finance_details { association(:finance_details, :has_copy_cards_order, strategy: :build) }
+    end
+
     trait :active do
       metaData { association(:metaData, :active, strategy: :build) }
     end
@@ -67,7 +71,7 @@ FactoryBot.define do
     end
 
     trait :restored do
-      metaData { association(:metaData, :active, restored_reason: "a reason", restored_by: "foo@example.com", strategy: :build) }
+      metaData { association(:metaData, :active, restored_reason: "a reason", restored_by: "whatever@example.com", strategy: :build) }
     end
 
     trait :registered_15_months_ago do

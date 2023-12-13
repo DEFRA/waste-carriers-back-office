@@ -1,0 +1,17 @@
+en:
+  ceased_or_revoked_confirm_forms:
+    new:
+      title: "Confirm %{revoke_or_cease} for registration %{reg_identifier}"
+      heading: "Confirm %{revoke_or_cease} for registration %{reg_identifier}"
+      revoke_or_cease:
+        revoked: "revoke"
+        inactive: "cease"
+      contact_address:
+        heading: "Contact address:"
+      next_button: "Confirm %{revoke_or_cease}"
+      cancel: "Cancel"
+    create:
+      submit_message: "%{reg_identifier} has been %{ceased_or_revoked}"
+      ceased_or_revoked:
+        revoked: "revoked"
+        inactive: "ceased"

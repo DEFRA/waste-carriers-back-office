@@ -1,0 +1,20 @@
+en:
+  copy_cards_forms:
+    new:
+      title: "Order registration cards for %{reg_identifier}"
+      heading: "Order registration cards for %{reg_identifier}"
+      temp_cards_label: "Number of cards at £5 each"
+      next_button: "Continue"
+      check_the_address: "Check the address to post the cards to:"
+      total_cost_info: "The total cost will be shown on the next page"
+      contact_address:
+        heading: "Contact address:"
+  activemodel:
+    errors:
+      models:
+        waste_carriers_engine/copy_cards_form:
+          attributes:
+            temp_cards:
+              not_a_number: "Enter a number between 1 and 999"
+              greater_than_or_equal_to: "Enter a number between 1 and 999"
+              not_an_integer: "Enter a number between 1 and 999"

@@ -1,0 +1,19 @@
+<div class="govuk-form-group">
+  <table class="govuk-table" aria-describedby="order_and_total_legend">
+    <caption class="govuk-table__caption govuk-table__caption--m">
+      <%= t(".legend") %>
+    </caption>
+    <tbody class="govuk-table__body">
+      <% presenter.order_items.each do |item| %>
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header"><%= item[:description] %></th>
+          <td class="govuk-table__cell">£<%= display_pence_as_pounds(item[:amount]) %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <th scope="row" class="govuk-table__header"><%= t(".total_cost") %></th>
+        <td class="govuk-table__cell govuk-!-font-weight-bold">£<%= display_pence_as_pounds(presenter.total_cost) %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

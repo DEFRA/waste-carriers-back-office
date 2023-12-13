@@ -1,0 +1,77 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notifications.service.gov.uk/v2/notifications/email
+    body:
+      encoding: UTF-8
+      string: '{"email_address":"whatever@example.com","template_id":"56997dd9-852f-4e18-b4e2-c008a9398bfe","personalisation":{"reg_identifier":"CBDU1","first_name":"Jane","last_name":"Doe","total_cards":1,"ordered_on":"30
+        November 2023","payment_due":"5","sort_code":"60-70-80","account_number":"1001
+        4411"}}'
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/5.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIyNWNiNmI5NC04Y2U3LTQ4NWItOTE4YS01NTlmM2IxOGY2OWMiLCJpYXQiOjE3MDEzNjg5MzV9.lq6YzmyEvUmDhDGmD7NhQTmDEc2PMdDwmn20tCXLLZM
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1498'
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 30 Nov 2023 18:28:55 GMT
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-B3-Spanid:
+      - 469cac5245f5b883
+      X-B3-Traceid:
+      - '059447db53a74b61469cac5245f5b883'
+      X-Vcap-Request-Id:
+      - '059447db-53a7-4b61-469c-ac5245f5b883'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 25bae94046433e736c44a6c37f27c7c4.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - LHR50-P3
+      X-Amz-Cf-Id:
+      - HZAGsx4Op_HdMacUw6tTcpr8Z94dI8SD0GMLNB2Qq9hYYy1BH7JHkw==
+    body:
+      encoding: UTF-8
+      string: '{"content":{"body":"Dear Jane Doe\r\n\r\n#You need to pay for your
+        waste carriers registration card order\r\n \r\nYou ordered 1 registration
+        cards on 30 November 2023 for carrier registration number CBDU1\r\n\r\n \r\nWe
+        cannot print the cards until we receive confirmation that you have paid\r\n\r\n#1.
+        Pay by bank transfer (Bacs) with these details\r\n\r\nPayment due \u00a35\r\n\r\nUse
+        this reference CBDU1\r\n\r\nSort code 60-70-80\r\n\r\nAccount number 1001
+        4411\r\n\r\n \r\n#2. Then send us confirmation that you have paid\r\n\r\nEmail
+        us ea_fsc_ar@gov.sscl.com\r\n\r\nFax 01733 464 892\r\n\r\nOr send a letter
+        to:\r\n\r\nEnvironment Agency\r\nSSCL Banking Team\r\nPO Box 263\r\nPeterborough\r\nPE2
+        8YD\r\n\r\n#If you need to contact us\r\n\r\nEnvironment Agency\r\n\r\nTelephone
+        03708 506 506, Monday to Friday (8am to 6pm)\r\n\r\nnccc-carrierbroker@environment-agency.gov.uk\r\n\r\n
+        \r\nThis is an automated email, please do not reply.","from_email":"waste.carriers.registration.service@notifications.service.gov.uk","subject":"You
+        need to pay for your waste carriers registration card order"},"id":"3e0bb7aa-f77d-463b-8be0-494f78b75f40","reference":null,"scheduled_for":null,"template":{"id":"56997dd9-852f-4e18-b4e2-c008a9398bfe","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/56997dd9-852f-4e18-b4e2-c008a9398bfe","version":3},"uri":"https://api.notifications.service.gov.uk/v2/notifications/3e0bb7aa-f77d-463b-8be0-494f78b75f40"}
+
+        '
+  recorded_at: Thu, 30 Nov 2023 18:28:55 GMT
+recorded_with: VCR 6.2.0

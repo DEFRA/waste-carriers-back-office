@@ -1,0 +1,44 @@
+<% content_for :title, t(".title", reg_identifier: @transient_registration.reg_identifier).html_safe %>
+<%= render("waste_carriers_engine/shared/back", back_path: Rails.application.routes.url_helpers.registration_path(@transient_registration.reg_identifier)) %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= form_for(@copy_cards_form) do |f| %>
+      <%= render partial: "waste_carriers_engine/shared/error_summary", locals: { f: f } %>
+
+      <h1 class="govuk-heading-l"><%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %></h1>
+
+      <p class="govuk-body"><%= t(".check_the_address") %></p>
+
+      <div class="govuk-inset-text">
+        <span class="bold"><%= t(".contact_address.heading")%> </span>
+        <% displayable_address(@transient_registration.contact_address).each do |address_line| %>
+          <br/>
+          <%= address_line %>
+        <% end %>
+      </div>
+
+      <div class="govuk-form-group <%= "govuk-form-group--error" if @copy_cards_form.errors[:temp_cards].any? %>">
+        <% if @copy_cards_form.errors[:temp_cards].any? %>
+          <span class="govuk-error-message"><%= @copy_cards_form.errors[:temp_cards].join(", ") %></span>
+        <% end %>
+
+        <%= f.label :temp_cards, t(".temp_cards_label"), class: "govuk-label" %>
+        <%= f.number_field(
+              :temp_cards,
+              value: (@copy_cards_form.temp_cards || 0),
+              class: "govuk-input govuk-input--width-3",
+              min: 0,
+              max: WasteCarriersEngine::CardsForm::MAX_TEMP_CARDS
+            )
+        %>
+      </div>
+
+      <p class="govuk-body"> <%= t(".total_cost_info") %> </p>
+
+      <div class="govuk-form-group">
+        <%= f.submit t(".next_button"), class: "govuk-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

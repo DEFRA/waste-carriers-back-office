@@ -1,0 +1,10 @@
+en:
+  activemodel:
+    errors:
+      models:
+        waste_carriers_engine/ceased_or_revoked_registration:
+          attributes:
+            reg_identifier:
+              invalid_format: "The registration ID is not in a valid format"
+              no_registration: "There is no registration matching this ID"
+              renewal_in_progress: "This renewal is already in progress"

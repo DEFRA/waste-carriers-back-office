@@ -1,0 +1,17 @@
+en:
+  copy_cards_order_completed_forms:
+    new:
+      title: "Confirmation of order"
+      heading: "Confirmation of order"
+      awaiting_payment_message:
+        "true_html": "Order is awaiting payment."
+        "false_html": "Order is awaiting payment.<br>We've sent an email with payment details to %{email}."
+      payment_success_message:
+        "true_html": "Order completed.<br>Payment has cleared."
+        "false_html": "Order completed.<br>Payment has cleared.<br>We have sent a confirmation email to %{email}."
+      details_table:
+        cards_label: "Number of cards ordered"
+        total_cost: "Total cost"
+        reference: "Reference"
+      dashboard: "Go to registration search"
+      details_page: "Details for %{reg_identifier}"

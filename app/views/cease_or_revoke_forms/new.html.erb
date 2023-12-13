@@ -1,0 +1,73 @@
+<% content_for :title, t(".title", reg_identifier: @transient_registration.reg_identifier).html_safe %>
+<%= render("waste_carriers_engine/shared/back", back_path: Rails.application.routes.url_helpers.registration_path(@transient_registration.reg_identifier)) %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= form_for(@cease_or_revoke_form) do |f| %>
+      <%= f.fields_for :metaData do |f| %>
+        <%= render("waste_carriers_engine/shared/errors", object: @cease_or_revoke_form) %>
+
+        <h1 class="govuk-heading-l"><%= t(".heading", reg_identifier: @transient_registration.reg_identifier) %></h1>
+
+        <%= render "shared/company_details_panel", registration: @transient_registration %>
+
+        <div class="govuk-form-group <%= "govuk-form-group--error" if @cease_or_revoke_form.errors[:status].any? %>">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend">
+              <p>
+                <%= t(".cease_or_revoke.legend") %>
+              </p>
+            </legend>
+
+            <% if @cease_or_revoke_form.errors[:status].any? %>
+              <span class="govuk-error-message"><%= @cease_or_revoke_form.errors[:status].join(", ") %></span>
+            <% end %>
+            <div class="govuk-radios">
+              <div class="govuk-radios__item">
+                <%= f.radio_button :status, "REVOKED",
+                    checked: @transient_registration.metaData&.status == "REVOKED",
+                    class: "govuk-radios__input" %>
+                <%= f.label :status,
+                    t(".cease_or_revoke.options.revoke"),
+                    value: "REVOKED",
+                    class: "govuk-radios__label" %>
+              </div>
+
+              <div class="govuk-radios__item">
+                <%= f.radio_button :status,
+                    "INACTIVE",
+                    checked: @transient_registration.metaData&.status == "INACTIVE",
+                    class: "govuk-radios__input" %>
+                <%= f.label :status,
+                    t(".cease_or_revoke.options.cease"),
+                    value: "INACTIVE",
+                    class: "govuk-radios__label" %>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="govuk-form-group <%= "govuk-form-group--error" if @cease_or_revoke_form.errors[:revoked_reason].any? %>">
+          <% if @cease_or_revoke_form.errors[:revoked_reason].any? %>
+            <span class="govuk-error-message"><%= @cease_or_revoke_form.errors[:revoked_reason].join(", ") %></span>
+          <% end %>
+
+          <%= f.label :revoked_reason, class: "govuk-label" do %>
+            <%= t(".cease_or_revoke.reason.label") %>
+
+            <span class="govuk-hint">
+              <%= t(".cease_or_revoke.reason.hint") %>
+            </span>
+          <% end %>
+
+          <%= f.text_area :revoked_reason,
+              class: "govuk-textarea", rows: 5, value: @transient_registration.metaData&.revoked_reason %>
+        </div>
+
+        <div class="govuk-form-group">
+          <%= f.submit t(".next_button"), class: "govuk-button" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

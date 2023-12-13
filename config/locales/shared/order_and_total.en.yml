@@ -1,0 +1,14 @@
+en:
+  shared:
+    order_and_total:
+      legend: "Order details"
+      item_descriptions:
+        renew: "Renewal of registration"
+        type_change:
+          renewal: "Additional charge for changing registration type"
+          edit: "Charge for changing registration type"
+        copy_cards:
+          one: "1 registration card total cost"
+          other: "%{count} registration cards total cost"
+        charge_adjust: "Charge adjust"
+      total_cost: "Total charge"

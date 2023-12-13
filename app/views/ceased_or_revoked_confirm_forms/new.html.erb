@@ -1,0 +1,22 @@
+<% content_for :title, t(".title", reg_identifier: @transient_registration.reg_identifier, revoke_or_cease: t(".revoke_or_cease.#{@transient_registration.status}")).html_safe %>
+<%= render("waste_carriers_engine/shared/back", back_path: WasteCarriersEngine::Engine.routes.url_helpers.go_back_forms_path(@transient_registration.token)) %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= form_for(@ceased_or_revoked_confirm_form) do |f| %>
+      <h1 class="govuk-heading-l">
+        <%= t(".heading", reg_identifier: @transient_registration.reg_identifier, revoke_or_cease: t(".revoke_or_cease.#{@transient_registration.status}")) %>
+      </h1>
+
+      <%= render "shared/company_details_panel", registration: @transient_registration %>
+
+      <div class="govuk-form-group">
+        <%= f.submit t(".next_button", revoke_or_cease: t(".revoke_or_cease.#{@transient_registration.status}")), class: "govuk-button" %>
+
+        <div class="govuk-body">
+          <%= link_to t(".cancel"), WasteCarriersEngine::Engine.routes.url_helpers.delete_transient_registration_path(@ceased_or_revoked_confirm_form.transient_registration.token) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

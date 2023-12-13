@@ -1,0 +1,41 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t(".heading") %></h1>
+
+    <% if @transient_registration.temp_payment_method == "card" %>
+      <%= render("shared/success", message: t(".payment_success_message.#{@transient_registration.assisted_digital?}_html", email: @transient_registration.contact_email)) %>
+    <% else %>
+      <%= render("shared/message", message: t(".awaiting_payment_message.#{@transient_registration.assisted_digital?}_html", email: @transient_registration.contact_email)) %>
+    <% end %>
+
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          <%= t(".details_table.cards_label") %>
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <%= @transient_registration.temp_cards %>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          <%= t(".details_table.total_cost") %>
+        </dt>
+        <dd class="govuk-summary-list__value">
+          £ <%= display_pence_as_pounds(@transient_registration.total_registration_card_charge) %>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          <%= t(".details_table.reference") %>
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <%= @transient_registration.reg_identifier %>
+        </dd>
+      </div>
+    </dl>
+
+    <%= link_to t(".dashboard"), "/bo", class: "govuk-button" %>
+    <%= link_to t(".details_page", reg_identifier: @transient_registration.reg_identifier), Rails.application.routes.url_helpers.registration_path(@transient_registration.reg_identifier), class: "govuk-button" %>
+  </div>
+</div>

@@ -47,6 +47,16 @@ FactoryBot.define do
       after(:build, :create, &:update_balance)
     end
 
+    trait :has_copy_cards_order do
+      orders { [build(:order, :has_copy_cards_item)] }
+      after(:build, :create, &:update_balance)
+    end
+
+    trait :has_edit_order do
+      orders { [build(:order, :has_type_change_item)] }
+      after(:build, :create, &:update_balance)
+    end
+
     trait :has_single_payment do
       orders { [build(:order, :has_required_data)] }
       payments do

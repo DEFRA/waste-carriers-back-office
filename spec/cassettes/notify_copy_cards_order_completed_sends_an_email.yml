@@ -1,0 +1,71 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.notifications.service.gov.uk/v2/notifications/email
+    body:
+      encoding: UTF-8
+      string: '{"email_address":"whatever@example.com","template_id":"543a89cd-056e-4e9b-a55b-6416980f5472","personalisation":{"reg_identifier":"CBDU16","first_name":"Jane","last_name":"Doe","total_cards":1,"ordered_on":"30
+        November 2023","total_paid":"5"}}'
+    headers:
+      User-Agent:
+      - NOTIFY-API-RUBY-CLIENT/5.4.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIyNWNiNmI5NC04Y2U3LTQ4NWItOTE4YS01NTlmM2IxOGY2OWMiLCJpYXQiOjE3MDEzNjkwMzh9.SVVqx8RzJ5PaegSutGd1K7IENoZUb8KJATW4n0ktNSY
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1113'
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 30 Nov 2023 18:30:38 GMT
+      Access-Control-Allow-Headers:
+      - Content-Type,Authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-B3-Spanid:
+      - 645abb0e3f9ada18
+      X-B3-Traceid:
+      - 25bc111a12c74a48645abb0e3f9ada18
+      X-Vcap-Request-Id:
+      - 25bc111a-12c7-4a48-645a-bb0e3f9ada18
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 cb9d66c261e91793be744f629d6e309e.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - LHR50-P3
+      X-Amz-Cf-Id:
+      - jQFyCz0XVozi2qPN15O86g197pcBOaftjrOdbiHP93MjkdWaPNXjKA==
+    body:
+      encoding: UTF-8
+      string: '{"content":{"body":"Dear Jane Doe\r\n\r\n#We\u2019re printing your
+        waste carriers registration cards. They should arrive within 10 working days\r\n
+        \r\n#Receipt\r\n\r\nOrder: 1  registration cards\r\n\r\nOrdered on: 30 November
+        2023\r\n\r\nCarrier registration number: CBDU16\r\n\r\nPaid: \u00a35 by debit
+        or credit card.\r\n\r\n \r\n#If you need to contact us\r\n\r\nEnvironment
+        Agency\r\n\r\nTelephone 03708 506 506, Monday to Friday (8am to 6pm)\r\n\r\nnccc-carrierbroker@environment-agency.gov.uk
+        \r\n\r\n \r\nThis is an automated email, please do not reply.","from_email":"waste.carriers.registration.service@notifications.service.gov.uk","subject":"We\u2019re
+        printing your waste carriers registration cards"},"id":"51505673-2a77-453c-af20-88b1c117f1af","reference":null,"scheduled_for":null,"template":{"id":"543a89cd-056e-4e9b-a55b-6416980f5472","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/543a89cd-056e-4e9b-a55b-6416980f5472","version":6},"uri":"https://api.notifications.service.gov.uk/v2/notifications/51505673-2a77-453c-af20-88b1c117f1af"}
+
+        '
+  recorded_at: Thu, 30 Nov 2023 18:30:38 GMT
+recorded_with: VCR 6.2.0

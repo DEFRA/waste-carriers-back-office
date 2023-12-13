@@ -1,0 +1,11 @@
+en:
+  shared:
+    payment_summary_options:
+      payment_method:
+        subheading: "Payment method"
+        legend: "Preferred payment is by credit or debit card. Do not offer another payment option unless they are unable to pay by card."
+      options:
+        card: "Credit or debit card - encourage customers to pay by card"
+        bank_transfer: "Alternative payment - discouraged"
+      hint_pay_by_card: "Visa, Mastercard, Maestro only"
+      hint_pay_by_bank_transfer: "For example, bank transfer or cheque. We’ll send the cards when payment arrives. Allow 5 days for the transfer to arrive at the bank."

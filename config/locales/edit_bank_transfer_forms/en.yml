@@ -1,0 +1,6 @@
+en:
+  edit_bank_transfer_forms:
+    new:
+      title: Pay by bank transfer
+      heading: Pay by bank transfer
+      next_button: Continue
