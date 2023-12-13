@@ -77,6 +77,16 @@ Rails.application.routes.draw do
       resources :renewal_received_pending_conviction_forms,
                 only: %i[new create],
                 path: "renewal-received",
+
+                # Order copy cards flow
+      resources :copy_cards_forms,
+                only: %i[new create],
+                path: "order-copy-cards",
+                path_names: { new: "" }
+
+      resources :copy_cards_bank_transfer_forms,
+                only: %i[new create],
+                path: "order-copy-cards-bank-transfer",
                 path_names: { new: "" }
 
       # Order copy cards flow
