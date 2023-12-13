@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe EditRegistration do
+RSpec.describe EditCompleteForm do
   describe "#workflow_state" do
     it_behaves_like "a fixed final state",
                     current_state: :edit_complete_form,

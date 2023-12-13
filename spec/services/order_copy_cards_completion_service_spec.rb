@@ -115,7 +115,7 @@ RSpec.describe OrderCopyCardsCompletionService do
       it "creates order item logs with activated_at set to the current time" do
         described_class.run(transient_registration)
         first_card_order_item = WasteCarriersEngine::OrderItemLog.where(type: "COPY_CARDS").first
-        expect(first_card_order_item.activated_at.to_time).to be_within(1.second).of(Time.now)
+        expect(first_card_order_item.activated_at.to_time).to be_within(1.second).of(Time.zone.now)
       end
     end
 

@@ -6,24 +6,22 @@ module WasteCarriersEngine
   RSpec.describe OrderAndTotalPresenter do
     subject(:presenter) { described_class.new(form, view) }
 
-    let(:form) { double(:form, transient_registration: transient_registration) }
+    let(:form) { instance_double(EditForm, transient_registration: transient_registration) }
     let(:transient_registration) do
-      double(:transient_registration,
-             finance_details: finance_details,
-             temp_cards: temp_cards)
+      instance_double(EditRegistration, finance_details: finance_details, temp_cards: temp_cards)
     end
     let(:temp_cards) { 2 }
 
-    let(:finance_details) { double(:finance_details, balance: balance, orders: orders) }
+    let(:finance_details) { instance_double(WasteCarriersEngine::FinanceDetails, balance: balance, orders: orders) }
     let(:balance) { 0 }
     let(:orders) { [order] }
-    let(:order) { double(:order, order_items: order_items) }
+    let(:order) { instance_double(WasteCarriersEngine::Order, order_items: order_items) }
 
     let(:order_items) { [] }
-    let(:renewal_order_item) { double(:order_item, type: OrderItem::TYPES[:renew], amount: 10_500) }
-    let(:edit_order_item) { double(:order_item, type: OrderItem::TYPES[:edit], amount: 4_000) }
-    let(:copy_cards_order_item) { double(:order_item, type: OrderItem::TYPES[:copy_cards], amount: 1_000) }
-    let(:charge_adjust_order_item) { double(:order_item, type: OrderItem::TYPES[:charge_adjust], amount: 500) }
+    let(:renewal_order_item) { instance_double(WasteCarriersEngine::OrderItem, type: OrderItem::TYPES[:renew], amount: 10_500) }
+    let(:edit_order_item) { instance_double(WasteCarriersEngine::OrderItem, type: OrderItem::TYPES[:edit], amount: 4_000) }
+    let(:copy_cards_order_item) { instance_double(WasteCarriersEngine::OrderItem, type: OrderItem::TYPES[:copy_cards], amount: 1_000) }
+    let(:charge_adjust_order_item) { instance_double(WasteCarriersEngine::OrderItem, type: OrderItem::TYPES[:charge_adjust], amount: 500) }
 
     describe "#order_items" do
       let(:order_items) { [edit_order_item, copy_cards_order_item, charge_adjust_order_item] }

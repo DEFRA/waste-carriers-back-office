@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe EditRegistration do
+RSpec.describe WasteCarriersEngine::DeclarationForm do
   subject(:declaration_form) { build(:edit_registration, workflow_state: "declaration_form") }
 
   describe "#workflow_state" do

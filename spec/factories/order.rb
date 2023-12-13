@@ -22,7 +22,7 @@ FactoryBot.define do
     end
 
     trait :has_type_change_item do
-      date_created { Time.now }
+      date_created { Time.zone.now }
 
       order_items do
         [build(:order_item, :new_type_change_item)]

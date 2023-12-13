@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe EditRegistration do
+RSpec.describe EditForm do
   subject(:edit_registration) { build(:edit_registration) }
 
   describe "#workflow_state" do

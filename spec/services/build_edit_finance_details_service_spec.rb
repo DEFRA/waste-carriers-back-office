@@ -4,14 +4,14 @@ require "rails_helper"
 
 RSpec.describe BuildEditFinanceDetailsService do
   describe ".run" do
-    let(:user) { double(:user) }
-    let(:transient_registration) { double(:transient_registration) }
-    let(:order) { double(:order) }
+    let(:user) { instance_double(User) }
+    let(:transient_registration) { instance_double(EditRegistration) }
+    let(:order) { instance_double(WasteCarriersEngine::Order) }
 
     before do
-      finance_details = double(:finance_details)
-      order_item = double(:order_item)
-      orders = double(:orders)
+      finance_details = instance_double(WasteCarriersEngine::FinanceDetails)
+      order_item = instance_double(WasteCarriersEngine::OrderItem)
+      orders = [instance_double(WasteCarriersEngine::Order)]
 
       allow(WasteCarriersEngine::FinanceDetails).to receive(:new).and_return(finance_details)
       allow(finance_details).to receive(:transient_registration=).with(transient_registration)

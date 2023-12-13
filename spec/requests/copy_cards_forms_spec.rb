@@ -59,10 +59,12 @@ RSpec.describe "CopyCardsForms" do
               end
             end
 
-            it "redirects to the correct workflow state form" do
-              get new_copy_cards_form_path(transient_registration.token)
+            context "when the token is a token" do
+              it "redirects to the correct workflow state form" do
+                get new_copy_cards_form_path(transient_registration.token)
 
-              expect(response).to redirect_to(new_copy_cards_payment_form_path(transient_registration.token))
+                expect(response).to redirect_to(new_copy_cards_payment_form_path(transient_registration.token))
+              end
             end
           end
         end

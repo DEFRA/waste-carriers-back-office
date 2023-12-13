@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe CeasedOrRevokedRegistration do
+RSpec.describe CeaseOrRevokeForm do
   subject(:ceased_or_revoked_registration) { build(:ceased_or_revoked_registration, workflow_state: "cease_or_revoke_form") }
 
   describe "#workflow_state" do

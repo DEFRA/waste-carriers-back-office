@@ -40,7 +40,7 @@ RSpec.describe "EditCancelledForms" do
 
         context "when the workflow_state is not correct" do
           before do
-            transient_registration.update_attributes(workflow_state: "declaration_form")
+            transient_registration.update(workflow_state: "declaration_form")
           end
 
           it "redirects to the correct page and does not delete the transient object" do

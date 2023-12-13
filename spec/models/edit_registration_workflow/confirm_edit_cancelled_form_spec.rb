@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe EditRegistration do
+RSpec.describe ConfirmEditCancelledForm do
   subject { build(:edit_registration, workflow_state: "confirm_edit_cancelled_form") }
 
   describe "#workflow_state" do

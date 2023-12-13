@@ -4,9 +4,9 @@ require "rails_helper"
 
 module WasteCarriersEngine
   RSpec.describe EditRegistrationPermissionChecksService do
-    let(:transient_registration) { double(:transient_registration) }
-    let(:user) { double(:user) }
-    let(:result) { double(:result) }
+    let(:transient_registration) { instance_double(EditRegistration) }
+    let(:user) { instance_double(User) }
+    let(:result) { instance_double(PermissionChecksResult) }
     let(:params) { { transient_registration: transient_registration, user: user } }
 
     describe ".run" do
@@ -30,8 +30,8 @@ module WasteCarriersEngine
 
       context "when the transient registration is valid" do
         let(:valid) { true }
-        let(:registration) { double(:registration) }
-        let(:ability) { double(:ability) }
+        let(:registration) { instance_double(EditRegistration) }
+        let(:ability) { instance_double(Ability) }
 
         before do
           allow(transient_registration).to receive(:registration).and_return(registration)
@@ -52,7 +52,7 @@ module WasteCarriersEngine
 
         context "when the user has the correct permissions" do
           let(:can) { true }
-          let(:registration) { double(:registration) }
+          let(:registration) { instance_double(EditRegistration) }
 
           before do
             allow(transient_registration).to receive(:registration).and_return(registration)

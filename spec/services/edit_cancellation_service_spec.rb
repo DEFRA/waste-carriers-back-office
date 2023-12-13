@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe EditCancellationService do
   describe "run" do
-    let(:edit_registration) { double(:edit_registration) }
+    let(:edit_registration) { instance_double(EditRegistration) }
 
     it "deletes the edit_registration" do
       allow(edit_registration).to receive(:delete)

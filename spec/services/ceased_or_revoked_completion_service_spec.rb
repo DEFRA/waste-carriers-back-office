@@ -8,7 +8,7 @@ RSpec.describe CeasedOrRevokedCompletionService do
     let(:registration) { transient_registration.registration }
     let(:registration_metadata) { registration.metaData }
     let(:transient_registration_metadata) { transient_registration.metaData }
-    let(:revoked_reason) { double(:revoked_reason) }
+    let(:revoked_reason) { instance_double(String) }
     let(:user) { create(:user) }
 
     before do

@@ -4,13 +4,13 @@ require "rails_helper"
 
 RSpec.describe OrderCopyCardsMailerPresenter do
   subject(:presenter) { described_class.new(registration, order) }
-  let(:registration) { double(:registration) }
-  let(:order) { double(:order) }
+
+  let(:registration) { instance_double(WasteCarriersEngine::Registration) }
+  let(:order) { instance_double(WasteCarriersEngine::Order) }
 
   describe "#contact_name" do
     it "returns a string with first and last name" do
-      allow(registration).to receive(:first_name).and_return("Bob")
-      allow(registration).to receive(:last_name).and_return("Proctor")
+      allow(registration).to receive_messages(first_name: "Bob", last_name: "Proctor")
 
       expect(presenter.contact_name).to eq("Bob Proctor")
     end
@@ -18,8 +18,8 @@ RSpec.describe OrderCopyCardsMailerPresenter do
 
   describe "#total_cards" do
     it "returns the order item's quantity" do
-      order_item = double(:order_item)
-      result = double(:result)
+      order_item = instance_double(WasteCarriersEngine::OrderItem)
+      result = instance_double(Integer)
 
       allow(order).to receive(:order_items).and_return([order_item])
       allow(order_item).to receive(:quantity).and_return(result)
@@ -30,8 +30,8 @@ RSpec.describe OrderCopyCardsMailerPresenter do
 
   describe "#order_description" do
     it "returns the order's description" do
-      order_item = double(:order_item)
-      result = double(:result)
+      order_item = instance_double(WasteCarriersEngine::OrderItem)
+      result = instance_double(String)
 
       allow(order).to receive(:order_items).and_return([order_item])
       allow(order_item).to receive(:description).and_return(result)
@@ -42,7 +42,7 @@ RSpec.describe OrderCopyCardsMailerPresenter do
 
   describe "#ordered_on_formatted_string" do
     it "returns the date the order was created as a string eg '31 October 2010'" do
-      allow(order).to receive(:date_created).and_return(Time.parse("2010-10-31").to_datetime)
+      allow(order).to receive(:date_created).and_return(Time.zone.parse("2010-10-31").to_datetime)
 
       expect(presenter.ordered_on_formatted_string).to eq("31 October 2010")
     end

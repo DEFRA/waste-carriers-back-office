@@ -5,11 +5,11 @@ require "rails_helper"
 RSpec.describe EditFormPresenter do
   subject(:presenter) { described_class.new(form, view) }
 
-  let(:form) { double(:form, transient_registration: transient_registration) }
+  let(:form) { instance_double(EditForm, transient_registration: transient_registration) }
 
   describe "#receipt_email" do
     context "when the field does not exist" do
-      let(:transient_registration) { double(:transient_registration) }
+      let(:transient_registration) { instance_double(EditRegistration) }
 
       it "returns nothing" do
         allow(transient_registration).to receive(:receipt_email)
@@ -19,7 +19,7 @@ RSpec.describe EditFormPresenter do
     end
 
     context "when the field exists" do
-      let(:transient_registration) { double(:transient_registration, receipt_email: receipt_email) }
+      let(:transient_registration) { instance_double(EditRegistration, receipt_email: receipt_email) }
       let(:receipt_email) { "whatever@example.com" }
 
       it "returns the value in receipt email" do

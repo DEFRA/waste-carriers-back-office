@@ -59,10 +59,12 @@ RSpec.describe "CeaseOrRevokeForms" do
               end
             end
 
-            it "redirects to the correct workflow state form" do
-              get new_cease_or_revoke_form_path(transient_registration.token)
+            context "when the token is a token" do
+              it "redirects to the correct workflow state form" do
+                get new_cease_or_revoke_form_path(transient_registration.token)
 
-              expect(response).to redirect_to(new_ceased_or_revoked_confirm_form_path(transient_registration.token))
+                expect(response).to redirect_to(new_ceased_or_revoked_confirm_form_path(transient_registration.token))
+              end
             end
           end
         end

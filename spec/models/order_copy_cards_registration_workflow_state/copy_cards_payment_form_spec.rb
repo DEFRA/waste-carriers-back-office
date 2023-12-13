@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe OrderCopyCardsRegistration do
+RSpec.describe CopyCardsPaymentForm do
   subject(:registration) { build(:order_copy_cards_registration, workflow_state: "copy_cards_payment_form") }
 
   describe "#workflow_state" do

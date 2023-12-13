@@ -100,7 +100,7 @@ RSpec.describe "EditCompleteForms" do
           # https://github.com/DEFRA/waste-carriers-engine/pull/902
           context "when key details have been changed by other actions since the edit was started" do
             let(:email) { "behindthescenes@example.com" }
-            let(:expires_on) { Date.today + 42.days }
+            let(:expires_on) { Time.zone.today + 42.days }
 
             it "does not overwrite those details" do
               # We have to be careful of lazy let() evaluation. We need to
@@ -124,7 +124,7 @@ RSpec.describe "EditCompleteForms" do
 
         context "when the workflow_state is not correct" do
           before do
-            transient_registration.update_attributes(workflow_state: "declaration_form")
+            transient_registration.update(workflow_state: "declaration_form")
           end
 
           it "redirects to the correct page, does not update the registration and does not delete the transient object" do

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable RSpec/MultipleMemoizedHelpers
 require "rails_helper"
 
 RSpec.describe EditCompletionService do
@@ -35,33 +34,30 @@ RSpec.describe EditCompletionService do
 
   let(:first_name) { "Foo" }
   let(:last_name) { "Bar" }
-  let(:contact_address) { double(:address) }
+  let(:contact_address) { instance_double(WasteCarriersEngine::Address) }
 
-  let(:reg_finance_details) { double(:reg_finance_details) }
-  let(:transient_finance_details) { double(:transient_finance_details) }
+  let(:reg_finance_details) { instance_double(WasteCarriersEngine::FinanceDetails) }
+  let(:transient_finance_details) { instance_double(WasteCarriersEngine::FinanceDetails) }
 
   let(:registration_type_changed) { false }
 
-  let(:registration) do
-    double(:registration,
-           finance_details: reg_finance_details)
-  end
+  let(:registration) { instance_double(WasteCarriersEngine::Registration, finance_details: reg_finance_details) }
 
   let(:edit_registration) do
-    double(:edit_registration,
-           attributes: attributes,
-           registration: registration,
-           contact_address: contact_address,
-           first_name: first_name,
-           last_name: last_name,
-           finance_details: transient_finance_details,
-           registration_type_changed?: registration_type_changed)
+    instance_double(EditRegistration,
+                    attributes: attributes,
+                    registration: registration,
+                    contact_address: contact_address,
+                    first_name: first_name,
+                    last_name: last_name,
+                    finance_details: transient_finance_details,
+                    registration_type_changed?: registration_type_changed)
   end
 
-  let(:reg_orders) { [double(:orders)] }
-  let(:reg_payments) { [double(:payment)] }
-  let(:transient_order) { double(:transient_order) }
-  let(:transient_payment) { double(:transient_payment) }
+  let(:reg_orders) { [instance_double(WasteCarriersEngine::Order)] }
+  let(:reg_payments) { [instance_double(WasteCarriersEngine::Payment)] }
+  let(:transient_order) { instance_double(WasteCarriersEngine::Order) }
+  let(:transient_payment) { instance_double(WasteCarriersEngine::Payment) }
   let(:transient_payments) { [transient_payment] }
 
   describe ".run" do
@@ -72,14 +68,12 @@ RSpec.describe EditCompletionService do
       allow(WasteCarriersEngine::PastRegistration).to receive(:build_past_registration)
       allow(registration).to receive(:save!)
       allow(registration).to receive(:write_attributes)
-      allow(reg_finance_details).to receive(:orders).and_return(reg_orders)
-      allow(reg_finance_details).to receive(:payments).and_return(reg_payments)
+      allow(reg_finance_details).to receive_messages(orders: reg_orders, payments: reg_payments)
       allow(reg_finance_details).to receive(:update_balance)
       allow(reg_orders).to receive(:<<).with(transient_order)
       allow(reg_payments).to receive(:<<).with(transient_payment)
-      allow(transient_finance_details).to receive(:orders).and_return([transient_order])
       allow(transient_finance_details).to receive(:payments).and_return([transient_payment]).twice
-      allow(transient_finance_details).to receive(:payments).and_return(transient_payments)
+      allow(transient_finance_details).to receive_messages(orders: [transient_order], payments: transient_payments)
     end
 
     context "when given an edit_registration" do
@@ -143,4 +137,3 @@ RSpec.describe EditCompletionService do
     end
   end
 end
-# rubocop:enable RSpec/MultipleMemoizedHelpers
