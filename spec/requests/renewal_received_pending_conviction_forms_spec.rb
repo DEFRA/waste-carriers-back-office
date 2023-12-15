@@ -7,5 +7,5 @@ RSpec.describe "RenewalReceivedPendingConvictionForms" do
 
   let(:path) { "/bo/#{transient_registration.token}/renewal-received" }
 
-  it_behaves_like "a controller that resumes call recording"
+  it_behaves_like "resumes call recording"
 end

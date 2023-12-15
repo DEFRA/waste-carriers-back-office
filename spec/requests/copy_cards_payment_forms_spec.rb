@@ -23,10 +23,11 @@ RSpec.describe "CopyCardsPaymentForms" do
       end
 
       context "when a matching registration exists" do
-        let(:order_copy_cards_registration) { create(:order_copy_cards_registration, :has_finance_details, workflow_state: "copy_cards_payment_form") }
+        let(:transient_registration) { create(:order_copy_cards_registration, :has_finance_details, workflow_state: "copy_cards_payment_form") }
+        let(:path) { new_copy_cards_payment_form_path(transient_registration.token) }
 
         it "renders the appropriate template and responds with a 200 status code" do
-          get new_copy_cards_payment_form_path(order_copy_cards_registration.token)
+          get path
 
           expect(response).to render_template("copy_cards_payment_forms/new")
           expect(response).to have_http_status(:ok)
@@ -35,7 +36,6 @@ RSpec.describe "CopyCardsPaymentForms" do
         context "when call recording feature flag is on" do
           before do
             allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(true)
-            get new_copy_cards_payment_form_path(order_copy_cards_registration.token)
           end
 
           it "pauses call recording" do
@@ -46,7 +46,6 @@ RSpec.describe "CopyCardsPaymentForms" do
         context "when call recording feature flag is off" do
           before do
             allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(false)
-            get new_copy_cards_payment_form_path(order_copy_cards_registration.token)
           end
 
           it "does not pause call recording" do
@@ -91,7 +90,7 @@ RSpec.describe "CopyCardsPaymentForms" do
       end
 
       context "when a matching registration exists" do
-        let(:order_copy_cards_registration) { create(:order_copy_cards_registration, :has_finance_details, workflow_state: "copy_cards_payment_form") }
+        let(:transient_registration) { create(:order_copy_cards_registration, :has_finance_details, workflow_state: "copy_cards_payment_form") }
 
         context "when valid params are submitted" do
           let(:valid_params) { { temp_payment_method: temp_payment_method } }
@@ -100,13 +99,13 @@ RSpec.describe "CopyCardsPaymentForms" do
             let(:temp_payment_method) { "card" }
 
             it "updates the transient registration with correct data, returns a 302 response and redirects to the govpay form" do
-              post copy_cards_payment_forms_path(token: order_copy_cards_registration.token), params: { copy_cards_payment_form: valid_params }
+              post copy_cards_payment_forms_path(token: transient_registration.token), params: { copy_cards_payment_form: valid_params }
 
-              order_copy_cards_registration.reload
+              transient_registration.reload
 
-              expect(order_copy_cards_registration.temp_payment_method).to eq("card")
+              expect(transient_registration.temp_payment_method).to eq("card")
               expect(response).to have_http_status(:found)
-              expect(response).to redirect_to(WasteCarriersEngine::Engine.routes.url_helpers.new_govpay_form_path(order_copy_cards_registration.token))
+              expect(response).to redirect_to(WasteCarriersEngine::Engine.routes.url_helpers.new_govpay_form_path(transient_registration.token))
             end
           end
 
@@ -114,13 +113,13 @@ RSpec.describe "CopyCardsPaymentForms" do
             let(:temp_payment_method) { "bank_transfer" }
 
             it "updates the transient registration with correct data, returns a 302 response and redirects to the bank transfer form" do
-              post copy_cards_payment_forms_path(token: order_copy_cards_registration.token), params: { copy_cards_payment_form: valid_params }
+              post copy_cards_payment_forms_path(token: transient_registration.token), params: { copy_cards_payment_form: valid_params }
 
-              order_copy_cards_registration.reload
+              transient_registration.reload
 
-              expect(order_copy_cards_registration.temp_payment_method).to eq("bank_transfer")
+              expect(transient_registration.temp_payment_method).to eq("bank_transfer")
               expect(response).to have_http_status(:found)
-              expect(response).to redirect_to(new_copy_cards_bank_transfer_form_path(order_copy_cards_registration.token))
+              expect(response).to redirect_to(new_copy_cards_bank_transfer_form_path(transient_registration.token))
             end
           end
         end
@@ -129,7 +128,7 @@ RSpec.describe "CopyCardsPaymentForms" do
           let(:invalid_params) { { temp_payment_method: "foo" } }
 
           it "returns a 200 response and render the new copy cards form" do
-            post copy_cards_payment_forms_path(token: order_copy_cards_registration.token), params: { copy_cards_payment_form: invalid_params }
+            post copy_cards_payment_forms_path(token: transient_registration.token), params: { copy_cards_payment_form: invalid_params }
 
             expect(response).to have_http_status(:ok)
             expect(response).to render_template("copy_cards_payment_forms/new")

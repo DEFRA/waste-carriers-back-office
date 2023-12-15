@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "a controller that pauses call recording" do
+RSpec.shared_examples "pauses call recording" do
   let(:user) { create(:user, role: :agency_super) }
   let(:call_recording_service) { instance_spy(CallRecordingService) }
 
@@ -16,7 +16,6 @@ RSpec.shared_examples "a controller that pauses call recording" do
     end
 
     it "returns http success" do
-      get path
       expect(response).to have_http_status(:success)
     end
 
@@ -32,23 +31,11 @@ RSpec.shared_examples "a controller that pauses call recording" do
     end
 
     it "returns http success" do
-      get path
       expect(response).to have_http_status(:success)
     end
 
     it "does not pause call recording" do
       expect(call_recording_service).not_to have_received(:pause)
-    end
-  end
-
-  context "when determining form path" do
-    before do
-      allow(controller).to receive(:find_or_initialize_transient_registration).and_return(transient_registration)
-      get path
-    end
-
-    it "generates the correct form path" do
-      expect(controller.form_path).to eq(path)
     end
   end
 end

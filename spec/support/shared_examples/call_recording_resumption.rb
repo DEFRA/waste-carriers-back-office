@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "a controller that resumes call recording" do
+RSpec.shared_examples "resumes call recording" do
   let(:user) { create(:user, role: :agency_super) }
   let(:call_recording_service) { instance_double(CallRecordingService) }
 

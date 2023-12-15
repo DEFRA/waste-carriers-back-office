@@ -13,7 +13,7 @@ RSpec.describe "Payment method confirmation forms" do
       allow(CallRecordingService).to receive(:new).with(user: user).and_return(call_recording_service)
     end
 
-    it_behaves_like "a controller that pauses call recording"
+    it_behaves_like "pauses call recording"
 
     describe "payment confirmation payment methods" do
       before do

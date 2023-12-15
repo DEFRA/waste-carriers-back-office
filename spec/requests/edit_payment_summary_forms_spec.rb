@@ -26,35 +26,28 @@ RSpec.describe "EditPaymentSummaryForms" do
       end
 
       context "when a matching registration exists" do
-        let(:edit_registration) do
+        let(:path) { new_edit_payment_summary_form_path(transient_registration.token) }
+        let(:transient_registration) do
           create(:edit_registration,
                  :has_finance_details,
                  workflow_state: "edit_payment_summary_form")
         end
 
         it "renders the appropriate template and responds with a 200 status code" do
-          get new_edit_payment_summary_form_path(edit_registration.token)
+          get path
 
           expect(response).to render_template("edit_payment_summary_forms/new")
           expect(response).to have_http_status(:ok)
         end
 
         context "when the call recording feature flag is on" do
-          before do
-            allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(true)
-            get "/bo/#{transient_registration.token}/edit-payment"
-          end
+          before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(true) }
 
-          it "pauses call recording" do
-            expect(call_recording_service).to have_received(:pause)
-          end
+          it_behaves_like "pauses call recording"
         end
 
         context "when the call recording feature flag is off" do
-          before do
-            allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(false)
-            get "/bo/#{transient_registration.token}/edit-payment"
-          end
+          before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(false) }
 
           it "does not pause call recording" do
             expect(call_recording_service).not_to have_received(:pause)
@@ -63,23 +56,23 @@ RSpec.describe "EditPaymentSummaryForms" do
 
         context "when it already has a finance_details" do
           it "does not modify the finance_details" do
-            expect { get new_edit_payment_summary_form_path(edit_registration.token) }.not_to change(edit_registration, :finance_details)
+            expect { get path }.not_to change(transient_registration, :finance_details)
           end
         end
 
         context "when it does not have a finance_details" do
-          let(:edit_registration) do
+          let(:transient_registration) do
             create(:edit_registration,
                    :has_changed_registration_type,
                    workflow_state: "edit_payment_summary_form")
           end
 
           it "creates a new finance_details" do
-            expect(edit_registration.finance_details).to be_nil
+            expect(transient_registration.finance_details).to be_nil
 
-            get new_edit_payment_summary_form_path(edit_registration.token)
+            get path
 
-            expect(edit_registration.reload.finance_details).not_to be_nil
+            expect(transient_registration.reload.finance_details).not_to be_nil
           end
         end
       end
@@ -106,7 +99,8 @@ RSpec.describe "EditPaymentSummaryForms" do
       end
 
       context "when a matching registration exists" do
-        let(:edit_registration) { create(:edit_registration, :has_finance_details, workflow_state: "edit_payment_summary_form") }
+        let(:path) { edit_payment_summary_forms_path(token: transient_registration.token) }
+        let(:transient_registration) { create(:edit_registration, :has_finance_details, workflow_state: "edit_payment_summary_form") }
 
         context "when valid params are submitted" do
           let(:valid_params) { { temp_payment_method: temp_payment_method } }
@@ -115,13 +109,13 @@ RSpec.describe "EditPaymentSummaryForms" do
             let(:temp_payment_method) { "card" }
 
             it "updates the transient registration with correct data, returns a 302 response and redirects to the govpay form" do
-              post edit_payment_summary_forms_path(token: edit_registration.token), params: { edit_payment_summary_form: valid_params }
+              post path, params: { edit_payment_summary_form: valid_params }
 
-              edit_registration.reload
+              transient_registration.reload
 
-              expect(edit_registration.temp_payment_method).to eq("card")
+              expect(transient_registration.temp_payment_method).to eq("card")
               expect(response).to have_http_status(:found)
-              expect(response).to redirect_to(WasteCarriersEngine::Engine.routes.url_helpers.new_govpay_form_path(edit_registration.token))
+              expect(response).to redirect_to(WasteCarriersEngine::Engine.routes.url_helpers.new_govpay_form_path(transient_registration.token))
             end
           end
 
@@ -129,13 +123,13 @@ RSpec.describe "EditPaymentSummaryForms" do
             let(:temp_payment_method) { "bank_transfer" }
 
             it "updates the transient registration with correct data, returns a 302 response and redirects to the bank transfer form" do
-              post edit_payment_summary_forms_path(token: edit_registration.token), params: { edit_payment_summary_form: valid_params }
+              post path, params: { edit_payment_summary_form: valid_params }
 
-              edit_registration.reload
+              transient_registration.reload
 
-              expect(edit_registration.temp_payment_method).to eq("bank_transfer")
+              expect(transient_registration.temp_payment_method).to eq("bank_transfer")
               expect(response).to have_http_status(:found)
-              expect(response).to redirect_to(new_edit_bank_transfer_form_path(edit_registration.token))
+              expect(response).to redirect_to(new_edit_bank_transfer_form_path(transient_registration.token))
             end
           end
         end
@@ -144,7 +138,7 @@ RSpec.describe "EditPaymentSummaryForms" do
           let(:invalid_params) { { temp_payment_method: "foo" } }
 
           it "returns a 200 response and render the new copy cards form" do
-            post edit_payment_summary_forms_path(token: edit_registration.token), params: { edit_payment_summary_form: invalid_params }
+            post path, params: { edit_payment_summary_form: invalid_params }
 
             expect(response).to have_http_status(:ok)
             expect(response).to render_template("edit_payment_summary_forms/new")
