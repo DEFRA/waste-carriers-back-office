@@ -3,7 +3,6 @@
 class CopyCardsPaymentFormsController < WasteCarriersEngine::FormsController
   include CanPauseCallRecording
   include CanAuthenticateUser
-  include CanFetchEngineFormRoute
 
   before_action :check_and_pause_call_recording, only: %i[new]
 

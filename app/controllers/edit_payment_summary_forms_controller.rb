@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class EditPaymentSummaryFormsController < WasteCarriersEngine::FormsController
-  include CanFetchEngineFormRoute
   include CanPauseCallRecording
   include CanAuthenticateUser
 

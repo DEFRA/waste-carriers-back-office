@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class EditFormsController < WasteCarriersEngine::FormsController
-  include CanFetchEngineFormRoute
 
   prepend_before_action :authenticate_user!
 
