@@ -18,7 +18,7 @@ module WasteCarriersEngine
       end
 
       def engine_route?(workflow_state)
-        !WasteCarriersEngine::Engine.routes.routes.select { |r| r.name == "#{workflow_state}s" }.none?
+        WasteCarriersEngine::Engine.routes.routes.any? { |r| r.name == "#{workflow_state}s" }
       end
     end
   end

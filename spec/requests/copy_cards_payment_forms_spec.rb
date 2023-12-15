@@ -34,13 +34,12 @@ RSpec.describe "CopyCardsPaymentForms" do
         end
 
         context "when call recording feature flag is on" do
+
           before do
             allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(true)
           end
 
-          it "pauses call recording" do
-            expect(call_recording_service).to have_received(:pause)
-          end
+          it_behaves_like "pauses call recording"
         end
 
         context "when call recording feature flag is off" do
