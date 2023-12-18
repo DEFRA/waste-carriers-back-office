@@ -325,6 +325,7 @@ GEM
       mongoid (>= 5.0, < 9)
     multi_json (1.15.0)
     net-imap (0.4.8)
+      date
       net-protocol
     net-pop (0.1.2)
       net-protocol
@@ -583,8 +584,7 @@ DEPENDENCIES
   matrix
   mongo_session_store
   mongoid
-  net-imap
-  net-pop
+  net-imap (~> 0.4.7)
   passenger (~> 5.0, >= 5.0.30)
   pry-byebug
   puma

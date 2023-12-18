@@ -46,8 +46,7 @@ gem "wicked_pdf"
 
 gem "matrix"
 
-gem "net-imap"
-gem "net-pop"
+gem "net-imap", "~> 0.4.7"
 
 gem "defra_ruby_storm"
 
