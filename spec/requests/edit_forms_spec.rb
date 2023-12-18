@@ -190,6 +190,13 @@ RSpec.describe "EditForms" do
         end
       end
 
+      describe "POST edit_company_name" do
+        it "redirects to the edit form" do
+          post WasteCarriersEngine::Engine.routes.url_helpers.company_name_forms_path(token)
+          expect(response).to redirect_to Rails.application.routes.url_helpers.new_edit_form_path(token)
+        end
+      end
+
       describe "GET edit_company_address" do
         it "redirects to the company postcode form" do
           get company_address_edit_forms_path(token)

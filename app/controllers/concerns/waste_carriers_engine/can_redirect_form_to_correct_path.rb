@@ -12,7 +12,11 @@ module WasteCarriersEngine
       # Get the path based on the workflow state, with token as params, ie:
       # new_state_name_path/:token or start_state_name_path?token=:token
       def form_path
-        target = engine_route?(@transient_registration.workflow_state) ? basic_app_engine : self
+        target = if engine_route?(@transient_registration.workflow_state)
+                   basic_app_engine
+                 else
+                   Rails.application.routes.url_helpers
+                 end
 
         target.send("new_#{@transient_registration.workflow_state}_path".to_sym, token: @transient_registration.token)
       end
