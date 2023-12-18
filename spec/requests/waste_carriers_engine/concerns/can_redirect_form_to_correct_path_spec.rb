@@ -8,13 +8,24 @@ module WasteCarriersEngine
 
     before { sign_in create(:user, role: :agency) }
 
-    context "with an engine route" do
+    context "with an engine route with a plural route name" do
       let(:transient_registration) { create(:renewing_registration, workflow_state: "renewal_start_form") }
 
       it "redirects to the engine route" do
         get WasteCarriersEngine::Engine.routes.url_helpers.new_location_form_path(transient_registration.token)
 
         expect(response).to redirect_to WasteCarriersEngine::Engine.routes.url_helpers.new_renewal_start_form_path(transient_registration.token)
+      end
+    end
+
+    context "with an engine route with a new_ singular route name" do
+      let(:transient_registration) { create(:renewing_registration, workflow_state: "registration_received_pending_payment_form") }
+
+      it "redirects to the engine route" do
+        get WasteCarriersEngine::Engine.routes.url_helpers.new_location_form_path(transient_registration.token)
+
+        expect(response).to redirect_to WasteCarriersEngine::Engine.routes.url_helpers
+                                                                   .new_registration_received_pending_payment_form_path(transient_registration.token)
       end
     end
 

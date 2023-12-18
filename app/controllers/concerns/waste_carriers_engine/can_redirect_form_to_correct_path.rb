@@ -22,7 +22,10 @@ module WasteCarriersEngine
       end
 
       def engine_route?(workflow_state)
-        WasteCarriersEngine::Engine.routes.routes.any? { |r| r.name == "#{workflow_state}s" }
+        # routes will be "new_some_form_name" or "some_form_names"
+        WasteCarriersEngine::Engine.routes.routes.any? do |r|
+          ["new_#{workflow_state}", "#{workflow_state}s"].include? r.name
+        end
       end
     end
   end
