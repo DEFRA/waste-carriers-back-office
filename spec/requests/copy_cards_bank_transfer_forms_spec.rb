@@ -4,12 +4,14 @@ require "rails_helper"
 
 RSpec.describe "CopyCardsBankTransferForms" do
   describe "GET new_copy_cards_bank_transfer_form" do
-    context "when a valid user is signed in" do
-      let(:user) { create(:user) }
 
-      before do
-        sign_in(user)
-      end
+    it_behaves_like "user is not logged in", action: :get, path: :new_copy_cards_bank_transfer_form_path
+    it_behaves_like "user is not authorised to perform action", action: :get, path: :new_copy_cards_bank_transfer_form_path, role: :finance
+
+    context "when a valid user is signed in" do
+      let(:user) { create(:user, role: "agency_with_refund") }
+
+      before { sign_in(user) }
 
       context "when a valid transient registration exists" do
         let(:transient_registration) do
@@ -43,12 +45,14 @@ RSpec.describe "CopyCardsBankTransferForms" do
   end
 
   describe "POST new_copy_cards_bank_transfer_form" do
-    context "when a valid user is signed in" do
-      let(:user) { create(:user) }
 
-      before do
-        sign_in(user)
-      end
+    it_behaves_like "user is not logged in", action: :post, path: :copy_cards_bank_transfer_forms_path
+    it_behaves_like "user is not authorised to perform action", action: :post, path: :copy_cards_bank_transfer_forms_path, role: :finance
+
+    context "when a valid user is signed in" do
+      let(:user) { create(:user, role: "agency_with_refund") }
+
+      before { sign_in(user) }
 
       context "when an order is in progress" do
         let(:transient_registration) do
