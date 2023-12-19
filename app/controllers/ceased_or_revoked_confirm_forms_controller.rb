@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CeasedOrRevokedConfirmFormsController < WasteCarriersEngine::FormsController
+class CeasedOrRevokedConfirmFormsController < BackOfficeFormsController
   def new
     super(CeasedOrRevokedConfirmForm, "ceased_or_revoked_confirm_form")
   end
@@ -22,5 +22,12 @@ class CeasedOrRevokedConfirmFormsController < WasteCarriersEngine::FormsControll
     flash[:message] = message
 
     redirect_to("/bo")
+  end
+
+  private
+
+  def authorize_user
+    authorize! :cease, WasteCarriersEngine::Registration
+    authorize! :revoke, WasteCarriersEngine::Registration
   end
 end
