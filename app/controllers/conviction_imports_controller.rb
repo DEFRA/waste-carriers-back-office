@@ -8,10 +8,18 @@ class ConvictionImportsController < ApplicationController
   def new; end
 
   def create
-    if data_updated_successfully?
-      add_success_flash_message
-      redirect_to bo_path
+    uploaded_file = params[:file]
+    if uploaded_file && File.extname(uploaded_file.original_filename).casecmp(".csv").zero?
+      begin
+        ConvictionImportService.run(uploaded_file.read)
+        add_success_flash_message
+        redirect_to bo_path
+      rescue StandardError => e
+        add_error_flash_message(e)
+        render :new
+      end
     else
+      flash_error(I18n.t("conviction_imports.flash_messages.invalid_file_type"))
       render :new
     end
   end
@@ -20,14 +28,6 @@ class ConvictionImportsController < ApplicationController
 
   def authorize
     authorize! :import_conviction_data, current_user
-  end
-
-  def data_updated_successfully?
-    ConvictionImportService.run(params[:data])
-    true
-  rescue StandardError => e
-    add_error_flash_message(e)
-    false
   end
 
   def add_success_flash_message

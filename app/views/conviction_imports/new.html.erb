@@ -10,17 +10,13 @@
 
     <%= render("shared/flash_messages") %>
 
-    <%= form_tag(conviction_imports_path) do %>
+    <%= form_tag(conviction_imports_path, multipart: true) do %>
       <div class="govuk-form-group">
-        <label class="govuk-label govuk-label--s" for="data">
-          <%= t(".textarea_label") %>
-          <p class="govuk-hint">
-            <%= t(".textarea_hint_1") %>
-            <br>
-            <%= t(".textarea_hint_2") %>
-          </p>
+        <label class="govuk-label govuk-label--s" for="file">
+          <%= t(".file_label") %>
         </label>
-        <%= text_area_tag :data, nil, rows: 10, class: "govuk-textarea" %>
+        <p class="govuk-hint"><%= t(".file_hint") %></p>
+        <%= file_field_tag :file, accept: 'text/csv', class: "govuk-file-upload" %>
       </div>
 
       <div class="govuk-warning-text">
