@@ -4,12 +4,14 @@ require "rails_helper"
 
 RSpec.describe "CeasedOrRevokedConfirmForms" do
   describe "GET new_ceased_or_revoked_confirm_form_path" do
-    context "when a user is signed in" do
+
+    it_behaves_like "user is not logged in", action: :get, path: :new_ceased_or_revoked_confirm_form_path
+    it_behaves_like "user is not authorised to perform action", action: :get, path: :new_ceased_or_revoked_confirm_form_path, role: :finance
+
+    context "when a valid user is signed in" do
       let(:user) { create(:user, role: "agency_with_refund") }
 
-      before do
-        sign_in(user)
-      end
+      before { sign_in(user) }
 
       context "when no matching registration exists" do
         it "redirects to the invalid token error page" do
@@ -37,29 +39,17 @@ RSpec.describe "CeasedOrRevokedConfirmForms" do
         end
       end
     end
-
-    context "when a user is not signed in" do
-      before do
-        user = create(:user)
-        sign_out(user)
-      end
-
-      it "returns a 302 response" do
-        get new_ceased_or_revoked_confirm_form_path("foo")
-
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(page_path("invalid"))
-      end
-    end
   end
 
   describe "POST ceased_or_revoked_confirm_forms_path" do
-    context "when a valid user is signed in" do
-      let(:user) { create(:user) }
 
-      before do
-        sign_in(user)
-      end
+    it_behaves_like "user is not logged in", action: :post, path: :cease_or_revoke_forms_path
+    it_behaves_like "user is not authorised to perform action", action: :post, path: :new_cease_or_revoke_form_path, role: :finance
+
+    context "when a valid user is signed in" do
+      let(:user) { create(:user, role: "agency_with_refund") }
+
+      before { sign_in(user) }
 
       context "when a valid transient registration exists" do
         let(:transient_registration) do
@@ -76,18 +66,33 @@ RSpec.describe "CeasedOrRevokedConfirmForms" do
         context "when the workflow_state is correct" do
           before { allow(WasteCarriersEngine.configuration).to receive(:host_is_back_office?).and_return(true) }
 
-          it "deletes the transient object, copy data to the registration, redirects to the main dashboard page" do
+          it "deletes the transient object" do
+            transient_registration # instantiate
+
+            expect { post ceased_or_revoked_confirm_forms_path(transient_registration.token) }
+              .to change(WasteCarriersEngine::TransientRegistration, :count).by(-1)
+          end
+
+          it "copies data to the registration" do
             registration = transient_registration.registration
 
             post ceased_or_revoked_confirm_forms_path(transient_registration.token)
 
             registration.reload
 
-            expect(WasteCarriersEngine::TransientRegistration.count).to eq(0)
-            expect(registration.metaData.status).to eq("REVOKED")
-            expect(registration.metaData.revokedReason).to eq("Revoked Reason")
-            expect(response).to have_http_status(:found)
-            expect(response).to redirect_to("/bo")
+            aggregate_failures do
+              expect(registration.metaData.status).to eq("REVOKED")
+              expect(registration.metaData.revokedReason).to eq("Revoked Reason")
+            end
+          end
+
+          it "redirects to the main dashboard page" do
+            post ceased_or_revoked_confirm_forms_path(transient_registration.token)
+
+            aggregate_failures do
+              expect(response).to have_http_status(:found)
+              expect(response).to redirect_to("/bo")
+            end
           end
         end
       end

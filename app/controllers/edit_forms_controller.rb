@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EditFormsController < WasteCarriersEngine::FormsController
+class EditFormsController < BackOfficeFormsController
 
   prepend_before_action :authenticate_user!
 
@@ -69,5 +69,9 @@ class EditFormsController < WasteCarriersEngine::FormsController
 
   def fetch_presenters
     @presenter = EditFormPresenter.new(@edit_form, view_context)
+  end
+
+  def authorize_user
+    authorize! :edit, WasteCarriersEngine::Registration
   end
 end

@@ -4,12 +4,14 @@ require "rails_helper"
 
 RSpec.describe "EditForms" do
   describe "GET new_edit_form_path" do
-    context "when a user is signed in" do
-      let(:user) { create(:user) }
 
-      before do
-        sign_in(user)
-      end
+    it_behaves_like "user is not logged in", action: :get, path: :new_edit_form_path
+    it_behaves_like "user is not authorised to perform action", action: :get, path: :new_edit_form_path, role: :data_agent
+
+    context "when a valid user is signed in" do
+      let(:user) { create(:user, role: :agency) }
+
+      before { sign_in(user) }
 
       context "when no matching registration exists" do
         it "redirects to the invalid token error page" do
@@ -61,25 +63,15 @@ RSpec.describe "EditForms" do
         end
       end
     end
-
-    context "when a user is not signed in" do
-      before do
-        user = create(:user)
-        sign_out(user)
-      end
-
-      it "returns a 302 response and redirects to the sign in page" do
-        get new_edit_form_path("foo")
-
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
   end
 
   describe "POST edit_forms_path" do
-    context "when a user is signed in" do
-      let(:user) { create(:user) }
+
+    it_behaves_like "user is not logged in", action: :post, path: :edit_forms_path
+    it_behaves_like "user is not authorised to perform action", action: :post, path: :edit_forms_path, role: :data_agent
+
+    context "when a valid user is signed in" do
+      let(:user) { create(:user, role: :agency) }
 
       before do
         sign_in(user)
@@ -141,40 +133,20 @@ RSpec.describe "EditForms" do
         end
       end
     end
-
-    context "when a user is not signed in" do
-      let(:registration) { create(:registration) }
-
-      before do
-        user = create(:user)
-        sign_out(user)
-      end
-
-      it "returns a 302 response, redirects to the login page and does not create a new transient registration" do
-        original_tr_count = EditRegistration.count
-
-        post edit_forms_path(registration.reg_identifier)
-
-        expect(response).to redirect_to(new_user_session_path)
-        expect(response).to have_http_status(:found)
-        expect(EditRegistration.count).to eq(original_tr_count)
-      end
-    end
   end
 
   describe "edit redirect paths" do
     let(:edit_registration) { create(:edit_registration) }
     let(:token) { edit_registration.token }
 
-    context "when a user is signed in" do
-      let(:user) { create(:user) }
-      let(:ability_instance) { instance_double(Ability) }
+    # Rather than heavily test all these near-identical controller actions, we'll just test cbd_type:
+    it_behaves_like "user is not logged in", action: :get, path: :cbd_type_edit_forms_path
+    it_behaves_like "user is not authorised to perform action", action: :get, path: :cbd_type_edit_forms_path, role: :data_agent
 
-      before do
-        allow(Ability).to receive(:new).and_return(ability_instance)
-        allow(ability_instance).to receive(:can?).with(:edit, edit_registration.registration).and_return(true)
-        sign_in(user)
-      end
+    context "when a valid user is signed in" do
+      let(:user) { create(:user, role: :agency) }
+
+      before { sign_in(user) }
 
       describe "GET edit_cbd_type" do
         it "redirects to the cbd_type form" do
@@ -249,68 +221,6 @@ RSpec.describe "EditForms" do
 
           expect(EditRegistration.count).to eq(original_tr_count)
           expect(response).to redirect_to(page_path("invalid"))
-        end
-      end
-
-      context "when the user does not have permission" do
-        it "returns a 302 response, redirects to the permissions error and does not modify the workflow_state" do
-          original_state = edit_registration.workflow_state
-          allow(ability_instance).to receive(:can?).with(:edit, edit_registration.registration).and_return(false)
-
-          get cbd_type_edit_forms_path(token)
-
-          expect(response).to redirect_to("/pages/permission")
-          expect(response).to have_http_status(:found)
-          expect(edit_registration.reload.workflow_state).to eq(original_state)
-        end
-      end
-
-      context "when there is no edit in progress" do
-        let(:registration) { create(:registration) }
-        let(:token) { registration.reg_identifier }
-
-        context "when the user does not have permission" do
-          it "returns a 302 response, redirects to the permissions error and does not create a new transient registration" do
-            original_tr_count = EditRegistration.count
-            allow(ability_instance).to receive(:can?).with(:edit, registration).and_return(false)
-
-            get cbd_type_edit_forms_path(token)
-
-            expect(response).to redirect_to("/pages/permission")
-            expect(response).to have_http_status(:found)
-            expect(EditRegistration.count).to eq(original_tr_count)
-          end
-        end
-      end
-    end
-
-    context "when a user is not signed in" do
-      before do
-        user = create(:user)
-        sign_out(user)
-      end
-
-      context "when there is no edit in progress" do
-        let(:token) { create(:registration).reg_identifier }
-
-        it "returns a 302 response, redirects to the login page and does not create a new transient registration" do
-          original_tr_count = EditRegistration.count
-          get cbd_type_edit_forms_path(token)
-
-          expect(response).to redirect_to(new_user_session_path)
-          expect(response).to have_http_status(:found)
-          expect(EditRegistration.count).to eq(original_tr_count)
-        end
-      end
-
-      context "when there is an edit already in progress" do
-        it "returns a 302 response, redirects to the login page and does not modify the workflow_state" do
-          original_state = edit_registration.workflow_state
-          get cbd_type_edit_forms_path(token)
-
-          expect(response).to redirect_to(new_user_session_path)
-          expect(response).to have_http_status(:found)
-          expect(edit_registration.reload.workflow_state).to eq(original_state)
         end
       end
     end

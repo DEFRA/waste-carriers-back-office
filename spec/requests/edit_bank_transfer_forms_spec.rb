@@ -4,8 +4,12 @@ require "rails_helper"
 
 RSpec.describe "EditBankTransferForms" do
   describe "GET new_edit_bank_transfer_form" do
+
+    it_behaves_like "user is not logged in", action: :get, path: :new_edit_bank_transfer_form_path
+    it_behaves_like "user is not authorised to perform action", action: :get, path: :new_edit_bank_transfer_form_path, role: :data_agent
+
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, role: :agency) }
 
       before do
         sign_in(user)
@@ -42,8 +46,12 @@ RSpec.describe "EditBankTransferForms" do
   end
 
   describe "POST new_edit_bank_transfer_form" do
+
+    it_behaves_like "user is not logged in", action: :post, path: :edit_bank_transfer_forms_path
+    it_behaves_like "user is not authorised to perform action", action: :post, path: :edit_bank_transfer_forms_path, role: :data_agent
+
     context "when a valid user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, role: :agency) }
 
       before do
         sign_in(user)

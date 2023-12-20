@@ -4,12 +4,14 @@ require "rails_helper"
 
 RSpec.describe "CeaseOrRevokeForms" do
   describe "GET new_cease_or_revoke_form_path" do
-    context "when a user is signed in" do
+
+    it_behaves_like "user is not logged in", action: :get, path: :new_cease_or_revoke_form_path
+    it_behaves_like "user is not authorised to perform action", action: :get, path: :new_cease_or_revoke_form_path, role: :finance
+
+    context "when an agency user is signed in" do
       let(:user) { create(:user, role: "agency_with_refund") }
 
-      before do
-        sign_in(user)
-      end
+      before { sign_in(user) }
 
       context "when no matching registration exists" do
         it "redirects to the invalid token error page" do
@@ -70,29 +72,17 @@ RSpec.describe "CeaseOrRevokeForms" do
         end
       end
     end
-
-    context "when a user is not signed in" do
-      before do
-        user = create(:user)
-        sign_out(user)
-      end
-
-      it "returns a 302 response and redirects to the sign in page" do
-        get new_cease_or_revoke_form_path("foo")
-
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
   end
 
   describe "POST cease_or_revoke_forms_path" do
-    context "when a user is signed in" do
+
+    it_behaves_like "user is not logged in", action: :post, path: :cease_or_revoke_forms_path
+    it_behaves_like "user is not authorised to perform action", action: :post, path: :new_cease_or_revoke_form_path, role: :finance
+
+    context "when a valid user is signed in" do
       let(:user) { create(:user, role: "agency_with_refund") }
 
-      before do
-        sign_in(user)
-      end
+      before { sign_in(user) }
 
       context "when no matching registration exists" do
         it "redirects to the invalid token error page and does not create a new transient registration" do
@@ -148,26 +138,6 @@ RSpec.describe "CeaseOrRevokeForms" do
             expect(response).to render_template("cease_or_revoke_forms/new")
           end
         end
-      end
-    end
-
-    context "when a user is not signed in" do
-      let(:registration) { create(:registration) }
-      let(:valid_params) { { token: registration.reg_identifier } }
-
-      before do
-        user = create(:user)
-        sign_out(user)
-      end
-
-      it "returns a 302 response, redirects to the login page and does not create a new transient registration" do
-        original_tr_count = CeasedOrRevokedRegistration.count
-
-        post cease_or_revoke_forms_path(registration.reg_identifier), params: { renewal_start_form: valid_params }
-
-        expect(response).to redirect_to(new_user_session_path)
-        expect(response).to have_http_status(:found)
-        expect(CeasedOrRevokedRegistration.count).to eq(original_tr_count)
       end
     end
   end

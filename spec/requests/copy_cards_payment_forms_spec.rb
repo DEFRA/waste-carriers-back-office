@@ -4,6 +4,10 @@ require "rails_helper"
 
 RSpec.describe "CopyCardsPaymentForms" do
   describe "GET new_copy_cards_payment_form_path" do
+
+    it_behaves_like "user is not logged in", action: :get, path: :new_copy_cards_payment_form_path
+    it_behaves_like "user is not authorised to perform action", action: :get, path: :new_copy_cards_payment_form_path, role: :finance
+
     context "when a user is signed in" do
       let(:user) { create(:user, role: :agency_super) }
       let(:call_recording_service) { instance_spy(CallRecordingService) }
@@ -53,25 +57,15 @@ RSpec.describe "CopyCardsPaymentForms" do
         end
       end
     end
-
-    context "when a user is not signed in" do
-      before do
-        user = create(:user)
-        sign_out(user)
-      end
-
-      it "returns a 302 response and redirects to the invalid page" do
-        get new_copy_cards_payment_form_path("foo")
-
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(page_path("invalid"))
-      end
-    end
   end
 
   describe "POST copy_cards_payment_forms_path" do
+
+    it_behaves_like "user is not logged in", action: :post, path: :copy_cards_payment_forms_path
+    it_behaves_like "user is not authorised to perform action", action: :post, path: :copy_cards_payment_forms_path, role: :finance
+
     context "when a user is signed in" do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, role: :agency_super) }
 
       before do
         sign_in(user)
@@ -133,20 +127,6 @@ RSpec.describe "CopyCardsPaymentForms" do
             expect(response).to render_template("copy_cards_payment_forms/new")
           end
         end
-      end
-    end
-
-    context "when a user is not signed in" do
-      before do
-        user = create(:user)
-        sign_out(user)
-      end
-
-      it "returns a 302 response and redirects to an invalid page" do
-        post copy_cards_payment_forms_path(token: "1234")
-
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(page_path("invalid"))
       end
     end
   end

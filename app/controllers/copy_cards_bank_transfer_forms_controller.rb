@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CopyCardsBankTransferFormsController < WasteCarriersEngine::FormsController
+class CopyCardsBankTransferFormsController < BackOfficeFormsController
   def new
     return unless super(CopyCardsBankTransferForm, "copy_cards_bank_transfer_form")
 
@@ -18,6 +18,6 @@ class CopyCardsBankTransferFormsController < WasteCarriersEngine::FormsControlle
   end
 
   def authorize_user
-    authorize! :order_copy_cards, @resource
+    authorize! :order_copy_cards, WasteCarriersEngine::Registration
   end
 end

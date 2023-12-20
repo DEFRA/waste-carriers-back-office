@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-class CeaseOrRevokeFormsController < WasteCarriersEngine::FormsController
-  prepend_before_action :authenticate_user!
+class CeaseOrRevokeFormsController < BackOfficeFormsController
 
   def new
     super(CeaseOrRevokeForm, "cease_or_revoke_form")
@@ -24,4 +23,9 @@ class CeaseOrRevokeFormsController < WasteCarriersEngine::FormsController
                                 CeasedOrRevokedRegistration.new(reg_identifier: token)
   end
   # rubocop:enable Naming/MemoizedInstanceVariableName
+
+  def authorize_user
+    authorize! :cease, WasteCarriersEngine::Registration
+    authorize! :revoke, WasteCarriersEngine::Registration
+  end
 end

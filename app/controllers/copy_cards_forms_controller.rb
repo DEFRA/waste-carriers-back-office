@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-class CopyCardsFormsController < WasteCarriersEngine::FormsController
-  prepend_before_action :authenticate_user!
+class CopyCardsFormsController < BackOfficeFormsController
 
   def new
     super(CopyCardsForm, "copy_cards_form")
@@ -24,4 +23,8 @@ class CopyCardsFormsController < WasteCarriersEngine::FormsController
                                 OrderCopyCardsRegistration.new(reg_identifier: token)
   end
   # rubocop:enable Naming/MemoizedInstanceVariableName
+
+  def authorize_user
+    authorize! :order_copy_cards, WasteCarriersEngine::Registration
+  end
 end

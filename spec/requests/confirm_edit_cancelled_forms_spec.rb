@@ -4,12 +4,14 @@ require "rails_helper"
 
 RSpec.describe "ConfirmEditCancelledForms" do
   describe "GET new_confirm_edit_cancelled_form_path" do
-    context "when a valid user is signed in" do
-      let(:user) { create(:user) }
 
-      before do
-        sign_in(user)
-      end
+    it_behaves_like "user is not logged in", action: :get, path: :new_confirm_edit_cancelled_form_path
+    it_behaves_like "user is not authorised to perform action", action: :get, path: :new_confirm_edit_cancelled_form_path, role: :finance
+
+    context "when a valid user is signed in" do
+      let(:user) { create(:user, role: "agency_with_refund") }
+
+      before { sign_in(user) }
 
       context "when no edit registration exists" do
         it "redirects to the invalid page" do
@@ -21,8 +23,7 @@ RSpec.describe "ConfirmEditCancelledForms" do
 
       context "when a valid edit registration exists" do
         let(:transient_registration) do
-          create(:edit_registration,
-                 workflow_state: "confirm_edit_cancelled_form")
+          create(:edit_registration, workflow_state: "confirm_edit_cancelled_form")
         end
 
         it "returns a 200 status" do
@@ -35,12 +36,14 @@ RSpec.describe "ConfirmEditCancelledForms" do
   end
 
   describe "POST confirm_edit_cancelled_form_path" do
-    context "when a valid user is signed in" do
-      let(:user) { create(:user) }
 
-      before do
-        sign_in(user)
-      end
+    it_behaves_like "user is not logged in", action: :post, path: :confirm_edit_cancelled_forms_path
+    it_behaves_like "user is not authorised to perform action", action: :post, path: :confirm_edit_cancelled_forms_path, role: :finance
+
+    context "when a valid user is signed in" do
+      let(:user) { create(:user, role: "agency_with_refund") }
+
+      before { sign_in(user) }
 
       context "when no edit registration exists" do
         it "redirects to the invalid page" do
@@ -52,8 +55,7 @@ RSpec.describe "ConfirmEditCancelledForms" do
 
       context "when a valid edit registration exists" do
         let(:transient_registration) do
-          create(:edit_registration,
-                 workflow_state: "confirm_edit_cancelled_form")
+          create(:edit_registration, workflow_state: "confirm_edit_cancelled_form")
         end
 
         it "redirects to the edit cancelled page" do

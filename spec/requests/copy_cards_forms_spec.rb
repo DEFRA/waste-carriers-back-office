@@ -4,12 +4,14 @@ require "rails_helper"
 
 RSpec.describe "CopyCardsForms" do
   describe "GET new_copy_cards_form_path" do
-    context "when a user is signed in" do
-      let(:user) { create(:user) }
 
-      before do
-        sign_in(user)
-      end
+    it_behaves_like "user is not logged in", action: :get, path: :new_copy_cards_form_path
+    it_behaves_like "user is not authorised to perform action", action: :get, path: :new_copy_cards_form_path, role: :finance
+
+    context "when a valid user is signed in" do
+      let(:user) { create(:user, role: "agency_with_refund") }
+
+      before { sign_in(user) }
 
       context "when no matching registration exists" do
         it "redirects to the invalid token error page" do
@@ -70,29 +72,17 @@ RSpec.describe "CopyCardsForms" do
         end
       end
     end
-
-    context "when a user is not signed in" do
-      before do
-        user = create(:user)
-        sign_out(user)
-      end
-
-      it "returns a 302 response and redirects to the sign in page" do
-        get new_copy_cards_form_path("foo")
-
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
   end
 
   describe "POST copy_cards_forms_path" do
-    context "when a user is signed in" do
-      let(:user) { create(:user) }
 
-      before do
-        sign_in(user)
-      end
+    it_behaves_like "user is not logged in", action: :post, path: :copy_cards_forms_path
+    it_behaves_like "user is not authorised to perform action", action: :post, path: :copy_cards_forms_path, role: :finance
+
+    context "when a valid user is signed in" do
+      let(:user) { create(:user, role: "agency_with_refund") }
+
+      before { sign_in(user) }
 
       context "when no matching registration exists" do
         it "redirects to the invalid token error page and does not create a new transient registration" do
