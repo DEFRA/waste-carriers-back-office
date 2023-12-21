@@ -2,6 +2,9 @@
 
 module Notify
   class CopyCardsOrderCompletedEmailService < WasteCarriersEngine::Notify::BaseSendEmailService
+    TEMPLATE_ID = "543a89cd-056e-4e9b-a55b-6416980f5472"
+    COMMS_LABEL = "Registration cards order confirmation"
+
     def run(registration:, order:)
       @order = order
       super

@@ -24,7 +24,7 @@ module Notify
         }
       end
 
-      subject do
+      subject(:run_service) do
         VCR.use_cassette("notify_renewal_reminder_sends_an_email") do
           described_class.run(registration: registration)
         end
@@ -45,6 +45,8 @@ module Notify
             /Renew waste carrier registration CBDU/
           )
         end
+
+        it_behaves_like "can create a communication record", "email"
       end
 
       context "when the registration's contact email is missing" do

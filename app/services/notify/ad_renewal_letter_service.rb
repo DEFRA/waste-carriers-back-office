@@ -2,11 +2,13 @@
 
 module Notify
   class AdRenewalLetterService < RenewalLetterService
-    private
+    include WasteCarriersEngine::CanRecordCommunication
 
-    def template
-      "1b56d3a7-f7fd-414d-a3ba-2b50f627cf40"
-    end
+    COMMS_LABEL = "Renewal letter"
+    TEMPLATE_ID = "1b56d3a7-f7fd-414d-a3ba-2b50f627cf40"
+    NOTIFICATION_TYPE = "letter"
+
+    private
 
     def personalisation
       {
