@@ -30,18 +30,20 @@ module WasteCarriersEngine
 
       context "when the transient registration is valid" do
         let(:valid) { true }
-        let(:registration) { instance_double(EditRegistration) }
-        let(:ability) { instance_double(Ability) }
+        let(:transient_registration) { build(:edit_registration) }
 
-        before do
-          allow(transient_registration).to receive(:registration).and_return(registration)
+        context "when the user is nil" do
+          let(:user) { nil }
 
-          allow(Ability).to receive(:new).with(user).and_return(ability)
-          allow(ability).to receive(:can?).with(:edit, registration).and_return(can)
+          it "returns a missing permissions result" do
+            expect(described_class.run(params)).to eq(result)
+
+            expect(result).to have_received(:needs_permissions!)
+          end
         end
 
         context "when the user does not have the correct permissions" do
-          let(:can) { false }
+          let(:user) { create(:user, role: :data_agent) }
 
           it "returns a missing permissions result" do
             expect(described_class.run(params)).to eq(result)
@@ -51,12 +53,10 @@ module WasteCarriersEngine
         end
 
         context "when the user has the correct permissions" do
-          let(:can) { true }
-          let(:registration) { instance_double(EditRegistration) }
+          let(:user) { create(:user, role: :agency) }
 
           before do
-            allow(transient_registration).to receive(:registration).and_return(registration)
-            allow(registration).to receive(:active?).and_return(active)
+            allow(transient_registration.registration).to receive(:active?).and_return(active)
           end
 
           context "when the registration is not active" do
