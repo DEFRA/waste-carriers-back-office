@@ -134,6 +134,12 @@ RSpec.describe Ability do
     it_behaves_like "allows only the permitted roles", false, :view_certificate, WasteCarriersEngine::Registration
   end
 
+  context "when the action is view the communications history" do
+    let(:permitted_roles) { agency_plus_roles }
+
+    it_behaves_like "allows only the permitted roles", false, :view_communication_history, WasteCarriersEngine::Registration
+  end
+
   context "when the action is update a transient registration" do
     let(:permitted_roles) { agency_plus_roles }
 

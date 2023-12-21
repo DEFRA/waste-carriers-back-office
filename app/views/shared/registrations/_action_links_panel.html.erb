@@ -95,5 +95,11 @@
                       method: :patch  %>
       </li>
     <% end %>
+
+    <% if display_communication_records_link_for?(resource) %>
+        <p class="govuk-body">
+          <%= link_to t(".actions_box.links.show_communication_history"), registration_communication_records_path(resource.reg_identifier) %>
+        </p>
+    <% end %>
   </ul>
 </div>

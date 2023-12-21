@@ -1,0 +1,10 @@
+en:
+  communication_records:
+    index:
+      title: "Communication history"
+      heading: "Communication history"
+      comms_label: "Template name"
+      notify_template_id: "Template ID"
+      notification_type: "Type"
+      sent_to: "Sent to"
+      sent_at: "Sent on"

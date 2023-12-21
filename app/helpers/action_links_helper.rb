@@ -97,6 +97,10 @@ module ActionLinksHelper
     true
   end
 
+  def display_communication_records_link_for?(resource)
+    a_registration?(resource) && can?(:view_communication_history, WasteCarriersEngine::Registration)
+  end
+
   def display_cease_or_revoke_link_for?(resource)
     return false unless display_registration_links?(resource)
     return false unless can?(:revoke, WasteCarriersEngine::Registration)
