@@ -1,0 +1,57 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: registration_path(@resource.reg_identifier)) %>
+
+    <h1 class="govuk-heading-l">
+      <%= t(".heading") %>
+    </h1>
+  </div>
+</div>
+
+<% if @resource.present? %>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <table class="govuk-table" aria-label="<%= t(".heading") %>">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col"><%= t(".comms_label") %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".notify_template_id") %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".notification_type") %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".sent_to") %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".sent_at") %></th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <% @communication_records.each do |record| %>
+             <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <%= record.comms_label %>
+              </td>
+              <td class="govuk-table__cell">
+                <%= record.notify_template_id %>
+              </td>
+              <td class="govuk-table__cell">
+                <%= record.notification_type %>
+              </td>
+              <td class="govuk-table__cell">
+                <%= record.sent_to %>
+              </td>
+              <td class="govuk-table__cell">
+                <%= record.sent_at.to_formatted_s(:time_on_day_month_year) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <nav role="navigation" class="pagination" aria-label="Pagination">
+        <div class="pagination__summary govuk-body">
+          <%= page_entries_info @communication_records, entry_name: "item" %>
+        </div>
+        <span class="govuk-body">
+          <%= paginate @communication_records %>
+        </span>
+      </nav>
+    </div>
+  </div>
+<% end %>
