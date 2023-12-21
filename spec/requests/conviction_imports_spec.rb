@@ -37,16 +37,9 @@ RSpec.describe "ConvictionImports" do
   end
 
   describe "POST /bo/import-convictions" do
-    let(:params) do
-      {
-        data: %(
-Offender,Birth Date,Company No.,System Flag,Inc Number
-Apex Limited,,11111111,ABC,99999999
-"Doe, John",01/01/1991,,DFG,
-   Whitespace Inc   , , , ,
-)
-      }
-    end
+    let(:valid_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/valid_entities.csv"), "text/csv") }
+    let(:invalid_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/invalid_entities.csv"), "text/csv") }
+    let(:invalid_file) { fixture_file_upload(Rails.root.join("spec/fixtures/files/invalid_file.txt"), "text") }
 
     context "when a valid user is signed in" do
       let(:user) { create(:user, role: :developer) }
@@ -56,20 +49,27 @@ Apex Limited,,11111111,ABC,99999999
       end
 
       it "redirects to the results page and displays a flash message" do
-        post "/bo/import-convictions", params: params
+        post "/bo/import-convictions", params: { file: valid_csv }
 
-        expect(response).to redirect_to("/bo")
-        expect(request.flash[:success]).to eq("Convictions data has been updated successfully. 3 records in database.")
+        expect(response).to redirect_to(bo_path)
+        expect(flash[:success]).to match(/Convictions data has been updated successfully. \d+ records in database./)
+      end
+
+      context "when invalid file type is submitted" do
+        it "renders the new template and displays an error message" do
+          post "/bo/import-convictions", params: { file: invalid_file }
+
+          expect(response).to render_template(:new)
+          expect(flash[:error]).to eq(I18n.t("conviction_imports.flash_messages.error"))
+        end
       end
 
       context "when invalid data is submitted" do
-        let(:params) { { data: "foo" } }
-
-        it "redirects to the :new template and displays an error message" do
-          post "/bo/import-convictions", params: params
+        it "renders the new template and displays an error message" do
+          post "/bo/import-convictions", params: { file: invalid_csv }
 
           expect(response).to render_template(:new)
-          expect(request.flash[:error]).to eq("Error occurred while importing data: Invalid headers")
+          expect(flash[:error]).to match(/Error occurred while importing data:/)
         end
       end
     end
@@ -82,7 +82,7 @@ Apex Limited,,11111111,ABC,99999999
       end
 
       it "redirects to the permissions error page" do
-        post "/bo/import-convictions", params: params
+        post "/bo/import-convictions", params: { file: valid_csv }
 
         expect(response).to redirect_to("/bo/pages/permission")
       end

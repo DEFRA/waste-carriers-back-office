@@ -1,0 +1,6 @@
+Offender,Wrong Birth Date Header,Company No.,System Flag,Inc Number
+Apex Limited,NotADate,11111111,ABC,99999999
+"Doe, John",01/01/1991,,DFG,
+Whitespace Inc,,,,
+MissingComma John,01/01/1991,22222222,DEF
+BinaryData John,01/01/1991,33333333,EFG,<<Binary Content>>

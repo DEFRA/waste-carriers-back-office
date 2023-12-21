@@ -16,3 +16,4 @@ en:
         one: "Convictions data has been updated successfully. %{count} record in database."
         other: "Convictions data has been updated successfully. %{count} records in database."
       error: "Error occurred while importing data: %{error}"
+      error_details: "Invalid file format. Please upload a CSV file."
