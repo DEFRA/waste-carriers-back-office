@@ -1,0 +1,133 @@
+<%
+  # When this template is used by a controller, the @presenter variable is exposed.
+  # But when it is rendered from (eg) the RegistrationActivatedEmailService,
+  # the instance variable is not available, only the local one.
+  @presenter ||= presenter
+%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <%= stylesheet_link_tag "certificates", media: "all" %>
+  </head>
+  <body>
+    <%= link_to "View as PDF", registration_certificate_pdf_path(@presenter.reg_identifier), class: "govuk-!-display-none-print govuk-button", target: "_blank" %>
+    <div id="wrapper">
+      <main id="content" role="main" class="group">
+        <div class="grid-wrapper">
+          <div class="grid-2-3">
+
+            <!-- Header section -->
+            <header class="page-header group">
+              <div class="hgroup">
+                <h1 class="heading-small"><%=t ".heading" %></h1>
+              </div>
+            </header>
+
+            <table summary="Regulation Authority details" class="certificate_table" role="presentation">
+              <thead>
+                <tr>
+                  <th><%=t ".authority" %></th>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="table-column-text"><%=t ".name" %></td>
+                  <td>
+                    <%= image_tag "environment_agency_logo.png", alt: "Environment Agency Logo", border: "0", height: "39", width: "129" %>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table-column-text"><%=t ".nccc_address_pretext" %></td>
+                  <td>
+                    <ul>
+                      <li><%=t ".nccc_address_line_1" %></li>
+                      <li><%=t ".nccc_address_line_2" %></li>
+                      <li><%=t ".nccc_address_line_3" %></li>
+                      <li><%=t ".nccc_address_line_4" %></li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table-column-text"><%=t ".telephone_number_pretext" %></td>
+                  <td><%=t ".nccc_number" %></td>
+                </tr>
+              </tbody>
+            </table>
+            </br>
+
+            <p class="certificate_text"><%=t ".certify_message" %></p>
+
+            <table summary="Registration Certificate" role="presentation">
+              <thead>
+                <tr>
+                  <th><%=t ".carrier_table_heading" %></th>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="table-column-text"><%=t ".entity_display_name" %></td>
+                  <td><%= @presenter.entity_display_name %></td>
+                </tr>
+                <% if @presenter.complex_organisation_details? %>
+                  <tr>
+                    <td class="table-column-text"><%= @presenter.complex_organisation_heading %></td>
+                    <td><%= @presenter.complex_organisation_name %></td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <td class="table-column-text"><%=t ".registered" %></td>
+                  <td><%= @presenter.tier_and_registration_type %></td>
+                </tr>
+                <tr>
+                  <td class="table-column-text"><%=t ".registration_number" %></td>
+                  <td><%= @presenter.reg_identifier%></td>
+                </tr>
+                <tr>
+                  <td class="table-column-text"><%=t ".business_address" %></td>
+                  <td>
+                  <% @presenter.registered_address_fields.each do |line| %>
+                    <%= line %><br>
+                  <% end %>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table-column-text"><%=t ".carrier_telephone_number" %></td>
+                  <td><%= @presenter.phone_number%></td>
+                </tr>
+                <tr>
+                  <td class="table-column-text"><%=t ".registration_date" %></td>
+                  <td><%= @presenter.metaData.date_activated.in_time_zone("London").to_date %></td>
+                </tr>
+                <% if @presenter.upper_tier? %>
+                  <tr>
+                    <td class="table-column-text"><%=t ".expiry_date" %></td>
+                    <td><%= @presenter.expires_on.in_time_zone("London").to_date %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+            <p class="certificate_text"><%= t(".cert_created_date", date: @presenter.certificate_creation_date) %></p>
+
+            <p class="certificate_text"><%= t(".cert_copy_text", certificate_version: @presenter.certificate_version) %></p>
+
+            <h2 class="certificate_title"><%=t ".heading2" %></h2>
+
+            <!-- Renewal details section -->
+            <div class="renewal">
+              <p class="certificate_text"><%= @presenter.renewal_message %></p>
+              <% if @presenter.assisted_digital? %>
+                <p class="certificate_text"><%= t ".update_phone" %></p>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

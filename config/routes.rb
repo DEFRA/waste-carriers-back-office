@@ -339,6 +339,7 @@ Rails.application.routes.draw do
                   as: :registration_transfer_success
 
               get "certificate", to: "certificates#show", as: :certificate
+              get "certificate/pdf", to: "certificates#pdf", as: :certificate_pdf
 
               get "communication_records", to: "communication_records#index", as: :communication_records
             end
