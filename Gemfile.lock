@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 81eb5f6d6682cc3e780f72346738a323e836a3e0
+  revision: 52415bdd826a31904021eb42c2d5c0caca39577a
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -324,7 +324,7 @@ GEM
     mongoid-locker (2.0.2)
       mongoid (>= 5.0, < 9)
     multi_json (1.15.0)
-    net-imap (0.4.8)
+    net-imap (0.4.9)
       date
       net-protocol
     net-pop (0.1.2)
