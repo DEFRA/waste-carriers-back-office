@@ -8,12 +8,6 @@ class CertificatesController < ApplicationController
     @presenter = WasteCarriersEngine::CertificateGeneratorService.run(registration: registration,
                                                                       requester: current_user, view: view_context)
 
-  end
-
-  def pdf
-    registration = WasteCarriersEngine::Registration.find_by(reg_identifier: params[:registration_reg_identifier])
-    @presenter = WasteCarriersEngine::CertificateGeneratorService.run(registration: registration,
-                                                                      requester: current_user, view: view_context)
     render pdf: registration.reg_identifier,
            show_as_html: show_as_html?,
            layout: false,

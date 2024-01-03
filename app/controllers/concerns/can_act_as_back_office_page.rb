@@ -5,8 +5,8 @@ module CanActAsBackOfficePage
 
   # rubocop:disable Metrics/BlockLength
   included do
-    include WasteCarriersEngine::CanAddDebugLogging
     include CanAuthenticateUser
+    include CanHandleErrors
 
     # Prevent CSRF attacks by raising an exception.
     # For APIs, you may want to use :null_session instead.
@@ -40,19 +40,6 @@ module CanActAsBackOfficePage
 
     def after_accept_path_for(*)
       bo_path
-    end
-
-    # Most generic handler first:
-    # https://apidock.com/rails/ActiveSupport/Rescuable/ClassMethods/rescue_from#518-Define-handlers-in-order-of-most-generic-to-most-specific
-    rescue_from StandardError do |e|
-      Airbrake.notify e
-      Rails.logger.error "Unhandled exception: #{e}"
-      log_transient_registration_details("Uncaught system error", e, @transient_registration)
-      redirect_to "/bo/pages/system_error"
-    end
-
-    rescue_from CanCan::AccessDenied do
-      redirect_to "/bo/pages/permission"
     end
 
     # http://jacopretorius.net/2014/01/force-page-to-reload-on-browser-back-in-rails.html
