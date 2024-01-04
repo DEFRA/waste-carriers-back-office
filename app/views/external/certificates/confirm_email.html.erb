@@ -6,10 +6,11 @@
       <fieldset class="govuk-fieldset">
         <div class="govuk-form-group">
           <%= form.label :email, class: 'govuk-label' %>
-          <%= form.email_field :email, required: true, class: 'govuk-input' %>
+          <%= form.email_field :email, required: true, class: 'govuk-input govuk-input--width-20' %>
         </div>
       </fieldset>
 
+      </br>
       <%= form.submit "Confirm", class: 'govuk-button', data: { module: 'govuk-button' } %>
     <% end %>
   </main>
