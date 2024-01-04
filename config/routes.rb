@@ -340,7 +340,11 @@ Rails.application.routes.draw do
 
               get "certificate", to: "certificates#show", as: :certificate
 
-              get "external_certificate", to: "external/certificates#show", as: :external_certificate
+              namespace :external do
+                get 'certificate', to: 'certificates#show'
+                get 'certificate_confirm_email', to: 'certificates#confirm_email'
+                post 'certificate_process_email', to: 'certificates#process_email'
+              end
 
               get "communication_records", to: "communication_records#index", as: :communication_records
             end

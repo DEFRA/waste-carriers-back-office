@@ -1,0 +1,16 @@
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" id="main-content" role="main">
+    <h1 class="govuk-heading-l">Confirm your email address</h1>
+
+    <%= form_with url: registration_external_certificate_process_email_path(@registration.reg_identifier), method: :post, html: { class: 'govuk-form-group' } do |form| %>
+      <fieldset class="govuk-fieldset">
+        <div class="govuk-form-group">
+          <%= form.label :email, class: 'govuk-label' %>
+          <%= form.email_field :email, required: true, class: 'govuk-input' %>
+        </div>
+      </fieldset>
+
+      <%= form.submit "Confirm", class: 'govuk-button', data: { module: 'govuk-button' } %>
+    <% end %>
+  </main>
+</div>
