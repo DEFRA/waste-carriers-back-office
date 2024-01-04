@@ -342,6 +342,7 @@ Rails.application.routes.draw do
 
               namespace :external do
                 get 'certificate', to: 'certificates#show'
+                get 'pdf_certificate', to: 'certificates#pdf'
                 get 'certificate_confirm_email', to: 'certificates#confirm_email'
                 post 'certificate_process_email', to: 'certificates#process_email'
               end
