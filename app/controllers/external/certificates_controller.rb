@@ -4,6 +4,8 @@ module External
   # rubocop:disable Rails/ApplicationController
   class CertificatesController < ActionController::Base
     # rubocop:enable Rails/ApplicationController
+    before_action :find_registration
+    before_action :ensure_valid_email, only: %i[show pdf]
 
     include CanHandleErrors
     layout "application"
@@ -11,60 +13,73 @@ module External
     UserStruct = Struct.new(:email)
 
     def show
-      if session[:valid_email]
-        registration = find_registration
-        @presenter = WasteCarriersEngine::CertificateGeneratorService.run(registration: registration,
-                                                                          requester: current_user, view: view_context)
-      else
-        redirect_to registration_external_certificate_confirm_email_path(params[:registration_reg_identifier])
-      end
+      @presenter = build_presenter
     end
 
     def pdf
-      registration = find_registration
-      @presenter = WasteCarriersEngine::CertificateGeneratorService.run(registration: registration,
-                                                                        requester: UserStruct.new(
-                                                                          email: session[:valid_email]
-                                                                        ),
-                                                                        view: view_context)
-
-      render pdf: registration.reg_identifier,
-             layout: false,
-             page_size: "A4",
-             margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
-             print_media_type: true,
-             template: "waste_carriers_engine/pdfs/certificate",
-             enable_local_file_access: true,
-             allow: [WasteCarriersEngine::Engine.root.join("app", "assets", "images",
-                                                           "environment_agency_logo.png").to_s]
+      @presenter = build_presenter
+      render pdf_settings
     end
 
     def confirm_email
-      reset_session if Rails.env.development? # remove before merging
-      @registration = find_registration
+      reset_session if Rails.env.development?
     end
 
     def process_email
-      @registration = find_registration
       email = params[:email]
-      if valid_email?(email)
-        session[:valid_email] = email
-        redirect_to registration_external_certificate_path(@registration.reg_identifier)
-      else
+      unless valid_email?(email)
         flash[:error] = I18n.t("external.certificates.process_email.error")
-        render :confirm_email
+        render :confirm_email and return
       end
+
+      session[:valid_email] = email
+      redirect_to registration_external_certificate_path(@registration.reg_identifier)
     end
 
     private
 
+    def ensure_valid_email
+      return if valid_email?(session[:valid_email])
+
+      redirect_to confirm_email_path
+    end
+
+    def build_presenter
+      WasteCarriersEngine::CertificateGeneratorService.run(
+        registration: @registration,
+        requester: current_user_struct,
+        view: view_context
+      )
+    end
+
+    def pdf_settings
+      {
+        pdf: @registration.reg_identifier,
+        layout: false,
+        page_size: "A4",
+        margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
+        print_media_type: true,
+        template: "waste_carriers_engine/pdfs/certificate",
+        enable_local_file_access: true,
+        allow: [WasteCarriersEngine::Engine.root.join("app", "assets", "images", "environment_agency_logo.png").to_s]
+      }
+    end
+
     def find_registration
-      WasteCarriersEngine::Registration.find_by(reg_identifier: params[:registration_reg_identifier])
+      @registration = WasteCarriersEngine::Registration.find_by(reg_identifier: params[:registration_reg_identifier])
+      redirect_to root_path unless @registration
     end
 
     def valid_email?(email)
       [@registration.contact_email, @registration.receipt_email].include?(email)
     end
 
+    def current_user_struct
+      UserStruct.new(session[:valid_email])
+    end
+
+    def confirm_email_path
+      registration_external_certificate_confirm_email_path(@registration.reg_identifier)
+    end
   end
 end
