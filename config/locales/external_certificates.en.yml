@@ -36,4 +36,9 @@ en:
         carrier_dealer: "carrier and dealer"
         broker_dealer: "broker and dealer"
         carrier_broker_dealer: "carrier, broker and dealer"
+      confirm_email:
+        header: "Confirm your email address"
+      process_email:
+        error: "Invalid email address"
+
 

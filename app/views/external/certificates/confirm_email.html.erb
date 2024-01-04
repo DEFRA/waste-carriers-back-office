@@ -1,6 +1,11 @@
 <div class="govuk-width-container">
   <main class="govuk-main-wrapper" id="main-content" role="main">
-    <h1 class="govuk-heading-l">Confirm your email address</h1>
+    <% if flash[:error].present? %>
+      <div class="govuk-error-summary" role="alert">
+        <h2 class="govuk-heading-m"><%= flash[:error] %></h2>
+      </div>
+    <% end %>
+    <h1 class="govuk-heading-l"><%=t('.header')%></h1>
 
     <%= form_with url: registration_external_certificate_process_email_path(@registration.reg_identifier), method: :post, html: { class: 'govuk-form-group' } do |form| %>
       <fieldset class="govuk-fieldset">

@@ -3,7 +3,6 @@
 module CanActAsBackOfficePage
   extend ActiveSupport::Concern
 
-  # rubocop:disable Metrics/BlockLength
   included do
     include CanAuthenticateUser
     include CanHandleErrors
@@ -49,5 +48,4 @@ module CanActAsBackOfficePage
       response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
     end
   end
-  # rubocop:enable Metrics/BlockLength
 end
