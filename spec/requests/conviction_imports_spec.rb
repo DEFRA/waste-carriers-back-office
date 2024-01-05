@@ -60,7 +60,7 @@ RSpec.describe "ConvictionImports" do
           post "/bo/import-convictions", params: { file: invalid_file }
 
           expect(response).to render_template(:new)
-          expect(flash[:error]).to eq(I18n.t("conviction_imports.flash_messages.error"))
+          expect(flash[:error]).to eq(I18n.t("conviction_imports.flash_messages.invalid_file_type_details"))
         end
       end
 
