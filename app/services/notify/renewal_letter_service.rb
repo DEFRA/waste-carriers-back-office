@@ -4,20 +4,38 @@ require "notifications/client"
 
 module Notify
   class RenewalLetterService < ::WasteCarriersEngine::BaseService
+    NOTIFICATION_TYPE = "letter"
     # So we can use displayable_address()
     include ::WasteCarriersEngine::ApplicationHelper
+    include WasteCarriersEngine::CanRecordCommunication
 
     def run(registration:)
       @registration = NotifyRenewalPresenter.new(registration)
 
       client = Notifications::Client.new(WasteCarriersEngine.configuration.notify_api_key)
 
-      client.send_letter(template_id: template,
+      client.send_letter(template_id: template_id,
                          reference: @registration.reg_identifier,
-                         personalisation: personalisation)
+                         personalisation: personalisation).tap do |response|
+                           if response.instance_of?(Notifications::Client::ResponseNotification)
+                             create_communication_record
+                           end
+                         end
     end
 
     private
+
+    def template_id
+      self.class::TEMPLATE_ID
+    end
+
+    def comms_label
+      self.class::COMMS_LABEL
+    end
+
+    def notification_type
+      NOTIFICATION_TYPE
+    end
 
     def address_lines
       address_values = [

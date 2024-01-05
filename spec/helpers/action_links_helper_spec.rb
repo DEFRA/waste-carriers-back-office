@@ -933,6 +933,36 @@ RSpec.describe ActionLinksHelper do
     end
   end
 
+  describe "#display_communication_records_link_for?" do
+    context "when resource is not a Registration" do
+      let(:invalid_resource) { build(:address) }
+
+      it "returns false" do
+        expect(helper.display_communication_records_link_for?(invalid_resource)).to be(false)
+      end
+    end
+
+    context "when user has no permissions to view communication history" do
+      let(:resource) { build(:registration) }
+
+      before { allow(helper).to receive(:can?).and_return(false) }
+
+      it "returns false" do
+        expect(helper.display_communication_records_link_for?(resource)).to be(false)
+      end
+    end
+
+    context "when resourse is a Registration and user has permissions to view communication history" do
+      let(:resource) { build(:registration) }
+
+      before { allow(helper).to receive(:can?).and_return(true) }
+
+      it "returns true" do
+        expect(helper.display_communication_records_link_for?(resource)).to be(true)
+      end
+    end
+  end
+
   describe "#display_renew_link_for?" do
     context "when the resource is not a Registration" do
       let(:resource) { build(:renewing_registration) }

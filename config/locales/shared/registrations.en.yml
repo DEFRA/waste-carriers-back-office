@@ -87,6 +87,7 @@ en:
             refresh_companies_house: "Refresh registered company name from Companies House"
             refresh_ea_area: "Refresh EA area"
             restore: Restore registration
+            show_communication_history: "Show communication history"
       restored_panel:
         restored_details:
           heading: Restored registration

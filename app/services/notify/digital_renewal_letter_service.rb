@@ -2,11 +2,10 @@
 
 module Notify
   class DigitalRenewalLetterService < RenewalLetterService
-    private
+    TEMPLATE_ID = "41ebbbc4-0d2f-425a-8d94-29e2beffd8ba"
+    COMMS_LABEL = "Digital reminder letter"
 
-    def template
-      "41ebbbc4-0d2f-425a-8d94-29e2beffd8ba"
-    end
+    private
 
     def personalisation
       {

@@ -4,22 +4,30 @@ require "rails_helper"
 
 RSpec.describe Notify::DigitalRenewalSmsService do
   describe "run" do
+    subject(:run_service) { described_class.run(registration: decorated_registration) }
+
+    let(:registration) { create(:registration, :expires_soon, :simple_address) }
     let(:decorated_registration) do
-      NotifyRenewalPresenter.new(create(:registration, :expires_soon, :simple_address))
+      NotifyRenewalPresenter.new(registration)
     end
+    let(:template_id) { "c23c1300-6d49-4310-bda6-99174ca0cd23" }
 
     let(:client) { instance_double(Notifications::Client) }
+    let(:notifications_client_response_notification) { instance_double(Notifications::Client::ResponseNotification) }
 
     before do
       allow(Notifications::Client).to receive(:new).and_return(client)
-      allow(client).to receive(:send_sms)
+      allow(client).to receive(:send_sms).and_return(notifications_client_response_notification)
+      allow(notifications_client_response_notification).to receive(:instance_of?)
+        .with(Notifications::Client::ResponseNotification)
+        .and_return(true)
     end
 
     it "sends an sms" do
-      described_class.run(registration: decorated_registration)
+      run_service
       expect(client).to have_received(:send_sms).with(
         hash_including(
-          template_id: Notify::DigitalRenewalSmsService::TEMPLATE_ID,
+          template_id: template_id,
           phone_number: decorated_registration.phone_number,
           personalisation: hash_including(
             expiry_date: decorated_registration.expiry_date,
@@ -29,5 +37,7 @@ RSpec.describe Notify::DigitalRenewalSmsService do
         )
       )
     end
+
+    it_behaves_like "can create a communication record", "sms"
   end
 end
