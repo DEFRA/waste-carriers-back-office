@@ -5,12 +5,14 @@
         <h2 class="govuk-heading-m"><%= flash[:error] %></h2>
       </div>
     <% end %>
-    <h1 class="govuk-heading-l"><%=t('.header')%></h1>
 
     <%= form_with url: registration_external_certificate_process_email_path(@registration.reg_identifier), method: :post, html: { class: 'govuk-form-group' } do |form| %>
       <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <h1 class="govuk-fieldset__heading">
+            <%=t('.legend')%>
+          </h1>
         <div class="govuk-form-group">
-          <%= form.label :email, class: 'govuk-label' %>
           <%= form.email_field :email, required: true, class: 'govuk-input govuk-input--width-20' %>
         </div>
       </fieldset>
