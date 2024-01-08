@@ -54,6 +54,37 @@ RSpec.describe "External Certificates" do
     end
   end
 
+  describe "GET pdf" do
+    let(:base_path) { "/bo/registrations/#{registration.reg_identifier}/external/pdf_certificate" }
+    context "with valid email in session" do
+      before do
+        post process_email_path, params: { email: valid_email }
+      end
+
+      it "responds with a PDF with a filename that includes the registration reference and returns a 200 status code" do
+        get base_path
+
+        expect(response.media_type).to eq("application/pdf")
+        expected_content_disposition = "inline; filename=\"#{registration.reg_identifier}.pdf\"; filename*=UTF-8''#{registration.reg_identifier}.pdf"
+        expect(response.headers["Content-Disposition"]).to eq(expected_content_disposition)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "without valid email in session" do
+      before do
+        post process_email_path, params: { email: invalid_email }
+      end
+
+      it "redirects to the email confirmation page" do
+        get "#{base_path}.pdf"
+
+        expect(response).to redirect_to(registration_external_certificate_confirm_email_path(registration.reg_identifier))
+        expect(response).to have_http_status(:found)
+      end
+    end
+  end
+
   def process_email_path
     registration_external_certificate_process_email_path(registration.reg_identifier)
   end
