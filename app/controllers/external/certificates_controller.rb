@@ -21,7 +21,9 @@ module External
       render pdf_settings
     end
 
-    def confirm_email; end
+    def confirm_email; 
+      # to render the confirm_email view, with registration from before_action
+    end
 
     def process_email
       email = params[:email]
