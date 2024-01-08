@@ -86,6 +86,13 @@ RSpec.describe "External Certificates" do
     end
   end
 
+  describe "GET confirm_email" do
+    it "renders the confirm email page" do
+      get registration_external_certificate_confirm_email_path(registration.reg_identifier)
+      expect(response).to render_template(:confirm_email)
+    end
+  end
+
   def process_email_path
     registration_external_certificate_process_email_path(registration.reg_identifier)
   end
