@@ -56,6 +56,7 @@ RSpec.describe "External Certificates" do
 
   describe "GET pdf" do
     let(:base_path) { "/bo/registrations/#{registration.reg_identifier}/external/pdf_certificate" }
+
     context "with valid email in session" do
       before do
         post process_email_path, params: { email: valid_email }
