@@ -22,7 +22,6 @@ module External
     end
 
     def confirm_email
-      reset_session if Rails.env.development?
     end
 
     def process_email
@@ -71,7 +70,7 @@ module External
     end
 
     def valid_email?(email)
-      [@registration.contact_email, @registration.receipt_email].include?(email)
+      [@registration.contact_email, @registration.receipt_email].compact.include?(email)
     end
 
     def current_user_struct
@@ -80,6 +79,10 @@ module External
 
     def confirm_email_path
       registration_external_certificate_confirm_email_path(@registration.reg_identifier)
+    end
+
+    def session_email
+      session[:valid_email]
     end
   end
 end
