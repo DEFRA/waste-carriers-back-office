@@ -79,9 +79,5 @@ module External
     def confirm_email_path
       registration_external_certificate_confirm_email_path(@registration.reg_identifier)
     end
-
-    def session_email
-      session[:valid_email]
-    end
   end
 end
