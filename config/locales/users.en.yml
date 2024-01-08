@@ -40,6 +40,8 @@ en:
             visually_hidden_text: " %{email}"
   mongoid:
     errors:
+      messages:
+        confirmation: "The passwords don't match"
       models:
         user:
           attributes:
