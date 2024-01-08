@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 58216a792ced6d82f792143983a79add028d2a69
+  revision: 97e77bc1d9b73fd766b8abcfb66979098ec13d7f
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -331,7 +331,7 @@ GEM
       net-protocol
     net-protocol (0.2.2)
       timeout
-    net-smtp (0.4.0)
+    net-smtp (0.4.0.1)
       net-protocol
     netrc (0.11.0)
     nio4r (2.7.0)
