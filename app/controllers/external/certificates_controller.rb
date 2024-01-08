@@ -21,8 +21,7 @@ module External
       render pdf_settings
     end
 
-    def confirm_email
-    end
+    def confirm_email; end
 
     def process_email
       email = params[:email]

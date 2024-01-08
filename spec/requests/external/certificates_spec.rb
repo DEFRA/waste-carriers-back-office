@@ -2,17 +2,17 @@
 
 require "rails_helper"
 
-RSpec.describe External::CertificatesController, type: :request do
-  let(:registration) { create(:registration, :expires_soon, contact_email: 'contact@example.com') }
+RSpec.describe "External Certificates" do
+  let(:registration) { create(:registration, :expires_soon, contact_email: "contact@example.com") }
   let(:valid_email) { registration.contact_email }
   let(:invalid_email) { "invalid@example.com" }
   let(:base_path) { "/bo/registrations/#{registration.reg_identifier}/external/certificate" }
 
-
   describe "POST process_email" do
     context "with valid email" do
       it "sets the valid email in session and redirects to the certificate page" do
-        validate_valid_email
+        post process_email_path, params: { email: valid_email }
+        expect(response).to redirect_to(base_path)
       end
     end
 
@@ -29,7 +29,7 @@ RSpec.describe External::CertificatesController, type: :request do
   describe "GET show" do
     context "with valid email in session" do
       before do
-        validate_valid_email
+        post process_email_path, params: { email: valid_email }
       end
 
       it "renders the HTML certificate" do
@@ -41,6 +41,10 @@ RSpec.describe External::CertificatesController, type: :request do
     end
 
     context "without valid email in session" do
+      before do
+        post process_email_path, params: { email: invalid_email }
+      end
+
       it "redirects to the email confirmation page" do
         get base_path
 
@@ -52,10 +56,5 @@ RSpec.describe External::CertificatesController, type: :request do
 
   def process_email_path
     registration_external_certificate_process_email_path(registration.reg_identifier)
-  end
-
-  def validate_valid_email
-    post process_email_path, params: { email: valid_email }
-    expect(response).to redirect_to(base_path)
   end
 end
