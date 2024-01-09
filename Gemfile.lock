@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 97e77bc1d9b73fd766b8abcfb66979098ec13d7f
+  revision: b6fa963b3e59d5c67d1a24255ab860db631651c1
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -11,7 +11,7 @@ GIT
       defra_ruby_area (~> 2.2)
       defra_ruby_email (~> 1.3.0)
       defra_ruby_govpay
-      defra_ruby_validators (~> 2.5.1)
+      defra_ruby_validators (~> 2.6)
       high_voltage (~> 3.1.2)
       jbuilder (~> 2.11.5)
       mongo_session_store (~> 3.2.1)
@@ -197,13 +197,14 @@ GEM
       rubocop-rake
       rubocop-rspec
     defra_ruby_template (3.13.0)
-    defra_ruby_validators (2.5.2)
+    defra_ruby_validators (2.6.0)
       activemodel
       i18n
       matrix
       os_map_ref
       phonelib
       rest-client (~> 2.0)
+      uk_postcode
       validates_email_format_of
     devise (4.9.3)
       bcrypt (~> 3.0)
@@ -216,7 +217,7 @@ GEM
       devise (>= 4.6)
     diff-lcs (1.5.0)
     docile (1.4.0)
-    domain_name (0.6.20231109)
+    domain_name (0.6.20240107)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
