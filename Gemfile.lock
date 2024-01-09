@@ -224,9 +224,9 @@ GEM
       railties (>= 3.2)
     erubi (1.12.0)
     execjs (2.8.1)
-    factory_bot (6.4.2)
+    factory_bot (6.4.5)
       activesupport (>= 5.0.0)
-    factory_bot_rails (6.4.2)
+    factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
     faker (3.2.2)
@@ -325,7 +325,7 @@ GEM
     mongoid-locker (2.0.2)
       mongoid (>= 5.0, < 9)
     multi_json (1.15.0)
-    net-imap (0.4.9)
+    net-imap (0.4.9.1)
       date
       net-protocol
     net-pop (0.1.2)
