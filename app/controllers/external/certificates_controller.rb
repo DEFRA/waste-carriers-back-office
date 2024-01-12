@@ -6,6 +6,7 @@ module External
     # rubocop:enable Rails/ApplicationController
     before_action :find_registration
     before_action :ensure_valid_email, only: %i[show pdf]
+    before_action :ensure_valid_token, only: %i[confirm_email show pdf]
 
     include CanHandleErrors
     layout "application"
@@ -33,7 +34,8 @@ module External
       end
 
       session[:valid_email] = email
-      redirect_to registration_external_certificate_path(@registration.reg_identifier)
+      redirect_to registration_external_certificate_path(@registration.reg_identifier,
+                                                         token: @registration.view_certificate_token)
     end
 
     private
@@ -80,6 +82,18 @@ module External
 
     def confirm_email_path
       registration_external_certificate_confirm_email_path(@registration.reg_identifier)
+    end
+
+    def ensure_valid_token
+      return if valid_token?
+
+      redirect_to root_path, notice: I18n.t("external.certificates.errors.token")
+    end
+
+    def valid_token?
+      return false unless params[:token].present? && @registration.view_certificate_token_valid?
+
+      params[:token] == @registration.view_certificate_token
     end
   end
 end

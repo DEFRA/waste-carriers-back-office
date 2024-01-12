@@ -1,6 +1,8 @@
 en:
   external:
     certificates:
+      errors:
+        token: "You do not have permission to view this page"
       show:
         heading: "Certificate of Registration under the Waste (England and Wales) Regulations 2011"
         authority: "Regulation authority"

@@ -12,7 +12,7 @@
     <%= stylesheet_link_tag "certificates", media: "all" %>
   </head>
   <body>
-    <%= link_to "View as PDF", registration_external_pdf_certificate_path(@presenter.reg_identifier), class: "govuk-!-display-none-print govuk-button", target: "_blank" %>
+    <%= link_to "View as PDF", registration_external_pdf_certificate_path(@presenter.reg_identifier, token: params[:token]), class: "govuk-!-display-none-print govuk-button", target: "_blank" %>
     <div id="wrapper">
       <main id="content" role="main" class="group">
         <div class="grid-wrapper">
