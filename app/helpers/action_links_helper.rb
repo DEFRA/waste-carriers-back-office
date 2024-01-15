@@ -91,6 +91,7 @@ module ActionLinksHelper
   end
 
   def display_refresh_ea_area_link_for?(resource)
+    return false unless a_registration?(resource)
     return false if resource.company_address.blank?
     return false if resource.company_address.postcode.blank?
 

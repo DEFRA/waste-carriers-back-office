@@ -931,6 +931,14 @@ RSpec.describe ActionLinksHelper do
         expect(helper.display_refresh_ea_area_link_for?(resource)).to be(false)
       end
     end
+
+    context "when the resource is a transient registration" do
+      let(:resource) { build(:renewing_registration) }
+
+      it "returns false" do
+        expect(helper.display_refresh_ea_area_link_for?(resource)).to be(false)
+      end
+    end
   end
 
   describe "#display_communication_records_link_for?" do
