@@ -9,14 +9,15 @@ module Analytics
       @end_date = end_date || Time.zone.today
 
       {
-        total_journeys_started: total_journeys_started,
-        total_journeys_completed: total_journeys_completed,
-        completion_rate: completion_rate,
-        front_office_started: front_office_started,
-        back_office_started: back_office_started,
-        front_office_completed: front_office_completed,
-        back_office_completed: back_office_completed,
-        cross_office_completed: cross_office_completed
+        total_journeys_started:,
+        total_journeys_completed:,
+        completion_rate:,
+        front_office_started:,
+        back_office_started:,
+        front_office_completed:,
+        back_office_completed:,
+        cross_office_completed:,
+        total_journeys_abandoned:
       }
     end
 
@@ -27,32 +28,50 @@ module Analytics
     end
 
     def front_office_started
-      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date).started_digital.count
+      WasteCarriersEngine::Analytics::UserJourney.reached_start_cutoff_page
+                                                 .date_range(start_date, end_date)
+                                                 .started_digital
+                                                 .count
     end
 
     def back_office_started
-      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date).started_assisted_digital.count
+      WasteCarriersEngine::Analytics::UserJourney.reached_start_cutoff_page
+                                                 .date_range(start_date, end_date)
+                                                 .started_assisted_digital
+                                                 .count
     end
 
     def total_journeys_started
-      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date).count
+      WasteCarriersEngine::Analytics::UserJourney.reached_start_cutoff_page
+                                                 .date_range(start_date, end_date)
+                                                 .count
     end
 
     def front_office_completed
-      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date).completed_digital.count
+      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date)
+                                                 .completed_digital.count
     end
 
     def back_office_completed
-      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date).completed_assisted_digital.count
+      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date)
+                                                 .completed_assisted_digital.count
     end
 
     def cross_office_completed
-      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date,
-                                                             end_date).started_digital.completed_assisted_digital.count
+      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date)
+                                                 .started_digital
+                                                 .completed_assisted_digital
+                                                 .count
     end
 
     def total_journeys_completed
-      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date).completed.count
+      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date)
+                                                 .completed
+                                                 .count
+    end
+
+    def total_journeys_abandoned
+      total_journeys_started - total_journeys_completed
     end
 
     def completion_rate

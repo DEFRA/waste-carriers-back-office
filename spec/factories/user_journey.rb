@@ -6,6 +6,16 @@ FactoryBot.define do
     started_route { "DIGITAL" }
     token { SecureRandom.hex(20) }
 
+    transient do
+      visited_pages { [] }
+    end
+
+    after :create do |user_journey, options|
+      options.visited_pages.each do |page|
+        user_journey.page_views.create(page:, time: Time.zone.now, route: "DIGITAL")
+      end
+    end
+
     trait :registration do
       journey_type { "registration" }
     end

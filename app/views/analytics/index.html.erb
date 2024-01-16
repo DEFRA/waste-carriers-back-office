@@ -76,5 +76,9 @@
       <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.cross_office_completed") %></th>
       <td class="govuk-table__cell"><%= @analytics_data[:cross_office_completed] %></td>
     </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header"><%= t(".aggregate_data_table.total_journeys_abandoned") %></th>
+      <td class="govuk-table__cell"><%= @analytics_data[:total_journeys_abandoned] %></td>
+    </tr>
   </tbody>
 </table>

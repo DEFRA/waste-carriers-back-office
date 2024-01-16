@@ -1,19 +1,20 @@
 en:
   analytics:
     index:
-      title: "Analytics Dashboard"
-      select_date_range: "Select date range"
+      title: Analytics Dashboard
+      select_date_range: Select date range
       labels:
-        start_date: "Start date"
-        end_date: "End date"
-      filter: "Filter"
+        start_date: Start date
+        end_date: End date
+      filter: Filter
       aggregate_data_table:
-        header: "Aggregate User Journey data"
-        total_journeys_started: "Total journeys started"
-        front_office_started: "Front office journeys started"
-        back_office_started: "Back office journeys started"
-        total_journeys_completed: "Total journeys completed"
-        completion_rate: "Completion rate"
-        front_office_completed: "Front office completions"
-        back_office_completed: "Back office completions"
-        cross_office_completed: "Cross office completions"
+        header: Aggregate User Journey data
+        total_journeys_started: Total journeys started
+        front_office_started: Front office journeys started (measured from the business location page)
+        back_office_started: Back office journeys started
+        total_journeys_completed: Total journeys completed
+        completion_rate: Completion rate
+        front_office_completed: Front office completions
+        back_office_completed: Back office completions
+        cross_office_completed: Journeys started in the front office and completed in the back office
+        total_journeys_abandoned: Number of users dropping off after reaching the business location page

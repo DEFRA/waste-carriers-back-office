@@ -7,7 +7,7 @@ class AnalyticsController < ApplicationController
     @start_date = start_date
     @end_date = end_date
 
-    @analytics_data = WasteCarriersEngine::Analytics::AggregatedAnalyticsService.run(
+    @analytics_data = Analytics::AggregatedAnalyticsService.run(
       start_date: @start_date,
       end_date: @end_date
     )
