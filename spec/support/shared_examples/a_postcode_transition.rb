@@ -2,15 +2,15 @@
 
 RSpec.shared_examples "a postcode transition" do |address_type:, factory:|
   describe "#workflow_state" do
-    current_state = "#{address_type}_postcode_form".to_sym
+    current_state = :"#{address_type}_postcode_form"
     subject(:a_subject) do
       create(factory, workflow_state: current_state,
                       tier: defined?(tier) ? tier : WasteCarriersEngine::Registration::UPPER_TIER)
     end
 
     context "when subject.skip_to_manual_address? is false" do
-      next_state = "#{address_type}_address_form".to_sym
-      alt_state = "#{address_type}_address_manual_form".to_sym
+      next_state = :"#{address_type}_address_form"
+      alt_state = :"#{address_type}_address_manual_form"
 
       before { a_subject.temp_os_places_error = nil }
 
@@ -33,7 +33,7 @@ RSpec.shared_examples "a postcode transition" do |address_type:, factory:|
     end
 
     context "when subject.skip_to_manual_address? is true" do
-      next_state = "#{address_type}_address_manual_form".to_sym
+      next_state = :"#{address_type}_address_manual_form"
 
       before { a_subject.temp_os_places_error = true }
 

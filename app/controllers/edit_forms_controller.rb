@@ -63,7 +63,7 @@ class EditFormsController < BackOfficeFormsController
 
     return unless setup_checks_pass?
 
-    @transient_registration.send("#{transition}!".to_sym)
+    @transient_registration.send(:"#{transition}!")
     redirect_to_correct_form
   end
 

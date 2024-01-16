@@ -9,11 +9,15 @@ RSpec.describe "lookups:update:missing_area", type: :rake do
 
   before do
     allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:run_ea_areas_job).and_return(true)
+
+    # To avoid creating excessive test data, we reduce the default 50 to 8.
+    allow(WasteCarriersBackOffice::Application.config).to receive(:area_lookup_address_limit).and_return(8)
+
     task.reenable
   end
 
-  it "updates the area field for a maximum of 50 addresses with missing area and a postcode" do
-    registrations = create_list(:registration, 55)
+  it "updates the area field for a maximum of 8 addresses with missing area and a postcode" do
+    registrations = create_list(:registration, 10)
     registrations.each do |registration|
       create(:address, :registered, registration: registration, area: nil, postcode: "AB1 2CD")
     end
@@ -23,7 +27,7 @@ RSpec.describe "lookups:update:missing_area", type: :rake do
     task.invoke
 
     expect(TimedServiceRunner).to have_received(:run).with(
-      scope: array_with_size(50, WasteCarriersEngine::Address),
+      scope: array_with_size(8, WasteCarriersEngine::Address),
       run_for: WasteCarriersBackOffice::Application.config.area_lookup_run_for.to_i,
       service: WasteCarriersEngine::AssignSiteDetailsService,
       throttle: 0.1

@@ -65,8 +65,8 @@ module Reports
     # Define address-level fields dynamically
     address_keys = %w[line_1 line_2 line_3 line_4 line_5 line_6 town_city postcode country].freeze
     address_keys.each do |key|
-      define_method("registered_address_#{key}".to_sym) { @registered_address["registered_address_#{key}".to_sym] }
-      define_method("contact_address_#{key}".to_sym) { @contact_address["contact_address_#{key}".to_sym] }
+      define_method(:"registered_address_#{key}") { @registered_address[:"registered_address_#{key}"] }
+      define_method(:"contact_address_#{key}") { @contact_address[:"contact_address_#{key}"] }
     end
 
     # Map an address from WCR database form to the presentation form.
@@ -79,12 +79,12 @@ module Reports
       address_hash = {}
 
       address_values.each_with_index do |value, index|
-        address_hash["#{prefix}_address_line_#{index + 1}".to_sym] = value
+        address_hash[:"#{prefix}_address_line_#{index + 1}"] = value
       end
 
       # Pad out the address lines to the required six with blanks
       (address_hash.keys.length..5).each do |n|
-        address_hash["#{prefix}_address_line_#{n + 1}".to_sym] = nil
+        address_hash[:"#{prefix}_address_line_#{n + 1}"] = nil
       end
 
       address_hash.merge!(

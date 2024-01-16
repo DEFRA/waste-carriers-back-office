@@ -2,7 +2,7 @@
 
 RSpec.shared_examples "a manual address transition" do |next_state:, address_type:, factory:|
   describe "#workflow_state" do
-    current_state = "#{address_type}_address_manual_form".to_sym
+    current_state = :"#{address_type}_address_manual_form"
     subject do
       build(factory, workflow_state: current_state, location: location,
                      tier: defined?(tier) ? tier : WasteCarriersEngine::Registration::UPPER_TIER)

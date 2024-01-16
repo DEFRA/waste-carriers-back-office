@@ -18,7 +18,7 @@ module WasteCarriersEngine
                    Rails.application.routes.url_helpers
                  end
 
-        target.send("new_#{@transient_registration.workflow_state}_path".to_sym, token: @transient_registration.token)
+        target.send(:"new_#{@transient_registration.workflow_state}_path", token: @transient_registration.token)
       end
 
       def engine_route?(workflow_state)

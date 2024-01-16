@@ -25,7 +25,7 @@ class AdPrivacyPolicyPresenter < WasteCarriersEngine::BasePresenter
 
   def resume_path
     WasteCarriersEngine::Engine.routes.url_helpers.send(
-      "new_#{transient_registration.workflow_state}_path".to_sym,
+      :"new_#{transient_registration.workflow_state}_path",
       token: transient_registration.token
     )
   end

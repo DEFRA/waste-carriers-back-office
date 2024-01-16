@@ -74,7 +74,7 @@ RSpec.describe DeregistrationEmailExportSerializer do
   let(:file_path) { Rails.root.join("tmp/card_orders_file.csv") }
   let(:email_type) { "Lower-tier deregistration pilot email" }
   let(:email_template_id) { "a-template-id" }
-  let(:batch_size) { 10 }
+  let(:batch_size) { 8 }
 
   describe "#to_csv" do
     let(:export_content) { File.read(file_path) }
@@ -146,7 +146,7 @@ RSpec.describe DeregistrationEmailExportSerializer do
 
     context "when the number of eligible registrations exceeds the batch size" do
       before do
-        create_list(:registration, 15,
+        create_list(:registration, 10,
                     :active,
                     :registered_15_months_ago,
                     tier: "LOWER")

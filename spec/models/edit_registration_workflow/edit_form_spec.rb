@@ -29,7 +29,7 @@ RSpec.describe EditForm do
 
         non_address_editable_form_states.each do |expected_state|
           state_without_form_suffix = expected_state.to_s.remove("_form")
-          event = "edit_#{state_without_form_suffix}".to_sym
+          event = :"edit_#{state_without_form_suffix}"
 
           it "changes to #{expected_state} after the '#{event}' event" do
             expect(edit_registration).to transition_from(current_state).to(expected_state).on_event(event)
