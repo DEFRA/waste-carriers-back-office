@@ -57,7 +57,7 @@
     </div>
   </div>
 
-  <% if can?(:create, WasteCarriersEngine::Registration) && WasteCarriersEngine::FeatureToggle.active?(:new_registration) %>
+  <% if can?(:create, WasteCarriersEngine::Registration) %>
     <div class="govuk-grid-column-one-third">
       <div class="wcr-actions">
         <h2 class="govuk-heading-s">
