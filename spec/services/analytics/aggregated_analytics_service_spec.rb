@@ -21,12 +21,12 @@ module Analytics
         }
       end
 
+      # default to getting past the location page
+      let(:visited_pages) { %w[start_form location_form business_type_form] }
+
       context "with specific date range" do
         let(:start_date) { 7.days.ago }
         let(:end_date) { Time.zone.today }
-
-        # default to getting as far as the location page
-        let(:visited_pages) { %w[start_form location_form] }
 
         before do
           create_list(:user_journey, 5, :started_digital, visited_pages:, created_at: 5.days.ago, completed_at: nil)
@@ -36,9 +36,14 @@ module Analytics
           create(:user_journey, visited_pages:, created_at: 8.days.ago, completed_at: 6.days.ago)
           create(:user_journey, visited_pages:, created_at: 6.days.ago, completed_at: 5.days.ago)
 
-          # these two should be excluded as the location page was not reached:
+          # these should be excluded as the location page was not passed:
           create(:user_journey, created_at: 6.days.ago)
           create(:user_journey, visited_pages: %w[start_form], created_at: 6.days.ago)
+          create(:user_journey, visited_pages: %w[start_form location_form], created_at: 6.days.ago)
+
+          # these should be excluded as only NewRegistration and RenewingRegistration journeys should be counted:
+          create(:user_journey, visited_pages:, created_at: 6.days.ago, journey_type: "EditRegistration")
+          create(:user_journey, visited_pages:, created_at: 6.days.ago, journey_type: "Foo")
         end
 
         it { expect(result).to match(expected_structure) }
@@ -56,15 +61,15 @@ module Analytics
       context "with default date range" do
         subject(:result) { described_class.run }
 
-        # default to getting as far as the location page
-        let(:visited_pages) { %w[start_form location_form] }
-
         before do
           create(:user_journey, :started_digital, visited_pages:, created_at: 1.year.ago)
           create(:user_journey, :completed_digital, visited_pages:, created_at: 6.months.ago, completed_at: 5.months.ago)
 
           # this one should be excluded as the location page was not reached
           create(:user_journey, :started_digital, visited_pages: %w[start_form], created_at: 1.year.ago)
+
+          # this one should be excluded as only new and renewing registration uer journeys should be counted
+          create(:user_journey, :started_digital, visited_pages:, created_at: 1.year.ago, journey_type: "FooRegistration")
         end
 
         it { expect(result).to match(expected_structure) }
@@ -81,7 +86,6 @@ module Analytics
       context "when no data is available for the date range" do
         let(:start_date) { 30.days.ago }
         let(:end_date) { 21.days.ago }
-        let(:visited_pages) { %w[start_form location_form] }
 
         before do
           create(:user_journey, visited_pages:, created_at: 31.days.ago)
@@ -91,6 +95,6 @@ module Analytics
         it { expect(result).to match(expected_structure) }
         it { expect(result.values).to all(be_zero) }
       end
-    end
+  end
   end
 end

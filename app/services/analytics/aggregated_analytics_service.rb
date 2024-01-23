@@ -28,46 +28,46 @@ module Analytics
     end
 
     def front_office_started
-      WasteCarriersEngine::Analytics::UserJourney.reached_start_cutoff_page
-                                                 .date_range(start_date, end_date)
-                                                 .started_digital
-                                                 .count
+      journey_base_scope.passed_start_cutoff_page
+                        .started_digital
+                        .count
     end
 
     def back_office_started
-      WasteCarriersEngine::Analytics::UserJourney.reached_start_cutoff_page
-                                                 .date_range(start_date, end_date)
-                                                 .started_assisted_digital
-                                                 .count
+      journey_base_scope.passed_start_cutoff_page
+                        .started_assisted_digital
+                        .count
     end
 
     def total_journeys_started
-      WasteCarriersEngine::Analytics::UserJourney.reached_start_cutoff_page
-                                                 .date_range(start_date, end_date)
-                                                 .count
+      journey_base_scope.passed_start_cutoff_page
+                        .count
     end
 
     def front_office_completed
-      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date)
-                                                 .completed_digital.count
+      journey_base_scope.completed_digital
+                        .count
     end
 
     def back_office_completed
-      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date)
-                                                 .completed_assisted_digital.count
+      journey_base_scope.completed_assisted_digital
+                        .count
     end
 
     def cross_office_completed
-      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date)
-                                                 .started_digital
-                                                 .completed_assisted_digital
-                                                 .count
+      journey_base_scope.started_digital
+                        .completed_assisted_digital
+                        .count
     end
 
     def total_journeys_completed
-      WasteCarriersEngine::Analytics::UserJourney.date_range(start_date, end_date)
-                                                 .completed
-                                                 .count
+      journey_base_scope.completed
+                        .count
+    end
+
+    def journey_base_scope
+      WasteCarriersEngine::Analytics::UserJourney.only_types(%w[NewRegistration RenewingRegistration])
+                                                 .date_range(start_date, end_date)
     end
 
     def total_journeys_abandoned

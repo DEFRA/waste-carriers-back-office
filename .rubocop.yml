@@ -6,6 +6,7 @@ inherit_gem:
 require:
   - rubocop-factory_bot
   - rubocop-rails
+  - rubocop-rake
   - rubocop-rspec
 
 AllCops:

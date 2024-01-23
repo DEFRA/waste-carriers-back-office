@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :user_journey, class: "WasteCarriersEngine::Analytics::UserJourney" do
-    journey_type { "registration" }
+    journey_type { "NewRegistration" }
     started_route { "DIGITAL" }
     token { SecureRandom.hex(20) }
 
@@ -17,11 +17,11 @@ FactoryBot.define do
     end
 
     trait :registration do
-      journey_type { "registration" }
+      journey_type { "NewRegistration" }
     end
 
     trait :renewal do
-      journey_type { "renewal" }
+      journey_type { "RenewingRegistration" }
     end
 
     trait :started_digital do
