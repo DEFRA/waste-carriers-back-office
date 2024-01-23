@@ -95,6 +95,6 @@ module Analytics
         it { expect(result).to match(expected_structure) }
         it { expect(result.values).to all(be_zero) }
       end
-  end
+    end
   end
 end
