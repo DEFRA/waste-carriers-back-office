@@ -35,9 +35,8 @@ RSpec.describe "one_off:fix_transient_registrations_with_account_emails", type: 
   context "when a transient registration doesn't have accountEmail field present" do
     let(:transient_registration) { create(:renewing_registration, :pending_payment) }
 
-    it "does not modify the registration" do
-      task.invoke
-      expect(WasteCarriersEngine::TransientRegistration.collection.find({ regIdentifier: transient_registration.regIdentifier, accountEmail: { "$exists": true } }).count).to be_zero
+    it "does not modify the transient registration" do
+      expect { task.invoke }.not_to change(transient_registration, :metaData)
     end
   end
 
