@@ -2,7 +2,17 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.24.0...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.24.1...HEAD)
+
+**Fixed bugs:**
+
+- Fix/ruby 2903 rake task to remove obsolete fields [\#1835](https://github.com/DEFRA/waste-carriers-back-office/pull/1835) ([brujeo](https://github.com/brujeo))
+- \[RUBY-2903\] minor adjustments to rake task output [\#1834](https://github.com/DEFRA/waste-carriers-back-office/pull/1834) ([brujeo](https://github.com/brujeo))
+- \[RUBY-2903\] rake task to remove accountEmail field from transient registrations [\#1833](https://github.com/DEFRA/waste-carriers-back-office/pull/1833) ([brujeo](https://github.com/brujeo))
+
+## [v1.24.1](https://github.com/defra/waste-carriers-back-office/tree/v1.24.1) (2024-01-22)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.24.0...v1.24.1)
 
 **Implemented enhancements:**
 
@@ -20,6 +30,7 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG [\#1831](https://github.com/DEFRA/waste-carriers-back-office/pull/1831) ([brujeo](https://github.com/brujeo))
 - Bump waste\_carriers\_engine from `2ccd372` to `e96ecac` [\#1829](https://github.com/DEFRA/waste-carriers-back-office/pull/1829) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump waste\_carriers\_engine from `b6fa963` to `2ccd372` [\#1826](https://github.com/DEFRA/waste-carriers-back-office/pull/1826) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump waste\_carriers\_engine from `97e77bc` to `b6fa963` [\#1824](https://github.com/DEFRA/waste-carriers-back-office/pull/1824) ([dependabot[bot]](https://github.com/apps/dependabot))
