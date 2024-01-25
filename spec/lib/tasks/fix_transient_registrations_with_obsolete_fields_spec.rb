@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-RSpec.describe "one_off:fix_transient_registrations_with_account_emails", type: :rake do
-  let(:task) { Rake::Task["one_off:fix_transient_registrations_with_account_emails"] }
+RSpec.describe "one_off:fix_transient_registrations_with_obsolete_fields", type: :rake do
+  let(:task) { Rake::Task["one_off:fix_transient_registrations_with_obsolete_fields"] }
 
   include_context "rake"
 
@@ -32,7 +32,24 @@ RSpec.describe "one_off:fix_transient_registrations_with_account_emails", type: 
     end
   end
 
-  context "when a transient registration doesn't have accountEmail field present" do
+  context "when a transient registration has temp_tier_check field present" do
+    let(:transient_registration) { create(:renewing_registration, :pending_payment) }
+
+    before do
+      WasteCarriersEngine::TransientRegistration.collection.update_one(
+        { regIdentifier: transient_registration.regIdentifier },
+        { "$set": { temp_tier_check: 1 } }
+      )
+    end
+
+    it "removes the temp_tier_check field for the registration" do
+      expect(WasteCarriersEngine::TransientRegistration.collection.find({ regIdentifier: transient_registration.regIdentifier, temp_tier_check: { "$exists": true } }).count).to be_positive
+      task.invoke
+      expect(WasteCarriersEngine::TransientRegistration.collection.find({ regIdentifier: transient_registration.regIdentifier, temp_tier_check: { "$exists": true } }).count).to be_zero
+    end
+  end
+
+  context "when a transient registration doesn't have any obsolete fields" do
     let(:transient_registration) { create(:renewing_registration, :pending_payment) }
 
     it "does not modify the transient registration" do
