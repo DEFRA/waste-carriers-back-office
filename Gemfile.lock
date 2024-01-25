@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: e6bd1079b7d94562eb68d7824b519897c41a0cc2
-  branch: chore/RUBY-2799_analytics_service_to_back_office
+  revision: 7154779bcc74a7047a983a09574b24dd4fa143a5
+  branch: main
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
