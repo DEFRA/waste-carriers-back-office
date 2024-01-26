@@ -10,9 +10,8 @@ namespace :one_off do
     puts "Updating 'Not found' areas for #{registrations.count} registrations" unless Rails.env.test?
 
     registrations.each do |registration|
-      registration.addresses.select do |address|
-        address.area == "Not found"
-      end.map { |address| address.update(area: nil) }
+      registration.addresses.select { |address| address.area == "Not found" }
+                  .map { |address| address.update(area: nil) }
     end
   end
 end
