@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 7154779bcc74a7047a983a09574b24dd4fa143a5
+  revision: 2a66f3788f22d3b3b31eb2646a4edd2fde8d580f
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -349,7 +349,7 @@ GEM
     orm_adapter (0.5.0)
     os_map_ref (0.5.0)
     parallel (1.24.0)
-    parser (3.3.0.4)
+    parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
     passenger (5.3.7)
@@ -432,7 +432,7 @@ GEM
     rspec-mocks (3.12.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-rails (6.1.0)
+    rspec-rails (6.1.1)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       railties (>= 6.1)
@@ -443,7 +443,7 @@ GEM
     rspec-retry (0.6.2)
       rspec-core (> 3.3)
     rspec-support (3.12.1)
-    rubocop (1.60.0)
+    rubocop (1.60.2)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
