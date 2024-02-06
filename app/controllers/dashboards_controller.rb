@@ -34,6 +34,8 @@ class DashboardsController < ApplicationController
       else
         :email
       end
+    elsif params[:search_reg_identifier]
+      :reg_identifier
     else
       :general
     end
@@ -45,6 +47,8 @@ class DashboardsController < ApplicationController
                     SearchFullnameService.run(page: page, term: @term)
                   when :email
                     SearchEmailService.run(page: page, term: @term)
+                  when :reg_identifier
+                    SearchRegIdentifierService.run(page: page, term: @term)
                   when :general
                     SearchService.run(page: page, term: @term)
                   else

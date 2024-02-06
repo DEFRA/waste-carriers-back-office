@@ -48,6 +48,13 @@
               <%= t(".search.email_search_label") %>
             </label>
           </span>
+
+          <% # search by reg_identifier %>
+          <span class="govuk-checkboxes__item">
+            <input id="search-reg-identifier-field" class="govuk-checkboxes__input" type="checkbox" value="1" name="search_reg_identifier" />
+            <label for="search-reg-identifier-field" class="govuk-label govuk-checkboxes__label">
+              <%= t(".search.reg_identifier_search_label") %>
+            </label>
         </div>
         <br>
         <%= text_field_tag :term, @term, class: "govuk-input govuk-!-width-one-half", type: "search" %>
