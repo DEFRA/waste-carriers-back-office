@@ -13,7 +13,9 @@ class DashboardsController < ApplicationController
     @result_count = 0
     @results = []
 
-    if [params[:search_fullname], params[:search_email], params[:search_reg_identifier]].select { |s| s == "1" }.count > 1
+    if [params[:search_fullname], params[:search_email], params[:search_reg_identifier]].select do |s|
+         s == "1"
+       end.count > 1
       flash.now[:error] = I18n.t(".dashboards.index.search.search_type_error")
     else
       @search_type = search_type(params)
