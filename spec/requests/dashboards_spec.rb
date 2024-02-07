@@ -124,6 +124,40 @@ RSpec.describe "Dashboards" do
             end
           end
         end
+
+        context "when reg_identifier search is selected" do
+          let!(:matching_registration) { create(:registration) }
+          let!(:non_matching_registration) { create(:registration) }
+
+          it "links to the matched registration details page" do
+            get "/bo", params: { term: matching_registration.reg_identifier, search_reg_identifier: "1" }
+
+            expect(response.body).to include(registration_path(matching_registration.reg_identifier))
+            expect(response.body).not_to include(registration_path(non_matching_registration.reg_identifier))
+          end
+
+          it "displays no results when there is no match" do
+            get "/bo", params: { term: "nonexistent", search_reg_identifier: "1" }
+
+            expect(response.body).to include("No results")
+          end
+
+          context "when both reg_identifier search and another search type are selected" do
+            it "returns a form validation error" do
+              get "/bo", params: { term: "something", search_reg_identifier: "1", search_email: "1" }
+
+              expect(request.flash[:error]).to be_present
+            end
+          end
+
+          context "with excess whitespace around reg_identifier search term" do
+            it "correctly matches the registration ignoring whitespace" do
+              get "/bo", params: { term: "  #{matching_registration.reg_identifier}  ", search_reg_identifier: "1" }
+
+              expect(response.body).to include(registration_path(matching_registration.reg_identifier))
+            end
+          end
+        end
       end
     end
   end
