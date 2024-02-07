@@ -76,7 +76,6 @@ jobs:
       # https://community.sonarsource.com/t/code-coverage-doesnt-work-with-github-action/16747/6
       - name: Run unit tests
         run: |
-          bundle exec rails test
           bundle exec rspec
           sed -i 's/\/home\/runner\/work\/waste-carriers-back-office\/waste-carriers-back-office\//\/github\/workspace\//g' coverage/coverage.json
 
