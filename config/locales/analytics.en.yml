@@ -17,4 +17,4 @@ en:
         front_office_completed: Front office completions
         back_office_completed: Back office completions
         cross_office_completed: Journeys started in the front office and completed in the back office
-        total_journeys_abandoned: Number of users dropping off after reaching the business location page
+        total_journeys_abandoned: Number of incomplete journeys that have gone past the business location page
