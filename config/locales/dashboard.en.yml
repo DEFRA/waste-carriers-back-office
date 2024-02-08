@@ -14,7 +14,7 @@ en:
         email_search_label: Email address
         reg_identifier_search_label: Registration number
         submit: Search
-        search_type_error: You cannot search use multiple search checkboxes at the same time. Only use one of the search checkboxes at a time.
+        search_type_error: Only use one of the search checkboxes at a time.
         invalid_email_error: Enter a valid email address
       results:
         caption:
