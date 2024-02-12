@@ -76,6 +76,54 @@ Apex Limited,,11111111,ABC,99999999
       end
     end
 
+    context "when the CSV contains unexpected additional headers" do
+      let(:csv) do
+        %(
+Offender,Birth Date,Company No.,System Flag,Inc Number,Unexpected Header
+Apex Limited,,11111111,ABC,99999999,Extra Data
+)
+      end
+
+      it "ignores the unexpected headers and processes valid convictions" do
+        matching_business_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(
+          name: "Apex Limited",
+          date_of_birth: nil,
+          company_number: "11111111",
+          system_flag: "ABC",
+          incident_number: "99999999"
+        )
+        expect { run_service }.to change(matching_business_conviction, :count).by(1)
+
+        new_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: "Apex Limited").first
+        expect(new_conviction).not_to be_nil
+        expect(new_conviction.company_number).to eq("11111111")
+      end
+    end
+
+    context "when the CSV contains an empty header" do
+      let(:csv) do
+        %(
+Offender,Birth Date,Company No.,System Flag,Inc Number,
+Apex Limited,,11111111,ABC,99999999,
+)
+      end
+
+      it "processes the CSV correctly ignoring the empty header" do
+        matching_business_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(
+          name: "Apex Limited",
+          date_of_birth: nil,
+          company_number: "11111111",
+          system_flag: "ABC",
+          incident_number: "99999999"
+        )
+        expect { run_service }.to change(matching_business_conviction, :count).by(1)
+
+        new_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: "Apex Limited").first
+        expect(new_conviction).not_to be_nil
+        expect(new_conviction.company_number).to eq("11111111")
+      end
+    end
+
     context "when valid CSV data is not provided" do
       # Use an object with a close method so that forwardable does not complain about forwarding to a private method.
       let(:test_class) do
@@ -108,9 +156,10 @@ baking soda,2,tablespoons
       end
 
       it "raises an InvalidConvictionDataError and doesn't update any conviction data" do
-        old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
+        expected_error_message = "Invalid headers, missing Offender, Birth Date, Company No., System Flag, Inc Number"
+        expect { run_service }.to raise_error(InvalidConvictionDataError, expected_error_message)
 
-        expect { run_service }.to raise_error(InvalidConvictionDataError, "Invalid headers")
+        old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
         expect do
           run_service
         rescue InvalidConvictionDataError

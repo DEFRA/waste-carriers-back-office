@@ -61,9 +61,12 @@ class ConvictionImportService < WasteCarriersEngine::BaseService
   end
 
   def validate_headers(data)
-    return if data.headers == ["Offender", "Birth Date", "Company No.", "System Flag", "Inc Number"]
+    required_headers = ["Offender", "Birth Date", "Company No.", "System Flag", "Inc Number"]
+    missing_headers = required_headers - data.headers
 
-    raise InvalidConvictionDataError, "Invalid headers"
+    return true if missing_headers.empty?
+
+    raise InvalidConvictionDataError, "Invalid headers, missing #{missing_headers.join(', ')}"
   end
 
   def validate_row(row)
