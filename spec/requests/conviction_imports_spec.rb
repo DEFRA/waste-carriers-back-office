@@ -42,6 +42,7 @@ RSpec.describe "ConvictionImports" do
     let(:invalid_file) { fixture_file_upload(Rails.root.join("spec/fixtures/files/invalid_file.txt"), "text") }
     let(:csv_missing_some_headers) { fixture_file_upload(Rails.root.join("spec/fixtures/files/missing_headers.csv"), "text/csv") }
     let(:extra_headers_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/extra_headers.csv"), "text/csv") }
+    let(:mixed_order_headers_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/mixed_order_headers.csv"), "text/csv") }
 
     context "when a valid user is signed in" do
       let(:user) { create(:user, role: :developer) }
@@ -71,6 +72,15 @@ RSpec.describe "ConvictionImports" do
       context "when the CSV file has extra headers" do
         it "redirects to the results page and displays a flash message" do
           post "/bo/import-convictions", params: { file: extra_headers_csv }
+
+          expect(response).to redirect_to(bo_path)
+          expect(flash[:success]).to match(/Convictions data has been updated successfully. \d+ records in database./)
+        end
+      end
+
+      context "when the CSV file has headers in mixed order" do
+        it "redirects to the results page and displays a flash message" do
+          post "/bo/import-convictions", params: { file: mixed_order_headers_csv }
 
           expect(response).to redirect_to(bo_path)
           expect(flash[:success]).to match(/Convictions data has been updated successfully. \d+ records in database./)

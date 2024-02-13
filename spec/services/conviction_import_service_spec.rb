@@ -100,6 +100,30 @@ Apex Limited,,11111111,ABC,99999999,Extra Data
       end
     end
 
+    context "when the CSV contains the headers in a different order" do
+      let(:csv) do
+        %(
+Company No.,System Flag,Inc Number,Offender,Birth Date
+11111111,ABC,99999999,Apex Limited,
+)
+      end
+
+      it "processes the CSV correctly regardless of the header order" do
+        matching_business_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(
+          name: "Apex Limited",
+          date_of_birth: nil,
+          company_number: "11111111",
+          system_flag: "ABC",
+          incident_number: "99999999"
+        )
+        expect { run_service }.to change(matching_business_conviction, :count).by(1)
+
+        new_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: "Apex Limited").first
+        expect(new_conviction).not_to be_nil
+        expect(new_conviction.company_number).to eq("11111111")
+      end
+    end
+
     context "when the CSV contains an empty header" do
       let(:csv) do
         %(
