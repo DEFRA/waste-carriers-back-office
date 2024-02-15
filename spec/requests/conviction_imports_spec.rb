@@ -40,9 +40,10 @@ RSpec.describe "ConvictionImports" do
     let(:valid_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/valid_entities.csv"), "text/csv") }
     let(:invalid_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/invalid_entities.csv"), "text/csv") }
     let(:invalid_file) { fixture_file_upload(Rails.root.join("spec/fixtures/files/invalid_file.txt"), "text") }
-    let(:csv_missing_some_headers) { fixture_file_upload(Rails.root.join("spec/fixtures/files/missing_headers.csv"), "text/csv") }
+    let(:csv_with_blank_header) { fixture_file_upload(Rails.root.join("spec/fixtures/files/blank_header.csv"), "text/csv") }
     let(:extra_headers_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/extra_headers.csv"), "text/csv") }
     let(:mixed_order_headers_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/mixed_order_headers.csv"), "text/csv") }
+    let(:csv_missing_required_headers) { fixture_file_upload(Rails.root.join("spec/fixtures/files/missing_required_headers.csv"), "text/csv") }
 
     context "when a valid user is signed in" do
       let(:user) { create(:user, role: :developer) }
@@ -60,9 +61,9 @@ RSpec.describe "ConvictionImports" do
         end
       end
 
-      context "when the CSV file is missing some headers" do
+      context "when the CSV file has some blank headers" do
         it "redirects to the results page and displays a flash message" do
-          post "/bo/import-convictions", params: { file: csv_missing_some_headers }
+          post "/bo/import-convictions", params: { file: csv_with_blank_header }
 
           expect(response).to redirect_to(bo_path)
           expect(flash[:success]).to match(/Convictions data has been updated successfully. \d+ records in database./)
@@ -84,6 +85,15 @@ RSpec.describe "ConvictionImports" do
 
           expect(response).to redirect_to(bo_path)
           expect(flash[:success]).to match(/Convictions data has been updated successfully. \d+ records in database./)
+        end
+      end
+
+      context "when a required header is missing" do
+        it "renders the new template and displays an error message" do
+          post "/bo/import-convictions", params: { file: csv_missing_required_headers }
+
+          expect(response).to render_template(:new)
+          expect(flash[:error]).to match(/Error occurred while importing data:/)
         end
       end
 

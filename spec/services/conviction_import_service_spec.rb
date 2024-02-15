@@ -243,6 +243,32 @@ Offender,Birth Date,Company No.,System Flag,Inc Number
           end.not_to change { new_conviction.count }
         end
       end
+
+      context "when the CSV is missing a required header" do
+        let(:csv) do
+          %(
+Offender,Birth Date,Company No.,System Flag,
+"Doe, John",notadate,,DFG
+)
+        end
+
+        it "raises an InvalidConvictionDataError and doesn't update any conviction data" do
+          old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
+          new_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: "Doe, John")
+
+          expect { run_service }.to raise_error(InvalidConvictionDataError, "Invalid headers, missing Inc Number")
+          expect do
+            run_service
+          rescue InvalidConvictionDataError
+            Rails.logger.debug "rescued expected exception"
+          end.not_to change { old_conviction.count }
+          expect do
+            run_service
+          rescue InvalidConvictionDataError
+            Rails.logger.debug "rescued expected exception"
+          end.not_to change { new_conviction.count }
+        end
+      end
     end
   end
 end
