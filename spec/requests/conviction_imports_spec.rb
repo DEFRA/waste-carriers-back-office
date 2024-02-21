@@ -38,6 +38,8 @@ RSpec.describe "ConvictionImports" do
 
   describe "POST /bo/import-convictions" do
     let(:valid_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/valid_entities.csv"), "text/csv") }
+    let(:empty_utf_8_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/utf-8.csv"), "text/csv") }
+    let(:empty_non_utf_8_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/non-utf-8.csv"), "text/csv") }
     let(:invalid_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/invalid_entities.csv"), "text/csv") }
     let(:invalid_file) { fixture_file_upload(Rails.root.join("spec/fixtures/files/invalid_file.txt"), "text") }
     let(:csv_with_blank_header) { fixture_file_upload(Rails.root.join("spec/fixtures/files/blank_header.csv"), "text/csv") }
@@ -58,6 +60,26 @@ RSpec.describe "ConvictionImports" do
 
           expect(response).to redirect_to(bo_path)
           expect(flash[:success]).to match(/Convictions data has been updated successfully. \d+ records in database./)
+        end
+      end
+
+      context "with a file with only headers" do
+        context "when the file is utf-8 encoded" do
+          it "redirects to the results page and displays a flash message" do
+            post "/bo/import-convictions", params: { file: empty_utf_8_csv }
+
+            expect(response).to redirect_to(bo_path)
+            expect(flash[:success]).to match(/Convictions data has been updated successfully. \d+ records in database./)
+          end
+        end
+
+        context "when the file is not utf-8 encoded" do
+          it "redirects to the results page and displays a flash message" do
+            post "/bo/import-convictions", params: { file: empty_non_utf_8_csv }
+
+            expect(response).to redirect_to(bo_path)
+            expect(flash[:success]).to match(/Convictions data has been updated successfully. \d+ records in database./)
+          end
         end
       end
 

@@ -21,6 +21,8 @@ class ConvictionImportService < WasteCarriersEngine::BaseService
 
     validate_headers(convictions_data)
 
+    convictions_data = remove_empty_rows(convictions_data)
+
     convictions_data.each do |line|
       make_new_conviction_object(line)
     end
@@ -85,5 +87,12 @@ class ConvictionImportService < WasteCarriersEngine::BaseService
     Date.parse(date_of_birth)
   rescue ArgumentError
     raise InvalidConvictionDataError, "Invalid date of birth"
+  end
+
+  def remove_empty_rows(data)
+    data = data.map(&:to_h).reject { |row| row.values.all?(&:blank?) }
+
+    # return as a CSV::Table
+    CSV::Table.new(data.map { |row| CSV::Row.new(row.keys, row.values) })
   end
 end
