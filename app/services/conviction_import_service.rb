@@ -35,7 +35,7 @@ class ConvictionImportService < WasteCarriersEngine::BaseService
 
   def parse_data(csv)
     # Remove BOM from the start of the file if it exists
-    csv = csv.force_encoding("UTF-8")
+    csv = csv.dup.force_encoding("UTF-8")
     csv = csv.sub(/^\xEF\xBB\xBF/, "")
 
     CSV.parse(csv,
