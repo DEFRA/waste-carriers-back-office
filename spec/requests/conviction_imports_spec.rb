@@ -61,6 +61,54 @@ RSpec.describe "ConvictionImports" do
         end
       end
 
+      describe "utf-8 encoding" do
+        let(:empty_utf_8_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/utf-8.csv"), "text/csv") }
+        let(:empty_non_utf_8_csv) { fixture_file_upload(Rails.root.join("spec/fixtures/files/non-utf-8.csv"), "text/csv") }
+        let(:utf_8_csv_with_data) { fixture_file_upload(Rails.root.join("spec/fixtures/files/utf-8-with-data.csv"), "text/csv") }
+        let(:utf_8_csv_with_data_and_bom) { fixture_file_upload(Rails.root.join("spec/fixtures/files/valid_entities-utf8.csv"), "text/csv") }
+
+        context "with a file with only headers" do
+          context "when the file is utf-8 encoded" do
+            it "redirects to the results page and displays a flash message" do
+              post "/bo/import-convictions", params: { file: empty_utf_8_csv }
+
+              expect(response).to render_template(:new)
+              expect(flash[:error]).to eq("Error occurred while importing data: No valid convictions found in the file. Please check the file and try again.")
+            end
+          end
+
+          context "when the file is not utf-8 encoded" do
+            it "redirects to the results page and displays a flash message" do
+              post "/bo/import-convictions", params: { file: empty_non_utf_8_csv }
+
+              expect(response).to render_template(:new)
+              expect(flash[:error]).to eq("Error occurred while importing data: No valid convictions found in the file. Please check the file and try again.")
+            end
+          end
+        end
+
+        context "with a file with data" do
+          context "when the file is utf-8 encoded" do
+            it "redirects to the results page and displays a flash message" do
+              post "/bo/import-convictions", params: { file: utf_8_csv_with_data }
+
+              expect(response).to redirect_to(bo_path)
+              expect(flash[:success]).to match(/Convictions data has been updated successfully. 1 record in database./)
+            end
+
+            context "when the file starts with a BOM in front of a required field" do
+
+              it "redirects to the results page and displays a flash message" do
+                post "/bo/import-convictions", params: { file: utf_8_csv_with_data_and_bom }
+
+                expect(response).to redirect_to(bo_path)
+                expect(flash[:success]).to match(/Convictions data has been updated successfully. \d+ records in database./)
+              end
+            end
+          end
+        end
+      end
+
       context "when the CSV file has some blank headers" do
         it "redirects to the results page and displays a flash message" do
           post "/bo/import-convictions", params: { file: csv_with_blank_header }
