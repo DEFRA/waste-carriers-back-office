@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 0c1e21411d6ea5a3ed6473c370b1a9511a260aa7
+  revision: 1028116b2e3e76c0a5cb4a2f18ab52be9955872f
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -143,6 +143,7 @@ GEM
       aws-sigv4 (~> 1.6)
     aws-sigv4 (1.6.0)
       aws-eventstream (~> 1, >= 1.0.2)
+    base64 (0.2.0)
     bcrypt (3.1.19)
     bigdecimal (3.1.6)
     bindex (0.8.1)
@@ -158,7 +159,7 @@ GEM
       fiber-local
     countries (5.5.0)
       unaccent (~> 0.3)
-    crack (0.4.6)
+    crack (1.0.0)
       bigdecimal
       rexml
     crass (1.0.6)
@@ -220,10 +221,10 @@ GEM
     diff-lcs (1.5.0)
     docile (1.4.0)
     domain_name (0.6.20240107)
-    dotenv (2.8.1)
-    dotenv-rails (2.8.1)
-      dotenv (= 2.8.1)
-      railties (>= 3.2)
+    dotenv (3.0.2)
+    dotenv-rails (3.0.2)
+      dotenv (= 3.0.2)
+      railties (>= 6.1)
     erubi (1.12.0)
     execjs (2.8.1)
     factory_bot (6.4.5)
@@ -253,7 +254,7 @@ GEM
       rake (>= 10.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    govuk_design_system_formbuilder (5.0.0)
+    govuk_design_system_formbuilder (5.1.0)
       actionview (>= 6.1)
       activemodel (>= 6.1)
       activesupport (>= 6.1)
@@ -282,7 +283,8 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.7.1)
-    jwt (2.7.1)
+    jwt (2.8.0)
+      base64
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -314,7 +316,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2024.0206)
     mini_mime (1.1.5)
-    minitest (5.22.1)
+    minitest (5.22.2)
     mongo (2.19.3)
       bson (>= 4.14.1, < 5.0.0)
     mongo_session_store (3.2.1)
@@ -544,7 +546,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webmock (3.20.0)
+    webmock (3.22.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
