@@ -29,6 +29,10 @@ class ConvictionImportService < WasteCarriersEngine::BaseService
   end
 
   def update_convictions_in_database
+    if @new_convictions.empty?
+      raise InvalidConvictionDataError, "No valid convictions found in the file. Please check the file and try again."
+    end
+
     @old_convictions.each(&:destroy!)
     @new_convictions.each(&:save!)
   end

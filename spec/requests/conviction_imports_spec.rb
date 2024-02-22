@@ -72,8 +72,8 @@ RSpec.describe "ConvictionImports" do
             it "redirects to the results page and displays a flash message" do
               post "/bo/import-convictions", params: { file: empty_utf_8_csv }
 
-              expect(response).to redirect_to(bo_path)
-              expect(flash[:success]).to match(/Convictions data has been updated successfully. \d+ records in database./)
+              expect(response).to render_template(:new)
+              expect(flash[:error]).to eq("Error occurred while importing data: No valid convictions found in the file. Please check the file and try again.")
             end
           end
 
@@ -81,8 +81,8 @@ RSpec.describe "ConvictionImports" do
             it "redirects to the results page and displays a flash message" do
               post "/bo/import-convictions", params: { file: empty_non_utf_8_csv }
 
-              expect(response).to redirect_to(bo_path)
-              expect(flash[:success]).to match(/Convictions data has been updated successfully. \d+ records in database./)
+              expect(response).to render_template(:new)
+              expect(flash[:error]).to eq("Error occurred while importing data: No valid convictions found in the file. Please check the file and try again.")
             end
           end
         end
