@@ -7,9 +7,7 @@ RSpec.describe "EditCompleteForms" do
     context "when a valid user is signed in" do
       let(:user) { create(:user) }
 
-      before do
-        sign_in(user)
-      end
+      before { sign_in(user) }
 
       context "when no edit registration exists" do
         it "redirects to the invalid page" do
@@ -36,58 +34,66 @@ RSpec.describe "EditCompleteForms" do
         let(:registration) { transient_registration.registration }
 
         context "when the workflow_state is correct" do
-          it "updates the registration with the new data and deletes the transient object" do
-            old_expires_on = registration.expires_on
-            old_finance_details = registration.finance_details
-            old_relevant_people = registration.relevant_people
+          let(:old_expires_on) { registration.expires_on }
+          let(:old_finance_details) { registration.finance_details }
+          let(:old_relevant_people) { registration.relevant_people }
 
+          before do
             get new_edit_complete_form_path(transient_registration.token)
+
             registration.reload
+          end
 
-            # Update base attributes
+          it "updates the contact email" do
             expect(registration.contact_email).to eq(updated_email)
+          end
 
-            # Update key people
+          it "updates the key people" do
             expect(registration.main_people.count).to eq(1)
             expect(registration.main_people.first.first_name).to eq(updated_person.first_name)
+          end
 
-            # Update addresses
+          it "updates the addresses" do
             expect(registration.addresses.count).to eq(2)
             expect(registration.registered_address.postcode).to eq(updated_registered_address.postcode)
             expect(registration.contact_address.postcode).to eq(updated_contact_address.postcode)
+          end
 
-            # But don't modify finance details or other non-editable attributes
+          it "does not update finance_details or other non-editale attributes" do
             expect(registration.expires_on).to eq(old_expires_on)
             expect(registration.expires_on).not_to eq(different_expires_on)
             expect(registration.finance_details).to eq(old_finance_details)
             expect(registration.relevant_people).to eq(old_relevant_people)
-
-            # Delete the transient registration
-            expect(WasteCarriersEngine::TransientRegistration.count).to eq(0)
-
-            expect(response).to have_http_status(:ok)
           end
 
-          context "when there is a change in registration type" do
-            let(:transient_registration) do
-              create(:edit_registration,
-                     :has_changed_registration_type,
-                     contact_email: updated_email,
-                     addresses: [updated_registered_address, updated_contact_address],
-                     key_people: [updated_person],
-                     workflow_state: "edit_complete_form")
-            end
+          it "deletes the transient object" do
+            expect(WasteCarriersEngine::TransientRegistration.count).to eq(0)
+          end
 
-            it "generates a new order in the registration" do
-              old_orders_count = registration.finance_details.orders.count
-              transient_registration.prepare_for_payment(:bank_transfer, user)
+          it "returns HTTP ok" do
+            expect(response).to have_http_status(:ok)
+          end
+        end
 
-              get new_edit_complete_form_path(transient_registration.token)
+        context "when there is a change in registration type" do
+          let(:transient_registration) do
+            create(:edit_registration,
+                   :has_changed_registration_type,
+                   contact_email: updated_email,
+                   addresses: [updated_registered_address, updated_contact_address],
+                   key_people: [updated_person],
+                   workflow_state: "edit_complete_form")
+          end
 
-              registration.reload
+          it "generates a new order in the registration" do
+            old_orders_count = registration.finance_details.orders.count
+            transient_registration.prepare_for_payment(:bank_transfer, user)
 
-              expect(registration.finance_details.orders.count).to eq(old_orders_count + 1)
-            end
+            get new_edit_complete_form_path(transient_registration.token)
+
+            registration.reload
+
+            expect(registration.finance_details.orders.count).to eq(old_orders_count + 1)
           end
 
           # A registration can be renewed or transferred after an edit is
@@ -115,6 +121,7 @@ RSpec.describe "EditCompleteForms" do
               registration.save!
 
               get new_edit_complete_form_path(transient_registration.token)
+
               registration.reload
 
               expect(registration.expires_on).to eq(expires_on)

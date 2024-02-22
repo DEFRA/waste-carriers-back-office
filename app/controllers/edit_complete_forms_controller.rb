@@ -7,6 +7,6 @@ class EditCompleteFormsController < WasteCarriersEngine::FormsController
   def new
     return unless super(EditCompleteForm, "edit_complete_form")
 
-    EditCompletionService.run(edit_registration: @transient_registration)
+    EditCompletionService.run(edit_registration: @transient_registration, user: current_user)
   end
 end

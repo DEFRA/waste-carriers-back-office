@@ -5,12 +5,13 @@ class EditCompletionService < WasteCarriersEngine::BaseService
 
   delegate :registration, to: :transient_registration
 
-  def run(edit_registration:)
+  def run(edit_registration:, user: nil)
     @transient_registration = edit_registration
 
     copy_names_to_contact_address
     create_past_registration
     copy_data_to_registration
+    registration.increment_certificate_version(user)
     delete_transient_registration
   end
 
@@ -54,6 +55,13 @@ class EditCompletionService < WasteCarriersEngine::BaseService
       workflow_state
     ].concat(EditRegistration.temp_attributes)
 
-    registration.write_attributes(transient_registration.attributes.except(*do_not_copy_attributes))
+    copyable_attributes = WasteCarriersEngine::SafeCopyAttributesService.run(
+      source_instance: transient_registration,
+      target_class: WasteCarriersEngine::Registration,
+      embedded_documents: %w[addresses metaData financeDetails key_people],
+      attributes_to_exclude: do_not_copy_attributes
+    )
+
+    registration.write_attributes(copyable_attributes)
   end
 end

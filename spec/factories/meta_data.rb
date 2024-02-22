@@ -4,6 +4,8 @@ FactoryBot.define do
   factory :metaData, class: "WasteCarriersEngine::MetaData" do
     date_registered { Time.current }
     date_activated { Time.current }
+    certificateVersion { 1 }
+    certificateVersionHistory { [{ foo: :bar }] }
     status { :ACTIVE }
     revoked_reason { "reason" }
 

@@ -28,111 +28,99 @@ RSpec.describe EditCompletionService do
       "workflow_state" => nil
     }
   end
-  let(:attributes) do
-    copyable_attributes.merge(uncopyable_attributes)
-  end
 
-  let(:first_name) { "Foo" }
-  let(:last_name) { "Bar" }
-  let(:contact_address) { instance_double(WasteCarriersEngine::Address) }
+  let(:edited_first_name) { "Foo" }
+  let(:edited_last_name) { "Bar" }
+  let(:edited_contact_email) { Faker::Internet.email }
+  let(:contact_address) { registration.contact_address }
 
-  let(:reg_finance_details) { instance_double(WasteCarriersEngine::FinanceDetails) }
-  let(:transient_finance_details) { instance_double(WasteCarriersEngine::FinanceDetails) }
+  let(:edit_registration) { create(:edit_registration, :has_finance_details) }
+  let(:registration) { WasteCarriersEngine::Registration.find_by(reg_identifier: edit_registration.reg_identifier) }
 
-  let(:registration_type_changed) { false }
-
-  let(:registration) { instance_double(WasteCarriersEngine::Registration, finance_details: reg_finance_details) }
-
-  let(:edit_registration) do
-    instance_double(EditRegistration,
-                    attributes: attributes,
-                    registration: registration,
-                    contact_address: contact_address,
-                    first_name: first_name,
-                    last_name: last_name,
-                    finance_details: transient_finance_details,
-                    registration_type_changed?: registration_type_changed)
-  end
-
-  let(:reg_orders) { [instance_double(WasteCarriersEngine::Order)] }
-  let(:reg_payments) { [instance_double(WasteCarriersEngine::Payment)] }
-  let(:transient_order) { instance_double(WasteCarriersEngine::Order) }
-  let(:transient_payment) { instance_double(WasteCarriersEngine::Payment) }
+  let(:reg_orders) { registration.finance_details.orders }
+  let(:reg_payments) { registration.finance_details.payments }
+  let(:transient_order) { edit_registration.finance_details.orders.first }
+  let(:transient_payment) { edit_registration.finance_details.payments.first }
   let(:transient_payments) { [transient_payment] }
 
   describe ".run" do
-    before do
-      allow(contact_address).to receive(:first_name=)
-      allow(contact_address).to receive(:last_name=)
-      allow(edit_registration).to receive(:delete)
-      allow(WasteCarriersEngine::PastRegistration).to receive(:build_past_registration)
-      allow(registration).to receive(:save!)
-      allow(registration).to receive(:write_attributes)
-      allow(reg_finance_details).to receive_messages(orders: reg_orders, payments: reg_payments)
-      allow(reg_finance_details).to receive(:update_balance)
-      allow(reg_orders).to receive(:<<).with(transient_order)
-      allow(reg_payments).to receive(:<<).with(transient_payment)
-      allow(transient_finance_details).to receive(:payments).and_return([transient_payment]).twice
-      allow(transient_finance_details).to receive_messages(orders: [transient_order], payments: transient_payments)
-    end
+    subject(:run_service) { described_class.run(edit_registration: edit_registration, user:) }
 
-    context "when given an edit_registration" do
-      it "updates the registration without merging finance details and deletes the edit_registration" do
+    let(:user) { create(:user, role: :agency) }
 
-        described_class.run(edit_registration: edit_registration)
+    before { allow(edit_registration).to receive(:registration_type_changed?).and_return(registration_type_changed) }
 
-        # Sets up the contact address data
-        expect(contact_address).to have_received(:first_name=).with(first_name)
-        expect(contact_address).to have_received(:last_name=).with(last_name)
-
-        # Creates a past_registration
-        expect(WasteCarriersEngine::PastRegistration).to have_received(:build_past_registration).with(registration, :edit)
-
-        # Updates the registration
-        expect(registration).to have_received(:write_attributes).with(copyable_attributes)
-
-        # Does not merge finance details
-        expect(reg_finance_details).not_to have_received(:update_balance)
-
-        # Saves the registration
-        expect(registration).to have_received(:save!)
-
-        # Deletes transient registration
-        expect(edit_registration).to have_received(:delete)
+    shared_examples "non carrier-type changes" do
+      before do
+        edit_registration.update(first_name: edited_first_name)
+        edit_registration.update(last_name: edited_last_name)
+        edit_registration.update(contact_email: edited_contact_email)
+        edit_registration.key_people << build(:key_person)
       end
 
-      context "when the carrier type has changed" do
-        let(:registration_type_changed) { true }
+      it "sets the contact address data" do
+        run_service
 
-        it "updates the registration, merges finance details and deletes the edit_registration" do
+        expect(registration.reload.contact_address.first_name).to eq edited_first_name
+        expect(registration.reload.contact_address.last_name).to eq edited_last_name
+      end
 
-          described_class.run(edit_registration: edit_registration)
+      it "updates the contact email address" do
+        expect { run_service }.to change { registration.reload.contact_email }.to(edited_contact_email)
+      end
 
-          # Sets up the contact address data
-          expect(contact_address).to have_received(:first_name=).with(first_name)
-          expect(contact_address).to have_received(:last_name=).with(last_name)
+      it "updates the key people" do
+        expect { run_service }.to change { registration.reload.key_people.length }.by(1)
+      end
 
-          # Creates a past_registration
-          expect(WasteCarriersEngine::PastRegistration).to have_received(:build_past_registration).with(registration, :edit)
+      it "creates a past registration" do
+        expect { run_service }.to change { registration.reload.past_registrations.count }.by(1)
+      end
 
-          # Updates the registration
-          expect(registration).to have_received(:write_attributes).with(copyable_attributes)
+      it "increments the certificate version" do
+        expect { run_service }.to change { registration.reload.metaData.certificate_version }.by(1)
+      end
 
-          # Updates the balance
-          expect(reg_finance_details).to have_received(:update_balance)
+      it "updates the certificate version history" do
+        expect { run_service }.to change { registration.reload.metaData.certificate_version_history.length }.by(1)
+      end
 
-          # Merges orders
-          expect(reg_orders).to have_received(:<<).with(transient_order)
+      it "records the current user in the version history" do
+        expect { run_service }.to change { registration.reload.metaData.certificate_version_history.last["generated_by"] }.to(user.email)
+      end
 
-          # Merges payments
-          expect(reg_payments).to have_received(:<<).with(transient_payment)
+      it "deletes the edit_registration" do
+        expect { run_service }.to change(EditRegistration, :count).by(-1)
+      end
+    end
 
-          # Saves the registration
-          expect(registration).to have_received(:save!)
+    context "when the carrier type has not been changed" do
+      let(:registration_type_changed) { false }
 
-          # Deletes transient registration
-          expect(edit_registration).to have_received(:delete)
-        end
+      it_behaves_like "non carrier-type changes"
+
+      it "does not merge finance details" do
+        expect { run_service }.not_to change { registration.reload.finance_details }
+      end
+    end
+
+    context "when the carrier type has been changed" do
+      let(:registration_type_changed) { true }
+
+      it_behaves_like "non carrier-type changes"
+
+      it "updates the balance" do
+        expect { run_service }.to change { registration.reload.finance_details.balance }
+      end
+
+      it "merges orders" do
+        expect { run_service }.to change { registration.reload.finance_details.orders.length }
+      end
+
+      it "merges payments" do
+        edit_registration.finance_details.payments << build(:payment)
+
+        expect { run_service }.to change { registration.reload.finance_details.payments.length }
       end
     end
   end
