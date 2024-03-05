@@ -2,13 +2,54 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.24.1...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.24.2...HEAD)
+
+**Implemented enhancements:**
+
+- Increment certificate version after back-office edits [\#1868](https://github.com/DEFRA/waste-carriers-back-office/pull/1868) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Ruby 2962 Enhance Conviction Data Import for UTF-8 Support [\#1865](https://github.com/DEFRA/waste-carriers-back-office/pull/1865) ([jjromeo](https://github.com/jjromeo))
+- \[RUBY-2962\] Improve ConvictionImportService with detailed error for missing headers and handle CSVs with extra headers [\#1856](https://github.com/DEFRA/waste-carriers-back-office/pull/1856) ([jjromeo](https://github.com/jjromeo))
+- RUBY 2909 wcr bo add search for registration number option [\#1855](https://github.com/DEFRA/waste-carriers-back-office/pull/1855) ([jjromeo](https://github.com/jjromeo))
+- Update analytics page content [\#1851](https://github.com/DEFRA/waste-carriers-back-office/pull/1851) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- \[RUBY-2909\] Add registration number search functionality to dashboards [\#1850](https://github.com/DEFRA/waste-carriers-back-office/pull/1850) ([jjromeo](https://github.com/jjromeo))
+- \[RUBY-2802\] Prevent certificate view tokens being copied onto EditRegistration transient registrations [\#1837](https://github.com/DEFRA/waste-carriers-back-office/pull/1837) ([jjromeo](https://github.com/jjromeo))
+- Feature/ruby 2799 user journey ends [\#1828](https://github.com/DEFRA/waste-carriers-back-office/pull/1828) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Fixed bugs:**
+
+- Add rake task to remove duplicate page views [\#1845](https://github.com/DEFRA/waste-carriers-back-office/pull/1845) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Merged pull requests:**
+
+- Bump defra\_ruby\_template from 3.15.0 to 3.15.1 [\#1879](https://github.com/DEFRA/waste-carriers-back-office/pull/1879) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `c9cfbf0` to `a4aefb3` [\#1871](https://github.com/DEFRA/waste-carriers-back-office/pull/1871) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump govuk\_design\_system\_formbuilder from 5.0.0 to 5.1.0 [\#1864](https://github.com/DEFRA/waste-carriers-back-office/pull/1864) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `0c1e214` to `1028116` [\#1863](https://github.com/DEFRA/waste-carriers-back-office/pull/1863) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump webmock from 3.20.0 to 3.22.0 [\#1862](https://github.com/DEFRA/waste-carriers-back-office/pull/1862) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump defra\_ruby\_template from 3.13.0 to 3.15.0 [\#1860](https://github.com/DEFRA/waste-carriers-back-office/pull/1860) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump dotenv-rails from 2.8.1 to 3.0.2 [\#1859](https://github.com/DEFRA/waste-carriers-back-office/pull/1859) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `ba6fb4a` to `0c1e214` [\#1854](https://github.com/DEFRA/waste-carriers-back-office/pull/1854) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `671d4d6` to `ba6fb4a` [\#1853](https://github.com/DEFRA/waste-carriers-back-office/pull/1853) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump webmock from 3.19.1 to 3.20.0 [\#1852](https://github.com/DEFRA/waste-carriers-back-office/pull/1852) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `a9d877a` to `671d4d6` [\#1849](https://github.com/DEFRA/waste-carriers-back-office/pull/1849) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `2c5acc7` to `a9d877a` [\#1848](https://github.com/DEFRA/waste-carriers-back-office/pull/1848) ([dependabot[bot]](https://github.com/apps/dependabot))
+- bump engine version [\#1847](https://github.com/DEFRA/waste-carriers-back-office/pull/1847) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Bump waste\_carriers\_engine from `92511f6` to `0f04c4f` [\#1844](https://github.com/DEFRA/waste-carriers-back-office/pull/1844) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `7154779` to `ec4b3de` [\#1839](https://github.com/DEFRA/waste-carriers-back-office/pull/1839) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.24.2](https://github.com/defra/waste-carriers-back-office/tree/v1.24.2) (2024-01-25)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.24.1...v1.24.2)
 
 **Fixed bugs:**
 
 - Fix/ruby 2903 rake task to remove obsolete fields [\#1835](https://github.com/DEFRA/waste-carriers-back-office/pull/1835) ([brujeo](https://github.com/brujeo))
 - \[RUBY-2903\] minor adjustments to rake task output [\#1834](https://github.com/DEFRA/waste-carriers-back-office/pull/1834) ([brujeo](https://github.com/brujeo))
 - \[RUBY-2903\] rake task to remove accountEmail field from transient registrations [\#1833](https://github.com/DEFRA/waste-carriers-back-office/pull/1833) ([brujeo](https://github.com/brujeo))
+
+**Merged pull requests:**
+
+- Update CHANGELOG [\#1836](https://github.com/DEFRA/waste-carriers-back-office/pull/1836) ([brujeo](https://github.com/brujeo))
 
 ## [v1.24.1](https://github.com/defra/waste-carriers-back-office/tree/v1.24.1) (2024-01-22)
 
@@ -19,6 +60,8 @@
 - RUBY 2806 wcr conviction data file upload [\#1823](https://github.com/DEFRA/waste-carriers-back-office/pull/1823) ([jjromeo](https://github.com/jjromeo))
 - Ruby 2806 wcr conviction data file upload [\#1819](https://github.com/DEFRA/waste-carriers-back-office/pull/1819) ([jjromeo](https://github.com/jjromeo))
 - \[RUBY-2795\] view communication history page [\#1808](https://github.com/DEFRA/waste-carriers-back-office/pull/1808) ([brujeo](https://github.com/brujeo))
+- \[RUBY-2806\] Implement CSV file upload for conviction data import with error handling and UI updates [\#1806](https://github.com/DEFRA/waste-carriers-back-office/pull/1806) ([jjromeo](https://github.com/jjromeo))
+- Add communication history tracking [\#1803](https://github.com/DEFRA/waste-carriers-back-office/pull/1803) ([jjromeo](https://github.com/jjromeo))
 - Feature/ruby 2784 wcr back office functionality to recheck an ea area [\#1792](https://github.com/DEFRA/waste-carriers-back-office/pull/1792) ([brujeo](https://github.com/brujeo))
 
 **Fixed bugs:**
@@ -39,9 +82,7 @@
 - Bump net-imap from 0.4.9 to 0.4.9.1 [\#1817](https://github.com/DEFRA/waste-carriers-back-office/pull/1817) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump waste\_carriers\_engine from `52415bd` to `58216a7` [\#1814](https://github.com/DEFRA/waste-carriers-back-office/pull/1814) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump factory\_bot\_rails from 6.4.2 to 6.4.3 [\#1812](https://github.com/DEFRA/waste-carriers-back-office/pull/1812) ([dependabot[bot]](https://github.com/apps/dependabot))
-- \[RUBY-2806\] Implement CSV file upload for conviction data import with error handling and UI updates [\#1806](https://github.com/DEFRA/waste-carriers-back-office/pull/1806) ([jjromeo](https://github.com/jjromeo))
 - Chore/ruby 2770 controller permission checks [\#1805](https://github.com/DEFRA/waste-carriers-back-office/pull/1805) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
-- Add communication history tracking [\#1803](https://github.com/DEFRA/waste-carriers-back-office/pull/1803) ([jjromeo](https://github.com/jjromeo))
 - Chore/ruby 2770 move bo functionality to bo [\#1800](https://github.com/DEFRA/waste-carriers-back-office/pull/1800) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
 - Bump waste\_carriers\_engine from `cc5cd80` to `a14c350` [\#1798](https://github.com/DEFRA/waste-carriers-back-office/pull/1798) ([dependabot[bot]](https://github.com/apps/dependabot))
 - RUBY 2765 wcr bo call recording to be paused before card payment [\#1796](https://github.com/DEFRA/waste-carriers-back-office/pull/1796) ([jjromeo](https://github.com/jjromeo))
@@ -1045,7 +1086,7 @@
 
 ## [v1.9.0](https://github.com/defra/waste-carriers-back-office/tree/v1.9.0) (2020-06-18)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.2...v1.9.0)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.3...v1.9.0)
 
 **Implemented enhancements:**
 
@@ -1158,13 +1199,13 @@
 - Bump waste\_carriers\_engine from `46ec95b` to `336551e` [\#818](https://github.com/DEFRA/waste-carriers-back-office/pull/818) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump waste\_carriers\_engine from `2799dbf` to `46ec95b` [\#813](https://github.com/DEFRA/waste-carriers-back-office/pull/813) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
-## [v1.8.2](https://github.com/defra/waste-carriers-back-office/tree/v1.8.2) (2020-05-12)
-
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.3...v1.8.2)
-
 ## [v1.8.3](https://github.com/defra/waste-carriers-back-office/tree/v1.8.3) (2020-05-12)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.1...v1.8.3)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.2...v1.8.3)
+
+## [v1.8.2](https://github.com/defra/waste-carriers-back-office/tree/v1.8.2) (2020-05-12)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.1...v1.8.2)
 
 ## [v1.8.1](https://github.com/defra/waste-carriers-back-office/tree/v1.8.1) (2020-04-17)
 
