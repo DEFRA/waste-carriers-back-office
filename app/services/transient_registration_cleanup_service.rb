@@ -50,9 +50,30 @@ class TransientRegistrationCleanupService < WasteCarriersEngine::BaseService
   end
 
   def remove_transient_registrations(transient_registrations)
+    resolve_invalid_transient_registration_types
+
     transient_registrations.each do |transient_registration|
       console_log transient_registration.reg_identifier
       transient_registration.destroy
+    end
+  end
+
+  def resolve_invalid_transient_registration_types
+    # First check for transient_registrations with invalid _type. This can happen
+    # when a transient_registration class is renamed or retired, if transient_registrations
+    # of the old type remain in the DB. In such cases, iterating and instantiating will fail.
+    valid_transient_registration_types = WasteCarriersEngine::TransientRegistration.descendants
+    invalid_transient_registration_types = WasteCarriersEngine::TransientRegistration
+                                           .where(_type: { "$nin": valid_transient_registration_types })
+                                           .pluck(:_type).uniq
+
+    return if invalid_transient_registration_types.empty?
+
+    # Temporarily create a class definition for each invalid type, to allow those
+    # transient_registrations to be instantiated and destroyed:
+    invalid_transient_registration_types.each do |type_name|
+      console_log "Handling obsolete transient registration type #{type_name}"
+      Object.const_set type_name, Class.new(WasteCarriersEngine::TransientRegistration)
     end
   end
 

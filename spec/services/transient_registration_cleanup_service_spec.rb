@@ -82,5 +82,20 @@ RSpec.describe TransientRegistrationCleanupService do
         it_behaves_like "does not delete it"
       end
     end
+
+    # This can happen when a transient_registration class is renamed or retired
+    # if transient_registrations of the old type remain in the DB.
+    context "when a transient_registration has an invalid _type" do
+      before do
+        transient_registration.update(created_at: 31.days.ago, _type: "NonExistentClass")
+      end
+
+      # validate test setup
+      it { expect(WasteCarriersEngine::TransientRegistration.pluck(:_type)).to eq ["NonExistentClass"] }
+
+      it { expect { described_class.run }.not_to raise_error }
+
+      it_behaves_like "deletes it"
+    end
   end
 end
