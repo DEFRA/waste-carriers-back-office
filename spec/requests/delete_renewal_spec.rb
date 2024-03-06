@@ -25,10 +25,9 @@ RSpec.describe "Delete renewal" do
     context "with no renewal in progress" do
       it_behaves_like "all restart renewal requests"
 
-      it "does not delete any registrations or transient_registrations" do
-        expect { subject }.not_to change(WasteCarriersEngine::Registration, :count)
-        expect { subject }.not_to change(WasteCarriersEngine::TransientRegistration, :count)
-      end
+      it { expect { subject }.not_to change(WasteCarriersEngine::Registration, :count) }
+
+      it { expect { subject }.not_to change(WasteCarriersEngine::TransientRegistration, :count) }
     end
 
     context "with a renewal in progress" do
