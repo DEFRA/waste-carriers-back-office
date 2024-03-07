@@ -59,9 +59,12 @@ class TransientRegistrationCleanupService < WasteCarriersEngine::BaseService
   end
 
   def resolve_invalid_transient_registration_types
-    # First check for transient_registrations with invalid _type. This can happen
-    # when a transient_registration class is renamed or retired, if transient_registrations
-    # of the old type remain in the DB. In such cases, iterating and instantiating will fail.
+    # Check for transient_registrations with invalid `_type`, which identifies the subtype of transient_registration.
+    # For example, a transient_registration of type `EditRegistration` may have been created but the class
+    # `EditRegistration` has now been renamed `BackOfficeEditRegistration`. If transient_registrations
+    # of the old type remain in the DB, iterating and instantiating will fail. So we temporarily define a
+    # subclass of TransientRegistration with the missing name so that the doomed transient_registration can be
+    # instantiated and destroyed.
     valid_transient_registration_types = WasteCarriersEngine::TransientRegistration.descendants
     invalid_transient_registration_types = WasteCarriersEngine::TransientRegistration
                                            .where(_type: { "$nin": valid_transient_registration_types })
