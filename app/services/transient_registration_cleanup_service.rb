@@ -76,7 +76,13 @@ class TransientRegistrationCleanupService < WasteCarriersEngine::BaseService
     # transient_registrations to be instantiated and destroyed:
     invalid_transient_registration_types.each do |type_name|
       console_log "Handling obsolete transient registration type #{type_name}"
-      Object.const_set type_name, Class.new(WasteCarriersEngine::TransientRegistration)
+      # some types are in the WasteCarriersEngine namespace:
+      elements = type_name.split("::")
+      if elements.length > 1
+        elements[0].constantize.const_set elements[1], Class.new(WasteCarriersEngine::TransientRegistration)
+      else
+        Object.const_set type_name, Class.new(WasteCarriersEngine::TransientRegistration)
+      end
     end
   end
 
