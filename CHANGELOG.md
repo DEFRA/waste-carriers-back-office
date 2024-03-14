@@ -2,7 +2,21 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.24.2...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.25.0...HEAD)
+
+**Fixed bugs:**
+
+- Add rake task to clean up invalid conviction signoffs [\#1885](https://github.com/DEFRA/waste-carriers-back-office/pull/1885) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- handle namespaces on obsolete transient registration types [\#1883](https://github.com/DEFRA/waste-carriers-back-office/pull/1883) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Fix/ruby 2917 tr cleanup error [\#1882](https://github.com/DEFRA/waste-carriers-back-office/pull/1882) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `24b3974` to `2e31886` [\#1884](https://github.com/DEFRA/waste-carriers-back-office/pull/1884) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.25.0](https://github.com/defra/waste-carriers-back-office/tree/v1.25.0) (2024-03-05)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.24.2...v1.25.0)
 
 **Implemented enhancements:**
 
@@ -21,6 +35,7 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG [\#1880](https://github.com/DEFRA/waste-carriers-back-office/pull/1880) ([jjromeo](https://github.com/jjromeo))
 - Bump defra\_ruby\_template from 3.15.0 to 3.15.1 [\#1879](https://github.com/DEFRA/waste-carriers-back-office/pull/1879) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump waste\_carriers\_engine from `c9cfbf0` to `a4aefb3` [\#1871](https://github.com/DEFRA/waste-carriers-back-office/pull/1871) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump govuk\_design\_system\_formbuilder from 5.0.0 to 5.1.0 [\#1864](https://github.com/DEFRA/waste-carriers-back-office/pull/1864) ([dependabot[bot]](https://github.com/apps/dependabot))
