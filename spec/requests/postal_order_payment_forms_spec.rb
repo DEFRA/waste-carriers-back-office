@@ -67,6 +67,9 @@ RSpec.describe "PostalOrderPaymentForms" do
     end
 
     before do
+      # ensure the payment amount is non-zero
+      transient_registration.finance_details.update(balance: 1)
+
       # Block renewal completion so we can check the values of the transient_registration after submission
       allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_return(nil)
     end
@@ -86,7 +89,7 @@ RSpec.describe "PostalOrderPaymentForms" do
 
         expect(response).to redirect_to(resource_finance_details_path(registration._id))
         expect(transient_registration.reload.finance_details.payments.count).to eq(old_payments_count + 1)
-        expect(transient_registration.reload.finance_details.payments.first.updated_by_user).to eq(user.email)
+        expect(transient_registration.reload.finance_details.payments.last.updated_by_user).to eq(user.email)
       end
 
       context "when there is no pending conviction check" do

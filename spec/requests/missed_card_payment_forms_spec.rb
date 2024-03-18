@@ -68,6 +68,9 @@ RSpec.describe "MissedCardPaymentForms" do
       let(:user) { create(:user, role: :finance_admin) }
 
       before do
+        # ensure the payment amount is non-zero
+        transient_registration.finance_details.update(balance: 1)
+
         sign_in(user)
       end
 
