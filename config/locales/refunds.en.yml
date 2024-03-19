@@ -1,11 +1,11 @@
 en:
   refunds:
     comments:
-      manual: "A manual refund has been requested for this payment"
+      manual: "A refund has been requested for this payment"
       card_pending: "A refund request has been submitted"
-      card_complete: "A manual refund has been successful"
+      card_complete: "A refund has been successful"
     refunded_message:
-      manual: "Refund: A manual refund has been requested for this payment"
+      manual: "Refund: A refund has been requested for this payment"
       card: "Refund: %{refund_status}"
       updated: "The refund status has been updated"
       not_updated: "The refund status has not changed"
