@@ -29,6 +29,7 @@ RSpec.describe RenewalReminderServiceBase do
       )
       empty_contact_email = create(:registration, expires_on: 3.days.from_now, contact_email: "")
       nil_contact_email = create(:registration, expires_on: 3.days.from_now, contact_email: nil)
+      opted_out_registration = create(:registration, expires_on: 3.days.from_now, communications_opted_out: true)
 
       test_class.run
 
@@ -40,6 +41,7 @@ RSpec.describe RenewalReminderServiceBase do
         expect(test_class_instance).not_to have_received(:send_email).with(ad_registration)
         expect(test_class_instance).not_to have_received(:send_email).with(empty_contact_email)
         expect(test_class_instance).not_to have_received(:send_email).with(nil_contact_email)
+        expect(test_class_instance).not_to have_received(:send_email).with(opted_out_registration)
       end
     end
 

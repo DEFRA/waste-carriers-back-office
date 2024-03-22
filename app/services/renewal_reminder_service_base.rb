@@ -30,6 +30,7 @@ class RenewalReminderServiceBase < WasteCarriersEngine::BaseService
         }
       )
       .not_in(contact_email: [nil, ""])
+      .communications_accepted
   end
 
   def expires_in_days
