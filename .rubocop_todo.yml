@@ -21,7 +21,6 @@ RSpec/AnyInstance:
     - 'spec/services/notify/ad_renewal_letter_service_spec.rb'
     - 'spec/services/notify/digital_renewal_letter_service_spec.rb'
     - 'spec/services/notify/renewal_reminder_email_service_spec.rb'
-    - 'spec/services/renewal_reminder_service_base_spec.rb'
     - 'spec/services/reports/finance_reports_service_spec.rb'
 
 # Offense count: 141
@@ -66,7 +65,6 @@ RSpec/StubbedMock:
     - 'spec/models/reports/boxi/registrations_serializer_spec.rb'
     - 'spec/models/reports/boxi/sign_offs_serializer_spec.rb'
     - 'spec/services/process_refund_service_spec.rb'
-    - 'spec/services/renewal_reminder_service_base_spec.rb'
 
 # Offense count: 231
 # Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.
