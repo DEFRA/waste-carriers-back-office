@@ -5,6 +5,7 @@ module CanResumeCallRecording
 
   def check_and_resume_call_recording
     return unless WasteCarriersEngine::FeatureToggle.active?(:control_call_recording)
+    return unless @transient_registration.upper_tier?
 
     flash[:call_recording] = if call_recording_service.resume
                                { success: t("shared.call_recording_banner.call_resuming.success") }
