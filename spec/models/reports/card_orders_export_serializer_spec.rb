@@ -5,22 +5,22 @@ require "rails_helper"
 module Reports
   RSpec.describe CardOrdersExportSerializer do
 
-    let(:registration1) { create(:registration) }
+    let(:registration_a) { create(:registration) }
     let(:end_time) { DateTime.now + 3.days }
     let(:start_time) { end_time - 1.week }
-    let(:registration2) { create(:registration) }
-    let(:registration3) { create(:registration) }
+    let(:registration_b) { create(:registration) }
+    let(:registration_c) { create(:registration) }
     let(:file_path) { Rails.root.join("tmp/card_orders_file.csv") }
 
     before do
       create(:order_item_log,
              type: "COPY_CARDS",
-             registration_id: registration1.id,
+             registration_id: registration_a.id,
              quantity: 2,
              activated_at: start_time + 1.second)
       create(:order_item_log,
              type: "COPY_CARDS",
-             registration_id: registration2.id,
+             registration_id: registration_b.id,
              quantity: 5,
              activated_at: end_time - 1.second)
     end
@@ -70,8 +70,8 @@ module Reports
         before { serializer.to_csv }
 
         it "includes one row per item ordered" do
-          expect(export_content.scan(registration1.reg_identifier).size).to eq 2
-          expect(export_content.scan(registration2.reg_identifier).size).to eq 5
+          expect(export_content.scan(registration_a.reg_identifier).size).to eq 2
+          expect(export_content.scan(registration_b.reg_identifier).size).to eq 5
         end
 
         # This is to ensure the export includes previously exported
@@ -80,8 +80,8 @@ module Reports
           serializer.mark_exported
           described_class.new(file_path, start_time, end_time).to_csv
 
-          expect(export_content.scan(registration1.reg_identifier).size).to eq 2
-          expect(export_content.scan(registration2.reg_identifier).size).to eq 5
+          expect(export_content.scan(registration_a.reg_identifier).size).to eq 2
+          expect(export_content.scan(registration_b.reg_identifier).size).to eq 5
         end
 
         it "excludes non-copy-card order items" do
@@ -153,13 +153,13 @@ module Reports
         before do
           create(:order_item_log,
                  type: "COPY_CARDS",
-                 registration_id: registration3.id,
+                 registration_id: registration_c.id,
                  quantity: nil,
                  activated_at: start_time + 1.second)
         end
 
         it "excludes the order item without raising an error" do
-          expect(export_content).not_to include(registration3.reg_identifier)
+          expect(export_content).not_to include(registration_c.reg_identifier)
         end
       end
     end

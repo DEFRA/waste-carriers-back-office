@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe ReminderLetterPresenter do
+  include WasteCarriersEngine::ApplicationHelper
+
   subject { described_class.new(registration, view_context) }
 
   let(:registration) { double(:registration) }
@@ -10,19 +12,27 @@ RSpec.describe ReminderLetterPresenter do
 
   describe "#contact_address_lines" do
     let(:company_name) { "company name" }
-    let(:contact_address) { double(:address) }
+    let(:contact_address) { build(:address) }
     let(:registration) { double(:registration, company_name: company_name, contact_address: contact_address) }
-    let(:address_lines) { ["line 1", "line 2"] }
-
-    before { allow_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:displayable_address).and_return(address_lines) }
 
     it "gets the displayable address lines" do
-      expected_address = [company_name, address_lines].flatten
+      expected_address = [
+        company_name,
+        contact_address.house_number,
+        contact_address.address_line_1,
+        contact_address.address_line_2,
+        contact_address.address_line_3,
+        contact_address.address_line_4,
+        contact_address.town_city,
+        contact_address.postcode,
+        contact_address.country
+      ].flatten
+
       expect(subject.contact_address_lines).to eq(expected_address)
     end
 
-    context "when there there are no address lines" do
-      let(:address_lines) { [] }
+    context "when there are no address lines" do
+      let(:contact_address) { build(:simple_address, house_number: nil, address_line_1: nil, town_city: nil, postcode: nil) }
 
       it "throws an error" do
         expect { subject.contact_address_lines }.to raise_error(MissingAddressError)
@@ -70,7 +80,6 @@ RSpec.describe ReminderLetterPresenter do
       expected_cost = "105"
 
       allow(Rails.configuration).to receive(:renewal_charge).and_return(renewal_cost)
-      allow_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(renewal_cost).and_return(expected_cost)
       expect(subject.renewal_cost).to eq(expected_cost)
     end
   end
@@ -82,7 +91,6 @@ RSpec.describe ReminderLetterPresenter do
       expected_cost = "154"
 
       allow(Rails.configuration).to receive(:new_registration_charge).and_return(new_reg_cost)
-      allow_any_instance_of(WasteCarriersEngine::ApplicationHelper).to receive(:display_pence_as_pounds).with(new_reg_cost).and_return(expected_cost)
       expect(subject.new_reg_cost).to eq(expected_cost)
     end
   end

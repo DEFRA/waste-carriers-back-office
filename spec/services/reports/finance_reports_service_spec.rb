@@ -23,13 +23,18 @@ module Reports
         let(:s3_test_filepath) { "FINANCE_REPORTS/#{test_filename}" }
         let(:s3_test_previous_filepath) { "FINANCE_REPORTS/a_file" }
         let(:file_path) { File.join(temp_dir, test_filename) }
+        let(:service_instance) { described_class.new }
+
+        before do
+          allow(described_class).to receive(:new).and_return(service_instance)
+          allow(service_instance).to receive(:file_name).and_return(test_filename)
+        end
 
         it "generates a report file, uploads it to AWS and deletes any previous files" do
 
           # populate test dir
           File.open(file_path, "w")
 
-          allow_any_instance_of(described_class).to receive(:file_name).and_return(test_filename)
           allow(Dir).to receive(:mktmpdir).and_yield(temp_dir)
           expect(DefraRuby::Aws).to receive(:get_bucket).and_return(bucket).at_least(:once)
           expect(upload_result).to receive(:successful?).and_return(true).at_least(:once)

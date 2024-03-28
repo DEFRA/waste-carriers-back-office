@@ -31,11 +31,11 @@ module Reports
       end
 
       context "when multiple report files exist on S3" do
-        let(:filename_previous1) { "test_file_2022-08-24_23-59-59.csv" }
-        let(:filename_previous2) { "test_file_2022-08-25_12-44-26.csv" }
-        let(:s3_filepath_previous1) { "#{WasteCarriersBackOffice::Application.config.finance_reports_directory}/#{filename_previous1}" }
-        let(:s3_filepath_previous2) { "#{WasteCarriersBackOffice::Application.config.finance_reports_directory}/#{filename_previous2}" }
-        let(:file_list) { [s3_filepath_previous2, s3_filepath, s3_filepath_previous1] }
+        let(:filename_previous_a) { "test_file_2022-08-24_23-59-59.csv" }
+        let(:filename_previous_b) { "test_file_2022-08-25_12-44-26.csv" }
+        let(:s3_filepath_previous_a) { "#{WasteCarriersBackOffice::Application.config.finance_reports_directory}/#{filename_previous_a}" }
+        let(:s3_filepath_previous_b) { "#{WasteCarriersBackOffice::Application.config.finance_reports_directory}/#{filename_previous_b}" }
+        let(:file_list) { [s3_filepath_previous_b, s3_filepath, s3_filepath_previous_a] }
 
         it "returns a download URL for the latest file" do
           allow(bucket).to receive(:presigned_url).with(s3_filepath).and_return(s3_url)

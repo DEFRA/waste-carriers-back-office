@@ -32,7 +32,7 @@ SecureHeaders::Configuration.default do |config|
   # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src
   # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/font-src
   # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors
-  #
+
   # We have to use single quotes here, even though it's against style - double doesn't work
   # rubocop:disable Lint/PercentStringArray
   config.csp = {

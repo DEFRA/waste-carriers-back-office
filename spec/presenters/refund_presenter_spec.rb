@@ -9,9 +9,9 @@ RSpec.describe RefundPresenter do
   let(:payment) { double(:payment) }
 
   describe ".total_amount_paid" do
-    let(:payment1) { double(:payment, amount: 100) }
-    let(:payment2) { double(:payment, amount: 600) }
-    let(:finance_details) { double(:finance_details, payments: [payment1, payment2]) }
+    let(:payment_a) { double(:payment, amount: 100) }
+    let(:payment_b) { double(:payment, amount: 600) }
+    let(:finance_details) { double(:finance_details, payments: [payment_a, payment_b]) }
 
     it "returns the total of all payments made by a user to a registration" do
       expect(subject.total_amount_paid).to eq(700)
@@ -19,9 +19,9 @@ RSpec.describe RefundPresenter do
   end
 
   describe ".total_amount_due" do
-    let(:order1) { double(:order, total_amount: 100) }
-    let(:order2) { double(:order, total_amount: 600) }
-    let(:finance_details) { double(:finance_details, orders: [order1, order2]) }
+    let(:order_a) { double(:order, total_amount: 100) }
+    let(:order_b) { double(:order, total_amount: 600) }
+    let(:finance_details) { double(:finance_details, orders: [order_a, order_b]) }
 
     it "returns the total amount of all orders made by a user to a registration" do
       expect(subject.total_amount_due).to eq(700)

@@ -48,12 +48,15 @@ RSpec.describe "ConvictionApprovalForms" do
           revoked_reason: "foo"
         }
       end
+      let(:renewal_completion_service) { WasteCarriersEngine::RenewalCompletionService.new(transient_registration) }
 
       before do
-        sign_in(user)
+        allow(WasteCarriersEngine::RenewalCompletionService).to receive(:new).and_return(renewal_completion_service)
 
         # Block renewal completion so we can check the values of the transient_registration after submission
-        allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_return(nil)
+        allow(renewal_completion_service).to receive(:delete_transient_registration)
+
+        sign_in(user)
       end
 
       it "redirects to the convictions page and updates the revoked_reason, workflow_state, and 'confirmed_' attributes" do
@@ -69,11 +72,7 @@ RSpec.describe "ConvictionApprovalForms" do
       end
 
       context "when there is no pending payment" do
-        before do
-          transient_registration.finance_details = build(:finance_details, balance: 0)
-          # Disable the stubbing as we want to test the full behaviour this time
-          allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
-        end
+        before { transient_registration.finance_details = build(:finance_details, balance: 0) }
 
         it "renews the registration" do
           expected_expiry_date = registration.expires_on.to_date + 3.years
@@ -87,7 +86,7 @@ RSpec.describe "ConvictionApprovalForms" do
 
         context "when the RenewalCompletionService fails" do
           before do
-            allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_raise(StandardError)
+            allow(renewal_completion_service).to receive(:complete_renewal).and_raise(StandardError)
           end
 
           it "rescues the error" do
@@ -99,11 +98,7 @@ RSpec.describe "ConvictionApprovalForms" do
       end
 
       context "when there is a pending payment" do
-        before do
-          transient_registration.finance_details = build(:finance_details, balance: 100)
-          # Disable the stubbing as we want to test the full behaviour this time
-          allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
-        end
+        before { transient_registration.finance_details = build(:finance_details, balance: 100) }
 
         it "does not renews the registration" do
           old_renewal_date = registration.expires_on

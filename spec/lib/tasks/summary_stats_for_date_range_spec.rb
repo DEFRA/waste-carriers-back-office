@@ -2,7 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable RSpec/ExpectOutput
 RSpec.describe "summary_stats:stats_for_date_range", type: :rake do
   include_context "rake"
 
@@ -11,6 +10,7 @@ RSpec.describe "summary_stats:stats_for_date_range", type: :rake do
   let(:start_date) { 90.days.ago.strftime("%Y-%m-%d") }
   let(:end_date) { Time.zone.today.strftime("%Y-%m-%d") }
 
+  # rubocop:disable RSpec/ExpectOutput
   before do
     # suppress noisy outputs during unit test
     $stdout = StringIO.new
@@ -21,9 +21,9 @@ RSpec.describe "summary_stats:stats_for_date_range", type: :rake do
   after do
     $stdout = original_stdout
   end
+  # rubocop:enable RSpec/ExpectOutput
 
   it "runs without error" do
     expect { Rake::Task[subject].invoke(start_date, end_date) }.not_to raise_error
   end
 end
-# rubocop:enable RSpec/ExpectOutput

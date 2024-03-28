@@ -12,8 +12,10 @@ class RenewalReminderServiceBase < WasteCarriersEngine::BaseService
 
   private
 
-  def send_email
-    raise(NotImplementedError)
+  def send_email(registration)
+    Notify::RenewalReminderEmailService.run(registration: registration)
+  rescue StandardError => e
+    Airbrake.notify(e, registration_no: registration.reg_identifier) if defined?(Airbrake)
   end
 
   def expiring_registrations
@@ -28,6 +30,7 @@ class RenewalReminderServiceBase < WasteCarriersEngine::BaseService
         }
       )
       .not_in(contact_email: [nil, ""])
+      .communications_accepted
   end
 
   def expires_in_days

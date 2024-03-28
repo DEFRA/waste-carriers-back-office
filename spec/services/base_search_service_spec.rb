@@ -15,10 +15,10 @@ RSpec.describe BaseSearchService do
   let(:search_term) { "search for me" }
   let(:non_matching_renewal) { create(:renewing_registration) }
   let(:non_matching_registration) { WasteCarriersEngine::Registration.find_by(reg_identifier: non_matching_renewal.reg_identifier) }
-  let(:matching_renewal1) { create(:renewing_registration) }
-  let(:matching_registration1) { WasteCarriersEngine::Registration.find_by(reg_identifier: matching_renewal1.reg_identifier) }
-  let(:matching_renewal2) { create(:renewing_registration) }
-  let(:matching_registration2) { WasteCarriersEngine::Registration.find_by(reg_identifier: matching_renewal2.reg_identifier) }
+  let(:matching_renewal_a) { create(:renewing_registration) }
+  let(:matching_registration_a) { WasteCarriersEngine::Registration.find_by(reg_identifier: matching_renewal_a.reg_identifier) }
+  let(:matching_renewal_b) { create(:renewing_registration) }
+  let(:matching_registration_b) { WasteCarriersEngine::Registration.find_by(reg_identifier: matching_renewal_b.reg_identifier) }
   let(:test_service) { instance_double(test_class) }
 
   def expected_result_for(entities)
@@ -50,26 +50,26 @@ RSpec.describe BaseSearchService do
     end
 
     context "with matches on a single collection" do
-      before { allow(test_service).to receive(:run).with(any_args).and_return(expected_result_for([matching_renewal1, matching_renewal2])) }
+      before { allow(test_service).to receive(:run).with(any_args).and_return(expected_result_for([matching_renewal_a, matching_renewal_b])) }
 
       it "returns the expected count" do
         expect(run_service[:count]).to eq 2
       end
 
       it "returns all matches from the collection" do
-        expect(run_service[:results]).to contain_exactly(matching_renewal1, matching_renewal2)
+        expect(run_service[:results]).to contain_exactly(matching_renewal_a, matching_renewal_b)
       end
     end
 
     context "with matches on multiple collections" do
-      before { allow(test_service).to receive(:run).and_return(expected_result_for([matching_renewal1, matching_registration2])) }
+      before { allow(test_service).to receive(:run).and_return(expected_result_for([matching_renewal_a, matching_registration_b])) }
 
       it "returns the expected count" do
         expect(run_service[:count]).to eq 2
       end
 
       it "returns aggregated results from the different collections" do
-        expect(run_service[:results]).to contain_exactly(matching_renewal1, matching_registration2)
+        expect(run_service[:results]).to contain_exactly(matching_renewal_a, matching_registration_b)
       end
     end
 
@@ -84,8 +84,8 @@ RSpec.describe BaseSearchService do
 
       before do
         allow(test_service).to receive(:search).and_return([
-                                                             matching_renewal1.reg_identifier,
-                                                             matching_registration2.reg_identifier,
+                                                             matching_renewal_a.reg_identifier,
+                                                             matching_registration_b.reg_identifier,
                                                              edit_registration.reg_identifier
                                                            ])
       end

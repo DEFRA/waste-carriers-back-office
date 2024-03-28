@@ -20,13 +20,20 @@ module Reports
 
     attr_reader :dir_path
 
-    # rubocop:disable Metrics/CyclomaticComplexity
-    # rubocop:disable Metrics/PerceivedComplexity
     def run(dir_path)
       @dir_path = dir_path
 
       order_uid = 1
 
+      process_registrations(order_uid)
+
+      registration_serializers.each(&:close)
+      order_serializers.each(&:close)
+    end
+
+    private
+
+    def process_registrations(order_uid)
       registrations.each.with_index do |registration, index|
         # Start counting from 1 rather than from 0
         uid = index + 1
@@ -37,22 +44,19 @@ module Reports
 
         next unless registration&.finance_details&.orders&.any?
 
-        registration.finance_details.orders.each do |order|
-          order_serializers.each do |serializer|
-            serializer.add_entries_for(order, uid, order_uid)
-          end
-
-          order_uid += 1
-        end
+        process_orders(registration, uid, order_uid)
       end
-
-      registration_serializers.each(&:close)
-      order_serializers.each(&:close)
     end
-    # rubocop:enable Metrics/PerceivedComplexity
-    # rubocop:enable Metrics/CyclomaticComplexity
 
-    private
+    def process_orders(registration, uid, order_uid)
+      registration.finance_details.orders.each do |order|
+        order_serializers.each do |serializer|
+          serializer.add_entries_for(order, uid, order_uid)
+        end
+
+        order_uid += 1
+      end
+    end
 
     def registrations
       @_registrations ||= WasteCarriersEngine::Registration.all

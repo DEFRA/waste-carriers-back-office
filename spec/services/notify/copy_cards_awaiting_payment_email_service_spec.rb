@@ -4,8 +4,6 @@ require "rails_helper"
 
 module Notify
 
-  # TODO: Refactor to remove the use of allow_any_instance_of
-  # rubocop:disable RSpec/AnyInstance
   RSpec.describe CopyCardsAwaitingPaymentEmailService do
     describe ".run" do
       let(:template_id) { "56997dd9-852f-4e18-b4e2-c008a9398bfe" }
@@ -28,10 +26,11 @@ module Notify
           }
         }
       end
+      let(:notifications_client) { Notifications::Client.new(WasteCarriersEngine.configuration.notify_api_key) }
 
       context "with a contact_email" do
         before do
-          allow_any_instance_of(Notifications::Client)
+          allow(notifications_client)
             .to receive(:send_email)
             .with(expected_notify_options)
             .and_call_original
@@ -55,12 +54,11 @@ module Notify
         before { registration.contact_email = nil }
 
         it "does not attempt to send an email" do
-          expect_any_instance_of(Notifications::Client).not_to receive(:send_email)
+          expect(notifications_client).not_to receive(:send_email)
 
           described_class.run(registration: registration, order: order)
         end
       end
     end
   end
-  # rubocop:enable RSpec/AnyInstance
 end

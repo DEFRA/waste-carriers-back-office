@@ -86,11 +86,10 @@ class TransientRegistrationCleanupService < WasteCarriersEngine::BaseService
     end
   end
 
-  # rubocop:disable Rails/Output
   def console_log(text)
     # :nocov:
-    puts text unless Rails.env.test?
+    puts text unless Rails.env.test? # rubocop:disable Rails/Output
     # :nocov:
   end
-  # rubocop:enable Rails/Output
+
 end

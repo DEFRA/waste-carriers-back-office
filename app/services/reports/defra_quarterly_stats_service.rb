@@ -2,10 +2,10 @@
 
 # This is a minimalist implementation to meet an urgent requirement. It is expected to be enhanced later.
 module Reports
+  # rubocop:disable Layout/LineLength
   class DefraQuarterlyStatsService < ::WasteCarriersEngine::BaseService
     attr_reader :start_date, :end_date, :abandon_rate, :abandon_rate_percent
 
-    # rubocop:disable Layout/LineLength
     def run
       report = []
       report << "Abandon rate is not directly tracked. Estimation:"
@@ -57,7 +57,6 @@ module Reports
 
       report
     end
-    # rubocop:enable Layout/LineLength
 
     private
 
@@ -110,4 +109,5 @@ module Reports
       [required_quarter_start, required_quarter_end]
     end
   end
+  # rubocop:enable Layout/LineLength
 end

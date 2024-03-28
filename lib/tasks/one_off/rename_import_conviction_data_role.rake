@@ -10,6 +10,6 @@ namespace :one_off do
       puts "Updating #{convictions_users.count} \"import_conviction_data\" user roles to \"cbd_user\""
     end
 
-    convictions_users.update_all(role: :cbd_user)
+    convictions_users.update_all(role: :cbd_user) # rubocop:disable Rails/SkipsModelValidations
   end
 end

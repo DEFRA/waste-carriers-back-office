@@ -100,12 +100,7 @@ class Ability
     can :view_certificate, WasteCarriersEngine::Registration
     can :record_missed_card_payment, :all
     can :view_payments, :all
-
-    # rubocop:disable Style/SymbolProc
-    can :reverse, WasteCarriersEngine::Payment do |payment|
-      payment.govpay?
-    end
-    # rubocop:enable Style/SymbolProc
+    can :reverse, WasteCarriersEngine::Payment, &:govpay?
   end
 
   def permissions_for_agency_super_user

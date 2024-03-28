@@ -57,7 +57,7 @@ RSpec.describe "PostalOrderPaymentForms" do
   describe "POST /bo/transient-registrations/:reg_identifier/payments/postal-order" do
     let(:params) do
       {
-        amount: transient_registration.finance_details.balance,
+        amount: transient_registration.finance_details.balance / 100.0,
         comment: "foo",
         registration_reference: "foo",
         date_received_day: "1",
@@ -68,16 +68,20 @@ RSpec.describe "PostalOrderPaymentForms" do
 
     before do
       # ensure the payment amount is non-zero
-      transient_registration.finance_details.update(balance: 1)
-
-      # Block renewal completion so we can check the values of the transient_registration after submission
-      allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_return(nil)
+      transient_registration.finance_details.payments.last.update(amount: 200)
+      transient_registration.finance_details.update_balance
     end
 
     context "when a valid user is signed in" do
       let(:user) { create(:user, role: :agency_with_refund) }
+      let(:renewal_completion_service) { WasteCarriersEngine::RenewalCompletionService.new(transient_registration) }
 
       before do
+        allow(WasteCarriersEngine::RenewalCompletionService).to receive(:new).and_return(renewal_completion_service)
+
+        # Block deletion so we can check the values of the transient_registration after submission
+        allow(renewal_completion_service).to receive(:delete_transient_registration)
+
         sign_in(user)
       end
 
@@ -93,11 +97,7 @@ RSpec.describe "PostalOrderPaymentForms" do
       end
 
       context "when there is no pending conviction check" do
-        before do
-          transient_registration.conviction_sign_offs = [build(:conviction_sign_off, :confirmed)]
-          # Disable the stubbing as we want to test the full behaviour this time
-          allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
-        end
+        before { transient_registration.conviction_sign_offs = [build(:conviction_sign_off, :approved, :confirmed)] }
 
         it "renews the registration" do
           expected_expiry_date = registration.expires_on.to_date + 3.years
@@ -111,13 +111,9 @@ RSpec.describe "PostalOrderPaymentForms" do
       end
 
       context "when there is a pending conviction check" do
-        before do
-          transient_registration.conviction_sign_offs = [build(:conviction_sign_off)]
-          # Disable the stubbing as we want to test the full behaviour this time
-          allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
-        end
+        before { transient_registration.conviction_sign_offs = [build(:conviction_sign_off)] }
 
-        it "does not renews the registration" do
+        it "does not renew the registration" do
           old_renewal_date = registration.expires_on
 
           post "/bo/resources/#{transient_registration._id}/payments/postal-order", params: { postal_order_payment_form: params }
