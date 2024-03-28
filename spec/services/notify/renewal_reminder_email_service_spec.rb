@@ -9,6 +9,12 @@ module Notify
     let(:reg_identifier) { registration.reg_identifier }
 
     describe ".run" do
+      subject(:run_service) do
+        VCR.use_cassette("notify_renewal_reminder_sends_an_email") do
+          described_class.run(registration: registration)
+        end
+      end
+
       let(:expected_notify_options) do
         {
           email_address: registration.contact_email,
@@ -24,16 +30,13 @@ module Notify
           }
         }
       end
+      let(:notifications_client) { Notifications::Client.new(WasteCarriersEngine.configuration.notify_api_key) }
 
-      subject(:run_service) do
-        VCR.use_cassette("notify_renewal_reminder_sends_an_email") do
-          described_class.run(registration: registration)
-        end
-      end
+      before { allow(Notifications::Client).to receive(:new).and_return(notifications_client) }
 
       context "when the contact email is present" do
         before do
-          allow_any_instance_of(Notifications::Client)
+          allow(notifications_client)
             .to receive(:send_email)
             .with(expected_notify_options)
             .and_call_original
@@ -58,7 +61,7 @@ module Notify
         end
 
         it "does not send an email" do
-          expect_any_instance_of(Notifications::Client).not_to receive(:send_email)
+          expect(notifications_client).not_to receive(:send_email)
           subject
         end
       end

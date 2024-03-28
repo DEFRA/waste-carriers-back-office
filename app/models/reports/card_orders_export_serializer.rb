@@ -44,7 +44,7 @@ module Reports
 
     # Let the caller decide when it's ok to mark the documents as successfully exported
     def mark_exported
-      @order_item_logs.update_all(exported: true)
+      @order_item_logs.update_all(exported: true) # rubocop:disable Rails/SkipsModelValidations
     end
 
     private

@@ -4,19 +4,20 @@ require "rails_helper"
 
 RSpec.describe Notify::AdRenewalLetterService do
   describe "#run" do
-    let(:registration) { create(:registration, :expires_soon, :simple_address) }
-    let(:template_id) { "1b56d3a7-f7fd-414d-a3ba-2b50f627cf40" }
-    let(:run_service) do
+    subject(:run_service) do
       VCR.use_cassette("notify_ad_renewal_letter") do
         described_class.run(registration: registration)
       end
     end
-    let(:notifications_client_response_notification) { instance_double(Notifications::Client::ResponseNotification) }
+
+    let(:registration) { create(:registration, :expires_soon) }
+    let(:template_id) { "1b56d3a7-f7fd-414d-a3ba-2b50f627cf40" }
+    let(:address) { build(:simple_address) }
 
     before do
       # Make sure it's a real postcode for Notify validation purposes
-      allow_any_instance_of(WasteCarriersEngine::Address).to receive(:postcode).and_return("BS1 1AA")
-      allow_any_instance_of(Notifications::Client).to receive(:send_letter).and_call_original
+      allow(address).to receive(:postcode).and_return("BS1 1AA")
+      allow(registration).to receive(:contact_address).and_return(address)
     end
 
     it "sends a letter" do

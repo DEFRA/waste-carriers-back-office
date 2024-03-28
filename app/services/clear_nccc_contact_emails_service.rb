@@ -27,7 +27,7 @@ class ClearNcccContactEmailsService < WasteCarriersEngine::BaseService
         next unless matching_registrations.any?
 
         Rails.logger.info "Clearing NCCC contact email addresses: #{matching_registrations.pluck(:contact_email)}"
-        matching_registrations.update_all(contact_email: nil)
+        matching_registrations.update_all(contact_email: nil) # rubocop:disable Rails/SkipsModelValidations
       end
     end
   end

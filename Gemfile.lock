@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: c2be00a31efb4d748e1c387378eacc701e95a3da
+  revision: 88747ec76efa6590c96001d7ebe99c98dc2c6152
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -511,7 +511,8 @@ GEM
     simpleidn (0.2.1)
       unf (~> 0.1.4)
     spring (4.1.3)
-    sprockets (3.7.2)
+    sprockets (3.7.3)
+      base64
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.4.2)
