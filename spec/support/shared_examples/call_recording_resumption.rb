@@ -19,22 +19,37 @@ RSpec.shared_examples "resumes call recording" do
       allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(true)
     end
 
-    it "resumes call recording" do
-      allow(call_recording_service).to receive(:resume).and_return(true)
-      get path
-      expect(call_recording_service).to have_received(:resume)
+    context "when transient_registration is upper tier" do
+      it "resumes call recording" do
+        allow(call_recording_service).to receive(:resume).and_return(true)
+        get path
+        expect(call_recording_service).to have_received(:resume)
+      end
+
+      it "sets the correct flash message on success" do
+        allow(call_recording_service).to receive(:resume).and_return(true)
+        get path
+        expect(flash[:call_recording]).to eq(success: I18n.t("shared.call_recording_banner.call_resuming.success"))
+      end
+
+      it "sets the correct flash message on failure" do
+        allow(call_recording_service).to receive(:resume).and_return(false)
+        get path
+        expect(flash[:call_recording]).to eq(error: I18n.t("shared.call_recording_banner.call_resuming.error"))
+      end
     end
 
-    it "sets the correct flash message on success" do
-      allow(call_recording_service).to receive(:resume).and_return(true)
-      get path
-      expect(flash[:call_recording]).to eq(success: I18n.t("shared.call_recording_banner.call_resuming.success"))
-    end
+    context "when transient_registration is lower tier" do
+      before do
+        transient_registration.tier = "LOWER"
+        transient_registration.save
+      end
 
-    it "sets the correct flash message on failure" do
-      allow(call_recording_service).to receive(:resume).and_return(false)
-      get path
-      expect(flash[:call_recording]).to eq(error: I18n.t("shared.call_recording_banner.call_resuming.error"))
+      it "does not resume call recording" do
+        allow(call_recording_service).to receive(:resume)
+        get path
+        expect(call_recording_service).not_to have_received(:resume)
+      end
     end
   end
 
