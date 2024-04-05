@@ -6,7 +6,7 @@ module CanFetchResource
   included do
     before_action :fetch_resource
 
-    rescue_from BSON::ObjectId::Invalid do
+    rescue_from BSON::Error::InvalidObjectId do
       redirect_to "/bo/pages/invalid"
     end
 
