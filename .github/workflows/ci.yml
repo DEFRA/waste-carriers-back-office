@@ -63,7 +63,9 @@ jobs:
 
       - name: Set up databases
         run: |
+          sudo lsof -i:27017
           sudo systemctl stop mongod
+          sudo lsof -i:27017
           sleep 5s
           mlaunch --replicaset --name wcrepl --auth --username mongoAdmin --password password1234
           mongo "mongodb://mongoAdmin:password1234@localhost:27017,localhost:27018,localhost:27019/waste-carriers-test?authSource=admin&replicaSet=wcrepl" --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
