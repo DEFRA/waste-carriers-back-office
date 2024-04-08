@@ -56,8 +56,9 @@ jobs:
 
       - name: Set up databases
         run: |
+          sudo systemctl list-units --type=service --state=running
           sudo lsof -i:27017
-          sudo systemctl stop mongod
+          sudo systemctl stop mongod.service
           sudo lsof -i:27017
           sleep 5s
           mlaunch --replicaset --name wcrepl --auth --username mongoAdmin --password password1234
