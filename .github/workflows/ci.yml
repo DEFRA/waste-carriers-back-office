@@ -34,7 +34,7 @@ jobs:
     # Service containers to run with `runner-job`
     services:
       mongodb:
-        image: mongo
+        image: mongodb-replica-set
         ports:
         - 27017:27017
 
