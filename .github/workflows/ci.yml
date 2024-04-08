@@ -34,7 +34,7 @@ jobs:
     # Service containers to run with `runner-job`
     services:
       mongodb:
-        image: mongodb-replica-set
+        image: mongodb
         ports:
         - 27017:27017
 
@@ -45,12 +45,17 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of sonarcloud analysis
 
+      # supercharge/mongodb-github-action requires node.js
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+
       # Install various other dependencies
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install xvfb -y
           sudo apt-get install wkhtmltopdf -y
+          sudo npm install
 
       # We don't have to specify the ruby version, or grab it from .ruby-verion. This action supports reading the
       # version from .ruby-version itself
@@ -58,6 +63,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.10.0
+        with:
+          mongodb-replica-set: wcrepl
 
       - name: Set up databases
         run: |
