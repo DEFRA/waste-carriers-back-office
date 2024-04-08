@@ -31,6 +31,16 @@ jobs:
       # Just used to make the tests pass
       WCRS_USE_XVFB_FOR_WICKEDPDF: true
 
+<<<<<<< HEAD
+=======
+    # Service containers to run with `runner-job`
+    services:
+      mongodb:
+        image: mongo
+        ports:
+        - 27017:27017
+
+>>>>>>> 6a86abd (mongodb replica set config)
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Checkout repository
