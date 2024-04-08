@@ -63,9 +63,8 @@ jobs:
 
       - name: Set up databases
         run: |
-          sudo systemctl list-units --type=service --state=running
           sudo lsof -i:27017
-          mongo waste-carriers-test --eval 'db.adminCommand({ "shutdown" : 1, "force" : true })'
+          mongo --eval 'db.getSiblingDB('admin').shutdownServer()'
           sudo lsof -i:27017
           sleep 5s
           mlaunch --replicaset --name wcrepl --auth --username mongoAdmin --password password1234
