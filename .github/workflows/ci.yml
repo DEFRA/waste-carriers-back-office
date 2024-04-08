@@ -31,16 +31,6 @@ jobs:
       # Just used to make the tests pass
       WCRS_USE_XVFB_FOR_WICKEDPDF: true
 
-<<<<<<< HEAD
-=======
-    # Service containers to run with `runner-job`
-    services:
-      mongodb:
-        image: mongo
-        ports:
-        - 27017:27017
-
->>>>>>> 6a86abd (mongodb replica set config)
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Checkout repository
@@ -66,10 +56,7 @@ jobs:
 
       - name: Set up databases
         run: |
-<<<<<<< HEAD
-=======
-          systemctl stop mongod
->>>>>>> 4d6ea81 (mongodb replica set config)
+          sudo systemctl stop mongod
           mlaunch --replicaset --name wcrepl --auth --username mongoAdmin --password password1234
           mongo "mongodb://mongoAdmin:password1234@localhost:27017,localhost:27018,localhost:27019/waste-carriers-test?authSource=admin&replicaSet=wcrepl" --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
           mongo "mongodb://mongoAdmin:password1234@localhost:27017,localhost:27018,localhost:27019/waste-carriers-users-test?authSource=admin&replicaSet=wcrepl" --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
