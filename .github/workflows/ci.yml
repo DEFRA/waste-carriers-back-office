@@ -45,17 +45,14 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of sonarcloud analysis
 
-      # supercharge/mongodb-github-action requires node.js
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-
       # Install various other dependencies
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install xvfb -y
           sudo apt-get install wkhtmltopdf -y
-          sudo npm install
+          sudo apt-get install -qq python python3-pip
+          sudo pip3 install mtools[mlaunch]
 
       # We don't have to specify the ruby version, or grab it from .ruby-verion. This action supports reading the
       # version from .ruby-version itself
@@ -65,9 +62,8 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.10.0
-        with:
-          mongodb-replica-set: wcrepl
+        run: |
+          mlaunch --replicaset --name wcrepl --auth --username mongoAdmin --password password1234
 
       - name: Set up databases
         run: |
