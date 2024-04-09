@@ -4,7 +4,7 @@ require "rails_helper"
 
 module Notify
   RSpec.describe RenewalReminderEmailService do
-    let(:template_id) { "51cfcf60-7506-4ee7-9400-92aa90cf983c" }
+    let(:template_id) { "6d20d279-ba79-4fe0-9868-fb09c4ae7733" }
     let(:registration) { create(:registration, :expires_soon) }
     let(:reg_identifier) { registration.reg_identifier }
 
