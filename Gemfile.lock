@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: ea8075795811b9487bfc4d62d6143f1b863acbe2
+  revision: 4ed1fd4c9f088fe59df29413fc625b82e8869583
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -413,7 +413,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
-    rake (13.2.0)
+    rake (13.2.1)
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
