@@ -27,7 +27,8 @@ class EditRegistration < WasteCarriersEngine::TransientRegistration
                              deregistration_token
                              deregistration_token_created_at
                              view_certificate_token
-                             view_certificate_token_created_at],
+                             view_certificate_token_created_at
+                             unsubscribe_token],
     copy_addresses: true,
     copy_people: true
   }.freeze
