@@ -39,10 +39,16 @@ module WasteCarriersEngine
           end
 
           context "when there is an expires_on" do
-            before { registration.expires_on = 1.day.from_now }
+            let(:expiry_check_service) { instance_double(ExpiryCheckService) }
+
+            before do
+              allow(ExpiryCheckService).to receive(:new).and_return(expiry_check_service)
+
+              registration.expires_on = 1.day.from_now
+            end
 
             context "when the registration is in the standard grace window" do
-              before { allow_any_instance_of(ExpiryCheckService).to receive(:in_expiry_grace_window?).and_return(true) }
+              before { allow(expiry_check_service).to receive(:in_expiry_grace_window?).and_return(true) }
 
               it "returns true" do
                 expect(registration.can_start_front_office_renewal?).to be(true)
@@ -50,10 +56,10 @@ module WasteCarriersEngine
             end
 
             context "when the registration is not in the standard grace window" do
-              before { allow_any_instance_of(ExpiryCheckService).to receive(:in_expiry_grace_window?).and_return(false) }
+              before { allow(expiry_check_service).to receive(:in_expiry_grace_window?).and_return(false) }
 
               context "when the registration is past the expiry date" do
-                before { allow_any_instance_of(ExpiryCheckService).to receive(:expired?).and_return(true) }
+                before { allow(expiry_check_service).to receive(:expired?).and_return(true) }
 
                 it "returns false" do
                   expect(registration.can_start_front_office_renewal?).to be(false)
@@ -61,10 +67,10 @@ module WasteCarriersEngine
               end
 
               context "when the registration is not past the expiry date" do
-                before { allow_any_instance_of(ExpiryCheckService).to receive(:expired?).and_return(false) }
+                before { allow(expiry_check_service).to receive(:expired?).and_return(false) }
 
                 context "when the registration is in the renewal window" do
-                  before { allow_any_instance_of(ExpiryCheckService).to receive(:in_renewal_window?).and_return(true) }
+                  before { allow(expiry_check_service).to receive(:in_renewal_window?).and_return(true) }
 
                   it "returns true" do
                     expect(registration.can_start_front_office_renewal?).to be(true)
@@ -72,7 +78,7 @@ module WasteCarriersEngine
                 end
 
                 context "when the result is not in the renewal window" do
-                  before { allow_any_instance_of(ExpiryCheckService).to receive(:in_renewal_window?).and_return(false) }
+                  before { allow(expiry_check_service).to receive(:in_renewal_window?).and_return(false) }
 
                   it "returns false" do
                     expect(registration.can_start_front_office_renewal?).to be(false)

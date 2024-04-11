@@ -118,11 +118,7 @@ RSpec.describe "BankTransferPaymentForms" do
       end
 
       context "when there is a pending conviction check" do
-        before do
-          transient_registration.conviction_sign_offs = [build(:conviction_sign_off)]
-          # Disable the stubbing as we want to test the full behaviour this time
-          allow_any_instance_of(WasteCarriersEngine::RenewalCompletionService).to receive(:complete_renewal).and_call_original
-        end
+        before { transient_registration.conviction_sign_offs = [build(:conviction_sign_off)] }
 
         it "does not renews the registration" do
           old_renewal_date = registration.expires_on

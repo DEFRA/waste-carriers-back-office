@@ -5,15 +5,15 @@ http_interactions:
     uri: https://api.notifications.service.gov.uk/v2/notifications/email
     body:
       encoding: UTF-8
-      string: '{"email_address":"whatever@example.com","template_id":"51cfcf60-7506-4ee7-9400-92aa90cf983c","personalisation":{"reg_identifier":"CBDU1","first_name":"Jane","last_name":"Doe","expires_on":"26
-        June 2021","renew_fee":"105","renew_link":"http://localhost:3002/fo/renew/kGKRKjAbpTufSNQ1T1epDeBw"}}'
+      string: '{"email_address":"whatever@example.com","template_id":"6d20d279-ba79-4fe0-9868-fb09c4ae7733","personalisation":{"reg_identifier":"CBDU54","first_name":"Jane","last_name":"Doe","expires_on":"09
+        June 2024","renew_fee":"105","renew_link":"http://localhost:3002/fo/renew/WbeTaoFniMmes381r6sAwcra","unsubscribe_link":"http://localhost:3002/fo/unsubscribe/Uq6hbrmNmMN2SYmsvzCR1twe"}}'
     headers:
       User-Agent:
-      - NOTIFY-API-RUBY-CLIENT/5.3.0
+      - NOTIFY-API-RUBY-CLIENT/5.4.0
       Content-Type:
       - application/json
       Authorization:
-      - Basic <API_KEY>
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIyNWNiNmI5NC04Y2U3LTQ4NWItOTE4YS01NTlmM2IxOGY2OWMiLCJpYXQiOjE3MTI2ODIxMDZ9.ydj5TunToaOuspk3c7RQ13LKHhDyhTbt7-It1EpDJrw
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,44 +21,50 @@ http_interactions:
   response:
     status:
       code: 201
-      message: Created
+      message: CREATED
     headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1438'
+      Connection:
+      - keep-alive
+      Date:
+      - Tue, 09 Apr 2024 17:01:46 GMT
+      Server:
+      - gunicorn
+      Access-Control-Allow-Origin:
+      - "*"
       Access-Control-Allow-Headers:
       - Content-Type,Authorization
       Access-Control-Allow-Methods:
       - GET,PUT,POST,DELETE
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Type:
-      - application/json
-      Date:
-      - Mon, 26 Apr 2021 11:47:39 GMT
-      Server:
-      - nginx
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains
-      X-B3-Spanid:
-      - 3d0ccd3a14b4d381
       X-B3-Traceid:
-      - 3d0ccd3a14b4d381
-      X-Vcap-Request-Id:
-      - e7382990-eb46-45cb-439e-349f30ccbe9d
-      Content-Length:
-      - '1174'
-      Connection:
-      - keep-alive
+      - 6ZfCPzgY0GAv44lcLxDtUNML42CNPGLx3zclLsdXcy4aBQ1ZIvOGBw==
+      X-B3-Spanid:
+      - self-07dd12600d13c6b1
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 242a81711c4fc113f186d0cca0b5bb94.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - LHR50-P3
+      X-Amz-Cf-Id:
+      - 6ZfCPzgY0GAv44lcLxDtUNML42CNPGLx3zclLsdXcy4aBQ1ZIvOGBw==
     body:
       encoding: UTF-8
       string: '{"content":{"body":"Dear Jane Doe\r\n\r\n#Renew your waste carrier
-        registration by 26 June 2021\r\n\r\nIt costs \u00a3105 and lasts for 3 years.\r\n\r\n#You
-        can renew online in a few minutes at: \r\nhttp://localhost:3002/fo/renew/kGKRKjAbpTufSNQ1T1epDeBw\r\n\r\nRegistration
-        number: CBDU1\r\n\r\nIf you no longer need a waste carrier registration, you
-        can ignore these reminders. You cannot transport, buy, sell or dispose of
-        waste without a registration.\r\n\r\nEnvironment Agency\r\nTelephone 03708
-        506 506, Monday to Friday (8am to 6pm)\r\nnccc-carrierbroker@environment-agency.gov.uk\r\n\r\nThis
+        registration by 09 June 2024\r\n\r\nIt costs \u00a3105 and lasts for 3 years.\r\n\r\n#You
+        can renew online in a few minutes at: \r\nhttp://localhost:3002/fo/renew/WbeTaoFniMmes381r6sAwcra\r\n\r\nRegistration
+        number: CBDU54\r\n\r\nConviction checks could take up to 5 weeks. You should
+        plan for this if you have any relevant convictions. \r\n\r\nIf you no longer
+        need a waste carrier registration, you can ignore these reminders. You cannot
+        transport, buy, sell or dispose of waste without a registration.\r\n\r\nEnvironment
+        Agency\r\nTelephone 03708 506 506, Monday to Friday (8am to 6pm)\r\nnccc-carrierbroker@environment-agency.gov.uk\r\n\r\nTo
+        unsubscribe from email reminders\r\n[Unsubscribe](http://localhost:3002/fo/unsubscribe/Uq6hbrmNmMN2SYmsvzCR1twe)\r\n\r\nThis
         is an automated email, please do not reply.","from_email":"waste.carriers.registration.service@notifications.service.gov.uk","subject":"Renew
-        waste carrier registration CBDU1"},"id":"4d15f68d-b3a4-49a5-89aa-d36284e964e2","reference":null,"scheduled_for":null,"template":{"id":"51cfcf60-7506-4ee7-9400-92aa90cf983c","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/51cfcf60-7506-4ee7-9400-92aa90cf983c","version":5},"uri":"https://api.notifications.service.gov.uk/v2/notifications/4d15f68d-b3a4-49a5-89aa-d36284e964e2"}
+        waste carrier registration CBDU54","unsubscribe_link":null},"id":"8b63ed28-80d4-4a94-8522-13e1e8c3b9dc","reference":null,"scheduled_for":null,"template":{"id":"6d20d279-ba79-4fe0-9868-fb09c4ae7733","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/6d20d279-ba79-4fe0-9868-fb09c4ae7733","version":3},"uri":"https://api.notifications.service.gov.uk/v2/notifications/8b63ed28-80d4-4a94-8522-13e1e8c3b9dc"}
 
-'
-  recorded_at: Mon, 26 Apr 2021 11:47:39 GMT
-recorded_with: VCR 6.0.0
+        '
+  recorded_at: Tue, 09 Apr 2024 17:01:46 GMT
+recorded_with: VCR 6.2.0

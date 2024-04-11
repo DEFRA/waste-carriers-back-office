@@ -11,6 +11,7 @@ RSpec.describe ConvictionReasonForm, type: :model do
           revoked_reason: conviction_reason_form.revoked_reason
         }
       end
+      let(:renewing_registration) { build(:renewing_registration) }
 
       it "submits" do
         expect(conviction_reason_form.submit(valid_params)).to be(true)
@@ -18,7 +19,8 @@ RSpec.describe ConvictionReasonForm, type: :model do
 
       context "when the convictions have already been approved" do
         before do
-          allow_any_instance_of(WasteCarriersEngine::RenewingRegistration).to receive(:conviction_check_approved?).and_return(true)
+          allow(WasteCarriersEngine::RenewingRegistration).to receive(:new).and_return(renewing_registration)
+          allow(renewing_registration).to receive(:conviction_check_approved?).and_return(true)
         end
 
         it "does not submit" do
@@ -27,8 +29,11 @@ RSpec.describe ConvictionReasonForm, type: :model do
       end
 
       context "when the convictions have already been rejected" do
+        let(:meta_data) { build(:metaData) }
+
         before do
-          allow_any_instance_of(WasteCarriersEngine::MetaData).to receive(:REVOKED?).and_return(true)
+          allow(WasteCarriersEngine::MetaData).to receive(:new).and_return(meta_data)
+          allow(meta_data).to receive(:REVOKED?).and_return(true)
         end
 
         it "does not submit" do

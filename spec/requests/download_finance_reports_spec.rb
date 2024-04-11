@@ -16,10 +16,12 @@ RSpec.describe "DownloadFinanceReports" do
       let(:report_filename) { "report_file_2022-08-25_01-23-45.zip" }
       let(:folder_prefix) { "SOME_FOLDER" }
       let(:download_link) { "https://some_bucket.amazonaws.com/#{folder_prefix}/#{report_filename}" }
+      let(:aws_service) { instance_double(Reports::FinanceReportsAwsService) }
 
       before do
         sign_in(user)
-        allow_any_instance_of(Reports::FinanceReportsAwsService).to receive(:download_link).and_return(download_link)
+        allow(Reports::FinanceReportsAwsService).to receive(:new).and_return(aws_service)
+        allow(aws_service).to receive(:download_link).and_return(download_link)
       end
 
       it "returns HTTP status 200" do

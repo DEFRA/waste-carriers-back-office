@@ -31,13 +31,6 @@ jobs:
       # Just used to make the tests pass
       WCRS_USE_XVFB_FOR_WICKEDPDF: true
 
-    # Service containers to run with `runner-job`
-    services:
-      mongodb:
-        image: mongo
-        ports:
-        - 27017:27017
-
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Checkout repository
@@ -51,6 +44,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install xvfb -y
           sudo apt-get install wkhtmltopdf -y
+          sudo apt-get install -qq python python3-pip
+          sudo pip3 install mtools[mlaunch]
 
       # We don't have to specify the ruby version, or grab it from .ruby-verion. This action supports reading the
       # version from .ruby-version itself
@@ -61,8 +56,9 @@ jobs:
 
       - name: Set up databases
         run: |
-          mongo waste-carriers-test --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
-          mongo waste-carriers-users-test --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
+          mlaunch --replicaset --name wcrepl --auth --username mongoAdmin --password password1234
+          mongo "mongodb://mongoAdmin:password1234@localhost:27017,localhost:27018,localhost:27019/waste-carriers-test?authSource=admin&replicaSet=wcrepl" --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
+          mongo "mongodb://mongoAdmin:password1234@localhost:27017,localhost:27018,localhost:27019/waste-carriers-users-test?authSource=admin&replicaSet=wcrepl" --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
 
       # Run linting first. No point running the tests if there is a linting issue
       - name: Run lint check

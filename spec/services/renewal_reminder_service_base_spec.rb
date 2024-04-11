@@ -7,11 +7,17 @@ RSpec.describe RenewalReminderServiceBase do
   let(:test_class) do
     Class.new(described_class) do
       def expires_in_days = 3
-      def send_email(_arg); end
     end
   end
 
   describe ".run" do
+    let(:test_class_instance) { test_class.new }
+
+    before do
+      allow(test_class).to receive(:new).and_return(test_class_instance)
+      allow(test_class_instance).to receive(:send_email).and_call_original
+    end
+
     it "send emails to relevant registrations" do
       expiring = create(:registration, expires_on: 3.days.from_now)
       not_expiring = create(:registration, expires_on: 5.days.from_now)
@@ -23,29 +29,35 @@ RSpec.describe RenewalReminderServiceBase do
       )
       empty_contact_email = create(:registration, expires_on: 3.days.from_now, contact_email: "")
       nil_contact_email = create(:registration, expires_on: 3.days.from_now, contact_email: nil)
-
-      expect_any_instance_of(test_class).to receive(:send_email).with(expiring)
-
-      expect_any_instance_of(test_class).not_to receive(:send_email).with(not_expiring)
-      expect_any_instance_of(test_class).not_to receive(:send_email).with(expiring_too_soon)
-      expect_any_instance_of(test_class).not_to receive(:send_email).with(ad_registration)
-      expect_any_instance_of(test_class).not_to receive(:send_email).with(empty_contact_email)
-      expect_any_instance_of(test_class).not_to receive(:send_email).with(nil_contact_email)
+      opted_out_registration = create(:registration, expires_on: 3.days.from_now, communications_opted_in: false)
 
       test_class.run
+
+      aggregate_failures do
+        expect(test_class_instance).to have_received(:send_email).with(expiring)
+
+        expect(test_class_instance).not_to have_received(:send_email).with(not_expiring)
+        expect(test_class_instance).not_to have_received(:send_email).with(expiring_too_soon)
+        expect(test_class_instance).not_to have_received(:send_email).with(ad_registration)
+        expect(test_class_instance).not_to have_received(:send_email).with(empty_contact_email)
+        expect(test_class_instance).not_to have_received(:send_email).with(nil_contact_email)
+        expect(test_class_instance).not_to have_received(:send_email).with(opted_out_registration)
+      end
     end
 
     context "when an error occurs" do
-      it "logs it in rails and send it to Airbrake" do
+      before do
         create(:registration, expires_on: 3.days.from_now)
 
-        expect_any_instance_of(test_class).to receive(:send_email).and_raise("error")
-
-        expect(Airbrake).to receive(:notify)
-        expect(Rails.logger).to receive(:error)
+        allow(test_class_instance).to receive(:send_email).and_raise("error")
+        allow(Airbrake).to receive(:notify)
+        allow(Rails.logger).to receive(:error)
 
         test_class.run
       end
+
+      it { expect(Airbrake).to have_received(:notify) }
+      it { expect(Rails.logger).to have_received(:error) }
     end
   end
 end

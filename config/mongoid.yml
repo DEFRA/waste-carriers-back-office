@@ -3,16 +3,16 @@ development:
   clients:
     # Config for the registrations database
     default:
-      uri: <%= ENV['WCRS_REGSDB_URI'] || 'mongodb://mongoUser:password1234@localhost:27017/waste-carriers' %>
+      uri: <%= ENV['WCRS_REGSDB_URI'] || 'mongodb://mongoUser:password1234@localhost:27017,localhost:27018,localhost:27019/waste-carriers?authSource=admin&replicaSet=wcrepl' %>
     # Config for the users database
     users:
-      uri: <%= ENV['WCRS_USERSDB_URI'] || 'mongodb://mongoUser:password1234@localhost:27017/waste-carriers-users' %>
+      uri: <%= ENV['WCRS_USERSDB_URI'] || 'mongodb://mongoUser:password1234@localhost:27017,localhost:27018,localhost:27019/waste-carriers-users?authSource=admin&replicaSet=wcrepl' %>
 test:
   clients:
     default:
-      uri: <%= ENV['WCRS_TEST_REGSDB_URI'] || 'mongodb://mongoUser:password1234@localhost:27017/waste-carriers-test' %>
+      uri: <%= ENV['WCRS_TEST_REGSDB_URI'] || 'mongodb://mongoUser:password1234@localhost:27017,localhost:27018,localhost:27019/waste-carriers-test?replicaSet=wcrepl' %>
     users:
-      uri: <%= ENV['WCRS_TEST_USERSDB_URI'] || 'mongodb://mongoUser:password1234@localhost:27017/waste-carriers-users-test' %>
+      uri: <%= ENV['WCRS_TEST_USERSDB_URI'] || 'mongodb://mongoUser:password1234@localhost:27017,localhost:27018,localhost:27019/waste-carriers-users-test?replicaSet=wcrepl' %>
 production:
   clients:
     default:
