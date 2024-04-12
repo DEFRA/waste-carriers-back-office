@@ -15,4 +15,19 @@ namespace :one_off do
       registration.conviction_sign_offs&.last&.delete
     end
   end
+
+  desc "Clear redundant conviction signoffs for transient registrations"
+  task clear_transient_invalid_conviction_signoffs: :environment do
+
+    transient_registrations = WasteCarriersEngine::TransientRegistration.where(
+      declared_convictions: { "$ne": "yes" },
+      "conviction_search_result.match_result": "NO",
+      "key_people.person_type": { "$ne": "RELEVANT" },
+      "metaData.last_modified": { "$gte": DateTime.parse("2024-03-01") }
+    )
+
+    transient_registrations.each do |transient_registration|
+      transient_registration.conviction_sign_offs&.last&.delete
+    end
+  end
 end
