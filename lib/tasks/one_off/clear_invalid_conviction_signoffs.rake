@@ -12,7 +12,7 @@ namespace :one_off do
     )
 
     registrations.each do |registration|
-      registration.conviction_sign_offs&.last&.delete
+      registration.update(conviction_sign_offs: registration.conviction_sign_offs[0..-2])
     end
   end
 
@@ -27,7 +27,7 @@ namespace :one_off do
     )
 
     transient_registrations.each do |transient_registration|
-      transient_registration.conviction_sign_offs&.last&.delete
+      transient_registration.update(conviction_sign_offs: transient_registration.conviction_sign_offs[0..-2])
     end
   end
 end
