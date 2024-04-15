@@ -254,7 +254,7 @@ GEM
       rake (>= 10.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    govuk_design_system_formbuilder (5.3.1)
+    govuk_design_system_formbuilder (4.1.1)
       actionview (>= 6.1)
       activemodel (>= 6.1)
       activesupport (>= 6.1)
@@ -541,7 +541,7 @@ GEM
       unf_ext
     unf_ext (0.0.9.1)
     unicode-display_width (2.5.0)
-    validates_email_format_of (1.8.0)
+    validates_email_format_of (1.8.2)
       i18n (>= 0.8.0)
       simpleidn
     vcr (6.2.0)
@@ -592,7 +592,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   github_changelog_generator
-  govuk_design_system_formbuilder
+  govuk_design_system_formbuilder (~> 4)
   jquery-rails
   kaminari
   kaminari-mongoid
