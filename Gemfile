@@ -34,7 +34,8 @@ gem "rubyzip"
 gem "secure_headers"
 
 # Design system form builder
-# Pin to version 4 for now as v5 added a JS-dependent show-password button with no apparent option to disable it.
+# TODO: Unpin this when the fix for https://github.com/x-govuk/govuk-form-builder/issues/495
+# has been released. V5 added a JS-dependent show-password button with no option to disable it.
 gem "govuk_design_system_formbuilder", "~> 4"
 
 gem "kaminari"

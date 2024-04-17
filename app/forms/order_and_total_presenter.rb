@@ -4,13 +4,9 @@ class OrderAndTotalPresenter < WasteCarriersEngine::BasePresenter
   LOCALES_KEY = ".shared.order_and_total"
 
   def order_items
-    items = []
-
-    transient_registration.finance_details.orders.first.order_items.each do |item|
-      items << add_order_item(item)
+    transient_registration.finance_details.orders.first.order_items.map do |item|
+      add_order_item(item)
     end
-
-    items
   end
 
   def total_cost

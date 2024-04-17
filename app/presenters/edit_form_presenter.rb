@@ -43,12 +43,9 @@ class EditFormPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def main_people_with_roles
-    formatted_people = []
-    transient_registration.main_people.each do |person|
-      formatted_people << format_main_person(person)
+    transient_registration.main_people.map do |person|
+      format_main_person(person)
     end
-
-    formatted_people
   end
 
   def registration_type
