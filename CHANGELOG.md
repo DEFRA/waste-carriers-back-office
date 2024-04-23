@@ -2,7 +2,38 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.25.0...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.24.3...HEAD)
+
+**Implemented enhancements:**
+
+- Feature/ruby 2973 unsubscribe [\#1897](https://github.com/DEFRA/waste-carriers-back-office/pull/1897) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Fixed bugs:**
+
+- RUBY-3023 clearing invalid conviction signoffs for transient registrations [\#1913](https://github.com/DEFRA/waste-carriers-back-office/pull/1913) ([brujeo](https://github.com/brujeo))
+- \[RUBY-2973\] Add unsubscribe\_token to EditRegistration ignorable attributes list [\#1912](https://github.com/DEFRA/waste-carriers-back-office/pull/1912) ([jjromeo](https://github.com/jjromeo))
+- Feature/ruby 2973 unsubscribe [\#1905](https://github.com/DEFRA/waste-carriers-back-office/pull/1905) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Feature/ruby 2973 unsubscribe [\#1901](https://github.com/DEFRA/waste-carriers-back-office/pull/1901) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- \[RUBY-2888\] Add upper tier check for call recording resumption and update tests [\#1894](https://github.com/DEFRA/waste-carriers-back-office/pull/1894) ([jjromeo](https://github.com/jjromeo))
+- \[RUBY-3028\] Update refund request wording in locales file [\#1892](https://github.com/DEFRA/waste-carriers-back-office/pull/1892) ([jjromeo](https://github.com/jjromeo))
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `80bf87a` to `b70b7f4` [\#1918](https://github.com/DEFRA/waste-carriers-back-office/pull/1918) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Feature/ruby 2973 unsubscribe [\#1917](https://github.com/DEFRA/waste-carriers-back-office/pull/1917) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Bump waste\_carriers\_engine from `8544354` to `80bf87a` [\#1914](https://github.com/DEFRA/waste-carriers-back-office/pull/1914) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `4ed1fd4` to `8544354` [\#1911](https://github.com/DEFRA/waste-carriers-back-office/pull/1911) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump devise from 4.9.3 to 4.9.4 [\#1909](https://github.com/DEFRA/waste-carriers-back-office/pull/1909) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `ea80757` to `4ed1fd4` [\#1908](https://github.com/DEFRA/waste-carriers-back-office/pull/1908) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump govuk\_design\_system\_formbuilder from 5.3.0 to 5.3.1 [\#1907](https://github.com/DEFRA/waste-carriers-back-office/pull/1907) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump spring from 4.1.3 to 4.2.0 [\#1906](https://github.com/DEFRA/waste-carriers-back-office/pull/1906) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump faker from 3.3.0 to 3.3.1 [\#1902](https://github.com/DEFRA/waste-carriers-back-office/pull/1902) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 6.1.1 to 6.1.2 [\#1891](https://github.com/DEFRA/waste-carriers-back-office/pull/1891) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore/RUBY-2975\_unit\_tests [\#1889](https://github.com/DEFRA/waste-carriers-back-office/pull/1889) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+## [v1.24.3](https://github.com/defra/waste-carriers-back-office/tree/v1.24.3) (2024-03-14)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.25.0...v1.24.3)
 
 **Fixed bugs:**
 
@@ -12,6 +43,7 @@
 
 **Merged pull requests:**
 
+- Release v1.24.3 [\#1886](https://github.com/DEFRA/waste-carriers-back-office/pull/1886) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
 - Bump waste\_carriers\_engine from `24b3974` to `2e31886` [\#1884](https://github.com/DEFRA/waste-carriers-back-office/pull/1884) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v1.25.0](https://github.com/defra/waste-carriers-back-office/tree/v1.25.0) (2024-03-05)
