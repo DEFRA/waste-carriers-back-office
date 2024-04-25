@@ -3,7 +3,7 @@
 # spec/tasks/lookups_rake_spec.rb
 require "rails_helper"
 
-RSpec.describe "lookups:update:missing_area", type: :rake do
+RSpec.describe "lookups:update:missing_area", type: :task do
   include_context "rake"
   let(:task) { Rake::Task["lookups:update:missing_area"] }
 

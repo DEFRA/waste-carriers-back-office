@@ -39,11 +39,11 @@ RSpec.configure do |config|
     Rake::Task.define_task(:environment)
   end
 
-  config.before(:each, type: :rake) do
+  config.before(:each, type: :task) do
     DatabaseCleaner.strategy = :deletion
   end
 
-  config.after(type: :rake) do
+  config.after(type: :task) do
     DatabaseCleaner.clean_with(:deletion)
   end
 end

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "reports:export:generate_finance_reports", type: :rake do
+RSpec.describe "reports:export:generate_finance_reports", type: :task do
   include_context "rake"
 
   it "runs without error" do

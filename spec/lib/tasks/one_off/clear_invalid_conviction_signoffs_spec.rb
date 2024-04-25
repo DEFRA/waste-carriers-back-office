@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "clearing invalid conviction signoffs", type: :rake do
+RSpec.describe "clearing invalid conviction signoffs", type: :task do
   describe "one_off:clear_invalid_conviction_signoffs" do
     let(:task) { Rake::Task["one_off:clear_invalid_conviction_signoffs"] }
     let(:conviction_sign_offs) { [build(:conviction_sign_off)] }

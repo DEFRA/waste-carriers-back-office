@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "one_off:embed_page_views_in_user_journey", type: :rake do
+RSpec.describe "one_off:embed_page_views_in_user_journey", type: :task do
   subject(:rake_task) { Rake::Task["one_off:embed_page_views_in_user_journey"] }
 
   include_context "rake"

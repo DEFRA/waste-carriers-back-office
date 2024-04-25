@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "one_off:clear_duplicate_page_views", type: :rake do
+RSpec.describe "one_off:clear_duplicate_page_views", type: :task do
   subject(:rake_task) { Rake::Task["one_off:clear_duplicate_page_views"] }
 
   include_context "rake"

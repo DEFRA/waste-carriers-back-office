@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "one_off:clear_lower_tier_with_conviction_flags", type: :rake do
+RSpec.describe "one_off:clear_lower_tier_with_conviction_flags", type: :task do
   let(:task) { Rake::Task["one_off:clear_lower_tier_with_conviction_flags"] }
 
   include_context "rake"

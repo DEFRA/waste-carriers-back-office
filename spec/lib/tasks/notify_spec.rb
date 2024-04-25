@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Notify task", type: :rake do
+RSpec.describe "Notify task", type: :task do
   include_context "rake"
 
   describe "notify:letters:ad_renewals" do

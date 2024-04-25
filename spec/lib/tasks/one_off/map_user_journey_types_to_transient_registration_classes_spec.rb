@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "one_off:map_user_journey_types_to_transient_registration_classes", type: :rake do
+RSpec.describe "one_off:map_user_journey_types_to_transient_registration_classes", type: :task do
   subject(:rake_task) { Rake::Task["one_off:map_user_journey_types_to_transient_registration_classes"] }
 
   include_context "rake"

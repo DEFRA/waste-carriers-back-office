@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "summary_stats:stats_for_date_range", type: :rake do
+RSpec.describe "summary_stats:stats_for_date_range", type: :task do
   include_context "rake"
 
   original_stdout = $stdout

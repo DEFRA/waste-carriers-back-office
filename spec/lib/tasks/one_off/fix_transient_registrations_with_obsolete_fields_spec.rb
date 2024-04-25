@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "one_off:fix_transient_registrations_with_obsolete_fields", type: :rake do
+RSpec.describe "one_off:fix_transient_registrations_with_obsolete_fields", type: :task do
   let(:task) { Rake::Task["one_off:fix_transient_registrations_with_obsolete_fields"] }
 
   include_context "rake"

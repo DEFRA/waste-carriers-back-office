@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "one_off:clear_area_not_found_values", type: :rake do
+RSpec.describe "one_off:clear_area_not_found_values", type: :task do
   subject(:rake_task) { Rake::Task["one_off:clear_area_not_found_values"] }
 
   include_context "rake"

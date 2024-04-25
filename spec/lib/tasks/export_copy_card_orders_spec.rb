@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Export copy card orders task", type: :rake do
+RSpec.describe "Export copy card orders task", type: :task do
   subject { Rake.application["reports:export:weekly_copy_card_orders"] }
 
   include_context "rake"
