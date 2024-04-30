@@ -8,6 +8,10 @@ RSpec.describe "fix missing conviction signoffs", type: :task do
     let(:conviction_search_result) { build(:conviction_search_result, :match_result_no) }
     let(:key_people) { build_list(:key_person, 2, conviction_search_result:) }
 
+    let(:tier) { "UPPER" }
+    let(:conviction_sign_offs) { [] }
+    let!(:registration) { create(:registration, key_people:, tier:, conviction_sign_offs:) }
+
     include_context "rake"
 
     before { task.reenable }
@@ -30,20 +34,15 @@ RSpec.describe "fix missing conviction signoffs", type: :task do
 
     it { expect { task.invoke }.not_to raise_error }
 
-    context "when a registration has a conviction_sign_off" do
-
-      let!(:registration) do # rubocop:disable RSpec/LetSetup
-        create(:registration, key_people:, conviction_sign_offs: [build(:conviction_sign_off)])
-      end
+    context "when a registration already has a conviction_sign_off" do
+      let(:conviction_sign_offs) {  [build(:conviction_sign_off)] }
 
       it_behaves_like "does not add a conviction signoff"
     end
 
     context "when a registration does not have a conviction sign off" do
 
-      let!(:registration) do
-        create(:registration, key_people:, conviction_sign_offs: [])
-      end
+      let(:conviction_sign_offs) { [] }
 
       context "when all key people have a conviction search result of \"NO\"" do
         let(:match_result) { :match_result_no }
@@ -54,6 +53,22 @@ RSpec.describe "fix missing conviction signoffs", type: :task do
       context "when a key person has a conviction search result of \"YES\"" do
         before { registration.key_people.last.conviction_search_result.update(match_result: "YES") }
 
+        # This is an edge case for a registration that was changed from upper to lower tier
+        context "when the registration is lower tier" do
+          before { registration.update(tier: "LOWER") }
+
+          it_behaves_like "does not add a conviction signoff"
+        end
+
+        context "when the registration is in a state where a flag is not appropriate" do
+          %w[CEASED REVOKED REFUSED EXPIRED].each do |state|
+            before { registration.metaData.update(status: state) }
+
+            it_behaves_like "does not add a conviction signoff"
+          end
+        end
+
+        # Otherwise:
         it_behaves_like "adds a conviction signoff"
       end
 

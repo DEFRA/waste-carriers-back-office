@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 14f03b2309b95e4e435621180c34e115cf26a35a
+  revision: 11a6580be90ddafd9e12ba36ec862d73f3ff42b9
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -316,6 +316,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2024.0305)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.6)
     minitest (5.22.3)
     mongo (2.20.0)
       bson (>= 4.14.1, < 6.0.0)
@@ -340,9 +341,8 @@ GEM
       net-protocol
     netrc (0.11.0)
     nio4r (2.7.1)
-    nokogiri (1.15.6-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.15.6-x86_64-linux)
+    nokogiri (1.15.6)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     nori (2.6.0)
     notifications-ruby-client (5.4.0)
@@ -511,7 +511,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    simpleidn (0.2.1)
+    simpleidn (0.2.2)
       unf (~> 0.1.4)
     spring (4.2.1)
     sprockets (3.7.3)
@@ -572,9 +572,7 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
-  x86_64-darwin-21
-  x86_64-darwin-22
-  x86_64-linux
+  ruby
 
 DEPENDENCIES
   aws-healthcheck
