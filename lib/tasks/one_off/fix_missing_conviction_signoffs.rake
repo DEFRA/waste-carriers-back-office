@@ -7,7 +7,7 @@ namespace :one_off do
     registrations = WasteCarriersEngine::Registration.where(
       :conviction_sign_offs.in => [nil, []],
       tier: "UPPER",
-      "metaData.status" => { "$nin": %w[CEASED EXPIRED REFUSED REVOKED] },
+      "metaData.status" => { "$nin": %w[CEASED INACTIVE EXPIRED REFUSED REVOKED] },
       "key_people.conviction_search_result.match_result": "YES",
       "metaData.last_modified": { "$gte": DateTime.parse("2024-03-01") }
     )

@@ -61,10 +61,12 @@ RSpec.describe "fix missing conviction signoffs", type: :task do
         end
 
         context "when the registration is in a state where a flag is not appropriate" do
-          %w[CEASED REVOKED REFUSED EXPIRED].each do |state|
-            before { registration.metaData.update(status: state) }
+          %w[CEASED INACTIVE REVOKED REFUSED EXPIRED].each do |state|
+            it "does not add a conviction signoff for a registration with status #{state}" do
+              registration.metaData.update(status: state)
 
-            it_behaves_like "does not add a conviction signoff"
+              expect { task.invoke }.not_to change { registration.reload.conviction_sign_offs }
+            end
           end
         end
 
