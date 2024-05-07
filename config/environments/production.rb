@@ -56,9 +56,9 @@ Rails.application.configure do
   # think the protocol is http and will try and redirect every request to an https equivalent.
   config.force_ssl = true
 
-  # Use the lowest log level to ensure availability of diagnostic information
-  # when problems arise.
-  config.log_level = :info
+  # Use the lowest log level by default to ensure availability of diagnostic information
+  # when problems arise, but allow this to be overridden using an environment variable.
+  config.log_level = ENV.fetch("LOG_LEVEL", "info").to_sym
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
