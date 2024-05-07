@@ -14,8 +14,6 @@ RSpec.describe "EditPaymentSummaryForms" do
       before do
         sign_in(user)
         allow(CallRecordingService).to receive(:new).with(user: user).and_return(call_recording_service)
-        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:additional_debug_logging)
-        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording)
       end
 
       context "when no matching registration exists" do

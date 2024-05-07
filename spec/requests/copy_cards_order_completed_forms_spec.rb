@@ -7,11 +7,6 @@ RSpec.describe "CopyCardsOrderCompletedForms" do
   describe "GET new_copy_cards_order_completed_form_path" do
     let(:path) { new_copy_cards_order_completed_form_path(transient_registration.token) }
 
-    before do
-      allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording)
-      allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:additional_debug_logging)
-    end
-
     context "when a valid user is signed in" do
       let(:user) { create(:user) }
 

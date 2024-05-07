@@ -98,6 +98,11 @@ RSpec.configure do |config|
   # show exception that triggers a retry if verbose_retry is set to true
   config.display_try_failure_messages = true
 
+  config.before do
+    # Avoid having to allow unrelated FeatureToggle calls when testing feature toggles
+    allow(WasteCarriersEngine::FeatureToggle).to receive(:active?)
+  end
+
   config.around do |ex|
     ex.run_with_retry retry: 3
   end

@@ -15,18 +15,24 @@ RSpec.describe Notify::BulkDigitalRenewalNotificationService do
 
     before do
       create(:feature_toggle, key: "send_digital_renewal_sms", active: active)
+      allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:send_digital_renewal_sms).and_return(active)
     end
 
     describe "without errors" do
+      let(:send_digital_renewal_sms) { false }
+
       before do
         create_registrations
         allow(Notify::DigitalRenewalLetterService).to receive(:run)
         allow(Notify::DigitalRenewalSmsService).to receive(:run)
         allow(Airbrake).to receive(:notify)
+
         described_class.run(expires_on)
       end
 
       context "when the feature toggle is on" do
+        let(:active) { true }
+
         it "sends the relevant registrations to the Notify::DigitalRenewalLetterService" do
           expect(Airbrake).not_to have_received(:notify)
 
