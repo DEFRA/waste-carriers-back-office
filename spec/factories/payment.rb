@@ -30,10 +30,6 @@ FactoryBot.define do
       payment_type { WasteCarriersEngine::Payment::WORLDPAY_MISSED }
     end
 
-    trait :missed_card do
-      payment_type { WasteCarriersEngine::Payment::MISSED_CARD }
-    end
-
     trait :govpay do
       payment_type { WasteCarriersEngine::Payment::GOVPAY }
       govpay_id { SecureRandom.hex(24) }
