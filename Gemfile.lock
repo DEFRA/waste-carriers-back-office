@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 576d9e9d586cc4d27a616b38df896e615ccfd82a
+  revision: 53331092bae8fe3c3daaa477cea9a26332b8af73
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -569,7 +569,7 @@ GEM
       whenever
     wicked_pdf (2.6.3)
       activesupport
-    zeitwerk (2.6.13)
+    zeitwerk (2.6.14)
 
 PLATFORMS
   ruby
