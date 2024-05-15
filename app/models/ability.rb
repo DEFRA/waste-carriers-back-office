@@ -101,7 +101,7 @@ class Ability
     can :record_missed_card_payment, :all
     can :view_payments, :all
     can :reverse, WasteCarriersEngine::Payment, &:govpay?
-    can :reverse, WasteCarriersEngine::Payment, &:missed_card?
+    can :reverse, WasteCarriersEngine::Payment, &:worldpay_missed?
   end
 
   def permissions_for_agency_super_user

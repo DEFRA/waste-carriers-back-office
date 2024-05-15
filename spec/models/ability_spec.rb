@@ -294,7 +294,7 @@ RSpec.describe Ability do
       end
 
       it_behaves_like "allows only the permitted roles", false, :reverse,
-                      WasteCarriersEngine::Payment.new(payment_type: WasteCarriersEngine::Payment::MISSED_CARD)
+                      WasteCarriersEngine::Payment.new(payment_type: WasteCarriersEngine::Payment::WORLDPAY_MISSED)
     end
   end
 
