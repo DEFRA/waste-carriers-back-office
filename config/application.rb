@@ -114,7 +114,7 @@ module WasteCarriersBackOffice
     config.govpay_url = if ENV["WCRS_MOCK_ENABLED"].to_s.downcase == "true"
                           ENV.fetch("WCRS_MOCK_BO_GOVPAY_URL", nil)
                         else
-                          ENV["WCRS_GOVPAY_BACK_OFFICE_URL"] || "https://publicapi.payments.service.gov.uk/v1"
+                          ENV["WCRS_GOVPAY_URL"] || "https://publicapi.payments.service.gov.uk/v1"
                         end
     config.govpay_back_office_api_token = ENV.fetch("WCRS_GOVPAY_BACK_OFFICE_API_TOKEN", nil)
     config.govpay_front_office_api_token = ENV.fetch("WCRS_GOVPAY_FRONT_OFFICE_API_TOKEN", nil)
