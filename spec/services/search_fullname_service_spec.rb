@@ -82,4 +82,19 @@ RSpec.describe SearchFullnameService do
       end
     end
   end
+
+  context "when the matched registration has an obsolete attribute" do
+    let(:person) { matching_registration.key_people.first }
+    let(:term) { "#{person.first_name} #{person.last_name}" }
+
+    before do
+      # Bypass the model to inject the obsolete attribute
+      WasteCarriersEngine::Registration.collection.update_one(
+        { regIdentifier: matching_registration.regIdentifier },
+        { "$set": { obsolete_attribute: "foo" } }
+      )
+    end
+
+    it { expect { service }.not_to raise_error }
+  end
 end

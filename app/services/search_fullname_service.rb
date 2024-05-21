@@ -71,7 +71,16 @@ class SearchFullnameService < BaseSearchService
                    WasteCarriersEngine::NewRegistration,
                    WasteCarriersEngine::RenewingRegistration].include? doc_model
 
-      doc_model.new(doc.except(:fullname, :key_person, :key_fullname)) { |m| m.new_record = false }
+      attributes_to_exclude = %w[fullname key_person key_fullname]
+
+      copyable_attributes = WasteCarriersEngine::SafeCopyAttributesService.run(
+        source_instance: doc,
+        target_class: model,
+        embedded_documents: %w[email_history addresses metaData financeDetails key_people],
+        attributes_to_exclude:
+      )
+
+      doc_model.new(copyable_attributes) { |m| m.new_record = false }
     end.compact
   end
 end

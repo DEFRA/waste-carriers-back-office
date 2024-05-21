@@ -10,7 +10,7 @@ gem "mongo_session_store"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
 gem "rails", "~> 7.0"
 # Use SCSS for stylesheets
-gem "sass-rails", "~> 5.0"
+gem "sass-rails", "~> 6.0"
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem "turbolinks"
 # Use Uglifier as compressor for JavaScript assets

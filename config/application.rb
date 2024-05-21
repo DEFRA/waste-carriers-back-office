@@ -152,6 +152,11 @@ module WasteCarriersBackOffice
     # prevent comments showing ruby version:
     config.sass.line_comments = false
 
+    # avoid "calc(0px) is not a number for `max`" errors under sass-rails v6:
+    # https://github.com/alphagov/govuk-frontend/issues/1350#issuecomment-493129270
+    config.assets.css_compressor = nil
+    config.sass.style = :compressed
+
     # Logger
     config.wcrs_logger_max_files = ENV.fetch("WCRS_LOGGER_MAX_FILES", 3).to_i
     config.wcrs_logger_max_filesize = ENV.fetch("WCRS_LOGGER_MAX_FILESIZE", 10_000_000).to_i
