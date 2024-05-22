@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 395c8084aca739f72a12ae62ba087ead351a458e
+  revision: a7700e02edb3cb841256cfb4dad7a5ff238e9fe1
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -509,8 +509,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    simpleidn (0.2.2)
-      unf (~> 0.1.4)
+    simpleidn (0.2.3)
     spring (4.2.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
@@ -535,9 +534,6 @@ GEM
       execjs (>= 0.3.0, < 3)
     uk_postcode (2.1.8)
     unaccent (0.4.0)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.9.1)
     unicode-display_width (2.5.0)
     validates_email_format_of (1.8.2)
       i18n (>= 0.8.0)
