@@ -8,8 +8,13 @@
 # Learn more: http://github.com/javan/whenever
 
 log_output_path = ENV["EXPORT_SERVICE_CRON_LOG_OUTPUT_PATH"] || "/srv/ruby/waste-carriers-back-office/shared/log/"
-set :output, File.join(log_output_path, "whenever_cron.log")
+set :output, {
+  standard: File.join(log_output_path, "whenever_cron.log"),
+  error: File.join(log_output_path, "whenever_cron_error.log")
+}
 set :job_template, "/bin/bash -l -c 'eval \"$(rbenv init -)\" && :job'"
+# this job type is used to run a rake task and format standard stdout output into the log format
+job_type :rake_and_format, "cd :path && :environment_variable=:environment bin/rake_and_format :task --silent :output"
 
 # Only one of the AWS app servers has a role of "db"
 # see https://gitlab-dev.aws-int.defra.cloud/open/rails-deployment/blob/master/config/deploy.rb#L69
@@ -89,4 +94,9 @@ end
 
 every :day, at: ENV["CLEANUP_OLD_SESSIONS_TIME"] || "01:00", roles: [:db] do
   rake "db:sessions:trim"
+end
+
+every :minute, roles: [:db] do
+  rake_and_format "test:one"
+  rake_and_format "test:two"
 end

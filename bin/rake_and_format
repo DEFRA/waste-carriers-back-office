@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/boot'
+require 'rake'
+require 'stringio'
+
+task_name = ARGV[0]
+
+original_stdout = $stdout
+$stdout = StringIO.new
+
+puts "Started task: #{task_name}"
+Rake.application.run task_name
+puts "Finished task: #{task_name}"
+
+$stdout.string.split("\n").each do |line|
+  STDOUT.puts "#{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')} [#{task_name}] #{line}\n"
+end
+
+$stdout = original_stdout
+
+
