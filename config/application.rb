@@ -37,6 +37,9 @@ module WasteCarriersBackOffice
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.assets.paths << Rails.root.join("vendor", "assets", "stylesheets")
+    config.assets.paths << Rails.root.join("vendor", "assets", "fonts")
+    config.assets.paths << Rails.root.join("vendor", "assets", "images")
 
     config.assets.precompile += %w[
       application.css
