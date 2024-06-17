@@ -14,9 +14,11 @@
       id: "proposition-name" %>
 
   <% if user_signed_in? %>
-    <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide navigation menu">Menu</button>
-    <nav id="proposition-menu">
-      <ul id="proposition-links" class="govuk-header__navigation" aria-label="Top Level Navigation">
+    <nav aria-label="Menu" class="govuk-header__navigation">
+      <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" hidden>
+        Menu
+      </button>
+      <ul id="navigation" class="govuk-header__navigation-list" aria-label="Top Level Navigation">
         <li class="govuk-header__navigation-item">
           <%= link_to t("layouts.application.menu.dashboard"),
               main_app.bo_path,

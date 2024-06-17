@@ -26,8 +26,18 @@ input.button-link {
 }
 
 .inline-checkboxes {
-  .govuk-checkboxes__item {
-    padding-right: 1em;
-    clear: none;
-  }
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 1em; /* Spacing between items */
+}
+
+.inline-checkboxes .govuk-checkboxes__item {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.inline-checkboxes .govuk-checkboxes__label {
+  margin-left: 0.5em; /* Space between checkbox and label */
 }

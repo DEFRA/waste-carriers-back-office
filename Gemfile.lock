@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/defra-ruby-template
-  revision: cb057518ea3d3511bf31a6afb26ee12cff01ce84
+  revision: f298cb80a4996bd60b4cf73e4c1ff3b3a39ff334
   branch: RUBY-3083-wcr-wex-frae-bo-show-password-hint-functionality-does-not-work
   specs:
     defra_ruby_template (3.15.1)
