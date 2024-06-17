@@ -16,7 +16,7 @@ RSpec.describe "one_off:fix_communications_opted_in", type: :task do
   end
 
   context "when a registration has no communications_opted_in field set" do
-    let!(:registration) { create(:registration) }
+    let!(:registration) { create(:registration, expires_on: 2.days.from_now) }
 
     before do
       WasteCarriersEngine::Registration.collection.update_one(
@@ -33,7 +33,7 @@ RSpec.describe "one_off:fix_communications_opted_in", type: :task do
   end
 
   context "when a registration has communications_opted_in field set already" do
-    let(:registration) { create(:registration, communications_opted_in: false) }
+    let(:registration) { create(:registration, communications_opted_in: false, expires_on: 2.days.from_now) }
 
     it "does not modify the registration" do
       expect { task.invoke }.not_to change(registration, :communications_opted_in)
