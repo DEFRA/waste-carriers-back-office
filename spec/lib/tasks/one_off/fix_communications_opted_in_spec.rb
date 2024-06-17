@@ -16,26 +16,19 @@ RSpec.describe "one_off:fix_communications_opted_in", type: :task do
   end
 
   context "when a registration has no communications_opted_in field set" do
-    let!(:upper_tier_registration) { create(:registration, tier: "UPPER") }
-    let!(:lower_tier_registration) { create(:registration, tier: "LOWER") }
-    let!(:inactive_registration) { create(:registration, tier: "UPPER", metaData: { status: "PENDING" }) }
+    let!(:registration) { create(:registration) }
 
     before do
-      WasteCarriersEngine::Registration.collection.update_many({}, { "$unset": { communications_opted_in: 1 } })
+      WasteCarriersEngine::Registration.collection.update_one(
+        { regIdentifier: registration.regIdentifier },
+        { "$unset": { communications_opted_in: 1 } }
+      )
     end
 
-    it "set communications_opted_in to true for active upper tier registrations" do
-      expect(WasteCarriersEngine::Registration.collection.find({ regIdentifier: upper_tier_registration.regIdentifier, communications_opted_in: true }).count).to be_zero
+    it "set communications_opted_in to true" do
+      expect(WasteCarriersEngine::Registration.collection.find({ regIdentifier: registration.regIdentifier, communications_opted_in: true }).count).to be_zero
       task.invoke
-      expect(WasteCarriersEngine::Registration.collection.find({ regIdentifier: upper_tier_registration.regIdentifier, communications_opted_in: true }).count).to be_positive
-    end
-
-    it "does not modify the lower tier registrations" do
-      expect { task.invoke }.not_to change(lower_tier_registration, :communications_opted_in)
-    end
-
-    it "does not modify the inactive registrations" do
-      expect { task.invoke }.not_to change(inactive_registration, :communications_opted_in)
+      expect(WasteCarriersEngine::Registration.collection.find({ regIdentifier: registration.regIdentifier, communications_opted_in: true }).count).to be_positive
     end
   end
 

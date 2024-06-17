@@ -8,11 +8,11 @@ namespace :one_off do
     if regs_with_unset_opted_in.count.positive?
       puts "Updating #{regs_with_unset_opted_in.count} registration(s)" unless Rails.env.test?
       WasteCarriersEngine::Registration.collection.update_many(
-        { tier: "UPPER", "metaData.status": "ACTIVE", communications_opted_in: nil },
+        { communications_opted_in: nil },
         { "$set": { communications_opted_in: true } }
       )
     else
-      puts "No active upper tier registrations with unset communications_opted_in found." unless Rails.env.test?
+      puts "No registrations with unset communications_opted_in found." unless Rails.env.test?
     end
   end
 end
