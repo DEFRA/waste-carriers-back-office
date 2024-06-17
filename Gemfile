@@ -19,9 +19,7 @@ gem "uglifier"
 # Use CanCanCan for user roles and permissions
 gem "cancancan"
 
-gem "defra_ruby_template",
-  git: "https://github.com/DEFRA/defra-ruby-template",
-  branch: "RUBY-3083-wcr-wex-frae-bo-show-password-hint-functionality-does-not-work"
+gem "defra_ruby_template"
 
 # Use Devise for user authentication
 gem "devise"
