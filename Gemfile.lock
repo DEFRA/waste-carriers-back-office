@@ -577,7 +577,7 @@ DEPENDENCIES
   defra_ruby_mocks
   defra_ruby_storm
   defra_ruby_style
-  defra_ruby_template
+  defra_ruby_template (~> 5.0)
   devise
   devise_invitable
   dotenv-rails
