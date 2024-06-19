@@ -2,7 +2,24 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.25.1...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.26.0...HEAD)
+
+**Implemented enhancements:**
+
+- Feature/ruby 2859 wcr ensure that scheduled job start and completion events are being recorded in logs [\#1965](https://github.com/DEFRA/waste-carriers-back-office/pull/1965) ([brujeo](https://github.com/brujeo))
+
+**Fixed bugs:**
+
+- \[RUBY-3222\] feat: Add rake task to fix communications\_opted\_in [\#1970](https://github.com/DEFRA/waste-carriers-back-office/pull/1970) ([brujeo](https://github.com/brujeo))
+- Fix/ruby 2919 govpay mocks config [\#1957](https://github.com/DEFRA/waste-carriers-back-office/pull/1957) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+**Merged pull requests:**
+
+- Bump faker from 3.3.1 to 3.4.1 [\#1956](https://github.com/DEFRA/waste-carriers-back-office/pull/1956) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.26.0](https://github.com/defra/waste-carriers-back-office/tree/v1.26.0) (2024-05-28)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.25.1...v1.26.0)
 
 **Implemented enhancements:**
 
@@ -20,6 +37,7 @@
 
 **Merged pull requests:**
 
+- Version 1.26.0 [\#1954](https://github.com/DEFRA/waste-carriers-back-office/pull/1954) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
 - bump mocks gem [\#1950](https://github.com/DEFRA/waste-carriers-back-office/pull/1950) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
 - Bump waste\_carriers\_engine from `395c808` to `a7700e0` [\#1949](https://github.com/DEFRA/waste-carriers-back-office/pull/1949) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump defra\_ruby\_mocks from 4.1.0 to 4.2.0 [\#1948](https://github.com/DEFRA/waste-carriers-back-office/pull/1948) ([dependabot[bot]](https://github.com/apps/dependabot))
