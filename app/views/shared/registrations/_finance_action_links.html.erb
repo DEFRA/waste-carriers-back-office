@@ -25,7 +25,7 @@
     <% end %>
 
     <% if display_bank_transfer_refund_link_for?(registration.finance_details) %>
-      <%= link_to t(".bank_transfer_refund"), new_bank_transfer_refund_path(registration._id), class: "govuk-button" %>
+      <%= link_to t(".bank_transfer_refund"), resource_record_bank_transfer_refund_forms_path(registration._id), class: "govuk-button" %>
     <% end %>
 
     <% pending_refund_id = display_check_refund_status_link_for?(registration.finance_details) %>

@@ -89,6 +89,7 @@ class Ability
   def permissions_for_finance_user
     can :view_certificate, WasteCarriersEngine::Registration
     can :record_bank_transfer_payment, :all
+    can :record_bank_transfer_refund, :all
 
     can :view_payments, :all
     can :reverse, WasteCarriersEngine::Payment, &:bank_transfer?

@@ -96,7 +96,7 @@ module ActionLinksHelper
     # Ensure there is at least one bank transfer payment
     return false if resource.payments.find { |payment| payment.payment_type == "BANKTRANSFER" }.nil?
 
-    can?(:refund, resource)
+    can?(:record_bank_transfer_refund, resource)
   end
 
   def display_refresh_ea_area_link_for?(resource)

@@ -314,16 +314,17 @@ RSpec.describe ActionLinksHelper do
     end
 
     context "when the resource has a negative balance" do
-      let(:resource) { build(:finance_details, :has_overpaid_order_and_payment) }
+      let(:balance) { -10 }
+      let(:resource) { build(:finance_details, :has_overpaid_order_and_payment_bank_transfer) }
 
-      context "when the user does not have the permissions to refund" do
-        before { allow(helper).to receive(:can?).with(:refund, resource).and_return(false) }
+      context "when the user does not have the permissions to record a bank transfer refund" do
+        before { allow(helper).to receive(:can?).with(:record_bank_transfer_refund, resource).and_return(false) }
 
         it_behaves_like "returns false"
       end
 
-      context "when the user has the permissions to refund" do
-        before { allow(helper).to receive(:can?).with(:refund, resource).and_return(true) }
+      context "when the user has the permissions to record a bank transfer refund" do
+        before { allow(helper).to receive(:can?).with(:record_bank_transfer_refund, resource).and_return(true) }
 
         context "with a bank transfer payment" do
           let(:resource) { build(:finance_details, :has_overpaid_order_and_payment_bank_transfer) }

@@ -9,3 +9,4 @@ en:
         write_off_s: Write off (small)
         adjust_charge: Adjust charge
         refund: Refund
+        bank_transfer_refund: Record bank transfer refund
