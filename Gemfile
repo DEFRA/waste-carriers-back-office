@@ -40,7 +40,7 @@ gem "kaminari"
 gem "kaminari-mongoid"
 
 # Use Whenever to manage cron tasks
-gem "whenever"
+gem "whenever", require: false
 
 gem "wicked_pdf"
 
