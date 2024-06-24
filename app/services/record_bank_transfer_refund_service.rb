@@ -30,4 +30,3 @@ class RecordBankTransferRefundService < WasteCarriersEngine::BaseService
     refund
   end
 end
-
