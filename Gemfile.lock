@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: dcc8c8e4b54172cd0cfbe0e2c107559986ca8a5e
+  revision: d832f2f019e47755fd6b172d84be87e1a5994566
   branch: RUBY-3215-wcr-bo-allow-recording-of-bank-transfer-refunds
   specs:
     waste_carriers_engine (0.0.1)
