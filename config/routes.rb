@@ -242,9 +242,9 @@ Rails.application.routes.draw do
               path_names: { new: "" }
 
     resources :record_bank_transfer_refund_forms,
-              only: %i[new create],
+              only: %i[index new create],
               path: "record-bank-transfer-refund",
-              path_names: { new: "" }
+              path_names: { new: ":order_key/new" }
 
     resources :cash_payment_forms,
               only: %i[new create],

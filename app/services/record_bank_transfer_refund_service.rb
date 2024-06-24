@@ -27,7 +27,7 @@ class RecordBankTransferRefundService < WasteCarriersEngine::BaseService
     refund.updated_by_user = user.email
     refund.comment = "Bank transfer payment refunded"
 
-    reversal
+    refund
   end
 end
 

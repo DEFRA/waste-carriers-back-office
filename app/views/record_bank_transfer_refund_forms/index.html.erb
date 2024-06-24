@@ -12,7 +12,7 @@
 
     <%= render "shared/company_details_panel", registration: @resource %>
     <table class="govuk-table">
-      <thead class="govuk-table__header">
+      <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th class="govuk-table__header">
             <%= t(".date") %>
@@ -49,10 +49,10 @@
             </td>
             <td class="govuk-table__cell">
               <% if payment.reversible? %>
-                <%= link_to new_resource_reversal_form_path(resource_id: @resource._id, order_key: payment.order_key) do %>
-                  <%= t(".reverse_payment") %>
+                <%= link_to new_resource_record_bank_transfer_refund_form_path(resource_id: @resource._id, order_key: payment.order_key) do %>
+                  <%= t(".refund_payment") %>
                   <span class="govuk-visually-hidden">
-                    <%= t(".reverse_payment_alt",
+                    <%= t(".refund_payment_alt",
                           date: payment.date_received.to_formatted_s(:day_month_year_time_slashes),
                           method: t("shared.payment_type.#{payment.payment_type}"),
                           amount: display_pence_as_pounds_and_cents(payment.amount)) %>
@@ -68,4 +68,5 @@
     </table>
   </div>
 </div>
+
 

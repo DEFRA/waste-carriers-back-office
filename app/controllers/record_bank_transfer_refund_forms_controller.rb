@@ -41,4 +41,8 @@ class RecordBankTransferRefundFormsController < ResourceFormsController
   def authorize_user
     authorize! :record_bank_transfer_refund, payment
   end
+
+  def record_bank_transfer_refund_form_params
+    params.fetch(:record_bank_transfer_refund_form, {})
+  end
 end

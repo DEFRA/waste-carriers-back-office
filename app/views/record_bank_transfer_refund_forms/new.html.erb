@@ -1,0 +1,44 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: resource_finance_details_path(@resource._id)) %>
+  </div>
+</div>
+<%= form_for @record_bank_transfer_refund_form,
+  url: resource_record_bank_transfer_refund_forms_path(@resource._id, order_key: params[:order_key]),
+  builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+  <div class="govuk-width-container">
+    <main class="govuk-main-wrapper" id="main-content" role="main">
+      <h1 class="govuk-heading-l"><%= t('.page_title') %></h1>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <%= render "shared/company_details_panel", registration: @resource %>
+          <table class="govuk-table">
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header"><%= t(".refund_amount.label") %></th>
+                <td class="govuk-table__cell govuk-table__cell--numeric"><%= t(".refund_amount.value", amount: display_pence_as_pounds_and_cents(@payment.amount)) %></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header"><%= t(".total_amount_paid.label") %></th>
+                <td class="govuk-table__cell govuk-table__cell--numeric"><%= t(".total_amount_paid.value", amount: display_pence_as_pounds_and_cents(@resource.finance_details.payment_balance)) %></td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header"><%= t(".balance_to_be_refunded.label") %></th>
+                <td class="govuk-table__cell govuk-table__cell--numeric">
+                  <%= t(".balance_to_be_refunded.value", amount: display_pence_as_pounds_and_cents(@resource.finance_details.zero_difference_balance)) %>
+                </td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header"><%= t(".total_amount_due.label") %></th>
+                <td class="govuk-table__cell govuk-table__cell--numeric">
+                  <%= t(".total_amount_due.value", amount: display_pence_as_pounds_and_cents(@resource.finance_details.unpaid_balance)) %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <%= f.submit t(".confirm_refund"), class: "govuk-button", "data-module": "govuk-button" %>
+        </div>
+      </div>
+    </main>
+  </div>
+<% end %>
