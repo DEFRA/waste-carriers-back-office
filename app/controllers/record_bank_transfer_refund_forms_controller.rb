@@ -39,7 +39,7 @@ class RecordBankTransferRefundFormsController < ResourceFormsController
       overpaid_balance = @resource.finance_details.overpaid_balance
       @resource.finance_details.payments
                .where(payment_type: WasteCarriersEngine::Payment::BANKTRANSFER)
-               .select { |payment| payment.amount <= overpaid_balance }
+               .lte(amount: overpaid_balance)
     end
   end
 
