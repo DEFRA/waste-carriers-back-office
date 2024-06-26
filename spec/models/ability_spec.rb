@@ -189,6 +189,12 @@ RSpec.describe Ability do
     it_behaves_like "allows only the permitted roles", false, :record_bank_transfer_payment, WasteCarriersEngine::RenewingRegistration
   end
 
+  context "when the action is record a bank transfer refund" do
+    let(:permitted_roles) { %w[finance] }
+
+    it_behaves_like "allows only the permitted roles", false, :record_bank_transfer_refund, WasteCarriersEngine::RenewingRegistration
+  end
+
   context "when the action is record a cheque payment" do
     let(:permitted_roles) do
       %w[

@@ -1,0 +1,29 @@
+en:
+  record_bank_transfer_refund_forms:
+    flash_messages:
+      successful: "£%{amount} refund recorded successfully"
+    index:
+      title: "Which payment do you want to refund?"
+      heading: "Which payment do you want to refund?"
+      date: "Date"
+      type: "Type"
+      reference: "Reference"
+      amount: "Amount"
+      action: "Action"
+      refund_payment: "Refund payment"
+      refund_payment_alt: "Refund payment from %{date} by %{method} for %{amount}"
+    new:
+      page_title: "Confirm the payment refund"
+      refund_amount:
+        label: "Refund amount"
+        value: "£%{amount}"
+      total_amount_paid:
+        label: "Total amount paid"
+        value: "£%{amount}"
+      balance_to_be_refunded:
+        label: "Balance that will be refunded"
+        value: "£%{amount}"
+      total_amount_due:
+        label: "Total amount due"
+        value: "£%{amount}"
+      confirm_refund: "Confirm refund"

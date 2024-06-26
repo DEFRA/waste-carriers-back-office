@@ -90,6 +90,15 @@ module ActionLinksHelper
     resource.renewal_application_submitted?
   end
 
+  def display_bank_transfer_refund_link_for?(resource)
+    return false if resource.balance >= 0
+
+    # Ensure there is at least one bank transfer payment
+    return false if resource.payments.find { |payment| payment.payment_type == "BANKTRANSFER" }.nil?
+
+    can?(:record_bank_transfer_refund, resource)
+  end
+
   def display_refresh_ea_area_link_for?(resource)
     return false unless a_registration?(resource)
     return false if resource.company_address.blank?

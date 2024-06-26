@@ -47,6 +47,25 @@ FactoryBot.define do
       after(:build, :create, &:update_balance)
     end
 
+    trait :has_overpaid_order_and_payment_bank_transfer do
+      orders { [build(:order, :has_required_data)] }
+      payments do
+        [build(:payment, :bank_transfer, date_entered: payment_date_entered, amount: 100_500)]
+      end
+      after(:build, :create, &:update_balance)
+    end
+
+    trait :has_double_paid_order_and_payment_bank_transfer do
+      orders { [build(:order, :has_required_data)] }
+      payments do
+        [
+          build(:payment, :bank_transfer, date_entered: payment_date_entered, amount: 11_000),
+          build(:payment, :bank_transfer, date_entered: payment_date_entered, amount: 11_000)
+        ]
+      end
+      after(:build, :create, &:update_balance)
+    end
+
     trait :has_copy_cards_order do
       orders { [build(:order, :has_copy_cards_item)] }
       after(:build, :create, &:update_balance)
