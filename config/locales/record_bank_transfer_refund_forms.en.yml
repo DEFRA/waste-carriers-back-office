@@ -2,6 +2,7 @@ en:
   record_bank_transfer_refund_forms:
     flash_messages:
       successful: "£%{amount} refund recorded successfully"
+      error: "There was a problem recording the refund"
     index:
       title: "Which payment do you want to refund?"
       heading: "Which payment do you want to refund?"
@@ -14,8 +15,8 @@ en:
       refund_payment_alt: "Refund payment from %{date} by %{method} for %{amount}"
     new:
       page_title: "Confirm the payment refund"
-      refund_amount:
-        label: "Refund amount"
+      transaction_to_refund:
+        label: "Transaction to refund"
         value: "£%{amount}"
       total_amount_paid:
         label: "Total amount paid"

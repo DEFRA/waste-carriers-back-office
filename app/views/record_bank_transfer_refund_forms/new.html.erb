@@ -15,23 +15,23 @@
           <table class="govuk-table">
             <tbody class="govuk-table__body">
               <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header"><%= t(".refund_amount.label") %></th>
-                <td class="govuk-table__cell govuk-table__cell--numeric"><%= t(".refund_amount.value", amount: display_pence_as_pounds_and_cents(@payment.amount)) %></td>
+                <th scope="row" class="govuk-table__header"><%= t(".transaction_to_refund.label") %></th>
+                <td class="govuk-table__cell govuk-table__cell--numeric"><%= t(".transaction_to_refund.value", amount: display_pence_as_pounds_and_cents(@payment.amount)) %></td>
               </tr>
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header"><%= t(".total_amount_paid.label") %></th>
-                <td class="govuk-table__cell govuk-table__cell--numeric"><%= t(".total_amount_paid.value", amount: display_pence_as_pounds_and_cents(@resource.finance_details.payment_balance)) %></td>
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header"><%= t(".balance_to_be_refunded.label") %></th>
-                <td class="govuk-table__cell govuk-table__cell--numeric">
-                  <%= t(".balance_to_be_refunded.value", amount: display_pence_as_pounds_and_cents(@resource.finance_details.zero_difference_balance)) %>
-                </td>
+                <td class="govuk-table__cell govuk-table__cell--numeric"><%= t(".total_amount_paid.value", amount: display_pence_as_pounds_and_cents(@presenter.total_amount_paid)) %></td>
               </tr>
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header"><%= t(".total_amount_due.label") %></th>
                 <td class="govuk-table__cell govuk-table__cell--numeric">
-                  <%= t(".total_amount_due.value", amount: display_pence_as_pounds_and_cents(@resource.finance_details.unpaid_balance)) %>
+                  <%= t(".total_amount_due.value", amount: display_pence_as_pounds_and_cents(@presenter.total_amount_due)) %>
+                </td>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header"><%= t(".balance_to_be_refunded.label") %></th>
+                <td class="govuk-table__cell govuk-table__cell--numeric">
+                  <%= t(".balance_to_be_refunded.value", amount: display_pence_as_pounds_and_cents(@presenter.balance_to_refund)) %>
                 </td>
               </tr>
             </tbody>
