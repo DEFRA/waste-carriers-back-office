@@ -16,8 +16,8 @@ RSpec.describe RecordBankTransferRefundService do
     end
 
     context "when there is an overpayment" do
-      it "generates a new refund payment and assigns it to the finance details" do
-        expect(WasteCarriersEngine::Payment).to receive(:new).with(
+      before do
+        allow(WasteCarriersEngine::Payment).to receive(:new).with(
           payment_type: WasteCarriersEngine::Payment::REFUND,
           order_key: "ORDER456_REFUNDED",
           amount: -100,
@@ -27,7 +27,9 @@ RSpec.describe RecordBankTransferRefundService do
           updated_by_user: "user@example.com",
           comment: "Bank transfer payment refunded"
         ).and_return(refund)
+      end
 
+      it "generates a new refund payment and assigns it to the finance details" do
         expect(finance_details.payments).to receive(:<<).with(refund)
         expect(described_class.run(finance_details: finance_details, payment: payment, user: user)).to be true
       end

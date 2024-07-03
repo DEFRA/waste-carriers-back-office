@@ -11,21 +11,16 @@ class RecordBankTransferRefundFormsController < ResourceFormsController
 
   def new
     @presenter = RefundPresenter.new(@resource.finance_details, payment)
-    super(RecordBankTransferRefundForm, "record_bank_transfer_refund_form")
   end
 
   def create
-    return unless super(RecordBankTransferRefundForm, "record_bank_transfer_refund_form")
-
-    presenter = RefundPresenter.new(@resource.finance_details, @payment)
+    presenter = RefundPresenter.new(@resource.finance_details, payment)
     amount_to_refund = presenter.balance_to_refund
-
     response = RecordBankTransferRefundService.run(
       finance_details: @resource.finance_details,
-      payment: @payment,
+      payment: payment,
       user: current_user
     )
-
     if response
       flash_success(
         I18n.t("record_bank_transfer_refund_forms.flash_messages.successful",
@@ -34,9 +29,10 @@ class RecordBankTransferRefundFormsController < ResourceFormsController
     else
       flash_error(
         I18n.t("record_bank_transfer_refund_forms.flash_messages.error",
-               type: @payment.payment_type.titleize), nil
+               type: payment.payment_type.titleize), nil
       )
     end
+    redirect_to resource_finance_details_path(@resource._id)
   end
 
   private
@@ -52,9 +48,5 @@ class RecordBankTransferRefundFormsController < ResourceFormsController
 
   def authorize_user
     authorize! :record_bank_transfer_refund, payment
-  end
-
-  def record_bank_transfer_refund_form_params
-    params.fetch(:record_bank_transfer_refund_form, {})
   end
 end
