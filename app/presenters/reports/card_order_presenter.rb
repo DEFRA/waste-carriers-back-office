@@ -22,7 +22,7 @@ module Reports
         @registration.company_name
       )
 
-      super(model)
+      super
     end
 
     def reg_identifier

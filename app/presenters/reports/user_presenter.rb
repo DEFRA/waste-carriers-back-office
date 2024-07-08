@@ -6,7 +6,7 @@ module Reports
 
     def initialize(model)
       @user = model
-      super(model)
+      super
     end
 
     def current_sign_in_at
