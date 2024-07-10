@@ -17,7 +17,7 @@ RSpec.describe "Registrations" do
         get "/bo/registrations/#{reg_identifier}", headers: headers
       end
 
-      it "renders the index template" do
+      it "renders the show template" do
         expect(response).to render_template(:show)
       end
 
