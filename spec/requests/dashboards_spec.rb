@@ -50,13 +50,18 @@ RSpec.describe "Dashboards" do
         end
 
         context "when there are matches" do
+          let(:last_modified_renewal) { create(:renewing_registration) }
+          let(:link_to_renewal) { renewing_registration_path(last_modified_renewal.reg_identifier) }
+          let(:search_term) { last_modified_renewal.reg_identifier }
+
+          before { get "/bo", params: { term: search_term } }
+
           it "links to renewal details pages" do
-            last_modified_renewal = create(:renewing_registration)
-            link_to_renewal = renewing_registration_path(last_modified_renewal.reg_identifier)
-
-            get "/bo", params: { term: last_modified_renewal.reg_identifier }
-
             expect(response.body).to include(link_to_renewal)
+          end
+
+          it "sets the search_term cookie" do
+            expect(response.cookies["search_term"]).to match(/#{search_term}/)
           end
         end
 

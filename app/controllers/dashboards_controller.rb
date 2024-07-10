@@ -22,6 +22,8 @@ class DashboardsController < ApplicationController
     end
 
     search_and_count_results(params[:page])
+
+    set_search_term_cookie
   end
 
   private
@@ -58,5 +60,9 @@ class DashboardsController < ApplicationController
                   end
     @result_count = result_data[:count]
     @results = result_data[:results]
+  end
+
+  def set_search_term_cookie
+    cookies[:search_term] = @term if @term.present?
   end
 end
