@@ -129,6 +129,7 @@ group :test do
   gem "database_cleaner-mongoid"
   gem "factory_bot_rails"
   gem "faker"
+  gem "faraday-retry"
   gem "rails-controller-testing"
   gem "rspec-retry"
   gem "timecop"

@@ -6,7 +6,7 @@ class RegistrationsController < ApplicationController
   def show
     begin
       registration = WasteCarriersEngine::Registration.find_by(reg_identifier: params[:reg_identifier])
-      @back_link = show_back_link
+      @back_link_target, @back_link_text = back_link
     rescue Mongoid::Errors::DocumentNotFound
       return redirect_to bo_path
     end
@@ -20,14 +20,26 @@ class RegistrationsController < ApplicationController
   # 1. If the user previously executed a search, point back to search results
   # 2. If there is a HTTP_REFERER, point to that.
   # 3. Otherwise point to the dashboard.
-  def show_back_link
-    search_link || request.referer || bo_path
+  def back_link
+    search_link_details || referer_link_details || [bo_path, I18n.t(".registrations.show.back_link_dashboard")]
   end
 
-  def search_link
+  def search_link_details
     search_term = request.cookies["search_term"]
     return nil if search_term.blank?
 
-    "/bo?term=#{search_term}&commit=#{I18n.t('dashboards.index.search.submit')}"
+    [
+      "/bo?term=#{search_term}&commit=#{I18n.t('dashboards.index.search.submit')}",
+      I18n.t("registrations.show.back_link_search")
+    ]
+  end
+
+  def referer_link_details
+    return nil if request.referer.blank?
+
+    [
+      request.referer,
+      I18n.t("registrations.show.back_link")
+    ]
   end
 end
