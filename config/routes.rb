@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     ) do
       resources :registrations, only: %i[show create]
       resources :renewals, only: :show
+      post "govpay_webhooks/signature"
     end
 
     get "/resend-confirmation-email/:reg_identifier",
