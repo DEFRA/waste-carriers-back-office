@@ -6,7 +6,9 @@ namespace :one_off do
     # create communications_opted_in index if it doesn't exist
     if WasteCarriersEngine::Registration.collection.indexes.map { |i| i["key"].keys }
                                         .flatten.include?("communications_opted_in")
+      # :nocov:
       puts "Index on communications_opted_in already exists" unless Rails.env.test?
+      # :nocov:
     else
       create_communications_opted_in_index
     end

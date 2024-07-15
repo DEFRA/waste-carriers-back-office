@@ -12,7 +12,6 @@ RSpec.describe "Govpay webhooks API" do
 
       post "/bo/api/govpay_webhooks/signature", params: params.to_json, headers: { "CONTENT_TYPE" => "application/json" }
 
-      puts "\n>>>> #{response.body}\n"
       expect(response.body.match(/^[0-9A-F]+$/i)).to be_present
     end
   end
