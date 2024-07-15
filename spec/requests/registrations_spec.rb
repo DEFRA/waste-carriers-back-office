@@ -35,8 +35,8 @@ RSpec.describe "Registrations" do
         let(:referrer) { Faker::Internet.url }
         let(:headers) { { "HTTP_REFERER" => referrer } }
 
-        it "the back link points to the referrer" do
-          expect(response.body).to match(/href="#{referrer}">Back/)
+        it "the back link points to the dashboard" do
+          expect(response.body).to match(%r{href="/bo">Dashboard})
         end
       end
 

@@ -45,7 +45,7 @@ RSpec.describe "registration dashboard search" do
     it_behaves_like "expected link and text"
   end
 
-  context "when navigating directly to registration details without a prior search or HTTP referer" do
+  context "when navigating directly to registration details without a prior search" do
     let(:visited_pages) { [page_reg_details] }
 
     it_behaves_like "back to dashboard link"
@@ -63,24 +63,18 @@ RSpec.describe "registration dashboard search" do
     it_behaves_like "back to search results link"
   end
 
-  # Use request spec "get" instead of Capybara visit so can set HTTP_REFERER
-  context "when navigating to registration details without a prior search and with a HTTP_REFERER" do
-    let(:visited_pages) { [] }
-    let(:http_referer) { Faker::Internet.url }
-    let(:expected_link_target) { http_referer }
-    let(:expected_link_text) { "Back" }
-    let(:session) { ActionDispatch::Integration::Session.new(Rails.application) }
-    let(:response_html) { Nokogiri::HTML(session.response.body) }
-
-    before { session.get(page_reg_details, headers: { HTTP_REFERER: http_referer }) }
-
-    it_behaves_like "expected link and text"
-  end
-
   # RUBY-3210
   context "when navigating back to registration details from payment details after a search" do
     let(:visited_pages) { [page_dash, page_search, page_reg_details, page_finance_details, page_reg_details] }
 
     it_behaves_like "back to search results link"
+  end
+
+  context "when navigating back to registration details from payment details without a search" do
+    let(:visited_pages) { [page_reg_details, page_finance_details, page_reg_details] }
+    let(:expected_link_target) { page_dash }
+    let(:expected_link_text) { "Dashboard" }
+
+    it_behaves_like "expected link and text"
   end
 end
