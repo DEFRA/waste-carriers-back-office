@@ -10,6 +10,10 @@ module Api
       signature = hmac_digest(payload)
 
       render plain: signature
+    rescue StandardError => e
+      # rubocop:disable Rails/Output
+      puts ">>> exception generating signature: #{e}\n#{e.backtrace}"
+      # rubocop:enable Rails/Output
     end
 
     private
