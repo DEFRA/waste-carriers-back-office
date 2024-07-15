@@ -8,7 +8,9 @@ RSpec.describe "Govpay webhooks API" do
 
   describe "POST /bo/api/govpay_webhooks/signature" do
     it "returns a valid hexadecimal value" do
-      post "/bo/api/govpay_webhooks/signature"
+      params = { foo: :bar }
+
+      post "/bo/api/govpay_webhooks/signature", params: params.to_json, headers: { "CONTENT_TYPE" => "application/json" }
 
       expect(response.body.match(/^[0-9A-F]+$/i)).to be_present
     end
