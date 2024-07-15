@@ -4,6 +4,7 @@ inherit_gem:
   defra_ruby_style:
     - default.yml
 require:
+  - rubocop-capybara
   - rubocop-factory_bot
   - rubocop-rails
   - rubocop-rake
@@ -23,10 +24,12 @@ Rails/LexicallyScopedActionFilter:
 
 RSpec/DescribeClass:
   Exclude:
-  # This cop is n/a for rake tasks
+    # This cop is n/a for rake tasks
     - spec/lib/tasks/*
-  # Allow more descriptive string labels for request specs
+    # Allow more descriptive string labels for request specs
     - spec/requests/**/*
+    # Not applicable for feature specs
+    - spec/features/**/*
 
 Style/DisableCopsWithinSourceCodeDirective:
   Enabled: true

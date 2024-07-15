@@ -109,8 +109,10 @@ group :development, :test do
   gem "dotenv-rails"
   # Project uses RSpec as its test framework
   gem "rspec-rails"
+  gem "rubocop-capybara", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
+  gem "rubocop-rspec_rails", require: false
 end
 
 group :development do
@@ -123,9 +125,11 @@ group :development do
 end
 
 group :test do
+  gem "capybara"
   gem "database_cleaner-mongoid"
   gem "factory_bot_rails"
   gem "faker"
+  gem "faraday-retry"
   gem "rails-controller-testing"
   gem "rspec-retry"
   gem "timecop"

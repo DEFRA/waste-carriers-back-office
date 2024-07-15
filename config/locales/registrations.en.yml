@@ -3,7 +3,9 @@ en:
     show:
       title: "Registration details"
       heading: "Registration %{reg_identifier}"
-      back_link: Back to search results
+      back_link: Back
+      back_link_search: Back to search results
+      back_link_dashboard: Dashboard
       filler: "–"
       status:
         headings:

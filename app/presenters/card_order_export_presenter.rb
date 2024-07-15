@@ -4,7 +4,7 @@ class CardOrderExportPresenter < WasteCarriersEngine::BasePresenter
   def initialize(export)
     @export = export
 
-    super(export)
+    super
   end
 
   def self.create_from_collection(exports)

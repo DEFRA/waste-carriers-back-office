@@ -7,7 +7,7 @@ module Reports
     # The BasePresenter expects a model instance but we are using a hash, so need to make this available to the methods.
     def initialize(row)
       @row = row
-      super(row)
+      super
     end
 
     def pounds(pence)

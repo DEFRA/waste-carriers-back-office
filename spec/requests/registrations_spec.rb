@@ -17,7 +17,7 @@ RSpec.describe "Registrations" do
         get "/bo/registrations/#{reg_identifier}", headers: headers
       end
 
-      it "renders the index template" do
+      it "renders the show template" do
         expect(response).to render_template(:show)
       end
 
@@ -27,7 +27,7 @@ RSpec.describe "Registrations" do
 
       context "when HTTP referer is not set" do
         it "the back link points to the dashboard" do
-          expect(response.body).to match(%r{href="/bo">Back})
+          expect(response.body).to match(%r{href="/bo">Dashboard})
         end
       end
 
@@ -35,8 +35,8 @@ RSpec.describe "Registrations" do
         let(:referrer) { Faker::Internet.url }
         let(:headers) { { "HTTP_REFERER" => referrer } }
 
-        it "the back link points to the referrer" do
-          expect(response.body).to match(/href="#{referrer}">Back/)
+        it "the back link points to the dashboard" do
+          expect(response.body).to match(%r{href="/bo">Dashboard})
         end
       end
 
