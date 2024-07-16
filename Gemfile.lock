@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: c79011bc0316896ff76bcb1ea2646ea4150c11da
+  revision: dc2d33562d0fdf7f3fb6400df66c31da8498d97c
   branch: feature/RUBY-3143_validate_govpay_callbacks
   specs:
     waste_carriers_engine (0.0.1)
@@ -330,7 +330,7 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.7)
     minitest (5.24.1)
-    mongo (2.20.0)
+    mongo (2.20.1)
       bson (>= 4.14.1, < 6.0.0)
     mongo_session_store (3.2.1)
       actionpack (>= 4.0)
