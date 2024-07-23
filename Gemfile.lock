@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: c79011bc0316896ff76bcb1ea2646ea4150c11da
+  revision: 3e450efdd0b636cf6a445a77c4d597be797a9d5f
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -330,7 +330,7 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.7)
     minitest (5.24.1)
-    mongo (2.20.0)
+    mongo (2.20.1)
       bson (>= 4.14.1, < 6.0.0)
     mongo_session_store (3.2.1)
       actionpack (>= 4.0)
@@ -371,7 +371,7 @@ GEM
     passenger (5.3.7)
       rack
       rake (>= 0.8.1)
-    phonelib (0.8.9)
+    phonelib (0.9.1)
     protocol-hpack (1.4.2)
     protocol-http (0.24.7)
     protocol-http1 (0.15.1)
