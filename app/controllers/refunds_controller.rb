@@ -8,7 +8,7 @@ class RefundsController < ApplicationController
   prepend_before_action :authorise_user!
   prepend_before_action :authenticate_user!
 
-  before_action :fetch_payment, only: %i[new create]
+  before_action :fetch_payment_by_order_key, only: %i[new create]
 
   def index
     # Do not list worldpay payments for refunding.
@@ -45,7 +45,12 @@ class RefundsController < ApplicationController
   end
 
   def update
-    updated = GovpayUpdateRefundStatusService.run(registration: @resource, refund_id: params[:order_key])
+    refund_id = fetch_payment_by_id(params[:order_key]).govpay_id
+    updated = WasteCarriersEngine::GovpayUpdateRefundStatusService.run(
+      registration: @resource,
+      refund_id:,
+      new_status: GovpayRefundDetailsService.run(refund_id:)["status"]
+    )
 
     if updated
       flash_success(I18n.t("refunds.refunded_message.updated"))
@@ -58,8 +63,12 @@ class RefundsController < ApplicationController
 
   private
 
-  def fetch_payment
+  def fetch_payment_by_order_key
     @payment = @resource.finance_details.payments.refundable.where(order_key: params[:order_key]).first
+  end
+
+  def fetch_payment_by_id(govpay_id)
+    @resource.finance_details.payments.where(govpay_id:).first
   end
 
   def authorise_user!
