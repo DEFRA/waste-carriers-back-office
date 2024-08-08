@@ -2,12 +2,12 @@
 
 class GovpayRefundDetailsService < WasteCarriersEngine::BaseService
   def run(refund_id:)
-    @refund = GovpayFindPaymentService.run(payment_id: refund_id)
+    @refund = WasteCarriersEngine::GovpayFindPaymentService.run(payment_id: refund_id)
     raise ArgumentError, "Invalid refund id #{refund_id}" if refund.nil?
 
     payment_id = refund.refunded_payment_govpay_id
     # we don't use the payment value but this will force a suitable exception if not found
-    @payment = GovpayFindPaymentService.run(payment_id:)
+    @payment = WasteCarriersEngine::GovpayFindPaymentService.run(payment_id:)
     raise ArgumentError, "Invalid refunded payment id #{payment_id}" if payment.nil?
 
     response

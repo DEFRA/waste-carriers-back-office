@@ -124,7 +124,8 @@ RSpec.describe "Refunds" do
   describe "PATCH /bo/resources/:_id/refunds" do
 
     let(:registration) { create(:registration, :overpaid) }
-    let(:refund) { build(:payment, :govpay_refund_pending) }
+    let(:refunded_payment) { create(:payment, :govpay, finance_details: registration.finance_details) }
+    let(:refund) { create(:payment, :govpay_refund_pending, finance_details: registration.finance_details, refunded_payment_govpay_id: refunded_payment.govpay_id) }
 
     context "when a user is not signed in" do
       it "redirects to the sign-in page" do
@@ -136,21 +137,21 @@ RSpec.describe "Refunds" do
 
     context "when a valid user is signed in" do
       let(:user) { create(:user, role: :agency_with_refund) }
-      let(:update_service) { instance_double(GovpayUpdateRefundStatusService) }
+      let(:govpay_refund_response) { Rails.root.join("spec/fixtures/files/govpay/get_refund_details_response_submitted.json").read }
 
       before do
         registration.finance_details.payments << refund
 
-        allow(GovpayUpdateRefundStatusService).to receive(:new).and_return(update_service)
-        allow(update_service).to receive(:run)
+        allow(WasteCarriersEngine::GovpayUpdateRefundStatusService).to receive(:run)
+        allow(GovpayRefundDetailsService).to receive(:run).and_return(govpay_refund_response)
 
         sign_in(user)
 
-        patch resource_refund_path(registration, refund.id)
+        patch resource_refund_path(registration, refund.govpay_id)
       end
 
       it "calls the refund update service" do
-        expect(update_service).to have_received(:run)
+        expect(WasteCarriersEngine::GovpayUpdateRefundStatusService).to have_received(:run)
       end
 
       it "redirects to the finance-details page" do
