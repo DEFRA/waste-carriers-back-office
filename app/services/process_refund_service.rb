@@ -60,7 +60,7 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   end
 
   def assign_govpay_attributes(refund, payment)
-    refund.govpay_payment_status = "submitted"
+    refund.govpay_payment_status = WasteCarriersEngine::Payment::STATUS_SUBMITTED
     refund.govpay_id = @refund_details["refund_id"]
     refund.refunded_payment_govpay_id = payment.govpay_id
     refund.order_key = "#{payment.order_key}_PENDING"

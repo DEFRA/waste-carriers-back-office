@@ -72,7 +72,7 @@ RSpec.describe ProcessRefundService do
 
             expect(WasteCarriersEngine::Payment).to receive(:new).with(payment_type: WasteCarriersEngine::Payment::REFUND).and_return(refund)
             expect(refund).to receive(:refunded_payment_govpay_id=).with(payment.govpay_id)
-            expect(refund).to receive(:govpay_payment_status=).with("submitted")
+            expect(refund).to receive(:govpay_payment_status=).with(WasteCarriersEngine::Payment::STATUS_SUBMITTED)
             expect(refund).to receive(:govpay_id=)
             expect(refund).to receive(:order_key=).with("123_PENDING")
             expect(refund).to receive(:date_entered=).with(Date.current)

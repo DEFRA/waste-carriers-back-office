@@ -66,7 +66,10 @@ module ActionLinksHelper
     return false if resource.payments.find(&:govpay?).nil?
 
     # Do not display the link if there is a pending refund
-    return false if resource.payments.select(&:refund?).pluck(:govpay_payment_status).include?("submitted")
+    return false if resource.payments
+                            .select(&:refund?)
+                            .pluck(:govpay_payment_status)
+                            .include?(WasteCarriersEngine::Payment::STATUS_SUBMITTED)
 
     can?(:refund, resource)
   end
@@ -75,7 +78,8 @@ module ActionLinksHelper
     return false unless can?(:refund, resource)
 
     pending_refund = resource.payments.where(
-      payment_type: WasteCarriersEngine::Payment::REFUND, govpay_payment_status: "submitted"
+      payment_type: WasteCarriersEngine::Payment::REFUND,
+      govpay_payment_status: WasteCarriersEngine::Payment::STATUS_SUBMITTED
     ).first
 
     # return the id of the first pending refund, if any as the view needs it

@@ -66,7 +66,7 @@ module WasteCarriersEngine
             before { original_payment.update!(moto: false) }
 
             it "returns the expected status" do
-              expect(run_service["status"]).to eq "submitted"
+              expect(run_service["status"]).to eq WasteCarriersEngine::Payment::STATUS_SUBMITTED
             end
           end
 
@@ -74,7 +74,7 @@ module WasteCarriersEngine
             before { original_payment.update(moto: true) }
 
             it "returns the expected status" do
-              expect(run_service["status"]).to eq "submitted"
+              expect(run_service["status"]).to eq WasteCarriersEngine::Payment::STATUS_SUBMITTED
             end
           end
         end

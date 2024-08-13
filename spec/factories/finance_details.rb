@@ -42,7 +42,7 @@ FactoryBot.define do
     trait :has_overpaid_order_and_payment_govpay do
       orders { [build(:order, :has_required_data)] }
       payments do
-        [build(:payment, :govpay, date_entered: payment_date_entered, govpay_payment_status: "success", amount: 100_500)]
+        [build(:payment, :govpay, date_entered: payment_date_entered, govpay_payment_status: WasteCarriersEngine::Payment::STATUS_SUCCESS, amount: 100_500)]
       end
       after(:build, :create, &:update_balance)
     end
