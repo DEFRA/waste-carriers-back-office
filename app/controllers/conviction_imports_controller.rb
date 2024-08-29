@@ -19,7 +19,7 @@ class ConvictionImportsController < ApplicationController
         render :new
       end
     else
-      flash[:error] = I18n.t("conviction_imports.flash_messages.invalid_file_type_details")
+      flash.now[:error] = I18n.t("conviction_imports.flash_messages.invalid_file_type_details")
       render :new
     end
   end
