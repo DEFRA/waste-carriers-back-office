@@ -2,7 +2,19 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.27.0...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.28.0...HEAD)
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `f834981` to `bc2b22f` [\#2007](https://github.com/DEFRA/waste-carriers-back-office/pull/2007) ([dependabot[bot]](https://github.com/apps/dependabot))
+- bump gem versions [\#2006](https://github.com/DEFRA/waste-carriers-back-office/pull/2006) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Chore/ruby 3145 move govpay services to engine [\#1996](https://github.com/DEFRA/waste-carriers-back-office/pull/1996) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+- Bump waste\_carriers\_engine from `73da607` to `2daefa3` [\#1993](https://github.com/DEFRA/waste-carriers-back-office/pull/1993) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Chore/webhook signature api [\#1988](https://github.com/DEFRA/waste-carriers-back-office/pull/1988) ([PaulDoyle-DEFRA](https://github.com/PaulDoyle-DEFRA))
+
+## [v1.28.0](https://github.com/defra/waste-carriers-back-office/tree/v1.28.0) (2024-07-22)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.27.0...v1.28.0)
 
 **Implemented enhancements:**
 
@@ -18,6 +30,7 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG [\#1991](https://github.com/DEFRA/waste-carriers-back-office/pull/1991) ([jjromeo](https://github.com/jjromeo))
 - Bump waste\_carriers\_engine from `4be33b8` to `613323b` [\#1980](https://github.com/DEFRA/waste-carriers-back-office/pull/1980) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump net-imap from 0.4.11 to 0.4.14 [\#1978](https://github.com/DEFRA/waste-carriers-back-office/pull/1978) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rspec-rails from 6.1.2 to 6.1.3 [\#1976](https://github.com/DEFRA/waste-carriers-back-office/pull/1976) ([dependabot[bot]](https://github.com/apps/dependabot))
