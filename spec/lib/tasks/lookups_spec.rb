@@ -13,6 +13,8 @@ RSpec.describe "lookups:update:missing_area", type: :task do
     # To avoid creating excessive test data, we reduce the default 50 to 8.
     allow(WasteCarriersBackOffice::Application.config).to receive(:area_lookup_address_limit).and_return(8)
 
+    allow(TimedServiceRunner).to receive(:run)
+
     task.reenable
   end
 
@@ -21,8 +23,6 @@ RSpec.describe "lookups:update:missing_area", type: :task do
     registrations.each do |registration|
       create(:address, :registered, registration: registration, area: nil, postcode: "AB1 2CD")
     end
-
-    allow(TimedServiceRunner).to receive(:run)
 
     task.invoke
 
@@ -34,11 +34,9 @@ RSpec.describe "lookups:update:missing_area", type: :task do
     ).at_least(:once)
   end
 
-  context "when the company address is blank" do
-    it "does not include the address in the service call" do
-      create(:registration, addresses: [build(:address, :contact)])
-
-      allow(TimedServiceRunner).to receive(:run)
+  context "when the contact address area is blank" do
+    it "does not include the contact address in the service call" do
+      create(:registration, addresses: [build(:address, :contact, area: nil, postcode: "AB1 2CD")])
 
       task.invoke
 
@@ -53,9 +51,7 @@ RSpec.describe "lookups:update:missing_area", type: :task do
 
   context "when a registration is inactive" do
     it "does not include the address in the service call" do
-      create(:registration, :inactive, addresses: [build(:address, :registered, postcode: "AB1 2CD")])
-
-      allow(TimedServiceRunner).to receive(:run)
+      create(:registration, :inactive, addresses: [build(:address, :registered, area: nil, postcode: "AB1 2CD")])
 
       task.invoke
 
@@ -70,9 +66,7 @@ RSpec.describe "lookups:update:missing_area", type: :task do
 
   context "when the postcode is blank" do
     it "does not include the address in the service call" do
-      create(:registration, addresses: [build(:address, :registered, postcode: nil)])
-
-      allow(TimedServiceRunner).to receive(:run)
+      create(:registration, addresses: [build(:address, :registered, area: nil, postcode: nil)])
 
       task.invoke
 
@@ -89,8 +83,6 @@ RSpec.describe "lookups:update:missing_area", type: :task do
     it "does not include the address in the service call" do
       create(:registration, addresses: [build(:address, :registered, area: "Test Area", postcode: "AB1 2CD")])
 
-      allow(TimedServiceRunner).to receive(:run)
-
       task.invoke
 
       expect(TimedServiceRunner).to have_received(:run).with(
@@ -102,13 +94,10 @@ RSpec.describe "lookups:update:missing_area", type: :task do
     end
   end
 
-  context "when the correct attributes are passed in" do
-    it "calls the TimedServiceRunner with the correct attributes" do
-      registration = create(:registration, addresses: [build(:address, :registered, area: nil, postcode: "AB1 2CD")])
+  shared_examples "includes the address" do
+    let(:address_attributes) { registration.company_address.attributes.slice(:addresstype, :postcode, :addressLine1, :addressLine2) }
 
-      address_attributes = registration.company_address.attributes.slice(:addresstype, :postcode, :addressLine1, :addressLine2)
-
-      allow(TimedServiceRunner).to receive(:run)
+    it "calls the TimedServiceRunner with the correct address attributes" do
 
       task.invoke
 
@@ -119,5 +108,21 @@ RSpec.describe "lookups:update:missing_area", type: :task do
         throttle: 0.1
       ).at_least(:once)
     end
+  end
+
+  context "when the area is nil" do
+    # rubocop:disable RSpec/LetSetup
+    let!(:registration) { create(:registration, addresses: [build(:address, :registered, area: nil, postcode: "AB1 2CD")]) }
+    # rubocop:enable RSpec/LetSetup
+
+    it_behaves_like "includes the address"
+  end
+
+  context "when the area is blank" do
+    # rubocop:disable RSpec/LetSetup
+    let!(:registration) { create(:registration, addresses: [build(:address, :registered, area: "", postcode: "AB1 2CD")]) }
+    # rubocop:enable RSpec/LetSetup
+
+    it_behaves_like "includes the address"
   end
 end

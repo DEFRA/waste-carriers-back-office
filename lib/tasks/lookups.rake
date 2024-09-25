@@ -37,7 +37,7 @@ def pipeline(address_limit)
     #  ... and include only registered addresses without an area and with a postcode
     { "$match": {
       "addresses.addressType": "REGISTERED",
-      "addresses.area": nil,
+      "addresses.area": { "$in": [nil, ""] },
       "addresses.postcode": { "$nin": [nil, ""] }
     } },
     { "$limit": address_limit },
