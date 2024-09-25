@@ -3,13 +3,10 @@
 # Use in conjunction with long running tasks which you need to be throttled to
 # only run for a certain length of time.
 #
-# For example rake task lookups:update:missing_area first finds then updates
-# all site addresses missing an area. To ensure this does not run for too long
-# we use +TimedServiceRunner+ to limit how long it runs for.
-#
+# For example:
 #     run_for = 60 # minutes
-#     job_scope = WasteCarriersEngine::Address.site.missing_area.with_easting_and_northing
-#     service_to_run = WasteCarriersEngine::AssignSiteDetailsService
+#     job_scope = (a cursor from a model scope or aggregation)
+#     service_to_run = fully scoped service name
 #
 #     TimedServiceRunner.run(
 #       scope: job_scope,
