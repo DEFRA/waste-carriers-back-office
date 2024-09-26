@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: ce6f971935fa483ab9ee796547b332a3e246d90a
+  revision: 6bf340aa04c34723c80f91c47d923a20a826d0f1
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -295,7 +295,7 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.7.2)
-    jwt (2.9.0)
+    jwt (2.9.1)
       base64
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
