@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-  # rubocop:disable RSpec/LetSetup
-  RSpec.describe "lookups:update:missing_address_attributes", type: :task do
+# rubocop:disable RSpec/LetSetup
+RSpec.describe "lookups:update:missing_address_attributes", type: :task do
   include_context "rake"
 
   let(:task) { Rake::Task["lookups:update:missing_address_attributes"] }
@@ -63,9 +63,9 @@ require "rails_helper"
   context "when the contact address area is blank and the registered address area is present" do
     before do
       create(:registration, addresses: [
-        build(:address, :contact, area: nil, postcode: nil),
-        build(:address, :registered, area: "BRISTOL", postcode: "AB1 2CD")
-        ])
+               build(:address, :contact, area: nil, postcode: nil),
+               build(:address, :registered, area: "BRISTOL", postcode: "AB1 2CD")
+             ])
     end
 
     it_behaves_like "no addresses in scope"
