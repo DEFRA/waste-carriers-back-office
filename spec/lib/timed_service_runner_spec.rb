@@ -6,7 +6,7 @@ require_relative "../../lib/timed_service_runner"
 RSpec.describe TimedServiceRunner do
   describe ".run" do
     let(:run_for) { 1 } # minute
-    let(:service) { class_double(WasteCarriersEngine::AssignSiteDetailsService) }
+    let(:service) { class_double(WasteCarriersEngine::UpdateAddressDetailsFromOsPlacesService) }
     let(:registrations) { create_list(:registration, 2) }
     let(:scope) { registrations.pluck(:_id) }
 
@@ -14,7 +14,7 @@ RSpec.describe TimedServiceRunner do
       registrations.each do |registration|
         allow(service).to receive(:run).with(registration_id: registration.id)
       end
-      allow(service).to receive(:name).and_return("AssignSiteDetailsService")
+      allow(service).to receive(:name).and_return("UpdateAddressDetailsFromOsPlacesService")
       allow(Time).to receive(:zone).and_return(ActiveSupport::TimeZone["UTC"])
     end
 
@@ -54,7 +54,7 @@ RSpec.describe TimedServiceRunner do
         described_class.run(scope: scope, run_for: run_for, service: service)
 
         expect(Airbrake).to have_received(:notify).with(instance_of(StandardError), registration_id: registrations[0].id)
-        expect(Rails.logger).to have_received(:error).at_least(:once).with("AssignSiteDetailsService failed:\n Test error")
+        expect(Rails.logger).to have_received(:error).at_least(:once).with("UpdateAddressDetailsFromOsPlacesService failed:\n Test error")
       end
     end
   end
