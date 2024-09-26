@@ -8,7 +8,7 @@ namespace :lookups do
   namespace :update do
 
     desc "Update all sites with a missing area (postcode must be populated)"
-    task missing_area: :environment do
+    task missing_address_attributes: :environment do
       return false unless WasteCarriersEngine::FeatureToggle.active?(:run_ea_areas_job)
 
       run_for = WasteCarriersBackOffice::Application.config.area_lookup_run_for.to_i
@@ -21,7 +21,7 @@ namespace :lookups do
       TimedServiceRunner.run(
         scope: registrations_scope,
         run_for: run_for,
-        service: WasteCarriersEngine::AssignSiteDetailsService,
+        service: WasteCarriersEngine::UpdateAddressDetailsFromOsPlacesService,
         throttle: throttle
       )
     end
@@ -36,9 +36,15 @@ def pipeline(address_limit)
     { "$unwind": "$addresses" },
     #  ... and include only registered addresses without an area and with a postcode
     { "$match": {
-      "addresses.addressType": "REGISTERED",
-      "addresses.area": { "$in": [nil, ""] },
-      "addresses.postcode": { "$nin": [nil, ""] }
+      "$and": [
+        "addresses.addressType": "REGISTERED",
+        "addresses.postcode": { "$nin": [nil, ""] },
+        "$or": [
+          { "addresses.area": { "$in": [nil, ""] } },
+          { "addresses.easting": nil },
+          { "addresses.northing": nil }
+        ]
+      ]
     } },
     { "$limit": address_limit },
     # we need only the registration ids

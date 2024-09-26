@@ -89,7 +89,7 @@ every :tuesday, at: ENV["EXPORT_COPY_CARD_ORDERS_RUN_TIME"] || "02:15", roles: [
 end
 
 every :day, at: ENV["AREA_LOOKUP"] || "01:05", roles: [:db] do
-  rake_and_format "lookups:update:missing_area"
+  rake_and_format "lookups:update:missing_address_attributes"
 end
 
 every :day, at: ENV["CLEANUP_OLD_SESSIONS_TIME"] || "01:00", roles: [:db] do
