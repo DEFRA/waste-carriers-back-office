@@ -4,12 +4,12 @@ module Api
   class GovpayWebhooksController < ::ApplicationController
     skip_before_action :verify_authenticity_token
 
-    def signature
+    def signatures
       payload = request.body.read
 
-      signature = WasteCarriersEngine::GovpayPaymentWebhookSignatureService.run(body: payload)
+      signatures = WasteCarriersEngine::GovpayPaymentWebhookSignatureService.run(body: payload)
 
-      render plain: signature
+      render json: signatures
     end
 
     private

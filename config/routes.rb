@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     namespace :api, defaults: { format: :json }, constraints: Constraint::FeatureToggleConstraint.new(:api) do
       resources :registrations, only: %i[show create]
       resources :renewals, only: :show
-      post "govpay_webhooks/signature"
+      post "govpay_webhooks/signatures"
     end
 
     get "/resend-confirmation-email/:reg_identifier",

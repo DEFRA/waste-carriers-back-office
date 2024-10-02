@@ -4,25 +4,25 @@ require "rails_helper"
 
 RSpec.describe "Govpay webhooks API" do
   let(:params) { { foo: :bar } }
-  let(:signature) { Faker::Number.hexadecimal(digits: 20) }
+  let(:signatures) { { front_office: Faker::Number.hexadecimal(digits: 20), back_office: Faker::Number.hexadecimal(digits: 20) } }
   let(:signature_service) { instance_double(WasteCarriersEngine::GovpayPaymentWebhookSignatureService) }
 
   before do
     allow(WasteCarriersEngine::GovpayPaymentWebhookSignatureService).to receive(:new).and_return(signature_service)
-    allow(signature_service).to receive(:run).and_return(signature)
+    allow(signature_service).to receive(:run).and_return(signatures)
 
     allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:api).and_return(true)
 
-    post "/bo/api/govpay_webhooks/signature", params: params.to_json, headers: { "CONTENT_TYPE" => "application/json" }
+    post "/bo/api/govpay_webhooks/signatures", params: params.to_json, headers: { "CONTENT_TYPE" => "application/json" }
   end
 
-  describe "POST /bo/api/govpay_webhooks/signature" do
+  describe "POST /bo/api/govpay_webhooks/signatures" do
     it "calls the signature service" do
       expect(signature_service).to have_received(:run)
     end
 
-    it "returns a valid hexadecimal value" do
-      expect(response.body.match(/^[0-9A-F]+$/i)).to be_present
+    it "returns the front office and back office signatures" do
+      expect(response.body).to eq(signatures.to_json)
     end
   end
 end
