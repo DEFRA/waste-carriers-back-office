@@ -92,6 +92,14 @@ every :day, at: ENV["AREA_LOOKUP"] || "01:05", roles: [:db] do
   rake_and_format "lookups:update:missing_address_attributes"
 end
 
+every :day, at: ENV["AREA_LOOKUP"] || "01:05", roles: [:db] do
+  rake_and_format "lookups:update:missing_ea_areas"
+end
+
+every :day, at: ENV["EASTING_NORTHING_LOOKUP"] || "03:30", roles: [:db] do
+  rake_and_format "lookups:update:missing_easting_northing"
+end
+
 every :day, at: ENV["CLEANUP_OLD_SESSIONS_TIME"] || "01:00", roles: [:db] do
   rake_and_format "db:sessions:trim"
 end

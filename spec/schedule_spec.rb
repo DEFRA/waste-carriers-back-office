@@ -94,4 +94,19 @@ RSpec.describe "Whenever::Test::Shedule" do
     expect(job_details[:every][0]).to eq(:tuesday)
     expect(job_details[:every][1][:at]).to eq("02:15")
   end
+
+  it "picks up the daily missing areas task run frequency and time" do
+    job_details = schedule.jobs[:rake_and_format].find { |h| h[:task] == "lookups:update:missing_ea_areas" }
+
+    expect(job_details[:every][0]).to eq(:day)
+    expect(job_details[:every][1][:at]).to eq("01:05")
+  end
+
+
+  it "picks up the daily missing easting/northing task run frequency and time" do
+    job_details = schedule.jobs[:rake_and_format].find { |h| h[:task] == "lookups:update:missing_easting_northing" }
+
+    expect(job_details[:every][0]).to eq(:day)
+    expect(job_details[:every][1][:at]).to eq("03:30")
+  end
 end
