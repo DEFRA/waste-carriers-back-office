@@ -312,6 +312,7 @@ GEM
       kaminari-core (~> 1.0)
       mongoid
     language_server-protocol (3.17.0.3)
+    logger (1.6.1)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -323,9 +324,10 @@ GEM
     marcel (1.0.4)
     matrix (0.4.2)
     method_source (1.1.0)
-    mime-types (3.5.2)
+    mime-types (3.6.0)
+      logger
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2024.0903)
+    mime-types-data (3.2024.1001)
     mini_mime (1.1.5)
     mini_portile2 (2.8.7)
     minitest (5.25.1)
