@@ -91,7 +91,7 @@ RSpec.describe "lookups:update" do
   # rubocop:disable RSpec/LetSetup
   describe "missing_ea_areas", type: :task do
     let(:task) { Rake::Task["lookups:update:missing_ea_areas"] }
-    let(:update_service) { Geographic::UpdateEaAreaService }
+    let(:update_service) { Address::UpdateEaAreaService }
 
     it_behaves_like "inactive registration"
 
@@ -141,7 +141,7 @@ RSpec.describe "lookups:update" do
 
   describe "missing_easting_northings", type: :task do
     let(:task) { Rake::Task["lookups:update:missing_easting_northings"] }
-    let(:update_service) { Geographic::UpdateEastingNorthingService }
+    let(:update_service) { Address::UpdateEastingNorthingService }
 
     let(:easting) { nil }
     let(:northing) { nil }

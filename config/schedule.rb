@@ -88,16 +88,12 @@ every :tuesday, at: ENV["EXPORT_COPY_CARD_ORDERS_RUN_TIME"] || "02:15", roles: [
   rake_and_format "reports:export:weekly_copy_card_orders"
 end
 
-every :day, at: ENV["AREA_LOOKUP"] || "01:05", roles: [:db] do
-  rake_and_format "lookups:update:missing_address_attributes"
-end
-
-every :day, at: ENV["AREA_LOOKUP"] || "01:05", roles: [:db] do
-  rake_and_format "lookups:update:missing_ea_areas"
-end
-
-every :day, at: ENV["EASTING_NORTHING_LOOKUP"] || "03:30", roles: [:db] do
+every :day, at: ENV["EASTING_NORTHING_LOOKUP"] || "01:05", roles: [:db] do
   rake_and_format "lookups:update:missing_easting_northing"
+end
+
+every :day, at: ENV["AREA_LOOKUP"] || "03:30", roles: [:db] do
+  rake_and_format "lookups:update:missing_ea_areas"
 end
 
 every :day, at: ENV["CLEANUP_OLD_SESSIONS_TIME"] || "01:00", roles: [:db] do

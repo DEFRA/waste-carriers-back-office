@@ -15,7 +15,7 @@ RSpec.describe "Whenever::Test::Shedule" do
 
   it "makes sure 'rake_and_format' statements exist" do
     rake_jobs = schedule.jobs[:rake_and_format]
-    expect(rake_jobs.count).to eq(15)
+    expect(rake_jobs.count).to eq(14)
   end
 
   it "picks up the EPR export run frequency and time" do
@@ -95,15 +95,15 @@ RSpec.describe "Whenever::Test::Shedule" do
     expect(job_details[:every][1][:at]).to eq("02:15")
   end
 
-  it "picks up the daily missing areas task run frequency and time" do
-    job_details = schedule.jobs[:rake_and_format].find { |h| h[:task] == "lookups:update:missing_ea_areas" }
+  it "picks up the daily missing easting/northing task run frequency and time" do
+    job_details = schedule.jobs[:rake_and_format].find { |h| h[:task] == "lookups:update:missing_easting_northing" }
 
     expect(job_details[:every][0]).to eq(:day)
     expect(job_details[:every][1][:at]).to eq("01:05")
   end
 
-  it "picks up the daily missing easting/northing task run frequency and time" do
-    job_details = schedule.jobs[:rake_and_format].find { |h| h[:task] == "lookups:update:missing_easting_northing" }
+  it "picks up the daily missing areas task run frequency and time" do
+    job_details = schedule.jobs[:rake_and_format].find { |h| h[:task] == "lookups:update:missing_ea_areas" }
 
     expect(job_details[:every][0]).to eq(:day)
     expect(job_details[:every][1][:at]).to eq("03:30")

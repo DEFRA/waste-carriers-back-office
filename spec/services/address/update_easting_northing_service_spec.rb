@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-module Geographic
+module Address
   RSpec.describe UpdateEastingNorthingService, type: :service do
     describe "#run" do
       let(:address) { build(:address, address_type: "REGISTERED", postcode:, easting:, northing:) }

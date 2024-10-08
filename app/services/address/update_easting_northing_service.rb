@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Geographic
+module Address
   class UpdateEastingNorthingService < WasteCarriersEngine::BaseService
     attr_reader :address, :registration
 
@@ -12,7 +12,7 @@ module Geographic
 
       return if address.easting.present? && address.northing.present?
 
-      easting, northing = DetermineEastingAndNorthingService.run(postcode: postcode).values
+      easting, northing = Geographic::MapPostcodeToEastingAndNorthingService.run(postcode: postcode).values
       address.update(easting:, northing:)
     end
   end

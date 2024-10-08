@@ -5,7 +5,7 @@
 require "rails_helper"
 
 module Geographic
-  RSpec.describe DetermineEastingAndNorthingService, type: :service do
+  RSpec.describe MapPostcodeToEastingAndNorthingService, type: :service do
     let(:service) { described_class.new }
     let(:os_places_data) { JSON.parse(file_fixture("os_places_response.json").read) }
     let(:valid_postcode) { "SW1A 1AA" }

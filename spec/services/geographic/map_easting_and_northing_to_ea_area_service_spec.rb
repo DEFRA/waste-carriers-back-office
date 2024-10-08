@@ -4,7 +4,7 @@ require "rails_helper"
 require "defra_ruby/area"
 
 module Geographic
-  RSpec.describe DetermineEaAreaService do
+  RSpec.describe MapEastingAndNorthingToEaAreaService do
     describe ".run" do
       let(:coordinates) { { easting: 358_205.03, northing: 172_708.07 } }
 

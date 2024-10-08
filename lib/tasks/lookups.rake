@@ -11,14 +11,14 @@ namespace :lookups do
     task missing_ea_areas: :environment do
       next unless WasteCarriersEngine::FeatureToggle.active?(:run_ea_areas_job)
 
-      run_service(ea_area_match_clause, Geographic::UpdateEaAreaService)
+      run_service(ea_area_match_clause, Address::UpdateEaAreaService)
     end
 
     desc "Update all sites with a missing easting or northing (postcode must be populated)"
     task missing_easting_northings: :environment do
       next unless WasteCarriersEngine::FeatureToggle.active?(:run_ea_areas_job)
 
-      run_service(easting_northing_match_clause, Geographic::UpdateEastingNorthingService)
+      run_service(easting_northing_match_clause, Address::UpdateEastingNorthingService)
     end
   end
 end

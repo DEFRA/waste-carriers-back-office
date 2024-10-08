@@ -3,7 +3,7 @@
 require "defra_ruby/area"
 
 module Geographic
-  class DetermineEaAreaService < WasteCarriersEngine::BaseService
+  class MapEastingAndNorthingToEaAreaService < WasteCarriersEngine::BaseService
     def run(easting:, northing:)
       response = DefraRuby::Area::PublicFaceAreaService.run(easting, northing)
 

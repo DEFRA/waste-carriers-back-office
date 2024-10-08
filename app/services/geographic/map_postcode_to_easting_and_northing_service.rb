@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Geographic
-  class DetermineEastingAndNorthingService < WasteCarriersEngine::BaseService
+  class MapPostcodeToEastingAndNorthingService < WasteCarriersEngine::BaseService
     def run(postcode:)
       @result = { easting: nil, northing: nil }
 

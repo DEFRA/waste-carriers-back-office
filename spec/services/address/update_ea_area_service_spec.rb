@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-module Geographic
+module Address
   RSpec.describe UpdateEaAreaService, type: :service do
     describe "#run" do
       let(:easting) { 123_456 }
@@ -14,8 +14,8 @@ module Geographic
       subject(:run_service) { described_class.run(registration_id: registration.id) }
 
       before do
-        allow(DetermineEastingAndNorthingService).to receive(:run).and_return(easting:, northing:)
-        allow(DetermineEaAreaService).to receive(:run)
+        allow(Geographic::MapPostcodeToEastingAndNorthingService).to receive(:run).and_return(easting:, northing:)
+        allow(Geographic::MapEastingAndNorthingToEaAreaService).to receive(:run)
       end
 
       shared_examples "updates the area" do
@@ -30,13 +30,13 @@ module Geographic
         let(:address) { build(:address, address_type: "REGISTERED", postcode:, area: nil) }
 
         context "when the determine area service returns an area" do
-          before { allow(DetermineEaAreaService).to receive(:run).and_return("Area Name") }
+          before { allow(Geographic::MapEastingAndNorthingToEaAreaService).to receive(:run).and_return("Area Name") }
 
           it_behaves_like "updates the area"
         end
 
         context "when the determine area service does not return an area" do
-          before { allow(DetermineEaAreaService).to receive(:run).and_return(nil) }
+          before { allow(Geographic::MapEastingAndNorthingToEaAreaService).to receive(:run).and_return(nil) }
 
           it_behaves_like "does not update the area"
         end
