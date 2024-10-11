@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 0bf2d430d0acb135c6b00241bc00131263b96865
+  revision: 63272585b78b0ad71f5f65d056ebca6f30ae0bd9
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -573,7 +573,7 @@ GEM
       activesupport
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.18)
+    zeitwerk (2.7.0)
 
 PLATFORMS
   ruby
