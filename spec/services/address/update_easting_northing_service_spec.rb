@@ -24,38 +24,38 @@ module Address
         let(:easting) { valid_easting }
         let(:northing) { valid_northing }
 
-        it { expect { run_service }.not_to change { registration.reload.company_address.easting } }
-        it { expect { run_service }.not_to change { registration.reload.company_address.northing } }
+        it { expect { run_service }.not_to change { registration.reload.registered_address.easting } }
+        it { expect { run_service }.not_to change { registration.reload.registered_address.northing } }
       end
 
       context "when the address has an easting and no northing" do
         let(:easting) { valid_easting }
         let(:northing) { nil }
 
-        it { expect { run_service }.not_to change { registration.reload.company_address.easting } }
-        it { expect { run_service }.to change { registration.reload.company_address.northing } }
+        it { expect { run_service }.not_to change { registration.reload.registered_address.easting } }
+        it { expect { run_service }.to change { registration.reload.registered_address.northing } }
       end
 
       context "when the address has a northing and no easting" do
         let(:easting) { nil }
         let(:northing) { valid_northing }
 
-        it { expect { run_service }.to change { registration.reload.company_address.easting } }
-        it { expect { run_service }.not_to change { registration.reload.company_address.northing } }
+        it { expect { run_service }.to change { registration.reload.registered_address.easting } }
+        it { expect { run_service }.not_to change { registration.reload.registered_address.northing } }
       end
 
       context "when the address has no easting or northing values" do
         let(:easting) { nil }
         let(:northing) { nil }
 
-        it { expect { run_service }.to change { registration.reload.company_address.easting } }
-        it { expect { run_service }.to change { registration.reload.company_address.northing } }
+        it { expect { run_service }.to change { registration.reload.registered_address.easting } }
+        it { expect { run_service }.to change { registration.reload.registered_address.northing } }
 
         context "when the address does not have a postcode" do
           let(:postcode) { nil }
 
-          it { expect { run_service }.not_to change { registration.reload.company_address.easting } }
-          it { expect { run_service }.not_to change { registration.reload.company_address.northing } }
+          it { expect { run_service }.not_to change { registration.reload.registered_address.easting } }
+          it { expect { run_service }.not_to change { registration.reload.registered_address.northing } }
         end
       end
     end
