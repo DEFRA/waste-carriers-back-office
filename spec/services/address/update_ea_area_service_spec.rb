@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require "defra_ruby/area"
 
 module Address
   RSpec.describe UpdateEaAreaService, type: :service do
@@ -15,15 +16,14 @@ module Address
 
       before do
         allow(Geographic::MapPostcodeToEastingAndNorthingService).to receive(:run).and_return(easting:, northing:)
-        allow(Geographic::MapEastingAndNorthingToEaAreaService).to receive(:run)
       end
 
       shared_examples "updates the area" do
-        it { expect { run_service }.to change { registration.reload.company_address.area }.to(area) }
+        it { expect { run_service }.to change { registration.reload.registered_address.area }.to(area) }
       end
 
       shared_examples "does not update the area" do
-        it { expect { run_service }.not_to change { registration.reload.company_address.area } }
+        it { expect { run_service }.not_to change { registration.reload.registered_address.area } }
       end
 
       context "when the address has a postcode and area is not present" do
@@ -39,6 +39,23 @@ module Address
           before { allow(Geographic::MapEastingAndNorthingToEaAreaService).to receive(:run).and_return(nil) }
 
           it_behaves_like "does not update the area"
+        end
+
+        context "when the easting and northing values are nil" do
+          let(:easting) { nil }
+          let(:northing) { nil }
+          let(:area_service) { instance_double(DefraRuby::Area::PublicFaceAreaService) }
+
+          before do
+            allow(DefraRuby::Area::PublicFaceAreaService).to receive(:new).and_return(area_service)
+            allow(area_service).to receive(:run).and_raise(StandardError.new("Bad request"))
+          end
+
+          it "does not call the area service" do
+            run_service
+
+            expect(area_service).not_to have_received(:run)
+          end
         end
       end
 
@@ -58,7 +75,7 @@ module Address
         let(:address) { build(:address, address_type: "REGISTERED", postcode:, area: nil) }
         let(:registration) { create(:registration, addresses: [address], location: "overseas") }
 
-        it { expect { run_service }.to change { registration.reload.company_address.area }.to("Outside England") }
+        it { expect { run_service }.to change { registration.reload.registered_address.area }.to("Outside England") }
       end
     end
   end
