@@ -14,7 +14,7 @@
         <%= f.submit t(".next_button", revoke_or_cease: t(".revoke_or_cease.#{@transient_registration.status}")), class: "govuk-button" %>
 
         <div class="govuk-body">
-          <%= link_to t(".cancel"), WasteCarriersEngine::Engine.routes.url_helpers.delete_transient_registration_path(@ceased_or_revoked_confirm_form.transient_registration.token) %>
+          <%= link_to t(".cancel"), delete_transient_registration_path(@ceased_or_revoked_confirm_form.transient_registration.token) %>
         </div>
       </div>
     <% end %>

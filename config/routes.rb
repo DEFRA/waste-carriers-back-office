@@ -384,6 +384,10 @@ Rails.application.routes.draw do
       to: "convictions#begin_checks",
       as: :transient_registration_convictions_begin_checks
 
+  get "/bo/transient-registrations/:token/destroy",
+      to: "transient_registrations#destroy",
+      as: :delete_transient_registration
+
   delete "/bo/renewing-registrations/:reg_identifier",
          to: "renewing_registrations#destroy",
          as: :renewing_registration_destroy
