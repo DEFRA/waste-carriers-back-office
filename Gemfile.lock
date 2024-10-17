@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 10b639d63e01d60852a7c011738dbc01c757f533
-  branch: main
+  revision: d0c38e3cea6a3dd6e55d01e807a1c6c2102e46a7
+  branch: RUBY-3387-implement-solution-to-govpay-status-being-stored-twice
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
