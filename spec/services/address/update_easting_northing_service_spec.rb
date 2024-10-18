@@ -12,7 +12,7 @@ module Address
       let(:valid_easting) { os_places_data["easting"] }
       let(:valid_northing) { os_places_data["northing"] }
 
-      subject(:run_service) { described_class.run(registration_id: registration.id) }
+      subject(:run_service) { described_class.run(reg_identifier: registration.reg_identifier) }
 
       before do
         allow(WasteCarriersEngine::AddressLookupService).to receive(:run).and_return(
