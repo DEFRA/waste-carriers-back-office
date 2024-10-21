@@ -4,6 +4,10 @@ FactoryBot.define do
   factory :conviction_sign_off, class: "WasteCarriersEngine::ConvictionSignOff" do
     confirmed { "no" }
 
+    trait :possible_match do
+      workflow_state { "possible_match" }
+    end
+
     trait :confirmed do
       confirmed { "yes" }
     end

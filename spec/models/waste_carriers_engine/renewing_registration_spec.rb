@@ -12,5 +12,9 @@ module WasteCarriersEngine
         expect(renewing_registration.future_expiry_date).to eq renewing_registration.expires_on + 3.years
       end
     end
+
+    describe "scopes" do
+      it_behaves_like "TransientRegistration named scopes"
+    end
   end
 end
