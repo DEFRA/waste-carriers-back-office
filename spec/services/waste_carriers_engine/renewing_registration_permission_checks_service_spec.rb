@@ -60,8 +60,7 @@ module WasteCarriersEngine
           let(:registration) { instance_double(Registration) }
 
           before do
-            allow(transient_registration).to receive(:registration).and_return(registration)
-            allow(transient_registration).to receive(:can_be_renewed?).and_return(renewable)
+            allow(transient_registration).to receive_messages(registration: registration, can_be_renewed?: renewable)
           end
 
           context "when the transient_registration cannot be renewed" do
