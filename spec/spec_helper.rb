@@ -103,7 +103,7 @@ RSpec.configure do |config|
     allow(WasteCarriersEngine::FeatureToggle).to receive(:active?)
   end
 
-  config.around do |ex|
-    ex.run_with_retry retry: 3
-  end
+  # config.around do |ex|
+  #   ex.run_with_retry retry: 3
+  # end
 end

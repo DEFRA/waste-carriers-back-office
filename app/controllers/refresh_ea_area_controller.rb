@@ -9,13 +9,13 @@ class RefreshEaAreaController < ApplicationController
     begin
       reg_identifier = params[:reg_identifier]
       registration = WasteCarriersEngine::Registration.find_by(reg_identifier: reg_identifier)
-      address = registration.company_address
+      address = registration.registered_address
 
-      WasteCarriersEngine::UpdateAddressDetailsFromOsPlacesService.run(address:)
+      easting, northing = Geographic::MapPostcodeToEastingAndNorthingService.run(postcode: address.postcode).values
+      ea_area = Geographic::MapEastingAndNorthingToEaAreaService.run(easting:, northing:)
+      raise StandardError if ea_area.nil?
 
-      raise StandardError if address.area.nil?
-
-      address.save!
+      address.update(area: ea_area)
 
       flash_success(
         I18n.t("refresh_ea_area.messages.success")

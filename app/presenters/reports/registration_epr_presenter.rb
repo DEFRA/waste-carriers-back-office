@@ -4,7 +4,7 @@ module Reports
   class RegistrationEprPresenter < ::WasteCarriersEngine::BasePresenter
     delegate :uprn, :house_number, :address_line_1, :address_line_2, :address_line_3, :address_line_4,
              :town_city, :postcode, :country, :easting, :northing,
-             to: :company_address, prefix: true
+             to: :registered_address, prefix: true
 
     def metadata_date_activated
       metaData&.date_activated&.to_fs(:year_month_day_hyphens)

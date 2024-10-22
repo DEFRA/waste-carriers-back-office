@@ -5,6 +5,8 @@ require "defra_ruby/area"
 module Geographic
   class MapEastingAndNorthingToEaAreaService < WasteCarriersEngine::BaseService
     def run(easting:, northing:)
+      return if easting.blank? || northing.blank?
+
       response = DefraRuby::Area::PublicFaceAreaService.run(easting, northing)
 
       return response.areas.first.long_name if response.successful?

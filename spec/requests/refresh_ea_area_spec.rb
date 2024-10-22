@@ -26,14 +26,14 @@ RSpec.describe "Refresh EA area" do
     end
 
     let(:user) { create(:user) }
-    let(:company_address) { build(:address, :registered) }
-    let(:registration) { create(:registration, company_address: company_address) }
-    let(:os_places_data) { JSON.parse(file_fixture("os_places_response.json").read) }
+    let(:registered_address) { build(:address, :registered) }
+    let(:registration) { create(:registration, registered_address: registered_address) }
 
     before do
       sign_in(user)
-      allow(WasteCarriersEngine::AddressLookupService).to receive(:run).and_return(
-        instance_double(DefraRuby::Address::Response, successful?: true, results: [os_places_data])
+      stub_request(:get, /.*environment.data.gov.uk.*/).to_return(
+        status: 200,
+        body: File.read("./spec/fixtures/files/environment.data.gov.uk/public_face_area_valid.json")
       )
     end
 
@@ -60,7 +60,7 @@ RSpec.describe "Refresh EA area" do
         let(:old_ea_area) { Faker::Company.name }
 
         before do
-          allow(WasteCarriersEngine::UpdateAddressDetailsFromOsPlacesService).to receive(:run).and_raise(StandardError)
+          allow(Geographic::MapEastingAndNorthingToEaAreaService).to receive(:run).and_raise(StandardError)
         end
 
         it "returns an error message" do

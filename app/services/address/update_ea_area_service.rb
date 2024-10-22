@@ -8,7 +8,7 @@ module Address
 
     def run(registration_id:)
       @registration = WasteCarriersEngine::Registration.find(registration_id)
-      @address = @registration.company_address
+      @address = @registration.registered_address
 
       set_easting_and_northing
       assign_area

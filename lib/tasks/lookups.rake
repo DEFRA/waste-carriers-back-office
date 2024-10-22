@@ -31,6 +31,8 @@ def run_service(address_match_clause, service)
     scope_pipeline(address_limit, address_match_clause)
   ).pluck(:_id)
 
+  puts "Updating #{registrations_scope.count} registrations" unless Rails.env.test?
+
   throttle = MINUTE_IN_SECONDS / MAX_REQUESTS_PER_MINUTE
 
   TimedServiceRunner.run(
