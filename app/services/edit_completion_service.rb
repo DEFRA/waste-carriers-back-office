@@ -55,11 +55,12 @@ class EditCompletionService < WasteCarriersEngine::BaseService
       workflow_state
     ].concat(EditRegistration.temp_attributes)
 
+    do_not_copy_relations = %w[conviction_search_result conviction_sign_offs]
+
     copyable_attributes = WasteCarriersEngine::SafeCopyAttributesService.run(
       source_instance: transient_registration,
       target_class: WasteCarriersEngine::Registration,
-      embedded_documents: %w[addresses metaData financeDetails key_people],
-      attributes_to_exclude: do_not_copy_attributes
+      attributes_to_exclude: do_not_copy_attributes.concat(do_not_copy_relations)
     )
 
     registration.write_attributes(copyable_attributes)
