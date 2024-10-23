@@ -25,7 +25,8 @@ RSpec.describe SearchFullnameService do
     let(:term) { "#{first_name} #{last_name}" }
 
     it "matches the expected registration and renewal only" do
-      expect(service[:results]).to contain_exactly(matching_renewal, matching_registration)
+      expect(service[:results].map(&:reg_identifier))
+        .to contain_exactly(matching_renewal.reg_identifier, matching_registration.reg_identifier)
     end
   end
 
@@ -41,7 +42,8 @@ RSpec.describe SearchFullnameService do
     let(:term) { "#{first_name} #{last_name}".upcase }
 
     it "matches the expected registration and renewal only" do
-      expect(service[:results]).to contain_exactly(matching_renewal, matching_registration)
+      expect(service[:results].map(&:reg_identifier))
+        .to contain_exactly(matching_renewal.reg_identifier, matching_registration.reg_identifier)
     end
   end
 
@@ -49,7 +51,8 @@ RSpec.describe SearchFullnameService do
     let(:term) { " #{first_name} #{last_name} " }
 
     it "matches the term without whitespace" do
-      expect(service[:results]).to include(matching_registration)
+      expect(service[:results].map(&:reg_identifier))
+        .to include(matching_renewal.reg_identifier, matching_registration.reg_identifier)
     end
   end
 
@@ -66,7 +69,7 @@ RSpec.describe SearchFullnameService do
 
     context "when there is no match on the registration owner" do
       it "matches the expected registration only" do
-        expect(service[:results]).to contain_exactly(matching_registration)
+        expect(service[:results].map(&:reg_identifier)).to contain_exactly(matching_registration.reg_identifier)
       end
     end
 
