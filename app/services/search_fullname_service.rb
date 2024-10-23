@@ -71,12 +71,11 @@ class SearchFullnameService < BaseSearchService
                    WasteCarriersEngine::NewRegistration,
                    WasteCarriersEngine::RenewingRegistration].include? doc_model
 
-      attributes_to_exclude = %w[fullname key_person key_fullname]
+      attributes_to_exclude = %w[conviction_search_result conviction_sign_offs past_registrations]
 
       copyable_attributes = WasteCarriersEngine::SafeCopyAttributesService.run(
         source_instance: doc,
         target_class: model,
-        embedded_documents: %w[email_history addresses metaData financeDetails key_people],
         attributes_to_exclude:
       )
 
