@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 3f430d291d17b7fa5816ab03312e671cfa502f06
+  revision: 35bcadd946120ae18e623024e2d74657ad7c38b3
   branch: feature/RUBY-3433-wcr-tech-debt-remove-the-devise-and-cancancan-gems-from-wcr-engine
   specs:
     waste_carriers_engine (0.0.1)
