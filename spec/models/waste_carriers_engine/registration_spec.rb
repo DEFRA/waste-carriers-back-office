@@ -90,5 +90,50 @@ module WasteCarriersEngine
         end
       end
     end
+
+    describe "#increment_certificate_version" do
+      let(:user) { create(:user) }
+
+      context "when version is already present" do
+        let(:meta_data) { build(:metaData, certificateVersion: 1, certificateVersionHistory: [{ foo: :bar }]) }
+        let(:registration) { create(:registration, metaData: meta_data) }
+
+        it "increments verson number by 1" do
+          registration.increment_certificate_version(user)
+          expect(registration.metaData.certificate_version).to eq(2)
+        end
+
+        it "updates certificate_version_history" do
+          registration.increment_certificate_version(user)
+          expect(registration.metaData.certificate_version_history.length).to eq 2
+          expect(registration.metaData.certificate_version_history.last[:version]).to eq(2)
+          expect(registration.metaData.certificate_version_history.last[:generated_by]).to eq(user.email)
+          expect(registration.metaData.certificate_version_history.last[:generated_at]).to be_present
+        end
+      end
+
+      context "when version has not been set" do
+        let(:meta_data) { build(:metaDataEmpty) }
+        let(:registration) { create(:registration, metaData: meta_data) }
+
+        # The version must default to 1 for historic registrations created before versioning go-live
+        it "defaults to 1" do
+          expect(meta_data.certificate_version).to eq 1
+        end
+
+        it "keeps the version at 1" do
+          registration.increment_certificate_version(user)
+          expect(registration.metaData.certificate_version).to eq(1)
+        end
+
+        it "updates certificate_version_history" do
+          registration.increment_certificate_version(user)
+          expect(registration.metaData.certificate_version_history.length).to eq 1
+          expect(registration.metaData.certificate_version_history.last[:version]).to eq(1)
+          expect(registration.metaData.certificate_version_history.last[:generated_by]).to eq(user.email)
+          expect(registration.metaData.certificate_version_history.last[:generated_at]).to be_present
+        end
+      end
+    end
   end
 end

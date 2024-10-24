@@ -1,0 +1,35 @@
+<br>
+
+<% if controller_name != 'sessions' %>
+  <p class="govuk-body"><%= link_to "Log in", new_session_path(resource_name) %></p>
+<% end %>
+
+<% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <details class="govuk-details" data-module="govuk-details">
+    <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text"><%= t(".password_reset_summary") %></span>
+    </summary>
+    <div class="govuk-details__text">
+      <%= t(".password_reset_paragraph_1") %> <%= link_to t(".password_reset_link_text"), new_password_path(resource_name) %>.
+    </div>
+  </details>
+
+  <details class="govuk-details" data-module="govuk-details">
+    <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text"><%= t(".unknown_email_summary") %></span>
+    </summary>
+    <div class="govuk-details__text">
+      <%= t(".unknown_email_paragraph_1") %>
+    </div>
+  </details>
+<% end %>
+
+<% if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+  <details class="govuk-details" data-module="govuk-details">
+    <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text"><%= t(".locked_summary") %></span></summary>
+    <div class="govuk-details__text">
+      <%= t(".locked_paragraph_1") %> <%= link_to t(".locked_link_text"), new_unlock_path(resource_name) %>.
+    </div>
+  </details>
+<% end %>

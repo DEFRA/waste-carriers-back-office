@@ -34,4 +34,8 @@ FactoryBot.define do
       status { :REVOKED }
     end
   end
+
+  factory :metaDataEmpty, class: "WasteCarriersEngine::MetaData" do
+    date_registered { Time.current }
+  end
 end

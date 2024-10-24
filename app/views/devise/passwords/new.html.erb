@@ -1,0 +1,22 @@
+<%= render("waste_carriers_engine/shared/back", back_path: new_user_session_path) %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t(".heading") %></h1>
+
+    <p class="govuk-body"><%= t(".paragraph_1") %></p>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <div class="govuk-grid-row">
+        <div class="govuk-form-group govuk-grid-column-one-half">
+          <%= f.label :email, class: "govuk-label"%>
+          <%= f.email_field :email, class: "govuk-input" %>
+        </div>
+      </div>
+
+      <p class="govuk-hint"><%= t(".hint_1") %>.</p>
+
+      <%= f.submit t(".submit"), class: "govuk-button" %>
+    <% end %>
+  </div>
+</div>
