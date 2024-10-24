@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../timed_service_runner"
+
 MINUTE_IN_SECONDS = 60.0
 MAX_REQUESTS_PER_MINUTE = 600
 

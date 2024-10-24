@@ -6,6 +6,7 @@ RSpec.describe "lookups:update" do
 
   before do
     allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:run_ea_areas_job).and_return(true)
+
     allow(TimedServiceRunner).to receive(:run)
 
     # To avoid creating excessive test data, we reduce the default 50 to 8.
@@ -162,13 +163,13 @@ RSpec.describe "lookups:update" do
     context "when only easting is present" do
       let(:easting) { 358_205 }
 
-      it_behaves_like "no addresses in scope"
+      it_behaves_like "includes the address"
     end
 
     context "when only northing is present" do
       let(:northing) { 172_708 }
 
-      it_behaves_like "no addresses in scope"
+      it_behaves_like "includes the address"
     end
 
     context "when easting and northing are nil" do

@@ -6,8 +6,8 @@ module Address
 
     delegate :postcode, to: :address
 
-    def run(reg_identifier:)
-      @registration = WasteCarriersEngine::Registration.find_by(reg_identifier:)
+    def run(registration_id:)
+      @registration = WasteCarriersEngine::Registration.find(registration_id)
       @address = @registration.registered_address
 
       return if address.easting.present? && address.northing.present?
