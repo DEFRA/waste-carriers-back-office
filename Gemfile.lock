@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 35bcadd946120ae18e623024e2d74657ad7c38b3
-  branch: feature/RUBY-3433-wcr-tech-debt-remove-the-devise-and-cancancan-gems-from-wcr-engine
+  revision: 218201b4c23aa460b67632caf70be9b764efb8b2
+  branch: main
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
@@ -209,7 +209,7 @@ GEM
       rubocop-rake
       rubocop-rspec
     defra_ruby_template (5.4.1)
-    defra_ruby_validators (2.6.0)
+    defra_ruby_validators (2.7.0)
       activemodel
       i18n
       matrix
