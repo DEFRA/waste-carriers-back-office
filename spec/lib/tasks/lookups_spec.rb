@@ -22,7 +22,7 @@ RSpec.describe "lookups:update" do
 
     it "includes an address with the expected attributes" do
       expect(TimedServiceRunner).to have_received(:run).with(
-        scope: array_including(an_object_having_attributes(address_attributes)),
+        scope: array_including(registration.id),
         run_for: WasteCarriersBackOffice::Application.config.area_lookup_run_for.to_i,
         service: update_service,
         throttle: 0.1
@@ -31,37 +31,45 @@ RSpec.describe "lookups:update" do
   end
 
   RSpec.shared_examples "inactive registration" do
-    context "when the only registration is inactive" do
-      before do
-        create(:registration, :inactive, addresses: [build(:address, :registered, area: nil, postcode: "AB1 2CD")])
+    before do
+      create(:registration, :inactive, addresses: [build(:address, :registered, area: nil, postcode: "AB1 2CD")])
 
-        task.invoke
-      end
-
-      it_behaves_like "no addresses in scope"
+      task.invoke
     end
 
+    it_behaves_like "no addresses in scope"
   end
 
   RSpec.shared_examples "missing postcode" do
-    context "when the postcode on the only registration is missing" do
-      before do
-        create(:registration, addresses: [build(:address, :registered, area: nil, postcode: nil)])
+    before do
+      create(:registration, addresses: [build(:address, :registered, area: nil, postcode: nil)])
 
-        task.invoke
-      end
-
-      it_behaves_like "no addresses in scope"
+      task.invoke
     end
+
+    it_behaves_like "no addresses in scope"
   end
 
-  RSpec.shared_examples "expected address scope" do |expected_address_count|
+  RSpec.shared_examples "excludes overseas addresses" do
+    let(:address_attributes) { registration.registered_address.attributes.slice(:addresstype, :postcode, :addressLine1, :addressLine2) }
+
+    before do
+      create(:registration, location: "overseas", addresses: [build(:address, :registered, area: nil)])
+      # create(:registration, addresses: [build(:address, :registered, area: nil)])
+
+      task.invoke
+    end
+
+    it_behaves_like "no addresses in scope"
+  end
+
+  RSpec.shared_examples "expected address scope" do |expected_registration_count|
 
     before { task.invoke }
 
-    it "calls the service with the expected number of addresses" do
+    it "calls the service with the expected number of registrations" do
       expect(TimedServiceRunner).to have_received(:run).with(
-        scope: array_with_size(expected_address_count, WasteCarriersEngine::Address),
+        scope: array_with_size(expected_registration_count, WasteCarriersEngine::Address),
         run_for: WasteCarriersBackOffice::Application.config.area_lookup_run_for.to_i,
         service: update_service,
         throttle: 0.1
@@ -70,23 +78,20 @@ RSpec.describe "lookups:update" do
   end
 
   RSpec.shared_examples "limits the number of addresses" do
-    context "with greater than the maximum number of addresses qualifying for selection" do
-      before do
-        registrations = create_list(:registration, 10)
-        registrations.each do |registration|
-          create(:address, :registered, registration: registration, area: nil, easting: nil, postcode: "AB1 2CD")
-        end
-
-        task.invoke
+    before do
+      registrations = create_list(:registration, 10)
+      registrations.each do |registration|
+        create(:address, :registered, registration: registration, area: nil, easting: nil, postcode: "AB1 2CD")
       end
 
-      it_behaves_like "expected address scope", 8
+      task.invoke
     end
 
+    it_behaves_like "expected address scope", 8
   end
 
   RSpec.shared_examples "no addresses in scope" do
-    it_behaves_like "expected address scope", 0
+    it { expect(TimedServiceRunner).not_to have_received(:run) }
   end
 
   # rubocop:disable RSpec/LetSetup
@@ -138,55 +143,61 @@ RSpec.describe "lookups:update" do
     end
 
     it_behaves_like "limits the number of addresses"
+
+    it_behaves_like "excludes overseas addresses"
   end
 
   describe "missing_easting_northings", type: :task do
     let(:task) { Rake::Task["lookups:update:missing_easting_northings"] }
     let(:update_service) { Address::UpdateEastingNorthingService }
 
-    let(:easting) { nil }
-    let(:northing) { nil }
-    let(:area) { nil }
-    let!(:registration) { create(:registration, addresses: [build(:address, :registered, area:, postcode: "AB1 2CD", easting:, northing:)]) }
-
     it_behaves_like "inactive registration"
 
     it_behaves_like "missing postcode"
 
-    context "when easting and northing are present" do
-      let(:easting) { 358_205 }
-      let(:northing) { 172_708 }
-
-      it_behaves_like "no addresses in scope"
-    end
-
-    context "when only easting is present" do
-      let(:easting) { 358_205 }
-
-      it_behaves_like "includes the address"
-    end
-
-    context "when only northing is present" do
-      let(:northing) { 172_708 }
-
-      it_behaves_like "includes the address"
-    end
-
-    context "when easting and northing are nil" do
+    context "with an active registration" do
       let(:easting) { nil }
       let(:northing) { nil }
+      let(:area) { nil }
+      let!(:registration) { create(:registration, addresses: [build(:address, :registered, area:, postcode: "AB1 2CD", easting:, northing:)]) }
 
-      it_behaves_like "includes the address"
+      context "when easting and northing are present" do
+        let(:easting) { 358_205 }
+        let(:northing) { 172_708 }
 
-      # check shared area / easting-northing selection logic
-      context "when area is present" do
-        let(:area) { "BRISTOL" }
+        it_behaves_like "no addresses in scope"
+      end
+
+      context "when only easting is present" do
+        let(:easting) { 358_205 }
 
         it_behaves_like "includes the address"
+      end
+
+      context "when only northing is present" do
+        let(:northing) { 172_708 }
+
+        it_behaves_like "includes the address"
+      end
+
+      context "when easting and northing are nil" do
+        let(:easting) { nil }
+        let(:northing) { nil }
+
+        it_behaves_like "includes the address"
+
+        # check shared area / easting-northing selection logic
+        context "when area is present" do
+          let(:area) { "BRISTOL" }
+
+          it_behaves_like "includes the address"
+        end
       end
     end
 
     it_behaves_like "limits the number of addresses"
+
+    it_behaves_like "excludes overseas addresses"
   end
   # rubocop:enable RSpec/LetSetup
 end

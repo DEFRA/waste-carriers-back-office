@@ -33,6 +33,7 @@ def run_service(address_match_clause, service)
   ).pluck(:_id)
 
   puts "Updating #{registrations_scope.count} registrations" unless Rails.env.test?
+  return if registrations_scope.empty?
 
   throttle = MINUTE_IN_SECONDS / MAX_REQUESTS_PER_MINUTE
 
@@ -47,7 +48,11 @@ end
 def scope_pipeline(address_limit, address_match_clause)
   [
     # Include active registrations with a registered address
-    { "$match": { "metaData.status": "ACTIVE", "addresses.addressType": "REGISTERED" } },
+    { "$match": {
+      "metaData.status": "ACTIVE",
+      "addresses.addressType": "REGISTERED",
+      location: { "$ne": "overseas" }
+    } },
     #  Unwind to one document per address element...
     { "$unwind": "$addresses" },
     #  ... and include only registered addresses without an area and with a postcode
