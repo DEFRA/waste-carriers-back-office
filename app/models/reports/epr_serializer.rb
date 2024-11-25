@@ -40,7 +40,7 @@ module Reports
                       .active_and_expired
                       .lower_tier_or_unexpired
 
-      # Save these for de-duplication purposes
+      # Save these for de-duplication purposes in the EprRenewalSerializer subclass
       @registration_ids = registrations.pluck(:reg_identifier).to_set
 
       registrations

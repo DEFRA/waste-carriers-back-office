@@ -19,6 +19,16 @@ module Reports
     def each_data
       scope.each do |object|
         yield parse_object(object)
+      rescue StandardError => e
+        # Handle parsing errors here so that the serializer can continue with the next object.
+        message = if object.respond_to?(:reg_identifier)
+                    "Error mapping object with reg_identifier \"#{object.reg_identifier}\" to CSV: #{e}"
+                  else
+                    "Error writing CSV file to #{@path}: #{e}"
+                  end
+
+        Rails.logger.error message
+        Airbrake.notify(e, message:, csv_file_path: @path)
       end
     end
   end
