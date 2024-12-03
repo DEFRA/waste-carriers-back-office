@@ -7,7 +7,8 @@ namespace :email do
       task send: :environment do
         return unless WasteCarriersEngine::FeatureToggle.active?(:renewal_reminders)
 
-        FirstRenewalReminderService.run
+        registrations_count = FirstRenewalReminderService.run
+        StdoutLogger.log "Sent #{registrations_count} first renewal reminder(s)"
       end
     end
 
@@ -16,7 +17,8 @@ namespace :email do
       task send: :environment do
         return unless WasteCarriersEngine::FeatureToggle.active?(:renewal_reminders)
 
-        SecondRenewalReminderService.run
+        registrations_count = SecondRenewalReminderService.run
+        StdoutLogger.log "Sent #{registrations_count} second renewal reminder(s)"
       end
     end
   end
