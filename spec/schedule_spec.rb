@@ -96,7 +96,7 @@ RSpec.describe "Whenever::Test::Shedule" do
   end
 
   it "picks up the daily missing easting/northing task run frequency and time" do
-    job_details = schedule.jobs[:rake_and_format].find { |h| h[:task] == "lookups:update:missing_easting_northing" }
+    job_details = schedule.jobs[:rake_and_format].find { |h| h[:task] == "lookups:update:missing_easting_northings" }
 
     expect(job_details[:every][0]).to eq(:day)
     expect(job_details[:every][1][:at]).to eq("01:05")
