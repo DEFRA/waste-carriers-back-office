@@ -12,6 +12,7 @@ namespace :notify do
                                                        .from_now
 
       registrations = Notify::BulkDigitalRenewalNotificationService.run(expires_on)
+      StdoutLogger.log "Sent #{registrations.count} digital renewal notification(s)"
 
       if registrations.any?
         Rails.logger.info(
@@ -33,6 +34,7 @@ namespace :notify do
                                                        .from_now
 
       registrations = Notify::BulkAdRenewalLettersService.run(expires_on)
+      StdoutLogger.log "Sent #{registrations.count} AD renewal letter(s)"
 
       if registrations.any?
         Rails.logger.info "Notify AD renewal letters sent for #{registrations.map(&:reg_identifier).join(', ')}"
