@@ -14,6 +14,7 @@ RSpec.describe "Email task", type: :task do
   describe "email:renew_reminder:first:send" do
     before do
       allow(FirstRenewalReminderService).to receive(:run).and_return(registrations_count)
+      subject.reenable
     end
 
     it "runs without error" do
@@ -29,6 +30,7 @@ RSpec.describe "Email task", type: :task do
   describe "email:renew_reminder:second:send" do
     before do
       allow(SecondRenewalReminderService).to receive(:run).and_return(registrations_count)
+      subject.reenable
     end
 
     it "runs without error" do
