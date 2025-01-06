@@ -28,13 +28,19 @@ RSpec.describe "Refresh companies house" do
     let(:user) { create(:user) }
     let(:new_registered_name) { Faker::Company.name }
     let(:registration) { create(:registration, registered_company_name: old_registered_name) }
+    let(:companies_house_api) { instance_double(DefraRuby::CompaniesHouse::API) }
+    let(:companies_house_api_response) do
+      {
+        company_name: Faker::Company.name,
+        registered_office_address: ["10 Downing St", "Horizon House", "Bristol", "BS1 5AH"]
+      }
+    end
 
     before do
+      allow(DefraRuby::CompaniesHouse::API).to receive(:new).and_return(companies_house_api)
+      allow(companies_house_api).to receive(:run).and_return(companies_house_api_response)
+
       sign_in(user)
-      stub_request(:get, "#{Rails.configuration.companies_house_host}#{registration.company_no}").to_return(
-        status: 200,
-        body: { company_name: new_registered_name }.to_json
-      )
     end
 
     context "with no previous companies house name" do
