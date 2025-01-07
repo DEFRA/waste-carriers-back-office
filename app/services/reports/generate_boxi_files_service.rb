@@ -42,7 +42,7 @@ module Reports
           serializer.add_entries_for(registration, uid)
         end
 
-        next unless registration&.finance_details&.orders&.any?
+        next unless registration.finance_details&.orders&.any?
 
         process_orders(registration, uid, order_uid)
       end
