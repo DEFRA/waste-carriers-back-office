@@ -23,5 +23,12 @@ RSpec.describe ExpiredRegistrationsService do
       expect(active_registration).not_to be_expired
       expect(lower_tier_registration).not_to be_expired
     end
+
+    it "returns the number of registrations that were expired" do
+      create(:registration, :active, expires_on: Time.zone.now.beginning_of_day + 4.hours)
+      create(:registration, :active, expires_on: Time.zone.now.end_of_day + 4.hours)
+
+      expect(described_class.run).to eq(1)
+    end
   end
 end

@@ -8,6 +8,8 @@ class RenewalReminderServiceBase < WasteCarriersEngine::BaseService
       Airbrake.notify e, registration: registration.reg_identifier
       Rails.logger.error "Failed to send first renewal email for registration #{registration.reg_identifier}"
     end
+
+    expiring_registrations.size
   end
 
   private

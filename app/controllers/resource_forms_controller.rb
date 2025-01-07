@@ -48,7 +48,7 @@ class ResourceFormsController < ApplicationController
   end
 
   def authorize_if_required
-    send(:authorize_user) if defined?(:authorize_user)
+    send(:authorize_user)
   end
 
   def renew_or_complete_if_possible_and_redirect

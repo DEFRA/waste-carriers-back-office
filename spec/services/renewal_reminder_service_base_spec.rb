@@ -45,6 +45,13 @@ RSpec.describe RenewalReminderServiceBase do
       end
     end
 
+    it "returns the number of registrations that were sent emails" do
+      create(:registration, expires_on: 3.days.from_now)
+      create(:registration, expires_on: 5.days.from_now)
+
+      expect(test_class.run).to eq(1)
+    end
+
     context "when an error occurs" do
       before do
         create(:registration, expires_on: 3.days.from_now)
