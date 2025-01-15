@@ -2,7 +2,29 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.29.0...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.30.0...HEAD)
+
+**Fixed bugs:**
+
+- Prevent individual object mapping errors from halting serializers [\#2069](https://github.com/DEFRA/waste-carriers-back-office/pull/2069) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `e0f5ca9` to `1c54e68` [\#2083](https://github.com/DEFRA/waste-carriers-back-office/pull/2083) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `c02d3a1` to `e0f5ca9` [\#2082](https://github.com/DEFRA/waste-carriers-back-office/pull/2082) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Chore/ruby 3441 companies house gem [\#2080](https://github.com/DEFRA/waste-carriers-back-office/pull/2080) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- RUBY-3493 : add logging to permanent scheduled jobs [\#2071](https://github.com/DEFRA/waste-carriers-back-office/pull/2071) ([brujeo](https://github.com/brujeo))
+- Bump rails-html-sanitizer from 1.6.0 to 1.6.1 [\#2070](https://github.com/DEFRA/waste-carriers-back-office/pull/2070) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 6.4.3 to 6.5.0 [\#2068](https://github.com/DEFRA/waste-carriers-back-office/pull/2068) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 7.0.1 to 7.1.0 [\#2064](https://github.com/DEFRA/waste-carriers-back-office/pull/2064) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump net-imap from 0.4.17 to 0.4.18 [\#2063](https://github.com/DEFRA/waste-carriers-back-office/pull/2063) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump govuk\_design\_system\_formbuilder from 5.7.0 to 5.7.1 [\#2062](https://github.com/DEFRA/waste-carriers-back-office/pull/2062) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rexml from 3.3.8 to 3.3.9 [\#2058](https://github.com/DEFRA/waste-carriers-back-office/pull/2058) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump factory\_bot\_rails from 6.4.3 to 6.4.4 [\#2054](https://github.com/DEFRA/waste-carriers-back-office/pull/2054) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.30.0](https://github.com/defra/waste-carriers-back-office/tree/v1.30.0) (2024-11-05)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.29.0...v1.30.0)
 
 **Implemented enhancements:**
 
@@ -19,6 +41,7 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v1.30.0 [\#2060](https://github.com/DEFRA/waste-carriers-back-office/pull/2060) ([jjromeo](https://github.com/jjromeo))
 - \[RUBY-3387\] Update SafeCopyAttributesService to match new api [\#2051](https://github.com/DEFRA/waste-carriers-back-office/pull/2051) ([jjromeo](https://github.com/jjromeo))
 - RUBY-3433: Tech Debt : remove devise and cancancan gems + remove front-office users from wcr engine [\#2049](https://github.com/DEFRA/waste-carriers-back-office/pull/2049) ([brujeo](https://github.com/brujeo))
 - Bump waste\_carriers\_engine from `ea61f4d` to `5f30b89` [\#2046](https://github.com/DEFRA/waste-carriers-back-office/pull/2046) ([dependabot[bot]](https://github.com/apps/dependabot))
