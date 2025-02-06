@@ -2,7 +2,18 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.30.0...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.30.1...HEAD)
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `1c54e68` to `9b86878` [\#2096](https://github.com/DEFRA/waste-carriers-back-office/pull/2096) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 6.5.0 to 6.6.0 [\#2090](https://github.com/DEFRA/waste-carriers-back-office/pull/2090) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-rspec from 3.3.0 to 3.4.0 [\#2088](https://github.com/DEFRA/waste-carriers-back-office/pull/2088) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump govuk\_design\_system\_formbuilder from 5.7.1 to 5.8.0 [\#2084](https://github.com/DEFRA/waste-carriers-back-office/pull/2084) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.30.1](https://github.com/defra/waste-carriers-back-office/tree/v1.30.1) (2025-01-15)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.30.0...v1.30.1)
 
 **Fixed bugs:**
 
@@ -10,6 +21,7 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG [\#2085](https://github.com/DEFRA/waste-carriers-back-office/pull/2085) ([jjromeo](https://github.com/jjromeo))
 - Bump waste\_carriers\_engine from `e0f5ca9` to `1c54e68` [\#2083](https://github.com/DEFRA/waste-carriers-back-office/pull/2083) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump waste\_carriers\_engine from `c02d3a1` to `e0f5ca9` [\#2082](https://github.com/DEFRA/waste-carriers-back-office/pull/2082) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Chore/ruby 3441 companies house gem [\#2080](https://github.com/DEFRA/waste-carriers-back-office/pull/2080) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
