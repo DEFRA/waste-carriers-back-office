@@ -2,6 +2,7 @@
 
 require File.expand_path("boot", __dir__)
 
+require "logger"
 require "active_model/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
