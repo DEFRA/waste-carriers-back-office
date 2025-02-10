@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+
+require 'logger'
+
 begin
   load File.expand_path('../spring', __FILE__)
 rescue LoadError => e
