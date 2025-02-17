@@ -2,10 +2,25 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.30.1...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.30.2...HEAD)
 
 **Merged pull requests:**
 
+- Fix/ruby 3459 webhook payment not found [\#2104](https://github.com/DEFRA/waste-carriers-back-office/pull/2104) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Bump waste\_carriers\_engine from `9b86878` to `abfc86d` [\#2101](https://github.com/DEFRA/waste-carriers-back-office/pull/2101) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Fix logger issue for rails console sessions [\#2100](https://github.com/DEFRA/waste-carriers-back-office/pull/2100) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Bump net-imap from 0.4.18 to 0.4.19 [\#2099](https://github.com/DEFRA/waste-carriers-back-office/pull/2099) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 7.1.0 to 7.1.1 [\#2095](https://github.com/DEFRA/waste-carriers-back-office/pull/2095) ([dependabot[bot]](https://github.com/apps/dependabot))
+- bump webmock from 3.24.0 to 3.25.0 [\#2093](https://github.com/DEFRA/waste-carriers-back-office/pull/2093) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-rails from 2.28.0 to 2.29.1 [\#2089](https://github.com/DEFRA/waste-carriers-back-office/pull/2089) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.30.2](https://github.com/defra/waste-carriers-back-office/tree/v1.30.2) (2025-02-06)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.30.1...v1.30.2)
+
+**Merged pull requests:**
+
+- Version 1.30.2 [\#2097](https://github.com/DEFRA/waste-carriers-back-office/pull/2097) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - Bump waste\_carriers\_engine from `1c54e68` to `9b86878` [\#2096](https://github.com/DEFRA/waste-carriers-back-office/pull/2096) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump puma from 6.5.0 to 6.6.0 [\#2090](https://github.com/DEFRA/waste-carriers-back-office/pull/2090) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rubocop-rspec from 3.3.0 to 3.4.0 [\#2088](https://github.com/DEFRA/waste-carriers-back-office/pull/2088) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -1296,7 +1311,7 @@
 
 ## [v1.9.0](https://github.com/defra/waste-carriers-back-office/tree/v1.9.0) (2020-06-18)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.3...v1.9.0)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.2...v1.9.0)
 
 **Implemented enhancements:**
 
@@ -1409,13 +1424,13 @@
 - Bump waste\_carriers\_engine from `46ec95b` to `336551e` [\#818](https://github.com/DEFRA/waste-carriers-back-office/pull/818) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump waste\_carriers\_engine from `2799dbf` to `46ec95b` [\#813](https://github.com/DEFRA/waste-carriers-back-office/pull/813) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
-## [v1.8.3](https://github.com/defra/waste-carriers-back-office/tree/v1.8.3) (2020-05-12)
-
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.2...v1.8.3)
-
 ## [v1.8.2](https://github.com/defra/waste-carriers-back-office/tree/v1.8.2) (2020-05-12)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.1...v1.8.2)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.3...v1.8.2)
+
+## [v1.8.3](https://github.com/defra/waste-carriers-back-office/tree/v1.8.3) (2020-05-12)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.1...v1.8.3)
 
 ## [v1.8.1](https://github.com/defra/waste-carriers-back-office/tree/v1.8.1) (2020-04-17)
 
