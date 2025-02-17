@@ -16,7 +16,7 @@ class CeaseOrRevokeFormsController < BackOfficeFormsController
     params.fetch(:cease_or_revoke_form).permit(metaData: %i[status revoked_reason])
   end
 
-  # rubocop:disable Naming/MemoizedInstanceVariableName - we're not just memoizing here
+  # rubocop:disable Naming/MemoizedInstanceVariableName -- we're not just memoizing here
   def find_or_initialize_transient_registration(token)
     @transient_registration ||= CeasedOrRevokedRegistration.where(reg_identifier: token).first ||
                                 CeasedOrRevokedRegistration.where(token: token).first ||

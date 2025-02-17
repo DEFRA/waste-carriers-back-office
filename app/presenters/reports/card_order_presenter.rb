@@ -3,6 +3,8 @@
 module Reports
   class CardOrderPresenter < WasteCarriersEngine::BasePresenter
 
+    delegate :reg_identifier, :company_name, :registration_type, to: :@registration
+
     DATE_FORMAT = "%d/%m/%Y"
 
     def initialize(model)
@@ -25,10 +27,6 @@ module Reports
       super
     end
 
-    def reg_identifier
-      @registration.reg_identifier
-    end
-
     def date_of_issue
       @order_item_log.activated_at.strftime(DATE_FORMAT)
     end
@@ -40,14 +38,6 @@ module Reports
       else
         @registration.registered_company_name.presence || @registration.company_name
       end
-    end
-
-    def company_name
-      @registration.company_name
-    end
-
-    def registration_type
-      @registration.registration_type
     end
 
     def registration_date

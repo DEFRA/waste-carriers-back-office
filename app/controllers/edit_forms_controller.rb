@@ -50,7 +50,7 @@ class EditFormsController < BackOfficeFormsController
 
   private
 
-  # rubocop:disable Naming/MemoizedInstanceVariableName - we're not just memoizing here
+  # rubocop:disable Naming/MemoizedInstanceVariableName -- we're not just memoizing here
   def find_or_initialize_transient_registration(token)
     @transient_registration ||= EditRegistration.where(reg_identifier: token).first ||
                                 EditRegistration.where(token: token).first ||
