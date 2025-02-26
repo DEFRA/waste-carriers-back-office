@@ -2,10 +2,19 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.30.2...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.30.3...HEAD)
 
 **Merged pull requests:**
 
+- Bump waste\_carriers\_engine from `f44eeac` to `5eda686` [\#2109](https://github.com/DEFRA/waste-carriers-back-office/pull/2109) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.30.3](https://github.com/defra/waste-carriers-back-office/tree/v1.30.3) (2025-02-17)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.30.2...v1.30.3)
+
+**Merged pull requests:**
+
+- Release v1.30.3 [\#2105](https://github.com/DEFRA/waste-carriers-back-office/pull/2105) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - Fix/ruby 3459 webhook payment not found [\#2104](https://github.com/DEFRA/waste-carriers-back-office/pull/2104) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - Bump waste\_carriers\_engine from `9b86878` to `abfc86d` [\#2101](https://github.com/DEFRA/waste-carriers-back-office/pull/2101) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Fix logger issue for rails console sessions [\#2100](https://github.com/DEFRA/waste-carriers-back-office/pull/2100) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
