@@ -7,8 +7,7 @@ ruby "3.2.2"
 gem "mongoid"
 
 gem "mongo_session_store"
-# Bundle edge Rails instead: gem "rails", github: "rails/rails"
-gem "rails", "~> 7.0"
+
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 6.0"
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -123,7 +122,6 @@ group :development do
   gem "spring"
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem "web-console"
-  # gem "webrick"
 end
 
 group :test do
