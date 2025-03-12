@@ -2,10 +2,20 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.30.3...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.31.0...HEAD)
 
 **Merged pull requests:**
 
+- Chore/ruby 3700 rails 7 2 [\#2120](https://github.com/DEFRA/waste-carriers-back-office/pull/2120) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Chore/ruby 3700 rails 7 2 [\#2118](https://github.com/DEFRA/waste-carriers-back-office/pull/2118) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+
+## [v1.31.0](https://github.com/defra/waste-carriers-back-office/tree/v1.31.0) (2025-02-26)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.30.3...v1.31.0)
+
+**Merged pull requests:**
+
+- Version 1.31.0 [\#2110](https://github.com/DEFRA/waste-carriers-back-office/pull/2110) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - Bump waste\_carriers\_engine from `f44eeac` to `5eda686` [\#2109](https://github.com/DEFRA/waste-carriers-back-office/pull/2109) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v1.30.3](https://github.com/defra/waste-carriers-back-office/tree/v1.30.3) (2025-02-17)
