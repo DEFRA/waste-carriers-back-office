@@ -20,7 +20,7 @@ en:
   activemodel:
     errors:
       models:
-        waste_carriers_engine/cease_or_revoke_form:
+        cease_or_revoke_form:
           attributes:
             status:
               presence: "Select revoke or cease"

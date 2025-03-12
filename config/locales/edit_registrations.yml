@@ -2,7 +2,7 @@ en:
   activemodel:
     errors:
       models:
-        ceased_or_revoked_registration:
+        edit_registration:
           attributes:
             reg_identifier:
               invalid_format: "The registration ID is not in a valid format"
