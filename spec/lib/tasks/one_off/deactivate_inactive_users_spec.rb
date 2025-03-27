@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "one_off:deactivate_inactive_users", type: :rake do
+RSpec.describe "one_off:deactivate_inactive_users", type: :task do
   include_context "rake"
   let(:rake_task) { Rake::Task["one_off:deactivate_inactive_users"] }
   let(:active_user) { create(:user, active: true, role:) }

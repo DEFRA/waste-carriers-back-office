@@ -6,9 +6,9 @@ namespace :one_off do
     dry_run = args[:dry_run].to_s.downcase == "dry_run"
 
     users_to_deactivate = User.where(active: true)
-      .nin(role: %w[agency_super developer])
-      .any_of({ last_sign_in_at: { "$lt" => 3.months.ago } },
-              { last_sign_in_at: nil })
+                              .nin(role: %w[agency_super developer])
+                              .any_of({ last_sign_in_at: { "$lt" => 3.months.ago } },
+                                      { last_sign_in_at: nil })
 
     users_to_deactivate.each do |user|
       if dry_run
