@@ -10,9 +10,9 @@ development:
 test:
   clients:
     default:
-      uri: <%= ENV['WCRS_TEST_REGSDB_URI'] || 'mongodb://mongoUser:password1234@127.0.0.1:27017,127.0.0.1:27018,127.0.0.1:27019/waste-carriers-test?replicaSet=wcrepl' %>
+      uri: <%= ENV['WCRS_TEST_REGSDB_URI'] || 'mongodb://mongoUser:password1234@127.0.0.1:27017/waste-carriers-test' %>
     users:
-      uri: <%= ENV['WCRS_TEST_USERSDB_URI'] || 'mongodb://mongoUser:password1234@127.0.0.1:27017,127.0.0.1:27018,127.0.0.1:27019/waste-carriers-users-test?replicaSet=wcrepl' %>
+      uri: <%= ENV['WCRS_TEST_USERSDB_URI'] || 'mongodb://mongoUser:password1234@127.0.0.1:27017/waste-carriers-users-test' %>
 production:
   clients:
     default:

@@ -5,7 +5,7 @@ on: push
 jobs:
   build:
     # You must use a Linux environment when using service containers or container jobs
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     env:
       WCRS_REGISTRATION_EXPIRES_AFTER: 3
       WCRS_REGISTRATION_RENEWAL_WINDOW: 3
@@ -49,8 +49,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install xvfb -y
           sudo apt-get install wkhtmltopdf -y
-          sudo apt-get install -qq python python3-pip
-          sudo pip3 install mtools[mlaunch]
 
       # We don't have to specify the ruby version, or grab it from .ruby-verion. This action supports reading the
       # version from .ruby-version itself
@@ -59,9 +57,24 @@ jobs:
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
+      # Install MongoDB as per https://www.mongodb.com/community/forums/t/installing-mongodb-over-ubuntu-22-04/159931
+      - name: Install mongosh
+        run: |
+          sudo apt-get install gnupg
+          wget -qO- https://www.mongodb.org/static/pgp/server-7.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-7.0.asc
+          echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+          sudo apt-get update
+          sudo apt-get install -y mongodb-mongosh
+
+      - name: Start MongoDB in single node form and create admin user
+        uses: supercharge/mongodb-github-action@1.12.0
+        with:
+          mongodb-version: '7.0'
+          mongodb-username: mongoAdmin
+          mongodb-password: password1234
+
       - name: Set up databases
         run: |
-          mlaunch --replicaset --name wcrepl --auth --username mongoAdmin --password password1234
           mongo "mongodb://mongoAdmin:password1234@localhost:27017,localhost:27018,localhost:27019/waste-carriers-test?authSource=admin&replicaSet=wcrepl" --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
           mongo "mongodb://mongoAdmin:password1234@localhost:27017,localhost:27018,localhost:27019/waste-carriers-users-test?authSource=admin&replicaSet=wcrepl" --eval 'db.createUser({user:"mongoUser", pwd:"password1234", roles:["readWrite", "dbAdmin", "userAdmin"]})'
 
