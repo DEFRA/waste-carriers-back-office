@@ -2,10 +2,20 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.31.0...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.31.1...HEAD)
 
 **Merged pull requests:**
 
+- Single node mongodb in test env [\#2132](https://github.com/DEFRA/waste-carriers-back-office/pull/2132) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- RUBY 3494 wcr deactivation of back office users based upon last log in time [\#2126](https://github.com/DEFRA/waste-carriers-back-office/pull/2126) ([jjromeo](https://github.com/jjromeo))
+
+## [v1.31.1](https://github.com/defra/waste-carriers-back-office/tree/v1.31.1) (2025-03-12)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.31.0...v1.31.1)
+
+**Merged pull requests:**
+
+- Update CHANGELOG [\#2121](https://github.com/DEFRA/waste-carriers-back-office/pull/2121) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - Chore/ruby 3700 rails 7 2 [\#2120](https://github.com/DEFRA/waste-carriers-back-office/pull/2120) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - Chore/ruby 3700 rails 7 2 [\#2118](https://github.com/DEFRA/waste-carriers-back-office/pull/2118) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 
