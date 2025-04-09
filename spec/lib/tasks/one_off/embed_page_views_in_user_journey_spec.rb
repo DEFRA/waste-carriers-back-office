@@ -29,36 +29,36 @@ RSpec.describe "one_off:embed_page_views_in_user_journey", type: :task do
     rake_task.reenable
   end
 
-  # 2025-04-09: Temporarily exclude spec while rspec runs against MongoDB in single node mode
+  it "runs without error", pending: "reintroduction of cluster mode in test env" do
+    expect { rake_task.invoke }.not_to raise_error
+  end
 
-  xit { expect { rake_task.invoke }.not_to raise_error }
-
-  xit "removes all documents from the page_view collection" do
+  it "removes all documents from the page_view collection", pending: "reintroduction of cluster mode in test env" do
     expect { rake_task.invoke }.to change(collection, :count_documents).to(0)
   end
 
-  xit "embeds the page_views in the user_journeys" do
+  it "embeds the page_views in the user_journeys", pending: "reintroduction of cluster mode in test env" do
     rake_task.invoke
 
     expect(journey_a.reload.page_views.count).to eq 2
     expect(journey_b.reload.page_views.count).to eq 2
   end
 
-  xit "copies the page attribute correctly" do
+  it "copies the page attribute correctly", pending: "reintroduction of cluster mode in test env" do
     rake_task.invoke
 
     expect(journey_a.reload.page_views.pluck(:page)).to eq %w[start_form location_form]
     expect(journey_b.reload.page_views.pluck(:page)).to eq %w[x_form y_form]
   end
 
-  xit "copies the time attribute correctly" do
+  it "copies the time attribute correctly", pending: "reintroduction of cluster mode in test env" do
     rake_task.invoke
 
     expect(journey_a.reload.page_views.pluck(:time).map(&:to_i)).to eq [time_a_one.to_i, time_a_two.to_i]
     expect(journey_b.reload.page_views.pluck(:time).map(&:to_i)).to eq [time_b_one.to_i, time_b_two.to_i]
   end
 
-  xit "copies the route attribute correctly" do
+  it "copies the route attribute correctly", pending: "reintroduction of cluster mode in test env" do
     rake_task.invoke
 
     expect(journey_a.reload.page_views.pluck(:route)).to eq %w[DIGITAL DIGITAL]
