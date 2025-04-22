@@ -49,6 +49,10 @@ The test suite is written in RSpec.
 
 To run all the tests, use `bundle exec rspec`
 
+## Debugging
+
+Add breakpoints with `remote_byebug` and run `./bin/byebug` from *within your vagrant box* to start a session.
+
 ## Contributing to this project
 
 If you have an idea you'd like to contribute please log an issue.
