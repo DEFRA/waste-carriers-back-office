@@ -8,7 +8,7 @@ RSpec.describe EditBankTransferForm do
   describe "#workflow_state" do
     context "with :payment_summary_form state transitions" do
       context "with :next transition" do
-        include_examples "has next transition", next_state: "edit_complete_form"
+        it_behaves_like "has next transition", next_state: "edit_complete_form"
       end
     end
   end

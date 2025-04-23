@@ -11,13 +11,13 @@ RSpec.describe CopyCardsPaymentForm do
         context "when the method is paying by card" do
           before { registration.temp_payment_method = "card" }
 
-          include_examples "has next transition", next_state: "govpay_form"
+          it_behaves_like "has next transition", next_state: "govpay_form"
         end
 
         context "when the method is not paying by card" do
           before { registration.temp_payment_method = "bank_transfer" }
 
-          include_examples "has next transition", next_state: "copy_cards_bank_transfer_form"
+          it_behaves_like "has next transition", next_state: "copy_cards_bank_transfer_form"
         end
       end
     end
