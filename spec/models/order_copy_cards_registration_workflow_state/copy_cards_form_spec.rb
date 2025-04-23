@@ -8,7 +8,7 @@ RSpec.describe CopyCardsForm do
   describe "#workflow_state" do
     context "with :copy_cards_form state transitions" do
       context "with :next transition" do
-        include_examples "has next transition", next_state: "copy_cards_payment_form"
+        it_behaves_like "has next transition", next_state: "copy_cards_payment_form"
       end
     end
   end

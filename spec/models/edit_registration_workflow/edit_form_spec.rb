@@ -67,7 +67,7 @@ RSpec.describe EditForm do
         end
 
         context "with :next transition" do
-          include_examples "has next transition", next_state: "declaration_form"
+          it_behaves_like "has next transition", next_state: "declaration_form"
         end
       end
     end
