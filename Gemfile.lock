@@ -206,7 +206,7 @@ GEM
       devise (>= 4.9)
       rails
       sprockets-rails
-    defra_ruby_govpay (0.2.5)
+    defra_ruby_govpay (0.2.6)
       rest-client (~> 2.1)
     defra_ruby_mocks (5.0.0)
       defra_ruby_aws (~> 0.5)
@@ -349,7 +349,7 @@ GEM
     mime-types (3.6.2)
       logger
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2025.0402)
+    mime-types-data (3.2025.0422)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
     minitest (5.25.5)
