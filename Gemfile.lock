@@ -1,7 +1,15 @@
 GIT
+  remote: https://github.com/DEFRA/defra-ruby-govpay
+  revision: ffda72c32a8efd5c17b7abd8d01f687812a0e5d9
+  branch: RUBY-3757-wcr-tech-move-govpay-webhook-handling-to-the-govpay-gem
+  specs:
+    defra_ruby_govpay (0.2.6)
+      rest-client (~> 2.1)
+
+GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: ff1824bf29ff7179420b481aa6324b291a69d168
-  branch: main
+  revision: d06b5a48e1f21a142f10ffaf97fa15468407e59d
+  branch: RUBY-3757-wcr-tech-move-govpay-webhook-handling-to-the-govpay-gem
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
@@ -206,8 +214,6 @@ GEM
       devise (>= 4.9)
       rails
       sprockets-rails
-    defra_ruby_govpay (0.2.6)
-      rest-client (~> 2.1)
     defra_ruby_mocks (5.0.0)
       defra_ruby_aws (~> 0.5)
       rails (~> 7.0)
@@ -398,7 +404,7 @@ GEM
       rack (>= 1.6.13)
       rackup (>= 1.0.1)
       rake (>= 12.3.3)
-    phonelib (0.10.7)
+    phonelib (0.10.8)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -640,6 +646,7 @@ DEPENDENCIES
   defra_ruby_area
   defra_ruby_aws
   defra_ruby_features
+  defra_ruby_govpay!
   defra_ruby_mocks
   defra_ruby_storm
   defra_ruby_style

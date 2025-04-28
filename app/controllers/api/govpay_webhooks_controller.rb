@@ -7,7 +7,7 @@ module Api
     def signatures
       payload = request.body.read
 
-      signatures = WasteCarriersEngine::GovpayPaymentWebhookSignatureService.run(body: payload)
+      signatures = DefraRubyGovpay::GovpayWebhookSignatureService.run(body: payload)
 
       render json: signatures
     end
