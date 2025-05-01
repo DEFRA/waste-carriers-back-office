@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: d06b5a48e1f21a142f10ffaf97fa15468407e59d
+  revision: f1adcde8af16062d14095b093c7baabd0906859b
   branch: RUBY-3757-wcr-tech-move-govpay-webhook-handling-to-the-govpay-gem
   specs:
     waste_carriers_engine (0.0.1)
@@ -206,7 +206,7 @@ GEM
       devise (>= 4.9)
       rails
       sprockets-rails
-    defra_ruby_govpay (0.2.7)
+    defra_ruby_govpay (1.0.0)
       rest-client (~> 2.1)
     defra_ruby_mocks (5.0.0)
       defra_ruby_aws (~> 0.5)
@@ -349,7 +349,7 @@ GEM
     mime-types (3.6.2)
       logger
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2025.0422)
+    mime-types-data (3.2025.0429)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
     minitest (5.25.5)
