@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
   revision: f1adcde8af16062d14095b093c7baabd0906859b
-  branch: RUBY-3757-wcr-tech-move-govpay-webhook-handling-to-the-govpay-gem
+  branch: main
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
