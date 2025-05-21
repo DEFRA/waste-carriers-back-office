@@ -57,7 +57,11 @@ gem "defra_ruby_aws"
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",
-    branch: "main"
+    branch: "chore/RUBY-3754_debug_govpay_timeout"
+
+gem "defra_ruby_govpay",
+    git: "https://github.com/DEFRA/defra-ruby-govpay",
+    branch: "chore/RUBY-3754_debug_govpay_timeout"
 
 # Use the Defra Ruby Features gem to allow users with the correct permissions to
 # manage feature toggle (create / update / delete) from the back-office.
