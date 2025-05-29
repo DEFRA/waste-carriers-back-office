@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/defra-ruby-govpay
-  revision: 7d8eb0e6dcc51f19d0c9d31c4488c12f9b23dcfb
+  revision: aeb9abb08bbf05a4456a7de991b20896308df814
   branch: chore/RUBY-3754_debug_govpay_timeout
   specs:
     defra_ruby_govpay (1.0.0)
@@ -153,8 +153,8 @@ GEM
     aws-eventstream (1.3.2)
     aws-healthcheck (2.0.0)
       railties (>= 3.0)
-    aws-partitions (1.1107.0)
-    aws-sdk-core (3.224.0)
+    aws-partitions (1.1108.0)
+    aws-sdk-core (3.224.1)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
       aws-sigv4 (~> 1.9)
@@ -164,8 +164,8 @@ GEM
     aws-sdk-kms (1.101.0)
       aws-sdk-core (~> 3, >= 3.216.0)
       aws-sigv4 (~> 1.5)
-    aws-sdk-s3 (1.186.1)
-      aws-sdk-core (~> 3, >= 3.216.0)
+    aws-sdk-s3 (1.187.0)
+      aws-sdk-core (~> 3, >= 3.224.1)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.5)
     aws-sigv4 (1.11.0)
@@ -364,7 +364,7 @@ GEM
     mime-types (3.7.0)
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
-    mime-types-data (3.2025.0520)
+    mime-types-data (3.2025.0527)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
     minitest (5.25.5)
