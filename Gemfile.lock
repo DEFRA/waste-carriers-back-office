@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/DEFRA/defra-ruby-mocks
-  revision: 2fe5eff091816cd5f333dda1772a84e6de91f0fe
+  revision: b2e690ec3296dd84ac129561fba51168dbb21c68
   branch: chore/RUBY-3754_debug_govpay_timeout
   specs:
     defra_ruby_mocks (5.1.3)
