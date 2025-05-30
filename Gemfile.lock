@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/DEFRA/defra-ruby-mocks
-  revision: b2e690ec3296dd84ac129561fba51168dbb21c68
+  revision: d23f2434182ff67ec7d314d2af942e10c5537c95
   branch: chore/RUBY-3754_debug_govpay_timeout
   specs:
     defra_ruby_mocks (5.1.3)
@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: c01fd63c7354d468c83ed72c2d6ff378076c3f68
+  revision: 2b69a9a14023152d1f322e27828ead94c32557a6
   branch: chore/RUBY-3754_debug_govpay_timeout
   specs:
     waste_carriers_engine (0.0.1)
