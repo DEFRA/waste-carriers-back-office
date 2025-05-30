@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/defra-ruby-govpay
-  revision: 9f1395be7ead997e4cc5e3942084908d72c294b3
+  revision: f801e9807617cf88fcf3ef43cad7e3e7d9de1351
   branch: chore/RUBY-3754_debug_govpay_timeout
   specs:
     defra_ruby_govpay (1.0.0)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/DEFRA/defra-ruby-mocks
-  revision: 9e4c75306d58578127dd9fcdb8485768271b03ea
+  revision: cf1d27cb851d539421e7cd8ba23353e943fcea98
   branch: chore/RUBY-3754_debug_govpay_timeout
   specs:
     defra_ruby_mocks (5.1.3)
