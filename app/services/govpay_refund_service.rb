@@ -8,7 +8,9 @@ class GovpayRefundService < WasteCarriersEngine::BaseService
     @payment = payment
     @amount = amount
 
+    Rails.logger.warn "[GovpayRefundService] [run] refundable? #{govpay_payment.refundable?(amount)}"
     return false unless govpay_payment.refundable?(amount)
+    Rails.logger.warn "[GovpayRefundService] [run] error: \"#{error}\""
     return false if error
 
     return false unless refund_state_ok?
@@ -34,6 +36,7 @@ class GovpayRefundService < WasteCarriersEngine::BaseService
   end
 
   def refund
+    Rails.logger.warn "GovpayRefundService got response: #{response.inspect}"
     @refund ||= DefraRubyGovpay::Refund.new response
   end
 
