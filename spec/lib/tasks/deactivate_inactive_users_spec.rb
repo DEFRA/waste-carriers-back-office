@@ -2,9 +2,9 @@
 
 require "rails_helper"
 
-RSpec.describe "one_off:deactivate_inactive_users", type: :task do
+RSpec.describe "deactivate_inactive_users", type: :task do
   include_context "rake"
-  let(:rake_task) { Rake::Task["one_off:deactivate_inactive_users"] }
+  let(:rake_task) { Rake::Task["deactivate_inactive_users"] }
   let(:active_user) { create(:user, active: true, role:) }
 
   after { rake_task.reenable }
@@ -52,6 +52,30 @@ RSpec.describe "one_off:deactivate_inactive_users", type: :task do
 
     it "does not deactivate the user" do
       expect { rake_task.invoke }.not_to change { active_user.reload.active }
+    end
+  end
+
+  context "when the user has never signed in" do
+    let(:role) { "agency" }
+
+    context "when invited more than 3 months ago" do
+      before do
+        active_user.update(last_sign_in_at: nil, invitation_created_at: 4.months.ago)
+      end
+
+      it "deactivates the user" do
+        expect { rake_task.invoke }.to change { active_user.reload.active }.to(false)
+      end
+    end
+
+    context "when invited within the last 3 months" do
+      before do
+        active_user.update(last_sign_in_at: nil, invitation_created_at: 2.months.ago)
+      end
+
+      it "does not deactivate the user" do
+        expect { rake_task.invoke }.not_to change { active_user.reload.active }
+      end
     end
   end
 
