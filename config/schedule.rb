@@ -99,3 +99,7 @@ end
 every :day, at: ENV["CLEANUP_OLD_SESSIONS_TIME"] || "01:00", roles: [:db] do
   rake_and_format "db:sessions:trim"
 end
+
+every :day, at: ENV["DEACTIVATE_INACTIVE_USERS_TIME"] || "05:00", roles: [:db] do
+  rake_and_format "deactivate_inactive_users"
+end
