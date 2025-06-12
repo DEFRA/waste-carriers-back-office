@@ -20,6 +20,11 @@ AllCops:
 Naming/VariableNumber:
   Enabled: false
 
+# Bad cop: Not all methods returning a boolean should end in a question mark.
+# For example `submit_form` is a directive, not a query, and the boolean response indicates success or failure.
+Naming/PredicateMethod:
+  Enabled: false
+
 # Aligning with this cop would require excessive refactoring
 Rails/LexicallyScopedActionFilter:
   Enabled: false
@@ -37,6 +42,7 @@ Style/DisableCopsWithinSourceCodeDirective:
   Enabled: true
   AllowedCops:
     - Layout/LineLength
+    - Lint/DuplicateMethods                # this cop raises a bogus alert for boxi presenter finance_details_balance
     - Lint/PercentStringArray              # ['foo'] style is required for secure headers configuration
     - Metrics/AbcSize
     - Metrics/BlockLength

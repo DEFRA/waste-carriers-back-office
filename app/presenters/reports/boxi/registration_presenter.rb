@@ -10,9 +10,11 @@ module Reports
       delegate :balance, to: :finance_details, prefix: true, allow_nil: true
       delegate :match_result, to: :conviction_search_result, prefix: true, allow_nil: true
 
+      # rubocop:disable Lint/DuplicateMethods -- bogus cop warning
       def finance_details_balance
         finance_details&.balance && display_pence_as_pounds_and_cents(finance_details.balance)
       end
+      # rubocop:enable Lint/DuplicateMethods
 
       def metadata_date_registered
         return if metadata&.date_registered.blank?
