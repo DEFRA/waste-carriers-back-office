@@ -16,6 +16,11 @@ plugins:
 AllCops:
   TargetRubyVersion: 3.2.2
 
+Lint/DuplicateMethods:
+  Exclude:
+    # This cop seems to trip over a combination of a delegate instruction for an attribute/method and a call to the original attribute/method
+    - app/presenters/reports/boxi/registration_presenter.rb
+
 # Notify uses address_line_1 etc naming convention and we want to align with it
 Naming/VariableNumber:
   Enabled: false
