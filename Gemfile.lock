@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 627db49e9d32e579264c3f98a5f20f08e8eabbf8
+  revision: 9eb9963292c0c191e02a159bec44941632f2aa24
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -156,7 +156,7 @@ GEM
     benchmark (0.4.1)
     bigdecimal (3.2.2)
     bindex (0.8.1)
-    bson (5.0.2)
+    bson (5.1.0)
     builder (3.3.0)
     byebug (12.0.0)
     cancancan (3.6.1)
@@ -254,11 +254,11 @@ GEM
     erb (5.0.1)
     erubi (1.13.1)
     execjs (2.9.1)
-    factory_bot (6.5.0)
-      activesupport (>= 5.0.0)
-    factory_bot_rails (6.4.4)
+    factory_bot (6.5.4)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.5.0)
       factory_bot (~> 6.5)
-      railties (>= 5.0.0)
+      railties (>= 6.1.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
     faraday (2.12.3)
