@@ -348,7 +348,7 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.4)
-    matrix (0.4.3)
+    matrix (0.4.2)
     method_source (1.1.0)
     mime-types (3.7.0)
       logger
@@ -662,7 +662,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   kaminari-mongoid
-  matrix
+  matrix (< 0.4.3)
   mongo_session_store
   mongoid
   net-imap (~> 0.4.7)

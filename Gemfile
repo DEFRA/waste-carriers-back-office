@@ -43,7 +43,7 @@ gem "whenever", require: false
 
 gem "wicked_pdf"
 
-gem "matrix"
+gem "matrix", "< 0.4.3"
 
 gem "net-imap", "~> 0.4.7"
 
