@@ -2,10 +2,45 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.31.1...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.32.0...HEAD)
+
+**Implemented enhancements:**
+
+- \[RUBY-3790\] Add daily cron job to deactivate inactive back office users based on last login time [\#2157](https://github.com/DEFRA/waste-carriers-back-office/pull/2157) ([jjromeo](https://github.com/jjromeo))
+
+**Fixed bugs:**
+
+- Fix/ruby 3754 govpay mocks timeout [\#2159](https://github.com/DEFRA/waste-carriers-back-office/pull/2159) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Add the json fixtures needed by the webhook mocks [\#2149](https://github.com/DEFRA/waste-carriers-back-office/pull/2149) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 
 **Merged pull requests:**
 
+- apply govuk-frontend update [\#2172](https://github.com/DEFRA/waste-carriers-back-office/pull/2172) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- bump engine version [\#2168](https://github.com/DEFRA/waste-carriers-back-office/pull/2168) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Chore/bump engine 2025 0617a [\#2166](https://github.com/DEFRA/waste-carriers-back-office/pull/2166) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Chore/bump engine 2025 0617a [\#2165](https://github.com/DEFRA/waste-carriers-back-office/pull/2165) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Chore/bump engine 2025 0617a [\#2164](https://github.com/DEFRA/waste-carriers-back-office/pull/2164) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Bump engine version [\#2162](https://github.com/DEFRA/waste-carriers-back-office/pull/2162) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Bump engine version [\#2161](https://github.com/DEFRA/waste-carriers-back-office/pull/2161) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Bump engine and gem versions [\#2153](https://github.com/DEFRA/waste-carriers-back-office/pull/2153) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Bump defra\_ruby\_mocks from 5.1.2 to 5.1.3 [\#2151](https://github.com/DEFRA/waste-carriers-back-office/pull/2151) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump defra\_ruby\_mocks from 5.1.1 to 5.1.2 [\#2150](https://github.com/DEFRA/waste-carriers-back-office/pull/2150) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump defra\_ruby\_mocks from 5.1.0 to 5.1.1 [\#2148](https://github.com/DEFRA/waste-carriers-back-office/pull/2148) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump defra\_ruby\_mocks from 5.0.0 to 5.1.0 [\#2145](https://github.com/DEFRA/waste-carriers-back-office/pull/2145) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[RUBY-3757\] Update `waste_carriers_engine` gem to latest revision including defra\_ruby\_govpay changes [\#2140](https://github.com/DEFRA/waste-carriers-back-office/pull/2140) ([jjromeo](https://github.com/jjromeo))
+- Update dependabot setup [\#2139](https://github.com/DEFRA/waste-carriers-back-office/pull/2139) ([brujeo](https://github.com/brujeo))
+- Update dependencies and refactor code to align with new coding style requirements [\#2138](https://github.com/DEFRA/waste-carriers-back-office/pull/2138) ([brujeo](https://github.com/brujeo))
+- Add debugging instructions to README [\#2137](https://github.com/DEFRA/waste-carriers-back-office/pull/2137) ([brujeo](https://github.com/brujeo))
+- Bump net-imap from 0.4.19 to 0.4.20 [\#2136](https://github.com/DEFRA/waste-carriers-back-office/pull/2136) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump dotenv-rails from 3.1.7 to 3.1.8 [\#2134](https://github.com/DEFRA/waste-carriers-back-office/pull/2134) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.32.0](https://github.com/defra/waste-carriers-back-office/tree/v1.32.0) (2025-04-10)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.31.1...v1.32.0)
+
+**Merged pull requests:**
+
+- Version 1.32.0 [\#2133](https://github.com/DEFRA/waste-carriers-back-office/pull/2133) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - Single node mongodb in test env [\#2132](https://github.com/DEFRA/waste-carriers-back-office/pull/2132) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - RUBY 3494 wcr deactivation of back office users based upon last log in time [\#2126](https://github.com/DEFRA/waste-carriers-back-office/pull/2126) ([jjromeo](https://github.com/jjromeo))
 
@@ -1340,7 +1375,7 @@
 
 ## [v1.9.0](https://github.com/defra/waste-carriers-back-office/tree/v1.9.0) (2020-06-18)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.2...v1.9.0)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.3...v1.9.0)
 
 **Implemented enhancements:**
 
@@ -1453,13 +1488,13 @@
 - Bump waste\_carriers\_engine from `46ec95b` to `336551e` [\#818](https://github.com/DEFRA/waste-carriers-back-office/pull/818) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump waste\_carriers\_engine from `2799dbf` to `46ec95b` [\#813](https://github.com/DEFRA/waste-carriers-back-office/pull/813) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
-## [v1.8.2](https://github.com/defra/waste-carriers-back-office/tree/v1.8.2) (2020-05-12)
-
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.3...v1.8.2)
-
 ## [v1.8.3](https://github.com/defra/waste-carriers-back-office/tree/v1.8.3) (2020-05-12)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.1...v1.8.3)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.2...v1.8.3)
+
+## [v1.8.2](https://github.com/defra/waste-carriers-back-office/tree/v1.8.2) (2020-05-12)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.1...v1.8.2)
 
 ## [v1.8.1](https://github.com/defra/waste-carriers-back-office/tree/v1.8.1) (2020-04-17)
 
