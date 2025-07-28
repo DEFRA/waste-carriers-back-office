@@ -2,7 +2,18 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.32.0...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.33.0...HEAD)
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `082c2ab` to `b533660` [\#2179](https://github.com/DEFRA/waste-carriers-back-office/pull/2179) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `c6f537b` to `082c2ab` [\#2176](https://github.com/DEFRA/waste-carriers-back-office/pull/2176) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Restoring dependabot settings so it can pull engine updates [\#2175](https://github.com/DEFRA/waste-carriers-back-office/pull/2175) ([brujeo](https://github.com/brujeo))
+- Bump govuk\_design\_system\_formbuilder from 5.10.1 to 5.11.0 [\#2170](https://github.com/DEFRA/waste-carriers-back-office/pull/2170) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.33.0](https://github.com/defra/waste-carriers-back-office/tree/v1.33.0) (2025-06-26)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.32.0...v1.33.0)
 
 **Implemented enhancements:**
 
@@ -15,6 +26,7 @@
 
 **Merged pull requests:**
 
+- Version 1.33.0 [\#2173](https://github.com/DEFRA/waste-carriers-back-office/pull/2173) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - apply govuk-frontend update [\#2172](https://github.com/DEFRA/waste-carriers-back-office/pull/2172) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - bump engine version [\#2168](https://github.com/DEFRA/waste-carriers-back-office/pull/2168) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - Chore/bump engine 2025 0617a [\#2166](https://github.com/DEFRA/waste-carriers-back-office/pull/2166) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
