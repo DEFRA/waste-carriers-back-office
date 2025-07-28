@@ -371,7 +371,7 @@ GEM
     mongo_session_store (3.2.1)
       actionpack (>= 4.0)
       mongo (~> 2.0)
-    mongoid (8.1.10)
+    mongoid (8.1.11)
       activemodel (>= 5.1, < 8.1, != 7.0.0)
       concurrent-ruby (>= 1.0.5, < 2.0)
       mongo (>= 2.18.0, < 3.0.0)
