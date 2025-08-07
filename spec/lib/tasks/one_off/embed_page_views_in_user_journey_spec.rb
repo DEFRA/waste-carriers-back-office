@@ -30,14 +30,20 @@ RSpec.describe "one_off:embed_page_views_in_user_journey", type: :task do
   end
 
   it "runs without error" do
+    skip "Skip on CI as not running in cluster mode" unless File.directory?("/vagrant")
+
     expect { rake_task.invoke }.not_to raise_error
   end
 
   it "removes all documents from the page_view collection" do
+    skip "Skip on CI as not running in cluster mode" unless File.directory?("/vagrant")
+
     expect { rake_task.invoke }.to change(collection, :count_documents).to(0)
   end
 
   it "embeds the page_views in the user_journeys" do
+    skip "Skip on CI as not running in cluster mode" unless File.directory?("/vagrant")
+
     rake_task.invoke
 
     expect(journey_a.reload.page_views.count).to eq 2
@@ -45,6 +51,8 @@ RSpec.describe "one_off:embed_page_views_in_user_journey", type: :task do
   end
 
   it "copies the page attribute correctly" do
+    skip "Skip on CI as not running in cluster mode" unless File.directory?("/vagrant")
+
     rake_task.invoke
 
     expect(journey_a.reload.page_views.pluck(:page)).to eq %w[start_form location_form]
@@ -52,6 +60,8 @@ RSpec.describe "one_off:embed_page_views_in_user_journey", type: :task do
   end
 
   it "copies the time attribute correctly" do
+    skip "Skip on CI as not running in cluster mode" unless File.directory?("/vagrant")
+
     rake_task.invoke
 
     expect(journey_a.reload.page_views.pluck(:time).map(&:to_i)).to eq [time_a_one.to_i, time_a_two.to_i]
@@ -59,6 +69,8 @@ RSpec.describe "one_off:embed_page_views_in_user_journey", type: :task do
   end
 
   it "copies the route attribute correctly" do
+    skip "Skip on CI as not running in cluster mode" unless File.directory?("/vagrant")
+
     rake_task.invoke
 
     expect(journey_a.reload.page_views.pluck(:route)).to eq %w[DIGITAL DIGITAL]
