@@ -7,30 +7,30 @@ RSpec.shared_context "with finance stats order data" do
       # Include values for 36 months prior to the core test period, to allow for exipiries
       { date: 41.months.ago,
         orders: [
-          { NEW: 10_500 },
-          { NEW: 10_500, COPY_CARDS: 1500 },
+          { NEW: Rails.configuration.renewal_charge },
+          { NEW: Rails.configuration.renewal_charge, COPY_CARDS: 1500 },
           { COPY_CARDS: 1500 },
           { RENEW: 10_000, COPY_CARDS: 2500 },
           { CHARGE_ADJUST: 1200 }
         ] },
       { date: 40.months.ago,
         orders: [
-          { NEW: 10_500 },
+          { NEW: Rails.configuration.renewal_charge },
           { COPY_CARDS: 1500 },
           { RENEW: 10_000 },
           { EDIT: 2500 }
         ] },
       { date: 39.months.ago,
         orders: [
-          { NEW: 10_500 },
+          { NEW: Rails.configuration.renewal_charge },
           { RENEW: 10_000 },
           { RENEW: 10_000 }
         ] },
       { date: 5.months.ago,
         orders: [
           { CHARGE_ADJUST: 1200 },
-          { NEW: 10_500, COPY_CARDS: 1500 },
-          { NEW: 10_500 },
+          { NEW: Rails.configuration.renewal_charge, COPY_CARDS: 1500 },
+          { NEW: Rails.configuration.renewal_charge },
           { COPY_CARDS: 1500 },
           { RENEW: 10_000 },
           { RENEW: 10_000, COPY_CARDS: 2500 },
@@ -40,23 +40,23 @@ RSpec.shared_context "with finance stats order data" do
       # ensure there are values for multiple days in at least one month
       { date: 5.months.ago + 1.day,
         orders: [
-          { NEW: 10_500 },
-          { NEW: 10_500 },
+          { NEW: Rails.configuration.renewal_charge },
+          { NEW: Rails.configuration.renewal_charge },
           { RENEW: 10_000 }
         ] },
       { date: 4.months.ago - 1.day,
         orders: [
-          { NEW: 10_500 },
+          { NEW: Rails.configuration.renewal_charge },
           { RENEW: 10_000 },
           { RENEW: 10_000 }
         ] },
       { date: 4.months.ago,
         orders: [
           { CHARGE_ADJUST: 1200 },
-          { NEW: 10_500, COPY_CARDS: 1500 },
-          { NEW: 10_500, COPY_CARDS: 500 },
-          { NEW: 10_500, COPY_CARDS: 3500 },
-          { NEW: 10_500 },
+          { NEW: Rails.configuration.renewal_charge, COPY_CARDS: 1500 },
+          { NEW: Rails.configuration.renewal_charge, COPY_CARDS: 500 },
+          { NEW: Rails.configuration.renewal_charge, COPY_CARDS: 3500 },
+          { NEW: Rails.configuration.renewal_charge },
           { COPY_CARDS: 1500 },
           { RENEW: 10_000 },
           { RENEW: 10_000, COPY_CARDS: 2500 },
@@ -67,8 +67,8 @@ RSpec.shared_context "with finance stats order data" do
       { date: 3.months.ago,
         orders: [
           { CHARGE_ADJUST: 9600 },
-          { NEW: 10_500, COPY_CARDS: 1500 },
-          { NEW: 10_500 },
+          { NEW: Rails.configuration.renewal_charge, COPY_CARDS: 1500 },
+          { NEW: Rails.configuration.renewal_charge },
           { COPY_CARDS: 1500 },
           { RENEW: 10_000 },
           { RENEW: 10_000 },

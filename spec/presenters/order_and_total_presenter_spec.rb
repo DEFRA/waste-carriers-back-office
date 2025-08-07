@@ -18,8 +18,8 @@ module WasteCarriersEngine
     let(:order) { instance_double(WasteCarriersEngine::Order, order_items: order_items) }
 
     let(:order_items) { [] }
-    let(:renewal_order_item) { instance_double(WasteCarriersEngine::OrderItem, type: OrderItem::TYPES[:renew], amount: 10_500) }
-    let(:edit_order_item) { instance_double(WasteCarriersEngine::OrderItem, type: OrderItem::TYPES[:edit], amount: 4_000) }
+    let(:renewal_order_item) { instance_double(WasteCarriersEngine::OrderItem, type: OrderItem::TYPES[:renew], amount: Rails.configuration.renewal_charge) }
+    let(:edit_order_item) { instance_double(WasteCarriersEngine::OrderItem, type: OrderItem::TYPES[:edit], amount: Rails.configuration.type_change_charge) }
     let(:copy_cards_order_item) { instance_double(WasteCarriersEngine::OrderItem, type: OrderItem::TYPES[:copy_cards], amount: 1_000) }
     let(:charge_adjust_order_item) { instance_double(WasteCarriersEngine::OrderItem, type: OrderItem::TYPES[:charge_adjust], amount: 500) }
 
@@ -30,7 +30,7 @@ module WasteCarriersEngine
         expected_list = [
           {
             description: "Charge for changing registration type",
-            amount: 4_000
+            amount: Rails.configuration.type_change_charge
           },
           {
             description: "2 registration cards total cost",
@@ -53,11 +53,11 @@ module WasteCarriersEngine
           expected_list = [
             {
               description: "Renewal of registration",
-              amount: 10_500
+              amount: Rails.configuration.renewal_charge
             },
             {
               description: "Additional charge for changing registration type",
-              amount: 4_000
+              amount: Rails.configuration.type_change_charge
             },
             {
               description: "2 registration cards total cost",
