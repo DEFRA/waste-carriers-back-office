@@ -27,12 +27,12 @@ class ReminderLetterPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def renewal_cost
-    puts "\n+++ renewal_cost: #{Rails.configuration.renewal_charge}"
+    puts "\n+++ renewal_cost: #{Rails.configuration.renewal_charge}" # rubocop:disable Rails/Output
     display_pence_as_pounds(Rails.configuration.renewal_charge)
   end
 
   def new_reg_cost
-    puts "\n+++ new_reg_cost: #{Rails.configuration.new_registration_charge}"
+    puts "\n+++ new_reg_cost: #{Rails.configuration.new_registration_charge}" # rubocop:disable Rails/Output
     display_pence_as_pounds(Rails.configuration.new_registration_charge)
   end
 
