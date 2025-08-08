@@ -675,7 +675,7 @@ DEPENDENCIES
   matrix (< 0.4.3)
   mongo_session_store
   mongoid
-  net-imap (~> 0.4.7)
+  net-imap
   passenger (~> 6.0)
   pry-byebug
   rails-controller-testing
