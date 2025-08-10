@@ -27,10 +27,17 @@ class ReminderLetterPresenter < WasteCarriersEngine::BasePresenter
   end
 
   def renewal_cost
+    puts "\n+++ WCRS_REGISTRATION_CHARGE: #{ENV.fetch('WCRS_REGISTRATION_CHARGE', nil)}" # rubocop:disable Rails/Output
+    puts "\n+++ WCRS_RENEWAL_CHARGE:      #{ENV.fetch('WCRS_RENEWAL_CHARGE', nil)}" # rubocop:disable Rails/Output
+    puts "\n+++ WCRS_TYPE_CHANGE_CHARGE:  #{ENV.fetch('WCRS_TYPE_CHANGE_CHARGE', nil)}" # rubocop:disable Rails/Output
+    puts "\n+++ WCRS_CARD_CHARGE:         #{ENV.fetch('WCRS_CARD_CHARGE', nil)}" # rubocop:disable Rails/Output
+
+    puts "\n+++ renewal_cost: #{Rails.configuration.renewal_charge}" # rubocop:disable Rails/Output
     display_pence_as_pounds(Rails.configuration.renewal_charge)
   end
 
   def new_reg_cost
+    puts "\n+++ new_reg_cost: #{Rails.configuration.new_registration_charge}" # rubocop:disable Rails/Output
     display_pence_as_pounds(Rails.configuration.new_registration_charge)
   end
 
