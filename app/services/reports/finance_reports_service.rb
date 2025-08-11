@@ -42,7 +42,7 @@ module Reports
 
     def zip_report_files
       files_search_path = File.join(@tmp_dir, "*.csv")
-      Zip::File.open(file_path, Zip::File::CREATE) do |zipfile|
+      Zip::File.open(file_path, create: true) do |zipfile|
         Dir[files_search_path].each do |report_file_path|
           zipfile.add(File.basename(report_file_path), report_file_path)
         end

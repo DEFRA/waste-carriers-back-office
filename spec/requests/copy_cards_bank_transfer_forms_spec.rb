@@ -29,10 +29,10 @@ RSpec.describe "CopyCardsBankTransferForms" do
           order_item = order.order_items.first
 
           expect(first_finance_details.orders.count).to eq(1)
-          expect(first_finance_details.balance).to eq(1_500)
+          expect(first_finance_details.balance).to eq(3 * Rails.configuration.card_charge)
           expect(order.order_items.count).to eq(1)
           expect(order_item.type).to eq("COPY_CARDS")
-          expect(order_item.amount).to eq(1_500)
+          expect(order_item.amount).to eq(3 * Rails.configuration.card_charge)
 
           get new_copy_cards_bank_transfer_form_path(transient_registration.token)
 

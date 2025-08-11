@@ -17,8 +17,8 @@ FactoryBot.define do
       orders { [build(:order, :has_required_data)] }
       payments do
         [
-          build(:payment, payment_type, date_entered: payment_date_entered, amount: 10_500),
-          build(:payment, payment_type, date_entered: payment_date_entered, amount: 500)
+          build(:payment, payment_type, date_entered: payment_date_entered, amount: Rails.configuration.renewal_charge),
+          build(:payment, payment_type, date_entered: payment_date_entered, amount: Rails.configuration.card_charge)
         ]
       end
       after(:build, :create, &:update_balance)

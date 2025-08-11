@@ -74,23 +74,17 @@ RSpec.describe ReminderLetterPresenter do
   end
 
   describe "#renewal_cost" do
-    let(:renewal_cost) { 10_500 }
-
     it "returns the correct cost" do
-      expected_cost = "105"
+      expected_cost = "125"
 
-      allow(Rails.configuration).to receive(:renewal_charge).and_return(renewal_cost)
       expect(subject.renewal_cost).to eq(expected_cost)
     end
   end
 
   describe "#new_reg_cost" do
-    let(:new_reg_cost) { 15_400 }
-
     it "returns the correct cost" do
-      expected_cost = "154"
+      expected_cost = "184"
 
-      allow(Rails.configuration).to receive(:new_registration_charge).and_return(new_reg_cost)
       expect(subject.new_reg_cost).to eq(expected_cost)
     end
   end

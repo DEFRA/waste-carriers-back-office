@@ -45,7 +45,7 @@ gem "wicked_pdf"
 
 gem "matrix", "< 0.4.3"
 
-gem "net-imap", "~> 0.4.7"
+gem "net-imap"
 
 gem "defra_ruby_area"
 

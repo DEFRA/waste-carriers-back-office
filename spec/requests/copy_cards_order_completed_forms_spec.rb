@@ -48,10 +48,10 @@ RSpec.describe "CopyCardsOrderCompletedForms" do
             expect(WasteCarriersEngine::TransientRegistration.count).to eq(0)
 
             expect(finance_details.orders.count).to eq(2)
-            expect(finance_details.balance).to eq(500)
+            expect(finance_details.balance).to eq(Rails.configuration.card_charge)
             expect(order.order_items.count).to eq(1)
             expect(order_item.type).to eq("COPY_CARDS")
-            expect(order_item.amount).to eq(500)
+            expect(order_item.amount).to eq(Rails.configuration.card_charge)
             expect(response).to have_http_status(:ok)
             expect(response).to render_template("copy_cards_order_completed_forms/new")
           end
