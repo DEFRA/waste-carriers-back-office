@@ -29,36 +29,48 @@ RSpec.describe "one_off:embed_page_views_in_user_journey", type: :task do
     rake_task.reenable
   end
 
-  it "runs without error", pending: "reintroduction of cluster mode in test env" do
+  it "runs without error" do
+    skip "Skip on CI as not running in cluster mode" unless File.directory?("/vagrant")
+
     expect { rake_task.invoke }.not_to raise_error
   end
 
-  it "removes all documents from the page_view collection", pending: "reintroduction of cluster mode in test env" do
+  it "removes all documents from the page_view collection" do
+    skip "Skip on CI as not running in cluster mode" unless File.directory?("/vagrant")
+
     expect { rake_task.invoke }.to change(collection, :count_documents).to(0)
   end
 
-  it "embeds the page_views in the user_journeys", pending: "reintroduction of cluster mode in test env" do
+  it "embeds the page_views in the user_journeys" do
+    skip "Skip on CI as not running in cluster mode" unless File.directory?("/vagrant")
+
     rake_task.invoke
 
     expect(journey_a.reload.page_views.count).to eq 2
     expect(journey_b.reload.page_views.count).to eq 2
   end
 
-  it "copies the page attribute correctly", pending: "reintroduction of cluster mode in test env" do
+  it "copies the page attribute correctly" do
+    skip "Skip on CI as not running in cluster mode" unless File.directory?("/vagrant")
+
     rake_task.invoke
 
     expect(journey_a.reload.page_views.pluck(:page)).to eq %w[start_form location_form]
     expect(journey_b.reload.page_views.pluck(:page)).to eq %w[x_form y_form]
   end
 
-  it "copies the time attribute correctly", pending: "reintroduction of cluster mode in test env" do
+  it "copies the time attribute correctly" do
+    skip "Skip on CI as not running in cluster mode" unless File.directory?("/vagrant")
+
     rake_task.invoke
 
     expect(journey_a.reload.page_views.pluck(:time).map(&:to_i)).to eq [time_a_one.to_i, time_a_two.to_i]
     expect(journey_b.reload.page_views.pluck(:time).map(&:to_i)).to eq [time_b_one.to_i, time_b_two.to_i]
   end
 
-  it "copies the route attribute correctly", pending: "reintroduction of cluster mode in test env" do
+  it "copies the route attribute correctly" do
+    skip "Skip on CI as not running in cluster mode" unless File.directory?("/vagrant")
+
     rake_task.invoke
 
     expect(journey_a.reload.page_views.pluck(:route)).to eq %w[DIGITAL DIGITAL]

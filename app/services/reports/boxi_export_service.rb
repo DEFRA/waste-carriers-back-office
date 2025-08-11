@@ -28,7 +28,7 @@ module Reports
     def zip_export_files(dir_path)
       files_search_path = File.join(dir_path, "*.csv")
 
-      Zip::File.open(file_path, Zip::File::CREATE) do |zipfile|
+      Zip::File.open(file_path, create: true) do |zipfile|
         Dir[files_search_path].each do |export_file_path|
           zipfile.add(File.basename(export_file_path), export_file_path)
         end
