@@ -94,7 +94,7 @@ RSpec.describe OrderCopyCardsCompletionService do
 
     context "when the registration has been paid in full" do
       before do
-        transient_finance_details.payments << build(:payment, :bank_transfer, amount: 500)
+        transient_finance_details.payments << build(:payment, :bank_transfer, amount: Rails.configuration.card_charge)
         transient_finance_details.update_balance
         transient_finance_details.save
       end

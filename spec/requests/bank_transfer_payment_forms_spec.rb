@@ -94,7 +94,7 @@ RSpec.describe "BankTransferPaymentForms" do
           let(:registration) { create(:registration, :pending, :has_unpaid_order) }
           let(:params) do
             {
-              amount: "110.00",
+              amount: "130.00",
               comment: "foo",
               registration_reference: "foo",
               date_received_day: "1",

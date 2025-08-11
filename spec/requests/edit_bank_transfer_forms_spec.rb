@@ -30,10 +30,10 @@ RSpec.describe "EditBankTransferForms" do
           order_item = order.order_items.first
 
           expect(first_finance_details.orders.count).to eq(1)
-          expect(first_finance_details.balance).to eq(4_000)
+          expect(first_finance_details.balance).to eq(Rails.configuration.type_change_charge)
           expect(order.order_items.count).to eq(1)
           expect(order_item.type).to eq("EDIT")
-          expect(order_item.amount).to eq(4_000)
+          expect(order_item.amount).to eq(Rails.configuration.type_change_charge)
 
           get new_edit_bank_transfer_form_path(transient_registration.token)
 

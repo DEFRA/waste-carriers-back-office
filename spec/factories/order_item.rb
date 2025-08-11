@@ -5,14 +5,14 @@ FactoryBot.define do
     currency { "GBP" }
 
     trait :renewal_item do
-      amount { 10_500 }
+      amount { Rails.configuration.renewal_charge }
       description { "renewal of registration" }
       type { "RENEW" }
       quantity { 1 }
     end
 
     trait :copy_cards_item do
-      amount { 500 }
+      amount { Rails.configuration.card_charge }
       description { "1 registration card" }
       type { "COPY_CARDS" }
       quantity { 1 }
