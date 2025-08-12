@@ -42,7 +42,7 @@ en:
       edit_links:
         default: Change
         no_edit: Cannot edit
-        fee: Change (£40 fee)
+        fee: Change (£%{edit_fee} fee)
         visually_hidden:
           registration_type: registration type
           company_name: business name

@@ -52,7 +52,7 @@
               </td>
               <td class="govuk-table__cell govuk-table__cell--numeric">
                 <%= link_to cbd_type_edit_forms_path(@presenter.token) do %>
-                  <%= t(".edit_links.fee") %>
+                  <%= t(".edit_links.fee", edit_fee: display_pence_as_pounds(Rails.configuration.type_change_charge)) %>
                   <span class="govuk-visually-hidden">
                     <%= t(".edit_links.visually_hidden.registration_type") %>
                   </span>
