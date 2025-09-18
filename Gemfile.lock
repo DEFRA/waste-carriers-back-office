@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 972ae3bea6368c13af6459467f5ae6a5c356a59a
+  revision: 1caef24682108de2c161114dc8eb66bff25c1a77
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -212,7 +212,7 @@ GEM
       devise (>= 4.9)
       rails
       sprockets-rails
-    defra_ruby_govpay (1.0.2)
+    defra_ruby_govpay (1.1.0)
       rest-client (~> 2.1)
     defra_ruby_mocks (5.3.0)
       defra_ruby_aws (~> 0.5)
@@ -355,18 +355,18 @@ GEM
       net-imap
       net-pop
       net-smtp
-    marcel (1.0.4)
+    marcel (1.1.0)
     matrix (0.4.2)
     method_source (1.1.0)
     metrics (0.12.2)
     mime-types (3.7.0)
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
-    mime-types-data (3.2025.0812)
+    mime-types-data (3.2025.0916)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
     minitest (5.25.5)
-    mongo (2.21.2)
+    mongo (2.21.3)
       base64
       bson (>= 4.14.1, < 6.0.0)
     mongo_session_store (3.2.1)
@@ -413,7 +413,7 @@ GEM
       rack (>= 1.6.13)
       rackup (>= 1.0.1)
       rake (>= 12.3.3)
-    phonelib (0.10.11)
+    phonelib (0.10.12)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
