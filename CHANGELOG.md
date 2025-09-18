@@ -2,10 +2,36 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.33.0...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.33.1...HEAD)
+
+**Implemented enhancements:**
+
+- Feature/ruby 3890 price changes [\#2183](https://github.com/DEFRA/waste-carriers-back-office/pull/2183) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+
+**Fixed bugs:**
+
+- Fix/ruby 3890 price changes [\#2191](https://github.com/DEFRA/waste-carriers-back-office/pull/2191) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 
 **Merged pull requests:**
 
+- Bump waste\_carriers\_engine from `f54eeed` to `972ae3b` [\#2195](https://github.com/DEFRA/waste-carriers-back-office/pull/2195) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `025bce5` to `f54eeed` [\#2190](https://github.com/DEFRA/waste-carriers-back-office/pull/2190) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump net-imap from 0.4.22 to 0.5.9 [\#2189](https://github.com/DEFRA/waste-carriers-back-office/pull/2189) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump defra\_ruby\_mocks from 5.2.0 to 5.3.0 [\#2187](https://github.com/DEFRA/waste-carriers-back-office/pull/2187) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubyzip from 2.4.1 to 3.0.1 [\#2186](https://github.com/DEFRA/waste-carriers-back-office/pull/2186) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[RUBY-3896\] Remove duplicate companies house settings [\#2185](https://github.com/DEFRA/waste-carriers-back-office/pull/2185) ([jjromeo](https://github.com/jjromeo))
+- Bump spring from 4.3.0 to 4.4.0 [\#2184](https://github.com/DEFRA/waste-carriers-back-office/pull/2184) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump mongoid from 8.1.10 to 8.1.11 [\#2178](https://github.com/DEFRA/waste-carriers-back-office/pull/2178) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump faker from 3.5.1 to 3.5.2 [\#2174](https://github.com/DEFRA/waste-carriers-back-office/pull/2174) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 8.0.0 to 8.0.1 [\#2169](https://github.com/DEFRA/waste-carriers-back-office/pull/2169) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.33.1](https://github.com/defra/waste-carriers-back-office/tree/v1.33.1) (2025-07-28)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.33.0...v1.33.1)
+
+**Merged pull requests:**
+
+- Version 1.33.1 [\#2180](https://github.com/DEFRA/waste-carriers-back-office/pull/2180) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - Bump waste\_carriers\_engine from `082c2ab` to `b533660` [\#2179](https://github.com/DEFRA/waste-carriers-back-office/pull/2179) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump waste\_carriers\_engine from `c6f537b` to `082c2ab` [\#2176](https://github.com/DEFRA/waste-carriers-back-office/pull/2176) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Restoring dependabot settings so it can pull engine updates [\#2175](https://github.com/DEFRA/waste-carriers-back-office/pull/2175) ([brujeo](https://github.com/brujeo))
