@@ -155,7 +155,7 @@ module ActionLinksHelper
     return false unless display_renewing_registration_links?(resource)
     return false unless can?(:edit, WasteCarriersEngine::Registration)
 
-    WasteCarriersEngine::RenewingRegistration.where(reg_identifier: resource.reg_identifier).count.positive?
+    WasteCarriersEngine::RenewingRegistration.where(reg_identifier: resource.reg_identifier).any?
   end
 
   def display_refresh_registered_company_name_link_for?(resource)

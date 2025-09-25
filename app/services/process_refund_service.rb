@@ -66,10 +66,6 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
     refund.order_key = "#{payment.order_key}_PENDING"
   end
 
-  def order
-    @_order ||= finance_details.orders.find_by(order_code: payment.order_key)
-  end
-
   def card_payment?
     payment.govpay?
   end

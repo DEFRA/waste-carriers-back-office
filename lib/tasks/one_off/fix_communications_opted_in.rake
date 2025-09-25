@@ -8,7 +8,7 @@ namespace :one_off do
       expires_on: { "$gte": 40.months.ago.beginning_of_day }
     )
 
-    if regs_with_unset_opted_in.count.positive?
+    if regs_with_unset_opted_in.any?
       puts "Updating #{regs_with_unset_opted_in.count} registration(s)" unless Rails.env.test?
       time_start = Time.zone.now
       WasteCarriersEngine::Registration.collection.update_many(
