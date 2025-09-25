@@ -45,11 +45,10 @@ class RefundsController < ApplicationController
   end
 
   def update
-    refund_id = fetch_payment_by_id(params[:order_key]).govpay_id
+    refund = fetch_payment_by_id(params[:order_key])
     updated = WasteCarriersEngine::GovpayUpdateRefundStatusService.run(
-      registration: @resource,
-      refund_id:,
-      new_status: GovpayRefundDetailsService.run(refund_id:)["status"]
+      refund:,
+      new_status: GovpayRefundDetailsService.run(refund_id: refund.govpay_id)["status"]
     )
 
     if updated

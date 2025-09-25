@@ -150,6 +150,10 @@ RSpec.describe "Refunds" do
         patch resource_refund_path(registration, refund.govpay_id)
       end
 
+      it "returns a HTTP :found response" do
+        expect(response).to have_http_status(:found)
+      end
+
       it "calls the refund update service" do
         expect(WasteCarriersEngine::GovpayUpdateRefundStatusService).to have_received(:run)
       end
