@@ -34,7 +34,9 @@ class EditRegistration < WasteCarriersEngine::TransientRegistration
   }.freeze
 
   def registration
-    @_registration ||= WasteCarriersEngine::Registration.find_by(reg_identifier: reg_identifier)
+    return @_registration if defined?(@_registration)
+
+    @_registration = WasteCarriersEngine::Registration.find_by(reg_identifier: reg_identifier)
   end
 
   def prepare_for_payment(mode, user)

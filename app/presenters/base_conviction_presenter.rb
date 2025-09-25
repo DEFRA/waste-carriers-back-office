@@ -71,6 +71,6 @@ class BaseConvictionPresenter < WasteCarriersEngine::BasePresenter
 
     # Check to see if any conviction_search_results are present
     conviction_search_results = key_people.map(&:conviction_search_result).compact
-    conviction_search_results.count.zero?
+    conviction_search_results.none?
   end
 end

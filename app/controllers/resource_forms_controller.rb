@@ -8,6 +8,7 @@ class ResourceFormsController < ApplicationController
   include CanCompleteIfPossible
 
   extend ActiveModel::Callbacks
+
   define_model_callbacks :renew_or_complete
 
   prepend_before_action :authenticate_user!

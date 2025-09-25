@@ -12,7 +12,9 @@ class OrderCopyCardsRegistration < WasteCarriersEngine::TransientRegistration
   instance_delegate %i[contact_address contact_email registered_address] => :registration
 
   def registration
-    @_registration ||= WasteCarriersEngine::Registration.find_by(reg_identifier: reg_identifier)
+    return @_registration if defined?(@_registration)
+
+    @_registration = WasteCarriersEngine::Registration.find_by(reg_identifier: reg_identifier)
   end
 
   def prepare_for_payment(mode, user)

@@ -67,7 +67,9 @@ class ProcessRefundService < WasteCarriersEngine::BaseService
   end
 
   def order
-    @_order ||= finance_details.orders.find_by(order_code: payment.order_key)
+    return @_order if defined?(@_order)
+
+    @_order = finance_details.orders.find_by(order_code: payment.order_key)
   end
 
   def card_payment?
