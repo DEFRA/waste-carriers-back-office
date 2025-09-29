@@ -59,11 +59,11 @@ module Reports
     end
 
     def registrations
-      @_registrations ||= WasteCarriersEngine::Registration.all
+      @registrations ||= WasteCarriersEngine::Registration.all
     end
 
     def registration_serializers
-      @_registration_serializers ||= REGISTRATION_SERIALIZERS.map do |serializer_class|
+      @registration_serializers ||= REGISTRATION_SERIALIZERS.map do |serializer_class|
         serializer_class.new(dir_path)
       end
     end

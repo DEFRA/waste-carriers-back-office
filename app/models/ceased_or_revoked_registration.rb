@@ -8,8 +8,8 @@ class CeasedOrRevokedRegistration < WasteCarriersEngine::TransientRegistration
   delegate :company_name, :registration_type, :tier, :contact_address, to: :registration
 
   def registration
-    return @_registration if defined?(@_registration)
+    return @registration if defined?(@registration)
 
-    @_registration = WasteCarriersEngine::Registration.find_by(reg_identifier: reg_identifier)
+    @registration = WasteCarriersEngine::Registration.find_by(reg_identifier: reg_identifier)
   end
 end

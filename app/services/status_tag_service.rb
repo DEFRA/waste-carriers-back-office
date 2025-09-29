@@ -79,6 +79,6 @@ class StatusTagService < WasteCarriersEngine::BaseService
   end
 
   def registration_or_submitted_renewal?
-    @_registration_or_submitted_renewal ||= submitted_renewal? || !transient?
+    @registration_or_submitted_renewal ||= submitted_renewal? || !transient?
   end
 end
