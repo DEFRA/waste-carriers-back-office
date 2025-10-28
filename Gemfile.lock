@@ -182,7 +182,7 @@ GEM
       json
     countries (5.5.0)
       unaccent (~> 0.3)
-    crack (1.0.0)
+    crack (1.0.1)
       bigdecimal
       rexml
     crass (1.0.6)
@@ -295,7 +295,7 @@ GEM
     gyoku (1.4.0)
       builder (>= 2.1.2)
       rexml (~> 3.0)
-    hashdiff (1.2.0)
+    hashdiff (1.2.1)
     high_voltage (3.1.2)
     html-attributes-utils (1.0.2)
       activesupport (>= 6.1.4.4)
@@ -492,7 +492,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rexml (3.4.2)
+    rexml (3.4.4)
     rspec-core (3.13.5)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.5)
@@ -628,7 +628,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webmock (3.25.1)
+    webmock (3.26.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
