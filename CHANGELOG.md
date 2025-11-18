@@ -2,7 +2,36 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.33.1...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.34.0...HEAD)
+
+**Fixed bugs:**
+
+- Fix/ruby 4002 check refund status [\#2213](https://github.com/DEFRA/waste-carriers-back-office/pull/2213) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `1caef24` to `7a32d16` [\#2226](https://github.com/DEFRA/waste-carriers-back-office/pull/2226) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubyzip from 3.2.0 to 3.2.1 [\#2224](https://github.com/DEFRA/waste-carriers-back-office/pull/2224) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump webmock from 3.25.1 to 3.26.0 [\#2223](https://github.com/DEFRA/waste-carriers-back-office/pull/2223) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Updated CI configuration to use global sonar token [\#2222](https://github.com/DEFRA/waste-carriers-back-office/pull/2222) ([brujeo](https://github.com/brujeo))
+- Bump jquery-rails from 4.6.0 to 4.6.1 [\#2221](https://github.com/DEFRA/waste-carriers-back-office/pull/2221) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubyzip from 3.1.0 to 3.2.0 [\#2220](https://github.com/DEFRA/waste-carriers-back-office/pull/2220) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump net-imap from 0.5.10 to 0.5.12 [\#2217](https://github.com/DEFRA/waste-carriers-back-office/pull/2217) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-rails from 2.32.0 to 2.33.4 [\#2214](https://github.com/DEFRA/waste-carriers-back-office/pull/2214) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `972ae3b` to `1caef24` [\#2211](https://github.com/DEFRA/waste-carriers-back-office/pull/2211) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump passenger from 6.0.27 to 6.1.0 [\#2210](https://github.com/DEFRA/waste-carriers-back-office/pull/2210) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump defra\_ruby\_aws from 0.5.0 to 0.5.1 [\#2209](https://github.com/DEFRA/waste-carriers-back-office/pull/2209) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rexml from 3.4.1 to 3.4.2 [\#2206](https://github.com/DEFRA/waste-carriers-back-office/pull/2206) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump factory\_bot\_rails from 6.5.0 to 6.5.1 [\#2205](https://github.com/DEFRA/waste-carriers-back-office/pull/2205) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubyzip from 3.0.1 to 3.1.0 [\#2204](https://github.com/DEFRA/waste-carriers-back-office/pull/2204) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump net-imap from 0.5.9 to 0.5.10 [\#2202](https://github.com/DEFRA/waste-carriers-back-office/pull/2202) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump activestorage from 7.2.2.1 to 7.2.2.2 [\#2198](https://github.com/DEFRA/waste-carriers-back-office/pull/2198) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump activerecord from 7.2.2.1 to 7.2.2.2 [\#2197](https://github.com/DEFRA/waste-carriers-back-office/pull/2197) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-rails from 8.0.1 to 8.0.2 [\#2193](https://github.com/DEFRA/waste-carriers-back-office/pull/2193) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.34.0](https://github.com/defra/waste-carriers-back-office/tree/v1.34.0) (2025-08-13)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.33.1...v1.34.0)
 
 **Implemented enhancements:**
 
@@ -14,6 +43,7 @@
 
 **Merged pull requests:**
 
+- Version 1.34.0 [\#2196](https://github.com/DEFRA/waste-carriers-back-office/pull/2196) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - Bump waste\_carriers\_engine from `f54eeed` to `972ae3b` [\#2195](https://github.com/DEFRA/waste-carriers-back-office/pull/2195) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump waste\_carriers\_engine from `025bce5` to `f54eeed` [\#2190](https://github.com/DEFRA/waste-carriers-back-office/pull/2190) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump net-imap from 0.4.22 to 0.5.9 [\#2189](https://github.com/DEFRA/waste-carriers-back-office/pull/2189) ([dependabot[bot]](https://github.com/apps/dependabot))
