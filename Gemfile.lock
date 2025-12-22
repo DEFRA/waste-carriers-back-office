@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 7acf2eafba8aa1170dd7e80392d412f8f16233c8
+  revision: ff9eeaaa4f8511797ff3b5425f019f8790e9a8c7
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -307,7 +307,7 @@ GEM
       domain_name (~> 0.5)
     httpi (3.0.1)
       rack
-    i18n (1.14.7)
+    i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     io-console (0.8.2)
     io-endpoint (0.15.2)
@@ -414,7 +414,7 @@ GEM
       rack (>= 1.6.13)
       rackup (>= 1.0.1)
       rake (>= 12.3.3)
-    phonelib (0.10.14)
+    phonelib (0.10.15)
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
