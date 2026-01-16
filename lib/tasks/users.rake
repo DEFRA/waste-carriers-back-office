@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 desc "Deactivate inactive users"
+# Run with: bundle exec rake deactivate_inactive_users[dry_run]
 task :deactivate_inactive_users, [:dry_run] => :environment do |_task, args|
   dry_run = args[:dry_run].to_s.downcase == "dry_run"
 
@@ -25,4 +26,26 @@ task :deactivate_inactive_users, [:dry_run] => :environment do |_task, args|
   end
 end
 
-# Run with: bundle exec rake deactivate_inactive_users[dry_run]
+namespace :users do
+  desc "Fix signed in accounts with expired invitations"
+  task fix_signed_in_accounts_with_expired_invitations: :environment do
+    find_users_with_expired_invitations.each do |user|
+      clear_invitation_token(user)
+    end
+  end
+end
+
+def find_users_with_expired_invitations
+  User.where(
+    "active=? AND sign_in_count>? AND invitation_accepted_at IS NULL AND invitation_sent_at < ?",
+    true, 0, User.invite_for.ago
+  )
+end
+
+def clear_invitation_token(user)
+  puts "Clearing invitation for user #{user.email}" unless Rails.env.test?
+  user.invitation_token = nil
+  user.invitation_created_at = nil
+  user.invitation_sent_at = nil
+  user.save!
+end
