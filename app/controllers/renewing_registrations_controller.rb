@@ -23,7 +23,7 @@ class RenewingRegistrationsController < ApplicationController
 
     WasteCarriersEngine::RenewingRegistration.where(reg_identifier: reg_identifier).destroy
 
-    redirect_back(fallback_location: registration_path(reg_identifier))
+    redirect_back_or_to(registration_path(reg_identifier))
   end
 
   private

@@ -21,7 +21,7 @@ class ResendConfirmationEmailController < ApplicationController
       handle_resend_errored(e, :resend_confirmation_email, "resending confirmation email")
     end
 
-    redirect_back(fallback_location: "/")
+    redirect_back_or_to("/")
   end
 
   private
