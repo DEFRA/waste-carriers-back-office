@@ -26,7 +26,7 @@ class EmailExportsController < ApplicationController
     else
       flash_error(I18n.t("email_exports.messages.error"),
                   I18n.t("email_exports.messages.invalid_batch_size"))
-      redirect_back(fallback_location: root_path)
+      redirect_back_or_to(root_path)
     end
   end
 
