@@ -27,9 +27,6 @@ RSpec.describe Ability do
       permitted_roles.each do |role|
         user = instance_double(User, role: role, deactivated?: deactivated)
         expect(described_class.new(user)).to be_able_to(action, entity)
-      rescue RSpec::Expectations::ExpectationNotMetError, RSpec::Expectations::MultipleExpectationsNotMetError => e
-        puts "*** expectation failed for role #{role}" # rubocop:disable RSpec/Output
-        raise e
       end
     end
 
@@ -37,9 +34,6 @@ RSpec.describe Ability do
       not_permitted_roles.each do |role|
         user = instance_double(User, role: role, deactivated?: deactivated)
         expect(described_class.new(user)).not_to be_able_to(action, entity)
-      rescue RSpec::Expectations::ExpectationNotMetError, RSpec::Expectations::MultipleExpectationsNotMetError => e
-        puts "*** expectation failed for role #{role}" # rubocop:disable RSpec/Output
-        raise e
       end
     end
   end
