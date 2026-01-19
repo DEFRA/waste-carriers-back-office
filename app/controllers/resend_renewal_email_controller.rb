@@ -21,7 +21,7 @@ class ResendRenewalEmailController < ApplicationController
       handle_resend_errored(e, :resend_renewal_email, "resending renewal email")
     end
 
-    redirect_back(fallback_location: "/")
+    redirect_back_or_to("/")
   end
 
   private
