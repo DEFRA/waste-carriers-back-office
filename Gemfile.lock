@@ -227,7 +227,7 @@ GEM
     defra_ruby_storm (0.1.0)
       savon (~> 2.13.0)
     defra_ruby_style (0.4.1)
-    defra_ruby_template (5.11.0)
+    defra_ruby_template (5.11.1)
     defra_ruby_validators (3.0.0)
       activemodel
       defra_ruby_companies_house
