@@ -57,7 +57,7 @@ gem "defra_ruby_aws"
 # Use the waste carriers engine for the user journey
 gem "waste_carriers_engine",
     git: "https://github.com/DEFRA/waste-carriers-engine",
-    branch: "main"
+    branch: "feature/RUBY-4163-wcr-tech-debt-implement-os-places-address-lookup-service-in-defra-ruby-address-gem"
 
 # Use the Defra Ruby Features gem to allow users with the correct permissions to
 # manage feature toggle (create / update / delete) from the back-office.
