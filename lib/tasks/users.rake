@@ -39,7 +39,6 @@ end
 
 def find_users_with_expired_invitations
   User.where(
-    active: true,
     sign_in_count: { "$gt": 0 },
     invitation_accepted_at: nil,
     invitation_sent_at: { "$lt": User.invite_for.ago }

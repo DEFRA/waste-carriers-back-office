@@ -109,7 +109,6 @@ RSpec.describe "Users tasks" do
     context "when user has signed in but has expired invitation" do
       let(:user) do
         create(:user,
-               active: true,
                sign_in_count: 1,
                invitation_accepted_at: nil,
                invitation_sent_at: 4.weeks.ago,
@@ -136,7 +135,6 @@ RSpec.describe "Users tasks" do
     context "when user has not signed in" do
       let(:user) do
         create(:user,
-               active: true,
                sign_in_count: 0,
                invitation_accepted_at: nil,
                invitation_sent_at: 8.days.ago,
@@ -149,7 +147,6 @@ RSpec.describe "Users tasks" do
     context "when invitation is not expired" do
       let(:user) do
         create(:user,
-               active: true,
                sign_in_count: 1,
                invitation_accepted_at: nil,
                invitation_sent_at: 5.days.ago,
@@ -159,23 +156,9 @@ RSpec.describe "Users tasks" do
       it_behaves_like "it does not clear the invitation tokens"
     end
 
-    context "when user is inactive" do
-      let(:user) do
-        create(:user,
-               active: false,
-               sign_in_count: 1,
-               invitation_accepted_at: nil,
-               invitation_sent_at: 8.days.ago,
-               invitation_token: "sample_token")
-      end
-
-      it_behaves_like "it does not clear the invitation tokens"
-    end
-
     context "when invitation has been accepted" do
       let(:user) do
         create(:user,
-               active: true,
                sign_in_count: 1,
                invitation_accepted_at: 1.day.ago,
                invitation_sent_at: 8.days.ago,
