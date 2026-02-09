@@ -420,6 +420,12 @@ Rails.application.routes.draw do
                         only: %i[new create],
                         path: "role",
                         path_names: { new: "" }
+
+              resources :user_invite_resends,
+                        as: :invite_resends,
+                        only: %i[new create],
+                        path: "resend-invite",
+                        path_names: { new: "" }
             end
 
   resources :conviction_imports,
