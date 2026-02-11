@@ -19,13 +19,6 @@ namespace :users do
 
     users_to_deactivate.each { |user| deactivate_user(user, dry_run) }
   end
-
-  desc "Fix signed in accounts with expired invitations"
-  task fix_signed_in_accounts_with_expired_invitations: :environment do
-    find_users_with_expired_invitations.each do |user|
-      clear_invitation_token(user)
-    end
-  end
 end
 
 def deactivate_user(user, dry_run)
@@ -35,21 +28,4 @@ def deactivate_user(user, dry_run)
     puts "Deactivating user #{user.email}" unless Rails.env.test?
     user.update(active: false)
   end
-end
-
-def find_users_with_expired_invitations
-  User.where(
-    active: true,
-    sign_in_count: { "$gt": 0 },
-    invitation_accepted_at: nil,
-    invitation_sent_at: { "$lt": User.invite_for.ago }
-  )
-end
-
-def clear_invitation_token(user)
-  puts "Clearing invitation for user #{user.email}" unless Rails.env.test?
-  user.invitation_token = nil
-  user.invitation_created_at = nil
-  user.invitation_sent_at = nil
-  user.save!
 end
