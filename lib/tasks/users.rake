@@ -29,4 +29,3 @@ def deactivate_user(user, dry_run)
     user.update(active: false)
   end
 end
-
