@@ -1,4 +1,11 @@
 en:
+  user_invite_resends:
+    new:
+      title: "Resend invite"
+      heading: "Resend invite"
+      paragraph1: "You are about to resend the invitation email to:"
+      paragraph2: "This will reset the invite token. Any previous invite links will no longer work."
+      button: "Resend invite"
   users:
     index:
       title: "Manage back office users"
@@ -38,6 +45,9 @@ en:
           activate:
             link_text: "Activate"
             visually_hidden_text: " %{email}"
+          resend_invite:
+            link_text: "Resend invite"
+            visually_hidden_text: " to %{email}"
   mongoid:
     errors:
       messages:
