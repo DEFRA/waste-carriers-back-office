@@ -83,6 +83,17 @@
                         <% end %>
                       <% end %>
                     </li>
+                    <% if user.invitation_token.present? && user.invitation_accepted_at.nil? %>
+                      <li>
+                        <%= link_to user_invite_resends_path(user.id) do %>
+                          <%= t(".user_list.actions.resend_invite.link_text") %>
+                          <span class="govuk-visually-hidden">
+                            <%= t(".user_list.actions.resend_invite.visually_hidden_text",
+                                  email: user.email) %>
+                          </span>
+                        <% end %>
+                      </li>
+                    <% end %>
                   </ul>
                 <% end %>
               </td>
