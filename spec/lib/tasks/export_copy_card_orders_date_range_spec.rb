@@ -21,7 +21,7 @@ RSpec.describe "Export copy card orders date range task", type: :task do
   end
 
   context "with a specified start date and no specified end date" do
-    let(:start_date) { (Time.zone.today - rand(1..10).days) }
+    let(:start_date) { Time.zone.today - rand(1..10).days }
 
     it "end date defaults to today" do
       expect(Reports::CardOrdersExportService).to receive(:run)

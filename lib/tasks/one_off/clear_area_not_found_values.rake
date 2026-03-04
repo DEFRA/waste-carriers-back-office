@@ -11,7 +11,7 @@ namespace :one_off do
 
     registrations.each do |registration|
       registration.addresses.select { |address| address.area == "Not found" }
-                  .map { |address| address.update(area: nil) }
+                            .map { |address| address.update(area: nil) }
     end
   end
 end
