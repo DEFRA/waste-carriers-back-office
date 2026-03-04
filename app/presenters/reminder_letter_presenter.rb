@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-class MissingAddressError < StandardError; end
-
 class ReminderLetterPresenter < WasteCarriersEngine::BasePresenter
+  class MissingAddressError < StandardError; end
   include WasteCarriersEngine::ApplicationHelper
   include ActionView::Helpers::NumberHelper
 

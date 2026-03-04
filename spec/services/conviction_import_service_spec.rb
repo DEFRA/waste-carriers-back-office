@@ -158,13 +158,13 @@ Apex Limited,,11111111,ABC,99999999,
 
       let(:csv) { test_class.new }
 
-      it "raises an InvalidCSVError and doesn't update any conviction data" do
+      it "raises an ConvictionImportService::InvalidCSVError and doesn't update any conviction data" do
         old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
 
-        expect { run_service }.to raise_error(InvalidCSVError)
+        expect { run_service }.to raise_error(ConvictionImportService::InvalidCSVError)
         expect do
           run_service
-        rescue InvalidCSVError
+        rescue ConvictionImportService::InvalidCSVError
           Rails.logger.debug "rescued expected exception"
         end.not_to change { old_conviction.count }
       end
@@ -179,14 +179,14 @@ baking soda,2,tablespoons
 )
       end
 
-      it "raises an InvalidConvictionDataError and doesn't update any conviction data" do
+      it "raises an ConvictionImportService::InvalidConvictionDataError and doesn't update any conviction data" do
         expected_error_message = "Invalid headers, missing Offender, Birth Date, Company No., System Flag, Inc Number"
-        expect { run_service }.to raise_error(InvalidConvictionDataError, expected_error_message)
+        expect { run_service }.to raise_error(ConvictionImportService::InvalidConvictionDataError, expected_error_message)
 
         old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
         expect do
           run_service
-        rescue InvalidConvictionDataError
+        rescue ConvictionImportService::InvalidConvictionDataError
           Rails.logger.debug "rescued expected exception"
         end.not_to change { old_conviction.count }
       end
@@ -200,19 +200,19 @@ Apex Limited,,11111111,ABC,99999999
 )
         end
 
-        it "raises an InvalidConvictionDataError and doesn't update any conviction data" do
+        it "raises an ConvictionImportService::InvalidConvictionDataError and doesn't update any conviction data" do
           old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
           new_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: "Apex Limited")
 
-          expect { run_service }.to raise_error(InvalidConvictionDataError, "Offender name missing")
+          expect { run_service }.to raise_error(ConvictionImportService::InvalidConvictionDataError, "Offender name missing")
           expect do
             run_service
-          rescue InvalidConvictionDataError
+          rescue ConvictionImportService::InvalidConvictionDataError
             Rails.logger.debug "rescued expected exception"
           end.not_to change { old_conviction.count }
           expect do
             run_service
-          rescue InvalidConvictionDataError
+          rescue ConvictionImportService::InvalidConvictionDataError
             Rails.logger.debug "rescued expected exception"
           end.not_to change { new_conviction.count }
         end
@@ -226,19 +226,19 @@ Offender,Birth Date,Company No.,System Flag,Inc Number
 )
         end
 
-        it "raises an InvalidConvictionDataError and doesn't update any conviction data" do
+        it "raises an ConvictionImportService::InvalidConvictionDataError and doesn't update any conviction data" do
           old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
           new_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: "Doe, John")
 
-          expect { run_service }.to raise_error(InvalidConvictionDataError, "Invalid date of birth")
+          expect { run_service }.to raise_error(ConvictionImportService::InvalidConvictionDataError, "Invalid date of birth")
           expect do
             run_service
-          rescue InvalidConvictionDataError
+          rescue ConvictionImportService::InvalidConvictionDataError
             Rails.logger.debug "rescued expected exception"
           end.not_to change { old_conviction.count }
           expect do
             run_service
-          rescue InvalidConvictionDataError
+          rescue ConvictionImportService::InvalidConvictionDataError
             Rails.logger.debug "rescued expected exception"
           end.not_to change { new_conviction.count }
         end
@@ -252,19 +252,19 @@ Offender,Birth Date,Company No.,System Flag,
 )
         end
 
-        it "raises an InvalidConvictionDataError and doesn't update any conviction data" do
+        it "raises an ConvictionImportService::InvalidConvictionDataError and doesn't update any conviction data" do
           old_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: old_conviction_name)
           new_conviction = WasteCarriersEngine::ConvictionsCheck::Entity.where(name: "Doe, John")
 
-          expect { run_service }.to raise_error(InvalidConvictionDataError, "Invalid headers, missing Inc Number")
+          expect { run_service }.to raise_error(ConvictionImportService::InvalidConvictionDataError, "Invalid headers, missing Inc Number")
           expect do
             run_service
-          rescue InvalidConvictionDataError
+          rescue ConvictionImportService::InvalidConvictionDataError
             Rails.logger.debug "rescued expected exception"
           end.not_to change { old_conviction.count }
           expect do
             run_service
-          rescue InvalidConvictionDataError
+          rescue ConvictionImportService::InvalidConvictionDataError
             Rails.logger.debug "rescued expected exception"
           end.not_to change { new_conviction.count }
         end
