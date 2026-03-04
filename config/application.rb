@@ -87,6 +87,15 @@ module WasteCarriersBackOffice
         ENV["WCRS_COMPANIES_HOUSE_URL"] || "https://api.companieshouse.gov.uk/"
       end
 
+    # OS Placess postcode lookup config
+    config.os_places_api_key = ENV.fetch("WCRS_OSPLACES_KEY", nil)
+    config.os_places_service_url =
+      if ENV["WCRS_MOCK_ENABLED"].to_s.downcase == "true"
+        ENV.fetch("WCRS_MOCK_FO_OSPLACES_URL", nil)
+      else
+        ENV["WCRS_OSPLACES_URL"] || "https://api.os.uk/search/places/v1"
+      end
+
     # Paths
     # This is the domain to use on URLs for FO services such as renewal and deregistration
     config.wcrs_fo_link_domain = ENV["WCRS_RENEWALS_DOMAIN"] || "http://localhost:3002"
@@ -95,7 +104,6 @@ module WasteCarriersBackOffice
     config.wcrs_backend_url = ENV["WCRS_FRONTEND_ADMIN_DOMAIN"] || "http://localhost:3000"
     config.wcrs_back_office_url = ENV["WCRS_BACK_OFFICE_DOMAIN"] || "http://localhost:8001"
     config.wcrs_services_url = ENV["WCRS_SERVICES_DOMAIN"] || "http://localhost:8003"
-    config.os_places_service_url = ENV["WCRS_OS_PLACES_DOMAIN"] || "http://localhost:8005"
     config.host = config.wcrs_back_office_url
 
     # Finance
