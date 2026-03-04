@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 8919ca7707b6cc2b2ccba3c2f67b6d99e3fd4295
-  branch: feature/RUBY-4163-wcr-tech-debt-implement-os-places-address-lookup-service-in-defra-ruby-address-gem
+  revision: 22be1905c8324b64c0e310e3e46148a60b1ea102
+  branch: main
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
@@ -17,7 +17,7 @@ GIT
       mongo_session_store (~> 3.2.1)
       mongoid (~> 8.1)
       mongoid-locker (~> 2.0.2)
-      nokogiri (~> 1.18.9)
+      nokogiri (~> 1.19.1)
       notifications-ruby-client (~> 5.4.0)
       rails (~> 7.2)
       rest-client (~> 2.1.0)
@@ -397,7 +397,7 @@ GEM
       net-protocol
     netrc (0.11.0)
     nio4r (2.7.5)
-    nokogiri (1.18.10)
+    nokogiri (1.19.1)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     nori (2.7.1)
