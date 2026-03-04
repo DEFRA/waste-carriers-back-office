@@ -7,7 +7,7 @@ RSpec::Matchers.define :array_with_size do |expected_size, expected_class|
     actual.is_a?(Array) && actual.size == expected_size
 
     if expected_class.present?
-      actual.all? { |element| element.is_a?(expected_class) }
+      actual.all?(expected_class)
     else
       true
     end
