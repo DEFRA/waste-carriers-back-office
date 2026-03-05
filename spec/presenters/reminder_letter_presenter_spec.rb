@@ -35,7 +35,7 @@ RSpec.describe ReminderLetterPresenter do
       let(:contact_address) { build(:simple_address, house_number: nil, address_line_1: nil, town_city: nil, postcode: nil) }
 
       it "throws an error" do
-        expect { subject.contact_address_lines }.to raise_error(MissingAddressError)
+        expect { subject.contact_address_lines }.to raise_error(ReminderLetterPresenter::MissingAddressError)
       end
     end
   end

@@ -33,7 +33,7 @@ module Reports
         it "generates a report file, uploads it to AWS and deletes any previous files" do
 
           # populate test dir
-          File.open(file_path, "w")
+          FileUtils.touch(file_path)
 
           allow(Dir).to receive(:mktmpdir).and_yield(temp_dir)
           expect(DefraRuby::Aws).to receive(:get_bucket).and_return(bucket).at_least(:once)

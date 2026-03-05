@@ -16,8 +16,6 @@ WasteCarriersEngine.configure do |configuration|
   configuration.airbrake_project_key = ENV.fetch("WCRS_BACKOFFICE_AIRBRAKE_PROJECT_KEY", nil)
   configuration.airbrake_blocklist = [/password/i, /authorization/i]
 
-  configuration.address_host = ENV["ADDRESSBASE_URL"] || "http://localhost:8005"
-
   # Notify config
   configuration.notify_api_key = ENV.fetch("NOTIFY_API_KEY", nil)
 

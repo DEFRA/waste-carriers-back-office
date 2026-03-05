@@ -13,7 +13,7 @@ module Reports
         file_path = File.join(temp_dir, "test_file.csv")
 
         # populate test dir
-        File.open(file_path, "w")
+        FileUtils.touch(file_path)
 
         expect(GenerateBoxiFilesService).to receive(:run).with(temp_dir)
         allow(Dir).to receive(:mktmpdir).and_yield(temp_dir)
