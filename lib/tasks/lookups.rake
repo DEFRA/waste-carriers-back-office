@@ -58,8 +58,10 @@ def scope_pipeline(address_limit, address_match_clause)
     #  ... and include only registered addresses without an area and with a postcode
     { "$match": {
       "$and": [
-        "addresses.addressType": "REGISTERED",
-        "addresses.postcode": { "$nin": [nil, ""] }
+        {
+          "addresses.addressType": "REGISTERED",
+          "addresses.postcode": { "$nin": [nil, ""] }
+        }
         # ... and blend in the detailed address match clause for this task
       ] + [address_match_clause]
     } },

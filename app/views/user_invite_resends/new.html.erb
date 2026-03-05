@@ -1,0 +1,21 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: users_path) %>
+
+    <h1 class="govuk-heading-l">
+      <%= t(".heading") %>
+    </h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full govuk-body">
+    <p><%= t(".paragraph1") %></p>
+    <p><%= @user.email %></p>
+    <p><%= t(".paragraph2") %></p>
+
+    <%= button_to t(".button"),
+              user_invite_resends_path(@user.id),
+              class: "govuk-button" %>
+  </div>
+</div>

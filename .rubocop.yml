@@ -59,4 +59,5 @@ Style/DisableCopsWithinSourceCodeDirective:
     - RSpec/ContextWording                 # it sometimes suits to use non-standard context phrasing for clarity
     - RSpec/ExpectOutput                   # this cop fires when we just want to suppress stdout output during unit tests
     - RSpec/LetSetup
+    - RSpec/Output                         # we sometimes want to write to stdout during rspec to see failure details not otherwise shown
   
