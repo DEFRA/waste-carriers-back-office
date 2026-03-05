@@ -1,12 +1,12 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 7473aae7a3cc3b5428b1d329f3e536afa6a93b47
+  revision: 22be1905c8324b64c0e310e3e46148a60b1ea102
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
       countries (~> 5.5.0)
-      defra_ruby_address (~> 0.1.0)
+      defra_ruby_address (~> 0.3.0)
       defra_ruby_alert (~> 2.2.1)
       defra_ruby_companies_house
       defra_ruby_email (~> 1.3.0)
@@ -196,7 +196,7 @@ GEM
       database_cleaner-core (~> 2.0.0)
       mongoid
     date (3.5.1)
-    defra_ruby_address (0.1.0)
+    defra_ruby_address (0.3.0)
       rest-client (~> 2.0)
     defra_ruby_alert (2.2.1)
       airbrake
@@ -365,7 +365,7 @@ GEM
     mime-types (3.7.0)
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
-    mime-types-data (3.2026.0224)
+    mime-types-data (3.2026.0303)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
     minitest (6.0.2)
