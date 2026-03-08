@@ -115,6 +115,28 @@ RSpec.describe "BankTransferPaymentForms" do
             expect(registration).to be_active
           end
         end
+
+        context "when the resource is an active registration with an unpaid copy cards order" do
+          let(:registration) { create(:registration, :active, :has_copy_cards_order) }
+          let(:params) do
+            {
+              amount: registration.finance_details.balance,
+              comment: "foo",
+              registration_reference: "foo",
+              date_received_day: "1",
+              date_received_month: "1",
+              date_received_year: "2018"
+            }
+          end
+
+          it "creates OrderItemLog records for the copy cards order" do
+            expect {
+              post "/bo/resources/#{registration._id}/payments/bank-transfer", params: { bank_transfer_payment_form: params }
+            }.to change(WasteCarriersEngine::OrderItemLog, :count).by(registration.finance_details.orders.sum { |o| o.order_items.count })
+
+            expect(response).to redirect_to(resource_finance_details_path(registration._id))
+          end
+        end
       end
 
       context "when there is a pending conviction check" do

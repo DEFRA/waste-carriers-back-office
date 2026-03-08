@@ -9,6 +9,12 @@ module CanCompleteIfPossible
     def complete_if_possible
       return false unless can_complete?
 
+      if @resource.active? && !@resource.unpaid_balance?
+        # this is to handle deferred copy cards payment case
+        WasteCarriersEngine::OrderItemLog.create_from_registration(@resource, Time.current)
+        return true
+      end
+
       WasteCarriersEngine::RegistrationActivationService.run(registration: @resource)
 
       true
