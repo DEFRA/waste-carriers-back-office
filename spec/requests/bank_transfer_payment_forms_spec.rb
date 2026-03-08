@@ -130,9 +130,9 @@ RSpec.describe "BankTransferPaymentForms" do
           end
 
           it "creates OrderItemLog records for the copy cards order" do
-            expect {
+            expect do
               post "/bo/resources/#{registration._id}/payments/bank-transfer", params: { bank_transfer_payment_form: params }
-            }.to change(WasteCarriersEngine::OrderItemLog, :count).by(registration.finance_details.orders.sum { |o| o.order_items.count })
+            end.to change(WasteCarriersEngine::OrderItemLog, :count).by(registration.finance_details.orders.sum { |o| o.order_items.count })
 
             expect(response).to redirect_to(resource_finance_details_path(registration._id))
           end
