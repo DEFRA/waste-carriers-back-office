@@ -55,10 +55,7 @@
             </div>
 
             <div class="govuk-radios__item">
-              <%= f.radio_button :temp_payment_method,
-                  "bank_transfer",
-                  class: "govuk-radios__input",
-                  disabled: WasteCarriersEngine.configuration.host_is_back_office? %>
+              <%= f.radio_button :temp_payment_method, "bank_transfer", class: "govuk-radios__input" %>
               <%= f.label :temp_payment_method, value: "bank_transfer", class: "govuk-label govuk-radios__label" do %>
                 <%= t("copy_cards_payment_forms.new.options.bank_transfer") %>
                 <span class="govuk-hint"><%= t("copy_cards_payment_forms.new.hint_pay_by_bank_transfer") %></span>
