@@ -5,15 +5,15 @@ http_interactions:
     uri: https://api.notifications.service.gov.uk/v2/notifications/email
     body:
       encoding: UTF-8
-      string: '{"email_address":"whatever@example.com","template_id":"6d20d279-ba79-4fe0-9868-fb09c4ae7733","personalisation":{"reg_identifier":"CBDU54","first_name":"Jane","last_name":"Doe","expires_on":"09
-        June 2024","renew_fee":"105","renew_link":"http://localhost:3002/fo/renew/WbeTaoFniMmes381r6sAwcra","unsubscribe_link":"http://localhost:3002/fo/unsubscribe/Uq6hbrmNmMN2SYmsvzCR1twe"}}'
+      string: '{"email_address":"whatever@example.com","template_id":"6d20d279-ba79-4fe0-9868-fb09c4ae7733","personalisation":{"reg_identifier":"CBDU1","first_name":"Jane","last_name":"Doe","expires_on":"24
+        May 2026","renew_fee":"130.25","renew_link":"http://localhost:3002/fo/renew/GwbpirxiBsCR2LYdM4869LCd","unsubscribe_link":"http://localhost:3002/fo/unsubscribe/DykjfjEFMZfgVH8LBKyRi3a8"}}'
     headers:
       User-Agent:
       - NOTIFY-API-RUBY-CLIENT/5.4.0
       Content-Type:
       - application/json
       Authorization:
-      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIyNWNiNmI5NC04Y2U3LTQ4NWItOTE4YS01NTlmM2IxOGY2OWMiLCJpYXQiOjE3MTI2ODIxMDZ9.ydj5TunToaOuspk3c7RQ13LKHhDyhTbt7-It1EpDJrw
+      - Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIyNWNiNmI5NC04Y2U3LTQ4NWItOTE4YS01NTlmM2IxOGY2OWMiLCJpYXQiOjE3NzQzNjM0MDJ9.td8ol5D0bmC_i3hCBGLaK60R_CUOnF-qg36CRVGp_1g
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -26,11 +26,13 @@ http_interactions:
       Content-Type:
       - application/json
       Content-Length:
-      - '1438'
+      - '1843'
       Connection:
       - keep-alive
       Date:
-      - Tue, 09 Apr 2024 17:01:46 GMT
+      - Tue, 24 Mar 2026 14:43:22 GMT
+      X-B3-Spanid:
+      - self-71845d6e52514022
       Server:
       - gunicorn
       Access-Control-Allow-Origin:
@@ -39,32 +41,46 @@ http_interactions:
       - Content-Type,Authorization
       Access-Control-Allow-Methods:
       - GET,PUT,POST,DELETE
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Cache-Control:
+      - no-store, no-cache, private, must-revalidate
       X-B3-Traceid:
-      - 6ZfCPzgY0GAv44lcLxDtUNML42CNPGLx3zclLsdXcy4aBQ1ZIvOGBw==
-      X-B3-Spanid:
-      - self-07dd12600d13c6b1
+      - dwzh42-FWJnCqHW4M9V2zfU1iyOr0wI1CcEI43FWNfNo_NuhExKa1w==
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 242a81711c4fc113f186d0cca0b5bb94.cloudfront.net (CloudFront)
+      - 1.1 e3a1c705cc1183f2a1e2a55e5510e170.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
-      - LHR50-P3
+      - LHR3-P4
       X-Amz-Cf-Id:
-      - 6ZfCPzgY0GAv44lcLxDtUNML42CNPGLx3zclLsdXcy4aBQ1ZIvOGBw==
+      - dwzh42-FWJnCqHW4M9V2zfU1iyOr0wI1CcEI43FWNfNo_NuhExKa1w==
     body:
       encoding: UTF-8
       string: '{"content":{"body":"Dear Jane Doe\r\n\r\n#Renew your waste carrier
-        registration by 09 June 2024\r\n\r\nIt costs \u00a3105 and lasts for 3 years.\r\n\r\n#You
-        can renew online in a few minutes at: \r\nhttp://localhost:3002/fo/renew/WbeTaoFniMmes381r6sAwcra\r\n\r\nRegistration
-        number: CBDU54\r\n\r\nConviction checks could take up to 5 weeks. You should
+        registration by 24 May 2026\r\n\r\n#You can renew online in a few minutes
+        at: \r\nhttp://localhost:3002/fo/renew/GwbpirxiBsCR2LYdM4869LCd\r\n\r\nRegistration
+        number: CBDU1\r\n\r\nConviction checks could take up to 5 weeks. You should
         plan for this if you have any relevant convictions. \r\n\r\nIf you no longer
         need a waste carrier registration, you can ignore these reminders. You cannot
-        transport, buy, sell or dispose of waste without a registration.\r\n\r\nEnvironment
-        Agency\r\nTelephone 03708 506 506, Monday to Friday (8am to 6pm)\r\nnccc-carrierbroker@environment-agency.gov.uk\r\n\r\nTo
-        unsubscribe from email reminders\r\n[Unsubscribe](http://localhost:3002/fo/unsubscribe/Uq6hbrmNmMN2SYmsvzCR1twe)\r\n\r\nThis
-        is an automated email, please do not reply.","from_email":"waste.carriers.registration.service@notifications.service.gov.uk","subject":"Renew
-        waste carrier registration CBDU54","unsubscribe_link":null},"id":"8b63ed28-80d4-4a94-8522-13e1e8c3b9dc","reference":null,"scheduled_for":null,"template":{"id":"6d20d279-ba79-4fe0-9868-fb09c4ae7733","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/6d20d279-ba79-4fe0-9868-fb09c4ae7733","version":3},"uri":"https://api.notifications.service.gov.uk/v2/notifications/8b63ed28-80d4-4a94-8522-13e1e8c3b9dc"}
+        transport, buy, sell or dispose of waste without a registration.\r\n\r\n##
+        Please note: \r\n\r\nIf you do not renew by 24 May 2026, you\u2019ll need
+        to create a new registration which will change your registration number. For
+        more information visit: [Register or renew as a waste carrier, broker or dealer
+        - GOV.UK](https://www.gov.uk/register-renew-waste-carrier-broker-dealer-england)  \r\n\r\nWaste
+        carrier registrations, renewals and associated costs are subject to annual
+        increases in line with inflation. \r\n\r\nEnvironment Agency\r\nTelephone
+        03708 506 506, Monday to Friday (8am to 6pm)\r\nnccc-carrierbroker@environment-agency.gov.uk\r\n\r\nTo
+        unsubscribe from email reminders\r\n[Unsubscribe](http://localhost:3002/fo/unsubscribe/DykjfjEFMZfgVH8LBKyRi3a8)\r\n\r\nThis
+        is an automated email, please do not reply.","from_email":"waste.carriers.registration.service@notifications.service.gov.uk","one_click_unsubscribe_url":null,"subject":"Renew
+        waste carrier registration CBDU1"},"id":"450c5552-de22-4819-90aa-946ccc7d2d18","reference":null,"scheduled_for":null,"template":{"id":"6d20d279-ba79-4fe0-9868-fb09c4ae7733","uri":"https://api.notifications.service.gov.uk/services/25cb6b94-8ce7-485b-918a-559f3b18f69c/templates/6d20d279-ba79-4fe0-9868-fb09c4ae7733","version":11},"uri":"https://api.notifications.service.gov.uk/v2/notifications/450c5552-de22-4819-90aa-946ccc7d2d18"}
 
         '
-  recorded_at: Tue, 09 Apr 2024 17:01:46 GMT
-recorded_with: VCR 6.2.0
+  recorded_at: Tue, 24 Mar 2026 14:43:22 GMT
+recorded_with: VCR 6.4.0

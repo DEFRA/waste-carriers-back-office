@@ -110,10 +110,10 @@ module WasteCarriersBackOffice
     config.write_off_agency_user_cap = ENV["WRITE_OFF_AGENCY_USER_CAP"] || "500"
 
     # Fees
-    config.renewal_charge = ENV["WCRS_RENEWAL_CHARGE"].to_i
-    config.new_registration_charge = ENV["WCRS_REGISTRATION_CHARGE"].to_i
-    config.type_change_charge = ENV["WCRS_TYPE_CHANGE_CHARGE"].to_i
-    config.card_charge = ENV["WCRS_CARD_CHARGE"].to_i
+    config.renewal_charge = ENV["WCRS_RENEWAL_CHARGE"].to_f
+    config.new_registration_charge = ENV["WCRS_REGISTRATION_CHARGE"].to_f
+    config.type_change_charge = ENV["WCRS_TYPE_CHANGE_CHARGE"].to_f
+    config.card_charge = ENV["WCRS_CARD_CHARGE"].to_f
 
     # Times
     config.renewal_window = ENV["WCRS_REGISTRATION_RENEWAL_WINDOW"].to_i
