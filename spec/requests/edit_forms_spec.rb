@@ -200,7 +200,7 @@ RSpec.describe "EditForms" do
           get main_people_edit_forms_path(token)
           get WasteCarriersEngine::Engine.routes.url_helpers.go_back_forms_path(token:)
 
-          expect(response).to redirect_to(new_edit_form_path(token))
+          expect(response).to redirect_to(Rails.application.routes.url_helpers.new_edit_form_path(token))
         end
       end
 
