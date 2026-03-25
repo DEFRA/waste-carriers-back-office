@@ -60,6 +60,20 @@ RSpec.describe "EditForms" do
               expect(response).to have_http_status(:ok)
             end
           end
+
+          context "when the registration has no key people" do
+            let(:registration) { create(:registration, :active, key_people: []) }
+
+            it "still shows a main people edit link" do
+              get new_edit_form_path(registration.reg_identifier)
+
+              edit_registration = EditRegistration.find_by(reg_identifier: registration.reg_identifier)
+
+              expect(response.body).to include("Main people")
+              expect(response.body).to include("–")
+              expect(response.body).to include(main_people_edit_forms_path(edit_registration.token))
+            end
+          end
         end
       end
     end
