@@ -195,6 +195,13 @@ RSpec.describe "EditForms" do
           get main_people_edit_forms_path(token)
           expect(response).to redirect_to(WasteCarriersEngine::Engine.routes.url_helpers.new_main_people_form_path(token))
         end
+
+        it "returns to the edit form when going back" do
+          get main_people_edit_forms_path(token)
+          get WasteCarriersEngine::Engine.routes.url_helpers.go_back_forms_path(token:)
+
+          expect(response).to redirect_to(new_edit_form_path(token))
+        end
       end
 
       describe "GET edit_contact_name" do
