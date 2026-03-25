@@ -22,13 +22,13 @@ RSpec.describe NotifyRenewalPresenter, type: :helper do
 
   describe "#registration_cost" do
     it "returns the formatted new registration charge" do
-      expect(presenter.registration_cost).to eq("184")
+      expect(presenter.registration_cost).to eq("191.02")
     end
   end
 
   describe "#renewal_cost" do
     it "returns the formatted renewal charge" do
-      expect(presenter.renewal_cost).to eq("125")
+      expect(presenter.renewal_cost).to eq("130.25")
     end
   end
 
