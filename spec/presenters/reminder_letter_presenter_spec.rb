@@ -75,7 +75,7 @@ RSpec.describe ReminderLetterPresenter do
 
   describe "#renewal_cost" do
     it "returns the correct cost" do
-      expected_cost = "125"
+      expected_cost = "130.25"
 
       expect(subject.renewal_cost).to eq(expected_cost)
     end
@@ -83,7 +83,7 @@ RSpec.describe ReminderLetterPresenter do
 
   describe "#new_reg_cost" do
     it "returns the correct cost" do
-      expected_cost = "184"
+      expected_cost = "191.02"
 
       expect(subject.new_reg_cost).to eq(expected_cost)
     end
