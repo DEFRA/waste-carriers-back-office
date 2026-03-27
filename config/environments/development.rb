@@ -61,4 +61,8 @@ Rails.application.configure do
   # https://github.com/rails/web-console#configuration
   # https://stackoverflow.com/a/29417509
   config.web_console.allowed_ips = ENV.fetch("SSH_CLIENT", "127.0.0.1").split.first
+
+  # Allow requests from docker container hostnames for cross-app mocks
+  config.hosts << "front-office"
+  config.hosts << "back-office"
 end
