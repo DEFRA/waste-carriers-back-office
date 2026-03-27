@@ -27,6 +27,13 @@ RSpec.describe EditForm do
           expect(permitted_states).to match_array(transitionable_states)
         end
 
+        it "records the previous state when transitioning to an edit form" do
+          expect { edit_registration.transition_to_edit!(:edit_main_people) }
+            .to change(edit_registration, :workflow_history).from([]).to(["edit_form"])
+
+          expect(edit_registration.workflow_state).to eq("main_people_form")
+        end
+
         non_address_editable_form_states.each do |expected_state|
           state_without_form_suffix = expected_state.to_s.remove("_form")
           event = :"edit_#{state_without_form_suffix}"

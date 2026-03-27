@@ -127,34 +127,34 @@
             </tr>
           <% end %>
 
-          <% if @presenter.main_people_with_roles.any? %>
-            <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">
-                <%= t(".sections.business.labels.main_people") %>
-              </th>
-             <td class="govuk-table__cell">
-                <% if @presenter.main_people_with_roles.count == 1 %>
-                  <%= @presenter.main_people_with_roles.first %>
-                <% else %>
-                  <ul class="govuk-list govuk-list--bullet people_list">
-                    <% @presenter.main_people_with_roles.each do |person| %>
-                      <li>
-                        <%= person %>
-                      </li>
-                    <% end %>
-                  </ul>
-                <% end %>
-              </td>
-              <td class="govuk-table__cell govuk-table__cell--numeric">
-                <%= link_to main_people_edit_forms_path(@presenter.token) do %>
-                  <%= t(".edit_links.default") %>
-                  <span class="govuk-visually-hidden">
-                    <%= t(".edit_links.visually_hidden.main_people") %>
-                  </span>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">
+              <%= t(".sections.business.labels.main_people") %>
+            </th>
+            <td class="govuk-table__cell">
+              <% if @presenter.main_people_with_roles.count == 1 %>
+                <%= @presenter.main_people_with_roles.first %>
+              <% elsif @presenter.main_people_with_roles.any? %>
+                <ul class="govuk-list govuk-list--bullet people_list">
+                  <% @presenter.main_people_with_roles.each do |person| %>
+                    <li>
+                      <%= person %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <%= t("shared.registrations.filler") %>
+              <% end %>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
+              <%= link_to main_people_edit_forms_path(@presenter.token) do %>
+                <%= t(".edit_links.default") %>
+                <span class="govuk-visually-hidden">
+                  <%= t(".edit_links.visually_hidden.main_people") %>
+                </span>
+              <% end %>
+            </td>
+          </tr>
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header">
               <%= t(".sections.business.labels.registered_address") %>
