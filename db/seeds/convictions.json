@@ -1,0 +1,50 @@
+{
+  "convictions" : [
+    {
+      "name" : "Blogs, Fred",
+      "date_of_birth" : "1981-01-01",
+      "system_flag" : "ABC",
+      "incident_number" : "1234"
+    },
+    {
+      "name" : "Blogs, Jane",
+      "date_of_birth" : "1982-02-02",
+      "system_flag" : "BCDEF",
+      "incident_number" : "2345"
+    },
+    {
+      "name" : "Alex Smith-Brown",
+      "date_of_birth" : "1983-03-03",
+      "system_flag" : "CDE",
+      "incident_number" : "3456"
+    },
+    {
+      "name" : "Bobby Smith",
+      "system_flag" : null,
+      "incident_number" : "A4567"
+    },
+    {
+      "name" : "Test Waste Services Ltd.",
+      "company_number" : "12345678",
+      "system_flag" : "PQR",
+      "incident_number" : "7766"
+    },
+    {
+      "name" : "Recycle-pro (UK) Limited",
+      "company_number" : "9876",
+      "system_flag" : "RST"
+    },
+    {
+      "name" : "Waste Not Want Not, UK",
+      "company_number" : "654321",
+      "system_flag" : "XYZ",
+      "incident_number" : "Z-4321-01"
+    },
+    {
+      "name" : "CACI (Test)",
+      "company_number" : "1649776",
+      "system_flag" : "CACI",
+      "incident_number" : "123"
+    }
+  ]
+}
