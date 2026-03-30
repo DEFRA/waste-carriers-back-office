@@ -25,7 +25,7 @@
         </tr>
       </thead>
       <tbody class="govuk-table__body">
-        <% @finance_details.payments.each do |payment| %>
+        <% @finance_details.payments.except_online_not_authorised.each do |payment| %>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
               <%= (payment.date_received || payment.date_entered).to_formatted_s(:day_month_year_time_slashes) %>

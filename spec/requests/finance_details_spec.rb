@@ -20,6 +20,53 @@ RSpec.describe "FinanceDetails" do
           expect(response).to render_template(:show)
           expect(response).to have_http_status(:ok)
         end
+
+        context "when it has a mix of successful and unsuccessful card payments" do
+          let(:finance_details) do
+            build(:finance_details).tap do |details|
+              details.orders = [build(:order, :has_required_data)]
+              details.payments = [
+                build(
+                  :payment,
+                  :govpay,
+                  order_key: "successful-govpay",
+                  govpay_payment_status: WasteCarriersEngine::Payment::STATUS_SUCCESS
+                ),
+                build(
+                  :payment,
+                  :govpay,
+                  order_key: "started-govpay",
+                  govpay_payment_status: WasteCarriersEngine::Payment::STATUS_STARTED
+                ),
+                build(
+                  :payment,
+                  :worldpay,
+                  order_key: "authorised-worldpay",
+                  world_pay_payment_status: WasteCarriersEngine::Payment::STATUS_AUTHORISED
+                ),
+                build(
+                  :payment,
+                  :worldpay,
+                  order_key: "refused-worldpay",
+                  world_pay_payment_status: WasteCarriersEngine::Payment::STATUS_REFUSED
+                ),
+                build(:payment, :bank_transfer, order_key: "bank-transfer")
+              ]
+              details.update_balance
+            end
+          end
+          let(:renewing_registration) { create(:renewing_registration, finance_details:) }
+
+          it "shows only successful card payments in the payment history" do
+            get resource_finance_details_path(renewing_registration._id)
+
+            expect(response.body).to match(/successful-govpay/)
+            expect(response.body).to match(/authorised-worldpay/)
+            expect(response.body).to match(/bank-transfer/)
+            expect(response.body).not_to match(/started-govpay/)
+            expect(response.body).not_to match(/refused-worldpay/)
+          end
+        end
       end
 
       context "when the registration is not a transient object" do
