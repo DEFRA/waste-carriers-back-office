@@ -205,7 +205,19 @@ module CanUseEditRegistrationWorkflow
     # rubocop:enable Metrics/BlockLength
   end
 
+  def transition_to_edit!(transition)
+    record_current_state_for_back_navigation
+    public_send(:"#{transition}!")
+  end
+
   private
+
+  def record_current_state_for_back_navigation
+    return if workflow_state.blank?
+    return if workflow_history.last == workflow_state
+
+    workflow_history << workflow_state
+  end
 
   def based_overseas?
     overseas?

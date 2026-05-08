@@ -60,6 +60,20 @@ RSpec.describe "EditForms" do
               expect(response).to have_http_status(:ok)
             end
           end
+
+          context "when the registration has no key people" do
+            let(:registration) { create(:registration, :active, key_people: []) }
+
+            it "still shows a main people edit link" do
+              get new_edit_form_path(registration.reg_identifier)
+
+              edit_registration = EditRegistration.find_by(reg_identifier: registration.reg_identifier)
+
+              expect(response.body).to include("Main people")
+              expect(response.body).to include("–")
+              expect(response.body).to include(main_people_edit_forms_path(edit_registration.token))
+            end
+          end
         end
       end
     end
@@ -180,6 +194,13 @@ RSpec.describe "EditForms" do
         it "redirects to the main_people form" do
           get main_people_edit_forms_path(token)
           expect(response).to redirect_to(WasteCarriersEngine::Engine.routes.url_helpers.new_main_people_form_path(token))
+        end
+
+        it "returns to the edit form when going back" do
+          get main_people_edit_forms_path(token)
+          get WasteCarriersEngine::Engine.routes.url_helpers.go_back_forms_path(token:)
+
+          expect(response).to redirect_to(Rails.application.routes.url_helpers.new_edit_form_path(token))
         end
       end
 
