@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 1bb166debddacb6cb5cd4c1eec4615be1c0b1562
+  revision: 33cc560ad0598066be61cd1e05c2d7f99dab8f9c
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -11,7 +11,7 @@ GIT
       defra_ruby_companies_house
       defra_ruby_email (~> 1.3.0)
       defra_ruby_govpay
-      defra_ruby_validators (~> 3.0)
+      defra_ruby_validators (~> 3.1)
       high_voltage (~> 3.1.2)
       jbuilder (~> 2.11.5)
       mongo_session_store (~> 3.2.1)
@@ -229,7 +229,7 @@ GEM
       savon (~> 2.13.0)
     defra_ruby_style (0.4.1)
     defra_ruby_template (5.11.1)
-    defra_ruby_validators (3.0.0)
+    defra_ruby_validators (3.1.0)
       activemodel
       defra_ruby_companies_house
       i18n
@@ -305,7 +305,7 @@ GEM
     html-attributes-utils (1.0.2)
       activesupport (>= 6.1.4.4)
     http-accept (1.7.0)
-    http-cookie (1.1.4)
+    http-cookie (1.1.6)
       domain_name (~> 0.5)
     httpi (3.0.1)
       rack
@@ -369,7 +369,7 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
     minitest (5.27.0)
-    mongo (2.23.0)
+    mongo (2.24.0)
       base64
       bson (>= 4.14.1, < 6.0.0)
     mongo_session_store (3.2.1)
