@@ -2,7 +2,19 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.0...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.1...HEAD)
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `1bb166d` to `33cc560` [\#2307](https://github.com/DEFRA/waste-carriers-back-office/pull/2307) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump devise from 5.0.3 to 5.0.4 [\#2306](https://github.com/DEFRA/waste-carriers-back-office/pull/2306) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.19.2 to 1.19.3 [\#2305](https://github.com/DEFRA/waste-carriers-back-office/pull/2305) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump spring from 4.4.2 to 4.5.0 [\#2304](https://github.com/DEFRA/waste-carriers-back-office/pull/2304) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump activesupport from 7.2.3 to 7.2.3.1 [\#2287](https://github.com/DEFRA/waste-carriers-back-office/pull/2287) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.36.1](https://github.com/defra/waste-carriers-back-office/tree/v1.36.1) (2026-04-16)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.0...v1.36.1)
 
 **Fixed bugs:**
 
@@ -10,6 +22,7 @@
 
 **Merged pull requests:**
 
+- Release/v1.36.1 [\#2298](https://github.com/DEFRA/waste-carriers-back-office/pull/2298) ([brujeo](https://github.com/brujeo))
 - Bump gem dependencies 2026-04-15 [\#2297](https://github.com/DEFRA/waste-carriers-back-office/pull/2297) ([brujeo](https://github.com/brujeo))
 - Feature/add seed convictions data [\#2291](https://github.com/DEFRA/waste-carriers-back-office/pull/2291) ([brujeo](https://github.com/brujeo))
 - \[RUBY-4216\] Update main people section to handle cases with no key people [\#2290](https://github.com/DEFRA/waste-carriers-back-office/pull/2290) ([jjromeo](https://github.com/jjromeo))
