@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-ruby "3.2.2"
+ruby "3.4.6"
 
 # Use MongoDB as the database, and mongoid as our ORM for it.
 gem "mongoid"
@@ -43,6 +43,8 @@ gem "whenever", require: false
 
 gem "wicked_pdf"
 
+gem "csv"
+
 gem "matrix", "< 0.4.3"
 
 gem "net-imap"
@@ -50,6 +52,8 @@ gem "net-imap"
 gem "defra_ruby_area"
 
 gem "defra_ruby_storm"
+
+gem "nkf"
 
 # Use the Defra Ruby Aws gem for loading files to AWS buckets
 gem "defra_ruby_aws"
@@ -127,6 +131,7 @@ group :test do
   gem "factory_bot_rails"
   gem "faker"
   gem "faraday-retry"
+  gem "observer"
   gem "rails-controller-testing"
   gem "rspec-retry"
   gem "timecop"
