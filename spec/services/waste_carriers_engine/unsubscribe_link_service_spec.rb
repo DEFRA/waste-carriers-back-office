@@ -18,7 +18,7 @@ module WasteCarriersEngine
       end
 
       it "does not include the back-office path prefix" do
-        expect(@unsubscribe_link).not_to match(%r{/bo/unsubscribe})
+        expect(@unsubscribe_link).not_to include("/bo/unsubscribe")
       end
     end
   end

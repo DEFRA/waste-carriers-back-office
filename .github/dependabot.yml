@@ -6,3 +6,7 @@ updates:
     interval: daily
   open-pull-requests-limit: 10
   versioning-strategy: lockfile-only
+  cooldown:
+    default-days: 7
+    exclude:
+    - "waste_carriers_engine"

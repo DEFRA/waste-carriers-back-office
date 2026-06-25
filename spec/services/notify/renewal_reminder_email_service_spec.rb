@@ -45,9 +45,7 @@ module Notify
         it "sends an email" do
           expect(subject).to be_a(Notifications::Client::ResponseNotification)
           expect(subject.template["id"]).to eq(template_id)
-          expect(subject.content["subject"]).to match(
-            /Renew waste carrier registration CBDU/
-          )
+          expect(subject.content["subject"]).to include("Renew waste carrier registration CBDU")
         end
 
         it_behaves_like "can create a communication record", "email"

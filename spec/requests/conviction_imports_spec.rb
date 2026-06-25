@@ -141,7 +141,7 @@ RSpec.describe "ConvictionImports" do
           post "/bo/import-convictions", params: { file: csv_missing_required_headers }
 
           expect(response).to render_template(:new)
-          expect(flash[:error]).to match(/Error occurred while importing data:/)
+          expect(flash[:error]).to include("Error occurred while importing data:")
         end
       end
 
@@ -159,7 +159,7 @@ RSpec.describe "ConvictionImports" do
           post "/bo/import-convictions", params: { file: invalid_csv }
 
           expect(response).to render_template(:new)
-          expect(flash[:error]).to match(/Error occurred while importing data:/)
+          expect(flash[:error]).to include("Error occurred while importing data:")
         end
       end
     end
