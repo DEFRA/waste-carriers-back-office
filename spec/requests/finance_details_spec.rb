@@ -60,11 +60,11 @@ RSpec.describe "FinanceDetails" do
           it "shows only successful card payments in the payment history" do
             get resource_finance_details_path(renewing_registration._id)
 
-            expect(response.body).to match(/successful-govpay/)
-            expect(response.body).to match(/authorised-worldpay/)
-            expect(response.body).to match(/bank-transfer/)
-            expect(response.body).not_to match(/started-govpay/)
-            expect(response.body).not_to match(/refused-worldpay/)
+            expect(response.body).to include("successful-govpay")
+            expect(response.body).to include("authorised-worldpay")
+            expect(response.body).to include("bank-transfer")
+            expect(response.body).not_to include("started-govpay")
+            expect(response.body).not_to include("refused-worldpay")
           end
         end
       end

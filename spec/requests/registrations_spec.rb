@@ -27,7 +27,7 @@ RSpec.describe "Registrations" do
 
       context "when HTTP referer is not set" do
         it "the back link points to the dashboard" do
-          expect(response.body).to match(%r{href="/bo">Dashboard})
+          expect(response.body).to include('href="/bo">Dashboard')
         end
       end
 
@@ -36,7 +36,7 @@ RSpec.describe "Registrations" do
         let(:headers) { { "HTTP_REFERER" => referrer } }
 
         it "the back link points to the dashboard" do
-          expect(response.body).to match(%r{href="/bo">Dashboard})
+          expect(response.body).to include('href="/bo">Dashboard')
         end
       end
 
