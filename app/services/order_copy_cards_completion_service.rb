@@ -29,7 +29,7 @@ class OrderCopyCardsCompletionService < WasteCarriersEngine::BaseService
     registration.save!
 
     # Log the order items only if payment is complete.
-    if @transient_registration.unpaid_balance?
+    if registration.unpaid_balance?
       # Orders paid using alternate payment methods are not currently
       # included in the card order export. Just log these.
       Rails.logger.warn("Copy card order payment incomplete " \
@@ -44,7 +44,7 @@ class OrderCopyCardsCompletionService < WasteCarriersEngine::BaseService
   end
 
   def send_confirmation_email
-    if @transient_registration.unpaid_balance?
+    if registration.unpaid_balance?
       Notify::CopyCardsAwaitingPaymentEmailService
         .run(registration: registration, order: cached_copy_cards_order)
     else
