@@ -2,10 +2,25 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.1...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.2...HEAD)
 
 **Merged pull requests:**
 
+- Bump waste\_carriers\_engine from `9e7db7a` to `0bb3c95` [\#2334](https://github.com/DEFRA/waste-carriers-back-office/pull/2334) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Feature/ruby 4335 wcr security enable bundler cooldown give new gems a few days to be vetted [\#2333](https://github.com/DEFRA/waste-carriers-back-office/pull/2333) ([brujeo](https://github.com/brujeo))
+- Bump waste\_carriers\_engine from `3f7611e` to `9e7db7a` [\#2326](https://github.com/DEFRA/waste-carriers-back-office/pull/2326) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump net-imap from 0.6.4 to 0.6.4.1 [\#2320](https://github.com/DEFRA/waste-carriers-back-office/pull/2320) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump spring from 4.5.0 to 4.6.0 [\#2318](https://github.com/DEFRA/waste-carriers-back-office/pull/2318) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `33cc560` to `3f7611e` [\#2316](https://github.com/DEFRA/waste-carriers-back-office/pull/2316) ([dependabot[bot]](https://github.com/apps/dependabot))
+- RUBY-4265 Update Ruby to 3.4.6 [\#2313](https://github.com/DEFRA/waste-carriers-back-office/pull/2313) ([jjromeo](https://github.com/jjromeo))
+
+## [v1.36.2](https://github.com/defra/waste-carriers-back-office/tree/v1.36.2) (2026-05-09)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.1...v1.36.2)
+
+**Merged pull requests:**
+
+- Release/v1.36.2 [\#2308](https://github.com/DEFRA/waste-carriers-back-office/pull/2308) ([brujeo](https://github.com/brujeo))
 - Bump waste\_carriers\_engine from `1bb166d` to `33cc560` [\#2307](https://github.com/DEFRA/waste-carriers-back-office/pull/2307) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump devise from 5.0.3 to 5.0.4 [\#2306](https://github.com/DEFRA/waste-carriers-back-office/pull/2306) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump nokogiri from 1.19.2 to 1.19.3 [\#2305](https://github.com/DEFRA/waste-carriers-back-office/pull/2305) ([dependabot[bot]](https://github.com/apps/dependabot))
