@@ -13,7 +13,7 @@ RSpec.describe OrderCopyCardsCompletionService do
     # Ensure registration activation date is prior to the card order date
     before do
       allow(registration).to receive(:save!)
-      allow(registration.finance_details).to receive(:update_balance)
+      allow(registration.finance_details).to receive(:update_balance).and_call_original
       allow(transient_registration).to receive(:delete)
 
       registration.metaData.dateActivated = 1.month.ago
@@ -89,6 +89,23 @@ RSpec.describe OrderCopyCardsCompletionService do
 
       it "does not create an order item log" do
         expect { described_class.run(transient_registration) }.not_to change(WasteCarriersEngine::OrderItemLog, :count).from(0)
+      end
+    end
+
+    context "when the payment has already been recorded against the registration" do
+      before do
+        registration.finance_details.payments << build(:payment, :cheque, amount: Rails.configuration.card_charge)
+      end
+
+      it_behaves_like "completes the order", Notify::CopyCardsOrderCompletedEmailService
+
+      it "creates an order item log for the copy cards order" do
+        copy_card_order_item = transient_finance_details.orders.first.order_items.first
+
+        expect { described_class.run(transient_registration) }
+          .to change {
+            WasteCarriersEngine::OrderItemLog.where(order_item_id: copy_card_order_item.id).count
+          }.from(0).to(1)
       end
     end
 
