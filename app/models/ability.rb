@@ -132,7 +132,6 @@ class Ability
     can :import_conviction_data, :all
     can :run_finance_reports, :all
     can :read, Reports::DefraQuarterlyStatsService
-    can :read, DeregistrationEmailExportService
     can :view_analytics, :all
   end
 
@@ -142,7 +141,6 @@ class Ability
     can :manage_back_office_users, User
     can :import_conviction_data, :all
     can :run_finance_reports, :all
-    can :read, DeregistrationEmailExportService
     can :read, Reports::DefraQuarterlyStatsService
     can :view_analytics, :all
 

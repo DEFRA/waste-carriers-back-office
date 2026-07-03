@@ -24,8 +24,6 @@ class EditRegistration < WasteCarriersEngine::TransientRegistration
                              declaration
                              past_registrations
                              copy_cards
-                             deregistration_token
-                             deregistration_token_created_at
                              view_certificate_token
                              view_certificate_token_created_at
                              unsubscribe_token],
