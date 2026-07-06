@@ -11,13 +11,13 @@ RSpec.describe DeregistrationTokenCleanupService do
       collection.find("_id" => registration.id).first
     end
 
-    def set_legacy_fields(fields)
+    def write_legacy_fields(fields)
       collection.update_one({ "_id" => registration.id }, { "$set" => fields })
     end
 
     context "when a registration has both obsolete deregistration fields" do
       before do
-        set_legacy_fields("deregistration_token" => "TOKEN", "deregistration_token_created_at" => Time.zone.now)
+        write_legacy_fields("deregistration_token" => "TOKEN", "deregistration_token_created_at" => Time.zone.now)
       end
 
       it "removes deregistration_token" do
@@ -39,7 +39,7 @@ RSpec.describe DeregistrationTokenCleanupService do
     end
 
     context "when a registration has only one of the obsolete fields" do
-      before { set_legacy_fields("deregistration_token" => "TOKEN") }
+      before { write_legacy_fields("deregistration_token" => "TOKEN") }
 
       it "still removes it" do
         expect { described_class.run }.to change { stored_document["deregistration_token"] }.from("TOKEN").to(nil)
