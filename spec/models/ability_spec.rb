@@ -401,17 +401,6 @@ RSpec.describe Ability do
     it_behaves_like "allows only the permitted roles", false, :read, Reports::DefraQuarterlyStatsService
   end
 
-  context "when the action is view bulk email exports" do
-    let(:permitted_roles) do
-      %w[
-        cbd_user
-        developer
-      ]
-    end
-
-    it_behaves_like "allows only the permitted roles", false, :read, DeregistrationEmailExportService
-  end
-
   context "when the action is run finance reports" do
     let(:permitted_roles) do
       %w[

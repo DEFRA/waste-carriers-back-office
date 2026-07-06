@@ -34,16 +34,6 @@ module WasteCarriersEngine
         end
       end
 
-      context "when the transient object is a dergistering registration" do
-        let(:transient_registration) { DeregisteringRegistration.new }
-
-        it "runs the correct permission check service and return a result" do
-          expect(described_class.run(params)).to eq(result)
-
-          expect(BlankPermissionCheckService).to have_received(:run).with(params)
-        end
-      end
-
       context "when there is no permission check service for the given transient object" do
         let(:transient_registration) { instance_double(TransientRegistration) }
 

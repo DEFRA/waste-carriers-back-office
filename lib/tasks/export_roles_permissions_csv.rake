@@ -22,7 +22,6 @@ namespace :debug do
       { record_cheque_payment: WasteCarriersEngine::Registration },
       { record_missed_card_payment: WasteCarriersEngine::Registration },
       { record_postal_order_payment: WasteCarriersEngine::Registration },
-      { read: DeregistrationEmailExportService },
       { read: Reports::DefraQuarterlyStatsService },
       { refresh_company_name: WasteCarriersEngine::Registration },
       { refund: WasteCarriersEngine::Registration },
