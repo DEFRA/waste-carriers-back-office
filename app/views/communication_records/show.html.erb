@@ -38,7 +38,7 @@
       <% if @communication_record.content.present? %>
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key"><%= t(".content") %></dt>
-          <dd class="govuk-summary-list__value"><%= simple_format(@communication_record.content) %></dd>
+          <dd class="govuk-summary-list__value"><%= notify_content_html(@communication_record.content) %></dd>
         </div>
       <% end %>
     </dl>

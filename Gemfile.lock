@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: d94b663488a50a44b4d0896abd0032a5d229f287
+  revision: 6c5aad95dd09a984f599584e71204b4de6d02b9d
   branch: RUBY-4340-wcr-bo-add-communication-content-to-communication-history
   specs:
     waste_carriers_engine (0.0.1)
@@ -298,6 +298,9 @@ GEM
       activemodel (>= 6.1)
       activesupport (>= 6.1)
       html-attributes-utils (~> 1)
+    govuk_markdown (2.0.4)
+      activesupport
+      redcarpet
     gyoku (1.4.0)
       builder (>= 2.1.2)
       rexml (~> 3.0)
@@ -494,6 +497,7 @@ GEM
       erb
       psych (>= 4.0.0)
       tsort
+    redcarpet (3.6.1)
     regexp_parser (2.12.0)
     reline (0.6.3)
       io-console (~> 0.5)
@@ -684,6 +688,7 @@ DEPENDENCIES
   faraday-retry
   github_changelog_generator
   govuk_design_system_formbuilder (~> 5.3)
+  govuk_markdown
   jquery-rails
   kaminari
   kaminari-mongoid
