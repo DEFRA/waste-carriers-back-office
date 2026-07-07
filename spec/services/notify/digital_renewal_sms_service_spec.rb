@@ -13,7 +13,9 @@ RSpec.describe Notify::DigitalRenewalSmsService do
     let(:template_id) { "c23c1300-6d49-4310-bda6-99174ca0cd23" }
 
     let(:client) { instance_double(Notifications::Client) }
-    let(:notifications_client_response_notification) { instance_double(Notifications::Client::ResponseNotification) }
+    let(:notifications_client_response_notification) do
+      instance_double(Notifications::Client::ResponseNotification, content: { "body" => "Text message content" })
+    end
 
     before do
       allow(Notifications::Client).to receive(:new).and_return(client)

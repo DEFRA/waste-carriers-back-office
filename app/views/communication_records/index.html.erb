@@ -15,29 +15,27 @@
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
             <th class="govuk-table__header" scope="col"><%= t(".comms_label") %></th>
-            <th class="govuk-table__header" scope="col"><%= t(".notify_template_id") %></th>
             <th class="govuk-table__header" scope="col"><%= t(".notification_type") %></th>
-            <th class="govuk-table__header" scope="col"><%= t(".sent_to") %></th>
             <th class="govuk-table__header" scope="col"><%= t(".sent_at") %></th>
+            <th class="govuk-table__header" scope="col"><%= t(".delivery_status") %></th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
           <% @communication_records.each do |record| %>
              <tr class="govuk-table__row">
               <td class="govuk-table__cell">
-                <%= record.comms_label %>
-              </td>
-              <td class="govuk-table__cell">
-                <%= record.notify_template_id %>
+                <%= link_to record.comms_label,
+                            registration_communication_record_path(@resource.reg_identifier, record.id),
+                            class: "govuk-link" %>
               </td>
               <td class="govuk-table__cell">
                 <%= record.notification_type %>
               </td>
               <td class="govuk-table__cell">
-                <%= record.sent_to %>
+                <%= record.sent_at.to_formatted_s(:time_on_day_month_year) %>
               </td>
               <td class="govuk-table__cell">
-                <%= record.sent_at.to_formatted_s(:time_on_day_month_year) %>
+                <%= record.delivery_status %>
               </td>
             </tr>
           <% end %>

@@ -1,0 +1,46 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <%= render("waste_carriers_engine/shared/back", back_path: registration_communication_records_path(@resource.reg_identifier)) %>
+
+    <h1 class="govuk-heading-l">
+      <%= t(".heading") %>
+    </h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <dl class="govuk-summary-list govuk-summary-list--no-border">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key"><%= t(".comms_label") %></dt>
+        <dd class="govuk-summary-list__value"><%= @communication_record.comms_label %></dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key"><%= t(".notify_template_id") %></dt>
+        <dd class="govuk-summary-list__value"><%= @communication_record.notify_template_id %></dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key"><%= t(".notification_type") %></dt>
+        <dd class="govuk-summary-list__value"><%= @communication_record.notification_type %></dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key"><%= t(".sent_to") %></dt>
+        <dd class="govuk-summary-list__value"><%= @communication_record.sent_to %></dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key"><%= t(".sent_at") %></dt>
+        <dd class="govuk-summary-list__value"><%= @communication_record.sent_at.to_formatted_s(:time_on_day_month_year) %></dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key"><%= t(".delivery_status") %></dt>
+        <dd class="govuk-summary-list__value"><%= @communication_record.delivery_status %></dd>
+      </div>
+      <% if @communication_record.content.present? %>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key"><%= t(".content") %></dt>
+          <dd class="govuk-summary-list__value"><%= simple_format(@communication_record.content) %></dd>
+        </div>
+      <% end %>
+    </dl>
+  </div>
+</div>

@@ -12,14 +12,11 @@ module Notify
       @registration = NotifyRenewalPresenter.new(registration)
 
       client = Notifications::Client.new(WasteCarriersEngine.configuration.notify_api_key)
-      client.send_sms(
-        template_id: template_id,
-        reference: @registration.reg_identifier,
-        phone_number: @registration.phone_number,
-        personalisation: personalisation
-      ).tap do |response|
-        create_communication_record if response.instance_of?(Notifications::Client::ResponseNotification)
-      end
+      send_with_communication_record(client, :send_sms,
+                                     template_id: template_id,
+                                     reference: @registration.reg_identifier,
+                                     phone_number: @registration.phone_number,
+                                     personalisation: personalisation)
     end
 
     def template_id
