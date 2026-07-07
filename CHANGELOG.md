@@ -2,10 +2,23 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.2...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.3...HEAD)
+
+**Fixed bugs:**
+
+- \[RUBY-4304\] Fix issue with copy-card orders not being in export [\#2332](https://github.com/DEFRA/waste-carriers-back-office/pull/2332) ([jjromeo](https://github.com/jjromeo))
 
 **Merged pull requests:**
 
+- Feature/ruby 4356 wcr remove deregistration functionality [\#2340](https://github.com/DEFRA/waste-carriers-back-office/pull/2340) ([brujeo](https://github.com/brujeo))
+
+## [v1.36.3](https://github.com/defra/waste-carriers-back-office/tree/v1.36.3) (2026-06-29)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.2...v1.36.3)
+
+**Merged pull requests:**
+
+- Release/v1.36.3 [\#2335](https://github.com/DEFRA/waste-carriers-back-office/pull/2335) ([brujeo](https://github.com/brujeo))
 - Bump waste\_carriers\_engine from `9e7db7a` to `0bb3c95` [\#2334](https://github.com/DEFRA/waste-carriers-back-office/pull/2334) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Feature/ruby 4335 wcr security enable bundler cooldown give new gems a few days to be vetted [\#2333](https://github.com/DEFRA/waste-carriers-back-office/pull/2333) ([brujeo](https://github.com/brujeo))
 - Bump waste\_carriers\_engine from `3f7611e` to `9e7db7a` [\#2326](https://github.com/DEFRA/waste-carriers-back-office/pull/2326) ([dependabot[bot]](https://github.com/apps/dependabot))
