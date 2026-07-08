@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: af6387f28da7200e4e7a6b2f22f4ff2e33664675
-  branch: RUBY-4340-wcr-bo-add-communication-content-to-communication-history
+  revision: 706c4e40b7e507e02e474dcf8ee2f098a5e834ce
+  branch: main
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
