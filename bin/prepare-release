@@ -1,0 +1,286 @@
+#!/bin/bash
+set -euo pipefail
+
+VERSION=""
+SCRIPT_NAME="$(basename "$0")"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+info()  { echo -e "${GREEN}[INFO]${NC} $1"; }
+warn()  { echo -e "${YELLOW}[WARN]${NC} $1"; }
+error() { echo -e "${RED}[ERROR]${NC} $1" >&2; exit 1; }
+
+# ── Step 1: Verify main branch and pull ─────────────────────────────────────
+
+step_verify_main_and_pull() {
+  local current_branch
+  current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+  # If we're already on a release branch, skip this step
+  if [[ "$current_branch" =~ ^release/v ]]; then
+    warn "Already on release branch '$current_branch' — skipping main branch check and pull."
+    return 0
+  fi
+
+  if [ "$current_branch" != "main" ]; then
+    error "You must be on the 'main' branch. Currently on: '$current_branch'"
+  fi
+
+  info "Pulling latest changes from main..."
+  if ! git pull; then
+    error "git pull failed. Resolve any issues and re-run $SCRIPT_NAME."
+  fi
+
+  info "Main branch is up to date."
+}
+
+# ── Step 2: Check prerequisites ─────────────────────────────────────────────
+
+step_check_prerequisites() {
+  if [ -z "${CHANGELOG_GITHUB_TOKEN:-}" ]; then
+    error "CHANGELOG_GITHUB_TOKEN is not set.
+Set it in your shell profile with a GitHub personal access token:
+  export CHANGELOG_GITHUB_TOKEN=\"your_token_here\"
+See: https://github.com/github-changelog-generator/github-changelog-generator#github-token"
+  fi
+
+  info "Prerequisites OK (CHANGELOG_GITHUB_TOKEN is set)."
+}
+
+# ── Step 3: Determine next version ──────────────────────────────────────────
+
+step_determine_version() {
+  local current_branch
+  current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+  # If already on a release branch, extract version from branch name
+  if [[ "$current_branch" =~ ^release/(v[0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+    VERSION="${BASH_REMATCH[1]}"
+    info "Already on release branch — using version $VERSION"
+    return 0
+  fi
+
+  info "Fetching tags..."
+  git fetch --tags
+
+  local latest_tag
+  latest_tag=$(git tag -l 'v*' | sort -V | tail -1)
+
+  if [ -z "$latest_tag" ]; then
+    error "No version tags found. Cannot determine next version."
+  fi
+
+  # Parse version components
+  local version_without_v="${latest_tag#v}"
+  local major minor patch
+  IFS='.' read -r major minor patch <<< "$version_without_v"
+  local suggested="v${major}.${minor}.$((patch + 1))"
+
+  info "Latest release tag: $latest_tag"
+  echo -en "${YELLOW}Suggested next version: ${suggested}${NC}\n"
+  echo -n "Press Enter to accept, or type a different version (vX.Y.Z): "
+  read -r user_input
+
+  if [ -z "$user_input" ]; then
+    VERSION="$suggested"
+  else
+    VERSION="$user_input"
+  fi
+
+  # Validate format
+  if ! [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    error "Invalid version format: '$VERSION'. Expected vX.Y.Z (e.g., v1.30.1)"
+  fi
+
+  info "Version set to $VERSION"
+}
+
+# ── Step 4: Create release branch ───────────────────────────────────────────
+
+step_create_release_branch() {
+  local branch="release/$VERSION"
+  local current_branch
+  current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+  if [ "$current_branch" = "$branch" ]; then
+    info "Already on branch '$branch' — skipping."
+    return 0
+  fi
+
+  if git show-ref --verify --quiet "refs/heads/$branch"; then
+    info "Branch '$branch' already exists. Checking it out..."
+    git checkout "$branch"
+  else
+    info "Creating branch '$branch'..."
+    git checkout -b "$branch"
+  fi
+
+  info "On release branch '$branch'."
+}
+
+# ── Step 5: Update dependencies (optional) ──────────────────────────────────
+
+step_update_dependencies() {
+  echo -n "Update gem dependencies? (y/N): "
+  read -r update_deps
+
+  if [[ ! "$update_deps" =~ ^[Yy]$ ]]; then
+    info "Skipping dependency update."
+    SKIP_DEPS=true
+    return 0
+  fi
+
+  SKIP_DEPS=false
+
+  info "Running bundle update..."
+  if ! bundle update; then
+    error "bundle update failed."
+  fi
+
+  info "Running rubocop..."
+  if ! bundle exec rubocop; then
+    error "rubocop found issues. Fix them and re-run $SCRIPT_NAME."
+  fi
+
+  info "Running rspec..."
+  if ! RAILS_ENV=test bundle exec rspec; then
+    error "rspec tests failed. Fix them and re-run $SCRIPT_NAME."
+  fi
+
+  info "Dependencies updated and all checks passed."
+}
+
+# ── Step 6: Commit Gemfile.lock ─────────────────────────────────────────────
+
+# Build a commit message listing each gem that changed version.
+# Accepts one argument: the git diff command to use ("diff" or "diff --cached").
+build_gemfile_lock_commit_message() {
+  local diff_cmd="$1"
+  local changes
+  changes=$(git $diff_cmd Gemfile.lock \
+    | grep -E '^\+\s+\S+ \(' \
+    | sed 's/^\+\s\+//' \
+    | while read -r line; do
+        local gem_name version
+        gem_name=$(echo "$line" | sed 's/ (.*//')
+        version=$(echo "$line" | sed 's/.*(\(.*\))/\1/')
+        local old_version
+        old_version=$(git $diff_cmd Gemfile.lock \
+          | grep -E "^-\s+${gem_name} \(" \
+          | sed 's/.*(\(.*\))/\1/' \
+          | head -1)
+        if [ -n "$old_version" ] && [ "$old_version" != "$version" ]; then
+          echo "  - ${gem_name}: ${old_version} -> ${version}"
+        fi
+      done)
+
+  if [ -n "$changes" ]; then
+    echo "Bump gem dependencies"
+    echo ""
+    echo "Updated gems:"
+    echo "$changes"
+  else
+    echo "Update Gemfile.lock for $VERSION"
+  fi
+}
+
+step_commit_gemfile_lock() {
+  if [ "${SKIP_DEPS:-}" = "true" ]; then
+    info "Skipping Gemfile.lock commit (dependency update was skipped)."
+    return 0
+  fi
+
+  if git diff --name-only | grep -q "^Gemfile.lock$"; then
+    info "Committing Gemfile.lock changes..."
+    local commit_msg
+    commit_msg=$(build_gemfile_lock_commit_message "diff")
+    git add Gemfile.lock
+    git commit -m "$commit_msg"
+    info "Gemfile.lock committed."
+  elif git diff --staged --name-only | grep -q "^Gemfile.lock$"; then
+    info "Gemfile.lock is already staged — committing..."
+    local commit_msg
+    commit_msg=$(build_gemfile_lock_commit_message "diff --cached")
+    git commit -m "$commit_msg"
+    info "Gemfile.lock committed."
+  else
+    info "No changes to Gemfile.lock — skipping commit."
+  fi
+}
+
+# ── Step 7: Generate changelog ──────────────────────────────────────────────
+
+step_generate_changelog() {
+  info "Running bundle install..."
+  if ! bundle install; then
+    error "bundle install failed."
+  fi
+
+  info "Generating changelog..."
+  if ! bundle exec rake changelog; then
+    error "Changelog generation failed."
+  fi
+
+  info "Changelog generated."
+}
+
+# ── Step 8: Commit CHANGELOG.md ─────────────────────────────────────────────
+
+step_commit_changelog() {
+  if git diff --name-only | grep -q "^CHANGELOG.md$"; then
+    info "Committing CHANGELOG.md changes..."
+    git add CHANGELOG.md
+    git commit -m "Update CHANGELOG.md for $VERSION"
+    info "CHANGELOG.md committed."
+  elif git diff --staged --name-only | grep -q "^CHANGELOG.md$"; then
+    info "CHANGELOG.md is already staged — committing..."
+    git commit -m "Update CHANGELOG.md for $VERSION"
+    info "CHANGELOG.md committed."
+  else
+    info "No changes to CHANGELOG.md — skipping commit."
+  fi
+}
+
+# ── Step 9: Report success ──────────────────────────────────────────────────
+
+step_report_success() {
+  local branch="release/$VERSION"
+  echo ""
+  echo -e "${GREEN}════════════════════════════════════════════════════════════${NC}"
+  echo -e "${GREEN}  Release preparation complete!${NC}"
+  echo -e "${GREEN}════════════════════════════════════════════════════════════${NC}"
+  echo ""
+  echo -e "  Branch:  ${YELLOW}${branch}${NC}"
+  echo -e "  Version: ${YELLOW}${VERSION}${NC}"
+  echo ""
+  echo "  Commits on this branch:"
+  git log main.."$branch" --oneline 2>/dev/null || git log --oneline -3
+  echo ""
+  echo "  Next steps:"
+  echo "    git push -u origin $branch"
+  echo "    Then open a pull request on GitHub."
+  echo ""
+}
+
+# ── Main ────────────────────────────────────────────────────────────────────
+
+main() {
+  echo -e "${GREEN}═══ Waste Carriers Back Office — Release Preparation ═══${NC}"
+  echo ""
+
+  step_verify_main_and_pull
+  step_check_prerequisites
+  step_determine_version
+  step_create_release_branch
+  step_update_dependencies
+  step_commit_gemfile_lock
+  step_generate_changelog
+  step_commit_changelog
+  step_report_success
+}
+
+main
