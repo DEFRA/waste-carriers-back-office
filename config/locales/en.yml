@@ -17,8 +17,6 @@ en:
         quarterly_reports: DEFRA quarterly statistics
         feature_toggles: Toggle features
         card_order_exports: Copy card orders
-        email_exports: Email exports
-        email_export_list: Export list
         analytics: Analytics
       user_info:
         signed_in_user: "Signed in as %{email}."

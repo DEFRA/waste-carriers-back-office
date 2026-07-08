@@ -71,8 +71,6 @@ module WasteCarriersBackOffice
     config.finance_report_filename_prefix = ENV.fetch("FINANCE_REPORT_FILENAME_PREFIX", "finance_stats_")
     config.finance_reports_bucket_name = ENV.fetch("FINANCE_REPORTS_BUCKET", nil)
     config.finance_reports_directory = ENV.fetch("FINANCE_REPORTS", "FINANCE_REPORTS")
-    config.email_exports_bucket_name = ENV.fetch("AWS_EMAIL_EXPORT_BUCKET", nil)
-    config.email_exports_directory = ENV.fetch("EMAIL_EXPORTS_DIRECTORY", "EMAIL_EXPORTS")
 
     # Data retention
     config.data_retention_years = ENV["DATA_RETENTION_YEARS"] || 7
@@ -97,7 +95,7 @@ module WasteCarriersBackOffice
       end
 
     # Paths
-    # This is the domain to use on URLs for FO services such as renewal and deregistration
+    # This is the domain to use on URLs for FO services such as renewal
     config.wcrs_fo_link_domain = ENV["WCRS_RENEWALS_DOMAIN"] || "http://localhost:3002"
 
     config.wcrs_frontend_url = ENV["WCRS_FRONTEND_DOMAIN"] || "http://localhost:3000"
