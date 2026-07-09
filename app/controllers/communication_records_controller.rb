@@ -10,6 +10,13 @@ class CommunicationRecordsController < ApplicationController
     @communication_records = @resource.communication_records.order(sent_at: :desc).page(params[:page]).per(10)
   end
 
+  def show
+    find_resource(params)
+    authorize! :view_communication_history, @resource
+
+    @communication_record = @resource.communication_records.find(params[:id])
+  end
+
   protected
 
   def find_resource(params)

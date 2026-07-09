@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 2fef54b565bee318f14c5140020b2c21ade18689
+  revision: 706c4e40b7e507e02e474dcf8ee2f098a5e834ce
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -298,6 +298,9 @@ GEM
       activemodel (>= 6.1)
       activesupport (>= 6.1)
       html-attributes-utils (~> 1)
+    govuk_markdown (2.0.4)
+      activesupport
+      redcarpet
     gyoku (1.4.0)
       builder (>= 2.1.2)
       rexml (~> 3.0)
@@ -496,6 +499,7 @@ GEM
       prism (>= 1.6.0)
       rbs (>= 4.0.0)
       tsort
+    redcarpet (3.6.1)
     regexp_parser (2.12.0)
     reline (0.6.3)
       io-console (~> 0.5)
@@ -685,6 +689,7 @@ DEPENDENCIES
   faraday-retry
   github_changelog_generator
   govuk_design_system_formbuilder (~> 5.3)
+  govuk_markdown
   jquery-rails
   kaminari
   kaminari-mongoid

@@ -3,8 +3,17 @@ en:
     index:
       title: "Communication history"
       heading: "Communication history"
-      comms_label: "Template name"
+      comms_label: "Title"
+      notification_type: "Type"
+      sent_at: "Sent on"
+      delivery_status: "Delivery status"
+    show:
+      title: "Communication history"
+      heading: "Communication history"
+      comms_label: "Template title"
       notify_template_id: "Template ID"
       notification_type: "Type"
       sent_to: "Sent to"
       sent_at: "Sent on"
+      delivery_status: "Delivery status"
+      content: "Content"

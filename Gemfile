@@ -35,6 +35,9 @@ gem "secure_headers"
 # Design system form builder
 gem "govuk_design_system_formbuilder", "~> 5.3"
 
+# Render Notify message content (markdown) as GOV.UK Frontend HTML
+gem "govuk_markdown"
+
 gem "kaminari"
 gem "kaminari-mongoid"
 

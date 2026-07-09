@@ -14,13 +14,10 @@ module Notify
 
       client = Notifications::Client.new(WasteCarriersEngine.configuration.notify_api_key)
 
-      client.send_letter(template_id: template_id,
-                         reference: @registration.reg_identifier,
-                         personalisation: personalisation).tap do |response|
-                           if response.instance_of?(Notifications::Client::ResponseNotification)
-                             create_communication_record
-                           end
-                         end
+      send_with_communication_record(client, :send_letter,
+                                     template_id: template_id,
+                                     reference: @registration.reg_identifier,
+                                     personalisation: personalisation)
     end
 
     private

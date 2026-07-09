@@ -343,6 +343,8 @@ Rails.application.routes.draw do
               get "certificate", to: "certificates#show", as: :certificate
 
               get "communication_records", to: "communication_records#index", as: :communication_records
+
+              get "communication_records/:id", to: "communication_records#show", as: :communication_record
             end
 
   resources :card_order_exports,
