@@ -2,7 +2,7 @@
 
 module Notify
   class RenewalReminderEmailService < ::WasteCarriersEngine::Notify::BaseSendEmailService
-    TEMPLATE_ID = "6d20d279-ba79-4fe0-9868-fb09c4ae7733"
+    TEMPLATE_ID = "7b21be34-2eb6-45bf-85d2-3fa98f6fd63e"
     COMMS_LABEL = "Upper tier renewal reminder"
 
     private

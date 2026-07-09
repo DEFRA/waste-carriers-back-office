@@ -4,7 +4,7 @@ module Notify
   class DigitalRenewalSmsService < ::WasteCarriersEngine::BaseService
     include WasteCarriersEngine::CanRecordCommunication
 
-    TEMPLATE_ID = "c23c1300-6d49-4310-bda6-99174ca0cd23"
+    TEMPLATE_ID = "ac9cfef1-28e3-4f24-8807-82136945c604"
     NOTIFICATION_TYPE = "sms"
     COMMS_LABEL = "Digital reminder text"
 
