@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: b674c28c7fe4a0db9631f751802a0dd8248b0d95
-  branch: feature/RUBY-4339-wcr-implement-message-delivery-status-call-back
+  revision: 3cd94960996263060164ecf8afad7fa51ba3a3fd
+  branch: main
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
