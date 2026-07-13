@@ -2,7 +2,7 @@
 
 module Notify
   class DigitalRenewalLetterService < RenewalLetterService
-    TEMPLATE_ID = "41ebbbc4-0d2f-425a-8d94-29e2beffd8ba"
+    TEMPLATE_ID = "f66f587b-5ac2-4033-b3d2-f3c1e7b91275"
     COMMS_LABEL = "Digital reminder letter"
 
     private
