@@ -121,6 +121,11 @@ RSpec.describe "Communication Records" do
         expect(response.body).to include(communication_record.delivery_status)
       end
 
+      it "includes the communication subject" do
+        expect(response.body).to include(">Subject</dt>")
+        expect(response.body).to include(communication_record.subject)
+      end
+
       it "includes the communication content" do
         expect(response.body).to include(">Content</dt>")
         expect(response.body).to include("Please pay for your waste carrier registration.")
@@ -129,7 +134,7 @@ RSpec.describe "Communication Records" do
 
     context "when the communication record has no persisted content" do
       let(:communication_record) do
-        create(:communication_record, :email, registration: registration, content: nil, delivery_status: nil)
+        create(:communication_record, :email, registration: registration, subject: nil, content: nil, delivery_status: nil)
       end
 
       before do
@@ -142,6 +147,10 @@ RSpec.describe "Communication Records" do
 
       it "does not include the content row" do
         expect(response.body).not_to include(">Content</dt>")
+      end
+
+      it "does not include the subject row" do
+        expect(response.body).not_to include(">Subject</dt>")
       end
     end
 

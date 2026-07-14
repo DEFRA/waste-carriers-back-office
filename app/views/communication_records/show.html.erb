@@ -10,7 +10,7 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <dl class="govuk-summary-list govuk-summary-list--no-border">
+    <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key"><%= t(".comms_label") %></dt>
         <dd class="govuk-summary-list__value"><%= @communication_record.comms_label %></dd>
@@ -35,6 +35,12 @@
         <dt class="govuk-summary-list__key"><%= t(".delivery_status") %></dt>
         <dd class="govuk-summary-list__value"><%= @communication_record.delivery_status %></dd>
       </div>
+      <% if @communication_record.subject.present? %>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key"><%= t(".subject") %></dt>
+          <dd class="govuk-summary-list__value"><%= @communication_record.subject %></dd>
+        </div>
+      <% end %>
       <% if @communication_record.content.present? %>
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key"><%= t(".content") %></dt>

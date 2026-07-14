@@ -11,6 +11,7 @@ FactoryBot.define do
       notification_type { "email" }
       comms_label       { "Upper tier waste carrier registration email V1" }
       sent_to           { "test@email.com" }
+      subject           { "Waste carrier registration CBDU1 completed" }
       content           { "Dear Jane Doe,\r\nPlease pay for your waste carrier registration." }
     end
 

@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 706c4e40b7e507e02e474dcf8ee2f098a5e834ce
-  branch: main
+  revision: 8c5c5c4fe2b7e42992caf2664ff4396958a8d273
+  branch: RUBY-4340-add-subject-to-communication-records
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
