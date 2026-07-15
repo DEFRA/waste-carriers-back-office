@@ -16,4 +16,5 @@ en:
       sent_to: "Sent to"
       sent_at: "Sent on"
       delivery_status: "Delivery status"
+      subject: "Subject"
       content: "Content"
