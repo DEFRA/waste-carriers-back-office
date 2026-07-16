@@ -3,5 +3,5 @@ en:
     deactivated:
       title: "Your account has been deactivated"
       heading: "Your account has been deactivated"
-      text: "You cannot use the Waste Carriers Back Office unless your account is active. If you believe you should have access, contact an NCCC super user."
+      text_html: "You cannot use the Waste Carriers Back Office unless your account is active. If you believe you should have access, contact <a class=\"govuk-link\" href=\"mailto:nccc-carrierbroker@environment-agency.gov.uk\">nccc-carrierbroker@environment-agency.gov.uk</a>."
       sign_out_link: "Sign out"
