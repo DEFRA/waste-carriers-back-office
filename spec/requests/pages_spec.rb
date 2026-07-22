@@ -27,6 +27,7 @@ RSpec.describe "Pages" do
 
         expect(response).to have_http_status(:ok)
         expect(response).to render_template(:deactivated)
+        expect(response.body).to include("nccc-carrierbroker@environment-agency.gov.uk")
       end
     end
 
