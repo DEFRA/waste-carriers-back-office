@@ -31,9 +31,21 @@ RSpec.describe "Refresh EA area" do
 
     before do
       sign_in(user)
-      stub_request(:get, /.*environment.data.gov.uk.*/).to_return(
-        status: 200,
-        body: File.read("./spec/fixtures/files/environment.data.gov.uk/public_face_area_valid.json")
+
+      # Bristol city centre, inside the "Wessex" polygon below
+      allow(Geographic::MapPostcodeToEastingAndNorthingService)
+        .to receive(:run).and_return({ easting: 358_130, northing: 172_688 })
+
+      WasteCarriersEngine::EaPublicFaceArea.create!(
+        code: "WSX",
+        name: "Wessex",
+        area_id: 1,
+        area: {
+          "type" => "Polygon",
+          "coordinates" => [[
+            [-2.7, 51.4], [-2.5, 51.4], [-2.5, 51.5], [-2.7, 51.5], [-2.7, 51.4]
+          ]]
+        }
       )
     end
 

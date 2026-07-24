@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "rails_helper"
-require "defra_ruby/area"
 
 module Address
   RSpec.describe UpdateEaAreaService, type: :service do
@@ -44,18 +43,10 @@ module Address
         context "when the easting and northing values are nil" do
           let(:easting) { nil }
           let(:northing) { nil }
-          let(:area_service) { instance_double(DefraRuby::Area::PublicFaceAreaService) }
 
-          before do
-            allow(DefraRuby::Area::PublicFaceAreaService).to receive(:new).and_return(area_service)
-            allow(area_service).to receive(:run).and_raise(StandardError.new("Bad request"))
-          end
+          before { allow(Geographic::MapEastingAndNorthingToEaAreaService).to receive(:run).and_call_original }
 
-          it "does not call the area service" do
-            run_service
-
-            expect(area_service).not_to have_received(:run)
-          end
+          it_behaves_like "does not update the area"
         end
       end
 
@@ -67,6 +58,9 @@ module Address
 
       context "when the address does not have a postcode" do
         let(:address) { build(:address, address_type: "REGISTERED", postcode: nil) }
+        # Without a postcode the easting and northing lookup returns no coordinates
+        let(:easting) { nil }
+        let(:northing) { nil }
 
         it_behaves_like "does not update the area"
       end
