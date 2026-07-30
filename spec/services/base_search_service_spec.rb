@@ -78,7 +78,7 @@ RSpec.describe BaseSearchService do
       # Un-stub `run` in the test class to allow search to be stubbed
       let(:test_class) do
         Class.new(described_class) do
-          def search(); end
+          def search; end
         end
       end
 
