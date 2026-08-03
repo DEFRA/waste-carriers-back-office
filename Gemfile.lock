@@ -109,10 +109,6 @@ GEM
       airbrake-ruby (~> 6.0)
     airbrake-ruby (6.2.2)
       rbtree3 (~> 0.6)
-    akami (1.3.3)
-      base64
-      gyoku (>= 0.4.0)
-      nokogiri
     ast (2.4.3)
     async (2.43.0)
       console (~> 1.29)
@@ -222,8 +218,6 @@ GEM
       rest-client (~> 2.0)
       sprockets (~> 4.0)
       sprockets-rails (~> 3.0)
-    defra_ruby_storm (0.1.0)
-      savon (~> 2.13.0)
     defra_ruby_style (0.4.1)
     defra_ruby_template (5.11.1)
     defra_ruby_validators (3.1.0)
@@ -297,9 +291,6 @@ GEM
     govuk_markdown (2.0.4)
       activesupport
       redcarpet
-    gyoku (1.4.0)
-      builder (>= 2.1.2)
-      rexml (~> 3.0)
     hashdiff (1.2.1)
     high_voltage (3.1.2)
     html-attributes-utils (1.0.2)
@@ -307,8 +298,6 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.1.6)
       domain_name (~> 0.5)
-    httpi (3.0.1)
-      rack
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
     io-console (0.8.2)
@@ -399,9 +388,6 @@ GEM
     nokogiri (1.19.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nori (2.9.1)
-      bigdecimal
-      stringio
     notifications-ruby-client (5.4.0)
       jwt (>= 1.5, < 3)
     observer (0.1.2)
@@ -579,15 +565,6 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    savon (2.13.1)
-      akami (~> 1.2)
-      builder (>= 2.1.2)
-      gyoku (~> 1.2)
-      httpi (>= 2.4.5)
-      mail (~> 2.5)
-      nokogiri (>= 1.8.1)
-      nori (~> 2.4)
-      wasabi (~> 3.4)
     sawyer (0.9.3)
       addressable (>= 2.3.5)
       faraday (>= 0.17.3, < 3)
@@ -610,7 +587,6 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
-    stringio (3.2.0)
     thor (1.5.0)
     tilt (2.8.0)
     timecop (0.9.11)
@@ -636,10 +612,6 @@ GEM
     vcr (6.4.0)
     warden (1.2.9)
       rack (>= 2.0.9)
-    wasabi (3.8.0)
-      addressable
-      httpi (~> 3.0)
-      nokogiri (>= 1.4.2)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -676,7 +648,6 @@ DEPENDENCIES
   defra_ruby_aws
   defra_ruby_features
   defra_ruby_mocks
-  defra_ruby_storm
   defra_ruby_style
   defra_ruby_template (~> 5.11)
   devise

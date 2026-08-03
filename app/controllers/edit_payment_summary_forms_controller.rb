@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 class EditPaymentSummaryFormsController < WasteCarriersEngine::FormsController
-  include CanPauseCallRecording
   include CanAuthenticateUser
-
-  before_action :check_and_pause_call_recording, only: %i[new]
 
   def new
     return unless super(EditPaymentSummaryForm, "edit_payment_summary_form")
