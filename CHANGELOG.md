@@ -2,7 +2,24 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.3...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.4...HEAD)
+
+**Implemented enhancements:**
+
+- \[RUBY-4108\] Update user deactivated message to include NCCC email address [\#2350](https://github.com/DEFRA/waste-carriers-back-office/pull/2350) ([jjromeo](https://github.com/jjromeo))
+- \[RUBY-4340\] Add communication history details and show page for records [\#2341](https://github.com/DEFRA/waste-carriers-back-office/pull/2341) ([jjromeo](https://github.com/jjromeo))
+
+**Fixed bugs:**
+
+- \[RUBY-4340\] Communication history review fixes [\#2348](https://github.com/DEFRA/waste-carriers-back-office/pull/2348) ([jjromeo](https://github.com/jjromeo))
+
+**Merged pull requests:**
+
+- Add release  preparation  and completion scripts [\#2344](https://github.com/DEFRA/waste-carriers-back-office/pull/2344) ([brujeo](https://github.com/brujeo))
+
+## [v1.36.4](https://github.com/defra/waste-carriers-back-office/tree/v1.36.4) (2026-07-07)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.3...v1.36.4)
 
 **Fixed bugs:**
 
@@ -10,6 +27,7 @@
 
 **Merged pull requests:**
 
+- Release/v1.36.4 [\#2342](https://github.com/DEFRA/waste-carriers-back-office/pull/2342) ([brujeo](https://github.com/brujeo))
 - Feature/ruby 4356 wcr remove deregistration functionality [\#2340](https://github.com/DEFRA/waste-carriers-back-office/pull/2340) ([brujeo](https://github.com/brujeo))
 
 ## [v1.36.3](https://github.com/defra/waste-carriers-back-office/tree/v1.36.3) (2026-06-29)
@@ -2043,7 +2061,6 @@
 - Details page - Fixes [\#469](https://github.com/DEFRA/waste-carriers-back-office/pull/469) ([cintamani](https://github.com/cintamani))
 - Add expired panel to view details pages [\#463](https://github.com/DEFRA/waste-carriers-back-office/pull/463) ([irisfaraway](https://github.com/irisfaraway))
 - Add all action links to details page [\#462](https://github.com/DEFRA/waste-carriers-back-office/pull/462) ([cintamani](https://github.com/cintamani))
-- Add renew link to actions panel in details page [\#458](https://github.com/DEFRA/waste-carriers-back-office/pull/458) ([cintamani](https://github.com/cintamani))
 - Add continue application link to details page [\#457](https://github.com/DEFRA/waste-carriers-back-office/pull/457) ([cintamani](https://github.com/cintamani))
 - Finance message on lower tier registration finance section [\#456](https://github.com/DEFRA/waste-carriers-back-office/pull/456) ([cintamani](https://github.com/cintamani))
 - Convictions message for lower tier registrations [\#455](https://github.com/DEFRA/waste-carriers-back-office/pull/455) ([cintamani](https://github.com/cintamani))
@@ -2119,7 +2136,6 @@
 - Bump waste\_carriers\_engine from `05de6ed` to `05629b7` [\#450](https://github.com/DEFRA/waste-carriers-back-office/pull/450) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump waste\_carriers\_engine from `bb047bd` to `05de6ed` [\#446](https://github.com/DEFRA/waste-carriers-back-office/pull/446) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Use correct `small-bold` class [\#443](https://github.com/DEFRA/waste-carriers-back-office/pull/443) ([cintamani](https://github.com/cintamani))
-- Bump waste\_carriers\_engine from `9b67fef` to `bb047bd` [\#442](https://github.com/DEFRA/waste-carriers-back-office/pull/442) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Refactor RegistrationTransferService to inherit from BaseService [\#440](https://github.com/DEFRA/waste-carriers-back-office/pull/440) ([irisfaraway](https://github.com/irisfaraway))
 - Refactor UserMigrationService to inherit from BaseService [\#439](https://github.com/DEFRA/waste-carriers-back-office/pull/439) ([irisfaraway](https://github.com/irisfaraway))
 - Remove dupe BaseService [\#438](https://github.com/DEFRA/waste-carriers-back-office/pull/438) ([irisfaraway](https://github.com/irisfaraway))

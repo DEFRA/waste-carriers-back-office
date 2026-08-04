@@ -95,7 +95,7 @@ module CanBehaveLikeUser
       222 333 444 555 666 777 888 999 000 abc bcd cde def efg fgh ghi hij ijk jkl
       klm lmn mno nop opq pqr qrs rst stu tuv uvw vwx wxy xyz yza zab
     ]
-    return true unless sequences.any? { |s| password.include?(s) }
+    return true unless password.match?(Regexp.union(sequences))
 
     errors.add(:password, :obvious_sequence)
   end
