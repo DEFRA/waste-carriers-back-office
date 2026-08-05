@@ -1,13 +1,12 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: ad8e14c59de75444a3e2615d0a6ddc7c3c188a37
-  branch: feature/RUBY-4350-geospatial-ea-area-lookup
+  revision: e0584835a10d7570427df893a8d13601d950469f
+  branch: main
   specs:
     waste_carriers_engine (0.0.1)
       aasm (~> 5.5.0)
-      breasal (~> 0.0.1)
       countries (~> 5.5.0)
-      defra_ruby_address (~> 0.3.0)
+      defra_ruby_address (~> 0.4)
       defra_ruby_alert (~> 2.2.1)
       defra_ruby_companies_house
       defra_ruby_email (~> 1.3.0)
@@ -159,7 +158,6 @@ GEM
     benchmark (0.5.0)
     bigdecimal (4.1.2)
     bindex (0.8.1)
-    breasal (0.0.1)
     bson (5.2.0)
     builder (3.3.0)
     byebug (13.0.0)
@@ -195,7 +193,7 @@ GEM
       database_cleaner-core (~> 2.0.0)
       mongoid
     date (3.5.1)
-    defra_ruby_address (0.3.0)
+    defra_ruby_address (0.4.0)
       rest-client (~> 2.0)
     defra_ruby_alert (2.2.1)
       airbrake
@@ -252,7 +250,7 @@ GEM
       dotenv (= 3.2.0)
       railties (>= 6.1)
     drb (2.2.3)
-    erb (6.0.6)
+    erb (6.0.7)
     erubi (1.13.1)
     execjs (2.10.1)
     factory_bot (6.6.0)
@@ -419,7 +417,7 @@ GEM
       rack (>= 1.6.13)
       rackup (>= 1.0.1)
       rake (>= 12.3.3)
-    phonelib (0.10.22)
+    phonelib (0.10.23)
     pp (0.6.4)
       prettyprint
     prettyprint (0.2.0)
@@ -486,7 +484,7 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.4.2)
-    rbs (4.0.3)
+    rbs (4.1.2)
       logger
       prism (>= 1.6.0)
       tsort
@@ -660,7 +658,7 @@ GEM
       activesupport
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.8.2)
+    zeitwerk (2.8.3)
 
 PLATFORMS
   ruby
