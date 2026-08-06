@@ -12,12 +12,18 @@ class EaPublicFaceAreaDataLoadService < WasteCarriersEngine::BaseService
     features = JSON.parse(read_areas_file).fetch("features")
     results = features.filter_map { |feature| process_feature(feature) }
 
-    WasteCarriersEngine::EaPublicFaceArea.create_indexes
+    ensure_indexes
 
     results
   end
 
   private
+
+  # Mongoid's create_indexes creates any index the model declares which does
+  # not already exist, so this is a no-op after the first load
+  def ensure_indexes
+    WasteCarriersEngine::EaPublicFaceArea.create_indexes
+  end
 
   def process_feature(feature)
     properties = feature["properties"]
