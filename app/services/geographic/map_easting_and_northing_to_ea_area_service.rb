@@ -5,6 +5,10 @@ module Geographic
   # engine's geospatial lookup. Returns nil if the lookup fails.
   class MapEastingAndNorthingToEaAreaService < WasteCarriersEngine::BaseService
     def run(easting:, northing:)
+      # Without the boundaries loaded every point looks like it is outside
+      # England, so return nothing rather than an area we cannot determine
+      return nil unless WasteCarriersEngine::EaPublicFaceArea.exists?
+
       WasteCarriersEngine::DetermineEaAreaService.run(easting: easting, northing: northing)
     rescue StandardError => e
       handle_error(e, easting, northing)

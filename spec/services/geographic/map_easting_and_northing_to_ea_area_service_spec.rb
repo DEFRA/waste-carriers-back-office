@@ -9,6 +9,8 @@ module Geographic
       let(:result) { nil }
 
       before do
+        WasteCarriersEngine::EaPublicFaceArea.create!(code: "WSX", name: "Wessex", area_id: 28)
+
         allow(WasteCarriersEngine::DetermineEaAreaService)
           .to receive(:run)
           .with(easting: coordinates[:easting], northing: coordinates[:northing])
@@ -44,6 +46,22 @@ module Geographic
 
         it "returns nil" do
           expect(described_class.run(coordinates)).to be_nil
+        end
+      end
+
+      context "when the area boundaries have not been loaded" do
+        let(:result) { "Outside England" }
+
+        before { WasteCarriersEngine::EaPublicFaceArea.delete_all }
+
+        it "returns nil rather than treating the point as outside England" do
+          expect(described_class.run(coordinates)).to be_nil
+        end
+
+        it "does not attempt the lookup" do
+          described_class.run(coordinates)
+
+          expect(WasteCarriersEngine::DetermineEaAreaService).not_to have_received(:run)
         end
       end
 
