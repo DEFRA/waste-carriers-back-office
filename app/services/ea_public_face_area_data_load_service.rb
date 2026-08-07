@@ -12,7 +12,7 @@ class EaPublicFaceAreaDataLoadService < WasteCarriersEngine::BaseService
     features = JSON.parse(read_areas_file).fetch("features")
     results = features.filter_map { |feature| process_feature(feature) }
 
-    ensure_indexes
+    ensure_indexes_exist
 
     results
   end
@@ -21,7 +21,7 @@ class EaPublicFaceAreaDataLoadService < WasteCarriersEngine::BaseService
 
   # Mongoid's create_indexes creates any index the model declares which does
   # not already exist, so this is a no-op after the first load
-  def ensure_indexes
+  def ensure_indexes_exist
     WasteCarriersEngine::EaPublicFaceArea.create_indexes
   end
 
