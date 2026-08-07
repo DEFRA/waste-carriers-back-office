@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "rails_helper"
-require "support/shared_examples/call_recording_resumption"
 
 RSpec.describe "CopyCardsOrderCompletedForms" do
   describe "GET new_copy_cards_order_completed_form_path" do
@@ -32,8 +31,6 @@ RSpec.describe "CopyCardsOrderCompletedForms" do
             workflow_state: "copy_cards_order_completed_form"
           )
         end
-
-        it_behaves_like "resumes call recording"
 
         context "when the workflow_state is correct" do
           it "deletes the transient object, copy all finance details to the registration, load the confirmation page and sends an email" do

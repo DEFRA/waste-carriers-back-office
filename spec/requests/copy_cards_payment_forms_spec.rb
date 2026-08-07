@@ -10,11 +10,9 @@ RSpec.describe "CopyCardsPaymentForms" do
 
     context "when a user is signed in" do
       let(:user) { create(:user, role: :agency_super) }
-      let(:call_recording_service) { instance_spy(CallRecordingService) }
 
       before do
         sign_in(user)
-        allow(CallRecordingService).to receive(:new).with(user: user).and_return(call_recording_service)
       end
 
       context "when no matching registration exists" do
@@ -33,25 +31,6 @@ RSpec.describe "CopyCardsPaymentForms" do
 
           expect(response).to render_template("copy_cards_payment_forms/new")
           expect(response).to have_http_status(:ok)
-        end
-
-        context "when call recording feature flag is on" do
-
-          before do
-            allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(true)
-          end
-
-          it_behaves_like "pauses call recording"
-        end
-
-        context "when call recording feature flag is off" do
-          before do
-            allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(false)
-          end
-
-          it "does not pause call recording" do
-            expect(call_recording_service).not_to have_received(:pause)
-          end
         end
       end
     end

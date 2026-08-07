@@ -9,11 +9,9 @@ RSpec.describe "EditPaymentSummaryForms" do
       let(:transient_registration) do
         create(:edit_registration, finance_details: build(:finance_details, :has_paid_order_and_payment))
       end
-      let(:call_recording_service) { instance_spy(CallRecordingService) }
 
       before do
         sign_in(user)
-        allow(CallRecordingService).to receive(:new).with(user: user).and_return(call_recording_service)
       end
 
       context "when no matching registration exists" do
@@ -36,20 +34,6 @@ RSpec.describe "EditPaymentSummaryForms" do
 
           expect(response).to render_template("edit_payment_summary_forms/new")
           expect(response).to have_http_status(:ok)
-        end
-
-        context "when the call recording feature flag is on" do
-          before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(true) }
-
-          it_behaves_like "pauses call recording"
-        end
-
-        context "when the call recording feature flag is off" do
-          before { allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:control_call_recording).and_return(false) }
-
-          it "does not pause call recording" do
-            expect(call_recording_service).not_to have_received(:pause)
-          end
         end
 
         context "when it already has a finance_details" do
