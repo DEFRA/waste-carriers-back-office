@@ -40,6 +40,30 @@ module Address
           it_behaves_like "does not update the area"
         end
 
+        context "when the address already has an easting and northing" do
+          let(:address) do
+            build(:address, address_type: "REGISTERED", postcode:, area: nil,
+                            easting: 358_205, northing: 172_708)
+          end
+
+          before { allow(Geographic::MapEastingAndNorthingToEaAreaService).to receive(:run).and_return(area) }
+
+          it "looks the area up using the coordinates held on the address" do
+            run_service
+
+            expect(Geographic::MapEastingAndNorthingToEaAreaService)
+              .to have_received(:run).with(easting: 358_205, northing: 172_708)
+          end
+
+          it "does not look the coordinates up again" do
+            run_service
+
+            expect(Geographic::MapPostcodeToEastingAndNorthingService).not_to have_received(:run)
+          end
+
+          it_behaves_like "updates the area"
+        end
+
         context "when the easting and northing values are nil" do
           let(:easting) { nil }
           let(:northing) { nil }
