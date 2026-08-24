@@ -28,6 +28,21 @@ module Geographic
         end
       end
 
+      context "when the result has zero coordinates" do
+        before do
+          allow(Airbrake).to receive(:notify)
+          allow(WasteCarriersEngine::AddressLookupService).to receive(:run).with(valid_postcode).and_return(
+            instance_double(DefraRuby::Address::Response, successful?: true, results: [address_data.merge("x" => 0, "y" => 0)])
+          )
+        end
+
+        it "reports the error rather than treating zero as a location" do
+          service.run(postcode: valid_postcode)
+
+          expect(Airbrake).to have_received(:notify)
+        end
+      end
+
       context "when the result has no coordinates" do
         before do
           allow(Airbrake).to receive(:notify)

@@ -31,8 +31,9 @@ module Geographic
       easting = result["x"]
       northing = result["y"]
 
-      if easting.blank? || northing.blank?
-        return error_from_postcode_lookup(postcode, StandardError.new("no coordinates in the lookup result"))
+      # Zero is never a valid coordinate, it is the grid origin out at sea
+      if easting.to_f.zero? || northing.to_f.zero?
+        return error_from_postcode_lookup(postcode, StandardError.new("no usable coordinates in the lookup result"))
       end
 
       @result[:easting] = easting.to_f
