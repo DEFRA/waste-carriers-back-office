@@ -17,7 +17,10 @@ module Address
     private
 
     def set_easting_and_northing
-      return if address.easting.present? && address.northing.present?
+      @easting = address.easting
+      @northing = address.northing
+
+      return if @easting.present? && @northing.present?
 
       @easting, @northing = Geographic::MapPostcodeToEastingAndNorthingService.run(postcode: postcode).values
     end
