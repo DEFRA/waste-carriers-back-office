@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/DEFRA/defra-ruby-template
-  revision: 7044f08c9b0367cdcc3063492d44243d6ce21a80
-  branch: RUBY-4334-all-tech-debt-defra-ruby-template-upgrade-to-govuk-frontend-6-4-0-and-fix-template-drift
-  specs:
-    defra_ruby_template (6.4.0)
-
-GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
   revision: e0584835a10d7570427df893a8d13601d950469f
   branch: main
@@ -229,6 +222,7 @@ GEM
       sprockets (~> 4.0)
       sprockets-rails (~> 3.0)
     defra_ruby_style (0.4.1)
+    defra_ruby_template (6.4.0)
     defra_ruby_validators (3.1.0)
       activemodel
       defra_ruby_companies_house
@@ -655,7 +649,7 @@ DEPENDENCIES
   defra_ruby_features
   defra_ruby_mocks
   defra_ruby_style
-  defra_ruby_template (~> 6.4)!
+  defra_ruby_template (~> 6.4)
   devise
   devise_invitable
   dotenv-rails
