@@ -2,7 +2,26 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.4...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.5...HEAD)
+
+**Implemented enhancements:**
+
+- \[RUBY-4350\] Use local geospatial EA area lookup [\#2353](https://github.com/DEFRA/waste-carriers-back-office/pull/2353) ([jjromeo](https://github.com/jjromeo))
+
+**Fixed bugs:**
+
+- Fix/postcode lookup coordinates [\#2365](https://github.com/DEFRA/waste-carriers-back-office/pull/2365) ([jjromeo](https://github.com/jjromeo))
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `e058483` to `144a324` [\#2372](https://github.com/DEFRA/waste-carriers-back-office/pull/2372) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump json from 2.21.1 to 2.21.2 [\#2363](https://github.com/DEFRA/waste-carriers-back-office/pull/2363) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[RUBY-4344\] Remove Storm integration code [\#2361](https://github.com/DEFRA/waste-carriers-back-office/pull/2361) ([jjromeo](https://github.com/jjromeo))
+- Bump activestorage from 7.2.3.1 to 7.2.3.2 [\#2359](https://github.com/DEFRA/waste-carriers-back-office/pull/2359) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.36.5](https://github.com/defra/waste-carriers-back-office/tree/v1.36.5) (2026-07-30)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.4...v1.36.5)
 
 **Implemented enhancements:**
 
@@ -15,6 +34,7 @@
 
 **Merged pull requests:**
 
+- Release/v1.36.5 [\#2356](https://github.com/DEFRA/waste-carriers-back-office/pull/2356) ([brujeo](https://github.com/brujeo))
 - Add release  preparation  and completion scripts [\#2344](https://github.com/DEFRA/waste-carriers-back-office/pull/2344) ([brujeo](https://github.com/brujeo))
 
 ## [v1.36.4](https://github.com/defra/waste-carriers-back-office/tree/v1.36.4) (2026-07-07)

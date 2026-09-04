@@ -18,7 +18,7 @@ module Geographic
       response = WasteCarriersEngine::AddressLookupService.run(postcode)
 
       if response.successful?
-        apply_result_coordinates(response.results.first)
+        apply_result_coordinates(postcode, response.results.first)
       elsif response.error.is_a?(DefraRuby::Address::NoMatchError)
         no_match_from_postcode_lookup(postcode)
       else
@@ -26,9 +26,18 @@ module Geographic
       end
     end
 
-    def apply_result_coordinates(result)
-      @result[:easting] = result["easting"].to_f
-      @result[:northing] = result["northing"].to_f
+    # The address lookup returns coordinates as x and y
+    def apply_result_coordinates(postcode, result)
+      easting = result["x"]
+      northing = result["y"]
+
+      # Zero is never a valid coordinate, it is the grid origin out at sea
+      if easting.to_f.zero? || northing.to_f.zero?
+        return error_from_postcode_lookup(postcode, StandardError.new("no usable coordinates in the lookup result"))
+      end
+
+      @result[:easting] = easting.to_f
+      @result[:northing] = northing.to_f
     end
 
     def handle_error(error, message, metadata)

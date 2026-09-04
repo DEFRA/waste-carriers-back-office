@@ -7,7 +7,7 @@ require "rails_helper"
 module Geographic
   RSpec.describe MapPostcodeToEastingAndNorthingService, type: :service do
     let(:service) { described_class.new }
-    let(:os_places_data) { JSON.parse(file_fixture("os_places_response.json").read) }
+    let(:address_data) { JSON.parse(file_fixture("address_lookup_response.json").read) }
     let(:valid_postcode) { "SW1A 1AA" }
     let(:invalid_postcode) { "INVALID" }
 
@@ -16,15 +16,45 @@ module Geographic
         before do
           # Stub AddressLookupService to return a valid response
           allow(WasteCarriersEngine::AddressLookupService).to receive(:run).with(valid_postcode).and_return(
-            instance_double(DefraRuby::Address::Response, successful?: true, results: [os_places_data])
+            instance_double(DefraRuby::Address::Response, successful?: true, results: [address_data])
           )
         end
 
         it "returns the correct easting and northing values" do
           result = service.run(postcode: valid_postcode)
 
-          expect(result[:easting]).to eq(358_205.0)
-          expect(result[:northing]).to eq(172_708.0)
+          expect(result[:easting]).to eq(358_205.03)
+          expect(result[:northing]).to eq(172_708.07)
+        end
+      end
+
+      context "when the result has zero coordinates" do
+        before do
+          allow(Airbrake).to receive(:notify)
+          allow(WasteCarriersEngine::AddressLookupService).to receive(:run).with(valid_postcode).and_return(
+            instance_double(DefraRuby::Address::Response, successful?: true, results: [address_data.merge("x" => 0, "y" => 0)])
+          )
+        end
+
+        it "reports the error rather than treating zero as a location" do
+          service.run(postcode: valid_postcode)
+
+          expect(Airbrake).to have_received(:notify)
+        end
+      end
+
+      context "when the result has no coordinates" do
+        before do
+          allow(Airbrake).to receive(:notify)
+          allow(WasteCarriersEngine::AddressLookupService).to receive(:run).with(valid_postcode).and_return(
+            instance_double(DefraRuby::Address::Response, successful?: true, results: [address_data.except("x", "y")])
+          )
+        end
+
+        it "reports the error rather than returning silently wrong coordinates" do
+          service.run(postcode: valid_postcode)
+
+          expect(Airbrake).to have_received(:notify)
         end
       end
 

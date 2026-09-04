@@ -8,15 +8,15 @@ module Address
       let(:address) { build(:address, address_type: "REGISTERED", postcode:, easting:, northing:) }
       let(:registration) { create(:registration, addresses: [address]) }
       let(:postcode) { "BS1 5AH" }
-      let(:os_places_data) { JSON.parse(file_fixture("os_places_response.json").read) }
-      let(:valid_easting) { os_places_data["easting"] }
-      let(:valid_northing) { os_places_data["northing"] }
+      let(:address_data) { JSON.parse(file_fixture("address_lookup_response.json").read) }
+      let(:valid_easting) { address_data["x"] }
+      let(:valid_northing) { address_data["y"] }
 
       subject(:run_service) { described_class.run(registration_id: registration.id) }
 
       before do
         allow(WasteCarriersEngine::AddressLookupService).to receive(:run).and_return(
-          instance_double(DefraRuby::Address::Response, successful?: true, results: [os_places_data])
+          instance_double(DefraRuby::Address::Response, successful?: true, results: [address_data])
         )
       end
 
