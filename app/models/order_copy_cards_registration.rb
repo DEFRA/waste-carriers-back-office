@@ -1,15 +1,12 @@
 # frozen_string_literal: true
 
 class OrderCopyCardsRegistration < WasteCarriersEngine::TransientRegistration
-  # due to issues with mongoid-locker v2.0.2, delegate has to be added to the top of the class
-
   include CanUseOrderCopyCardsWorkflow
   include WasteCarriersEngine::CanUseLock
 
   validates :reg_identifier, "waste_carriers_engine/reg_identifier": true
 
-  # This is the instance_delegate method from ruby 3.2.2 forwardable rather than the rails delegate method
-  instance_delegate %i[contact_address contact_email registered_address] => :registration
+  delegate :contact_address, :contact_email, :registered_address, to: :registration
 
   def registration
     return @registration if defined?(@registration)

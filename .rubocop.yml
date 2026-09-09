@@ -33,6 +33,11 @@ Naming/PredicateMethod:
 Rails/LexicallyScopedActionFilter:
   Enabled: false
 
+# TODO: adopt `params.expect` (Rails 8) at the 8 controller sites this cop flags.
+# Deferred from the Rails 8.1 upgrade so the upgrade PR stays behaviour-neutral.
+Rails/StrongParametersExpect:
+  Enabled: false
+
 RSpec/DescribeClass:
   Exclude:
     # This cop is n/a for rake tasks
