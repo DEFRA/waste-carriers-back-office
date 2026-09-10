@@ -15,7 +15,7 @@ class CardOrderExportsController < ApplicationController
       export_log.first_visited_by = current_user.email
       export_log.save!
     end
-    redirect_to URI.parse(export_log.download_link).to_s
+    redirect_to URI.parse(export_log.download_link).to_s, allow_other_host: true
   end
 
   private
