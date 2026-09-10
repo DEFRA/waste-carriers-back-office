@@ -20,6 +20,10 @@ module WasteCarriersBackOffice
   class Application < Rails::Application
     config.load_defaults 8.1
 
+    # Keep button_to rendering <input type="submit"> rather than the <button>
+    # element that became the default in Rails 7.0
+    config.action_view.button_to_generates_button_tag = false
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
