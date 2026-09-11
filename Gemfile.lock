@@ -289,7 +289,7 @@ GEM
     google-protobuf (4.36.0)
       bigdecimal
       rake (~> 13.3)
-    govuk_design_system_formbuilder (6.4.0)
+    govuk_design_system_formbuilder (6.5.0)
       actionview (>= 7.2)
       activemodel (>= 7.2)
       activesupport (>= 7.2)
