@@ -2,7 +2,23 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.5...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.6...HEAD)
+
+**Fixed bugs:**
+
+- \[RUBY-4410\] Improve email search to use case-insensitive matching [\#2382](https://github.com/DEFRA/waste-carriers-back-office/pull/2382) ([brujeo](https://github.com/brujeo))
+
+**Merged pull requests:**
+
+- Bump waste\_carriers\_engine from `be226a9` to `8d7576f` [\#2388](https://github.com/DEFRA/waste-carriers-back-office/pull/2388) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Upgrade to Rails 8.1 and adjust dependencies and configurations- \#1701 [\#2379](https://github.com/DEFRA/waste-carriers-back-office/pull/2379) ([brujeo](https://github.com/brujeo))
+- Bump waste\_carriers\_engine from `0911766` to `7bd1056` [\#2378](https://github.com/DEFRA/waste-carriers-back-office/pull/2378) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `144a324` to `0911766` [\#2377](https://github.com/DEFRA/waste-carriers-back-office/pull/2377) ([dependabot[bot]](https://github.com/apps/dependabot))
+- WCR: Update defra-ruby-template to version 6.4.0 [\#2366](https://github.com/DEFRA/waste-carriers-back-office/pull/2366) ([jjromeo](https://github.com/jjromeo))
+
+## [v1.36.6](https://github.com/defra/waste-carriers-back-office/tree/v1.36.6) (2026-09-03)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.5...v1.36.6)
 
 **Implemented enhancements:**
 
