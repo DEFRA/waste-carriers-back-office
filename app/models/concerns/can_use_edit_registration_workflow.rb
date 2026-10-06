@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ModuleLength
+# rubocop:disable-next Metrics/ModuleLength
 module CanUseEditRegistrationWorkflow
   extend ActiveSupport::Concern
   include Mongoid::Document
@@ -231,4 +231,3 @@ module CanUseEditRegistrationWorkflow
     temp_payment_method == "card"
   end
 end
-# rubocop:enable Metrics/ModuleLength
