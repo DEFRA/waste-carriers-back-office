@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 8d7576f30e72f4cdf2ff01f20391c3776e02fac4
+  revision: 3710f2d7a40f70101f171f3c0a8d35ddafa7cb71
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -486,7 +486,7 @@ GEM
       prism (>= 1.6.0)
       tsort
     rbtree3 (0.7.1)
-    rdoc (8.0.0)
+    rdoc (8.1.0)
       erb
       prism (>= 1.6.0)
       rbs (>= 4.0.0)
