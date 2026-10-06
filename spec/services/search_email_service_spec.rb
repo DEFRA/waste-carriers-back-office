@@ -43,8 +43,18 @@ RSpec.describe SearchEmailService do
     it_behaves_like "matching registration and renewal"
   end
 
-  context "when the term has a case-insensitive match" do
+  context "when the the email is stored in lower-case and has a case-insensitive match" do
     let(:term) { matching_renewal.contact_email.upcase }
+
+    it_behaves_like "matching registration and renewal"
+  end
+
+  context "when the email is stored in upper-case and has a case-insensitive match" do
+    before do
+      matching_registration.update(contact_email: matching_registration.contact_email.upcase)
+    end
+
+    let(:term) { matching_renewal.contact_email.downcase }
 
     it_behaves_like "matching registration and renewal"
   end
