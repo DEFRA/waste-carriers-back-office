@@ -2,7 +2,7 @@
 
 require "csv"
 
-# rubocop:disable Metrics/BlockLength
+# rubocop:disable-next Metrics/BlockLength
 namespace :debug do
   desc "export a matrix of all permissions for all user roles"
   task export_roles_permissions: :environment do
@@ -76,4 +76,3 @@ namespace :debug do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

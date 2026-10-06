@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Reports
-  # rubocop:disable Metrics/ClassLength
+  # rubocop:disable-next Metrics/ClassLength
   class ChargesByTypeService < ::WasteCarriersEngine::BaseService
     # This service encapsulates an aggregation query originally created in JavaScript for use outside the app.
     # This initial implementation uses the original query for consistency, with no optimisatons.
@@ -24,7 +24,7 @@ module Reports
       super()
     end
 
-    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable-next Metrics/MethodLength
     def run
       # This definition is to avoid a SonarCloud complaint, it doesn't really help readability.
       order_date_key = "$orderDate"
@@ -93,7 +93,6 @@ module Reports
         ]
       )
     end
-    # rubocop:enable Metrics/MethodLength
 
     private
 
@@ -126,6 +125,5 @@ module Reports
       }.compact
     end
   end
-  # rubocop:enable Metrics/ClassLength
 
 end
