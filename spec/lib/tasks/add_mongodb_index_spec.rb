@@ -30,6 +30,34 @@ RSpec.describe "db:add_mongodb_index", type: :task do
     end
   end
 
+  context "with an unknown model_name" do
+    let(:model_name) { "WasteCarriersEngine::NotAModel" }
+
+    it "aborts without creating an index" do
+      expect { invoke_task }.to raise_error(SystemExit).and output(/is not a Mongoid model/).to_stderr
+    end
+  end
+
+  context "with a model_name that is not a Mongoid model" do
+    let(:model_name) { "Kernel" }
+
+    it "aborts without creating an index" do
+      expect { invoke_task }.to raise_error(SystemExit).and output(/is not a Mongoid model/).to_stderr
+    end
+  end
+
+  context "with an invalid index_path" do
+    %w[financeDetails..payments .govpay_id govpay_id. $where financeDetails.pay-ments].each do |invalid_path|
+      context "when the index_path is #{invalid_path}" do
+        let(:index_path) { invalid_path }
+
+        it "aborts without creating an index" do
+          expect { invoke_task }.to raise_error(SystemExit).and output(/Invalid index_path/).to_stderr
+        end
+      end
+    end
+  end
+
   context "with a model and index_path" do
     # Listing indexes fails if the collection does not exist yet
     before { WasteCarriersEngine::Registration.create_collection }

@@ -10,8 +10,12 @@ namespace :db do
             "\tand index_path is the index path from the model, e.g. 'financeDetails.payments.govpay_id'"
     end
 
-    model = args[:model_name].constantize
+    model = args[:model_name].safe_constantize
+    abort "#{args[:model_name]} is not a Mongoid model" unless model.is_a?(Class) && model.include?(Mongoid::Document)
+
     index_path = args[:index_path]
+    # Dot-separated field names, e.g. financeDetails.payments.govpay_id
+    abort "Invalid index_path: #{index_path}" unless index_path.match?(/\A[A-Za-z_]\w*(\.[A-Za-z_]\w*)*\z/)
 
     if model.collection.indexes.get(index_path => 1)
       abort "Index on #{index_path} already exists for #{model.collection.name}"
