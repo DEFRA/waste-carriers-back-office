@@ -2,15 +2,37 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.6...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.7...HEAD)
+
+**Implemented enhancements:**
+
+- Add rake task to add a DB index [\#2394](https://github.com/DEFRA/waste-carriers-back-office/pull/2394) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+
+**Merged pull requests:**
+
+- Bump devise\_invitable from 2.0.12 to 2.0.13 [\#2391](https://github.com/DEFRA/waste-carriers-back-office/pull/2391) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Add secret scanning config to exclude spec files [\#2390](https://github.com/DEFRA/waste-carriers-back-office/pull/2390) ([tobyprivett](https://github.com/tobyprivett))
+- Bump waste\_carriers\_engine from `8d7576f` to `3710f2d` [\#2389](https://github.com/DEFRA/waste-carriers-back-office/pull/2389) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubyzip from 3.4.1 to 3.7.0 [\#2385](https://github.com/DEFRA/waste-carriers-back-office/pull/2385) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump whenever from 1.1.2 to 1.1.3 [\#2383](https://github.com/DEFRA/waste-carriers-back-office/pull/2383) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump web-console from 4.2.1 to 4.3.0 [\#2381](https://github.com/DEFRA/waste-carriers-back-office/pull/2381) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump govuk\_design\_system\_formbuilder from 6.4.0 to 6.5.0 [\#2380](https://github.com/DEFRA/waste-carriers-back-office/pull/2380) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump webmock from 3.26.2 to 3.26.4 [\#2375](https://github.com/DEFRA/waste-carriers-back-office/pull/2375) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump passenger from 6.1.8 to 6.2.0 [\#2369](https://github.com/DEFRA/waste-carriers-back-office/pull/2369) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump csv from 3.3.5 to 3.3.6 [\#2360](https://github.com/DEFRA/waste-carriers-back-office/pull/2360) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.36.7](https://github.com/defra/waste-carriers-back-office/tree/v1.36.7) (2026-09-29)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.6...v1.36.7)
 
 **Fixed bugs:**
 
-- \[RUBY-4410\] Improve email search to use case-insensitive matching [\#2382](https://github.com/DEFRA/waste-carriers-back-office/pull/2382) ([brujeo](https://github.com/brujeo))
+- \[RUBY-4410\] Improve email search to use case-insensitive matching  [\#2382](https://github.com/DEFRA/waste-carriers-back-office/pull/2382) ([brujeo](https://github.com/brujeo))
 
 **Merged pull requests:**
 
 - Bump waste\_carriers\_engine from `be226a9` to `8d7576f` [\#2388](https://github.com/DEFRA/waste-carriers-back-office/pull/2388) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Release/v1.36.7 [\#2387](https://github.com/DEFRA/waste-carriers-back-office/pull/2387) ([jjromeo](https://github.com/jjromeo))
 - Upgrade to Rails 8.1 and adjust dependencies and configurations- \#1701 [\#2379](https://github.com/DEFRA/waste-carriers-back-office/pull/2379) ([brujeo](https://github.com/brujeo))
 - Bump waste\_carriers\_engine from `0911766` to `7bd1056` [\#2378](https://github.com/DEFRA/waste-carriers-back-office/pull/2378) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump waste\_carriers\_engine from `144a324` to `0911766` [\#2377](https://github.com/DEFRA/waste-carriers-back-office/pull/2377) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -30,6 +52,7 @@
 
 **Merged pull requests:**
 
+- Release/v1.36.6 [\#2373](https://github.com/DEFRA/waste-carriers-back-office/pull/2373) ([jjromeo](https://github.com/jjromeo))
 - Bump waste\_carriers\_engine from `e058483` to `144a324` [\#2372](https://github.com/DEFRA/waste-carriers-back-office/pull/2372) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump json from 2.21.1 to 2.21.2 [\#2363](https://github.com/DEFRA/waste-carriers-back-office/pull/2363) ([dependabot[bot]](https://github.com/apps/dependabot))
 - \[RUBY-4344\] Remove Storm integration code [\#2361](https://github.com/DEFRA/waste-carriers-back-office/pull/2361) ([jjromeo](https://github.com/jjromeo))
@@ -1603,7 +1626,7 @@
 
 ## [v1.9.0](https://github.com/defra/waste-carriers-back-office/tree/v1.9.0) (2020-06-18)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.2...v1.9.0)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.3...v1.9.0)
 
 **Implemented enhancements:**
 
@@ -1716,13 +1739,13 @@
 - Bump waste\_carriers\_engine from `46ec95b` to `336551e` [\#818](https://github.com/DEFRA/waste-carriers-back-office/pull/818) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump waste\_carriers\_engine from `2799dbf` to `46ec95b` [\#813](https://github.com/DEFRA/waste-carriers-back-office/pull/813) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
-## [v1.8.2](https://github.com/defra/waste-carriers-back-office/tree/v1.8.2) (2020-05-12)
-
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.3...v1.8.2)
-
 ## [v1.8.3](https://github.com/defra/waste-carriers-back-office/tree/v1.8.3) (2020-05-12)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.1...v1.8.3)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.2...v1.8.3)
+
+## [v1.8.2](https://github.com/defra/waste-carriers-back-office/tree/v1.8.2) (2020-05-12)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.1...v1.8.2)
 
 ## [v1.8.1](https://github.com/defra/waste-carriers-back-office/tree/v1.8.1) (2020-04-17)
 
@@ -2097,6 +2120,7 @@
 - Details page - Fixes [\#469](https://github.com/DEFRA/waste-carriers-back-office/pull/469) ([cintamani](https://github.com/cintamani))
 - Add expired panel to view details pages [\#463](https://github.com/DEFRA/waste-carriers-back-office/pull/463) ([irisfaraway](https://github.com/irisfaraway))
 - Add all action links to details page [\#462](https://github.com/DEFRA/waste-carriers-back-office/pull/462) ([cintamani](https://github.com/cintamani))
+- Add renew link to actions panel in details page [\#458](https://github.com/DEFRA/waste-carriers-back-office/pull/458) ([cintamani](https://github.com/cintamani))
 - Add continue application link to details page [\#457](https://github.com/DEFRA/waste-carriers-back-office/pull/457) ([cintamani](https://github.com/cintamani))
 - Finance message on lower tier registration finance section [\#456](https://github.com/DEFRA/waste-carriers-back-office/pull/456) ([cintamani](https://github.com/cintamani))
 - Convictions message for lower tier registrations [\#455](https://github.com/DEFRA/waste-carriers-back-office/pull/455) ([cintamani](https://github.com/cintamani))
@@ -2172,6 +2196,7 @@
 - Bump waste\_carriers\_engine from `05de6ed` to `05629b7` [\#450](https://github.com/DEFRA/waste-carriers-back-office/pull/450) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump waste\_carriers\_engine from `bb047bd` to `05de6ed` [\#446](https://github.com/DEFRA/waste-carriers-back-office/pull/446) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Use correct `small-bold` class [\#443](https://github.com/DEFRA/waste-carriers-back-office/pull/443) ([cintamani](https://github.com/cintamani))
+- Bump waste\_carriers\_engine from `9b67fef` to `bb047bd` [\#442](https://github.com/DEFRA/waste-carriers-back-office/pull/442) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Refactor RegistrationTransferService to inherit from BaseService [\#440](https://github.com/DEFRA/waste-carriers-back-office/pull/440) ([irisfaraway](https://github.com/irisfaraway))
 - Refactor UserMigrationService to inherit from BaseService [\#439](https://github.com/DEFRA/waste-carriers-back-office/pull/439) ([irisfaraway](https://github.com/irisfaraway))
 - Remove dupe BaseService [\#438](https://github.com/DEFRA/waste-carriers-back-office/pull/438) ([irisfaraway](https://github.com/irisfaraway))
