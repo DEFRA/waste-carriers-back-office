@@ -9,18 +9,10 @@ RSpec.describe Notify::BulkDigitalRenewalNotificationService do
     let(:non_matching_date_registration) { create(:registration, :expires_tomorrow) }
     let(:inactive_registration) { create(:registration, :expired) }
     let(:mobile_registration) { create(:registration, expires_on: expires_on, phone_number: "07837372722") }
-    let(:active) { true }
 
     let(:expires_on) { registrations.first.expires_on }
 
-    before do
-      create(:feature_toggle, key: "send_digital_renewal_sms", active: active)
-      allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:send_digital_renewal_sms).and_return(active)
-    end
-
     describe "without errors" do
-      let(:send_digital_renewal_sms) { false }
-
       before do
         create_registrations
         allow(Notify::DigitalRenewalLetterService).to receive(:run)
@@ -30,52 +22,24 @@ RSpec.describe Notify::BulkDigitalRenewalNotificationService do
         described_class.run(expires_on)
       end
 
-      context "when the feature toggle is on" do
-        let(:active) { true }
+      it "sends letters to registrations without a mobile number" do
+        expect(Airbrake).not_to have_received(:notify)
 
-        it "sends the relevant registrations to the Notify::DigitalRenewalLetterService" do
-          expect(Airbrake).not_to have_received(:notify)
+        expect(Notify::DigitalRenewalLetterService).to have_received(:run).with(registration: registrations[0])
+        expect(Notify::DigitalRenewalLetterService).to have_received(:run).with(registration: registrations[1])
 
-          expect(Notify::DigitalRenewalLetterService).to have_received(:run).with(registration: registrations[0])
-          expect(Notify::DigitalRenewalLetterService).to have_received(:run).with(registration: registrations[1])
-
-          expect(Notify::DigitalRenewalLetterService).not_to have_received(:run).with(registration: mobile_registration)
-          expect(Notify::DigitalRenewalLetterService).not_to have_received(:run).with(registration: ad_registration)
-          expect(Notify::DigitalRenewalLetterService).not_to have_received(:run).with(registration: non_matching_date_registration)
-          expect(Notify::DigitalRenewalLetterService).not_to have_received(:run).with(registration: inactive_registration)
-        end
-
-        it "sends the relevant registrations to the Notify::DigitalRenewalSmsService" do
-          expect(Airbrake).not_to have_received(:notify)
-
-          expect(Notify::DigitalRenewalSmsService).to have_received(:run).with(registration: mobile_registration)
-          expect(Notify::DigitalRenewalSmsService).not_to have_received(:run).with(registration: registrations[0])
-          expect(Notify::DigitalRenewalSmsService).not_to have_received(:run).with(registration: registrations[1])
-        end
+        expect(Notify::DigitalRenewalLetterService).not_to have_received(:run).with(registration: mobile_registration)
+        expect(Notify::DigitalRenewalLetterService).not_to have_received(:run).with(registration: ad_registration)
+        expect(Notify::DigitalRenewalLetterService).not_to have_received(:run).with(registration: non_matching_date_registration)
+        expect(Notify::DigitalRenewalLetterService).not_to have_received(:run).with(registration: inactive_registration)
       end
 
-      context "when the feature toggle is off" do
-        let(:active) { false }
+      it "sends SMS to registrations with a mobile number" do
+        expect(Airbrake).not_to have_received(:notify)
 
-        it "sends the relevant registrations to the Notify::DigitalRenewalLetterService" do
-          expect(Airbrake).not_to have_received(:notify)
-
-          expect(Notify::DigitalRenewalLetterService).to have_received(:run).with(registration: registrations[0])
-          expect(Notify::DigitalRenewalLetterService).to have_received(:run).with(registration: registrations[1])
-          expect(Notify::DigitalRenewalLetterService).to have_received(:run).with(registration: mobile_registration)
-
-          expect(Notify::DigitalRenewalLetterService).not_to have_received(:run).with(registration: ad_registration)
-          expect(Notify::DigitalRenewalLetterService).not_to have_received(:run).with(registration: non_matching_date_registration)
-          expect(Notify::DigitalRenewalLetterService).not_to have_received(:run).with(registration: inactive_registration)
-        end
-
-        it "does not send the relevant registrations to the Notify::DigitalRenewalSmsService" do
-          expect(Airbrake).not_to have_received(:notify)
-
-          expect(Notify::DigitalRenewalSmsService).not_to have_received(:run).with(registration: mobile_registration)
-          expect(Notify::DigitalRenewalSmsService).not_to have_received(:run).with(registration: registrations[0])
-          expect(Notify::DigitalRenewalSmsService).not_to have_received(:run).with(registration: registrations[1])
-        end
+        expect(Notify::DigitalRenewalSmsService).to have_received(:run).with(registration: mobile_registration)
+        expect(Notify::DigitalRenewalSmsService).not_to have_received(:run).with(registration: registrations[0])
+        expect(Notify::DigitalRenewalSmsService).not_to have_received(:run).with(registration: registrations[1])
       end
     end
 
