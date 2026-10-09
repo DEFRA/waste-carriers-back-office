@@ -11,7 +11,7 @@ module CanBehaveLikeUser
     ";" => "i", "|" => "i"
   }.freeze
 
-  # rubocop:disable Metrics/BlockLength
+  # rubocop:disable-next Metrics/BlockLength
   included do
     devise :database_authenticatable,
            :invitable,
@@ -60,7 +60,6 @@ module CanBehaveLikeUser
     validate :password_must_not_be_dictionary_word
     validate :password_must_not_contain_obvious_sequences
   end
-  # rubocop:enable Metrics/BlockLength
 
   private
 

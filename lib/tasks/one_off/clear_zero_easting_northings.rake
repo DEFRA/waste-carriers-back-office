@@ -14,7 +14,7 @@ namespace :one_off do
 
     registrations.each do |registration|
       registration.addresses.select { |address| address.easting&.zero? || address.northing&.zero? }
-                            .map { |address| address.update(easting: nil, northing: nil) }
+                  .map { |address| address.update(easting: nil, northing: nil) }
     end
   end
 end

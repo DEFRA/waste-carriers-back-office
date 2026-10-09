@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
+# rubocop:disable-next Metrics/BlockLength
 namespace :notify do
   namespace :notifications do
     desc "Run bulk digital renewal notification service"
@@ -62,4 +62,3 @@ namespace :notify do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength
