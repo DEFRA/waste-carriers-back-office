@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
+# rubocop:disable-next Metrics/BlockLength
 namespace :db do
   # Returns the Mongoid model for model_name, aborting if there isn't one
   find_model = lambda do |model_name|
@@ -60,4 +60,3 @@ namespace :db do
     puts "Dropped index '#{index_name}' from #{model.collection.name}"
   end
 end
-# rubocop:enable Metrics/BlockLength
