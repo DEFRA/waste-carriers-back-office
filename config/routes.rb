@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
+# rubocop:disable-next Metrics/BlockLength
 Rails.application.routes.draw do
   get "copy_cards_order_completed_forms/new"
   get "copy_cards_order_completed_forms/create"
@@ -458,4 +458,3 @@ Rails.application.routes.draw do
   mount WasteCarriersEngine::Engine => "/bo", as: "basic_app_engine"
 
 end
-# rubocop:enable Metrics/BlockLength

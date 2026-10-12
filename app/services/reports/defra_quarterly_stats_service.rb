@@ -2,7 +2,7 @@
 
 # This is a minimalist implementation to meet an urgent requirement. It is expected to be enhanced later.
 module Reports
-  # rubocop:disable Layout/LineLength
+  # rubocop:disable-next Layout/LineLength
   class DefraQuarterlyStatsService < ::WasteCarriersEngine::BaseService
     attr_reader :start_date, :end_date, :abandon_rate, :abandon_rate_percent
 
@@ -109,5 +109,4 @@ module Reports
       [required_quarter_start, required_quarter_end]
     end
   end
-  # rubocop:enable Layout/LineLength
 end

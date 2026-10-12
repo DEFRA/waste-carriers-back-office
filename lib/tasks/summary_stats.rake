@@ -42,7 +42,7 @@ def calcs_for_abandon_rate
   abandoned_30d
 end
 
-# rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+# rubocop:disable-next Metrics/MethodLength, Metrics/AbcSize
 def calcs_for_date_range(start_date, end_date, abandon_rate)
   puts "\tFrom #{start_date} to #{end_date} inclusive:"
 
@@ -126,4 +126,3 @@ def calcs_for_date_range(start_date, end_date, abandon_rate)
 
   puts "===================================================================================================="
 end
-# rubocop:enable Metrics/MethodLength, Metrics/AbcSize

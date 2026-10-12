@@ -23,7 +23,7 @@ module Reports
       super()
     end
 
-    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable-next Metrics/MethodLength
     def run
       # This definition is to avoid a SonarCloud complaint, it doesn't really help readability.
       payment_date_key = "$payment.dateEntered"
@@ -89,7 +89,6 @@ module Reports
         ]
       )
     end
-    # rubocop:enable Metrics/MethodLength
 
     private
 
