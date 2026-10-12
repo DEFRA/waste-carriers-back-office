@@ -85,7 +85,8 @@ gem "defra_ruby_mocks"
 # Then simply run `bundle exec rake changelog` to update CHANGELOG.md
 # Should be in the :development group however when it is it breaks deployment
 # to Heroku. Hence moved outside group till we can understand why.
-gem "github_changelog_generator", require: false
+# Pinned because the changelog task in waste_carriers_engine patches its internals
+gem "github_changelog_generator", "~> 1.18.0", require: false
 
 # Defines a route for ELB healthchecks. The healthcheck is a piece of Rack
 # middleware that does absolutely nothing, so it is faster than just using the
