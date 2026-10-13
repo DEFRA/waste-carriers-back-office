@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 13c9d32559aa48fd59c1cce335310ef83c211bd0
+  revision: 4564dc911bd27abb96e50ef524721b07bac18ed8
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -12,6 +12,7 @@ GIT
       defra_ruby_email (~> 1.3.0)
       defra_ruby_govpay
       defra_ruby_validators (~> 3.1)
+      github_changelog_generator (~> 1.18.0)
       high_voltage (~> 5.0.0)
       jbuilder (~> 2.11.5)
       mongo_session_store (~> 3.2.1)
@@ -657,7 +658,6 @@ DEPENDENCIES
   factory_bot_rails
   faker
   faraday-retry
-  github_changelog_generator (~> 1.18.0)
   govuk_design_system_formbuilder (~> 6.4)
   govuk_markdown
   jquery-rails
