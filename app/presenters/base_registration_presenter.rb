@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ClassLength
+# rubocop:disable-next Metrics/ClassLength
 class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
 
   include ActionView::Helpers::SanitizeHelper
@@ -136,4 +136,3 @@ class BaseRegistrationPresenter < WasteCarriersEngine::BasePresenter
     end
   end
 end
-# rubocop:enable Metrics/ClassLength

@@ -21,7 +21,7 @@ end
 # Only seed if not running in production or we specifically require it, eg. for Heroku
 seed_users if !Rails.env.production? || ENV["WCR_ALLOW_SEED"]
 
-# rubocop:disable Rails/Output
+# rubocop:disable-next Rails/Output
 def seed_convictions
   puts "Seeding convictions data..."
 
@@ -36,6 +36,5 @@ def seed_convictions
 
   puts "Seeded #{WasteCarriersEngine::ConvictionsCheck::Entity.count} conviction records"
 end
-# rubocop:enable Rails/Output
 
 seed_convictions if !Rails.env.production? || ENV["WCR_ALLOW_SEED"]

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ModuleLength
+# rubocop:disable-next Metrics/ModuleLength
 module ActionLinksHelper
   def details_link_for(resource)
     if a_new_registration?(resource)
@@ -238,4 +238,3 @@ module ActionLinksHelper
     can?(:renew, resource)
   end
 end
-# rubocop:enable Metrics/ModuleLength

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Reports
-  # rubocop:disable Metrics/ClassLength
+  # rubocop:disable-next Metrics/ClassLength
   class FinanceStatsService < ::WasteCarriersEngine::BaseService
 
     def initialize(granularity)
@@ -50,7 +50,7 @@ module Reports
       format("%<year>04i%<month>02i", year: expiry_date.year, month: expiry_date.month)
     end
 
-    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable-next Metrics/MethodLength
     def results_entry(result)
       entry = find_matching_result(result)
       if entry.blank?
@@ -93,7 +93,6 @@ module Reports
 
       entry
     end
-    # rubocop:enable Metrics/MethodLength
 
     def find_matching_result(candidate)
       if @daily
@@ -159,5 +158,4 @@ module Reports
       end
     end
   end
-  # rubocop:enable Metrics/ClassLength
 end

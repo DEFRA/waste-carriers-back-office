@@ -16,13 +16,12 @@ class CopyCardsFormsController < BackOfficeFormsController
     params.fetch(:copy_cards_form).permit(:temp_cards)
   end
 
-  # rubocop:disable Naming/MemoizedInstanceVariableName -- we're not just memoizing here
+  # rubocop:disable-next Naming/MemoizedInstanceVariableName -- we're not just memoizing here
   def find_or_initialize_transient_registration(token)
     @transient_registration ||= OrderCopyCardsRegistration.where(reg_identifier: token).first ||
                                 OrderCopyCardsRegistration.where(token: token).first ||
                                 OrderCopyCardsRegistration.new(reg_identifier: token)
   end
-  # rubocop:enable Naming/MemoizedInstanceVariableName
 
   def authorize_user
     authorize! :order_copy_cards, WasteCarriersEngine::Registration
