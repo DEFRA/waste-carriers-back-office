@@ -35,13 +35,13 @@ module WasteCarriersEngine
         before { allow(Airbrake).to receive(:notify) }
 
         it "raises an exception" do
-          expect { run_service }.to raise_exception(ArgumentError)
+          expect { run_service }.to raise_exception(WasteCarriersEngine::GovpayPaymentNotFoundError)
         end
 
         it "notifies Airbrake" do
           run_service
-        rescue StandardError
-          expect(Airbrake).to have_received(:notify).with(ArgumentError, anything)
+        rescue WasteCarriersEngine::GovpayPaymentNotFoundError
+          expect(Airbrake).to have_received(:notify).with(WasteCarriersEngine::GovpayPaymentNotFoundError, anything)
         end
       end
 
