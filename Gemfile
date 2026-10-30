@@ -20,7 +20,7 @@ gem "json", "~> 2.9"
 # Use CanCanCan for user roles and permissions
 gem "cancancan"
 
-gem "defra_ruby_template", "6.4.0"
+gem "defra_ruby_template", "~> 6.6.0"
 
 # Use Devise for user authentication
 gem "devise"
