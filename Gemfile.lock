@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: fc8f06f68f35ab3627ed50a1b5d9ffef9d05fe38
+  revision: d36d9dd8250b0d84758e03de7b77b450c884ea5e
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -263,13 +263,13 @@ GEM
       railties (>= 6.1.0)
     faker (3.8.0)
       i18n (>= 1.8.11, < 2)
-    faraday (2.14.4)
-      faraday-net_http (>= 2.0, < 3.5)
+    faraday (2.15.0)
+      faraday-net_http (>= 2.0, < 3.6)
       json
       logger
     faraday-http-cache (3.0.0)
       faraday (>= 0.8)
-    faraday-net_http (3.4.4)
+    faraday-net_http (3.5.0)
       net-http (~> 0.5)
     faraday-retry (2.4.0)
       faraday (~> 2.0)
@@ -311,7 +311,7 @@ GEM
     io-console (0.9.4)
     io-endpoint (0.19.0)
       openssl (>= 3.3.0)
-    io-event (1.22.1)
+    io-event (1.22.3)
     io-stream (0.14.0)
       openssl (>= 3.3)
     irb (1.18.0)
@@ -419,14 +419,14 @@ GEM
       rack (>= 1.6.13)
       rackup (>= 1.0.1)
       rake (>= 12.3.3)
-    phonelib (0.10.27)
+    phonelib (0.10.28)
     pp (0.6.4)
       prettyprint
     prettyprint (0.2.1)
     prism (1.9.0)
     protocol-hpack (1.5.1)
-    protocol-http (0.72.0)
-    protocol-http1 (0.41.0)
+    protocol-http (0.72.1)
+    protocol-http1 (0.41.1)
       protocol-http (~> 0.68)
     protocol-http2 (0.29.1)
       protocol-hpack (~> 1.4)
