@@ -225,7 +225,7 @@ GEM
       sprockets (~> 4.0)
       sprockets-rails (~> 3.0)
     defra_ruby_style (0.4.1)
-    defra_ruby_template (6.4.0)
+    defra_ruby_template (6.6.0)
     defra_ruby_validators (3.1.0)
       activemodel
       defra_ruby_companies_house
@@ -654,7 +654,7 @@ DEPENDENCIES
   defra_ruby_features
   defra_ruby_mocks
   defra_ruby_style
-  defra_ruby_template (= 6.4.0)
+  defra_ruby_template (~> 6.6.0)
   devise
   devise_invitable
   dotenv-rails
