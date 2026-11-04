@@ -2,7 +2,40 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.7...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.37.0...HEAD)
+
+**Implemented enhancements:**
+
+- \[RUBY-4529\] Fix renewal notification job performance [\#2415](https://github.com/DEFRA/waste-carriers-back-office/pull/2415) ([tobyprivett](https://github.com/tobyprivett))
+- \[RUBY-4511\] Add feature toggle to run finance export [\#2404](https://github.com/DEFRA/waste-carriers-back-office/pull/2404) ([tobyprivett](https://github.com/tobyprivett))
+
+**Fixed bugs:**
+
+- Pin JSON to 2.x for execjs compatibility [\#2403](https://github.com/DEFRA/waste-carriers-back-office/pull/2403) ([tobyprivett](https://github.com/tobyprivett))
+
+**Merged pull requests:**
+
+- \[RUBY-4493\] Pin defra\_ruby\_template to 6.4.0 [\#2420](https://github.com/DEFRA/waste-carriers-back-office/pull/2420) ([jjromeo](https://github.com/jjromeo))
+- Bump whenever from 1.1.3 to 1.1.4 [\#2418](https://github.com/DEFRA/waste-carriers-back-office/pull/2418) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump kaminari from 1.2.2 to 1.3.0 [\#2416](https://github.com/DEFRA/waste-carriers-back-office/pull/2416) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-capybara from 3.0.0 to 3.1.0 [\#2414](https://github.com/DEFRA/waste-carriers-back-office/pull/2414) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump passenger from 6.2.0 to 6.2.1 [\#2413](https://github.com/DEFRA/waste-carriers-back-office/pull/2413) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump webmock from 3.30.0 to 3.34.0 [\#2412](https://github.com/DEFRA/waste-carriers-back-office/pull/2412) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump cancancan from 3.6.2 to 3.7.0 [\#2411](https://github.com/DEFRA/waste-carriers-back-office/pull/2411) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update defra ruby gems [\#2410](https://github.com/DEFRA/waste-carriers-back-office/pull/2410) ([tobyprivett](https://github.com/tobyprivett))
+- Bump webmock from 3.26.4 to 3.30.0 [\#2408](https://github.com/DEFRA/waste-carriers-back-office/pull/2408) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump cancancan from 3.6.1 to 3.6.2 [\#2406](https://github.com/DEFRA/waste-carriers-back-office/pull/2406) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[RUBY-4509\] Update spec to expect GovpayPaymentNotFoundError [\#2405](https://github.com/DEFRA/waste-carriers-back-office/pull/2405) ([tobyprivett](https://github.com/tobyprivett))
+- Bump rubocop-rspec\_rails from 2.32.0 to 2.33.0 [\#2402](https://github.com/DEFRA/waste-carriers-back-office/pull/2402) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[RUBY-4494\] Update waste\_carriers\_engine for changelog fix [\#2399](https://github.com/DEFRA/waste-carriers-back-office/pull/2399) ([jjromeo](https://github.com/jjromeo))
+- Bump devise\_invitable from 2.0.13 to 2.0.14 [\#2398](https://github.com/DEFRA/waste-carriers-back-office/pull/2398) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Remove unused feature flags [\#2395](https://github.com/DEFRA/waste-carriers-back-office/pull/2395) ([tobyprivett](https://github.com/tobyprivett))
+- Bump waste\_carriers\_engine from `3710f2d` to `83b0f78` [\#2393](https://github.com/DEFRA/waste-carriers-back-office/pull/2393) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update rubocop-rails to 2.3.8 and resolve offences [\#2392](https://github.com/DEFRA/waste-carriers-back-office/pull/2392) ([tobyprivett](https://github.com/tobyprivett))
+
+## [v1.37.0](https://github.com/defra/waste-carriers-back-office/tree/v1.37.0) (2026-10-08)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.36.7...v1.37.0)
 
 **Implemented enhancements:**
 
@@ -10,6 +43,8 @@
 
 **Merged pull requests:**
 
+- Chore/add db index rake task [\#2397](https://github.com/DEFRA/waste-carriers-back-office/pull/2397) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Update CHANGELOG [\#2396](https://github.com/DEFRA/waste-carriers-back-office/pull/2396) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - Bump devise\_invitable from 2.0.12 to 2.0.13 [\#2391](https://github.com/DEFRA/waste-carriers-back-office/pull/2391) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Add secret scanning config to exclude spec files [\#2390](https://github.com/DEFRA/waste-carriers-back-office/pull/2390) ([tobyprivett](https://github.com/tobyprivett))
 - Bump waste\_carriers\_engine from `8d7576f` to `3710f2d` [\#2389](https://github.com/DEFRA/waste-carriers-back-office/pull/2389) ([dependabot[bot]](https://github.com/apps/dependabot))
