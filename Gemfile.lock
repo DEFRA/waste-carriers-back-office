@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: 4f88f3b6fb3b58b94f10600c0f6a01930a3e8802
+  revision: 72390f08847a54b40f186f052d4aa50d5bd907bd
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -105,7 +105,7 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
-    addressable (2.9.0)
+    addressable (2.9.1)
       public_suffix (>= 2.0.2, < 8.0)
     airbrake (13.0.5)
       airbrake-ruby (~> 6.0)
@@ -308,7 +308,7 @@ GEM
       domain_name (~> 0.5)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
-    io-console (0.9.4)
+    io-console (0.9.5)
     io-endpoint (0.19.0)
       openssl (>= 3.3.0)
     io-event (1.22.3)
@@ -363,7 +363,7 @@ GEM
     mime-types (3.7.0)
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
-    mime-types-data (3.2026.1020)
+    mime-types-data (3.2026.1027)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
     minitest (6.0.6)
@@ -441,7 +441,7 @@ GEM
       pry (>= 0.13, < 0.17)
     public_suffix (7.0.5)
     racc (1.8.1)
-    rack (3.2.7)
+    rack (3.2.8)
     rack-session (2.1.2)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
