@@ -59,7 +59,7 @@ module Reports
     end
 
     def registrations
-      @registrations ||= WasteCarriersEngine::Registration.all
+      @registrations ||= WasteCarriersEngine::Registration.all.no_timeout
     end
 
     def registration_serializers
