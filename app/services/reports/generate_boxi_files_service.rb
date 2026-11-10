@@ -18,6 +18,9 @@ module Reports
       Boxi::OrdersSerializer
     ].freeze
 
+    THROTTLE_EVERY = 25
+    THROTTLE_SLEEP = 0.010 # 10ms
+
     attr_reader :dir_path
 
     def run(dir_path)
@@ -34,6 +37,8 @@ module Reports
 
     def process_registrations
       registrations.each.with_index do |registration, index|
+        sleep(THROTTLE_SLEEP) if (index % THROTTLE_EVERY).zero?
+
         # Start counting from 1 rather than from 0
         uid = index + 1
 
