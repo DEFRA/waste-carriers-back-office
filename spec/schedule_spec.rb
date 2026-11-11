@@ -64,7 +64,7 @@ RSpec.describe "Whenever::Test::Shedule" do
     job_details = schedule.jobs[:rake_and_format].find { |h| h[:task] == "reports:export:boxi" }
 
     expect(job_details[:every][0]).to eq(:day)
-    expect(job_details[:every][1][:at]).to eq("22:00")
+    expect(job_details[:every][1][:at]).to eq("23:00")
   end
 
   it "picks up the expire registrations run frequency and time" do
