@@ -1016,7 +1016,31 @@ RSpec.describe ActionLinksHelper do
     end
   end
 
+  describe "#display_new_registration_link?" do
+    context "when service closure is enabled" do
+      before do
+        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).and_call_original
+        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:service_closure).and_return(true)
+      end
+
+      it "returns false" do
+        expect(helper.display_new_registration_link?).to be(false)
+      end
+    end
+  end
+
   describe "#display_renew_link_for?" do
+    context "when service closure is enabled" do
+      before do
+        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).and_call_original
+        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:service_closure).and_return(true)
+      end
+
+      it "returns false" do
+        expect(helper.display_renew_link_for?(build(:registration))).to be(false)
+      end
+    end
+
     context "when the resource is not a Registration" do
       let(:resource) { build(:renewing_registration) }
 
@@ -1119,6 +1143,17 @@ RSpec.describe ActionLinksHelper do
 
   describe "#display_ways_to_share_magic_link_for?" do
     let(:resource) { build(:registration) }
+
+    context "when service closure is enabled" do
+      before do
+        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).and_call_original
+        allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:service_closure).and_return(true)
+      end
+
+      it "returns false" do
+        expect(helper.display_ways_to_share_magic_link_for?(resource)).to be(false)
+      end
+    end
 
     context "when the 'renewal_reminders' feature toggle is not enabled" do
       before do

@@ -171,7 +171,14 @@ module ActionLinksHelper
     resource.pending?
   end
 
+  def display_new_registration_link?
+    return false if WasteCarriersEngine::FeatureToggle.active?(:service_closure)
+
+    can?(:create, WasteCarriersEngine::Registration)
+  end
+
   def display_renew_link_for?(resource)
+    return false if WasteCarriersEngine::FeatureToggle.active?(:service_closure)
     return false unless display_registration_links?(resource)
     return false unless can?(:renew, WasteCarriersEngine::Registration)
 
@@ -187,6 +194,7 @@ module ActionLinksHelper
   end
 
   def display_ways_to_share_magic_link_for?(resource)
+    return false if WasteCarriersEngine::FeatureToggle.active?(:service_closure)
     return false unless WasteCarriersEngine::FeatureToggle.active?(:renewal_reminders)
     return false unless display_registration_links?(resource)
     return false unless can?(:renew, WasteCarriersEngine::Registration)
