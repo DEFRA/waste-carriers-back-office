@@ -8,7 +8,29 @@ RSpec.describe "Email task", type: :task do
   let(:registrations_count) { 1 }
 
   before do
+    allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).and_call_original
     allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:renewal_reminders).and_return(true)
+    allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:service_closure).and_return(false)
+  end
+
+  context "when service closure is enabled" do
+    before do
+      allow(WasteCarriersEngine::FeatureToggle).to receive(:active?).with(:service_closure).and_return(true)
+    end
+
+    describe "email:renew_reminder:first:send" do
+      it "does not send reminders" do
+        expect(FirstRenewalReminderService).not_to receive(:run)
+        Rake::Task["email:renew_reminder:first:send"].invoke
+      end
+    end
+
+    describe "email:renew_reminder:second:send" do
+      it "does not send reminders" do
+        expect(SecondRenewalReminderService).not_to receive(:run)
+        Rake::Task["email:renew_reminder:second:send"].invoke
+      end
+    end
   end
 
   describe "email:renew_reminder:first:send" do
