@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: ba468567f9699616f0566059e3e883b481309a0d
+  revision: 66ff729a6e218311d7c61de7797943900d38e638
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -375,7 +375,7 @@ GEM
     mongo_session_store (3.2.2)
       actionpack (>= 4.0)
       mongo (~> 2.0)
-    mongoid (9.1.1)
+    mongoid (9.1.2)
       activemodel (>= 5.1, < 8.2, != 7.0.0)
       concurrent-ruby (>= 1.0.5, < 2.0)
       mongo (>= 2.18.0, < 3.0.0)
