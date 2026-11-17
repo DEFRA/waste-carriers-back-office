@@ -3,3 +3,5 @@ api:
   active: <%= ENV["FEATURE_TOGGLE_API"] %>
 renewal_reminders:
   active: <%= ENV["FEATURE_TOGGLE_RENEWAL_REMINDERS"] %>
+service_closure:
+  active: false

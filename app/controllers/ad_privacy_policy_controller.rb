@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class AdPrivacyPolicyController < ApplicationController
+  include WasteCarriersEngine::Engine.routes.url_helpers
+
   before_action :authenticate_user!
+  before_action :check_service_closure
 
   def show
     data_model = AdPrivacyPolicyData.new(params[:reg_identifier], params[:token])
@@ -17,4 +20,11 @@ class AdPrivacyPolicyController < ApplicationController
   # underlying 'model'.
   AdPrivacyPolicyData = Struct.new(:reg_identifier, :token)
 
+  private
+
+  def check_service_closure
+    return unless WasteCarriersEngine::FeatureToggle.active?(:service_closure)
+
+    redirect_to page_path("service_closed")
+  end
 end
