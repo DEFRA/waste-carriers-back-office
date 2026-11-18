@@ -4,6 +4,9 @@ require "csv"
 
 module Reports
   class BaseSerializer
+    THROTTLE_EVERY = nil
+    THROTTLE_SLEEP = nil
+
     def to_csv(force_quotes: true)
       CSV.generate(force_quotes: force_quotes) do |csv|
         csv << self.class::ATTRIBUTES.values
@@ -17,7 +20,8 @@ module Reports
     private
 
     def each_data
-      scope.each do |object|
+      scope.each.with_index do |object, index|
+        throttle(index)
         yield parse_object(object)
       rescue StandardError => e
         # Handle parsing errors here so that the serializer can continue with the next object.
@@ -30,6 +34,12 @@ module Reports
         Rails.logger.error message
         Airbrake.notify(e, message:, csv_file_path: @path)
       end
+    end
+
+    def throttle(index)
+      return unless self.class::THROTTLE_EVERY && self.class::THROTTLE_SLEEP
+
+      sleep(self.class::THROTTLE_SLEEP) if (index % self.class::THROTTLE_EVERY).zero?
     end
   end
 end
