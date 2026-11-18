@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: c9f522319a259ad06d5d6f4a756f55d9314361d5
+  revision: c9662e561cae662dbc72a5040695b5e5b1309994
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -247,7 +247,7 @@ GEM
       devise (>= 4.6)
     diff-lcs (1.6.2)
     docile (1.4.1)
-    domain_name (0.7.20261031)
+    domain_name (0.7.20261117)
     dotenv (3.2.0)
     dotenv-rails (3.2.0)
       dotenv (= 3.2.0)
