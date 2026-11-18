@@ -10,3 +10,4 @@ updates:
     default-days: 7
     exclude:
     - "waste_carriers_engine"
+    - "defra_ruby_*"
