@@ -2,6 +2,8 @@
 
 module Reports
   class EprSerializer < BaseCsvFileSerializer
+    THROTTLE_EVERY = 25
+    THROTTLE_SLEEP = 0.010
 
     attr_reader :registration_ids
 
