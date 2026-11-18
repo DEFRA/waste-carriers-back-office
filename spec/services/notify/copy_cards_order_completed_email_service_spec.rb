@@ -45,6 +45,11 @@ module Notify
           expect(run_service.template["id"]).to eq(template_id)
           expect(run_service.content["subject"]).to eq("We’re printing your waste carriers registration cards")
         end
+
+        it_behaves_like "calls notify with reference" do
+          let(:send_action) { :send_email }
+          let(:reference) { registration.reg_identifier }
+        end
       end
 
       context "with no contact_email" do

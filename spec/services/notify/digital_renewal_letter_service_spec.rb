@@ -27,6 +27,11 @@ RSpec.describe Notify::DigitalRenewalLetterService do
       expect(run_service.content["subject"]).to include("You must renew your waste carrier registration")
     end
 
+    it_behaves_like "calls notify with reference" do
+      let(:send_action) { :send_letter }
+      let(:reference) { registration.reg_identifier }
+    end
+
     it_behaves_like "can create a communication record", "letter"
   end
 end
