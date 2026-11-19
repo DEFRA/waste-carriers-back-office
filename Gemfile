@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-ruby "3.4.6"
+ruby "3.4.13"
 
 # Use MongoDB as the database, and mongoid as our ORM for it.
 gem "mongoid"
@@ -24,7 +24,7 @@ gem "defra_ruby_template", "6.4.0"
 
 # Use Devise for user authentication
 gem "devise"
-gem "devise_invitable"
+gem "devise_invitable", "~> 2.0"
 
 # To support method: :patch requests
 gem "jquery-rails"
