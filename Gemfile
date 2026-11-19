@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-ruby "3.4.6"
+ruby "3.4.13"
 
 # Use MongoDB as the database, and mongoid as our ORM for it.
 gem "mongoid"
