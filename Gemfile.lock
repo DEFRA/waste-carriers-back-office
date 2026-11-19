@@ -242,9 +242,9 @@ GEM
       railties (>= 7.0)
       responders
       warden (~> 1.2.3)
-    devise_invitable (3.1.0)
-      actionmailer (>= 7.0)
-      devise (>= 5.0)
+    devise_invitable (2.0.14)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     diff-lcs (1.6.2)
     docile (1.4.1)
     domain_name (0.7.20261117)
@@ -659,7 +659,7 @@ DEPENDENCIES
   defra_ruby_style
   defra_ruby_template (= 6.4.0)
   devise
-  devise_invitable
+  devise_invitable (~> 2.0)
   dotenv-rails
   factory_bot_rails
   faker
