@@ -13,7 +13,7 @@ This project is the back office application which internal EA users use to manag
 
 ## Prequisites
 
-You'll need [Ruby 3.1.2](https://www.ruby-lang.org/en/) installed plus the [Bundler](http://bundler.io/) gem.
+You'll need [Ruby](https://www.ruby-lang.org/en/) (version specified in `.ruby-version`) installed plus the [Bundler](http://bundler.io/) gem.
 
 ## Installation
 
