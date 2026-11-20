@@ -1,7 +1,7 @@
-@import "defra_ruby_template";
-@import "partials/dashboards";
-@import "partials/pagination";
-@import "partials/wcr-objects";
+@use "defra_ruby_template" as *;
+@use "partials/dashboards";
+@use "partials/pagination";
+@use "partials/wcr-objects";
 
 // Signed-in info banner
 #user-status {
