@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DEFRA/waste-carriers-engine
-  revision: c9662e561cae662dbc72a5040695b5e5b1309994
+  revision: 95c82357488c230a1d15ce125fade6698c073ec3
   branch: main
   specs:
     waste_carriers_engine (0.0.1)
@@ -370,7 +370,7 @@ GEM
     minitest (6.1.0)
       drb (~> 2.0)
       prism (>= 1.5, < 3)
-    mongo (2.26.1)
+    mongo (2.26.2)
       base64
       bson (>= 4.14.1, < 6.0.0)
     mongo_session_store (3.2.2)
