@@ -91,8 +91,8 @@ gem "aws-healthcheck"
 gem "passenger", "~> 6.0", require: "phusion_passenger/rack_handler"
 
 group :development, :test do
-  # Call "byebug" anywhere in the code to stop execution and get a debugger console
-  gem "pry-byebug"
+  # Call "debugger" anywhere in the code to stop execution and get a debugger console
+  gem "debug"
   # Apply our style guide to ensure consistency in how the code is written
   gem "defra_ruby_style"
   # Shim to load environment variables from a .env file into ENV in development
