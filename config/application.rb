@@ -165,7 +165,6 @@ module WasteCarriersBackOffice
 
     # prevent comments showing ruby version:
     config.sass.line_comments = false
-    config.sass.silence_deprecations = ["import"]
 
     # avoid "calc(0px) is not a number for `max`" errors under sass-rails v6:
     # https://github.com/alphagov/govuk-frontend/issues/1350#issuecomment-493129270
