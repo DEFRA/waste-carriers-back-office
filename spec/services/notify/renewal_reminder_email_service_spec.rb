@@ -19,6 +19,7 @@ module Notify
         {
           email_address: registration.contact_email,
           template_id: "6d20d279-ba79-4fe0-9868-fb09c4ae7733",
+          reference: reg_identifier,
           personalisation: {
             reg_identifier: reg_identifier,
             first_name: "Jane",
@@ -46,6 +47,11 @@ module Notify
           expect(subject).to be_a(Notifications::Client::ResponseNotification)
           expect(subject.template["id"]).to eq(template_id)
           expect(subject.content["subject"]).to include("Renew waste carrier registration CBDU")
+        end
+
+        it_behaves_like "calls notify with reference" do
+          let(:send_action) { :send_email }
+          let(:reference) { registration.reg_identifier }
         end
 
         it_behaves_like "can create a communication record", "email"

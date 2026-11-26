@@ -71,9 +71,11 @@
           <%= t(".actions.subheading") %>
         </h2>
         <ul class="govuk-list">
-          <li>
-            <%= link_to t(".actions.new_registration"), ad_privacy_policy_path %>
-          </li>
+          <% if display_new_registration_link? %>
+            <li>
+              <%= link_to t(".actions.new_registration"), ad_privacy_policy_path %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>

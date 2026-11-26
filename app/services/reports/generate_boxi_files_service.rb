@@ -18,14 +18,16 @@ module Reports
       Boxi::OrdersSerializer
     ].freeze
 
+    THROTTLE_EVERY = 25
+    THROTTLE_SLEEP = 0.010 # 10ms
+
     attr_reader :dir_path
 
     def run(dir_path)
       @dir_path = dir_path
+      @order_uid = 1
 
-      order_uid = 1
-
-      process_registrations(order_uid)
+      process_registrations
 
       registration_serializers.each(&:close)
       order_serializers.each(&:close)
@@ -33,8 +35,10 @@ module Reports
 
     private
 
-    def process_registrations(order_uid)
+    def process_registrations
       registrations.each.with_index do |registration, index|
+        sleep(THROTTLE_SLEEP) if (index % THROTTLE_EVERY).zero?
+
         # Start counting from 1 rather than from 0
         uid = index + 1
 
@@ -44,22 +48,22 @@ module Reports
 
         next unless registration.finance_details&.orders&.any?
 
-        process_orders(registration, uid, order_uid)
+        process_orders(registration, uid)
       end
     end
 
-    def process_orders(registration, uid, order_uid)
+    def process_orders(registration, uid)
       registration.finance_details.orders.each do |order|
         order_serializers.each do |serializer|
-          serializer.add_entries_for(order, uid, order_uid)
+          serializer.add_entries_for(order, uid, @order_uid)
         end
 
-        order_uid += 1
+        @order_uid += 1
       end
     end
 
     def registrations
-      @registrations ||= WasteCarriersEngine::Registration.all
+      @registrations ||= WasteCarriersEngine::Registration.all.no_timeout
     end
 
     def registration_serializers

@@ -49,7 +49,7 @@ end
 # to registrations.csv, addresses to addresses.csv. This is then uploaded to AWS
 # S3 from where it is grabbed by a process that imports it into the WCR BOXI
 # universe
-every :day, at: ENV["EXPORT_SERVICE_BOXI_EXPORT_TIME"] || "22:00", roles: [:db] do
+every :day, at: ENV["EXPORT_SERVICE_BOXI_EXPORT_TIME"] || "23:00", roles: [:db] do
   rake_and_format "reports:export:boxi"
 end
 

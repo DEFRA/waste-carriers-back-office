@@ -2,7 +2,38 @@
 
 ## [Unreleased](https://github.com/defra/waste-carriers-back-office/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.37.0...HEAD)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.37.2...HEAD)
+
+**Implemented enhancements:**
+
+- Use engine NotifyClient to add references to Notify send requests [\#2452](https://github.com/DEFRA/waste-carriers-back-office/pull/2452) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- \[RUBY-4371\] Add feature toggle to stop new registrations and renewals  [\#2449](https://github.com/DEFRA/waste-carriers-back-office/pull/2449) ([tobyprivett](https://github.com/tobyprivett))
+- \[RUBY-4512\] BOXI report performance [\#2437](https://github.com/DEFRA/waste-carriers-back-office/pull/2437) ([tobyprivett](https://github.com/tobyprivett))
+
+**Merged pull requests:**
+
+- Avoid pinning ruby version in README [\#2460](https://github.com/DEFRA/waste-carriers-back-office/pull/2460) ([tobyprivett](https://github.com/tobyprivett))
+- \[RUBY-4602\] Update to ruby 3.4.13 [\#2459](https://github.com/DEFRA/waste-carriers-back-office/pull/2459) ([tobyprivett](https://github.com/tobyprivett))
+- Bump waste\_carriers\_engine from `c9f5223` to `c9662e5` [\#2458](https://github.com/DEFRA/waste-carriers-back-office/pull/2458) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Chore/dependabot defra ruby [\#2457](https://github.com/DEFRA/waste-carriers-back-office/pull/2457) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- \[RUBY-4514\] Public register export performance [\#2456](https://github.com/DEFRA/waste-carriers-back-office/pull/2456) ([tobyprivett](https://github.com/tobyprivett))
+- Exclude defra\_ruby\_\* gems from Dependabot cooldown [\#2454](https://github.com/DEFRA/waste-carriers-back-office/pull/2454) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Bump passenger from 6.2.1 to 6.2.2 [\#2450](https://github.com/DEFRA/waste-carriers-back-office/pull/2450) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update CHANGELOG [\#2448](https://github.com/DEFRA/waste-carriers-back-office/pull/2448) ([tobyprivett](https://github.com/tobyprivett))
+- Bump waste\_carriers\_engine [\#2447](https://github.com/DEFRA/waste-carriers-back-office/pull/2447) ([tobyprivett](https://github.com/tobyprivett))
+- Bump rspec-rails from 8.0.4 to 8.1.0 [\#2446](https://github.com/DEFRA/waste-carriers-back-office/pull/2446) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Consolidate dependabot gem updates [\#2443](https://github.com/DEFRA/waste-carriers-back-office/pull/2443) ([tobyprivett](https://github.com/tobyprivett))
+- Add test coverage for finance reports feature toggle skip path [\#2438](https://github.com/DEFRA/waste-carriers-back-office/pull/2438) ([tobyprivett](https://github.com/tobyprivett))
+- Bump waste\_carriers\_engine from `1388ff3` to `ba46856` [\#2435](https://github.com/DEFRA/waste-carriers-back-office/pull/2435) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump waste\_carriers\_engine from `4f88f3b` to `7f62edd` [\#2431](https://github.com/DEFRA/waste-carriers-back-office/pull/2431) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.37.2](https://github.com/defra/waste-carriers-back-office/tree/v1.37.2) (2026-11-16)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.37.1...v1.37.2)
+
+## [v1.37.1](https://github.com/defra/waste-carriers-back-office/tree/v1.37.1) (2026-11-03)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.37.0...v1.37.1)
 
 **Implemented enhancements:**
 
@@ -15,6 +46,8 @@
 
 **Merged pull requests:**
 
+- Bump waste\_carriers\_engine from `fc8f06f` to `4f88f3b` [\#2425](https://github.com/DEFRA/waste-carriers-back-office/pull/2425) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update CHANGELOG [\#2424](https://github.com/DEFRA/waste-carriers-back-office/pull/2424) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - \[RUBY-4493\] Pin defra\_ruby\_template to 6.4.0 [\#2420](https://github.com/DEFRA/waste-carriers-back-office/pull/2420) ([jjromeo](https://github.com/jjromeo))
 - Bump whenever from 1.1.3 to 1.1.4 [\#2418](https://github.com/DEFRA/waste-carriers-back-office/pull/2418) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump kaminari from 1.2.2 to 1.3.0 [\#2416](https://github.com/DEFRA/waste-carriers-back-office/pull/2416) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -1661,7 +1694,7 @@
 
 ## [v1.9.0](https://github.com/defra/waste-carriers-back-office/tree/v1.9.0) (2020-06-18)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.3...v1.9.0)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.2...v1.9.0)
 
 **Implemented enhancements:**
 
@@ -1774,13 +1807,13 @@
 - Bump waste\_carriers\_engine from `46ec95b` to `336551e` [\#818](https://github.com/DEFRA/waste-carriers-back-office/pull/818) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump waste\_carriers\_engine from `2799dbf` to `46ec95b` [\#813](https://github.com/DEFRA/waste-carriers-back-office/pull/813) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
-## [v1.8.3](https://github.com/defra/waste-carriers-back-office/tree/v1.8.3) (2020-05-12)
-
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.2...v1.8.3)
-
 ## [v1.8.2](https://github.com/defra/waste-carriers-back-office/tree/v1.8.2) (2020-05-12)
 
-[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.1...v1.8.2)
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.3...v1.8.2)
+
+## [v1.8.3](https://github.com/defra/waste-carriers-back-office/tree/v1.8.3) (2020-05-12)
+
+[Full Changelog](https://github.com/defra/waste-carriers-back-office/compare/v1.8.1...v1.8.3)
 
 ## [v1.8.1](https://github.com/defra/waste-carriers-back-office/tree/v1.8.1) (2020-04-17)
 
