@@ -20,17 +20,17 @@ on:
 jobs:
   brakeman-scan:
     name: Brakeman Scan
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     # Customize the ruby version depending on your needs
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.4'
+        ruby-version: '4.0'
 
     - name: Setup Brakeman
       env:

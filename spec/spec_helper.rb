@@ -7,8 +7,8 @@ require "./spec/support/simplecov"
 # AASM spec helpers
 require "aasm/rspec"
 
-# Call "binding.pry" anywhere in the code to stop execution and get a debugger console
-require "pry-byebug"
+# Call "debugger" anywhere in the code to stop execution and get a debugger console
+require "debug"
 
 # RSpec::Retry adds a :retry option for intermittently failing rspec examples
 require "rspec/retry"
